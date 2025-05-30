@@ -1,6 +1,8 @@
 import { defineConfig } from '@rsbuild/core';
 import { pluginSolid } from '@rsbuild/plugin-solid';
 
+const isProduction = typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'production';
+
 export default defineConfig({
   plugins: [pluginSolid()],
   source: {
@@ -8,17 +10,13 @@ export default defineConfig({
       index: './src/index.tsx',
     },
   },
-  server: {
-    port: 30000,
-    open: true,
-  },
   html: {
     title: 'SOTA Marketing Stack',
   },
   tools: {
     rspack: {
       optimization: {
-        minimize: process.env.NODE_ENV === 'production',
+        minimize: isProduction,
       },
     },
   },
@@ -34,3 +32,9 @@ export default defineConfig({
     cleanDistPath: true,
   },
 });
+
+/*
+ * © 2025 Spectrum Web Co LLC. All rights reserved.
+ * This code is the property of Spectrum Web Co LLC.
+ * Licensed under MIT License.
+ */
