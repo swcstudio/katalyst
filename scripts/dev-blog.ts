@@ -1,0 +1,24 @@
+import { dev } from 'npm:astro';
+
+console.log('Starting Blog micro-frontend development server...');
+
+try {
+  await dev({
+    root: './apps/blog',
+    port: 3001,
+    config: {
+      integrations: ['@astrojs/solid-js', '@astrojs/mdx'],
+    }
+  });
+  
+  console.log('Blog development server started on http://localhost:3001');
+} catch (error) {
+  console.error('Failed to start Blog development server:', error);
+  Deno.exit(1);
+}
+
+/*
+ * © 2025 Spectrum Web Co LLC. All rights reserved.
+ * This code is the property of Spectrum Web Co LLC.
+ * Licensed under MIT License.
+ */

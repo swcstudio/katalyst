@@ -1,4 +1,4 @@
-name: AI-Powered CI
+name: AI-Powered CI with Deno
 
 on:
   push:
@@ -16,37 +16,40 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-
       - name: Setup Deno
         uses: denoland/setup-deno@v1
         with:
           deno-version: v1.32.x
 
-      - name: Install dependencies
-        run: npm ci
-
       - name: Cache Deno dependencies
         run: deno cache --reload --lock=deno.lock --lock-write server.ts
 
+      - name: Install Nx CLI via Deno
+        run: deno install --allow-all npm:nx@latest
+
+      - name: Lint with Deno
+        run: deno task lint
+
+      - name: Test with Deno
+        run: deno task test
+
+      - name: Build with Deno
+        run: deno task build
+
       - name: Start Nx Cloud CI
-        run: npx nx-cloud start-ci-run
+        run: deno run --allow-all npm:nx-cloud start-ci-run
 
       - name: Run affected tasks with AI
-        run: npx nx affected --target=build,test,lint --parallel=4 --cloud
+        run: deno run --allow-all npm:nx affected --target=build,test,lint --parallel=4 --cloud
         env:
           NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       - name: Stop Nx Cloud CI
-        run: npx nx-cloud stop-all-agents
+        run: deno run --allow-all npm:nx-cloud stop-all-agents
         if: always()
 
   deploy:
-    name: Deploy
+    name: Deploy to Vercel
     needs: [nx-cloud]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -54,36 +57,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-
       - name: Setup Deno
         uses: denoland/setup-deno@v1
         with:
           deno-version: v1.32.x
 
-      - name: Install dependencies
-        run: npm ci
-
       - name: Build all micro-frontends
-        run: npx nx run-many --target=build --all --parallel=4
-        env:
-          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+        run: deno task build
 
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.2
-        with:
-          publish-dir: './dist'
-          production-branch: main
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: true
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 5
+      - name: Install Vercel CLI
+        run: deno install --allow-all npm:vercel@latest
+
+      - name: Deploy Marketing to Vercel
+        run: vercel deploy ./dist/marketing --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-marketing
+        
+      - name: Deploy Blog to Vercel
+        run: vercel deploy ./dist/blog --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-blog
+        
+      - name: Deploy Storefront to Vercel
+        run: vercel deploy ./dist/storefront --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-storefront
+        
+      - name: Deploy Docs to Vercel
+        run: vercel deploy ./dist/docs --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-docs
