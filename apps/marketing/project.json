@@ -1,0 +1,26 @@
+{
+  "name": "marketing",
+  "sourceRoot": "apps/marketing/src",
+  "projectType": "application",
+  "tags": ["scope:marketing"],
+  "targets": {
+    "build": {
+      "executor": "@rsbuild/core:build",
+      "options": {
+        "configFile": "apps/marketing/rsbuild.config.ts"
+      }
+    },
+    "serve": {
+      "executor": "@rsbuild/core:dev",
+      "options": {
+        "configFile": "apps/marketing/rsbuild.config.ts"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno test apps/marketing/tests"
+      }
+    }
+  }
+}

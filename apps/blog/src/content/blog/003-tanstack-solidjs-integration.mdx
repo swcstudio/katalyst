@@ -1,0 +1,66 @@
+---
+title: "Integrating TanStack with SolidJS"
+description: "Building reactive UIs with TanStack's powerful libraries and SolidJS"
+date: "2025-03-10"
+author: "Spectrum Web Co"
+tags: ["tanstack", "solidjs", "reactive", "frontend"]
+---
+
+# Integrating TanStack with SolidJS
+
+The SOTA Marketing Stack combines the power of TanStack libraries with SolidJS to create highly performant, reactive user interfaces.
+
+## TanStack Router
+
+TanStack Router provides a type-safe, modern routing solution that integrates seamlessly with SolidJS:
+
+```tsx
+const router = createRouter({
+  routeTree: rootRoute.addChildren([
+    indexRoute,
+    aboutRoute,
+    contactRoute,
+    blogIndexRoute,
+    blogPostRoute,
+  ]),
+});
+```
+
+## TanStack Query
+
+Data fetching becomes simple and efficient with TanStack Query:
+
+```tsx
+const postsQuery = createQuery(() => ({
+  queryKey: ['posts'],
+  queryFn: fetchPosts,
+}));
+```
+
+## TanStack Table
+
+Create powerful, flexible tables with TanStack Table:
+
+```tsx
+const table = createSolidTable({
+  data: posts(),
+  columns: [
+    { accessorKey: 'title', header: 'Title' },
+    { accessorKey: 'author', header: 'Author' },
+    { accessorKey: 'date', header: 'Date' },
+  ],
+});
+```
+
+## Benefits of This Integration
+
+- Fine-grained reactivity
+- Minimal re-renders
+- Type safety throughout
+- Excellent developer experience
+
+/*
+ * © 2025 Spectrum Web Co LLC. All rights reserved.
+ * This content is the property of Spectrum Web Co LLC.
+ * Licensed under MIT License.
+ */
