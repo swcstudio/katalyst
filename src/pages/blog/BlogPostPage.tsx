@@ -1,4 +1,4 @@
-import { createSignal, createEffect, Show, For } from 'solid-js';
+cimport { createSignal, createEffect, Show, For } from 'solid-js';
 import { useParams, Link } from '@tanstack/solid-router';
 import { css } from '../../styled-system/css';
 import { flex } from '../../styled-system/patterns';
@@ -327,15 +327,15 @@ You've now set up your first project using the SOTA Marketing Stack! This boiler
 const BlogPostPage = () => {
   const params = useParams();
   const [activeSection, setActiveSection] = createSignal('');
-  
+
   const post = BLOG_POSTS[params.slug as keyof typeof BLOG_POSTS];
-  
+
   createEffect(() => {
     if (!post) return;
-    
+
     const handleScroll = () => {
       const sections = post.tableOfContents.map(item => document.getElementById(item.id));
-      
+
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section) {
@@ -347,21 +347,21 @@ const BlogPostPage = () => {
         }
       }
     };
-    
+
     globalThis.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
-    
+
     return () => {
       globalThis.removeEventListener('scroll', handleScroll);
     };
   });
-  
+
   const renderMarkdown = (content: string) => {
     return content.split('\n').map((line, index) => {
       if (line.startsWith('# ')) {
         const id = line.slice(2).toLowerCase().replace(/[^\w]+/g, '-');
         return (
-          <h1 
+          <h1
             id={id}
             class={css({
               fontSize: { base: '3xl', md: '4xl' },
@@ -377,7 +377,7 @@ const BlogPostPage = () => {
       } else if (line.startsWith('## ')) {
         const id = line.slice(3).toLowerCase().replace(/[^\w]+/g, '-');
         return (
-          <h2 
+          <h2
             id={id}
             class={css({
               fontSize: { base: '2xl', md: '3xl' },
@@ -393,7 +393,7 @@ const BlogPostPage = () => {
       } else if (line.startsWith('### ')) {
         const id = line.slice(4).toLowerCase().replace(/[^\w]+/g, '-');
         return (
-          <h3 
+          <h3
             id={id}
             class={css({
               fontSize: { base: 'xl', md: '2xl' },
