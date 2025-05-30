@@ -1,98 +1,56 @@
-import { serve } from "https://deno.land/std@0.192.0/http/server.ts";
-import { serveDir } from "https://deno.land/std@0.192.0/http/file_server.ts";
-import { join } from "https://deno.land/std@0.192.0/path/mod.ts";
+import { defineEventHandler, readBody, createError } from 'h3';
 
-const PORT = parseInt(Deno.env.get("PORT") || "3000");
-const DIST_DIR = join(Deno.cwd(), "dist");
+export default defineEventHandler(async (event) => {
+  const url = new URL(event.node.req.url!, `http://${event.node.req.headers.host}`);
+  
+  if (url.pathname.startsWith('/api/')) {
+    return handleApiRequest(event);
+  }
+  
+  return;
+});
 
-console.log(`SOTA Marketing Stack server starting on http://localhost:${PORT}`);
-
-const isDev = Deno.args.includes("--dev");
-
-await serve(async (req) => {
-  const url = new URL(req.url);
+async function handleApiRequest(event: any) {
+  const url = new URL(event.node.req.url!, `http://${event.node.req.headers.host}`);
   const pathname = url.pathname;
+  const method = event.node.req.method;
 
-  if (pathname.startsWith("/api/")) {
-    return handleApiRequest(req);
+  if (pathname === '/api/hello') {
+    return { message: 'Hello from SOTA Marketing Stack API!' };
   }
 
-  return serveDir(req, {
-    fsRoot: DIST_DIR,
-    urlRoot: "",
-    showDirListing: false,
-    enableCors: true,
+  if (pathname === '/api/contact' && method === 'POST') {
+    try {
+      const formData = await readBody(event);
+      console.log('Contact form submission:', formData);
+      
+      return { success: true, message: 'Form submitted successfully' };
+    } catch (error) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Failed to process form'
+      });
+    }
+  }
+
+  if (pathname === '/api/subscribe' && method === 'POST') {
+    try {
+      const formData = await readBody(event);
+      console.log('Newsletter subscription:', formData);
+      
+      return { success: true, message: 'Subscription successful' };
+    } catch (error) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Failed to process subscription'
+      });
+    }
+  }
+
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Not Found'
   });
-}, { port: PORT });
-
-async function handleApiRequest(req: Request): Promise<Response> {
-  const url = new URL(req.url);
-  const pathname = url.pathname;
-
-  if (pathname === "/api/hello") {
-    return new Response(
-      JSON.stringify({ message: "Hello from SOTA Marketing Stack API!" }),
-      {
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    );
-  }
-
-  if (pathname === "/api/contact" && req.method === "POST") {
-    try {
-      const formData = await req.json();
-      console.log("Contact form submission:", formData);
-      
-      return new Response(
-        JSON.stringify({ success: true, message: "Form submitted successfully" }),
-        {
-          headers: {
-            "content-type": "application/json",
-          },
-        }
-      );
-    } catch (error) {
-      return new Response(
-        JSON.stringify({ success: false, message: "Failed to process form" }),
-        {
-          status: 400,
-          headers: {
-            "content-type": "application/json",
-          },
-        }
-      );
-    }
-  }
-
-  if (pathname === "/api/subscribe" && req.method === "POST") {
-    try {
-      const formData = await req.json();
-      console.log("Newsletter subscription:", formData);
-      
-      return new Response(
-        JSON.stringify({ success: true, message: "Subscription successful" }),
-        {
-          headers: {
-            "content-type": "application/json",
-          },
-        }
-      );
-    } catch (error) {
-      return new Response(
-        JSON.stringify({ success: false, message: "Failed to process subscription" }),
-        {
-          status: 400,
-          headers: {
-            "content-type": "application/json",
-          },
-        }
-      );
-    }
-  }
-
-  return new Response("Not Found", { status: 404 });
 }
 
 /*

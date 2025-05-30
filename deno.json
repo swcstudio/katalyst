@@ -1,11 +1,12 @@
 {
   "tasks": {
-    "dev": "deno run --allow-net --allow-read --allow-env --allow-write --allow-run --unstable-hmr --watch src/server.ts",
-    "build": "deno run --allow-net --allow-read --allow-env --allow-write --allow-run scripts/build.ts",
-    "preview": "deno run --allow-net --allow-read --allow-env src/server.ts",
+    "dev": "nitro dev",
+    "build": "nitro build",
+    "preview": "nitro preview",
     "test": "deno test --allow-net --allow-read --allow-env",
     "lint": "deno lint",
-    "fmt": "deno fmt"
+    "fmt": "deno fmt",
+    "generate:panda": "deno run --allow-read --allow-write --allow-env npm:@pandacss/dev"
   },
   "compilerOptions": {
     "jsx": "preserve",
@@ -13,6 +14,8 @@
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   },
   "imports": {
+    "nitro": "https://esm.sh/nitro@2.8.1",
+    "h3": "https://esm.sh/h3@1.9.0",
     "solid-js": "https://esm.sh/solid-js@1.7.11",
     "solid-js/web": "https://esm.sh/solid-js@1.7.11/web",
     "solid-js/store": "https://esm.sh/solid-js@1.7.11/store",
@@ -25,6 +28,8 @@
     "date-fns": "https://esm.sh/date-fns@2.30.0",
     "convex": "https://esm.sh/convex@1.0.0",
     "@clerk/clerk-js": "https://esm.sh/@clerk/clerk-js@4.50.0",
+    "@testing-library/jest-dom": "https://esm.sh/@testing-library/jest-dom@6.1.5",
+    "solid-testing-library": "https://esm.sh/solid-testing-library@0.5.0",
     "~/": "./src/"
   },
   "lint": {

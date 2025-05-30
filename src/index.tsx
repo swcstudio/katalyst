@@ -1,7 +1,7 @@
 import { render } from 'solid-js/web';
-import { Router } from '@tanstack/solid-router';
+import { RouterProvider } from '@tanstack/solid-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
-import { routeTree } from './routes';
+import { router } from './routes';
 import './styled-system/styles.css';
 
 const queryClient = new QueryClient();
@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router routeTree={routeTree} />
+      <RouterProvider router={router} />
     </QueryClientProvider>
   );
 };

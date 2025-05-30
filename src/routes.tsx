@@ -1,4 +1,4 @@
-import { Route, RootRoute, Outlet, createRootRouteWithContext } from '@tanstack/solid-router';
+import { createRouter, createRoute, createRootRoute } from '@tanstack/solid-router';
 import { lazy } from 'solid-js';
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
@@ -9,62 +9,58 @@ const BlogPage = lazy(() => import('./pages/blog/BlogPage'));
 const BlogPostPage = lazy(() => import('./pages/blog/BlogPostPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
-const rootRoute = createRootRouteWithContext<{}>()({
-  component: () => <Outlet />,
-});
-
-const layoutRoute = new Route({
-  getParentRoute: () => rootRoute,
-  id: 'layout',
+const rootRoute = createRootRoute({
   component: MainLayout,
 });
 
-const indexRoute = new Route({
-  getParentRoute: () => layoutRoute,
+const indexRoute = createRoute({
+  getParentRoute: () => rootRoute,
   path: '/',
   component: HomePage,
 });
 
-const aboutRoute = new Route({
-  getParentRoute: () => layoutRoute,
+const aboutRoute = createRoute({
+  getParentRoute: () => rootRoute,
   path: '/about',
   component: AboutPage,
 });
 
-const contactRoute = new Route({
-  getParentRoute: () => layoutRoute,
+const contactRoute = createRoute({
+  getParentRoute: () => rootRoute,
   path: '/contact',
   component: ContactPage,
 });
 
-const blogIndexRoute = new Route({
-  getParentRoute: () => layoutRoute,
+const blogIndexRoute = createRoute({
+  getParentRoute: () => rootRoute,
   path: '/blog',
   component: BlogPage,
 });
 
-const blogPostRoute = new Route({
-  getParentRoute: () => layoutRoute,
+const blogPostRoute = createRoute({
+  getParentRoute: () => rootRoute,
   path: '/blog/$slug',
   component: BlogPostPage,
 });
 
-const notFoundRoute = new Route({
+const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '*',
   component: NotFoundPage,
 });
 
-export const routeTree = rootRoute.addChildren([
-  layoutRoute.addChildren([
-    indexRoute,
-    aboutRoute,
-    contactRoute,
-    blogIndexRoute,
-    blogPostRoute,
-  ]),
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  aboutRoute,
+  contactRoute,
+  blogIndexRoute,
+  blogPostRoute,
   notFoundRoute,
 ]);
+
+export const router = createRouter({ routeTree });
+
+export type Router = typeof router;
 
 /*
  * © 2025 Spectrum Web Co LLC. All rights reserved.
