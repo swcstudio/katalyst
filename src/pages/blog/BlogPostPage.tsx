@@ -433,7 +433,7 @@ const BlogPostPage = () => {
           </pre>
         );
       } else if (line.trim() === '') {
-        return <br key={_index} />;
+        return <br key={`br-${_index}`} />;
       } else {
         return (
           <p
