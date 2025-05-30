@@ -1,7 +1,7 @@
 export default {
   testMatch: ['**/tests/**/*.test.{ts,tsx}', '**/*.test.{ts,tsx}'],
   transform: {
-    '^.+\\.(ts|tsx)$': '@rstest/transformer',
+    '^.+\\.(ts|tsx)$': 'rstest/transformer',
   },
   testEnvironment: 'jsdom',
   moduleNameMapping: {
