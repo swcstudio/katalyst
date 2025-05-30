@@ -9,7 +9,7 @@
     "generate:panda": "deno run --allow-read --allow-write --allow-env npm:@pandacss/dev"
   },
   "compilerOptions": {
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "jsxImportSource": "solid-js",
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   },
