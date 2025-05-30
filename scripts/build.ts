@@ -4,7 +4,8 @@ console.log('Building SOTA Marketing Stack with Nitro...');
 
 try {
   await build({
-    preset: 'deno',
+    preset: 'deno_server',
+    compatibilityDate: '2024-01-01',
     experimental: {
       wasm: true
     }

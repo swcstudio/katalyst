@@ -1,16 +1,15 @@
-import { render, screen } from 'solid-testing-library';
+import { render } from 'solid-testing-library';
 import Header from '../../src/components/Header';
 
 describe('Header Component', () => {
   it('renders without crashing', () => {
     const { container } = render(() => <Header />);
-    expect(container).toBeTruthy();
+    expect(container).toBeInTheDocument();
   });
 
   it('contains navigation elements', () => {
-    render(() => <Header />);
-    const element = screen.queryByText('SOTA Stack');
-    expect(element).toBeTruthy();
+    const { getByText } = render(() => <Header />);
+    expect(getByText('SOTA Marketing')).toBeInTheDocument();
   });
 });
 

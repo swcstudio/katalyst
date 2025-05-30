@@ -1,15 +1,15 @@
-import { render, screen } from 'solid-testing-library';
+import { render } from 'solid-testing-library';
 import HomePage from '../../src/pages/HomePage';
 
 describe('HomePage Component', () => {
   it('renders without crashing', () => {
     const { container } = render(() => <HomePage />);
-    expect(container).toBeTruthy();
+    expect(container).toBeInTheDocument();
   });
 
   it('contains hero section', () => {
-    render(() => <HomePage />);
-    const headingElement = screen.queryByRole('heading', { level: 1 });
+    const { queryByRole } = render(() => <HomePage />);
+    const headingElement = queryByRole('heading', { level: 1 });
     expect(headingElement).toBeTruthy();
   });
 });

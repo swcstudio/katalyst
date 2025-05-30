@@ -1,13 +1,13 @@
 import '@testing-library/jest-dom';
 
-global.structuredClone = (obj: any) => JSON.parse(JSON.stringify(obj));
+window.structuredClone = (obj: any) => JSON.parse(JSON.stringify(obj));
 
-global.IntersectionObserver = class IntersectionObserver {
+window.IntersectionObserver = class MockIntersectionObserver {
   constructor() {}
   observe() { return null; }
   disconnect() { return null; }
   unobserve() { return null; }
-};
+} as unknown as typeof IntersectionObserver;
 
 /*
  * © 2025 Spectrum Web Co LLC. All rights reserved.

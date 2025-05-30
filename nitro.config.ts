@@ -4,7 +4,8 @@ export default defineNitroConfig({
   experimental: {
     wasm: true
   },
-  preset: 'deno',
+  preset: 'deno_server',
+  compatibilityDate: '2024-01-01',
   srcDir: 'src',
   output: {
     dir: 'dist',
