@@ -34,9 +34,10 @@
   "nxCloudUrl": "https://nx.app",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx/tasks-runners/default",
+      "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "test", "lint"]
+        "cacheableOperations": ["build", "test", "lint", "fmt"],
+        "accessToken": "${NX_CLOUD_ACCESS_TOKEN}"
       }
     }
   }
