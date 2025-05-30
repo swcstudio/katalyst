@@ -1,16 +1,14 @@
-import { defineNitroConfig } from 'nitro';
-
-export default defineNitroConfig({
+export default {
   experimental: {
     wasm: true
   },
   preset: 'deno_server',
-  compatibilityDate: '2024-01-01',
+  compatibilityDate: '2025-01-30',
   srcDir: 'src',
   output: {
-    dir: 'dist',
-    serverDir: 'dist/server',
-    publicDir: 'dist/public'
+    dir: '.output',
+    serverDir: '.output/server',
+    publicDir: '.output/public'
   },
   runtimeConfig: {
     port: 3000
@@ -18,7 +16,7 @@ export default defineNitroConfig({
   devServer: {
     port: 3000
   }
-});
+};
 
 /*
  * © 2025 Spectrum Web Co LLC. All rights reserved.

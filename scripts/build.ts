@@ -1,15 +1,12 @@
-import { build } from 'nitro';
+import { copy } from "https://deno.land/std@0.220.0/fs/copy.ts";
+import { ensureDir } from "https://deno.land/std@0.220.0/fs/ensure_dir.ts";
 
-console.log('Building SOTA Marketing Stack with Nitro...');
+console.log('Building SOTA Marketing Stack...');
 
 try {
-  await build({
-    preset: 'deno_server',
-    compatibilityDate: '2024-01-01',
-    experimental: {
-      wasm: true
-    }
-  });
+  await ensureDir("dist");
+  
+  await copy("src", "dist", { overwrite: true });
   
   console.log('Build completed successfully!');
 } catch (error) {

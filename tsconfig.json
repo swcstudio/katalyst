@@ -6,7 +6,7 @@
     "allowImportingTsExtensions": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "types": ["@types/jest", "deno-types"],
+    "types": ["@types/jest", "./deno-types"],
     "noEmit": true,
     "strict": true,
     "skipLibCheck": true,

@@ -1,8 +1,9 @@
 {
   "tasks": {
-    "dev": "deno run --allow-all scripts/dev.ts",
-    "build": "deno run --allow-all scripts/build.ts",
-    "preview": "deno run --allow-all scripts/preview.ts",
+    "dev": "deno run --allow-all --no-check scripts/dev.ts",
+    "build": "deno run --allow-all --no-check scripts/build.ts",
+    "preview": "deno run --allow-all --no-check scripts/preview.ts",
+    "start": "deno run --allow-net --allow-read server.ts",
     "test": "deno run --allow-all --no-check tests/runner.ts",
     "lint": "deno lint --ignore=src/styled-system/",
     "fmt": "deno fmt",
@@ -14,7 +15,10 @@
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   },
   "imports": {
-    "nitro": "https://esm.sh/nitro@2.8.1",
+    "nitro": "https://esm.sh/nitropack@2.8.1",
+    "nitropack": "https://esm.sh/nitropack@2.8.1",
+    "nitropack/dev": "https://esm.sh/nitropack@2.8.1/dist/dev",
+    "nitropack/runtime": "https://esm.sh/nitropack@2.8.1/dist/runtime",
     "h3": "https://esm.sh/h3@1.9.0",
     "solid-js": "https://esm.sh/solid-js@1.7.11",
     "solid-js/web": "https://esm.sh/solid-js@1.7.11/web",

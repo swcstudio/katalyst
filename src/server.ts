@@ -1,4 +1,4 @@
-import { defineEventHandler, readBody, createError, H3Event } from 'h3';
+import { defineEventHandler, readBody, createError, H3Event } from 'https://esm.sh/h3@1.9.0';
 
 export default defineEventHandler((event: H3Event) => {
   const url = new URL(event.node.req.url!, `http://${event.node.req.headers.host}`);

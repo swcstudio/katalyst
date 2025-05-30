@@ -9,6 +9,10 @@ declare namespace Deno {
   export function cwd(): string;
 }
 
+declare namespace process {
+  export function exit(code?: number): never;
+}
+
 /*
  * © 2025 Spectrum Web Co LLC. All rights reserved.
  * This code is the property of Spectrum Web Co LLC.
