@@ -1,0 +1,38 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-read --allow-env --allow-write --allow-run --unstable-hmr --watch src/server.ts",
+    "build": "deno run --allow-net --allow-read --allow-env --allow-write --allow-run scripts/build.ts",
+    "preview": "deno run --allow-net --allow-read --allow-env src/server.ts",
+    "test": "deno test --allow-net --allow-read --allow-env",
+    "lint": "deno lint",
+    "fmt": "deno fmt"
+  },
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
+  },
+  "imports": {
+    "solid-js": "https://esm.sh/solid-js@1.7.11",
+    "solid-js/web": "https://esm.sh/solid-js@1.7.11/web",
+    "solid-js/store": "https://esm.sh/solid-js@1.7.11/store",
+    "@tanstack/solid-router": "https://esm.sh/@tanstack/solid-router@0.8.0",
+    "@tanstack/solid-query": "https://esm.sh/@tanstack/solid-query@4.29.1",
+    "@tanstack/solid-table": "https://esm.sh/@tanstack/solid-table@8.10.0",
+    "@tanstack/solid-virtual": "https://esm.sh/@tanstack/solid-virtual@3.0.0",
+    "@tanstack/solid-store": "https://esm.sh/@tanstack/solid-store@0.2.0",
+    "zustand": "https://esm.sh/zustand@4.4.1",
+    "date-fns": "https://esm.sh/date-fns@2.30.0",
+    "convex": "https://esm.sh/convex@1.0.0",
+    "@clerk/clerk-js": "https://esm.sh/@clerk/clerk-js@4.50.0",
+    "~/": "./src/"
+  },
+  "lint": {
+    "include": ["src/"],
+    "exclude": ["node_modules/", "dist/", ".solid/"]
+  },
+  "fmt": {
+    "include": ["src/"],
+    "exclude": ["node_modules/", "dist/", ".solid/"]
+  }
+}
