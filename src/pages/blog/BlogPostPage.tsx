@@ -1,4 +1,4 @@
-import { createSignal, createEffect, Show } from 'solid-js';
+import { createSignal, createEffect, Show, For } from 'solid-js';
 import { useParams, Link } from '@tanstack/solid-router';
 import { css } from '../../styled-system/css';
 import { flex } from '../../styled-system/patterns';
@@ -348,16 +348,16 @@ const BlogPostPage = () => {
       }
     };
     
-    window.addEventListener('scroll', handleScroll);
+    globalThis.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      globalThis.removeEventListener('scroll', handleScroll);
     };
   });
   
   const renderMarkdown = (content: string) => {
-    return content.split('\n').map((line, index) => {
+    return content.split('\n').map((line, _index) => {
       if (line.startsWith('# ')) {
         const id = line.slice(2).toLowerCase().replace(/[^\w]+/g, '-');
         return (
@@ -433,7 +433,7 @@ const BlogPostPage = () => {
           </pre>
         );
       } else if (line.trim() === '') {
-        return <br />;
+        return <br key={_index} />;
       } else {
         return (
           <p

@@ -123,6 +123,7 @@ const BlogPage = () => {
             <For each={allTags}>
               {(tag) => (
                 <button
+                  type="button"
                   onClick={() => handleTagClick(tag)}
                   class={css({
                     px: '3',
@@ -143,6 +144,7 @@ const BlogPage = () => {
             </For>
             {selectedTag() && (
               <button
+                type="button"
                 onClick={() => setSelectedTag(null)}
                 class={css({
                   px: '3',
@@ -312,6 +314,7 @@ const BlogPage = () => {
             })}
           >
             <button
+              type="button"
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage() === 1}
               class={css({
@@ -338,6 +341,7 @@ const BlogPage = () => {
             <For each={Array.from({ length: totalPages() }, (_, i) => i + 1)}>
               {(page) => (
                 <button
+                  type="button"
                   onClick={() => setCurrentPage(page)}
                   class={css({
                     px: '4',
@@ -357,6 +361,7 @@ const BlogPage = () => {
               )}
             </For>
             <button
+              type="button"
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages()))}
               disabled={currentPage() === totalPages()}
               class={css({
