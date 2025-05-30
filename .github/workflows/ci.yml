@@ -1,4 +1,4 @@
-name: AI-Powered CI with Deno
+fname: AI-Powered CI with Deno
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          
+
       - name: Install Nx CLI
         run: npm install -g nx@latest nx-cloud@latest
 
@@ -77,12 +77,12 @@ jobs:
 
       - name: Deploy Marketing to Vercel
         run: vercel deploy ./dist/marketing --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-marketing
-        
+
       - name: Deploy Blog to Vercel
         run: vercel deploy ./dist/blog --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-blog
-        
+
       - name: Deploy Storefront to Vercel
         run: vercel deploy ./dist/storefront --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-storefront
-        
+
       - name: Deploy Docs to Vercel
         run: vercel deploy ./dist/docs --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-docs

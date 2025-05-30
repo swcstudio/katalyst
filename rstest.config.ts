@@ -1,25 +1,17 @@
-export default {
+
+export const testConfig = {
   testMatch: ['**/tests/**/*.test.{ts,tsx}', '**/*.test.{ts,tsx}'],
-  transform: {
-    '^.+\\.(ts|tsx)$': 'rstest/transformer',
-  },
   testEnvironment: 'jsdom',
   moduleNameMapping: {
-    '^~/(.*)$': '<rootDir>/src/$1',
-    '^@shared/(.*)$': '<rootDir>/libs/shared/$1',
+    '^~/(.*)$': './src/$1',
+    '^@shared/(.*)$': './libs/shared/$1',
   },
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
+  setupFiles: ['./tests/setup.ts'],
   coverage: {
-    reporter: ['text', 'html'],
+    include: ['src/**/*.{ts,tsx}', 'apps/**/*.{ts,tsx}', 'libs/**/*.{ts,tsx}'],
     exclude: ['**/node_modules/**', '**/tests/**', '**/*.config.{js,ts}'],
   },
   testTimeout: 10000,
-  solidPlugin: {
-    babel: {
-      presets: ['@babel/preset-typescript'],
-      plugins: ['babel-plugin-solid-undestructure'],
-    },
-  },
 };
 
 /*

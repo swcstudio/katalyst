@@ -1,14 +1,14 @@
 {
   "tasks": {
     "dev": "deno run --allow-all scripts/dev.ts",
-    "dev:marketing": "deno run --allow-all scripts/dev-marketing.ts",
-    "dev:blog": "deno run --allow-all scripts/dev-blog.ts", 
+to p    "dev:marketing": "deno run --allow-all scripts/dev-marketing.ts",
+    "dev:blog": "deno run --allow-all scripts/dev-blog.ts",
     "dev:storefront": "deno run --allow-all scripts/dev-storefront.ts",
     "dev:docs": "deno run --allow-all scripts/dev-docs.ts",
     "build": "deno run --allow-all scripts/build.ts",
     "build:marketing": "deno run --allow-all scripts/build-marketing.ts",
     "build:blog": "deno run --allow-all scripts/build-blog.ts",
-    "build:storefront": "deno run --allow-all scripts/build-storefront.ts", 
+    "build:storefront": "deno run --allow-all scripts/build-storefront.ts",
     "build:docs": "deno run --allow-all scripts/build-docs.ts",
     "preview": "deno run --allow-all scripts/preview.ts",
     "preview:marketing": "deno run --allow-all scripts/preview-marketing.ts",
@@ -42,7 +42,6 @@
     "@zag-js/solid": "npm:@zag-js/solid@0.32.1",
     "@park-ui/panda-preset": "npm:@park-ui/panda-preset@0.33.0",
     "solid-js": "npm:solid-js@1.7.11",
-    "rstest": "npm:rstest@0.1.0",
     "zustand": "npm:zustand@4.4.1",
     "~/": "./src/"
   },
