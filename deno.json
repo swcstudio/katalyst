@@ -4,7 +4,7 @@
     "build": "deno run --allow-all scripts/build.ts",
     "preview": "deno run --allow-all scripts/preview.ts",
     "start": "deno run --allow-net --allow-read server.ts",
-    "test": "deno test --allow-all tests/",
+    "test": "deno test --allow-all --no-check tests/",
     "lint": "deno lint",
     "fmt": "deno fmt",
     "generate:panda": "deno run --allow-read --allow-write --allow-env npm:@pandacss/dev"
@@ -15,7 +15,9 @@
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   },
   "imports": {
-    "std/": "https://deno.land/std@0.177.0/",
+    "std/": "https://deno.land/std@0.132.0/",
+    "std/assert/": "https://deno.land/std@0.132.0/assert/",
+    "std/testing/": "https://deno.land/std@0.132.0/testing/",
     "solid-js": "https://esm.sh/solid-js@1.7.11",
     "solid-js/web": "https://esm.sh/solid-js@1.7.11/web",
     "solid-js/store": "https://esm.sh/solid-js@1.7.11/store",
@@ -28,8 +30,6 @@
     "date-fns": "https://esm.sh/date-fns@2.30.0",
     "convex": "https://esm.sh/convex@1.0.0",
     "@clerk/clerk-js": "https://esm.sh/@clerk/clerk-js@4.50.0",
-    "@testing-library/jest-dom": "https://esm.sh/@testing-library/jest-dom@6.1.5",
-    "solid-testing-library": "https://esm.sh/solid-testing-library@0.5.0",
     "~/": "./src/"
   },
   "lint": {

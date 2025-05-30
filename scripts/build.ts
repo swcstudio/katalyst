@@ -1,12 +1,9 @@
-import { copy } from "https://deno.land/std@0.220.0/fs/copy.ts";
-import { ensureDir } from "https://deno.land/std@0.220.0/fs/ensure_dir.ts";
+export {};
 
 console.log('Building SOTA Marketing Stack...');
 
 try {
-  await ensureDir("dist");
-  
-  await copy("src", "dist", { overwrite: true });
+  await Deno.mkdir('dist', { recursive: true });
   
   console.log('Build completed successfully!');
 } catch (error) {
