@@ -1,0 +1,43 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-all scripts/dev.ts",
+    "build": "deno run --allow-all scripts/build.ts",
+    "preview": "deno run --allow-all scripts/preview.ts",
+    "start": "deno run --allow-net --allow-read server.ts",
+    "test": "deno test --allow-all --no-check tests/",
+    "lint": "deno lint",
+    "fmt": "deno fmt",
+    "generate:panda": "deno run --allow-read --allow-write --allow-env npm:@pandacss/dev"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "solid-js",
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
+  },
+  "imports": {
+    "std/": "https://deno.land/std@0.140.0/",
+    "std/assert/": "https://deno.land/std@0.140.0/assert/",
+    "std/testing/": "https://deno.land/std@0.140.0/testing/",
+    "h3": "npm:h3@1.10.1",
+    "nitropack": "npm:nitropack@2.8.1",
+    "@tanstack/solid-router": "npm:@tanstack/solid-router@0.8.1",
+    "@tanstack/solid-query": "npm:@tanstack/solid-query@5.8.1",
+    "@tanstack/solid-table": "npm:@tanstack/solid-table@8.11.6",
+    "@tanstack/solid-form": "npm:@tanstack/solid-form@0.19.4",
+    "@tanstack/solid-virtual": "npm:@tanstack/solid-virtual@3.0.1",
+    "@tanstack/solid-store": "npm:@tanstack/solid-store@0.5.0",
+    "@tanstack/solid-pacer": "npm:@tanstack/solid-pacer@0.1.0",
+    "@zag-js/solid": "npm:@zag-js/solid@0.32.1",
+    "@park-ui/panda-preset": "npm:@park-ui/panda-preset@0.33.0",
+    "solid-js": "npm:solid-js@1.7.11",
+    "~/": "./src/"
+  },
+  "lint": {
+    "include": ["src/", "scripts/", "tests/"],
+    "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
+  },
+  "fmt": {
+    "include": ["src/", "scripts/", "tests/"],
+    "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
+  }
+}

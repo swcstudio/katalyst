@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+# These are explicitly windows files and should use crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+# These files are binary and should be left untouched
+*.png binary
+*.jpg binary
+*.jpeg binary
