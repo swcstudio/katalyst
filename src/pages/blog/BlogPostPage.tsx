@@ -357,7 +357,7 @@ const BlogPostPage = () => {
   });
   
   const renderMarkdown = (content: string) => {
-    return content.split('\n').map((line, _index) => {
+    return content.split('\n').map((line, index) => {
       if (line.startsWith('# ')) {
         const id = line.slice(2).toLowerCase().replace(/[^\w]+/g, '-');
         return (
@@ -433,7 +433,7 @@ const BlogPostPage = () => {
           </pre>
         );
       } else if (line.trim() === '') {
-        return <br />;
+        return <br key={`br-${index}`} />;
       } else {
         return (
           <p

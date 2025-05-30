@@ -33,6 +33,12 @@ declare namespace process {
   export function exit(code?: number): never;
 }
 
+declare namespace JSX {
+  interface HTMLAttributes<T> {
+    key?: string | number;
+  }
+}
+
 /*
  * © 2025 Spectrum Web Co LLC. All rights reserved.
  * This code is the property of Spectrum Web Co LLC.
