@@ -1,6 +1,6 @@
-import { defineEventHandler, readBody, createError } from 'h3';
+import { defineEventHandler, readBody, createError, H3Event } from 'h3';
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event: H3Event) => {
   const url = new URL(event.node.req.url!, `http://${event.node.req.headers.host}`);
   
   if (url.pathname.startsWith('/api/')) {
@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   return;
 });
 
-async function handleApiRequest(event: any) {
+async function handleApiRequest(event: H3Event) {
   const url = new URL(event.node.req.url!, `http://${event.node.req.headers.host}`);
   const pathname = url.pathname;
   const method = event.node.req.method;
@@ -25,7 +25,7 @@ async function handleApiRequest(event: any) {
       console.log('Contact form submission:', formData);
       
       return { success: true, message: 'Form submitted successfully' };
-    } catch (error) {
+    } catch (_error) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Failed to process form'
@@ -39,7 +39,7 @@ async function handleApiRequest(event: any) {
       console.log('Newsletter subscription:', formData);
       
       return { success: true, message: 'Subscription successful' };
-    } catch (error) {
+    } catch (_error) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Failed to process subscription'

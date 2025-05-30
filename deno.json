@@ -4,7 +4,7 @@
     "build": "deno run --allow-all scripts/build.ts",
     "preview": "deno run --allow-all scripts/preview.ts",
     "test": "deno test --allow-net --allow-read --allow-env tests/",
-    "lint": "deno lint",
+    "lint": "deno lint --ignore=src/styled-system/",
     "fmt": "deno fmt",
     "generate:panda": "deno run --allow-read --allow-write --allow-env npm:@pandacss/dev"
   },
@@ -34,10 +34,10 @@
   },
   "lint": {
     "include": ["src/"],
-    "exclude": ["node_modules/", "dist/", ".solid/"]
+    "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
   },
   "fmt": {
     "include": ["src/"],
-    "exclude": ["node_modules/", "dist/", ".solid/"]
+    "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
   }
 }

@@ -119,6 +119,7 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button
+          type="button"
           class={css({
             display: { base: 'block', md: 'none' },
             bg: 'transparent',
