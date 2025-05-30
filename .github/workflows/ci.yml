@@ -1,4 +1,4 @@
-name: CI
+fname: AI-Powered CI with Deno
 
 on:
   push:
@@ -7,87 +7,82 @@ on:
     branches: [main, staging, development]
 
 jobs:
-  lint:
-    name: Lint
+  nx-cloud:
+    name: Nx Cloud CI
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Deno
         uses: denoland/setup-deno@v1
         with:
           deno-version: v1.32.x
 
-      - name: Lint
-        run: |
-          deno cache --reload --lock=deno.lock --lock-write server.ts
-          deno task lint
+      - name: Cache Deno dependencies
+        run: deno cache --reload --lock=deno.lock --lock-write server.ts
 
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
+      - name: Setup Node.js for Nx
+        uses: actions/setup-node@v4
         with:
-          deno-version: v1.32.x
+          node-version: '18'
 
-      - name: Run tests
-        run: |
-          deno cache --reload --lock=deno.lock --lock-write server.ts
-          deno task test
+      - name: Install Nx CLI
+        run: npm install -g nx@latest nx-cloud@latest
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Lint with Deno
+        run: deno task lint
 
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
-        with:
-          deno-version: v1.32.x
+      - name: Test with Deno
+        run: deno task test
 
-      - name: Build
-        run: |
-          deno cache --reload --lock=deno.lock --lock-write server.ts
-          deno task build
+      - name: Build with Deno
+        run: deno task build
+
+      - name: Start Nx Cloud CI
+        run: nx-cloud start-ci-run
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+      - name: Run affected tasks with AI
+        run: nx affected --target=build,test,lint --parallel=4 --cloud
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+      - name: Stop Nx Cloud CI
+        run: nx-cloud stop-all-agents
+        if: always()
 
   deploy:
-    name: Deploy
-    needs: [lint, test, build]
+    name: Deploy to Vercel
+    needs: [nx-cloud]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Deno
         uses: denoland/setup-deno@v1
         with:
           deno-version: v1.32.x
 
-      - name: Build
-        run: |
-          deno cache --reload --lock=deno.lock --lock-write server.ts
-          deno task build
+      - name: Build all micro-frontends
+        run: deno task build
 
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.2
-        with:
-          publish-dir: './dist'
-          production-branch: main
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: true
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 5
+      - name: Install Vercel CLI
+        run: deno install --allow-all npm:vercel@latest
+
+      - name: Deploy Marketing to Vercel
+        run: vercel deploy ./dist/marketing --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-marketing
+
+      - name: Deploy Blog to Vercel
+        run: vercel deploy ./dist/blog --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-blog
+
+      - name: Deploy Storefront to Vercel
+        run: vercel deploy ./dist/storefront --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-storefront
+
+      - name: Deploy Docs to Vercel
+        run: vercel deploy ./dist/docs --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-docs

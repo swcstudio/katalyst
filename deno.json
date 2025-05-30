@@ -1,8 +1,20 @@
 {
   "tasks": {
     "dev": "deno run --allow-all scripts/dev.ts",
+to p    "dev:marketing": "deno run --allow-all scripts/dev-marketing.ts",
+    "dev:blog": "deno run --allow-all scripts/dev-blog.ts",
+    "dev:storefront": "deno run --allow-all scripts/dev-storefront.ts",
+    "dev:docs": "deno run --allow-all scripts/dev-docs.ts",
     "build": "deno run --allow-all scripts/build.ts",
+    "build:marketing": "deno run --allow-all scripts/build-marketing.ts",
+    "build:blog": "deno run --allow-all scripts/build-blog.ts",
+    "build:storefront": "deno run --allow-all scripts/build-storefront.ts",
+    "build:docs": "deno run --allow-all scripts/build-docs.ts",
     "preview": "deno run --allow-all scripts/preview.ts",
+    "preview:marketing": "deno run --allow-all scripts/preview-marketing.ts",
+    "preview:blog": "deno run --allow-all scripts/preview-blog.ts",
+    "preview:storefront": "deno run --allow-all scripts/preview-storefront.ts",
+    "preview:docs": "deno run --allow-all scripts/preview-docs.ts",
     "start": "deno run --allow-net --allow-read server.ts",
     "test": "deno test --allow-all --no-check tests/",
     "lint": "deno lint",
@@ -26,18 +38,23 @@
     "@tanstack/solid-form": "npm:@tanstack/solid-form@0.19.4",
     "@tanstack/solid-virtual": "npm:@tanstack/solid-virtual@3.0.1",
     "@tanstack/solid-store": "npm:@tanstack/solid-store@0.5.0",
-    "@tanstack/solid-pacer": "npm:@tanstack/solid-pacer@0.1.0",
+    "@tanstack/solid-pacer": "npm:@tanstack/solid-pacer@0.2.0",
     "@zag-js/solid": "npm:@zag-js/solid@0.32.1",
     "@park-ui/panda-preset": "npm:@park-ui/panda-preset@0.33.0",
     "solid-js": "npm:solid-js@1.7.11",
+    "zustand": "npm:zustand@4.4.1",
     "~/": "./src/"
   },
   "lint": {
-    "include": ["src/", "scripts/", "tests/"],
-    "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
+    "files": {
+      "include": ["src/", "scripts/", "tests/"],
+      "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
+    }
   },
   "fmt": {
-    "include": ["src/", "scripts/", "tests/"],
-    "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
+    "files": {
+      "include": ["src/", "scripts/", "tests/"],
+      "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
+    }
   }
 }

@@ -4,7 +4,7 @@
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json"],
-    "sharedGlobals": []
+    "sharedGlobals": ["{workspaceRoot}/deno.json", "{workspaceRoot}/nx.json"]
   },
   "targetDefaults": {
     "build": {
@@ -40,7 +40,46 @@
         "accessToken": "${NX_CLOUD_ACCESS_TOKEN}"
       }
     }
-  }
+  },
+  "distributedExecutionConfig": {
+    "enabled": true,
+    "agents": 4,
+    "agentTimeoutMs": 600000
+  },
+  "ai": {
+    "enabled": true,
+    "explainWithAI": true
+  },
+  "conformanceRules": [
+    {
+      "rule": "@nx/enforce-module-boundaries",
+      "options": {
+        "allow": [],
+        "depConstraints": [
+          {
+            "sourceTag": "scope:shared",
+            "onlyDependOnLibsWithTags": ["scope:shared"]
+          },
+          {
+            "sourceTag": "scope:marketing",
+            "onlyDependOnLibsWithTags": ["scope:shared"]
+          },
+          {
+            "sourceTag": "scope:blog", 
+            "onlyDependOnLibsWithTags": ["scope:shared"]
+          },
+          {
+            "sourceTag": "scope:storefront",
+            "onlyDependOnLibsWithTags": ["scope:shared"]
+          },
+          {
+            "sourceTag": "scope:docs",
+            "onlyDependOnLibsWithTags": ["scope:shared"]
+          }
+        ]
+      }
+    }
+  ]
 }
 
 /*
