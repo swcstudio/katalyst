@@ -1,4 +1,4 @@
-cimport { createSignal, createEffect, Show, For } from 'solid-js';
+import { createSignal, createEffect, Show, For } from 'solid-js';
 import { useParams, Link } from '@tanstack/solid-router';
 import { css } from '../../styled-system/css';
 import { flex } from '../../styled-system/patterns';
