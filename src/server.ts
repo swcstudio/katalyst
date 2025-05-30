@@ -1,57 +1,52 @@
-import { defineEventHandler, readBody, createError, H3Event } from 'https://esm.sh/h3@1.9.0';
+console.log("SOTA Marketing Stack API server starting...");
 
-export default defineEventHandler((event: H3Event) => {
-  const url = new URL(event.node.req.url!, `http://${event.node.req.headers.host}`);
+export const handler = async (req: Request): Promise<Response> => {
+  const url = new URL(req.url);
   
-  if (url.pathname.startsWith('/api/')) {
-    return handleApiRequest(event);
+  if (url.pathname === '/api/hello') {
+    return new Response(
+      JSON.stringify({ message: 'Hello from SOTA Marketing Stack API!' }),
+      { headers: { "Content-Type": "application/json" } }
+    );
   }
   
-  return;
-});
-
-async function handleApiRequest(event: H3Event) {
-  const url = new URL(event.node.req.url!, `http://${event.node.req.headers.host}`);
-  const pathname = url.pathname;
-  const method = event.node.req.method;
-
-  if (pathname === '/api/hello') {
-    return { message: 'Hello from SOTA Marketing Stack API!' };
-  }
-
-  if (pathname === '/api/contact' && method === 'POST') {
+  if (url.pathname === '/api/contact' && req.method === 'POST') {
     try {
-      const formData = await readBody(event);
+      const formData = await req.json();
       console.log('Contact form submission:', formData);
-      
-      return { success: true, message: 'Form submitted successfully' };
+      return new Response(
+        JSON.stringify({ success: true, message: 'Form submitted successfully' }),
+        { headers: { "Content-Type": "application/json" } }
+      );
     } catch (_error) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: 'Failed to process form'
-      });
+      return new Response(
+        JSON.stringify({ success: false, message: 'Failed to process form' }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
     }
   }
 
-  if (pathname === '/api/subscribe' && method === 'POST') {
+  if (url.pathname === '/api/subscribe' && req.method === 'POST') {
     try {
-      const formData = await readBody(event);
+      const formData = await req.json();
       console.log('Newsletter subscription:', formData);
-      
-      return { success: true, message: 'Subscription successful' };
+      return new Response(
+        JSON.stringify({ success: true, message: 'Subscription successful' }),
+        { headers: { "Content-Type": "application/json" } }
+      );
     } catch (_error) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: 'Failed to process subscription'
-      });
+      return new Response(
+        JSON.stringify({ success: false, message: 'Failed to process subscription' }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
     }
   }
-
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Not Found'
-  });
-}
+  
+  return new Response(
+    JSON.stringify({ error: 'Not Found' }),
+    { status: 404, headers: { "Content-Type": "application/json" } }
+  );
+};
 
 /*
  * © 2025 Spectrum Web Co LLC. All rights reserved.

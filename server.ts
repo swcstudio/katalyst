@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std@0.220.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.132.0/http/server.ts";
 
 console.log("SOTA Marketing Stack server starting...");
 
@@ -22,7 +22,7 @@ const handler = async (req: Request): Promise<Response> => {
           JSON.stringify({ success: true, message: 'Form submitted successfully' }),
           { headers: { "Content-Type": "application/json" } }
         );
-      } catch (error) {
+      } catch (_error) {
         return new Response(
           JSON.stringify({ success: false, message: 'Failed to process form' }),
           { status: 400, headers: { "Content-Type": "application/json" } }
@@ -39,7 +39,7 @@ const handler = async (req: Request): Promise<Response> => {
           JSON.stringify({ success: true, message: 'Subscription successful' }),
           { headers: { "Content-Type": "application/json" } }
         );
-      } catch (error) {
+      } catch (_error) {
         return new Response(
           JSON.stringify({ success: false, message: 'Failed to process subscription' }),
           { status: 400, headers: { "Content-Type": "application/json" } }

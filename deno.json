@@ -18,18 +18,6 @@
     "std/": "https://deno.land/std@0.132.0/",
     "std/assert/": "https://deno.land/std@0.132.0/assert/",
     "std/testing/": "https://deno.land/std@0.132.0/testing/",
-    "solid-js": "https://esm.sh/solid-js@1.7.11",
-    "solid-js/web": "https://esm.sh/solid-js@1.7.11/web",
-    "solid-js/store": "https://esm.sh/solid-js@1.7.11/store",
-    "@tanstack/solid-router": "https://esm.sh/@tanstack/solid-router@0.8.0",
-    "@tanstack/solid-query": "https://esm.sh/@tanstack/solid-query@4.29.1",
-    "@tanstack/solid-table": "https://esm.sh/@tanstack/solid-table@8.10.0",
-    "@tanstack/solid-virtual": "https://esm.sh/@tanstack/solid-virtual@3.0.0",
-    "@tanstack/solid-store": "https://esm.sh/@tanstack/solid-store@0.2.0",
-    "zustand": "https://esm.sh/zustand@4.4.1",
-    "date-fns": "https://esm.sh/date-fns@2.30.0",
-    "convex": "https://esm.sh/convex@1.0.0",
-    "@clerk/clerk-js": "https://esm.sh/@clerk/clerk-js@4.50.0",
     "~/": "./src/"
   },
   "lint": {
