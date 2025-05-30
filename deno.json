@@ -18,6 +18,8 @@
     "std/": "https://deno.land/std@0.132.0/",
     "std/assert/": "https://deno.land/std@0.132.0/assert/",
     "std/testing/": "https://deno.land/std@0.132.0/testing/",
+    "@tanstack/solid-router": "npm:@tanstack/solid-router@0.8.1",
+    "solid-js": "npm:solid-js@1.7.11",
     "~/": "./src/"
   },
   "lint": {
