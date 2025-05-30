@@ -23,7 +23,7 @@
     "~/": "./src/"
   },
   "lint": {
-    "include": ["src/", "scripts/", "tests/"],
+    "files": ["src/", "scripts/", "tests/"],
     "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
   },
   "fmt": {
