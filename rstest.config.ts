@@ -8,6 +8,18 @@ export default {
     '^~/(.*)$': '<rootDir>/src/$1',
     '^@shared/(.*)$': '<rootDir>/libs/shared/$1',
   },
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
+  coverage: {
+    reporter: ['text', 'html'],
+    exclude: ['**/node_modules/**', '**/tests/**', '**/*.config.{js,ts}'],
+  },
+  testTimeout: 10000,
+  solidPlugin: {
+    babel: {
+      presets: ['@babel/preset-typescript'],
+      plugins: ['babel-plugin-solid-undestructure'],
+    },
+  },
 };
 
 /*

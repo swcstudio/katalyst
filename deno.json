@@ -38,11 +38,12 @@
     "@tanstack/solid-form": "npm:@tanstack/solid-form@0.19.4",
     "@tanstack/solid-virtual": "npm:@tanstack/solid-virtual@3.0.1",
     "@tanstack/solid-store": "npm:@tanstack/solid-store@0.5.0",
-    "@tanstack/solid-pacer": "npm:@tanstack/solid-pacer@0.1.0",
+    "@tanstack/solid-pacer": "npm:@tanstack/solid-pacer@0.2.0",
     "@zag-js/solid": "npm:@zag-js/solid@0.32.1",
     "@park-ui/panda-preset": "npm:@park-ui/panda-preset@0.33.0",
     "solid-js": "npm:solid-js@1.7.11",
     "rstest": "npm:rstest@0.1.0",
+    "zustand": "npm:zustand@4.4.1",
     "~/": "./src/"
   },
   "lint": {
