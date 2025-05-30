@@ -1,5 +1,4 @@
 name: AI-Powered CI
-
 on:
   push:
     branches: [main, staging, development]
@@ -9,12 +8,20 @@ on:
 jobs:
   nx-cloud:
     name: Nx Cloud CI
-    runs-on: ubuntu-latest
+    runs-on: MIC_GITHUB_spectrumwebco
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.32.x
+
+      - name: Cache Deno dependencies
+        run: deno cache --reload --lock=deno.lock --lock-write server.ts
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -22,16 +29,8 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
-        with:
-          deno-version: v1.32.x
-
       - name: Install dependencies
         run: npm ci
-
-      - name: Cache Deno dependencies
-        run: deno cache --reload --lock=deno.lock --lock-write server.ts
 
       - name: Start Nx Cloud CI
         run: npx nx-cloud start-ci-run
@@ -49,21 +48,21 @@ jobs:
     name: Deploy
     needs: [nx-cloud]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
+    runs-on: MIC_GITHUB_spectrumwebco
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.32.x
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
-
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
-        with:
-          deno-version: v1.32.x
 
       - name: Install dependencies
         run: npm ci
@@ -79,11 +78,13 @@ jobs:
           publish-dir: './dist'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: true
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
+          deploy-message: "Deploy from Gitea CI"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 5
+
+/*
+ * © 2025 Spectrum Web Co LLC. All rights reserved.
+ * This code is the property of Spectrum Web Co LLC.
+ * Licensed under MIT License.
+ */

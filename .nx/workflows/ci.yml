@@ -1,0 +1,21 @@
+name: Nx Cloud AI-Powered CI
+distributedExecution:
+  agents: 4
+  agentTimeoutMs: 600000
+targets:
+  - name: build
+    parallelism: 4
+  - name: test
+    parallelism: 2
+  - name: lint
+    parallelism: 1
+ai:
+  enabled: true
+  explainWithAI: true
+  conformanceRules: true
+
+/*
+ * © 2025 Spectrum Web Co LLC. All rights reserved.
+ * This code is the property of Spectrum Web Co LLC.
+ * Licensed under MIT License.
+ */
