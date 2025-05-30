@@ -1,5 +1,5 @@
-import { build } from 'npm:@rsbuild/core';
-import { pluginSolid } from 'npm:@rsbuild/plugin-solid';
+import { build } from 'npm:@rsbuild/core@1.0.1';
+import { pluginSolid } from 'npm:@rsbuild/plugin-solid@1.0.1';
 
 console.log('Building Marketing micro-frontend...');
 

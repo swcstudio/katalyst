@@ -24,8 +24,13 @@ jobs:
       - name: Cache Deno dependencies
         run: deno cache --reload --lock=deno.lock --lock-write server.ts
 
-      - name: Install Nx CLI via Deno
-        run: deno install --allow-all npm:nx@latest
+      - name: Setup Node.js for Nx
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install Nx CLI
+        run: npm install -g nx@latest nx-cloud@latest
 
       - name: Lint with Deno
         run: deno task lint
@@ -37,15 +42,17 @@ jobs:
         run: deno task build
 
       - name: Start Nx Cloud CI
-        run: deno run --allow-all npm:nx-cloud start-ci-run
+        run: nx-cloud start-ci-run
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       - name: Run affected tasks with AI
-        run: deno run --allow-all npm:nx affected --target=build,test,lint --parallel=4 --cloud
+        run: nx affected --target=build,test,lint --parallel=4 --cloud
         env:
           NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       - name: Stop Nx Cloud CI
-        run: deno run --allow-all npm:nx-cloud stop-all-agents
+        run: nx-cloud stop-all-agents
         if: always()
 
   deploy:

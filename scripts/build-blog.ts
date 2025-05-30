@@ -1,4 +1,4 @@
-import { build } from 'npm:astro';
+import { build } from 'npm:astro@3.6.4';
 
 console.log('Building Blog micro-frontend...');
 
