@@ -45,11 +45,15 @@
     "~/": "./src/"
   },
   "lint": {
-    "include": ["src/", "scripts/", "tests/"],
-    "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
+    "files": {
+      "include": ["src/", "scripts/", "tests/"],
+      "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
+    }
   },
   "fmt": {
-    "include": ["src/", "scripts/", "tests/"],
-    "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
+    "files": {
+      "include": ["src/", "scripts/", "tests/"],
+      "exclude": ["node_modules/", "dist/", ".solid/", "src/styled-system/"]
+    }
   }
 }
