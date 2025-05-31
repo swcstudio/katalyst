@@ -1,0 +1,67 @@
+{
+  "name": "@sse/types",
+  "version": "1.0.0",
+  "description": "SolidStack Enterprise shared TypeScript types and interfaces",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./api": {
+      "import": "./dist/api/index.js",
+      "types": "./dist/api/index.d.ts"
+    },
+    "./common": {
+      "import": "./dist/common/index.js",
+      "types": "./dist/common/index.d.ts"
+    },
+    "./user": {
+      "import": "./dist/user/index.js",
+      "types": "./dist/user/index.d.ts"
+    },
+    "./product": {
+      "import": "./dist/product/index.js",
+      "types": "./dist/product/index.d.ts"
+    },
+    "./content": {
+      "import": "./dist/content/index.js",
+      "types": "./dist/content/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --dts-only",
+    "dev": "tsup src/index.ts --format esm --dts --dts-only --watch",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit",
+    "test": "deno test src/ --allow-all"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.1.6"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spectrum-web-co/sse.git",
+    "directory": "libs/types"
+  },
+  "keywords": [
+    "typescript",
+    "types",
+    "interfaces",
+    "definitions",
+    "sse",
+    "solidjs"
+  ],
+  "author": "Spectrum Web Co LLC",
+  "license": "MIT"
+}

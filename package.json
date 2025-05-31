@@ -1,0 +1,93 @@
+{
+  "name": "sota-marketing-stack",
+  "version": "1.0.0",
+  "description": "A state-of-the-art, cloud-native, distributed system boilerplate for marketing websites",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nx serve marketing",
+    "dev:all": "nx run-many --target=serve --projects=marketing,blog,docs,storefront --parallel",
+    "build": "nx run-many --target=build --all",
+    "build:apps": "nx run-many --target=build --projects=marketing,blog,docs,storefront",
+    "build:libs": "nx run-many --target=build --projects=ui,utils,types",
+    "preview": "nx run-many --target=preview --all",
+    "test": "deno task test",
+    "test:watch": "deno test --allow-all --no-check tests/ --watch",
+    "test:coverage": "deno test --allow-all --no-check tests/ --coverage",
+    "test:apps": "nx run-many --target=test --projects=marketing,blog,docs,storefront",
+    "test:libs": "nx run-many --target=test --projects=ui,utils,types",
+    "lint": "deno lint && eslint . --ext .ts,.tsx",
+    "format": "deno fmt && prettier --write \"**/*.{ts,tsx,css,md}\"",
+    "prepare": "husky install",
+    "marketing": "nx serve marketing",
+    "marketing:build": "nx build marketing",
+    "blog": "nx serve blog",
+    "blog:build": "nx build blog",
+    "docs": "nx serve docs",
+    "docs:build": "nx build docs",
+    "storefront": "nx serve storefront",
+    "storefront:build": "nx build storefront",
+    "ui": "nx serve ui",
+    "ui:build": "nx build ui",
+    "utils:build": "nx build utils",
+    "types:build": "nx build types"
+  },
+  "dependencies": {
+    "@ark-ui/react": "^5.11.0",
+    "@ark-ui/solid": "^5.11.0",
+    "@clerk/clerk-js": "^4.50.0",
+    "@motionone/solid": "^10.16.4",
+    "@park-ui/panda-preset": "^0.43.1",
+    "@tanstack/solid-query": "^5.8.1",
+    "@tanstack/solid-table": "^8.11.6",
+    "@tanstack/solid-virtual": "^3.0.1",
+    "@tanstack/solid-store": "^0.5.0",
+    "@zag-js/accordion": "^1.14.0",
+    "cobe": "^0.6.3",
+    "convex": "^1.0.0",
+    "date-fns": "^2.30.0",
+    "motion": "^12.15.0",
+    "solid-js": "^1.7.11",
+    "zustand": "^4.4.1"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^0.15.0",
+    "@rsbuild/core": "^0.2.0",
+    "@rsbuild/plugin-solid": "^0.2.0",
+    "@rslib/core": "^0.1.0",
+    "@rspack/cli": "^0.3.0",
+    "@rspress/core": "^1.0.0",
+    "@rsdoctor/core": "^0.1.0",
+    "@solid-primitives/i18n": "^2.0.0",
+    "@tanstack/solid-pacer": "^0.2.0",
+    "@astrojs/solid-js": "^3.0.0",
+    "@astrojs/mdx": "^2.0.0",
+    "astro": "^4.0.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-solid": "^0.13.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.0",
+    "prettier": "^3.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,md,json}": [
+      "prettier --write"
+    ]
+  },
+  "author": "Spectrum Web Co LLC",
+  "license": "MIT"
+}

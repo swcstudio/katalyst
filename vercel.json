@@ -1,0 +1,45 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "apps/marketing/src/index.tsx",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "deno task build:marketing",
+        "outputDirectory": "dist/marketing"
+      }
+    },
+    {
+      "src": "apps/blog/astro.config.mjs", 
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "deno task build:blog",
+        "outputDirectory": "dist/blog"
+      }
+    },
+    {
+      "src": "apps/storefront/src/index.tsx",
+      "use": "@vercel/static-build", 
+      "config": {
+        "buildCommand": "deno task build:storefront",
+        "outputDirectory": "dist/storefront"
+      }
+    },
+    {
+      "src": "apps/docs/astro.config.mjs",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "deno task build:docs", 
+        "outputDirectory": "dist/docs"
+      }
+    }
+  ],
+  "routes": [
+    { "src": "/marketing/(.*)", "dest": "/marketing/$1" },
+    { "src": "/blog/(.*)", "dest": "/blog/$1" },
+    { "src": "/storefront/(.*)", "dest": "/storefront/$1" },
+    { "src": "/docs/(.*)", "dest": "/docs/$1" },
+    { "src": "/(.*)", "dest": "/marketing/$1" }
+  ],
+  "teamId": "team_orpnm7TSGW7mUkKyvdRWkHFl"
+}

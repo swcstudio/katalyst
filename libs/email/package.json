@@ -1,0 +1,85 @@
+{
+  "name": "@sse/email",
+  "version": "1.0.0",
+  "description": "SolidStack Enterprise email service with PandaCSS templating and custom Resend integration",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./resend-client": {
+      "import": "./dist/resend-client.js",
+      "types": "./dist/resend-client.d.ts"
+    },
+    "./template-engine": {
+      "import": "./dist/template-engine.js",
+      "types": "./dist/template-engine.d.ts"
+    },
+    "./email-service": {
+      "import": "./dist/email-service.js",
+      "types": "./dist/email-service.d.ts"
+    },
+    "./templates": {
+      "import": "./dist/templates/index.js",
+      "types": "./dist/templates/index.d.ts"
+    },
+    "./sse-templates": {
+      "import": "./dist/templates/sse-templates.js",
+      "types": "./dist/templates/sse-templates.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "dev": "tsup src/index.ts --format esm --dts --watch",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit",
+    "test": "deno test src/ --allow-all",
+    "lint": "deno lint src/",
+    "fmt": "deno fmt src/"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "peerDependencies": {
+    "deno": ">=1.32.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.1.6"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spectrum-web-co/sse.git",
+    "directory": "libs/email"
+  },
+  "keywords": [
+    "email",
+    "resend",
+    "templates",
+    "pandacss",
+    "solidjs",
+    "typescript",
+    "sse",
+    "deno",
+    "cloud-native"
+  ],
+  "author": "Spectrum Web Co LLC",
+  "license": "Commercial",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "nx": {
+    "tags": ["scope:shared", "type:email"]
+  }
+}

@@ -1,0 +1,88 @@
+fname: AI-Powered CI with Deno
+
+on:
+  push:
+    branches: [main, staging, development]
+  pull_request:
+    branches: [main, staging, development]
+
+jobs:
+  nx-cloud:
+    name: Nx Cloud CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.32.x
+
+      - name: Cache Deno dependencies
+        run: deno cache --reload --lock=deno.lock --lock-write server.ts
+
+      - name: Setup Node.js for Nx
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Nx CLI
+        run: npm install -g nx@latest nx-cloud@latest
+
+      - name: Lint with Deno
+        run: deno task lint
+
+      - name: Test with Deno
+        run: deno task test
+
+      - name: Build with Deno
+        run: deno task build
+
+      - name: Start Nx Cloud CI
+        run: nx-cloud start-ci-run
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+      - name: Run affected tasks with AI
+        run: nx affected --target=build,test,lint --parallel=4 --cloud
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+      - name: Stop Nx Cloud CI
+        run: nx-cloud stop-all-agents
+        if: always()
+
+  deploy:
+    name: Deploy to Vercel
+    needs: [nx-cloud]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.32.x
+
+      - name: Build all micro-frontends
+        run: deno task build
+
+      - name: Install Vercel CLI
+        run: deno install --allow-all npm:vercel@latest
+
+      - name: Deploy Marketing to Vercel
+        run: vercel deploy ./dist/marketing --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-marketing
+
+      - name: Deploy Blog to Vercel
+        run: vercel deploy ./dist/blog --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-blog
+
+      - name: Deploy Storefront to Vercel
+        run: vercel deploy ./dist/storefront --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-storefront
+
+      - name: Deploy Docs to Vercel
+        run: vercel deploy ./dist/docs --token=${{ secrets.VERCEL_TOKEN }} --prod --team=team_orpnm7TSGW7mUkKyvdRWkHFl --name=sota-docs

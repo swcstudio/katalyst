@@ -1,0 +1,64 @@
+{
+  "name": "@sse/ui",
+  "version": "1.0.0",
+  "description": "SolidStack Enterprise shared UI components library",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./layouts": {
+      "import": "./dist/layouts/index.js",
+      "types": "./dist/layouts/index.d.ts"
+    },
+    "./styled-system": {
+      "import": "./dist/styled-system/index.js",
+      "types": "./dist/styled-system/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "dev": "tsup src/index.ts --format esm --dts --watch",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.7.11"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@park-ui/panda-preset": "^0.20.0",
+    "@pandacss/dev": "^0.15.0"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spectrum-web-co/sse.git",
+    "directory": "libs/ui"
+  },
+  "keywords": [
+    "solidjs",
+    "ui",
+    "components",
+    "typescript",
+    "sse"
+  ],
+  "author": "Spectrum Web Co LLC",
+  "license": "MIT"
+}

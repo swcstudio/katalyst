@@ -1,0 +1,101 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/nx-schema.json",
+  "version": 19,
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json"],
+    "sharedGlobals": ["{workspaceRoot}/deno.json", "{workspaceRoot}/nx.json"]
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"],
+      "cache": true
+    },
+    "test": {
+      "inputs": ["default", "^production"],
+      "cache": true
+    },
+    "lint": {
+      "inputs": ["default"],
+      "cache": true
+    }
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/rspack",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve"
+      }
+    }
+  ],
+  "nxCloudAccessToken": "${NX_CLOUD_ACCESS_TOKEN}",
+  "nxCloudUrl": "https://nx.app",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "test", "lint", "fmt"],
+        "accessToken": "${NX_CLOUD_ACCESS_TOKEN}"
+      }
+    }
+  },
+  "distributedExecutionConfig": {
+    "enabled": true,
+    "agents": 4,
+    "agentTimeoutMs": 600000
+  },
+  "ai": {
+    "enabled": true,
+    "explainWithAI": true
+  },
+  "conformanceRules": [
+    {
+      "rule": "@nx/enforce-module-boundaries",
+      "options": {
+        "allow": [],
+        "depConstraints": [
+          {
+            "sourceTag": "scope:shared",
+            "onlyDependOnLibsWithTags": ["scope:shared"]
+          },
+          {
+            "sourceTag": "scope:marketing",
+            "onlyDependOnLibsWithTags": ["scope:shared", "type:ui", "type:utils", "type:types"]
+          },
+          {
+            "sourceTag": "scope:blog", 
+            "onlyDependOnLibsWithTags": ["scope:shared", "type:ui", "type:utils", "type:types"]
+          },
+          {
+            "sourceTag": "scope:storefront",
+            "onlyDependOnLibsWithTags": ["scope:shared", "type:ui", "type:utils", "type:types"]
+          },
+          {
+            "sourceTag": "scope:docs",
+            "onlyDependOnLibsWithTags": ["scope:shared", "type:ui", "type:utils", "type:types"]
+          },
+          {
+            "sourceTag": "type:ui",
+            "onlyDependOnLibsWithTags": ["type:utils", "type:types"]
+          },
+          {
+            "sourceTag": "type:utils",
+            "onlyDependOnLibsWithTags": ["type:types"]
+          },
+          {
+            "sourceTag": "type:types",
+            "onlyDependOnLibsWithTags": []
+          }
+        ]
+      }
+    }
+  ]
+}
+
+/*
+ * © 2025 Spectrum Web Co LLC. All rights reserved.
+ * This code is the property of Spectrum Web Co LLC.
+ * Licensed under MIT License.
+ */
