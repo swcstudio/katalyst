@@ -1,9 +1,10 @@
 // SolidStack UI Demo Components
-export { AnimatedShinyTextDemo } from './AnimatedShinyTextDemo.tsx';
-export { DotPatternDemo } from './DotPatternDemo.tsx';
-export { GridPatternDemo } from './GridPatternDemo.tsx';
-export { OrbitingCirclesDemo } from './OrbitingCirclesDemo.tsx';
-export { SolidStackNewComponentsDemo } from './SolidStackNewComponents.tsx';
+export { AnimatedShinyTextDemo } from './AnimatedShinyTextDemo';
+export { DotPatternDemo } from './DotPatternDemo';
+export { GridPatternDemo } from './GridPatternDemo';
+export { OrbitingCirclesDemo } from './OrbitingCirclesDemo';
+export { SolidStackNewComponents } from './SolidStackNewComponents';
+export { SolidStackUIShowcase } from './SolidStackUIShowcase';
 
 // Type exports
 export type { default as AnimatedShinyTextDemoProps } from './AnimatedShinyTextDemo.tsx';

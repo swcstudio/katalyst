@@ -16,6 +16,19 @@ export { StickyScrollRevealDemo } from './StickyScrollRevealDemo';
 export { AceternityShowcase } from './AceternityShowcase';
 export { AceternityTestShowcase } from './AceternityTestShowcase';
 
+// Vortex Components
+export { VortexDemo, VortexDemoSecond } from './VortexDemo';
+
+// New Demo Components
+export { WavyBackgroundDemo } from './WavyBackgroundDemo';
+export { WobbleCardDemo } from './WobbleCardDemo';
+export { WorldMapDemo } from './WorldMapDemo';
+export { FeaturesSectionDemo, SkeletonOne, SkeletonTwo, SkeletonThree, SkeletonFour } from './FeaturesSectionDemo';
+export { GridFeaturesSectionDemo, Grid, GridPattern } from './GridFeaturesSectionDemo';
+export { IconFeaturesSectionDemo } from './IconFeaturesSectionDemo';
+export { CardDemo, BackgroundOverlayCardDemo, AuthorCardDemo, Card, CardTitle, CardDescription, CardSkeletonContainer } from './CardDemo';
+export { HeroSectionDemo } from './HeroSectionDemo';
+
 // Core Components
 export { 
   SparklesCore, 

@@ -77,3 +77,42 @@ export {
   AnimatedTooltip,
   AnimatedTooltipPreview
 } from "./magicui/index"
+
+// TailwindPlus Components - Enterprise Hero Layer
+export {
+  // Hero Components
+  HeroSimple,
+  HeroSplit,
+  
+  // Feature Components
+  FeatureSplit,
+  FeatureGrid,
+  FeatureSimple,
+  
+  // TailwindPlus Showcase
+  TailwindPlusShowcase,
+  CompleteTailwindPlusDemo,
+  FeatureShowcase,
+  CompleteTailwindPlusFeatureDemo,
+  
+  // Navigation Hook
+  useNavigation
+} from "./tailwindplus/index"
+
+export type {
+  // Hero Component Props
+  HeroSimpleProps,
+  HeroSplitProps,
+  
+  // Feature Component Props
+  FeatureSplitProps,
+  FeatureGridProps,
+  FeatureSimpleProps,
+  Feature,
+  
+  // Navigation Types
+  NavigationAPI,
+  NavigationContext,
+  NavigationState,
+  NavigationItem
+} from "./tailwindplus/index"
