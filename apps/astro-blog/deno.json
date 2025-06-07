@@ -1,0 +1,32 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-all npm:astro dev --port 3001",
+    "build": "deno run --allow-all npm:astro build",
+    "preview": "deno run --allow-all npm:astro preview",
+    "check": "deno run --allow-all npm:astro check"
+  },
+  "imports": {
+    "astro": "npm:astro@^4.15.12",
+    "@astrojs/solid-js": "npm:@astrojs/solid-js@^4.4.2",
+    "solid-js": "npm:solid-js@^1.9.3",
+    "@tanstack/solid-query": "npm:@tanstack/solid-query@^5.17.1",
+    "@tanstack/solid-router": "npm:@tanstack/solid-router@^1.120.17",
+    "@tanstack/solid-table": "npm:@tanstack/solid-table@^8.20.5",
+    "@tanstack/solid-form": "npm:@tanstack/solid-form@^0.33.0",
+    "@tanstack/solid-virtual": "npm:@tanstack/solid-virtual@^3.10.8",
+    "shared": "../../../libs/shared/index.ts"
+  },
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "moduleResolution": "bundler",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  }
+}

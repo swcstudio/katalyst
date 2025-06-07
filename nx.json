@@ -12,6 +12,9 @@
       "inputs": ["production", "^production"],
       "cache": true
     },
+    "serve": {
+      "cache": false
+    },
     "test": {
       "inputs": ["default", "^production"],
       "cache": true
@@ -19,6 +22,13 @@
     "lint": {
       "inputs": ["default"],
       "cache": true
+    },
+    "storybook": {
+      "cache": false
+    },
+    "build-storybook": {
+      "cache": true,
+      "inputs": ["default", "^production"]
     }
   },
   "plugins": [
@@ -27,6 +37,12 @@
       "options": {
         "buildTargetName": "build",
         "serveTargetName": "serve"
+      }
+    },
+    {
+      "plugin": "@nx/js",
+      "options": {
+        "targetName": "typecheck"
       }
     }
   ],
@@ -75,11 +91,28 @@
           {
             "sourceTag": "scope:docs",
             "onlyDependOnLibsWithTags": ["scope:shared"]
+          },
+          {
+            "sourceTag": "scope:remix",
+            "onlyDependOnLibsWithTags": ["scope:shared"]
+          },
+          {
+            "sourceTag": "scope:sveltekit",
+            "onlyDependOnLibsWithTags": ["scope:shared"]
           }
         ]
       }
     }
-  ]
+  ],
+  "projects": {
+    "marketing": "apps/marketing",
+    "blog": "apps/blog",
+    "docs": "apps/docs",
+    "storefront": "apps/storefront",
+    "remix-app": "apps/remix-app",
+    "sveltekit-spa": "apps/sveltekit-spa",
+    "shared": "libs/shared"
+  }
 }
 
 /*

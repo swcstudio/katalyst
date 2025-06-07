@@ -1,31 +1,35 @@
 import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
-interface User {
+export interface User {
   id: string;
   email: string;
   firstName?: string;
   lastName?: string;
+  name?: string;
   roles: string[];
 }
 
-interface AuthState {
+export interface AuthStore {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (user: User) => void;
-  logout: () => void;
+  login: (user: User) => Promise<void>;
+  logout: () => Promise<void>;
   setLoading: (loading: boolean) => void;
+  checkAuth: () => Promise<void>;
 }
 
-export const useAuthStore = create<AuthState>()(
+export const useAuthStore = create<AuthStore>()(
   subscribeWithSelector((set) => ({
     user: null,
     isAuthenticated: false,
     isLoading: true,
-    login: (user) => set({ user, isAuthenticated: true, isLoading: false }),
-    logout: () => set({ user: null, isAuthenticated: false, isLoading: false }),
+    login: async (user) => set({ user, isAuthenticated: true, isLoading: false }),
+    logout: async () => set({ user: null, isAuthenticated: false, isLoading: false }),
     setLoading: (isLoading) => set({ isLoading }),
+    checkAuth: async () => {
+    },
   }))
 );
 

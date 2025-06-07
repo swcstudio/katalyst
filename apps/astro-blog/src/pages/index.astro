@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { TanstackIntegration } from '../components/TanstackIntegration';
+---
+
+<Layout title="Astro Blog - SSE Framework">
+  <main class="p-4">
+    <h1 class="text-3xl font-bold mb-4">Welcome to Astro Blog</h1>
+    <p class="mb-8">This is the Astro micro-frontend for dynamic blog functionality.</p>
+    
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Features:</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Astro for static site generation with dynamic capabilities</li>
+        <li>SolidJS integration for interactive components</li>
+        <li>TypeScript for type safety</li>
+        <li>Tanstack Query for data fetching</li>
+        <li>Tanstack Router integration</li>
+        <li>Shared Zustand state management</li>
+        <li>Rspack build system</li>
+        <li>Deno runtime integration</li>
+        <li>Integration with SSE framework</li>
+      </ul>
+    </div>
+
+    <div class="mb-8">
+      <TanstackIntegration client:load />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-4 border rounded">
+        <h3 class="text-lg font-semibold mb-2">Recent Posts</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-blue-600 hover:underline">Getting Started with SSE Framework</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Building Micro-Frontends with SolidJS</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">State Management Across Applications</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Tanstack Ecosystem Integration</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Rspack vs Vite Performance</a></li>
+        </ul>
+      </div>
+      
+      <div class="p-4 border rounded">
+        <h3 class="text-lg font-semibold mb-2">Categories</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-blue-600 hover:underline">Framework Updates</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Best Practices</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Tutorials</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Performance</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Architecture</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</Layout>
