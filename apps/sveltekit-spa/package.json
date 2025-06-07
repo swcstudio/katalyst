@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "rsbuild build",
-    "dev": "rsbuild dev --port 3005",
+    "dev": "rsbuild dev --port 20005",
     "preview": "rsbuild preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
