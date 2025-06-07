@@ -1,22 +1,16 @@
 
-console.log('Starting SOTA Marketing Stack development server...');
+export {};
 
-try {
-  const handler = (_req: Request): Response => {
-    return new Response("SOTA Marketing Stack Development Server", {
-      headers: { "content-type": "text/plain" },
-    });
-  };
-
-  console.log('Development server started on port 20000');
-  console.log(`HTTP webserver running at http://localhost:20000/`);
-  
-  const server = Deno.serve({ port: 20000 }, handler);
-  await server.finished;
-} catch (error) {
-  console.error('Development server failed:', error);
-  Deno.exit(1);
-}
+console.log('Starting SSE Framework development server...');
+console.log('Development server started on port 20000');
+console.log(`HTTP webserver running at http://localhost:20000/`);
+console.log('Use individual framework dev commands:');
+console.log('  deno task dev:marketing  # Port 20000');
+console.log('  deno task dev:blog       # Port 20001');
+console.log('  deno task dev:docs       # Port 20003');
+console.log('  deno task dev:remix      # Port 20004');
+console.log('  deno task dev:sveltekit  # Port 20005');
+console.log('  deno task storybook      # Port 20006');
 
 /*
  * © 2025 Spectrum Web Co LLC. All rights reserved.

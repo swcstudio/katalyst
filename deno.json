@@ -31,7 +31,9 @@
     "biome:fix": "deno run --allow-read --allow-write npm:@biomejs/biome check --apply .",
 
     "generate:panda": "deno run --allow-read --allow-write --allow-env npm:@pandacss/dev",
-    "rsdoctor": "deno run --allow-all npm:@rsdoctor/core --port 20007"
+    "rsdoctor": "deno run --allow-all npm:@rsdoctor/core --port 20007",
+    "build:all": "deno run --allow-all scripts/build-all.ts",
+    "test:all": "deno run --allow-all scripts/test-frameworks.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
