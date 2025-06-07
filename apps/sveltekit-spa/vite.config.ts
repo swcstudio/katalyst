@@ -4,7 +4,7 @@ import { pluginSvelte } from '@rsbuild/plugin-svelte';
 export default defineConfig({
   plugins: [pluginSvelte()],
   server: {
-    port: 3005,
+    port: 20005,
   },
   source: {
     entry: {

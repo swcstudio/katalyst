@@ -7,7 +7,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3004,
+    port: 20004,
   },
   output: {
     target: 'web',

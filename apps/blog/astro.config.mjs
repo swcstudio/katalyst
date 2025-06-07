@@ -7,7 +7,7 @@ export default defineConfig({
   output: 'hybrid',
   srcDir: './src',
   server: {
-    port: 3001,
+    port: 20001,
   },
   build: {
     outDir: '../../dist/blog'

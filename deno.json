@@ -27,7 +27,7 @@
     "fmt": "deno fmt",
     "biome": "deno run --allow-read --allow-write npm:@biomejs/biome check .",
     "biome:fix": "deno run --allow-read --allow-write npm:@biomejs/biome check --apply .",
-    "storybook": "deno run --allow-all npm:storybook dev -p 6006",
+    "storybook": "deno run --allow-all npm:storybook dev -p 20006",
     "build-storybook": "deno run --allow-all npm:storybook build",
     "generate:panda": "deno run --allow-read --allow-write --allow-env npm:@pandacss/dev"
   },

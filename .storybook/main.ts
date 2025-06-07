@@ -9,7 +9,14 @@ const config: StorybookConfig = {
     name: '@storybook/solid-vite',
     options: {},
   },
+  core: {
+    builder: '@storybook/builder-vite',
+  },
   viteFinal: (config) => {
+    config.server = {
+      ...config.server,
+      port: 20006,
+    };
     return config;
   },
   typescript: {

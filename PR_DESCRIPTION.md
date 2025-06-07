@@ -62,13 +62,13 @@ This PR implements a comprehensive micro-frameworks ecosystem for the SolidStack
 - Enhanced type safety across all frameworks
 
 ## Port Assignments
-- **Marketing**: 3000 (SolidJS core framework)
-- **Blog**: 3001 (Astro dynamic)
-- **Storefront**: 3002 (SolidJS e-commerce)
-- **Docs**: 3003 (Astro static)
-- **Remix**: 3004 (Application UIs)
-- **SvelteKit**: 3005 (SPAs)
-- **Storybook**: 6006 (Component development)
+- **Marketing**: 20000 (SolidJS core framework)
+- **Blog**: 20001 (Astro dynamic)
+- **Storefront**: 20002 (SolidJS e-commerce)
+- **Docs**: 20003 (Astro static)
+- **Remix**: 20004 (Application UIs)
+- **SvelteKit**: 20005 (SPAs)
+- **Storybook**: 20006 (Component development)
 
 ## Framework-Specific Implementations
 
@@ -148,11 +148,11 @@ This PR implements a comprehensive micro-frameworks ecosystem for the SolidStack
 ### 1. Verify Deno Runtime Integration
 ```bash
 # All commands should use Deno exclusively
-deno task dev:marketing  # Port 3000
-deno task dev:blog       # Port 3001
-deno task dev:docs       # Port 3003
-deno task dev:remix      # Port 3004
-deno task dev:sveltekit  # Port 3005
+deno task dev:marketing  # Port 20000
+deno task dev:blog       # Port 20001
+deno task dev:docs       # Port 20003
+deno task dev:remix      # Port 20004
+deno task dev:sveltekit  # Port 20005
 ```
 
 ### 2. Test Biomjs Linting
@@ -163,7 +163,7 @@ deno task biome:fix     # Fix issues automatically
 
 ### 3. Test Storybook Integration
 ```bash
-deno task storybook     # Port 6006
+deno task storybook     # Port 20006
 ```
 
 ### 4. Verify Tanstack Ecosystem
