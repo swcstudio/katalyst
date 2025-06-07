@@ -4,28 +4,28 @@ import { pluginSvelte } from '@rsbuild/plugin-svelte';
 export default defineConfig({
   plugins: [pluginSvelte()],
   server: {
-    port: 3005,
+    port: 20005,
   },
   source: {
     entry: {
-      index: './src/app.html',
+      index: './src/app.ts',
     },
   },
   html: {
     template: './src/app.html',
   },
   output: {
-    target: 'web',
     distPath: {
-      root: '../../dist/sveltekit-spa',
+      root: 'build',
     },
+    cleanDistPath: true,
   },
   tools: {
     rspack: {
       resolve: {
         alias: {
-          '$lib': './src/lib',
           '$app': '@sveltejs/kit/app',
+          '$lib': './src/lib',
         },
       },
     },
