@@ -1,98 +1,195 @@
-# SOTA Marketing Stack v1.0.0
+# SolidStack Enterprise (SSE) Framework
 
 ![Spectrum Web Co](https://via.placeholder.com/150x50?text=Spectrum+Web+Co)
 
-> A state-of-the-art, cloud-native, distributed system boilerplate for marketing websites.
+> A comprehensive micro-frameworks ecosystem built with SolidJS, rspack, and the complete Tanstack ecosystem for building state-of-the-art marketing websites.
 
-## Overview
+## 🚀 Overview
 
-The SOTA Marketing Stack is a comprehensive, production-ready boilerplate for creating high-performance marketing websites using cutting-edge technologies. Built with a cloud-native distributed system architecture, this stack provides a robust foundation for creating scalable, maintainable, and feature-rich marketing websites.
+The SolidStack Enterprise framework provides a cutting-edge foundation for building high-performance marketing websites using modern web technologies and micro-frontend architecture. Built with 100% TypeScript, Deno runtime exclusively, and complete rspack ecosystem integration.
 
-### Key Features
+### ✨ Key Features
 
-- **Modern Frontend**: Built with SolidJS and the complete Tanstack Framework suite
-- **Cloud-Native Architecture**: Designed for Kubernetes and vCluster deployment
-- **TypeScript-First**: 100% TypeScript codebase for type safety and developer experience
-- **Comprehensive Testing**: Unit, E2E, snapshot, and asynchronous code testing
-- **Self-Hosted Database**: Convex with CloudNativePG for data persistence
-- **Research Blog**: Built-in blog functionality with MDX support
-- **Authentication & Billing**: Integrated with Clerk
-- **GitOps Workflow**: Complete CI/CD pipeline with Tekton, Jenkins, Flux-CD, and GitHub Actions
+- **🚀 Revolutionary Micro-Frontend Architecture**: Six specialized micro-frontends (Marketing, Blog, Storefront, Docs, Remix, SvelteKit) with shared state management
+- **⚡ Unparalleled Performance**: Built with SolidJS and the complete Tanstack Framework suite for lightning-fast rendering
+- **☁️ Enterprise-Grade Cloud-Native Architecture**: Designed for Kubernetes and vCluster deployment with production-ready scalability
+- **🔒 Type-Safe Development**: 100% TypeScript codebase delivering superior developer experience and runtime safety
+- **🧪 Comprehensive Testing Suite**: Robust unit, E2E, snapshot, and asynchronous code testing infrastructure with rstest
+- **💾 Self-Hosted Database**: Convex with CloudNativePG for secure, high-performance data persistence
+- **📝 Integrated Content Platform**: Built-in blog and documentation system with advanced MDX support
+- **🔑 Enterprise Authentication & Billing**: Seamlessly integrated with Clerk for secure user management
+- **🔄 Complete CI/CD Pipeline**: State-of-the-art GitOps workflow with Nx Cloud Premium and GitHub Actions
+- **⚙️ Zero-Config Deployments**: Optimized for Vercel with comprehensive multi-framework support
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-### Frontend
-- **Framework**: [SolidJS](https://www.solidjs.com/) with [Tanstack](https://tanstack.com/) suite
-  - Router, Query, Table, Form, Virtual, Pacer, Store, Ranger & Config
-- **Build Tools**: rspack, rsbuild, rslib, rspress, rsdoctor, rstest
-- **Runtime**: [Deno](https://deno.land/)
-- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
-- **Styling**: 
-  - [PandaCSS](https://panda-css.com/)
-  - [Mystic UI](https://mysticui.dev/)
-  - [Park UI](https://park-ui.com/)
-- **Language**: TypeScript (100% of codebase)
+### Core Technologies
+- **Frontend Framework**: SolidJS with TypeScript
+- **Build Tool**: rspack (complete ecosystem, no Vite)
+- **Runtime**: Deno (exclusive package management)
+- **Styling**: PandaCSS (atomic CSS)
+- **Animation**: Anime.js with TypeScript wrappers
+- **Testing**: rstest + Deno test
+- **Linting**: Biomjs
+- **Documentation**: Storybook with SolidJS integration
 
-### Backend
+### Tanstack Ecosystem (Complete Integration)
+- **State Management**: Zustand + Tanstack Store
+- **Routing**: Tanstack Router v1.120.17
+- **Data Fetching**: Tanstack Query
+- **Forms**: Tanstack Form
+- **Tables**: Tanstack Table
+- **Virtualization**: Tanstack Virtual
+- **Performance**: Tanstack Pacer
+
+### Development Tools
+- **Build Analysis**: rsdoctor with advanced features
+- **CI/CD**: Nx Cloud Premium with AI-powered features
+- **Deployment**: Vercel with multi-framework support
+- **Server**: Nitro with Deno runtime integration
+
+## 🏗️ Architecture
+
+### Micro-Frontends Ecosystem
+
+The SSE framework consists of six specialized micro-frontends, each serving specific purposes:
+
+| Framework | Port | Purpose | Technology Stack |
+|-----------|------|---------|------------------|
+| **Marketing** | 20000 | Main marketing website | SolidJS + rspack + PandaCSS |
+| **Blog** | 20001 | Dynamic blog functionality | Astro + SolidJS + Tanstack Query |
+| **Storefront** | 20002 | E-commerce functionality | SolidJS + rspack + Zustand |
+| **Docs** | 20003 | Static documentation | Astro Static + SolidJS components |
+| **Remix App** | 20004 | Application UIs | Remix + rspack + SSR |
+| **SvelteKit SPA** | 20005 | Single Page Applications | SvelteKit + rspack (no Vite) |
+| **Storybook** | 20006 | Component development | Storybook + SolidJS |
+
+### Shared Infrastructure
+
+- **State Management**: Zustand with cross-framework adapters
+- **Animations**: Anime.js TypeScript wrappers with SolidJS reactivity
+- **Components**: Shared component library with TypeScript
+- **Authentication**: Clerk integration with shared state
+- **Styling**: PandaCSS with framework-specific configurations
+
+### Backend & Database
 - **Database**: [Convex](https://www.convex.dev/) (self-hosted)
 - **Database Engine**: [CloudNativePG](https://cloudnative-pg.io/)
+- **Server**: Nitro with Deno runtime integration
 
-### Testing
-- **Frameworks**:
-  - [Solid Testing Library](https://github.com/solidjs/solid-testing-library)
-  - [Jest](https://jestjs.io/)
-- **Testing Types**:
-  - Unit Testing
-  - E2E Testing
-  - Snapshot Testing
-  - Asynchronous Code Testing
+### Testing Infrastructure
+- **Frameworks**: Deno test + rstest + Solid Testing Library
+- **Testing Types**: Unit, E2E, snapshot, and asynchronous code testing
+- **Coverage**: Comprehensive testing across all micro-frontends
 
-### Infrastructure
+### Infrastructure & Deployment
 - **Container Orchestration**: Kubernetes
 - **Virtual Clusters**: [vCluster](https://www.vcluster.com/) (loft.sh)
 - **Cloud Provider**: OVHcloud (Managed Kubernetes)
+- **Hosting**: Vercel with multi-framework support
+- **Authentication & Billing**: [Clerk](https://clerk.dev/)
 
 ### CI/CD & GitOps
-- **Pipeline Tools**:
-  - [Tekton](https://tekton.dev/)
-  - [Jenkins](https://www.jenkins.io/)
-  - [Flux CD](https://fluxcd.io/)
-  - [GitHub Actions](https://github.com/features/actions)
+- **Build System**: Nx Cloud Premium with AI-powered CI
+- **Pipeline Tools**: GitHub Actions with comprehensive testing
 - **GitOps Framework**: [KubeStack](https://www.kubestack.com/)
-
-### Hosting & Authentication
-- **Hosting**: [Netlify](https://www.netlify.com/)
-- **Authentication & Billing**: [Clerk](https://clerk.dev/)
+- **Deployment**: Automated Vercel deployment for all frameworks
 
 ## Getting Started
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v18 or later)
-- [Deno](https://deno.land/) (v1.32 or later)
-- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- [vcluster CLI](https://www.vcluster.com/docs/getting-started/setup)
+- **Deno Runtime**: Latest version installed
+- **Git**: For version control
+- **TypeScript**: Included via Deno
 
 ### Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/spectrumwebco/sota-marketing-stack.git
-   cd sota-marketing-stack
-   ```
+```bash
+# Clone the repository
+git clone https://github.com/spectrumwebco/sse.git
+cd sse
 
-2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
+# No npm install needed - Deno handles all dependencies
+# All packages are imported via npm: specifiers in deno.json
+```
 
-3. Start the development server:
-   ```bash
-   pnpm dev
-   ```
+### Development Commands
 
-4. Open your browser and navigate to `http://localhost:3000`
+#### Start Individual Micro-Frontends
+
+```bash
+# Marketing website (SolidJS)
+deno task dev:marketing     # http://localhost:20000
+
+# Blog (Astro + SolidJS)
+deno task dev:blog          # http://localhost:20001
+
+# Storefront (SolidJS)
+deno task dev:storefront    # http://localhost:20002
+
+# Documentation (Astro Static)
+deno task dev:docs          # http://localhost:20003
+
+# Remix application (Remix + rspack)
+deno task dev:remix         # http://localhost:20004
+
+# SvelteKit SPA (SvelteKit + rspack)
+deno task dev:sveltekit     # http://localhost:20005
+
+# Storybook (Component development)
+deno task storybook         # http://localhost:20006
+```
+
+#### Build Commands
+
+```bash
+# Build all micro-frontends
+deno task build
+
+# Build individual frameworks
+deno task build:marketing
+deno task build:blog
+deno task build:storefront
+deno task build:docs
+deno task build:remix
+deno task build:sveltekit
+```
+
+#### Testing Commands
+
+```bash
+# Comprehensive test suite
+deno task test
+
+# Unit tests
+deno task test:unit
+
+# Framework-specific tests
+deno task test:frameworks
+
+# Test all frameworks
+deno task test:all
+```
+
+#### Development Tools
+
+```bash
+# Code quality and linting
+deno task biome
+deno task biome:fix
+
+# PandaCSS generation
+deno task generate:panda
+
+# Build analysis with rsdoctor
+deno task rsdoctor
+
+# Preview built applications
+deno task preview:marketing
+deno task preview:remix
+deno task preview:sveltekit
+```
 
 ## Documentation
 
