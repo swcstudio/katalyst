@@ -13,14 +13,14 @@ const frameworks = [
 ];
 
 console.log('📋 Build Queue:');
-frameworks.forEach((f) => {
+for (const f of frameworks) {
   console.log(`  • ${f.name.padEnd(12)} (Port ${f.port}) - ${f.description}`);
-});
+}
 
 console.log('\n🎯 Use individual build commands:');
-frameworks.forEach((f) => {
+for (const f of frameworks) {
   console.log(`  deno task build:${f.name}`);
-});
+}
 
 console.log('\n✨ All frameworks configured for rspack builds with Deno runtime!');
 

@@ -49,8 +49,11 @@ export function TanstackIntegration() {
             <p>Last Updated: {new Date(docQuery.data.lastUpdated).toLocaleDateString()}</p>
             <div class="mt-2">
               <span class="font-medium">Tags: </span>
-              {docQuery.data.tags.map((tag, index) => (
-                <span class="inline-block bg-green-100 text-green-800 px-2 py-1 rounded text-xs mr-1">
+              {docQuery.data.tags.map((tag) => (
+                <span
+                  key={tag}
+                  class="inline-block bg-green-100 text-green-800 px-2 py-1 rounded text-xs mr-1"
+                >
                   {tag}
                 </span>
               ))}

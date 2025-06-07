@@ -32,6 +32,8 @@
 
     "generate:panda": "deno run --allow-read --allow-write --allow-env npm:@pandacss/dev",
     "rsdoctor": "deno run --allow-all npm:@rsdoctor/core --port 20007",
+    "storybook": "deno run --allow-all npm:storybook dev -p 20006",
+    "build-storybook": "deno run --allow-all npm:storybook build",
     "build:all": "deno run --allow-all scripts/build-all.ts",
     "test:all": "deno run --allow-all scripts/test-frameworks.ts"
   },

@@ -30,6 +30,7 @@ export function TanstackDemo() {
           </p>
         )}
         <button
+          type="button"
           onClick={() => (authStore.isAuthenticated ? authStore.logout() : authStore.login())}
           disabled={authStore.isLoading}
           class="mt-2 px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
@@ -50,13 +51,14 @@ export function TanstackDemo() {
               <p class="text-sm font-medium">Available Tanstack Features:</p>
               <ul class="text-sm list-disc list-inside">
                 {demoQuery.data.features.map((feature) => (
-                  <li>{feature}</li>
+                  <li key={feature}>{feature}</li>
                 ))}
               </ul>
             </div>
           </div>
         )}
         <button
+          type="button"
           onClick={() => demoQuery.refetch()}
           class="mt-2 px-3 py-1 bg-green-500 text-white rounded text-sm"
         >

@@ -67,9 +67,8 @@ const TanstackTable = () => {
     return [...currentData].sort((a, b) => {
       if (sortDirection() === 'asc') {
         return a[field] > b[field] ? 1 : -1;
-      } else {
-        return a[field] < b[field] ? 1 : -1;
       }
+      return a[field] < b[field] ? 1 : -1;
     });
   };
 
@@ -114,6 +113,7 @@ const TanstackTable = () => {
                   _hover: { bg: 'gray.100', _dark: { bg: 'gray.700' } },
                 })}
                 onClick={() => handleSort('firstName')}
+                onKeyDown={(e) => e.key === 'Enter' && handleSort('firstName')}
               >
                 First Name{getSortIndicator('firstName')}
               </th>
@@ -126,6 +126,7 @@ const TanstackTable = () => {
                   _hover: { bg: 'gray.100', _dark: { bg: 'gray.700' } },
                 })}
                 onClick={() => handleSort('lastName')}
+                onKeyDown={(e) => e.key === 'Enter' && handleSort('lastName')}
               >
                 Last Name{getSortIndicator('lastName')}
               </th>
@@ -138,6 +139,7 @@ const TanstackTable = () => {
                   _hover: { bg: 'gray.100', _dark: { bg: 'gray.700' } },
                 })}
                 onClick={() => handleSort('age')}
+                onKeyDown={(e) => e.key === 'Enter' && handleSort('age')}
               >
                 Age{getSortIndicator('age')}
               </th>
@@ -150,6 +152,7 @@ const TanstackTable = () => {
                   _hover: { bg: 'gray.100', _dark: { bg: 'gray.700' } },
                 })}
                 onClick={() => handleSort('visits')}
+                onKeyDown={(e) => e.key === 'Enter' && handleSort('visits')}
               >
                 Visits{getSortIndicator('visits')}
               </th>
@@ -162,6 +165,7 @@ const TanstackTable = () => {
                   _hover: { bg: 'gray.100', _dark: { bg: 'gray.700' } },
                 })}
                 onClick={() => handleSort('status')}
+                onKeyDown={(e) => e.key === 'Enter' && handleSort('status')}
               >
                 Status{getSortIndicator('status')}
               </th>

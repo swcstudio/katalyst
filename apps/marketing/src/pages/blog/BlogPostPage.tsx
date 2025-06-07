@@ -369,7 +369,7 @@ const BlogPostPage = () => {
   });
 
   const renderMarkdown = (content: string) => {
-    return content.split('\n').map((line, index) => {
+    return content.split('\n').map((line) => {
       if (line.startsWith('# ')) {
         const id = line
           .slice(2)
@@ -389,7 +389,8 @@ const BlogPostPage = () => {
             {line.slice(2)}
           </h1>
         );
-      } else if (line.startsWith('## ')) {
+      }
+      if (line.startsWith('## ')) {
         const id = line
           .slice(3)
           .toLowerCase()
@@ -408,7 +409,8 @@ const BlogPostPage = () => {
             {line.slice(3)}
           </h2>
         );
-      } else if (line.startsWith('### ')) {
+      }
+      if (line.startsWith('### ')) {
         const id = line
           .slice(4)
           .toLowerCase()
@@ -427,7 +429,8 @@ const BlogPostPage = () => {
             {line.slice(4)}
           </h3>
         );
-      } else if (line.startsWith('- ')) {
+      }
+      if (line.startsWith('- ')) {
         return (
           <li
             class={css({
@@ -438,7 +441,8 @@ const BlogPostPage = () => {
             {line.slice(2)}
           </li>
         );
-      } else if (line.startsWith('```')) {
+      }
+      if (line.startsWith('```')) {
         return (
           <pre
             class={css({
@@ -453,20 +457,21 @@ const BlogPostPage = () => {
             <code>{line.slice(3)}</code>
           </pre>
         );
-      } else if (line.trim() === '') {
-        return <br key={`br-${index}`} />;
-      } else {
-        return (
-          <p
-            class={css({
-              mb: '4',
-              lineHeight: 'tall',
-            })}
-          >
-            {line}
-          </p>
-        );
       }
+      if (line.trim() === '') {
+        return <br key={`br-${line.length}-${Math.random()}`} />;
+      }
+      return (
+        <p
+          key={`p-${line.slice(0, 20)}-${Math.random()}`}
+          class={css({
+            mb: '4',
+            lineHeight: 'tall',
+          })}
+        >
+          {line}
+        </p>
+      );
     });
   };
 

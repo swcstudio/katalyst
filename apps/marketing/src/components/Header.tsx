@@ -40,7 +40,7 @@ const Header = () => {
             color: 'primary.700',
           })}
         >
-          <Link href="/">SOTA Marketing</Link>
+          <Link to="/">SOTA Marketing</Link>
         </div>
 
         {/* Desktop Navigation */}
@@ -56,7 +56,7 @@ const Header = () => {
           >
             <li>
               <Link
-                href="/"
+                to="/"
                 class={css({
                   fontWeight: 'medium',
                   color: 'gray.700',
@@ -71,7 +71,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/about"
+                to="/about"
                 class={css({
                   fontWeight: 'medium',
                   color: 'gray.700',
@@ -86,7 +86,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/blog"
+                to="/blog"
                 class={css({
                   fontWeight: 'medium',
                   color: 'gray.700',
@@ -101,7 +101,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/contact"
+                to="/contact"
                 class={css({
                   fontWeight: 'medium',
                   color: 'gray.700',
@@ -139,7 +139,7 @@ const Header = () => {
               transition: 'all 0.3s ease',
               transform: isMenuOpen() ? 'rotate(45deg) translate(5px, 5px)' : 'none',
             })}
-          ></div>
+          />
           <div
             class={css({
               width: '24px',
@@ -149,7 +149,7 @@ const Header = () => {
               transition: 'all 0.3s ease',
               opacity: isMenuOpen() ? '0' : '1',
             })}
-          ></div>
+          />
           <div
             class={css({
               width: '24px',
@@ -158,7 +158,7 @@ const Header = () => {
               transition: 'all 0.3s ease',
               transform: isMenuOpen() ? 'rotate(-45deg) translate(5px, -5px)' : 'none',
             })}
-          ></div>
+          />
         </button>
       </div>
 
@@ -183,7 +183,7 @@ const Header = () => {
           >
             <li>
               <Link
-                href="/"
+                to="/"
                 class={css({
                   fontWeight: 'medium',
                   color: 'gray.700',
@@ -201,7 +201,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/about"
+                to="/about"
                 class={css({
                   fontWeight: 'medium',
                   color: 'gray.700',
@@ -219,7 +219,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/blog"
+                to="/blog"
                 class={css({
                   fontWeight: 'medium',
                   color: 'gray.700',
@@ -237,7 +237,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/contact"
+                to="/contact"
                 class={css({
                   fontWeight: 'medium',
                   color: 'gray.700',

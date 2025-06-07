@@ -16,7 +16,8 @@ export function useAuthStoreRemix(): AuthStore {
 
   try {
     const authModule =
-      globalThis.require?.('../state/auth-store') || (globalThis as Record<string, unknown>).__authStore;
+      globalThis.require?.('../state/auth-store') ||
+      (globalThis as Record<string, unknown>).__authStore;
     if (authModule?.useAuthStore) {
       return useStore(authModule.useAuthStore) as AuthStore;
     }

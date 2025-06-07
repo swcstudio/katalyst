@@ -40,6 +40,7 @@ export default function AnimatedButton(props: AnimatedButtonProps) {
 
   return (
     <button
+      type="button"
       ref={setButtonRef}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}

@@ -3,7 +3,11 @@
   "version": 18,
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json"],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json"
+    ],
     "sharedGlobals": ["{workspaceRoot}/deno.json", "{workspaceRoot}/nx.json"]
   },
   "targetDefaults": {
@@ -81,7 +85,7 @@
             "onlyDependOnLibsWithTags": ["scope:shared"]
           },
           {
-            "sourceTag": "scope:blog", 
+            "sourceTag": "scope:blog",
             "onlyDependOnLibsWithTags": ["scope:shared"]
           },
           {

@@ -14,14 +14,14 @@ const testSuites = [
 ];
 
 console.log('📋 Test Suite Coverage:');
-testSuites.forEach((suite) => {
+for (const suite of testSuites) {
   console.log(`  • ${suite.name.padEnd(12)} - ${suite.description}`);
-});
+}
 
 console.log('\n🎯 Available test commands:');
-testSuites.forEach((suite) => {
+for (const suite of testSuites) {
   console.log(`  deno task test:${suite.name}`);
-});
+}
 
 console.log('\n🔬 Testing Infrastructure:');
 console.log('  • rstest configuration with framework-specific transformers');

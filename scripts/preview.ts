@@ -10,7 +10,7 @@ try {
   };
 
   console.log('Preview server started on port 3000');
-  console.log(`HTTP webserver running at http://localhost:3000/`);
+  console.log('HTTP webserver running at http://localhost:3000/');
 
   await serve(handler, { port: 3000 });
 } catch (error) {

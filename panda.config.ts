@@ -7,6 +7,7 @@ export default defineConfig({
     './apps/marketing/src/**/*.{js,jsx,ts,tsx}',
     './apps/blog/src/**/*.{js,jsx,ts,tsx,astro}',
     './apps/storefront/src/**/*.{js,jsx,ts,tsx}',
+    './apps/astro-blog/src/**/*.{js,jsx,ts,tsx,astro}',
     './apps/astro-docs/src/**/*.{js,jsx,ts,tsx,astro}',
     './apps/remix-app/app/**/*.{js,jsx,ts,tsx}',
     './apps/sveltekit-spa/src/**/*.{js,jsx,ts,tsx,svelte}',
