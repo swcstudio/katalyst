@@ -1,6 +1,3 @@
-export {};
-
-import { serve } from "https://deno.land/std@0.132.0/http/server.ts";
 
 console.log('Starting SOTA Marketing Stack development server...');
 
@@ -11,10 +8,11 @@ try {
     });
   };
 
-  console.log('Development server started on port 3000');
-  console.log(`HTTP webserver running at http://localhost:3000/`);
+  console.log('Development server started on port 20000');
+  console.log(`HTTP webserver running at http://localhost:20000/`);
   
-  await serve(handler, { port: 3000 });
+  const server = Deno.serve({ port: 20000 }, handler);
+  await server.finished;
 } catch (error) {
   console.error('Development server failed:', error);
   Deno.exit(1);

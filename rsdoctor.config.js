@@ -1,11 +1,19 @@
-module.exports = {
+export default {
   features: {
     loader: true,
     plugins: true,
     resolver: true,
-    bundle: true
+    bundle: true,
+    treeShaking: true,
+    moduleGraph: true,
+    duplicatePackages: true
   },
-  reportDir: './dist/rsdoctor'
+  reportDir: './dist/rsdoctor',
+  port: 20007,
+  open: false,
+  supports: {
+    generateTileGraph: true
+  }
 };
 
 /*
