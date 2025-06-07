@@ -29,8 +29,7 @@
     "fmt": "deno fmt",
     "biome": "deno run --allow-read --allow-write npm:@biomejs/biome check .",
     "biome:fix": "deno run --allow-read --allow-write npm:@biomejs/biome check --apply .",
-    "storybook": "deno run --allow-all npm:storybook dev -p 20006",
-    "build-storybook": "deno run --allow-all npm:storybook build",
+
     "generate:panda": "deno run --allow-read --allow-write --allow-env npm:@pandacss/dev",
     "rsdoctor": "deno run --allow-all npm:@rsdoctor/core --port 20007"
   },
@@ -63,9 +62,7 @@
     "animejs": "npm:animejs@3.2.2",
     "@types/animejs": "npm:@types/animejs@3.1.12",
     "@biomejs/biome": "npm:@biomejs/biome@1.8.3",
-    "@storybook/solid-vite": "npm:@storybook/solid-vite@8.2.9",
-    "@storybook/addon-essentials": "npm:@storybook/addon-essentials@8.2.9",
-    "storybook": "npm:storybook@8.2.9",
+
     "@remix-run/node": "npm:@remix-run/node@2.12.1",
     "@remix-run/react": "npm:@remix-run/react@2.12.1",
     "@remix-run/serve": "npm:@remix-run/serve@2.12.1",
