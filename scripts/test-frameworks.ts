@@ -1,5 +1,4 @@
-
-export {};
+export type {};
 
 console.log('🧪 SSE Framework Test Orchestrator');
 console.log('Comprehensive testing across all micro-frameworks...\n');
@@ -15,12 +14,12 @@ const testSuites = [
 ];
 
 console.log('📋 Test Suite Coverage:');
-testSuites.forEach(suite => {
+testSuites.forEach((suite) => {
   console.log(`  • ${suite.name.padEnd(12)} - ${suite.description}`);
 });
 
 console.log('\n🎯 Available test commands:');
-testSuites.forEach(suite => {
+testSuites.forEach((suite) => {
   console.log(`  deno task test:${suite.name}`);
 });
 

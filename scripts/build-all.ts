@@ -1,5 +1,4 @@
-
-export {};
+export type {};
 
 console.log('🚀 SSE Framework Build Orchestrator');
 console.log('Building all micro-frameworks in sequence...\n');
@@ -14,12 +13,12 @@ const frameworks = [
 ];
 
 console.log('📋 Build Queue:');
-frameworks.forEach(f => {
+frameworks.forEach((f) => {
   console.log(`  • ${f.name.padEnd(12)} (Port ${f.port}) - ${f.description}`);
 });
 
 console.log('\n🎯 Use individual build commands:');
-frameworks.forEach(f => {
+frameworks.forEach((f) => {
   console.log(`  deno task build:${f.name}`);
 });
 

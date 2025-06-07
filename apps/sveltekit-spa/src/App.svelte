@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { authStore } from '../../../libs/shared/adapters/zustand-svelte';
-  
-  let user = authStore.getState().user;
-  
-  onMount(() => {
-    const unsubscribe = authStore.subscribe((state) => {
-      user = state.user;
-    });
-    
-    return unsubscribe;
+import { onMount } from 'svelte';
+import { authStore } from '../../../libs/shared/adapters/zustand-svelte';
+
+let user = authStore.getState().user;
+
+onMount(() => {
+  const unsubscribe = authStore.subscribe((state) => {
+    user = state.user;
   });
+
+  return unsubscribe;
+});
 </script>
 
 <main>

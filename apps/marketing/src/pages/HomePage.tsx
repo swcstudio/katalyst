@@ -1,7 +1,7 @@
-import { css } from '../styled-system/css';
-import { flex } from '../styled-system/patterns';
 import { Link } from '@tanstack/solid-router';
 import { createSignal } from 'solid-js';
+import { css } from '../styled-system/css';
+import { flex } from '../styled-system/patterns';
 
 const HomePage = () => {
   const [email, setEmail] = createSignal('');

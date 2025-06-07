@@ -1,4 +1,3 @@
-
 console.log('Running comprehensive test suite across all frameworks...');
 
 try {
@@ -10,14 +9,14 @@ try {
     ['deno', 'run', '--allow-all', 'npm:rstest', 'apps/astro-docs/'],
     ['deno', 'run', '--allow-all', 'npm:rstest', 'apps/remix-app/'],
     ['deno', 'run', '--allow-all', 'npm:rstest', 'apps/sveltekit-spa/'],
-    ['deno', 'run', '--allow-all', 'npm:rstest', 'libs/shared/']
+    ['deno', 'run', '--allow-all', 'npm:rstest', 'libs/shared/'],
   ];
 
   for (const cmd of testCommands) {
     console.log(`Running: ${cmd.join(' ')}`);
     const command = new Deno.Command(cmd[0], { args: cmd.slice(1) });
     const { success } = await command.output();
-    
+
     if (!success) {
       throw new Error(`Test failed for: ${cmd.join(' ')}`);
     }

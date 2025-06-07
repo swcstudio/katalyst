@@ -1,4 +1,4 @@
-import type { AnimeParams, AnimeInstance } from 'animejs';
+import type { AnimeInstance, AnimeParams } from 'animejs';
 
 export interface AnimationConfig extends Omit<AnimeParams, 'targets'> {
   targets?: string | Element | Element[] | NodeList;

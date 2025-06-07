@@ -1,4 +1,4 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, expect, test } from '@jest/globals';
 
 describe('Storefront Framework', () => {
   test('storefront configuration is valid', () => {

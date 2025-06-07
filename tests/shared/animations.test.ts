@@ -9,11 +9,11 @@ describe('Animation utilities', () => {
   test('animate function handles element animation', () => {
     const { animate } = createAnimation();
     const mockElement = document.createElement('div');
-    
+
     expect(() => {
       animate(mockElement, {
         opacity: [0, 1],
-        duration: 100
+        duration: 100,
       });
     }).not.toThrow();
   });

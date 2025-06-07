@@ -1,6 +1,6 @@
 import { onMount } from 'solid-js';
-import { css } from '../styled-system/css';
 import { createAnimation } from '../../../../libs/shared/animations';
+import { css } from '../styled-system/css';
 
 export const AnimatedHero = () => {
   const { animate } = createAnimation();
@@ -12,7 +12,7 @@ export const AnimatedHero = () => {
         opacity: [0, 1],
         translateY: [50, 0],
         duration: 1000,
-        easing: 'easeOutQuart'
+        easing: 'easeOutQuart',
       });
     }
   });
@@ -58,7 +58,8 @@ export const AnimatedHero = () => {
             mx: 'auto',
           })}
         >
-          State-of-the-art micro-frameworks ecosystem for building high-performance marketing websites with comprehensive TypeScript integration.
+          State-of-the-art micro-frameworks ecosystem for building high-performance marketing
+          websites with comprehensive TypeScript integration.
         </p>
       </div>
     </section>

@@ -10,7 +10,7 @@
       }
     },
     {
-      "src": "apps/astro-blog/astro.config.mjs", 
+      "src": "apps/astro-blog/astro.config.mjs",
       "use": "@vercel/static-build",
       "config": {
         "buildCommand": "deno task build:blog",
@@ -19,7 +19,7 @@
     },
     {
       "src": "apps/storefront/src/index.tsx",
-      "use": "@vercel/static-build", 
+      "use": "@vercel/static-build",
       "config": {
         "buildCommand": "deno task build:storefront",
         "outputDirectory": "apps/storefront/dist"
@@ -29,7 +29,7 @@
       "src": "apps/astro-docs/astro.config.mjs",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "deno task build:docs", 
+        "buildCommand": "deno task build:docs",
         "outputDirectory": "apps/astro-docs/dist"
       }
     },

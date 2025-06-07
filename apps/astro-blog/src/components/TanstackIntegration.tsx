@@ -1,20 +1,20 @@
-import { createSignal } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
+import { createSignal } from 'solid-js';
 
 export function TanstackIntegration() {
   const [postId, setPostId] = createSignal(1);
-  
+
   const postQuery = createQuery(() => ({
     queryKey: ['blog-post', postId()],
     queryFn: async () => {
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await new Promise((resolve) => setTimeout(resolve, 800));
       return {
         id: postId(),
         title: `Blog Post ${postId()}`,
         content: `This is the content for blog post ${postId()}. Demonstrating Tanstack Query in Astro dynamic blog.`,
         author: 'SSE Framework',
         publishedAt: new Date().toISOString(),
-        tags: ['SolidJS', 'Astro', 'Tanstack', 'SSE']
+        tags: ['SolidJS', 'Astro', 'Tanstack', 'SSE'],
       };
     },
   }));
@@ -22,7 +22,7 @@ export function TanstackIntegration() {
   return (
     <div class="p-6 border rounded-lg">
       <h3 class="text-xl font-semibold mb-4">Dynamic Blog Content (Tanstack Query)</h3>
-      
+
       <div class="mb-4">
         <label class="block text-sm font-medium mb-2">Select Post ID:</label>
         <select
@@ -48,7 +48,7 @@ export function TanstackIntegration() {
             <div class="mt-2">
               <span class="font-medium">Tags: </span>
               {postQuery.data.tags.map((tag, index) => (
-                <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-1">
+                <span key={index} class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-1">
                   {tag}
                 </span>
               ))}

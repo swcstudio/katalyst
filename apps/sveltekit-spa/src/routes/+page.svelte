@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { authStore } from 'shared/adapters';
-  import { onMount } from 'svelte';
+import { authStore } from 'shared/adapters';
+import { onMount } from 'svelte';
 
-  let authState = { isAuthenticated: false, user: null };
+let authState = { isAuthenticated: false, user: null };
 
-  onMount(() => {
-    const unsubscribe = authStore.subscribe((state) => {
-      authState = state;
-    });
-
-    return unsubscribe;
+onMount(() => {
+  const unsubscribe = authStore.subscribe((state) => {
+    authState = state;
   });
+
+  return unsubscribe;
+});
 </script>
 
 <div class="container">

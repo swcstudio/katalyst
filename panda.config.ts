@@ -12,7 +12,7 @@ export default defineConfig({
     './apps/sveltekit-spa/src/**/*.{js,jsx,ts,tsx,svelte}',
     './libs/*/src/**/*.{js,jsx,ts,tsx}',
     './src/**/*.{js,jsx,ts,tsx}',
-    './libs/shared/**/*.{js,jsx,ts,tsx}'
+    './libs/shared/**/*.{js,jsx,ts,tsx}',
   ],
 
   exclude: [],

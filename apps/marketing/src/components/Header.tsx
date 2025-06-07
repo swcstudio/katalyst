@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/solid-router';
+import { Show, createSignal } from 'solid-js';
 import { css } from '../styled-system/css';
 import { flex } from '../styled-system/patterns';
-import { createSignal, Show } from 'solid-js';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = createSignal(false);

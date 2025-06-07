@@ -24,8 +24,8 @@ export default defineConfig({
     rspack: {
       resolve: {
         alias: {
-          '$app': '@sveltejs/kit/app',
-          '$lib': './src/lib',
+          $app: '@sveltejs/kit/app',
+          $lib: './src/lib',
         },
       },
     },

@@ -21,13 +21,13 @@ export const clerkConfig = {
       colorDanger: '#ef4444', // red.500
       fontFamily: 'Inter, system-ui, sans-serif',
       borderRadius: '0.375rem', // rounded-md
-    }
+    },
   },
   userRoles: {
     admin: ['user:read', 'user:write', 'content:manage', 'settings:manage'],
     editor: ['content:write', 'content:read', 'user:read'],
     customer: ['content:read', 'orders:manage'],
-    user: ['content:read']
+    user: ['content:read'],
   },
   onUserChange: (user: ClerkUser | null) => {
     if (user) {
@@ -35,7 +35,7 @@ export const clerkConfig = {
     } else {
       useAuthStore.getState().logout();
     }
-  }
+  },
 };
 
 /*

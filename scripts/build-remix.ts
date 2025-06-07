@@ -1,14 +1,13 @@
-
 console.log('Building Remix application...');
 
 try {
   const command = new Deno.Command('deno', {
     args: ['run', '--allow-all', 'npm:@remix-run/dev', 'build'],
-    cwd: './apps/remix-app'
+    cwd: './apps/remix-app',
   });
 
   const { success } = await command.output();
-  
+
   if (success) {
     console.log('Remix application built successfully!');
   } else {

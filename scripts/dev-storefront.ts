@@ -15,16 +15,16 @@ try {
       port: 3002,
     },
   });
-  
+
   const handleSignal = async () => {
     console.log('Shutting down Storefront development server...');
     await close();
     Deno.exit(0);
   };
-  
-  Deno.addSignalListener("SIGINT", handleSignal);
-  Deno.addSignalListener("SIGTERM", handleSignal);
-  
+
+  Deno.addSignalListener('SIGINT', handleSignal);
+  Deno.addSignalListener('SIGTERM', handleSignal);
+
   console.log('Storefront development server started on http://localhost:3002');
 } catch (error) {
   console.error('Failed to start Storefront development server:', error);

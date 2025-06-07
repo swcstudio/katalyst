@@ -10,7 +10,7 @@ interface AnimatedButtonProps {
 
 export default function AnimatedButton(props: AnimatedButtonProps) {
   const [buttonRef, setButtonRef] = createSignal<HTMLButtonElement>();
-  
+
   const hoverAnimation = useAnimation(buttonRef, {
     scale: [1, 1.05],
     duration: 200,

@@ -1,10 +1,9 @@
-
 export const testConfig = {
   testMatch: [
-    '**/tests/**/*.test.{ts,tsx}', 
+    '**/tests/**/*.test.{ts,tsx}',
     '**/*.test.{ts,tsx}',
     'apps/**/tests/**/*.test.{ts,tsx}',
-    'libs/**/tests/**/*.test.{ts,tsx}'
+    'libs/**/tests/**/*.test.{ts,tsx}',
   ],
   testEnvironment: 'jsdom',
   moduleNameMapping: {
@@ -20,41 +19,41 @@ export const testConfig = {
   setupFiles: ['./tests/setup.ts'],
   coverage: {
     include: [
-      'src/**/*.{ts,tsx}', 
-      'apps/**/*.{ts,tsx}', 
+      'src/**/*.{ts,tsx}',
+      'apps/**/*.{ts,tsx}',
       'libs/**/*.{ts,tsx}',
       'apps/**/src/**/*.{ts,tsx}',
-      'apps/**/app/**/*.{ts,tsx}'
+      'apps/**/app/**/*.{ts,tsx}',
     ],
     exclude: [
-      '**/node_modules/**', 
-      '**/tests/**', 
+      '**/node_modules/**',
+      '**/tests/**',
       '**/*.config.{js,ts}',
       '**/dist/**',
       '**/.svelte-kit/**',
       '**/build/**',
-      '**/styled-system/**'
+      '**/styled-system/**',
     ],
   },
   testTimeout: 15000,
   frameworks: {
     solidjs: {
       transform: 'rstest/transformer',
-      testEnvironment: 'jsdom'
+      testEnvironment: 'jsdom',
     },
     remix: {
       transform: 'rstest/transformer',
-      testEnvironment: 'node'
+      testEnvironment: 'node',
     },
     svelte: {
       transform: 'rstest/transformer',
-      testEnvironment: 'jsdom'
+      testEnvironment: 'jsdom',
     },
     astro: {
       transform: 'rstest/transformer',
-      testEnvironment: 'jsdom'
-    }
-  }
+      testEnvironment: 'jsdom',
+    },
+  },
 };
 
 /*

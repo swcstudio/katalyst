@@ -1,5 +1,5 @@
 // @ts-nocheck: Using Nitro implementation for Deno runtime
-import { createApp, defineEventHandler, toNodeListener, readBody } from 'npm:h3@1.10.1';
+import { createApp, defineEventHandler, readBody, toNodeListener } from 'npm:h3@1.10.1';
 import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
 
 console.log("SOTA Marketing Stack server starting...");
@@ -35,56 +35,7 @@ app.use('/api/subscribe', defineEventHandler(async (event) => {
   }
   return { error: 'Method not allowed', statusCode: 405 };
 }));
-  const url = new URL(req.url);
-  
-  if (url.pathname.startsWith('/api/')) {
-    if (url.pathname === '/api/hello') {
-      return new Response(
-        JSON.stringify({ message: 'Hello from SOTA Marketing Stack API!' }),
-        { headers: { "Content-Type": "application/json" } }
-      );
-    }
-    
-    if (url.pathname === '/api/contact' && req.method === 'POST') {
-      try {
-        const formData = await req.json();
-        console.log('Contact form submission:', formData);
-        
-        return new Response(
-          JSON.stringify({ success: true, message: 'Form submitted successfully' }),
-          { headers: { "Content-Type": "application/json" } }
-        );
-      } catch (_error) {
-        return new Response(
-          JSON.stringify({ success: false, message: 'Failed to process form' }),
-          { status: 400, headers: { "Content-Type": "application/json" } }
-        );
-      }
-    }
-    
-    if (url.pathname === '/api/subscribe' && req.method === 'POST') {
-      try {
-        const formData = await req.json();
-        console.log('Newsletter subscription:', formData);
-        
-        return new Response(
-          JSON.stringify({ success: true, message: 'Subscription successful' }),
-          { headers: { "Content-Type": "application/json" } }
-        );
-      } catch (_error) {
-        return new Response(
-          JSON.stringify({ success: false, message: 'Failed to process subscription' }),
-          { status: 400, headers: { "Content-Type": "application/json" } }
-        );
-      }
-    }
-    
-    return new Response(
-      JSON.stringify({ error: 'Not Found' }),
-      { status: 404, headers: { "Content-Type": "application/json" } }
-    );
-  }
-  
+
 app.use('/**', defineEventHandler(() => {
   return `<!DOCTYPE html>
   <html lang="en">

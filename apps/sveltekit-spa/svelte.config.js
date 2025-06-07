@@ -2,19 +2,18 @@ import adapter from '@sveltejs/adapter-static';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-
   kit: {
     adapter: adapter({
       pages: '../../dist/sveltekit-spa',
       assets: '../../dist/sveltekit-spa',
       fallback: 'index.html',
       precompress: false,
-      strict: true
+      strict: true,
     }),
     prerender: {
-      handleHttpError: 'warn'
-    }
-  }
+      handleHttpError: 'warn',
+    },
+  },
 };
 
 export default config;

@@ -79,7 +79,10 @@ export class AnimeWrapper {
     return AnimeWrapper.presets.find((preset) => preset.name === name);
   }
 
-  applyPreset(name: string, targets: string | Element | Element[] | NodeList): AnimeInstance | null {
+  applyPreset(
+    name: string,
+    targets: string | Element | Element[] | NodeList
+  ): AnimeInstance | null {
     const preset = this.getPreset(name);
     if (!preset) return null;
 

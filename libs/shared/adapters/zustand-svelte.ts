@@ -1,4 +1,4 @@
-import { writable, type Writable } from 'svelte/store';
+import { type Writable, writable } from 'svelte/store';
 import type { AuthStore } from '../state/auth-store';
 
 let authStoreInstance: Writable<AuthStore> | null = null;
@@ -20,18 +20,18 @@ export function createAuthStoreSvelte(): Writable<AuthStore> {
 
   if (typeof window !== 'undefined') {
     try {
-      import('../state/auth-store').then(({ useAuthStore }) => {
-        const unsubscribe = useAuthStore.subscribe((state) => {
-          authStoreInstance?.set(state);
-        });
+      import('../state/auth-store')
+        .then(({ useAuthStore }) => {
+          const unsubscribe = useAuthStore.subscribe((state) => {
+            authStoreInstance?.set(state);
+          });
 
-        if (typeof window !== 'undefined') {
-          window.addEventListener('beforeunload', unsubscribe);
-        }
-      }).catch(() => {
-      });
-    } catch {
-    }
+          if (typeof window !== 'undefined') {
+            window.addEventListener('beforeunload', unsubscribe);
+          }
+        })
+        .catch(() => {});
+    } catch {}
   }
 
   return authStoreInstance;

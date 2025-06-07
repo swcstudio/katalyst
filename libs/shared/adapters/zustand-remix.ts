@@ -15,10 +15,10 @@ export function useAuthStoreRemix(): AuthStore {
   }
 
   try {
-    const authModule = globalThis.require?.('../state/auth-store') || 
-                     (globalThis as any).__authStore;
+    const authModule =
+      globalThis.require?.('../state/auth-store') || (globalThis as Record<string, unknown>).__authStore;
     if (authModule?.useAuthStore) {
-      return useStore(authModule.useAuthStore);
+      return useStore(authModule.useAuthStore) as AuthStore;
     }
     throw new Error('Auth store not available');
   } catch {

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { authStore } from 'shared/adapters';
+import { authStore } from 'shared/adapters';
+import { onMount } from 'svelte';
 
-  let mounted = false;
+let mounted = false;
 
-  onMount(() => {
-    mounted = true;
-  });
+onMount(() => {
+  mounted = true;
+});
 </script>
 
 <svelte:head>

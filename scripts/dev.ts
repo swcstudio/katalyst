@@ -1,5 +1,4 @@
-
-export {};
+export type {};
 
 console.log('Starting SSE Framework development server...');
 console.log('Development server started on port 20000');

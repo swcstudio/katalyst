@@ -1,4 +1,3 @@
-
 console.log('Building all SOTA Marketing Stack micro-frontends...');
 
 try {
@@ -8,10 +7,10 @@ try {
     ['deno', 'task', 'build:storefront'],
     ['deno', 'task', 'build:docs'],
     ['deno', 'task', 'build:remix'],
-    ['deno', 'task', 'build:sveltekit']
+    ['deno', 'task', 'build:sveltekit'],
   ];
 
-  const buildPromises = buildCommands.map(cmd => 
+  const buildPromises = buildCommands.map((cmd) =>
     new Deno.Command(cmd[0], { args: cmd.slice(1) }).output()
   );
 

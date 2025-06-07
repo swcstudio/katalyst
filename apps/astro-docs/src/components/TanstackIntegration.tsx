@@ -1,20 +1,20 @@
-import { createSignal } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
+import { createSignal } from 'solid-js';
 
 export function TanstackIntegration() {
   const [docId, setDocId] = createSignal(1);
-  
+
   const docQuery = createQuery(() => ({
     queryKey: ['documentation', docId()],
     queryFn: async () => {
-      await new Promise(resolve => setTimeout(resolve, 600));
+      await new Promise((resolve) => setTimeout(resolve, 600));
       return {
         id: docId(),
         title: `Documentation Section ${docId()}`,
         content: `This is the content for documentation section ${docId()}. Demonstrating Tanstack Query in Astro static docs.`,
         category: 'Framework Guide',
         lastUpdated: new Date().toISOString(),
-        tags: ['SolidJS', 'Astro', 'Tanstack', 'SSE', 'Documentation']
+        tags: ['SolidJS', 'Astro', 'Tanstack', 'SSE', 'Documentation'],
       };
     },
   }));
@@ -22,7 +22,7 @@ export function TanstackIntegration() {
   return (
     <div class="p-6 border rounded-lg">
       <h3 class="text-xl font-semibold mb-4">Dynamic Documentation (Tanstack Query)</h3>
-      
+
       <div class="mb-4">
         <label class="block text-sm font-medium mb-2">Select Documentation Section:</label>
         <select

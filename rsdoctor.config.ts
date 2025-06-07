@@ -10,22 +10,22 @@ const config: RsdoctorConfig = {
     moduleGraph: true,
     duplicatePackages: true,
     bundleSize: true,
-    timeline: true
+    timeline: true,
   },
   reportDir: './dist/rsdoctor',
   port: 20007,
   open: false,
   supports: {
     generateTileGraph: true,
-    parseBundle: true
+    parseBundle: true,
   },
   linter: {
     rules: {
       'default-import-check': 'error',
       'duplicate-package': 'warn',
-      'loader-perf': 'warn'
-    }
-  }
+      'loader-perf': 'warn',
+    },
+  },
 };
 
 export default config;

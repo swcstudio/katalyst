@@ -1,7 +1,7 @@
 export default {
   experimental: {
     wasm: true,
-    nitropack: true
+    nitropack: true,
   },
   preset: 'deno_server',
   compatibilityDate: '2025-01-30',
@@ -9,37 +9,37 @@ export default {
   output: {
     dir: '.output',
     serverDir: '.output/server',
-    publicDir: '.output/public'
+    publicDir: '.output/public',
   },
   runtimeConfig: {
     port: 20000,
     apiBase: '/api',
     public: {
-      apiBase: '/api'
-    }
+      apiBase: '/api',
+    },
   },
   devServer: {
-    port: 20000
+    port: 20000,
   },
   routeRules: {
-    '/api/**': { 
+    '/api/**': {
       cors: true,
-      headers: { 'Access-Control-Allow-Origin': '*' }
+      headers: { 'Access-Control-Allow-Origin': '*' },
     },
     '/marketing/**': { proxy: 'http://localhost:20000' },
     '/blog/**': { proxy: 'http://localhost:20001' },
     '/storefront/**': { proxy: 'http://localhost:20002' },
     '/docs/**': { proxy: 'http://localhost:20003' },
     '/remix/**': { proxy: 'http://localhost:20004' },
-    '/spa/**': { proxy: 'http://localhost:20005' }
+    '/spa/**': { proxy: 'http://localhost:20005' },
   },
   storage: {
     redis: {
       driver: 'redis',
       host: process.env.REDIS_HOST || 'localhost',
-      port: process.env.REDIS_PORT || 6379
-    }
-  }
+      port: process.env.REDIS_PORT || 6379,
+    },
+  },
 };
 
 /*

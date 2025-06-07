@@ -1,9 +1,9 @@
 import { createSignal } from 'solid-js';
 import { css } from '../../../src/styled-system/css';
-import { createAnimation } from '../animations';
+import { animeWrapper } from '../animations/anime-wrapper';
 
 interface AnimatedButtonProps {
-  children: any;
+  children: JSX.Element;
   onClick?: () => void;
   variant?: 'primary' | 'secondary';
   disabled?: boolean;
@@ -11,14 +11,16 @@ interface AnimatedButtonProps {
 
 export const AnimatedButton = (props: AnimatedButtonProps) => {
   const [isHovered, setIsHovered] = createSignal(false);
-  const { animate } = createAnimation();
+  const animate = (target: HTMLElement, config: Record<string, unknown>) => {
+    animeWrapper.animate(target, config);
+  };
 
   const handleMouseEnter = (element: HTMLElement) => {
     setIsHovered(true);
     animate(element, {
       scale: [1, 1.05],
       duration: 200,
-      easing: 'easeOutQuad'
+      easing: 'easeOutQuad',
     });
   };
 
@@ -27,12 +29,13 @@ export const AnimatedButton = (props: AnimatedButtonProps) => {
     animate(element, {
       scale: [1.05, 1],
       duration: 200,
-      easing: 'easeOutQuad'
+      easing: 'easeOutQuad',
     });
   };
 
   return (
     <button
+      type="button"
       ref={(el) => {
         el.addEventListener('mouseenter', () => handleMouseEnter(el));
         el.addEventListener('mouseleave', () => handleMouseLeave(el));

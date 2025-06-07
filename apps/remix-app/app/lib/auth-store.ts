@@ -22,11 +22,11 @@ export const useAuthStore = create<AuthStore>()(
     isAuthenticated: false,
     isLoading: false,
     user: null,
-    
+
     login: async () => {
       set({ isLoading: true });
       try {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         set({
           isAuthenticated: true,
           user: { id: '1', email: 'user@example.com', name: 'User' },
@@ -37,11 +37,11 @@ export const useAuthStore = create<AuthStore>()(
         throw error;
       }
     },
-    
+
     logout: async () => {
       set({ isLoading: true });
       try {
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 500));
         set({
           isAuthenticated: false,
           user: null,
@@ -52,13 +52,13 @@ export const useAuthStore = create<AuthStore>()(
         throw error;
       }
     },
-    
+
     setLoading: (loading: boolean) => set({ isLoading: loading }),
-    
+
     checkAuth: async () => {
       set({ isLoading: true });
       try {
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 500));
         const isAuth = Math.random() > 0.5;
         set({
           isAuthenticated: isAuth,

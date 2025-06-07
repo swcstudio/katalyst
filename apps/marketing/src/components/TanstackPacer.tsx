@@ -11,21 +11,21 @@ interface Pacer {
 
 function createPacer(options: PacerOptions): Pacer {
   let intervalId: number | null = null;
-  
+
   const start = () => {
     if (intervalId === null) {
       const interval = Math.floor(1000 / options.fps);
       intervalId = setInterval(options.onUpdate, interval) as unknown as number;
     }
   };
-  
+
   const stop = () => {
     if (intervalId !== null) {
       clearInterval(intervalId);
       intervalId = null;
     }
   };
-  
+
   return { start, stop };
 }
 import { css } from '../styled-system/css';
@@ -34,16 +34,16 @@ export default function TanstackPacer() {
   const [count, setCount] = createSignal(0);
   const [isRunning, setIsRunning] = createSignal(false);
   const [pacerRate, setPacerRate] = createSignal(1000); // 1 second default
-  
+
   const pacer = createPacer({
     fps: 60, // Update at 60fps for smooth animation
     onUpdate: () => {
       if (isRunning()) {
-        setCount(prev => prev + 1);
+        setCount((prev) => prev + 1);
       }
     },
   });
-  
+
   const toggleCounter = () => {
     if (isRunning()) {
       pacer.stop();
@@ -52,41 +52,45 @@ export default function TanstackPacer() {
     }
     setIsRunning(!isRunning());
   };
-  
+
   const resetCounter = () => {
     setCount(0);
   };
-  
+
   const handleRateChange = (e: Event) => {
-    const value = parseInt((e.target as HTMLInputElement).value);
+    const value = Number.parseInt((e.target as HTMLInputElement).value);
     setPacerRate(value);
-    
+
     if (isRunning()) {
       pacer.stop();
       pacer.start();
     }
   };
-  
+
   onCleanup(() => {
     pacer.stop();
   });
-  
+
   return (
-    <div class={css({ padding: '4', borderRadius: 'md', bg: 'gray.50', _dark: { bg: 'gray.800' } })}>
+    <div
+      class={css({ padding: '4', borderRadius: 'md', bg: 'gray.50', _dark: { bg: 'gray.800' } })}
+    >
       <h2 class={css({ fontSize: '2xl', fontWeight: 'bold', mb: '4', color: 'emerald.500' })}>
         Tanstack Pacer Example
       </h2>
-      
+
       <div class={css({ mb: '6', textAlign: 'center' })}>
-        <div class={css({ 
-          fontSize: '6xl', 
-          fontWeight: 'bold', 
-          mb: '4',
-          color: isRunning() ? 'emerald.500' : 'gray.500'
-        })}>
+        <div
+          class={css({
+            fontSize: '6xl',
+            fontWeight: 'bold',
+            mb: '4',
+            color: isRunning() ? 'emerald.500' : 'gray.500',
+          })}
+        >
           {count()}
         </div>
-        
+
         <div class={css({ mb: '4' })}>
           <button
             type="button"
@@ -104,7 +108,7 @@ export default function TanstackPacer() {
           >
             {isRunning() ? 'Stop' : 'Start'}
           </button>
-          
+
           <button
             type="button"
             onClick={resetCounter}
@@ -122,7 +126,7 @@ export default function TanstackPacer() {
           </button>
         </div>
       </div>
-      
+
       <div class={css({ maxWidth: '400px', mx: 'auto' })}>
         <label class={css({ display: 'block', mb: '2', fontWeight: 'medium' })}>
           Update Rate: {pacerRate()}ms
@@ -139,16 +143,27 @@ export default function TanstackPacer() {
             accentColor: 'emerald.500',
           })}
         />
-        <div class={css({ display: 'flex', justifyContent: 'space-between', mt: '1', fontSize: 'sm' })}>
+        <div
+          class={css({ display: 'flex', justifyContent: 'space-between', mt: '1', fontSize: 'sm' })}
+        >
           <span>Fast (100ms)</span>
           <span>Slow (2000ms)</span>
         </div>
       </div>
-      
-      <div class={css({ mt: '6', p: '3', bg: 'gray.100', _dark: { bg: 'gray.700' }, borderRadius: 'md' })}>
+
+      <div
+        class={css({
+          mt: '6',
+          p: '3',
+          bg: 'gray.100',
+          _dark: { bg: 'gray.700' },
+          borderRadius: 'md',
+        })}
+      >
         <p class={css({ fontSize: 'sm' })}>
-          Tanstack Pacer provides a high-performance, frame-rate-independent timer for animations and time-based updates.
-          It's perfect for creating smooth animations, game loops, or any time-based functionality in your application.
+          Tanstack Pacer provides a high-performance, frame-rate-independent timer for animations
+          and time-based updates. It's perfect for creating smooth animations, game loops, or any
+          time-based functionality in your application.
         </p>
       </div>
     </div>

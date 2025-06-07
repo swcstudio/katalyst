@@ -9,7 +9,7 @@ export const LoadingSpinner = (props: LoadingSpinnerProps) => {
   const sizeMap = {
     sm: '4',
     md: '8',
-    lg: '12'
+    lg: '12',
   };
 
   return (
