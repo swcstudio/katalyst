@@ -106,8 +106,8 @@
   ],
   "projects": {
     "marketing": "apps/marketing",
-    "blog": "apps/blog",
-    "docs": "apps/docs",
+    "astro-blog": "apps/astro-blog",
+    "astro-docs": "apps/astro-docs",
     "storefront": "apps/storefront",
     "remix-app": "apps/remix-app",
     "sveltekit-spa": "apps/sveltekit-spa",
