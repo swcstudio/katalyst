@@ -43,11 +43,412 @@
     }
   ],
   "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": "infrastructure/nomad/jobs/blog.nomad",
+        "hash": "10814659457137770339"
+      },
+      {
+        "file": "scripts/dev-remix.ts",
+        "hash": "11583575116355732548"
+      },
+      {
+        "file": "infrastructure/kubernetes/manifests/vault-integration.yaml",
+        "hash": "11050167702907426057"
+      },
+      {
+        "file": "infrastructure/nomad/jobs/marketing.nomad",
+        "hash": "15829278963731928714"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/config.yml",
+        "hash": "3760894544537943459"
+      },
+      {
+        "file": "infrastructure/kubernetes/manifests/deployment.yaml",
+        "hash": "10374857304802868416"
+      },
+      {
+        "file": "infrastructure/kubestack/modules/clerk/main.tf",
+        "hash": "16108872023920923856"
+      },
+      {
+        "file": "infrastructure/kubestack/modules/convex/main.tf",
+        "hash": "1278788881810364656"
+      },
+      {
+        "file": "nitro.config.ts",
+        "hash": "18443039076553240312"
+      },
+      {
+        "file": "nx.json",
+        "hash": "11165142729334353747"
+      },
+      {
+        "file": "scripts/build-blog.ts",
+        "hash": "7448392099565546968"
+      },
+      {
+        "file": "scripts/build-storefront.ts",
+        "hash": "16452167498642815466"
+      },
+      {
+        "file": "scripts/preview-docs.ts",
+        "hash": "10238030514670265799"
+      },
+      {
+        "file": "libs/shared/state/auth-store.ts",
+        "hash": "16417515658453123720"
+      },
+      {
+        "file": "tests/setup.ts",
+        "hash": "8692365303082243711"
+      },
+      {
+        "file": "docs/architecture.md",
+        "hash": "18407589381246787084"
+      },
+      {
+        "file": "infrastructure/kubestack/modules/vnode-runtime/main.tf",
+        "hash": "3474312125138113406"
+      },
+      {
+        "file": "infrastructure/kubernetes/manifests/vnode-runtime.yaml",
+        "hash": "16556261855317312069"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "7211646027357559927"
+      },
+      {
+        "file": "rsbuild.config.ts",
+        "hash": "6778990123450633939"
+      },
+      {
+        "file": "libs/shared/animations/solid-animations.ts",
+        "hash": "4855815732925079029"
+      },
+      {
+        "file": "libs/shared/auth/clerk-config.ts",
+        "hash": "7390157408024810454"
+      },
+      {
+        "file": "libs/shared/rslib.config.ts",
+        "hash": "15774634267552954152"
+      },
+      {
+        "file": "infrastructure/kubestack/modules/namespaces/main.tf",
+        "hash": "13757932388069192486"
+      },
+      {
+        "file": "scripts/preview-storefront.ts",
+        "hash": "11827652518271099917"
+      },
+      {
+        "file": "scripts/build-docs.ts",
+        "hash": "16827697988365420338"
+      },
+      {
+        "file": "rstest.config.ts",
+        "hash": "17376737346630424396"
+      },
+      {
+        "file": "infrastructure/nomad/jobs/remix-app.nomad",
+        "hash": "5212125112372172064"
+      },
+      {
+        "file": "scripts/preview-blog.ts",
+        "hash": "11909054376645250195"
+      },
+      {
+        "file": "tests/pages/HomePage.test.tsx",
+        "hash": "4903915180887226259"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "15123930263805902867"
+      },
+      {
+        "file": "infrastructure/kubernetes/manifests/zarf-integration.yaml",
+        "hash": "11266010795264981231"
+      },
+      {
+        "file": "PR_DESCRIPTION_INFRASTRUCTURE.md",
+        "hash": "9202603997511584900"
+      },
+      {
+        "file": ".github/workflows/ci.yml",
+        "hash": "889870872786147564"
+      },
+      {
+        "file": "libs/shared/animations/index.ts",
+        "hash": "12981172623113613009"
+      },
+      {
+        "file": "infrastructure/kubestack/main.tf",
+        "hash": "14363540434230520108"
+      },
+      {
+        "file": "tests/shared/animations.test.ts",
+        "hash": "15549952001097093507"
+      },
+      {
+        "file": "libs/shared/adapters/zustand-remix.ts",
+        "hash": "3186126122695590432"
+      },
+      {
+        "file": "src/index.html",
+        "hash": "14269576170678062320"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/bug_report.yml",
+        "hash": "16760531441829752898"
+      },
+      {
+        "file": "scripts/dev-docs.ts",
+        "hash": "9677329100602873874"
+      },
+      {
+        "file": "tests/components/Header.test.tsx",
+        "hash": "17131889021169440585"
+      },
+      {
+        "file": "scripts/test-all.ts",
+        "hash": "4035115653397848784"
+      },
+      {
+        "file": "scripts/preview-sveltekit.ts",
+        "hash": "11914003133559534892"
+      },
+      {
+        "file": "tests/runner.ts",
+        "hash": "13163243274917863112"
+      },
+      {
+        "file": "PR_DESCRIPTION.md",
+        "hash": "15583171880982294039"
+      },
+      {
+        "file": "biome.json",
+        "hash": "14848416545669332130"
+      },
+      {
+        "file": "package.json",
+        "hash": "1226265545980274867"
+      },
+      {
+        "file": "infrastructure/ci-cd/jenkins/Jenkinsfile",
+        "hash": "9810409633166466173"
+      },
+      {
+        "file": "scripts/build-marketing.ts",
+        "hash": "532223953883507581"
+      },
+      {
+        "file": ".gitattributes",
+        "hash": "3734314869792645083"
+      },
+      {
+        "file": "infrastructure/ci-cd/tekton/pipeline.yaml",
+        "hash": "12281953797717315809"
+      },
+      {
+        "file": "libs/shared/components/AnimatedButton.tsx",
+        "hash": "2349435471643818603"
+      },
+      {
+        "file": "scripts/dev.ts",
+        "hash": "3512040418886990305"
+      },
+      {
+        "file": "scripts/build-sveltekit.ts",
+        "hash": "17495518110134652701"
+      },
+      {
+        "file": "libs/shared/animations/anime-wrapper.ts",
+        "hash": "7962860406721223186"
+      },
+      {
+        "file": "libs/shared/components/index.ts",
+        "hash": "12933874033792909391"
+      },
+      {
+        "file": "infrastructure/nomad/jobs/docs.nomad",
+        "hash": "16664171344728802857"
+      },
+      {
+        "file": "scripts/dev-marketing.ts",
+        "hash": "7265665106821989392"
+      },
+      {
+        "file": "server.ts",
+        "hash": "16459196025567097830"
+      },
+      {
+        "file": "tests/shared/components.test.tsx",
+        "hash": "5827910112368007380"
+      },
+      {
+        "file": "deno-types.d.ts",
+        "hash": "14300415278276738453"
+      },
+      {
+        "file": "vercel.json",
+        "hash": "6385765192126567833"
+      },
+      {
+        "file": "deno.json",
+        "hash": "15382623995144555990"
+      },
+      {
+        "file": "libs/shared/adapters/zustand-svelte.ts",
+        "hash": "4590061778493746577"
+      },
+      {
+        "file": "libs/shared/index.ts",
+        "hash": "8716944830329074451"
+      },
+      {
+        "file": "scripts/build.ts",
+        "hash": "13295261076104824501"
+      },
+      {
+        "file": "argocd/application.yaml",
+        "hash": "6229259605792346972"
+      },
+      {
+        "file": "scripts/preview-remix.ts",
+        "hash": "11809895231928900672"
+      },
+      {
+        "file": "infrastructure/kubernetes/manifests/sse-deployment.yaml",
+        "hash": "1738625626436417226"
+      },
+      {
+        "file": "content/blog/002-cloud-native-architecture.mdx",
+        "hash": "10136816799768485158"
+      },
+      {
+        "file": "infrastructure/nomad/jobs/sveltekit-spa.nomad",
+        "hash": "4461710130750656172"
+      },
+      {
+        "file": "scripts/build-remix.ts",
+        "hash": "8835242164922556332"
+      },
+      {
+        "file": "scripts/dev-blog.ts",
+        "hash": "2096647196010889488"
+      },
+      {
+        "file": "scripts/dev-sveltekit.ts",
+        "hash": "8966173691455751585"
+      },
+      {
+        "file": "infrastructure/kubernetes/manifests/monitoring-stack.yaml",
+        "hash": "4828291734073252818"
+      },
+      {
+        "file": "libs/shared/components/LoadingSpinner.tsx",
+        "hash": "15299828810863296311"
+      },
+      {
+        "file": "LICENSE",
+        "hash": "9554884839290523976"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/feature_request.yml",
+        "hash": "16196186112927737929"
+      },
+      {
+        "file": "infrastructure/ci-cd/github-actions/ci.yml",
+        "hash": "1109571021423602134"
+      },
+      {
+        "file": "infrastructure/kubernetes/manifests/convex-postgres.yaml",
+        "hash": "6894125372880631368"
+      },
+      {
+        "file": ".nx/workflows/ci.yml",
+        "hash": "15096345280698813832"
+      },
+      {
+        "file": "docs/deployment.md",
+        "hash": "4592068854494581804"
+      },
+      {
+        "file": "content/blog/003-tanstack-solidjs-integration.mdx",
+        "hash": "9393501533441495114"
+      },
+      {
+        "file": "libs/shared/adapters/index.ts",
+        "hash": "7345613198728165113"
+      },
+      {
+        "file": "panda.config.ts",
+        "hash": "4944107392014265666"
+      },
+      {
+        "file": "scripts/dev-storefront.ts",
+        "hash": "10022643947463062574"
+      },
+      {
+        "file": "scripts/preview.ts",
+        "hash": "3525332146419374937"
+      },
+      {
+        "file": "scripts/test-frameworks.ts",
+        "hash": "16034155212459474052"
+      },
+      {
+        "file": "infrastructure/nomad/jobs/storefront.nomad",
+        "hash": "8524616323715702273"
+      },
+      {
+        "file": "README.md",
+        "hash": "5215563061384303943"
+      },
+      {
+        "file": "libs/shared/animations/types.ts",
+        "hash": "8898506921899348475"
+      },
+      {
+        "file": "rsdoctor.config.ts",
+        "hash": "2045644998211478964"
+      },
+      {
+        "file": "content/blog/001-welcome-to-sota-stack.mdx",
+        "hash": "7650977101572169035"
+      },
+      {
+        "file": "scripts/build-all.ts",
+        "hash": "12167267124981228048"
+      },
+      {
+        "file": "scripts/preview-marketing.ts",
+        "hash": "9603463309995022795"
+      }
+    ],
     "projectFileMap": {
+      "docs": [
+        {
+          "file": "apps/docs/astro.config.mjs",
+          "hash": "11329754899194722294",
+          "deps": [
+            "npm:astro/config",
+            "npm:@astrojs/solid-js",
+            "npm:@astrojs/mdx"
+          ]
+        },
+        {
+          "file": "apps/docs/project.json",
+          "hash": "6997096941860014035"
+        }
+      ],
       "remix-app": [
         {
           "file": "apps/remix-app/app/lib/auth-store.ts",
-          "hash": "3008761842757125379",
+          "hash": "4953515520953175354",
           "deps": [
             "npm:zustand",
             "npm:zustand/middleware"
@@ -55,15 +456,15 @@
         },
         {
           "file": "apps/remix-app/app/root.tsx",
-          "hash": "10584820059852656392",
+          "hash": "11636712820538559721",
           "deps": [
-            "npm:@remix-run/react",
-            "npm:@remix-run/node"
+            "npm:@remix-run/node",
+            "npm:@remix-run/react"
           ]
         },
         {
           "file": "apps/remix-app/app/routes/_index.tsx",
-          "hash": "1244608013360276417",
+          "hash": "15444991442008413552",
           "deps": [
             "npm:@remix-run/node",
             "npm:shared/adapters"
@@ -90,7 +491,7 @@
         },
         {
           "file": "apps/remix-app/remix.config.js",
-          "hash": "16298194871668728160"
+          "hash": "2830714737002471431"
         },
         {
           "file": "apps/remix-app/rsbuild.config.ts",
@@ -101,7 +502,7 @@
         },
         {
           "file": "apps/remix-app/tests/remix.test.ts",
-          "hash": "16561035211447664656",
+          "hash": "11629260862433959761",
           "deps": [
             "npm:@jest/globals"
           ]
@@ -111,93 +512,56 @@
           "hash": "8759982028424826016"
         }
       ],
-      "astro-blog": [
+      "astro-docs": [
         {
-          "file": "apps/astro-blog/astro.config.mjs",
-          "hash": "3252167755903490683",
+          "file": "apps/astro-docs/astro.config.mjs",
+          "hash": "16784877593414842898",
           "deps": [
             "npm:astro/config",
             "npm:@astrojs/solid-js"
           ]
         },
         {
-          "file": "apps/astro-blog/deno.json",
-          "hash": "7576109485158960649"
+          "file": "apps/astro-docs/deno.json",
+          "hash": "5116840840838572999"
         },
         {
-          "file": "apps/astro-blog/project.json",
-          "hash": "899070866256568256"
-        },
-        {
-          "file": "apps/astro-blog/src/components/TanstackIntegration.tsx",
-          "hash": "208702873127009520",
-          "deps": [
-            "npm:solid-js",
-            "npm:@tanstack/solid-query"
-          ]
-        },
-        {
-          "file": "apps/astro-blog/src/layouts/Layout.astro",
-          "hash": "1097046871453591390"
-        },
-        {
-          "file": "apps/astro-blog/src/pages/index.astro",
-          "hash": "5160976838224216827"
-        },
-        {
-          "file": "apps/astro-blog/tsconfig.json",
-          "hash": "11261348325520824653"
-        }
-      ],
-      "blog": [
-        {
-          "file": "apps/blog/astro.config.mjs",
-          "hash": "4156361989253691426",
-          "deps": [
-            "npm:astro/config",
-            "npm:@astrojs/solid-js",
-            "npm:@astrojs/mdx"
-          ]
-        },
-        {
-          "file": "apps/blog/panda.config.ts",
+          "file": "apps/astro-docs/panda.config.ts",
           "hash": "229933617635160920",
           "deps": [
             "npm:@pandacss/dev"
           ]
         },
         {
-          "file": "apps/blog/project.json",
-          "hash": "11020804908061787036"
+          "file": "apps/astro-docs/project.json",
+          "hash": "8848042720827054266"
         },
         {
-          "file": "apps/blog/src/content/blog/001-welcome-to-sota-stack.mdx",
-          "hash": "7650977101572169035"
-        },
-        {
-          "file": "apps/blog/src/content/blog/002-cloud-native-architecture.mdx",
-          "hash": "10136816799768485158"
-        },
-        {
-          "file": "apps/blog/src/content/blog/003-tanstack-solidjs-integration.mdx",
-          "hash": "9393501533441495114"
-        },
-        {
-          "file": "apps/blog/src/index.tsx",
-          "hash": "3982370288775781159",
+          "file": "apps/astro-docs/src/components/TanstackIntegration.tsx",
+          "hash": "15286440741368459817",
           "deps": [
-            "npm:solid-js/web",
-            "npm:@solidjs/router",
             "npm:@tanstack/solid-query",
-            "npm:../../../libs/shared/state/auth-store"
+            "npm:solid-js"
           ]
         },
         {
-          "file": "apps/blog/tests/blog.test.ts",
-          "hash": "16548297653849132432",
+          "file": "apps/astro-docs/src/layouts/Layout.astro",
+          "hash": "4351695744403767218"
+        },
+        {
+          "file": "apps/astro-docs/src/pages/index.astro",
+          "hash": "6100599285643988970"
+        },
+        {
+          "file": "apps/astro-docs/tests/docs.test.ts",
+          "hash": "1151967492824248787",
           "deps": [
             "npm:@jest/globals"
           ]
+        },
+        {
+          "file": "apps/astro-docs/tsconfig.json",
+          "hash": "11261348325520824653"
         }
       ],
       "sveltekit-spa": [
@@ -222,7 +586,7 @@
         },
         {
           "file": "apps/sveltekit-spa/rsbuild.config.ts",
-          "hash": "13410606000652678837",
+          "hash": "7665028736606754740",
           "deps": [
             "npm:@rsbuild/core",
             "npm:@rsbuild/plugin-svelte"
@@ -230,11 +594,11 @@
         },
         {
           "file": "apps/sveltekit-spa/src/App.svelte",
-          "hash": "2022370153744450598"
+          "hash": "2273704452999504028"
         },
         {
           "file": "apps/sveltekit-spa/src/app.d.ts",
-          "hash": "4304216718663240765"
+          "hash": "16259769956290710724"
         },
         {
           "file": "apps/sveltekit-spa/src/app.html",
@@ -245,12 +609,27 @@
           "hash": "14470907151071190043"
         },
         {
+          "file": "apps/sveltekit-spa/src/lib/index.ts",
+          "hash": "17430347723336212112"
+        },
+        {
+          "file": "apps/sveltekit-spa/src/lib/stores.ts",
+          "hash": "3519078880317450679",
+          "deps": [
+            "npm:svelte/store"
+          ]
+        },
+        {
+          "file": "apps/sveltekit-spa/src/lib/utils.ts",
+          "hash": "15591027569975091519"
+        },
+        {
           "file": "apps/sveltekit-spa/src/routes/+layout.svelte",
-          "hash": "4941077507907365122"
+          "hash": "3113691241871410534"
         },
         {
           "file": "apps/sveltekit-spa/src/routes/+page.svelte",
-          "hash": "11455186344419571213"
+          "hash": "2656436705499043924"
         },
         {
           "file": "apps/sveltekit-spa/src/routes/about/+page.svelte",
@@ -258,18 +637,18 @@
         },
         {
           "file": "apps/sveltekit-spa/src/routes/dashboard/+page.svelte",
-          "hash": "5070682849551369544"
+          "hash": "11953112968209648710"
         },
         {
           "file": "apps/sveltekit-spa/svelte.config.js",
-          "hash": "18202645133436116812",
+          "hash": "9606536304995587066",
           "deps": [
             "npm:@sveltejs/adapter-static"
           ]
         },
         {
           "file": "apps/sveltekit-spa/tests/sveltekit.test.ts",
-          "hash": "8743339402203318406",
+          "hash": "13542891718376332705",
           "deps": [
             "npm:@jest/globals"
           ]
@@ -277,52 +656,6 @@
         {
           "file": "apps/sveltekit-spa/tsconfig.json",
           "hash": "8447270375595262125"
-        }
-      ],
-      "storefront": [
-        {
-          "file": "apps/storefront/project.json",
-          "hash": "3037366468131621291"
-        },
-        {
-          "file": "apps/storefront/rsbuild.config.ts",
-          "hash": "10756836280724179227",
-          "deps": [
-            "npm:@rsbuild/core",
-            "npm:@rsbuild/plugin-solid"
-          ]
-        },
-        {
-          "file": "apps/storefront/src/index.tsx",
-          "hash": "8199878642369227627",
-          "deps": [
-            "npm:solid-js/web",
-            "npm:@tanstack/solid-router",
-            "npm:@tanstack/solid-query",
-            "npm:../../../libs/shared/state/auth-store"
-          ]
-        },
-        {
-          "file": "apps/storefront/tests/storefront.test.ts",
-          "hash": "11351323901546026546",
-          "deps": [
-            "npm:@jest/globals"
-          ]
-        }
-      ],
-      "docs": [
-        {
-          "file": "apps/docs/astro.config.mjs",
-          "hash": "11329754899194722294",
-          "deps": [
-            "npm:astro/config",
-            "npm:@astrojs/solid-js",
-            "npm:@astrojs/mdx"
-          ]
-        },
-        {
-          "file": "apps/docs/project.json",
-          "hash": "6997096941860014035"
         }
       ],
       "marketing": [
@@ -347,7 +680,7 @@
         },
         {
           "file": "apps/marketing/src/components/AnimatedButton.tsx",
-          "hash": "11095507758537611083",
+          "hash": "100478835472563420",
           "deps": [
             "npm:solid-js",
             "npm:../../../../libs/shared/animations"
@@ -355,7 +688,7 @@
         },
         {
           "file": "apps/marketing/src/components/AnimatedHero.tsx",
-          "hash": "1878746269403896310",
+          "hash": "8852837711937580280",
           "deps": [
             "npm:solid-js",
             "npm:../../../../libs/shared/animations"
@@ -363,14 +696,14 @@
         },
         {
           "file": "apps/marketing/src/components/Footer.tsx",
-          "hash": "2459185506554643982",
+          "hash": "1385062144881815727",
           "deps": [
             "npm:@tanstack/solid-router"
           ]
         },
         {
           "file": "apps/marketing/src/components/Header.tsx",
-          "hash": "10283430058364123653",
+          "hash": "10896353695462092205",
           "deps": [
             "npm:@tanstack/solid-router",
             "npm:solid-js"
@@ -378,10 +711,10 @@
         },
         {
           "file": "apps/marketing/src/components/TanstackDemo.tsx",
-          "hash": "14039239606682074543",
+          "hash": "12927517383370345920",
           "deps": [
-            "npm:solid-js",
             "npm:@tanstack/solid-query",
+            "npm:solid-js",
             "npm:../../../libs/shared/state/auth-store"
           ]
         },
@@ -394,7 +727,7 @@
         },
         {
           "file": "apps/marketing/src/components/TanstackForm.tsx",
-          "hash": "4154306574551556120",
+          "hash": "15112347119687639207",
           "deps": [
             "npm:solid-js"
           ]
@@ -408,14 +741,14 @@
         },
         {
           "file": "apps/marketing/src/components/TanstackPacer.tsx",
-          "hash": "459924608792166566",
+          "hash": "3814882862334645532",
           "deps": [
             "npm:solid-js"
           ]
         },
         {
           "file": "apps/marketing/src/components/TanstackQuery.tsx",
-          "hash": "3202988579109183878",
+          "hash": "2728287749281001280",
           "deps": [
             "npm:solid-js"
           ]
@@ -429,7 +762,7 @@
         },
         {
           "file": "apps/marketing/src/components/TanstackStore.tsx",
-          "hash": "715193654523546890",
+          "hash": "18238327949900452727",
           "deps": [
             "npm:solid-js"
           ]
@@ -443,7 +776,7 @@
         },
         {
           "file": "apps/marketing/src/components/TanstackTable.tsx",
-          "hash": "12400637378518654078",
+          "hash": "4542473812385762304",
           "deps": [
             "npm:solid-js"
           ]
@@ -457,24 +790,24 @@
         },
         {
           "file": "apps/marketing/src/components/TanstackVirtual.tsx",
-          "hash": "1675604050080085877",
+          "hash": "12340667694958033735",
           "deps": [
-            "npm:solid-js",
-            "npm:@tanstack/solid-virtual"
+            "npm:@tanstack/solid-virtual",
+            "npm:solid-js"
           ]
         },
         {
           "file": "apps/marketing/src/index.tsx",
-          "hash": "3599164990539656675",
+          "hash": "12649990541764386509",
           "deps": [
-            "npm:solid-js/web",
+            "npm:@tanstack/solid-query",
             "npm:@tanstack/solid-router",
-            "npm:@tanstack/solid-query"
+            "npm:solid-js/web"
           ]
         },
         {
           "file": "apps/marketing/src/layouts/MainLayout.tsx",
-          "hash": "7759607869863910115",
+          "hash": "14176018887897757309",
           "deps": [
             "npm:@tanstack/solid-router",
             "npm:solid-js"
@@ -486,14 +819,14 @@
         },
         {
           "file": "apps/marketing/src/pages/ContactPage.tsx",
-          "hash": "8406993927715206814",
+          "hash": "11816932796469610708",
           "deps": [
             "npm:solid-js"
           ]
         },
         {
           "file": "apps/marketing/src/pages/HomePage.tsx",
-          "hash": "6665308783129645414",
+          "hash": "13905887490471847508",
           "deps": [
             "npm:@tanstack/solid-router",
             "npm:solid-js"
@@ -508,23 +841,23 @@
         },
         {
           "file": "apps/marketing/src/pages/blog/BlogPage.tsx",
-          "hash": "3360360822050343482",
+          "hash": "18245527769022744862",
           "deps": [
-            "npm:solid-js",
-            "npm:@tanstack/solid-router"
+            "npm:@tanstack/solid-router",
+            "npm:solid-js"
           ]
         },
         {
           "file": "apps/marketing/src/pages/blog/BlogPostPage.tsx",
-          "hash": "8448195750412197243",
+          "hash": "6685934813502367868",
           "deps": [
-            "npm:solid-js",
-            "npm:@tanstack/solid-router"
+            "npm:@tanstack/solid-router",
+            "npm:solid-js"
           ]
         },
         {
           "file": "apps/marketing/src/routes.tsx",
-          "hash": "1381240797769043656",
+          "hash": "14881062350276230176",
           "deps": [
             "npm:@tanstack/solid-router",
             "npm:solid-js"
@@ -1170,354 +1503,132 @@
         },
         {
           "file": "apps/marketing/tests/components.test.tsx",
-          "hash": "2844107966776251101",
+          "hash": "13532112237308021822",
           "deps": [
-            "npm:@solidjs/testing-library"
+            "npm:std/assert/assert_equals.ts"
           ]
         }
       ],
-      "astro-docs": [
+      "storefront": [
         {
-          "file": "apps/astro-docs/astro.config.mjs",
-          "hash": "16784877593414842898",
+          "file": "apps/storefront/project.json",
+          "hash": "3037366468131621291"
+        },
+        {
+          "file": "apps/storefront/rsbuild.config.ts",
+          "hash": "10756836280724179227",
+          "deps": [
+            "npm:@rsbuild/core",
+            "npm:@rsbuild/plugin-solid"
+          ]
+        },
+        {
+          "file": "apps/storefront/src/index.tsx",
+          "hash": "6416052425051198928",
+          "deps": [
+            "npm:@tanstack/solid-query",
+            "npm:@tanstack/solid-router",
+            "npm:solid-js/web",
+            "npm:../../../libs/shared/state/auth-store"
+          ]
+        },
+        {
+          "file": "apps/storefront/tests/storefront.test.ts",
+          "hash": "2897158684060325417",
+          "deps": [
+            "npm:@jest/globals"
+          ]
+        }
+      ],
+      "astro-blog": [
+        {
+          "file": "apps/astro-blog/astro.config.mjs",
+          "hash": "3252167755903490683",
           "deps": [
             "npm:astro/config",
             "npm:@astrojs/solid-js"
           ]
         },
         {
-          "file": "apps/astro-docs/deno.json",
-          "hash": "5116840840838572999"
+          "file": "apps/astro-blog/deno.json",
+          "hash": "7576109485158960649"
         },
         {
-          "file": "apps/astro-docs/panda.config.ts",
+          "file": "apps/astro-blog/project.json",
+          "hash": "899070866256568256"
+        },
+        {
+          "file": "apps/astro-blog/src/components/TanstackIntegration.tsx",
+          "hash": "12321353882006914199",
+          "deps": [
+            "npm:@tanstack/solid-query",
+            "npm:solid-js"
+          ]
+        },
+        {
+          "file": "apps/astro-blog/src/layouts/Layout.astro",
+          "hash": "1097046871453591390"
+        },
+        {
+          "file": "apps/astro-blog/src/pages/index.astro",
+          "hash": "4848612843915692317"
+        },
+        {
+          "file": "apps/astro-blog/tsconfig.json",
+          "hash": "11261348325520824653"
+        }
+      ],
+      "blog": [
+        {
+          "file": "apps/blog/astro.config.mjs",
+          "hash": "4156361989253691426",
+          "deps": [
+            "npm:astro/config",
+            "npm:@astrojs/solid-js",
+            "npm:@astrojs/mdx"
+          ]
+        },
+        {
+          "file": "apps/blog/panda.config.ts",
           "hash": "229933617635160920",
           "deps": [
             "npm:@pandacss/dev"
           ]
         },
         {
-          "file": "apps/astro-docs/project.json",
-          "hash": "8848042720827054266"
+          "file": "apps/blog/project.json",
+          "hash": "7836006944457621054"
         },
         {
-          "file": "apps/astro-docs/src/components/TanstackIntegration.tsx",
-          "hash": "5931137642385327179",
+          "file": "apps/blog/src/content/blog/001-welcome-to-sota-stack.mdx",
+          "hash": "7650977101572169035"
+        },
+        {
+          "file": "apps/blog/src/content/blog/002-cloud-native-architecture.mdx",
+          "hash": "10136816799768485158"
+        },
+        {
+          "file": "apps/blog/src/content/blog/003-tanstack-solidjs-integration.mdx",
+          "hash": "9393501533441495114"
+        },
+        {
+          "file": "apps/blog/src/index.tsx",
+          "hash": "3771005445979296219",
           "deps": [
-            "npm:solid-js",
-            "npm:@tanstack/solid-query"
+            "npm:@solidjs/router",
+            "npm:@tanstack/solid-query",
+            "npm:solid-js/web",
+            "npm:../../../libs/shared/state/auth-store"
           ]
         },
         {
-          "file": "apps/astro-docs/src/layouts/Layout.astro",
-          "hash": "4351695744403767218"
-        },
-        {
-          "file": "apps/astro-docs/src/pages/index.astro",
-          "hash": "1124667119449953355"
-        },
-        {
-          "file": "apps/astro-docs/tests/docs.test.ts",
-          "hash": "14922891197633744315",
+          "file": "apps/blog/tests/blog.test.ts",
+          "hash": "15757526179855912718",
           "deps": [
             "npm:@jest/globals"
           ]
-        },
-        {
-          "file": "apps/astro-docs/tsconfig.json",
-          "hash": "11261348325520824653"
         }
       ]
-    },
-    "nonProjectFiles": [
-      {
-        "file": ".gitattributes",
-        "hash": "3734314869792645083"
-      },
-      {
-        "file": ".github/ISSUE_TEMPLATE/bug_report.yml",
-        "hash": "16760531441829752898"
-      },
-      {
-        "file": ".github/ISSUE_TEMPLATE/config.yml",
-        "hash": "3760894544537943459"
-      },
-      {
-        "file": ".github/ISSUE_TEMPLATE/feature_request.yml",
-        "hash": "16196186112927737929"
-      },
-      {
-        "file": ".github/workflows/ci.yml",
-        "hash": "6801777717711130936"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "15123930263805902867"
-      },
-      {
-        "file": ".nx/workflows/ci.yml",
-        "hash": "15096345280698813832"
-      },
-      {
-        "file": "LICENSE",
-        "hash": "9554884839290523976"
-      },
-      {
-        "file": "PR_DESCRIPTION.md",
-        "hash": "15583171880982294039"
-      },
-      {
-        "file": "README.md",
-        "hash": "5215563061384303943"
-      },
-      {
-        "file": "argocd/application.yaml",
-        "hash": "6229259605792346972"
-      },
-      {
-        "file": "biome.json",
-        "hash": "14848416545669332130"
-      },
-      {
-        "file": "content/blog/001-welcome-to-sota-stack.mdx",
-        "hash": "7650977101572169035"
-      },
-      {
-        "file": "content/blog/002-cloud-native-architecture.mdx",
-        "hash": "10136816799768485158"
-      },
-      {
-        "file": "content/blog/003-tanstack-solidjs-integration.mdx",
-        "hash": "9393501533441495114"
-      },
-      {
-        "file": "deno-types.d.ts",
-        "hash": "13644432714997208904"
-      },
-      {
-        "file": "deno.json",
-        "hash": "15822788193347326446"
-      },
-      {
-        "file": "docs/architecture.md",
-        "hash": "18407589381246787084"
-      },
-      {
-        "file": "docs/deployment.md",
-        "hash": "4592068854494581804"
-      },
-      {
-        "file": "libs/shared/adapters/index.ts",
-        "hash": "7345613198728165113"
-      },
-      {
-        "file": "libs/shared/adapters/zustand-remix.ts",
-        "hash": "11049090683598761184"
-      },
-      {
-        "file": "libs/shared/adapters/zustand-svelte.ts",
-        "hash": "8779721621054067751"
-      },
-      {
-        "file": "libs/shared/animations/anime-wrapper.ts",
-        "hash": "8754219746904146619"
-      },
-      {
-        "file": "libs/shared/animations/index.ts",
-        "hash": "12981172623113613009"
-      },
-      {
-        "file": "libs/shared/animations/solid-animations.ts",
-        "hash": "13538206542956343133"
-      },
-      {
-        "file": "libs/shared/animations/types.ts",
-        "hash": "12016008087974796187"
-      },
-      {
-        "file": "libs/shared/auth/clerk-config.ts",
-        "hash": "15000395097041110235"
-      },
-      {
-        "file": "libs/shared/components/AnimatedButton.tsx",
-        "hash": "6433555343470338181"
-      },
-      {
-        "file": "libs/shared/components/LoadingSpinner.tsx",
-        "hash": "3234621613021608301"
-      },
-      {
-        "file": "libs/shared/components/index.ts",
-        "hash": "12933874033792909391"
-      },
-      {
-        "file": "libs/shared/index.ts",
-        "hash": "8716944830329074451"
-      },
-      {
-        "file": "libs/shared/rslib.config.ts",
-        "hash": "14916453620768587280"
-      },
-      {
-        "file": "libs/shared/state/auth-store.ts",
-        "hash": "7631584478800862360"
-      },
-      {
-        "file": "nitro.config.ts",
-        "hash": "12381869710655356913"
-      },
-      {
-        "file": "nx.json",
-        "hash": "10766605688920376642"
-      },
-      {
-        "file": "package.json",
-        "hash": "1226265545980274867"
-      },
-      {
-        "file": "panda.config.ts",
-        "hash": "7726454238046090805"
-      },
-      {
-        "file": "rsbuild.config.ts",
-        "hash": "15813527548106736183"
-      },
-      {
-        "file": "rsdoctor.config.ts",
-        "hash": "15756623365185787999"
-      },
-      {
-        "file": "rstest.config.ts",
-        "hash": "1618643731923911556"
-      },
-      {
-        "file": "scripts/build-blog.ts",
-        "hash": "1643452336488199546"
-      },
-      {
-        "file": "scripts/build-docs.ts",
-        "hash": "12961292772792073030"
-      },
-      {
-        "file": "scripts/build-marketing.ts",
-        "hash": "8767309220181385035"
-      },
-      {
-        "file": "scripts/build-remix.ts",
-        "hash": "15206164951207139573"
-      },
-      {
-        "file": "scripts/build-storefront.ts",
-        "hash": "8998456058171341305"
-      },
-      {
-        "file": "scripts/build-sveltekit.ts",
-        "hash": "12222271909806376244"
-      },
-      {
-        "file": "scripts/build.ts",
-        "hash": "1955722953660001813"
-      },
-      {
-        "file": "scripts/dev-blog.ts",
-        "hash": "918526280255145399"
-      },
-      {
-        "file": "scripts/dev-docs.ts",
-        "hash": "4182907846748694129"
-      },
-      {
-        "file": "scripts/dev-marketing.ts",
-        "hash": "1479604182766887936"
-      },
-      {
-        "file": "scripts/dev-remix.ts",
-        "hash": "3367424669606791973"
-      },
-      {
-        "file": "scripts/dev-storefront.ts",
-        "hash": "8337826735232473076"
-      },
-      {
-        "file": "scripts/dev-sveltekit.ts",
-        "hash": "11426344576714663244"
-      },
-      {
-        "file": "scripts/dev.ts",
-        "hash": "17391403367473715750"
-      },
-      {
-        "file": "scripts/preview-blog.ts",
-        "hash": "1205233900141204086"
-      },
-      {
-        "file": "scripts/preview-docs.ts",
-        "hash": "4279610552092633972"
-      },
-      {
-        "file": "scripts/preview-marketing.ts",
-        "hash": "9375264312621998594"
-      },
-      {
-        "file": "scripts/preview-remix.ts",
-        "hash": "9227292013079492454"
-      },
-      {
-        "file": "scripts/preview-storefront.ts",
-        "hash": "1109173584476074640"
-      },
-      {
-        "file": "scripts/preview-sveltekit.ts",
-        "hash": "8404732405853825196"
-      },
-      {
-        "file": "scripts/preview.ts",
-        "hash": "1106862396954285077"
-      },
-      {
-        "file": "scripts/test-all.ts",
-        "hash": "18331412907208195926"
-      },
-      {
-        "file": "server.ts",
-        "hash": "2076802803598010167"
-      },
-      {
-        "file": "src/index.html",
-        "hash": "14269576170678062320"
-      },
-      {
-        "file": "tests/components/Header.test.tsx",
-        "hash": "15415224541158316114"
-      },
-      {
-        "file": "tests/pages/HomePage.test.tsx",
-        "hash": "3612151052563689530"
-      },
-      {
-        "file": "tests/runner.ts",
-        "hash": "13500594472174752531"
-      },
-      {
-        "file": "tests/setup.ts",
-        "hash": "18031759265215688673"
-      },
-      {
-        "file": "tests/shared/animations.test.ts",
-        "hash": "10413803881381213356"
-      },
-      {
-        "file": "tests/shared/components.test.tsx",
-        "hash": "5026698799493557943"
-      },
-      {
-        "file": "tsconfig.json",
-        "hash": "7211646027357559927"
-      },
-      {
-        "file": "vercel.json",
-        "hash": "12770686742036342087"
-      }
-    ]
+    }
   }
 }
