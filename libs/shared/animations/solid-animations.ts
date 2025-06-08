@@ -1,7 +1,7 @@
 import type { AnimeInstance } from 'animejs';
 import { createSignal, onCleanup, onMount } from 'solid-js';
-import { animeWrapper } from './anime-wrapper';
-import type { AnimationConfig, SolidAnimationHook } from './types';
+import { animeWrapper } from './anime-wrapper.ts';
+import type { AnimationConfig, SolidAnimationHook } from './types.ts';
 
 export function useAnimation(
   targetRef: () => Element | undefined,

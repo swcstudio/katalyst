@@ -1,5 +1,5 @@
 import anime, { type AnimeParams, type AnimeInstance } from 'animejs';
-import type { AnimationConfig, AnimationPreset } from './types';
+import type { AnimationConfig, AnimationPreset } from './types.ts';
 
 export class AnimeWrapper {
   private static instance: AnimeWrapper;

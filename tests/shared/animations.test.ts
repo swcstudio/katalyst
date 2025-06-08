@@ -1,20 +1,23 @@
-import { createAnimation } from '../../libs/shared/animations';
+import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { createAnimation } from '../../libs/shared/animations/index.ts';
 
-describe('Animation utilities', () => {
-  test('createAnimation returns animation functions', () => {
-    const { animate } = createAnimation();
-    expect(typeof animate).toBe('function');
-  });
+Deno.test('Animation utilities - createAnimation returns animation functions', () => {
+  const { animate } = createAnimation();
+  assertEquals(typeof animate, 'function');
+});
 
-  test('animate function handles element animation', () => {
-    const { animate } = createAnimation();
-    const mockElement = document.createElement('div');
+Deno.test('Animation utilities - animate function handles element animation', () => {
+  const { animate } = createAnimation();
+  const mockElement = document.createElement('div');
 
-    expect(() => {
-      animate(mockElement, {
-        opacity: [0, 1],
-        duration: 100,
-      });
-    }).not.toThrow();
-  });
+  let didThrow = false;
+  try {
+    animate(mockElement, {
+      opacity: [0, 1],
+      duration: 100,
+    });
+  } catch {
+    didThrow = true;
+  }
+  assertEquals(didThrow, false);
 });

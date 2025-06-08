@@ -1,5 +1,5 @@
 import { onMount } from 'solid-js';
-import { createAnimation } from '../../../../libs/shared/animations';
+import { createAnimation } from '../../../../libs/shared/animations/index.ts';
 import { css } from '../styled-system/css';
 
 export const AnimatedHero = () => {

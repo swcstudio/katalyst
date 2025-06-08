@@ -95,6 +95,8 @@ jobs:
             deno task test:astro-blog
           elif [[ "${{ matrix.framework }}" == "docs" ]]; then
             deno task test:astro-docs
+          elif [[ "${{ matrix.framework }}" == "sveltekit-spa" ]]; then
+            deno task test:sveltekit-spa
           else
             deno task test:${{ matrix.framework }}
           fi
@@ -107,6 +109,8 @@ jobs:
             deno task build:blog
           elif [[ "${{ matrix.framework }}" == "docs" ]]; then
             deno task build:docs
+          elif [[ "${{ matrix.framework }}" == "sveltekit-spa" ]]; then
+            deno task build:sveltekit
           else
             deno task build:${{ matrix.framework }}
           fi
