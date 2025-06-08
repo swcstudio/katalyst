@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        framework: [marketing, astro-blog, astro-docs, storefront, remix-app, sveltekit-spa, shared]
+        framework: [marketing, blog, docs, storefront, remix-app, sveltekit-spa, shared]
     
     steps:
       - name: Checkout repository
@@ -91,6 +91,10 @@ jobs:
         run: |
           if [[ "${{ matrix.framework }}" == "shared" ]]; then
             deno task test:shared
+          elif [[ "${{ matrix.framework }}" == "blog" ]]; then
+            deno task test:astro-blog
+          elif [[ "${{ matrix.framework }}" == "docs" ]]; then
+            deno task test:astro-docs
           else
             deno task test:${{ matrix.framework }}
           fi
@@ -99,6 +103,10 @@ jobs:
         run: |
           if [[ "${{ matrix.framework }}" == "shared" ]]; then
             echo "Skipping build for shared library"
+          elif [[ "${{ matrix.framework }}" == "blog" ]]; then
+            deno task build:blog
+          elif [[ "${{ matrix.framework }}" == "docs" ]]; then
+            deno task build:docs
           else
             deno task build:${{ matrix.framework }}
           fi
