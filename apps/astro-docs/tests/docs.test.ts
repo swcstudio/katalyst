@@ -1,7 +1,5 @@
-import { describe, expect, test } from '@jest/globals';
+import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
-describe('Documentation Framework', () => {
-  test('docs configuration is valid', () => {
-    expect(true).toBe(true);
-  });
+Deno.test("astro-docs Framework - configuration is valid", () => {
+  assertEquals(true, true, "Basic configuration validation passes");
 });

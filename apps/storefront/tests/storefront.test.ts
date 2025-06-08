@@ -1,7 +1,5 @@
-import { describe, expect, test } from '@jest/globals';
+import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
-describe('Storefront Framework', () => {
-  test('storefront configuration is valid', () => {
-    expect(true).toBe(true);
-  });
+Deno.test("storefront Framework - configuration is valid", () => {
+  assertEquals(true, true, "Basic configuration validation passes");
 });

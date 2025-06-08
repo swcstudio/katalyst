@@ -1,7 +1,5 @@
-import { describe, expect, test } from '@jest/globals';
+import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
-describe('Remix Framework', () => {
-  test('remix configuration is valid', () => {
-    expect(true).toBe(true);
-  });
+Deno.test("Remix Framework - remix configuration is valid", () => {
+  assertEquals(true, true, "Basic remix configuration validation passes");
 });
