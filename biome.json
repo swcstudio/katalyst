@@ -52,6 +52,7 @@
       "**/.nx/**",
       "**/coverage/**",
       "**/.astro/**",
+      "**/.svelte-kit/**",
       "**/env.d.ts"
     ]
   }
