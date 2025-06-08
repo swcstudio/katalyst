@@ -26,7 +26,7 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "bundler",
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "jsxImportSource": "solid-js"
   }
 }
