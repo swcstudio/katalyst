@@ -32,9 +32,11 @@ jobs:
         with:
           node-version: '18'
 
-
+      - name: Install dependencies
+        run: npm install
+        
       - name: Install Nx CLI
-        run: npm install -g nx@latest nx-cloud@latest
+        run: npm install -g nx@18.3.0 nx-cloud@latest
 
       - name: Cache Deno dependencies
         run: deno cache --reload deno.json
@@ -68,9 +70,11 @@ jobs:
         with:
           node-version: '18'
 
-
+      - name: Install dependencies
+        run: npm install
+        
       - name: Install Nx CLI
-        run: npm install -g nx@latest
+        run: npm install -g nx@18.3.0
 
       - name: Cache Deno dependencies
         uses: actions/cache@v3
@@ -149,8 +153,11 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Install dependencies
+        run: npm install
+        
       - name: Install Nx CLI
-        run: npm install -g nx@latest nx-cloud@latest
+        run: npm install -g nx@18.3.0 nx-cloud@latest
 
       - name: Start Nx Cloud CI
         run: nx-cloud start-ci-run
