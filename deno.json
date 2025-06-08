@@ -29,7 +29,6 @@
     "fmt": "deno fmt",
     "biome": "deno run --allow-read --allow-write npm:@biomejs/biome check .",
     "biome:fix": "deno run --allow-read --allow-write npm:@biomejs/biome check --apply .",
-
     "generate:panda": "deno run --allow-read --allow-write --allow-env npm:@pandacss/dev",
     "rsdoctor": "deno run --allow-all npm:@rsdoctor/core --port 20007",
     "storybook": "deno run --allow-all npm:storybook dev -p 20006",
@@ -46,7 +45,7 @@
     "test:animations": "deno run --allow-all tests/shared/animations.test.ts"
   },
   "compilerOptions": {
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   },

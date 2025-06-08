@@ -21,9 +21,3 @@ if (root) {
 } else {
   console.error('Root element not found');
 }
-
-/*
- * © 2025 Spectrum Web Co LLC. All rights reserved.
- * This code is the property of Spectrum Web Co LLC.
- * Licensed under MIT License.
- */

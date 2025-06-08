@@ -226,14 +226,26 @@ For detailed deployment instructions, see the [Deployment Guide](./docs/deployme
 
 ## Contributing
 
-Please read our [Contributing Guide](./CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+### Development Workflow
+1. Create feature branch from `staging`
+2. Follow 100% TypeScript policy (zero JavaScript tolerance)
+3. Use non-standard ports (20000-20007) for all services
+4. Test locally before pushing: `deno task biome`, `deno task test:all`
+5. Run comprehensive builds: `deno task build:all`
+
+### Code Quality Standards
+- **Zero JavaScript tolerance**: All files must be TypeScript (.ts/.tsx)
+- **Accessibility**: WCAG compliance with proper ARIA attributes
+- **Performance**: 80% test coverage threshold enforced
+- **Security**: Non-standard ports and HashiCorp Vault integration
+
+### Testing Requirements
+- Unit tests for all shared components
+- Integration tests across framework boundaries
+- Performance testing for bundle optimization
+- Accessibility testing for WCAG compliance
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
-
 © 2025 Spectrum Web Co LLC. All rights reserved.
-
-## Trademark
-
-The SOTA Marketing Stack name and logo are trademarks of Spectrum Web Co LLC. All other trademarks are the property of their respective owners.
+Licensed under MIT License.
