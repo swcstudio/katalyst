@@ -1,0 +1,37 @@
+{
+  "name": "shared",
+  "type": "library",
+  "sourceRoot": "libs/shared",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@rslib/core:build",
+      "outputs": ["{projectRoot}/dist"],
+      "options": {
+        "configFile": "libs/shared/rslib.config.ts"
+      }
+    },
+    "typecheck": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "tsConfig": "libs/shared/tsconfig.json"
+      }
+    },
+    "test": {
+      "executor": "@nx/js:node",
+      "outputs": [],
+      "options": {
+        "main": "tests/shared/components.test.tsx"
+      }
+    },
+    "lint": {
+      "executor": "@biomejs/biome:lint",
+      "outputs": [],
+      "options": {
+        "lintFilePatterns": ["libs/shared/**/*.{ts,tsx}"]
+      }
+    }
+  }
+}

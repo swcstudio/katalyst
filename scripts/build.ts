@@ -1,16 +1,20 @@
-export {};
-
 console.log('Building all SOTA Marketing Stack micro-frontends...');
 
 try {
-  const buildPromises = [
-    Deno.run({ cmd: ['deno', 'task', 'build:marketing'] }),
-    Deno.run({ cmd: ['deno', 'task', 'build:blog'] }),
-    Deno.run({ cmd: ['deno', 'task', 'build:storefront'] }),
-    Deno.run({ cmd: ['deno', 'task', 'build:docs'] })
+  const buildCommands = [
+    ['deno', 'task', 'build:marketing'],
+    ['deno', 'task', 'build:blog'],
+    ['deno', 'task', 'build:storefront'],
+    ['deno', 'task', 'build:docs'],
+    ['deno', 'task', 'build:remix'],
+    ['deno', 'task', 'build:sveltekit'],
   ];
 
-  await Promise.all(buildPromises.map(p => p.status()));
+  const buildPromises = buildCommands.map((cmd) =>
+    new Deno.Command(cmd[0], { args: cmd.slice(1) }).output()
+  );
+
+  await Promise.all(buildPromises);
   console.log('All micro-frontends built successfully!');
 } catch (error) {
   console.error('Build failed:', error);

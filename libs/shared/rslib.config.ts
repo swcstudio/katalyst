@@ -7,8 +7,8 @@ export default defineConfig({
       syntax: 'es2021',
       bundle: false,
       dts: true,
-      source: './src/index.ts',
-      output: './dist'
+      source: './index.ts',
+      output: './dist',
     },
   ],
 });

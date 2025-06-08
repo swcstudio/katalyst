@@ -1,16 +1,30 @@
 {
   "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/nx-schema.json",
-  "version": 19,
+  "version": 18,
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json"],
-    "sharedGlobals": ["{workspaceRoot}/deno.json", "{workspaceRoot}/nx.json"]
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json"
+    ],
+    "sharedGlobals": [
+      "{workspaceRoot}/deno.json",
+      "{workspaceRoot}/nx.json",
+      "{workspaceRoot}/tsconfig.json",
+      "{workspaceRoot}/biome.json",
+      "{workspaceRoot}/panda.config.ts",
+      "libs/shared/**/*"
+    ]
   },
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"],
       "cache": true
+    },
+    "serve": {
+      "cache": false
     },
     "test": {
       "inputs": ["default", "^production"],
@@ -19,6 +33,13 @@
     "lint": {
       "inputs": ["default"],
       "cache": true
+    },
+    "storybook": {
+      "cache": false
+    },
+    "build-storybook": {
+      "cache": true,
+      "inputs": ["default", "^production"]
     }
   },
   "plugins": [
@@ -27,6 +48,12 @@
       "options": {
         "buildTargetName": "build",
         "serveTargetName": "serve"
+      }
+    },
+    {
+      "plugin": "@nx/js",
+      "options": {
+        "targetName": "typecheck"
       }
     }
   ],
@@ -65,7 +92,7 @@
             "onlyDependOnLibsWithTags": ["scope:shared"]
           },
           {
-            "sourceTag": "scope:blog", 
+            "sourceTag": "scope:blog",
             "onlyDependOnLibsWithTags": ["scope:shared"]
           },
           {
@@ -75,15 +102,26 @@
           {
             "sourceTag": "scope:docs",
             "onlyDependOnLibsWithTags": ["scope:shared"]
+          },
+          {
+            "sourceTag": "scope:remix",
+            "onlyDependOnLibsWithTags": ["scope:shared"]
+          },
+          {
+            "sourceTag": "scope:sveltekit",
+            "onlyDependOnLibsWithTags": ["scope:shared"]
           }
         ]
       }
     }
-  ]
+  ],
+  "projects": {
+    "marketing": "apps/marketing",
+    "astro-blog": "apps/astro-blog",
+    "astro-docs": "apps/astro-docs",
+    "storefront": "apps/storefront",
+    "remix-app": "apps/remix-app",
+    "sveltekit-spa": "apps/sveltekit-spa",
+    "shared": "libs/shared"
+  }
 }
-
-/*
- * © 2025 Spectrum Web Co LLC. All rights reserved.
- * This code is the property of Spectrum Web Co LLC.
- * Licensed under MIT License.
- */

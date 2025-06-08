@@ -1,13 +1,13 @@
 // @ts-ignore npm import compatibility with Deno
-import { build } from 'npm:@rsbuild/core@0.2.0';
+import { build } from 'npm:@rsbuild/core@1.0.1';
 // @ts-ignore npm import compatibility with Deno
-import { pluginSolid } from 'npm:@rsbuild/plugin-solid@0.2.0';
+import { pluginSolid } from 'npm:@rsbuild/plugin-solid@1.0.1';
 
 console.log('Building Storefront micro-frontend...');
 
 try {
   await Deno.mkdir('dist/storefront', { recursive: true });
-  
+
   const { close } = await build({
     plugins: [pluginSolid()],
     source: {
@@ -21,7 +21,7 @@ try {
       },
     },
   });
-  
+
   await close();
   console.log('Storefront build completed successfully!');
 } catch (error) {

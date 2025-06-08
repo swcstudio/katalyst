@@ -1,27 +1,26 @@
-// @ts-ignore npm import compatibility with Deno
-import { build } from 'npm:astro@4.0.0';
+export type {};
 
 console.log('Building Blog micro-frontend...');
 
 try {
-  await Deno.mkdir('dist/blog', { recursive: true });
-  
-  await build({
-    root: './apps/blog',
-    outDir: '../../dist/blog',
-    config: {
-      integrations: ['@astrojs/solid-js', '@astrojs/mdx'],
-    }
+  console.log('Using Astro version: astro@4.16.18');
+  const buildCommand = new Deno.Command('deno', {
+    args: ['run', '--allow-all', 'npm:astro@4.16.18', 'build'],
+    cwd: './apps/astro-blog',
+    stdout: 'piped',
+    stderr: 'piped',
   });
-  
-  console.log('Blog build completed successfully!');
+
+  const buildResult = await buildCommand.output();
+  if (buildResult.success) {
+    console.log('Blog build completed successfully!');
+    console.log(new TextDecoder().decode(buildResult.stdout));
+  } else {
+    console.error('Blog build failed:');
+    console.error(new TextDecoder().decode(buildResult.stderr));
+    throw new Error('Blog build failed');
+  }
 } catch (error) {
   console.error('Blog build failed:', error);
   Deno.exit(1);
 }
-
-/*
- * © 2025 Spectrum Web Co LLC. All rights reserved.
- * This code is the property of Spectrum Web Co LLC.
- * Licensed under MIT License.
- */

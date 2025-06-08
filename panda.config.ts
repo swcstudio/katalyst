@@ -3,7 +3,18 @@ import { defineConfig } from '@pandacss/dev';
 export default defineConfig({
   preflight: true,
 
-  include: ['./src/**/*.{js,jsx,ts,tsx}', './pages/**/*.{js,jsx,ts,tsx}'],
+  include: [
+    './apps/marketing/src/**/*.{ts,tsx}',
+    './apps/blog/src/**/*.{ts,tsx,astro}',
+    './apps/storefront/src/**/*.{ts,tsx}',
+    './apps/astro-blog/src/**/*.{ts,tsx,astro}',
+    './apps/astro-docs/src/**/*.{ts,tsx,astro}',
+    './apps/remix-app/app/**/*.{ts,tsx}',
+    './apps/sveltekit-spa/src/**/*.{ts,tsx,svelte}',
+    './libs/*/src/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+    './libs/shared/**/*.{ts,tsx}',
+  ],
 
   exclude: [],
 

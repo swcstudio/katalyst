@@ -4,13 +4,16 @@ import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   integrations: [solidJs(), mdx()],
-  output: 'static',
+  output: 'hybrid',
   srcDir: './src',
   server: {
-    port: 3001,
+    port: 20001,
   },
   build: {
     outDir: '../../dist/blog'
+  },
+  experimental: {
+    serverIslands: true,
   }
 });
 

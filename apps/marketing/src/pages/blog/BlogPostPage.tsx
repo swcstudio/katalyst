@@ -1,5 +1,5 @@
-import { createSignal, createEffect, Show, For } from 'solid-js';
-import { useParams, Link } from '@tanstack/solid-router';
+import { Link, useParams } from '@tanstack/solid-router';
+import { For, Show, createEffect, createSignal } from 'solid-js';
 import { css } from '../../styled-system/css';
 import { flex } from '../../styled-system/patterns';
 
@@ -66,13 +66,25 @@ Cloud-native technologies offer powerful capabilities for marketing websites, en
     tableOfContents: [
       { id: 'introduction', title: 'Introduction', level: 2 },
       { id: 'what-is-cloud-native', title: 'What is Cloud-Native?', level: 2 },
-      { id: 'benefits-of-cloud-native-marketing-websites', title: 'Benefits of Cloud-Native Marketing Websites', level: 2 },
+      {
+        id: 'benefits-of-cloud-native-marketing-websites',
+        title: 'Benefits of Cloud-Native Marketing Websites',
+        level: 2,
+      },
       { id: 'scalability', title: 'Scalability', level: 3 },
       { id: 'reliability', title: 'Reliability', level: 3 },
       { id: 'performance', title: 'Performance', level: 3 },
-      { id: 'implementing-cloud-native-marketing-websites', title: 'Implementing Cloud-Native Marketing Websites', level: 2 },
+      {
+        id: 'implementing-cloud-native-marketing-websites',
+        title: 'Implementing Cloud-Native Marketing Websites',
+        level: 2,
+      },
       { id: 'step-1-containerization', title: 'Step 1: Containerization', level: 3 },
-      { id: 'step-2-kubernetes-orchestration', title: 'Step 2: Kubernetes Orchestration', level: 3 },
+      {
+        id: 'step-2-kubernetes-orchestration',
+        title: 'Step 2: Kubernetes Orchestration',
+        level: 3,
+      },
       { id: 'step-3-vcluster-deployment', title: 'Step 3: vCluster Deployment', level: 3 },
       { id: 'conclusion', title: 'Conclusion', level: 2 },
     ],
@@ -334,7 +346,7 @@ const BlogPostPage = () => {
     if (!post) return;
 
     const handleScroll = () => {
-      const sections = post.tableOfContents.map(item => document.getElementById(item.id));
+      const sections = post.tableOfContents.map((item) => document.getElementById(item.id));
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
@@ -357,9 +369,12 @@ const BlogPostPage = () => {
   });
 
   const renderMarkdown = (content: string) => {
-    return content.split('\n').map((line, index) => {
+    return content.split('\n').map((line) => {
       if (line.startsWith('# ')) {
-        const id = line.slice(2).toLowerCase().replace(/[^\w]+/g, '-');
+        const id = line
+          .slice(2)
+          .toLowerCase()
+          .replace(/[^\w]+/g, '-');
         return (
           <h1
             id={id}
@@ -374,8 +389,12 @@ const BlogPostPage = () => {
             {line.slice(2)}
           </h1>
         );
-      } else if (line.startsWith('## ')) {
-        const id = line.slice(3).toLowerCase().replace(/[^\w]+/g, '-');
+      }
+      if (line.startsWith('## ')) {
+        const id = line
+          .slice(3)
+          .toLowerCase()
+          .replace(/[^\w]+/g, '-');
         return (
           <h2
             id={id}
@@ -390,8 +409,12 @@ const BlogPostPage = () => {
             {line.slice(3)}
           </h2>
         );
-      } else if (line.startsWith('### ')) {
-        const id = line.slice(4).toLowerCase().replace(/[^\w]+/g, '-');
+      }
+      if (line.startsWith('### ')) {
+        const id = line
+          .slice(4)
+          .toLowerCase()
+          .replace(/[^\w]+/g, '-');
         return (
           <h3
             id={id}
@@ -406,7 +429,8 @@ const BlogPostPage = () => {
             {line.slice(4)}
           </h3>
         );
-      } else if (line.startsWith('- ')) {
+      }
+      if (line.startsWith('- ')) {
         return (
           <li
             class={css({
@@ -417,7 +441,8 @@ const BlogPostPage = () => {
             {line.slice(2)}
           </li>
         );
-      } else if (line.startsWith('```')) {
+      }
+      if (line.startsWith('```')) {
         return (
           <pre
             class={css({
@@ -432,20 +457,21 @@ const BlogPostPage = () => {
             <code>{line.slice(3)}</code>
           </pre>
         );
-      } else if (line.trim() === '') {
-        return <br key={`br-${index}`} />;
-      } else {
-        return (
-          <p
-            class={css({
-              mb: '4',
-              lineHeight: 'tall',
-            })}
-          >
-            {line}
-          </p>
-        );
       }
+      if (line.trim() === '') {
+        return <br key={`br-${line.length}-${Math.random()}`} />;
+      }
+      return (
+        <p
+          key={`p-${line.slice(0, 20)}-${Math.random()}`}
+          class={css({
+            mb: '4',
+            lineHeight: 'tall',
+          })}
+        >
+          {line}
+        </p>
+      );
     });
   };
 

@@ -1,7 +1,8 @@
 import { defineConfig } from '@rsbuild/core';
 import { pluginSolid } from '@rsbuild/plugin-solid';
 
-const isProduction = typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'production';
+const isProduction =
+  typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'production';
 
 export default defineConfig({
   plugins: [pluginSolid()],
