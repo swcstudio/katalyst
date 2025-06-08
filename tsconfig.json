@@ -18,6 +18,6 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": ["src", "tests", "scripts"],
+  "include": ["src", "tests", "scripts", "apps", "libs"],
   "exclude": ["dist", "build", ".solid", ".vercel", ".netlify"]
 }

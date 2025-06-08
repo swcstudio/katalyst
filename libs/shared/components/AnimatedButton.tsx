@@ -1,6 +1,7 @@
 import { createSignal } from 'solid-js';
-import { css } from '../../../src/styled-system/css';
+import type { JSX } from 'solid-js';
 import { animeWrapper } from '../animations/anime-wrapper';
+import { css } from '../styled-system/css';
 
 interface AnimatedButtonProps {
   children: JSX.Element;
@@ -12,7 +13,10 @@ interface AnimatedButtonProps {
 export const AnimatedButton = (props: AnimatedButtonProps) => {
   const [isHovered, setIsHovered] = createSignal(false);
   const animate = (target: HTMLElement, config: Record<string, unknown>) => {
-    animeWrapper.animate(target, config);
+    animeWrapper.create({
+      targets: target,
+      ...config,
+    });
   };
 
   const handleMouseEnter = (element: HTMLElement) => {

@@ -43,15 +43,7 @@
     }
   },
   "files": {
-    "include": [
-      "**/*.ts",
-      "**/*.tsx",
-      "**/*.js",
-      "**/*.jsx",
-      "**/*.json",
-      "**/*.astro",
-      "**/*.svelte"
-    ],
+    "include": ["**/*.ts", "**/*.tsx", "**/*.json", "**/*.astro", "**/*.svelte"],
     "ignore": [
       "**/node_modules/**",
       "**/dist/**",

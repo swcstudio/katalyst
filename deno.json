@@ -45,7 +45,7 @@
     "test:animations": "deno run --allow-all tests/shared/animations.test.ts"
   },
   "compilerOptions": {
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   },

@@ -8,7 +8,14 @@
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json"
     ],
-    "sharedGlobals": ["{workspaceRoot}/deno.json", "{workspaceRoot}/nx.json"]
+    "sharedGlobals": [
+      "{workspaceRoot}/deno.json",
+      "{workspaceRoot}/nx.json",
+      "{workspaceRoot}/tsconfig.json",
+      "{workspaceRoot}/biome.json",
+      "{workspaceRoot}/panda.config.ts",
+      "libs/shared/**/*"
+    ]
   },
   "targetDefaults": {
     "build": {
