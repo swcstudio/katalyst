@@ -1,6 +1,6 @@
-import { render } from 'solid-js/web';
 import { Router, useRoutes } from '@solidjs/router';
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
+import { render } from 'solid-js/web';
 import { useAuthStore } from '../../../libs/shared/state/auth-store';
 
 const queryClient = new QueryClient();
@@ -18,7 +18,7 @@ const routes = [
 
 const App = () => {
   const Routes = useRoutes(routes);
-  
+
   return (
     <QueryClientProvider client={queryClient}>
       <Router>

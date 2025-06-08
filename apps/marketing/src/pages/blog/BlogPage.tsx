@@ -1,5 +1,5 @@
-import { createSignal, createEffect, For } from 'solid-js';
 import { Link } from '@tanstack/solid-router';
+import { For, createEffect, createSignal } from 'solid-js';
 import { css } from '../../styled-system/css';
 import { flex } from '../../styled-system/patterns';
 
@@ -44,28 +44,28 @@ const BlogPage = () => {
   const [displayedPosts, setDisplayedPosts] = createSignal<typeof BLOG_POSTS>([]);
   const [selectedTag, setSelectedTag] = createSignal<string | null>(null);
 
-  const allTags = [...new Set(BLOG_POSTS.flatMap(post => post.tags))];
+  const allTags = [...new Set(BLOG_POSTS.flatMap((post) => post.tags))];
 
   const filteredPosts = () => {
     if (!selectedTag()) return BLOG_POSTS;
-    return BLOG_POSTS.filter(post => post.tags.includes(selectedTag()!));
+    return BLOG_POSTS.filter((post) => post.tags.includes(selectedTag()!));
   };
 
   createEffect(() => {
     const filtered = filteredPosts();
     setTotalPages(Math.ceil(filtered.length / POSTS_PER_PAGE));
-    
+
     const startIndex = (currentPage() - 1) * POSTS_PER_PAGE;
     const endIndex = startIndex + POSTS_PER_PAGE;
     setDisplayedPosts(filtered.slice(startIndex, endIndex));
-    
+
     if (currentPage() > totalPages() && totalPages() > 0) {
       setCurrentPage(1);
     }
   });
 
   const handleTagClick = (tag: string) => {
-    setSelectedTag(prev => prev === tag ? null : tag);
+    setSelectedTag((prev) => (prev === tag ? null : tag));
     setCurrentPage(1);
   };
 
@@ -315,7 +315,7 @@ const BlogPage = () => {
           >
             <button
               type="button"
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage() === 1}
               class={css({
                 px: '4',
@@ -362,7 +362,7 @@ const BlogPage = () => {
             </For>
             <button
               type="button"
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages()))}
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages()))}
               disabled={currentPage() === totalPages()}
               class={css({
                 px: '4',

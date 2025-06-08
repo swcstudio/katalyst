@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "sourceRoot": "apps/blog/src", 
+  "sourceRoot": "apps/blog/src",
   "projectType": "application",
   "tags": ["scope:blog"],
   "targets": {

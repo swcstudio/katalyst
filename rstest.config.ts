@@ -1,17 +1,60 @@
-
-export const testConfig = {
-  testMatch: ['**/tests/**/*.test.{ts,tsx}', '**/*.test.{ts,tsx}'],
+export default {
   testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
   moduleNameMapping: {
-    '^~/(.*)$': './src/$1',
-    '^@shared/(.*)$': './libs/shared/$1',
+    '^~/(.*)$': '<rootDir>/src/$1',
+    '^@/(.*)$': '<rootDir>/libs/shared/$1',
+    '^@marketing/(.*)$': '<rootDir>/apps/marketing/src/$1',
+    '^@blog/(.*)$': '<rootDir>/apps/blog/src/$1',
+    '^@storefront/(.*)$': '<rootDir>/apps/storefront/src/$1',
+    '^@docs/(.*)$': '<rootDir>/apps/astro-docs/src/$1',
+    '^@remix/(.*)$': '<rootDir>/apps/remix-app/app/$1',
+    '^@sveltekit/(.*)$': '<rootDir>/apps/sveltekit-spa/src/$1',
   },
-  setupFiles: ['./tests/setup.ts'],
-  coverage: {
-    include: ['src/**/*.{ts,tsx}', 'apps/**/*.{ts,tsx}', 'libs/**/*.{ts,tsx}'],
-    exclude: ['**/node_modules/**', '**/tests/**', '**/*.config.{js,ts}'],
+  transform: {
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        useESM: true,
+        tsconfig: {
+          jsx: 'react-jsx',
+          jsxImportSource: 'solid-js',
+        },
+      },
+    ],
+    '^.+\\.svelte$': [
+      'svelte-jester',
+      {
+        preprocess: true,
+      },
+    ],
+    '^.+\\.astro$': [
+      'astro-jest',
+      {
+        preprocess: true,
+      },
+    ],
   },
-  testTimeout: 10000,
+  testMatch: [
+    '<rootDir>/apps/*/tests/**/*.test.{ts,tsx}',
+    '<rootDir>/tests/**/*.test.{ts,tsx}',
+    '<rootDir>/libs/*/tests/**/*.test.{ts,tsx}',
+  ],
+  collectCoverageFrom: [
+    'apps/*/src/**/*.{ts,tsx}',
+    'libs/*/src/**/*.{ts,tsx}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+    '!**/dist/**',
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
 };
 
 /*

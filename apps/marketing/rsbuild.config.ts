@@ -12,7 +12,7 @@ export default defineConfig({
     title: 'SOTA Marketing',
   },
   server: {
-    port: 30000,
+    port: 20000,
   },
   output: {
     distPath: {
