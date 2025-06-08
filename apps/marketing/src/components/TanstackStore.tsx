@@ -87,8 +87,14 @@ export default function TanstackStore() {
           <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold', mb: '3' })}>User Profile</h3>
           <form onSubmit={handleSubmit} class={css({ mb: '4' })}>
             <div class={css({ mb: '3' })}>
-              <label class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}>Name</label>
+              <label
+                for="user-name"
+                class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}
+              >
+                Name
+              </label>
               <input
+                id="user-name"
                 type="text"
                 value={nameInput()}
                 onInput={(e) => setNameInput(e.currentTarget.value)}
@@ -104,8 +110,14 @@ export default function TanstackStore() {
             </div>
 
             <div class={css({ mb: '3' })}>
-              <label class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}>Email</label>
+              <label
+                for="user-email"
+                class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}
+              >
+                Email
+              </label>
               <input
+                id="user-email"
                 type="email"
                 value={emailInput()}
                 onInput={(e) => setEmailInput(e.currentTarget.value)}
@@ -169,8 +181,14 @@ export default function TanstackStore() {
           </div>
 
           <div>
-            <label class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}>Language</label>
+            <label
+              for="user-language"
+              class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}
+            >
+              Language
+            </label>
             <select
+              id="user-language"
               value={user().preferences.language}
               onChange={(e) => changeLanguage(e.currentTarget.value)}
               class={css({

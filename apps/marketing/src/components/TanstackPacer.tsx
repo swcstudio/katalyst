@@ -128,10 +128,11 @@ export default function TanstackPacer() {
       </div>
 
       <div class={css({ maxWidth: '400px', mx: 'auto' })}>
-        <label class={css({ display: 'block', mb: '2', fontWeight: 'medium' })}>
+        <label for="pacer-rate" class={css({ display: 'block', mb: '2', fontWeight: 'medium' })}>
           Update Rate: {pacerRate()}ms
         </label>
         <input
+          id="pacer-rate"
           type="range"
           min="100"
           max="2000"

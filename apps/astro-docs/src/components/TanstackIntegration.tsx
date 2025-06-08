@@ -24,8 +24,11 @@ export function TanstackIntegration() {
       <h3 class="text-xl font-semibold mb-4">Dynamic Documentation (Tanstack Query)</h3>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium mb-2">Select Documentation Section:</label>
+        <label for="doc-select" class="block text-sm font-medium mb-2">
+          Select Documentation Section:
+        </label>
         <select
+          id="doc-select"
           value={docId()}
           onChange={(e) => setDocId(Number(e.target.value))}
           class="border rounded px-3 py-1"

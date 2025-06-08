@@ -24,8 +24,11 @@ export function TanstackIntegration() {
       <h3 class="text-xl font-semibold mb-4">Dynamic Blog Content (Tanstack Query)</h3>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium mb-2">Select Post ID:</label>
+        <label for="post-select" class="block text-sm font-medium mb-2">
+          Select Post ID:
+        </label>
         <select
+          id="post-select"
           value={postId()}
           onChange={(e) => setPostId(Number(e.target.value))}
           class="border rounded px-3 py-1"
