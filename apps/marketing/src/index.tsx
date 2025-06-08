@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
 import { RouterProvider } from '@tanstack/solid-router';
 import { render } from 'solid-js/web';
 import { router } from './routes';
-import './styled-system/styles.css';
+import './styled-system/global.css';
 
 const queryClient = new QueryClient();
 

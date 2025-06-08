@@ -1,28 +1,30 @@
 // @ts-ignore npm import compatibility with Deno
-import { build } from 'npm:@rsbuild/core@0.2.0';
+import { createRsbuild } from 'npm:@rsbuild/core@1.0.1';
 // @ts-ignore npm import compatibility with Deno
-import { pluginSolid } from 'npm:@rsbuild/plugin-solid@0.2.0';
+import { pluginSolid } from 'npm:@rsbuild/plugin-solid@1.0.1';
 
 console.log('Building Marketing micro-frontend...');
 
 try {
   await Deno.mkdir('dist/marketing', { recursive: true });
 
-  const { close } = await build({
-    plugins: [pluginSolid()],
-    source: {
-      entry: {
-        index: './apps/marketing/src/index.tsx',
+  const rsbuild = await createRsbuild({
+    rsbuildConfig: {
+      plugins: [pluginSolid()],
+      source: {
+        entry: {
+          index: './apps/marketing/src/index.tsx',
+        },
       },
-    },
-    output: {
-      distPath: {
-        root: './dist/marketing',
+      output: {
+        distPath: {
+          root: './dist/marketing',
+        },
       },
     },
   });
 
-  await close();
+  await rsbuild.build();
   console.log('Marketing build completed successfully!');
 } catch (error) {
   console.error('Marketing build failed:', error);

@@ -1,5 +1,5 @@
 // @ts-ignore npm import compatibility with Deno
-import { build } from 'npm:astro@4.0.0';
+import { build } from 'npm:astro@4.16.18';
 
 console.log('Building Docs micro-frontend...');
 
