@@ -6,7 +6,7 @@ export default defineConfig({
   integrations: [solidJs(), mdx()],
   srcDir: './src',
   server: {
-    port: 30002,
+    port: 3003,
   },
   build: {
     outDir: '../../dist/docs'

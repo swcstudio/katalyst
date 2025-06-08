@@ -1,0 +1,32 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-all npm:@rsbuild/core dev --port 3005",
+    "build": "deno run --allow-all npm:@rsbuild/core build",
+    "preview": "deno run --allow-all npm:@rsbuild/core preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+  },
+  "imports": {
+    "@sveltejs/kit": "npm:@sveltejs/kit@^2.5.28",
+    "@sveltejs/adapter-static": "npm:@sveltejs/adapter-static@^3.0.4",
+    "svelte": "npm:svelte@^4.2.19",
+    "@rsbuild/core": "npm:@rsbuild/core@^1.0.1",
+    "@rsbuild/plugin-svelte": "npm:@rsbuild/plugin-svelte@^1.0.1",
+    "svelte-check": "npm:svelte-check@^3.8.6",
+    "typescript": "npm:typescript@^5.6.2",
+    "@tanstack/svelte-query": "npm:@tanstack/svelte-query@^5.17.1",
+    "@tanstack/svelte-router": "npm:@tanstack/svelte-router@^1.120.17",
+    "shared": "../../../libs/shared/index.ts"
+  },
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "moduleResolution": "bundler"
+  }
+}

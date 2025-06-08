@@ -1,7 +1,7 @@
-Deno.test("HomePage Component - mock test", () => {
+Deno.test('HomePage Component - mock test', () => {
   const result = true;
   if (!result) {
-    throw new Error("Test failed");
+    throw new Error('Test failed');
   }
 });
 

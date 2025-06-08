@@ -31,12 +31,12 @@ declare namespace Deno {
   export function mkdir(path: string, options?: { recursive?: boolean }): Promise<void>;
   export function remove(path: string, options?: { recursive?: boolean }): Promise<void>;
   export function cwd(): string;
-  
+
   export function test(
     nameOrOptions: string | TestDefinition,
     fn?: (t: TestContext) => void | Promise<void>
   ): void;
-  
+
   export interface TestDefinition {
     name: string;
     fn: (t: TestContext) => void | Promise<void>;
@@ -46,7 +46,7 @@ declare namespace Deno {
     sanitizeResources?: boolean;
     sanitizeExit?: boolean;
   }
-  
+
   export interface TestContext {
     name: string;
     step(name: string, fn: (t: TestContext) => void | Promise<void>): Promise<void>;
@@ -61,14 +61,14 @@ declare namespace JSX {
   interface HTMLAttributes<T> {
     key?: string | number;
     class?: string;
-    ref?: any;
+    ref?: HTMLElement | ((el: HTMLElement) => void) | null;
     style?: { [key: string]: string | number } | string;
     onClick?: (event: MouseEvent) => void;
     onInput?: (event: InputEvent) => void;
     onChange?: (event: Event) => void;
     onSubmit?: (event: Event) => void;
   }
-  
+
   interface IntrinsicElements {
     div: HTMLAttributes<HTMLDivElement>;
     h1: HTMLAttributes<HTMLHeadingElement>;

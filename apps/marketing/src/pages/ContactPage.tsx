@@ -11,14 +11,14 @@ const ContactPage = () => {
 
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
-    
+
     if (!name() || !email() || !message()) {
       alert('Please fill out all fields');
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -31,7 +31,7 @@ const ContactPage = () => {
           message: message(),
         }),
       });
-      
+
       if (response.ok) {
         setSubmitStatus('success');
         setName('');

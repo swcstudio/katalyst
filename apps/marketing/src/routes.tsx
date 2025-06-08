@@ -1,4 +1,4 @@
-import { createRouter, createRoute, createRootRoute } from '@tanstack/solid-router';
+import { createRootRoute, createRoute, createRouter } from '@tanstack/solid-router';
 import { lazy } from 'solid-js';
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';

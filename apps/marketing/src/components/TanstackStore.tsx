@@ -24,14 +24,14 @@ export default function TanstackStore() {
   };
 
   const [user, setUser] = createSignal<UserStore>(initialUser);
-  
+
   const [nameInput, setNameInput] = createSignal(user().name);
   const [emailInput, setEmailInput] = createSignal(user().email);
 
   const handleSubmit = (e: Event) => {
     e.preventDefault();
-    
-    setUser(prev => ({
+
+    setUser((prev) => ({
       ...prev,
       name: nameInput(),
       email: emailInput(),
@@ -39,50 +39,62 @@ export default function TanstackStore() {
   };
 
   const toggleTheme = () => {
-    setUser(prev => ({
+    setUser((prev) => ({
       ...prev,
       preferences: {
         ...prev.preferences,
         theme: prev.preferences.theme === 'light' ? 'dark' : 'light',
-      }
+      },
     }));
   };
 
   const toggleNotifications = () => {
-    setUser(prev => ({
+    setUser((prev) => ({
       ...prev,
       preferences: {
         ...prev.preferences,
         notifications: !prev.preferences.notifications,
-      }
+      },
     }));
   };
 
   const changeLanguage = (language: string) => {
-    setUser(prev => ({
+    setUser((prev) => ({
       ...prev,
       preferences: {
         ...prev.preferences,
         language,
-      }
+      },
     }));
   };
 
   return (
-    <div class={css({ padding: '4', borderRadius: 'md', bg: 'gray.50', _dark: { bg: 'gray.800' } })}>
+    <div
+      class={css({ padding: '4', borderRadius: 'md', bg: 'gray.50', _dark: { bg: 'gray.800' } })}
+    >
       <h2 class={css({ fontSize: '2xl', fontWeight: 'bold', mb: '4', color: 'emerald.500' })}>
         Tanstack Store Example
       </h2>
-      
-      <div class={css({ display: 'grid', gridTemplateColumns: { base: '1fr', md: '1fr 1fr' }, gap: '6' })}>
+
+      <div
+        class={css({
+          display: 'grid',
+          gridTemplateColumns: { base: '1fr', md: '1fr 1fr' },
+          gap: '6',
+        })}
+      >
         <div>
           <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold', mb: '3' })}>User Profile</h3>
           <form onSubmit={handleSubmit} class={css({ mb: '4' })}>
             <div class={css({ mb: '3' })}>
-              <label class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}>
+              <label
+                for="user-name"
+                class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}
+              >
                 Name
               </label>
               <input
+                id="user-name"
                 type="text"
                 value={nameInput()}
                 onInput={(e) => setNameInput(e.currentTarget.value)}
@@ -96,12 +108,16 @@ export default function TanstackStore() {
                 })}
               />
             </div>
-            
+
             <div class={css({ mb: '3' })}>
-              <label class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}>
+              <label
+                for="user-email"
+                class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}
+              >
                 Email
               </label>
               <input
+                id="user-email"
                 type="email"
                 value={emailInput()}
                 onInput={(e) => setEmailInput(e.currentTarget.value)}
@@ -115,7 +131,7 @@ export default function TanstackStore() {
                 })}
               />
             </div>
-            
+
             <button
               type="submit"
               class={css({
@@ -131,7 +147,7 @@ export default function TanstackStore() {
               Update Profile
             </button>
           </form>
-          
+
           <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold', mb: '3' })}>Preferences</h3>
           <div class={css({ mb: '3' })}>
             <button
@@ -148,7 +164,7 @@ export default function TanstackStore() {
             >
               Toggle Theme ({user().preferences.theme})
             </button>
-            
+
             <button
               type="button"
               onClick={toggleNotifications}
@@ -163,12 +179,16 @@ export default function TanstackStore() {
               {user().preferences.notifications ? 'Disable' : 'Enable'} Notifications
             </button>
           </div>
-          
+
           <div>
-            <label class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}>
+            <label
+              for="user-language"
+              class={css({ display: 'block', mb: '1', fontWeight: 'medium' })}
+            >
               Language
             </label>
             <select
+              id="user-language"
               value={user().preferences.language}
               onChange={(e) => changeLanguage(e.currentTarget.value)}
               class={css({
@@ -186,9 +206,11 @@ export default function TanstackStore() {
             </select>
           </div>
         </div>
-        
+
         <div>
-          <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold', mb: '3' })}>Current Store State</h3>
+          <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold', mb: '3' })}>
+            Current Store State
+          </h3>
           <pre
             class={css({
               p: '3',
