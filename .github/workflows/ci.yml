@@ -160,14 +160,24 @@ jobs:
         run: npm install -g nx@18.3.0 nx-cloud@latest
 
       - name: Start Nx Cloud CI
-        run: nx-cloud start-ci-run
+        run: |
+          if [ -n "${{ secrets.NX_CLOUD_ACCESS_TOKEN }}" ]; then
+            nx-cloud start-ci-run
+          else
+            echo "Skipping Nx Cloud - no access token configured"
+          fi
 
       - name: Run affected tasks with AI
         run: nx affected --target=build,test,lint --parallel=4 --cloud
 
       - name: Stop Nx Cloud CI
-        run: nx-cloud stop-all-agents
         if: always()
+        run: |
+          if [ -n "${{ secrets.NX_CLOUD_ACCESS_TOKEN }}" ]; then
+            nx-cloud stop-all-agents
+          else
+            echo "Skipping Nx Cloud stop - no access token configured"
+          fi
 
   deploy-staging:
     name: Deploy to Staging
