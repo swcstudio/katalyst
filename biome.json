@@ -50,7 +50,9 @@
       "**/.output/**",
       "**/styled-system/**",
       "**/.nx/**",
-      "**/coverage/**"
+      "**/coverage/**",
+      "**/.astro/**",
+      "**/env.d.ts"
     ]
   }
 }
