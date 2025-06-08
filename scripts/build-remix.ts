@@ -1,17 +1,16 @@
-export type {};
-
 console.log('Building Remix application...');
 
 try {
-  const process = Deno.run({
-    cmd: ['deno', 'run', '--allow-all', 'npm:@remix-run/dev@2.12.1', 'build'],
+  const command = new Deno.Command('deno', {
+    args: ['run', '--allow-all', 'npm:@remix-run/dev@2.12.1', 'build'],
     cwd: './apps/remix-app',
+    stdout: 'inherit',
+    stderr: 'inherit',
   });
 
-  const status = await process.status();
-  process.close();
+  const { success } = await command.output();
 
-  if (status.success) {
+  if (success) {
     console.log('Remix application built successfully!');
   } else {
     throw new Error('Remix build failed');
