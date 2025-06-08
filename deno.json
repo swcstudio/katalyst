@@ -13,6 +13,7 @@
     "build:storefront": "deno run --allow-all scripts/build-storefront.ts",
     "build:docs": "deno run --allow-all scripts/build-docs.ts",
     "build:remix": "deno run --allow-all scripts/build-remix.ts",
+    "build:remix-app": "deno run --allow-all scripts/build-remix.ts",
     "build:sveltekit": "deno run --allow-all scripts/build-sveltekit.ts",
     "preview": "deno run --allow-all scripts/preview.ts",
     "preview:marketing": "deno run --allow-all scripts/preview-marketing.ts",
@@ -89,6 +90,9 @@
     "svelte-check": "npm:svelte-check@3.8.6",
     "@rsbuild/plugin-svelte": "npm:@rsbuild/plugin-svelte@1.0.1",
     "typescript": "npm:typescript@5.6.2",
+    "astro": "npm:astro@5.0.0",
+    "@astrojs/solid-js": "npm:@astrojs/solid-js@4.4.2",
+    "@astrojs/mdx": "npm:@astrojs/mdx@3.0.1",
     "~/": "./src/"
   },
   "lint": {
