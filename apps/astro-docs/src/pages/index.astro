@@ -1,0 +1,55 @@
+---
+import { TanstackIntegration } from '../components/TanstackIntegration';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="SSE Framework Documentation">
+  <main class="p-4">
+    <h1 class="text-3xl font-bold mb-4">SSE Framework Documentation</h1>
+    <p class="mb-8">This is the Astro micro-frontend for static documentation.</p>
+    
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Framework Overview:</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li>SolidJS for reactive components</li>
+        <li>Astro for static site generation</li>
+        <li>TypeScript for type safety</li>
+        <li>Tanstack ecosystem for data management</li>
+        <li>Zustand for shared state management</li>
+        <li>Rspack build system</li>
+        <li>Deno runtime integration</li>
+        <li>Anime.js for animations</li>
+        <li>Biomjs for linting</li>
+        <li>Storybook for component development</li>
+      </ul>
+    </div>
+
+    <div class="mb-8">
+      <TanstackIntegration client:load />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-4 border rounded">
+        <h3 class="text-lg font-semibold mb-2">Getting Started</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-blue-600 hover:underline">Installation Guide</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Quick Start Tutorial</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Project Structure</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Configuration</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Development Workflow</a></li>
+        </ul>
+      </div>
+      
+      <div class="p-4 border rounded">
+        <h3 class="text-lg font-semibold mb-2">API Reference</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-blue-600 hover:underline">Core Components</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">State Management</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Routing</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Data Fetching</a></li>
+          <li><a href="#" class="text-blue-600 hover:underline">Animations</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</Layout>

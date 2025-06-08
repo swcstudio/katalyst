@@ -1,0 +1,338 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sse-micro-frameworks
+  namespace: sse-production
+  labels:
+    app: sse-micro-frameworks
+    version: v1.0.0
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sse-micro-frameworks
+  template:
+    metadata:
+      labels:
+        app: sse-micro-frameworks
+        version: v1.0.0
+    spec:
+      containers:
+      - name: marketing
+        image: denoland/deno:2.3.5
+        ports:
+        - containerPort: 20000
+          name: marketing
+        env:
+        - name: PORT
+          value: "20000"
+        - name: NODE_ENV
+          value: "production"
+        - name: VAULT_ADDR
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-addr
+        - name: VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-token
+        command: ["deno"]
+        args: ["task", "dev:marketing"]
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 20000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 20000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+      - name: blog
+        image: denoland/deno:2.3.5
+        ports:
+        - containerPort: 20001
+          name: blog
+        env:
+        - name: PORT
+          value: "20001"
+        - name: NODE_ENV
+          value: "production"
+        - name: VAULT_ADDR
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-addr
+        - name: VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-token
+        command: ["deno"]
+        args: ["task", "dev:blog"]
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+
+      - name: storefront
+        image: denoland/deno:2.3.5
+        ports:
+        - containerPort: 20002
+          name: storefront
+        env:
+        - name: PORT
+          value: "20002"
+        - name: NODE_ENV
+          value: "production"
+        - name: VAULT_ADDR
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-addr
+        - name: VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-token
+        command: ["deno"]
+        args: ["task", "dev:storefront"]
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+
+      - name: docs
+        image: denoland/deno:2.3.5
+        ports:
+        - containerPort: 20003
+          name: docs
+        env:
+        - name: PORT
+          value: "20003"
+        - name: NODE_ENV
+          value: "production"
+        - name: VAULT_ADDR
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-addr
+        - name: VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-token
+        command: ["deno"]
+        args: ["task", "dev:docs"]
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+
+      - name: remix-app
+        image: denoland/deno:2.3.5
+        ports:
+        - containerPort: 20004
+          name: remix
+        env:
+        - name: PORT
+          value: "20004"
+        - name: NODE_ENV
+          value: "production"
+        - name: VAULT_ADDR
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-addr
+        - name: VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-token
+        command: ["deno"]
+        args: ["task", "dev:remix"]
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+
+      - name: sveltekit-spa
+        image: denoland/deno:2.3.5
+        ports:
+        - containerPort: 20005
+          name: sveltekit
+        env:
+        - name: PORT
+          value: "20005"
+        - name: NODE_ENV
+          value: "production"
+        - name: VAULT_ADDR
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-addr
+        - name: VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-config
+              key: vault-token
+        command: ["deno"]
+        args: ["task", "dev:sveltekit"]
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+
+      serviceAccountName: sse-service-account
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 2000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sse-micro-frameworks-service
+  namespace: sse-production
+  labels:
+    app: sse-micro-frameworks
+spec:
+  type: ClusterIP
+  ports:
+  - port: 20000
+    targetPort: 20000
+    name: marketing
+  - port: 20001
+    targetPort: 20001
+    name: blog
+  - port: 20002
+    targetPort: 20002
+    name: storefront
+  - port: 20003
+    targetPort: 20003
+    name: docs
+  - port: 20004
+    targetPort: 20004
+    name: remix
+  - port: 20005
+    targetPort: 20005
+    name: sveltekit
+  selector:
+    app: sse-micro-frameworks
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sse-micro-frameworks-ingress
+  namespace: sse-production
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - marketing.sse.spectrumweb.co
+    - blog.sse.spectrumweb.co
+    - storefront.sse.spectrumweb.co
+    - docs.sse.spectrumweb.co
+    - remix.sse.spectrumweb.co
+    - spa.sse.spectrumweb.co
+    secretName: sse-tls-secret
+  rules:
+  - host: marketing.sse.spectrumweb.co
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sse-micro-frameworks-service
+            port:
+              number: 20000
+  - host: blog.sse.spectrumweb.co
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sse-micro-frameworks-service
+            port:
+              number: 20001
+  - host: storefront.sse.spectrumweb.co
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sse-micro-frameworks-service
+            port:
+              number: 20002
+  - host: docs.sse.spectrumweb.co
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sse-micro-frameworks-service
+            port:
+              number: 20003
+  - host: remix.sse.spectrumweb.co
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sse-micro-frameworks-service
+            port:
+              number: 20004
+  - host: spa.sse.spectrumweb.co
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sse-micro-frameworks-service
+            port:
+              number: 20005
+
+/*
+ * © 2025 Spectrum Web Co LLC. All rights reserved.
+ * This code is the property of Spectrum Web Co LLC.
+ * Licensed under MIT License.
+ */

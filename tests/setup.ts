@@ -1,8 +1,13 @@
 globalThis.IntersectionObserver = class MockIntersectionObserver {
-  constructor() {}
-  observe() { return null; }
-  disconnect() { return null; }
-  unobserve() { return null; }
+  observe() {
+    return null;
+  }
+  disconnect() {
+    return null;
+  }
+  unobserve() {
+    return null;
+  }
 } as unknown as typeof IntersectionObserver;
 
 if (!globalThis.structuredClone) {
@@ -15,13 +20,17 @@ export const render = (_component: unknown) => {
   return {
     container: { innerHTML: 'mocked-container' },
     getByText: (text: string) => ({ textContent: text }),
-    queryByRole: (_role?: string, _options?: Record<string, unknown>) => ({ textContent: 'mocked-heading' })
+    queryByRole: (_role?: string, _options?: Record<string, unknown>) => ({
+      textContent: 'mocked-heading',
+    }),
   };
 };
 
 export const screen = {
   getByText: (text: string) => ({ textContent: text }),
-  queryByRole: (_role?: string, _options?: Record<string, unknown>) => ({ textContent: 'mocked-heading' })
+  queryByRole: (_role?: string, _options?: Record<string, unknown>) => ({
+    textContent: 'mocked-heading',
+  }),
 };
 
 /*

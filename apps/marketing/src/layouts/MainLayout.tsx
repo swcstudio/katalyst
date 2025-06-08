@@ -1,7 +1,7 @@
 import { Outlet } from '@tanstack/solid-router';
 import { Suspense } from 'solid-js';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 import { css } from '../styled-system/css';
 import { flex } from '../styled-system/patterns';
 

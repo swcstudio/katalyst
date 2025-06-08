@@ -1,7 +1,7 @@
-import { css } from '../styled-system/css';
-import { flex } from '../styled-system/patterns';
 import { Link } from '@tanstack/solid-router';
 import { createSignal } from 'solid-js';
+import { css } from '../styled-system/css';
+import { flex } from '../styled-system/patterns';
 
 const HomePage = () => {
   const [email, setEmail] = createSignal('');
@@ -150,11 +150,13 @@ const HomePage = () => {
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
+                  aria-label="Feature Icon"
                 >
-                  <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
-                  <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
-                  <path d="M2 2l7.586 7.586"></path>
-                  <circle cx="11" cy="11" r="2"></circle>
+                  <title>Feature Icon</title>
+                  <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                  <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                  <path d="M2 2l7.586 7.586" />
+                  <circle cx="11" cy="11" r="2" />
                 </svg>
               </div>
               <h3
@@ -208,11 +210,13 @@ const HomePage = () => {
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
+                  aria-label="Feature Icon"
                 >
-                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                  <title>Feature Icon</title>
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
+                  <line x1="6" y1="6" x2="6.01" y2="6" />
+                  <line x1="6" y1="18" x2="6.01" y2="18" />
                 </svg>
               </div>
               <h3
@@ -266,9 +270,11 @@ const HomePage = () => {
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
+                  aria-label="Feature Icon"
                 >
-                  <polyline points="16 18 22 12 16 6"></polyline>
-                  <polyline points="8 6 2 12 8 18"></polyline>
+                  <title>Feature Icon</title>
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
                 </svg>
               </div>
               <h3
@@ -685,9 +691,11 @@ const HomePage = () => {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class={css({ ml: '2' })}
+                aria-label="View All Articles"
               >
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
+                <title>View All Articles</title>
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
               </svg>
             </Link>
           </div>

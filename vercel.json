@@ -6,31 +6,47 @@
       "use": "@vercel/static-build",
       "config": {
         "buildCommand": "deno task build:marketing",
-        "outputDirectory": "dist/marketing"
+        "outputDirectory": "apps/marketing/dist"
       }
     },
     {
-      "src": "apps/blog/astro.config.mjs", 
+      "src": "apps/astro-blog/astro.config.mjs",
       "use": "@vercel/static-build",
       "config": {
         "buildCommand": "deno task build:blog",
-        "outputDirectory": "dist/blog"
+        "outputDirectory": "apps/astro-blog/dist"
       }
     },
     {
       "src": "apps/storefront/src/index.tsx",
-      "use": "@vercel/static-build", 
+      "use": "@vercel/static-build",
       "config": {
         "buildCommand": "deno task build:storefront",
-        "outputDirectory": "dist/storefront"
+        "outputDirectory": "apps/storefront/dist"
       }
     },
     {
-      "src": "apps/docs/astro.config.mjs",
+      "src": "apps/astro-docs/astro.config.mjs",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "deno task build:docs", 
-        "outputDirectory": "dist/docs"
+        "buildCommand": "deno task build:docs",
+        "outputDirectory": "apps/astro-docs/dist"
+      }
+    },
+    {
+      "src": "apps/remix-app/app/root.tsx",
+      "use": "@vercel/remix",
+      "config": {
+        "buildCommand": "deno task build:remix",
+        "outputDirectory": "apps/remix-app/build"
+      }
+    },
+    {
+      "src": "apps/sveltekit-spa/src/app.html",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "deno task build:sveltekit",
+        "outputDirectory": "apps/sveltekit-spa/build"
       }
     }
   ],
@@ -39,7 +55,14 @@
     { "src": "/blog/(.*)", "dest": "/blog/$1" },
     { "src": "/storefront/(.*)", "dest": "/storefront/$1" },
     { "src": "/docs/(.*)", "dest": "/docs/$1" },
+    { "src": "/remix/(.*)", "dest": "/remix/$1" },
+    { "src": "/spa/(.*)", "dest": "/spa/$1" },
     { "src": "/(.*)", "dest": "/marketing/$1" }
   ],
+  "functions": {
+    "apps/remix-app/build/index.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "teamId": "team_orpnm7TSGW7mUkKyvdRWkHFl"
 }

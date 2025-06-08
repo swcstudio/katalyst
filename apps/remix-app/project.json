@@ -1,0 +1,34 @@
+{
+  "name": "remix-app",
+  "sourceRoot": "apps/remix-app/app",
+  "projectType": "application",
+  "tags": ["scope:remix"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno task build",
+        "cwd": "apps/remix-app"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno task dev",
+        "cwd": "apps/remix-app"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno test app/tests"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno run --allow-read --allow-write npm:@biomejs/biome check apps/remix-app"
+      }
+    }
+  }
+}

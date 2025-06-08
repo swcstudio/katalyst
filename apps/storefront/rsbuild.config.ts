@@ -12,7 +12,7 @@ export default defineConfig({
     title: 'SOTA Storefront',
   },
   server: {
-    port: 30003,
+    port: 20002,
   },
   output: {
     distPath: {
