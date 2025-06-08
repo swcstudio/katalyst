@@ -1,34 +1,24 @@
-import type { RsdoctorConfig } from '@rsdoctor/core';
-
-const config: RsdoctorConfig = {
-  features: {
-    loader: true,
-    plugins: true,
-    resolver: true,
-    bundle: true,
-    treeShaking: true,
-    moduleGraph: true,
-    duplicatePackages: true,
-    bundleSize: true,
-    timeline: true,
-  },
-  reportDir: './dist/rsdoctor',
+export default {
   port: 20007,
   open: false,
-  supports: {
-    generateTileGraph: true,
-    parseBundle: true,
+  features: {
+    bundleAnalyzer: true,
+    treeShaking: true,
+    duplicatePackages: true,
+    moduleAnalyzer: true,
+    loaderAnalyzer: true,
+    pluginAnalyzer: true,
+    resolver: true,
+    compilation: true,
   },
-  linter: {
-    rules: {
-      'default-import-check': 'error',
-      'duplicate-package': 'warn',
-      'loader-perf': 'warn',
-    },
+  frameworks: ['marketing', 'blog', 'storefront', 'docs', 'remix-app', 'sveltekit-spa'],
+  analysis: {
+    performance: true,
+    bundleSize: true,
+    chunkSplit: true,
+    assetOptimization: true,
   },
 };
-
-export default config;
 
 /*
  * © 2025 Spectrum Web Co LLC. All rights reserved.

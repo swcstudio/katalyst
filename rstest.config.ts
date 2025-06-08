@@ -1,57 +1,58 @@
-export const testConfig = {
-  testMatch: [
-    '**/tests/**/*.test.{ts,tsx}',
-    '**/*.test.{ts,tsx}',
-    'apps/**/tests/**/*.test.{ts,tsx}',
-    'libs/**/tests/**/*.test.{ts,tsx}',
-  ],
+export default {
   testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
   moduleNameMapping: {
-    '^~/(.*)$': './src/$1',
-    '^@shared/(.*)$': './libs/shared/$1',
-    '^@marketing/(.*)$': './apps/marketing/src/$1',
-    '^@blog/(.*)$': './apps/blog/src/$1',
-    '^@storefront/(.*)$': './apps/storefront/src/$1',
-    '^@docs/(.*)$': './apps/astro-docs/src/$1',
-    '^@remix/(.*)$': './apps/remix-app/app/$1',
-    '^@sveltekit/(.*)$': './apps/sveltekit-spa/src/$1',
+    '^~/(.*)$': '<rootDir>/src/$1',
+    '^@/(.*)$': '<rootDir>/libs/shared/$1',
+    '^@marketing/(.*)$': '<rootDir>/apps/marketing/src/$1',
+    '^@blog/(.*)$': '<rootDir>/apps/blog/src/$1',
+    '^@storefront/(.*)$': '<rootDir>/apps/storefront/src/$1',
+    '^@docs/(.*)$': '<rootDir>/apps/astro-docs/src/$1',
+    '^@remix/(.*)$': '<rootDir>/apps/remix-app/app/$1',
+    '^@sveltekit/(.*)$': '<rootDir>/apps/sveltekit-spa/src/$1',
   },
-  setupFiles: ['./tests/setup.ts'],
-  coverage: {
-    include: [
-      'src/**/*.{ts,tsx}',
-      'apps/**/*.{ts,tsx}',
-      'libs/**/*.{ts,tsx}',
-      'apps/**/src/**/*.{ts,tsx}',
-      'apps/**/app/**/*.{ts,tsx}',
+  transform: {
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        useESM: true,
+        tsconfig: {
+          jsx: 'react-jsx',
+          jsxImportSource: 'solid-js',
+        },
+      },
     ],
-    exclude: [
-      '**/node_modules/**',
-      '**/tests/**',
-      '**/*.config.{js,ts}',
-      '**/dist/**',
-      '**/.svelte-kit/**',
-      '**/build/**',
-      '**/styled-system/**',
+    '^.+\\.svelte$': [
+      'svelte-jester',
+      {
+        preprocess: true,
+      },
+    ],
+    '^.+\\.astro$': [
+      'astro-jest',
+      {
+        preprocess: true,
+      },
     ],
   },
-  testTimeout: 15000,
-  frameworks: {
-    solidjs: {
-      transform: 'rstest/transformer',
-      testEnvironment: 'jsdom',
-    },
-    remix: {
-      transform: 'rstest/transformer',
-      testEnvironment: 'node',
-    },
-    svelte: {
-      transform: 'rstest/transformer',
-      testEnvironment: 'jsdom',
-    },
-    astro: {
-      transform: 'rstest/transformer',
-      testEnvironment: 'jsdom',
+  testMatch: [
+    '<rootDir>/apps/*/tests/**/*.test.{ts,tsx}',
+    '<rootDir>/tests/**/*.test.{ts,tsx}',
+    '<rootDir>/libs/*/tests/**/*.test.{ts,tsx}',
+  ],
+  collectCoverageFrom: [
+    'apps/*/src/**/*.{ts,tsx}',
+    'libs/*/src/**/*.{ts,tsx}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+    '!**/dist/**',
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
     },
   },
 };
