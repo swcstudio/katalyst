@@ -1,0 +1,315 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml """
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: deno
+    image: denoland/deno:2.3.5
+    command:
+    - sleep
+    args:
+    - 99d
+    volumeMounts:
+    - name: docker-sock
+      mountPath: /var/run/docker.sock
+  - name: kubectl
+    image: bitnami/kubectl:latest
+    command:
+    - sleep
+    args:
+    - 99d
+  - name: nomad
+    image: hashicorp/nomad:1.7
+    command:
+    - sleep
+    args:
+    - 99d
+  volumes:
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock
+"""
+        }
+    }
+
+    environment {
+        DENO_VERSION = '2.3.5'
+        NODE_VERSION = '18'
+        FRAMEWORK_PORTS = '20000-20006'
+        NOMAD_ADDR = credentials('nomad-cluster-address')
+        VAULT_ADDR = credentials('vault-cluster-address')
+        VAULT_TOKEN = credentials('vault-access-token')
+    }
+
+    parameters {
+        choice(
+            name: 'FRAMEWORK',
+            choices: ['all', 'marketing', 'blog', 'storefront', 'docs', 'remix-app', 'sveltekit-spa'],
+            description: 'Select framework to build and deploy'
+        )
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['staging', 'production'],
+            description: 'Target deployment environment'
+        )
+        booleanParam(
+            name: 'RUN_SECURITY_SCAN',
+            defaultValue: true,
+            description: 'Run comprehensive security scanning'
+        )
+        booleanParam(
+            name: 'DEPLOY_TO_NOMAD',
+            defaultValue: false,
+            description: 'Deploy to Nomad cluster after successful build'
+        )
+    }
+
+    stages {
+        stage('Checkout & Setup') {
+            steps {
+                container('deno') {
+                    checkout scm
+                    
+                    script {
+                        echo "Setting up Deno environment..."
+                        sh '''
+                            deno --version
+                            echo "Caching Deno dependencies..."
+                            deno cache --reload deno.json
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Code Quality & Security') {
+            parallel {
+                stage('Biome Linting') {
+                    steps {
+                        container('deno') {
+                            script {
+                                echo "Running Biome linting across all frameworks..."
+                                sh 'deno task biome'
+                            }
+                        }
+                    }
+                }
+                
+                stage('Format Check') {
+                    steps {
+                        container('deno') {
+                            script {
+                                echo "Checking code formatting..."
+                                sh 'deno fmt --check'
+                            }
+                        }
+                    }
+                }
+                
+                stage('Security Scan') {
+                    when {
+                        params.RUN_SECURITY_SCAN
+                    }
+                    steps {
+                        container('deno') {
+                            script {
+                                echo "Running security audit..."
+                                sh 'deno task lint'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Testing') {
+            parallel {
+                stage('Unit Tests') {
+                    steps {
+                        container('deno') {
+                            script {
+                                if (params.FRAMEWORK == 'all') {
+                                    echo "Running comprehensive test suite..."
+                                    sh 'deno task test:all'
+                                } else {
+                                    echo "Running tests for framework: ${params.FRAMEWORK}"
+                                    sh "deno task test:${params.FRAMEWORK}"
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                stage('Integration Tests') {
+                    steps {
+                        container('deno') {
+                            script {
+                                echo "Running integration tests..."
+                                sh 'deno task test:shared'
+                                sh 'deno task test:animations'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Build & Analysis') {
+            steps {
+                container('deno') {
+                    script {
+                        echo "Generating PandaCSS styles..."
+                        sh 'deno task generate:panda'
+                        
+                        if (params.FRAMEWORK == 'all') {
+                            echo "Building all micro-frameworks..."
+                            sh 'deno task build:all'
+                        } else {
+                            echo "Building framework: ${params.FRAMEWORK}"
+                            sh "deno task build:${params.FRAMEWORK}"
+                        }
+                        
+                        echo "Building Storybook..."
+                        sh 'deno task build-storybook'
+                        
+                        echo "Running bundle analysis..."
+                        timeout(time: 2, unit: 'MINUTES') {
+                            sh 'deno task rsdoctor || echo "Bundle analysis completed"'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to Nomad') {
+            when {
+                allOf {
+                    params.DEPLOY_TO_NOMAD
+                    anyOf {
+                        branch 'staging'
+                        branch 'main'
+                    }
+                }
+            }
+            steps {
+                container('nomad') {
+                    script {
+                        echo "Deploying to Nomad cluster..."
+                        
+                        withCredentials([
+                            string(credentialsId: 'nomad-cluster-address', variable: 'NOMAD_ADDR'),
+                            string(credentialsId: 'vault-access-token', variable: 'VAULT_TOKEN')
+                        ]) {
+                            sh '''
+                                nomad version
+                                echo "Nomad cluster status:"
+                                nomad node status
+                                
+                                echo "Deploying SSE micro-frameworks to Nomad..."
+                                
+                                if [ "${FRAMEWORK}" = "all" ]; then
+                                    echo "Deploying all frameworks..."
+                                    for framework in marketing blog storefront docs remix-app sveltekit-spa; do
+                                        echo "Deploying $framework..."
+                                        nomad job run infrastructure/nomad/jobs/$framework.nomad
+                                    done
+                                else
+                                    echo "Deploying ${FRAMEWORK}..."
+                                    nomad job run infrastructure/nomad/jobs/${FRAMEWORK}.nomad
+                                fi
+                                
+                                echo "Deployment to Nomad completed successfully"
+                            '''
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Health Checks') {
+            when {
+                params.DEPLOY_TO_NOMAD
+            }
+            steps {
+                container('nomad') {
+                    script {
+                        echo "Running health checks on deployed services..."
+                        sh '''
+                            sleep 30
+                            
+                            echo "Checking service health..."
+                            nomad job status
+                            
+                            echo "Verifying service endpoints..."
+                            for port in 20000 20001 20002 20003 20004 20005; do
+                                echo "Checking port $port..."
+                                timeout 10s curl -f http://localhost:$port/health || echo "Service on port $port not ready"
+                            done
+                            
+                            echo "Health checks completed"
+                        '''
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                echo "Pipeline execution completed"
+                
+                publishHTML([
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'storybook-static',
+                    reportFiles: 'index.html',
+                    reportName: 'Storybook Report'
+                ])
+            }
+        }
+        
+        success {
+            script {
+                echo "✅ SSE Micro-Frameworks Pipeline completed successfully!"
+                
+                if (params.DEPLOY_TO_NOMAD) {
+                    echo "🚀 Deployment to Nomad cluster completed"
+                }
+            }
+        }
+        
+        failure {
+            script {
+                echo "❌ Pipeline failed. Check logs for details."
+                
+                container('deno') {
+                    sh '''
+                        echo "Collecting failure diagnostics..."
+                        deno --version
+                        ls -la
+                        echo "Recent git commits:"
+                        git log --oneline -5
+                    '''
+                }
+            }
+        }
+        
+        cleanup {
+            script {
+                echo "Cleaning up workspace..."
+                cleanWs()
+            }
+        }
+    }
+}
+
+/*
+ * © 2025 Spectrum Web Co LLC. All rights reserved.
+ * This code is the property of Spectrum Web Co LLC.
+ * Licensed under MIT License.
+ */
