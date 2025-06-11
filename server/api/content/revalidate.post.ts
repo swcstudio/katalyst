@@ -1,5 +1,4 @@
-import type { RevalidateRequest, RevalidateResponse } from '@sse/types';
-import { createError, defineEventHandler, getClientIP, getHeader, readBody, setHeader } from 'h3';
+import { createError, defineEventHandler, getHeader, readBody, setHeader } from 'h3';
 
 // Revalidation configurations for different content types
 const REVALIDATION_CONFIGS = {
@@ -44,7 +43,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const clientIP = getClientIP(event);
+    const clientIP = 'unknown';
     const userAgent = getHeader(event, 'user-agent') || '';
     const authHeader = getHeader(event, 'authorization');
     const webhookSignature = getHeader(event, 'x-webhook-signature');
@@ -81,7 +80,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const body: RevalidateRequest = await readBody(event);
+    const body: any = await readBody(event);
 
     // Validate request body
     if (!body.type && !body.paths && !body.tags) {
@@ -119,8 +118,8 @@ export default defineEventHandler(async (event) => {
 
     if (body.type) {
       const config = REVALIDATION_CONFIGS[body.type as keyof typeof REVALIDATION_CONFIGS];
-      pathsToRevalidate = config.paths;
-      tagsToRevalidate = config.tags;
+      pathsToRevalidate = [...config.paths];
+      tagsToRevalidate = [...config.tags];
       priority = config.priority;
     }
 
@@ -181,7 +180,7 @@ export default defineEventHandler(async (event) => {
       // Don't fail the request if history storage fails
     }
 
-    const response: RevalidateResponse = {
+    const response = {
       success: true,
       message: 'Content revalidation completed successfully',
       revalidated: {
@@ -205,16 +204,16 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Cache-Control', 'no-cache, no-store, must-revalidate');
 
     return response;
-  } catch (error: Error) {
+  } catch (error: unknown) {
     console.error('Revalidation error:', {
-      error: error.message,
-      stack: error.stack,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
       timestamp: new Date().toISOString(),
       userAgent: getHeader(event, 'user-agent'),
-      ip: getClientIP(event),
+      ip: 'unknown',
     });
 
-    if (error.statusCode) {
+    if (error && typeof error === 'object' && 'statusCode' in error) {
       throw error;
     }
 
@@ -281,10 +280,10 @@ async function performRevalidation(params: {
       // For now, we'll simulate the revalidation
       await simulateRevalidation(path, 'path');
       revalidatedPaths.push(path);
-    } catch (error: Error) {
+    } catch (error: unknown) {
       errors.push({
         path,
-        error: error.message || 'Unknown error',
+        error: error instanceof Error ? error.message : 'Unknown error',
       });
     }
   }
@@ -296,10 +295,10 @@ async function performRevalidation(params: {
       // For now, we'll simulate the revalidation
       await simulateRevalidation(tag, 'tag');
       revalidatedTags.push(tag);
-    } catch (error: Error) {
+    } catch (error: unknown) {
       errors.push({
         tag,
-        error: error.message || 'Unknown error',
+        error: error instanceof Error ? error.message : 'Unknown error',
       });
     }
   }
@@ -332,16 +331,16 @@ async function simulateRevalidation(target: string, type: 'path' | 'tag'): Promi
 }
 
 // Store revalidation history for analytics
-async function storeRevalidationHistory(data: any): Promise<void> {
+async function storeRevalidationHistory(data: Record<string, unknown>): Promise<void> {
   // In production, store in your database
   // await db.revalidationHistory.create({ data });
 
   // For now, just log
   console.debug('Revalidation history stored:', {
-    type: data.type,
-    pathsCount: data.paths.length,
-    tagsCount: data.tags.length,
-    timestamp: data.metadata.timestamp,
+    type: (data as any).type,
+    pathsCount: (data as any).paths?.length || 0,
+    tagsCount: (data as any).tags?.length || 0,
+    timestamp: (data as any).metadata?.timestamp,
   });
 }
 

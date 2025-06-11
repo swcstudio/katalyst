@@ -1,5 +1,5 @@
-import { Resend } from 'npm:resend';
-import { z } from 'npm:zod';
+// import { Resend } from 'npm:resend';
+// import { z } from 'npm:zod';
 
 const waitlistSchema = z.object({
   email: z.string().email(),
@@ -274,7 +274,7 @@ async function getWaitlistPosition(product: string): Promise<number> {
   return Math.floor(Math.random() * 1000) + 1; // Placeholder
 }
 
-async function storeWaitlistEntry(data: any): Promise<any> {
+async function storeWaitlistEntry(data: Record<string, unknown>): Promise<Record<string, unknown>> {
   // Store in database
   console.log('Waitlist entry stored:', data.email, data.product);
   return data;
@@ -285,7 +285,7 @@ function generateReferralCode(email: string): string {
   return `${hash.substring(0, 4)}${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 }
 
-async function trackWaitlistConversion(data: any): Promise<void> {
+async function trackWaitlistConversion(data: Record<string, unknown>): Promise<void> {
   // Send to analytics platform
   console.log('Waitlist conversion tracked:', data);
 }

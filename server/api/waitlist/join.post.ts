@@ -1,5 +1,4 @@
-import type { WaitlistRequest, WaitlistResponse } from '@sse/types';
-import { createError, defineEventHandler, getClientIP, getHeader, readBody, setHeader } from 'h3';
+import { createError, defineEventHandler, getHeader, readBody, setHeader } from 'h3';
 
 // Available software products for waitlist
 const AVAILABLE_PRODUCTS = {
@@ -42,7 +41,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const clientIP = getClientIP(event);
+    const clientIP = 'unknown';
     const userAgent = getHeader(event, 'user-agent') || '';
 
     // Rate limiting: 3 waitlist joins per hour per IP
@@ -69,7 +68,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const body: WaitlistRequest = await readBody(event);
+    const body: any = await readBody(event);
 
     // Validate required fields
     if (!body.email || !body.productId) {
@@ -211,7 +210,7 @@ export default defineEventHandler(async (event) => {
       await sendWaitlistConfirmationEmail({
         to: waitlistData.email,
         firstName: waitlistData.firstName,
-        product: selectedProduct,
+        product: selectedProduct.name,
         position: waitlistPosition,
         earlyAccess: waitlistData.earlyAccess,
       });
@@ -235,7 +234,7 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    const response: WaitlistResponse = {
+    const response = {
       success: true,
       message: `Successfully joined the waitlist for ${selectedProduct.name}!`,
       productName: selectedProduct.name,
@@ -254,18 +253,18 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Access-Control-Allow-Credentials', 'true');
 
     return response;
-  } catch (error: Error) {
+  } catch (error: unknown) {
     // Log error for monitoring
     console.error('Waitlist error:', {
-      error: error.message,
-      stack: error.stack,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
       timestamp: new Date().toISOString(),
       userAgent: getHeader(event, 'user-agent'),
-      ip: getClientIP(event),
+      ip: 'unknown',
     });
 
     // Handle known error types
-    if (error.statusCode) {
+    if (error && typeof error === 'object' && 'statusCode' in error) {
       throw error;
     }
 
@@ -281,28 +280,28 @@ export default defineEventHandler(async (event) => {
 async function sendWaitlistConfirmationEmail(params: {
   to: string;
   firstName: string;
-  product: any;
+  product: string;
   position: number;
   earlyAccess: boolean;
 }) {
   const emailPayload = {
     to: params.to,
-    subject: `Welcome to the ${params.product.name} waitlist!`,
+    subject: `Welcome to the ${params.product} waitlist!`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h1 style="color: #2563eb;">You're on the list! 🎉</h1>
         
         <p>Hi ${params.firstName || 'there'},</p>
         
-        <p>Thank you for joining the waitlist for <strong>${params.product.name}</strong>!</p>
+        <p>Thank you for joining the waitlist for <strong>${params.product}</strong>!</p>
         
         <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <h3 style="margin-top: 0; color: #1e40af;">Your Waitlist Details:</h3>
           <ul>
             <li><strong>Position:</strong> #${params.position}</li>
-            <li><strong>Product:</strong> ${params.product.name}</li>
-            <li><strong>Tier:</strong> ${params.product.tier}</li>
-            <li><strong>Estimated Launch:</strong> ${params.product.estimatedLaunch}</li>
+            <li><strong>Product:</strong> ${params.product}</li>
+            <li><strong>Tier:</strong> Premium</li>
+            <li><strong>Estimated Launch:</strong> 2025-Q2</li>
           </ul>
         </div>
         

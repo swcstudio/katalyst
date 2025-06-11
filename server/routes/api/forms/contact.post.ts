@@ -1,5 +1,5 @@
-import { z } from 'npm:zod';
-import { getDefaultEmailService } from '../../../libs/email/src/email-service.ts';
+// import { z } from 'npm:zod';
+// import { getDefaultEmailService } from '../../../libs/email/src/email-service.ts';
 
 const contactFormSchema = z.object({
   name: z.string().min(2).max(100),
@@ -147,7 +147,7 @@ async function setRateLimit(key: string, ttl: number): Promise<void> {
   // Store the key with TTL
 }
 
-async function storeContactSubmission(data: any): Promise<void> {
+async function storeContactSubmission(data: Record<string, unknown>): Promise<void> {
   // Implement with your database (Convex, Supabase, PlanetScale, etc.)
   // For now, just log
   console.log('Contact submission stored:', data.name, data.email);

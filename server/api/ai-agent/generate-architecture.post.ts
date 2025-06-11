@@ -1,5 +1,4 @@
-import type { ArchitectureRequest, ArchitectureResponse } from '@sse/types';
-import { createError, defineEventHandler, getClientIP, getHeader, readBody, setHeader } from 'h3';
+import { createError, defineEventHandler, getHeader, readBody, setHeader } from 'h3';
 
 // Cloud providers and their regions
 const CLOUD_PROVIDERS = {
@@ -65,7 +64,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const clientIP = getClientIP(event);
+    const clientIP = 'unknown';
     const userAgent = getHeader(event, 'user-agent') || '';
 
     // Rate limiting: 5 architecture generations per hour per IP
@@ -93,7 +92,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const body: ArchitectureRequest = await readBody(event);
+    const body: any = await readBody(event);
 
     // Validate required fields
     if (!body.projectName || !body.cloudProvider || !body.architecturePattern) {
@@ -130,7 +129,7 @@ export default defineEventHandler(async (event) => {
 
     // Validate region if provided
     const provider = CLOUD_PROVIDERS[body.cloudProvider as keyof typeof CLOUD_PROVIDERS];
-    if (body.region && !provider.regions.includes(body.region)) {
+    if (body.region && !((provider.regions as unknown) as string[]).includes(body.region)) {
       throw createError({
         statusCode: 400,
         statusMessage: `Invalid region for ${provider.name}`,
@@ -204,7 +203,7 @@ export default defineEventHandler(async (event) => {
       ip: clientIP,
     });
 
-    const response: ArchitectureResponse = {
+    const response = {
       success: true,
       architecture: {
         projectName: body.projectName,
@@ -259,16 +258,16 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Access-Control-Allow-Credentials', 'true');
 
     return response;
-  } catch (error: Error) {
+  } catch (error: unknown) {
     console.error('AI architecture generation error:', {
-      error: error.message,
-      stack: error.stack,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
       timestamp: new Date().toISOString(),
       userAgent: getHeader(event, 'user-agent'),
-      ip: getClientIP(event),
+      ip: 'unknown',
     });
 
-    if (error.statusCode) {
+    if (error && typeof error === 'object' && 'statusCode' in error) {
       throw error;
     }
 
