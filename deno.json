@@ -7,6 +7,7 @@
     "dev:docs": "deno run --allow-all scripts/dev-docs.ts",
     "dev:remix": "deno run --allow-all scripts/dev-remix.ts",
     "dev:sveltekit": "deno run --allow-all scripts/dev-sveltekit.ts",
+    "dev:reactonrust": "deno run --allow-all scripts/dev-reactonrust.ts",
     "build": "deno run --allow-all scripts/build.ts",
     "build:marketing": "deno run --allow-all scripts/build-marketing.ts",
     "build:blog": "deno run --allow-all scripts/build-blog.ts",
@@ -15,6 +16,7 @@
     "build:remix": "deno run --allow-all scripts/build-remix.ts",
     "build:remix-app": "deno run --allow-all scripts/build-remix.ts",
     "build:sveltekit": "deno run --allow-all scripts/build-sveltekit.ts",
+    "build:reactonrust": "deno run --allow-all scripts/build-reactonrust.ts",
     "preview": "deno run --allow-all scripts/preview.ts",
     "preview:marketing": "deno run --allow-all scripts/preview-marketing.ts",
     "preview:blog": "deno run --allow-all scripts/preview-blog.ts",
@@ -31,8 +33,8 @@
     "biome": "deno run --allow-read --allow-write --allow-env --allow-run npm:@biomejs/biome check .",
     "biome:fix": "deno run --allow-read --allow-write --allow-env --allow-run npm:@biomejs/biome check --apply .",
     "generate:panda": "deno run --allow-read --allow-write --allow-env npm:@pandacss/dev",
-    "rsdoctor": "deno run --allow-all npm:@rsdoctor/core --port 20007",
-    "storybook": "deno run --allow-all npm:storybook dev -p 20006",
+    "rsdoctor": "deno run --allow-all npm:@rsdoctor/core --port 20008",
+    "storybook": "deno run --allow-all npm:storybook dev -p 20009",
     "build-storybook": "deno run --allow-all npm:storybook build",
     "build:all": "deno run --allow-all scripts/build-all.ts",
     "test:all": "deno run --allow-all scripts/test-frameworks.ts",
@@ -47,7 +49,7 @@
   },
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "solid-js",
+    "jsxImportSource": "react",
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   },
   "imports": {
@@ -79,10 +81,11 @@
     "@remix-run/react": "npm:@remix-run/react@2.12.1",
     "@remix-run/serve": "npm:@remix-run/serve@2.12.1",
     "@remix-run/dev": "npm:@remix-run/dev@2.12.1",
-    "react": "npm:react@18.3.1",
-    "react-dom": "npm:react-dom@18.3.1",
-    "@types/react": "npm:@types/react@18.3.5",
-    "@types/react-dom": "npm:@types/react-dom@18.3.0",
+
+    "react": "npm:react@19.0.0",
+    "react-dom": "npm:react-dom@19.0.0",
+    "@types/react": "npm:@types/react@19.0.0",
+    "@types/react-dom": "npm:@types/react-dom@19.0.0",
     "@sveltejs/kit": "npm:@sveltejs/kit@2.5.28",
     "@sveltejs/adapter-static": "npm:@sveltejs/adapter-static@3.0.4",
     "svelte": "npm:svelte@4.2.19",
@@ -93,6 +96,10 @@
     "astro": "npm:astro@5.0.0",
     "@astrojs/solid-js": "npm:@astrojs/solid-js@4.4.2",
     "@astrojs/mdx": "npm:@astrojs/mdx@3.0.1",
+    "@rsbuild/plugin-react": "npm:@rsbuild/plugin-react@1.0.1",
+    "@rsbuild/core": "npm:@rsbuild/core@1.0.1",
+    "solid-js": "npm:solid-js@1.9.2",
+
     "~/": "./src/"
   },
   "lint": {

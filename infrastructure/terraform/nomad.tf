@@ -61,3 +61,7 @@ resource "nomad_job" "sse_remix" {
 resource "nomad_job" "sse_sveltekit" {
   jobspec = file("${path.module}/../nomad/jobs/sse-sveltekit.nomad")
 }
+
+resource "nomad_job" "sse_reactonrust" {
+  jobspec = file("${path.module}/../nomad/jobs/sse-reactonrust.nomad")
+}
