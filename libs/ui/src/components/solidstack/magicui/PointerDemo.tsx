@@ -1,25 +1,30 @@
-import { Component, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, createSignal, onCleanup, onMount, type JSX } from 'solid-js';
 
 // Placeholder Card components
 const Card: Component<{
   className?: string;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <div class={css({
-      borderRadius: 'lg',
-      border: '1px solid',
-      borderColor: 'gray.200',
-      backgroundColor: 'white',
-      boxShadow: 'sm',
-      overflow: 'hidden',
-      transition: 'all 0.3s',
-      _dark: {
-        borderColor: 'gray.800',
-        backgroundColor: 'gray.900',
-      },
-    }, props.className)}>
+    <div
+      class={css(
+        {
+          borderRadius: 'lg',
+          border: '1px solid',
+          borderColor: 'gray.200',
+          backgroundColor: 'white',
+          boxShadow: 'sm',
+          overflow: 'hidden',
+          transition: 'all 0.3s',
+          _dark: {
+            borderColor: 'gray.800',
+            backgroundColor: 'gray.900',
+          },
+        },
+        props.className
+      )}
+    >
       {props.children}
     </div>
   );
@@ -27,13 +32,18 @@ const Card: Component<{
 
 const CardHeader: Component<{
   className?: string;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <div class={css({
-      position: 'relative',
-      paddingBottom: '2',
-    }, props.className)}>
+    <div
+      class={css(
+        {
+          position: 'relative',
+          paddingBottom: '2',
+        },
+        props.className
+      )}
+    >
       {props.children}
     </div>
   );
@@ -41,17 +51,22 @@ const CardHeader: Component<{
 
 const CardContent: Component<{
   className?: string;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <div class={css({
-      position: 'relative',
-      display: 'flex',
-      height: '40',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '6',
-    }, props.className)}>
+    <div
+      class={css(
+        {
+          position: 'relative',
+          display: 'flex',
+          height: '40',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '6',
+        },
+        props.className
+      )}
+    >
       {props.children}
     </div>
   );
@@ -59,13 +74,18 @@ const CardContent: Component<{
 
 const CardTitle: Component<{
   className?: string;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <h3 class={css({
-      fontSize: 'xl',
-      fontWeight: 'bold',
-    }, props.className)}>
+    <h3
+      class={css(
+        {
+          fontSize: 'xl',
+          fontWeight: 'bold',
+        },
+        props.className
+      )}
+    >
       {props.children}
     </h3>
   );
@@ -73,12 +93,17 @@ const CardTitle: Component<{
 
 const CardDescription: Component<{
   className?: string;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <p class={css({
-      fontSize: 'sm',
-    }, props.className)}>
+    <p
+      class={css(
+        {
+          fontSize: 'sm',
+        },
+        props.className
+      )}
+    >
       {props.children}
     </p>
   );
@@ -87,7 +112,7 @@ const CardDescription: Component<{
 // Placeholder Pointer component
 const Pointer: Component<{
   className?: string;
-  children?: any;
+  children?: JSX.Element;
 }> = (props) => {
   const [mousePosition, setMousePosition] = createSignal({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = createSignal(false);
@@ -123,7 +148,7 @@ const Pointer: Component<{
   });
 
   return (
-    <div 
+    <div
       ref={containerRef}
       class={css({
         position: 'absolute',
@@ -151,14 +176,17 @@ const Pointer: Component<{
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              class={css({
-                fill: 'black',
-                _dark: {
-                  fill: 'white',
+              class={css(
+                {
+                  fill: 'black',
+                  _dark: {
+                    fill: 'white',
+                  },
                 },
-              }, props.className)}
+                props.className
+              )}
             >
-              <path d="M3 3L17 17M3 17L17 3" stroke="currentColor" stroke-width="2"/>
+              <path d="M3 3L17 17M3 17L17 3" stroke="currentColor" stroke-width="2" />
             </svg>
           )}
         </div>
@@ -170,9 +198,11 @@ const Pointer: Component<{
 // Animated Heart component
 const AnimatedHeart: Component = () => {
   return (
-    <div class={css({
-      animation: 'heartbeat 1.5s ease-in-out infinite',
-    })}>
+    <div
+      class={css({
+        animation: 'heartbeat 1.5s ease-in-out infinite',
+      })}
+    >
       <svg
         width="40"
         height="40"
@@ -200,72 +230,86 @@ const AnimatedHeart: Component = () => {
 
 export const PointerDemo: Component = () => {
   return (
-    <div class={css({
-      display: 'grid',
-      gridTemplateColumns: '1',
-      gap: '6',
-      md: {
-        gridTemplateColumns: '2',
-        gridTemplateRows: '2',
-      },
-    })}>
-      <Card className={css({
-        gridColumn: '1',
-        gridRow: '1',
-        overflow: 'hidden',
-        border: '1px solid',
-        borderColor: 'gray.200',
-        background: 'linear-gradient(to bottom right, slate.50, slate.100)',
-        transition: 'all 0.3s',
-        boxShadow: 'none',
-        _dark: {
-          background: 'linear-gradient(to bottom right, slate.900, slate.800)',
-          borderColor: 'gray.700',
+    <div
+      class={css({
+        display: 'grid',
+        gridTemplateColumns: '1',
+        gap: '6',
+        md: {
+          gridTemplateColumns: '2',
+          gridTemplateRows: '2',
         },
-      })}>
-        <CardHeader className={css({
-          position: 'relative',
-          paddingBottom: '2',
-          padding: '4',
-        })}>
-          <CardTitle className={css({
-            fontSize: 'xl',
-            fontWeight: 'bold',
-            color: 'gray.900',
-            _dark: {
-              color: 'white',
-            },
-          })}>
+      })}
+    >
+      <Card
+        className={css({
+          gridColumn: '1',
+          gridRow: '1',
+          overflow: 'hidden',
+          border: '1px solid',
+          borderColor: 'gray.200',
+          background: 'linear-gradient(to bottom right, slate.50, slate.100)',
+          transition: 'all 0.3s',
+          boxShadow: 'none',
+          _dark: {
+            background: 'linear-gradient(to bottom right, slate.900, slate.800)',
+            borderColor: 'gray.700',
+          },
+        })}
+      >
+        <CardHeader
+          className={css({
+            position: 'relative',
+            paddingBottom: '2',
+            padding: '4',
+          })}
+        >
+          <CardTitle
+            className={css({
+              fontSize: 'xl',
+              fontWeight: 'bold',
+              color: 'gray.900',
+              _dark: {
+                color: 'white',
+              },
+            })}
+          >
             Animated Pointer
           </CardTitle>
-          <CardDescription className={css({
-            fontSize: 'sm',
-            color: 'slate.600',
-            _dark: {
-              color: 'slate.400',
-            },
-          })}>
+          <CardDescription
+            className={css({
+              fontSize: 'sm',
+              color: 'slate.600',
+              _dark: {
+                color: 'slate.400',
+              },
+            })}
+          >
             Animated pointer
           </CardDescription>
         </CardHeader>
-        <CardContent className={css({
-          position: 'relative',
-          display: 'flex',
-          height: '40',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '6',
-        })}>
-          <span class={css({
-            pointerEvents: 'none',
-            textAlign: 'center',
-            fontSize: 'xl',
-            fontWeight: 'medium',
-            color: 'slate.800',
-            _dark: {
-              color: 'slate.200',
-            },
-          })}>
+        <CardContent
+          className={css({
+            position: 'relative',
+            display: 'flex',
+            height: '40',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '6',
+          })}
+        >
+          <span
+            class={css({
+              pointerEvents: 'none',
+              textAlign: 'center',
+              fontSize: 'xl',
+              fontWeight: 'medium',
+              color: 'slate.800',
+              _dark: {
+                color: 'slate.200',
+              },
+            })}
+          >
             Move your cursor here
           </span>
         </CardContent>
@@ -274,126 +318,150 @@ export const PointerDemo: Component = () => {
         </Pointer>
       </Card>
 
-      <Card className={css({
-        gridColumn: '1',
-        gridRow: '1',
-        overflow: 'hidden',
-        border: '1px solid',
-        borderColor: 'gray.200',
-        background: 'linear-gradient(to bottom right, blue.50, blue.100)',
-        transition: 'all 0.3s',
-        boxShadow: 'none',
-        _dark: {
-          background: 'linear-gradient(to bottom right, blue.900, blue.800)',
-          borderColor: 'gray.700',
-        },
-      })}>
-        <CardHeader className={css({
-          position: 'relative',
-          paddingBottom: '2',
-          padding: '4',
-        })}>
-          <CardTitle className={css({
-            fontSize: 'xl',
-            fontWeight: 'bold',
-            color: 'gray.900',
-            _dark: {
-              color: 'white',
-            },
-          })}>
+      <Card
+        className={css({
+          gridColumn: '1',
+          gridRow: '1',
+          overflow: 'hidden',
+          border: '1px solid',
+          borderColor: 'gray.200',
+          background: 'linear-gradient(to bottom right, blue.50, blue.100)',
+          transition: 'all 0.3s',
+          boxShadow: 'none',
+          _dark: {
+            background: 'linear-gradient(to bottom right, blue.900, blue.800)',
+            borderColor: 'gray.700',
+          },
+        })}
+      >
+        <CardHeader
+          className={css({
+            position: 'relative',
+            paddingBottom: '2',
+            padding: '4',
+          })}
+        >
+          <CardTitle
+            className={css({
+              fontSize: 'xl',
+              fontWeight: 'bold',
+              color: 'gray.900',
+              _dark: {
+                color: 'white',
+              },
+            })}
+          >
             Colored Pointer
           </CardTitle>
-          <CardDescription className={css({
-            fontSize: 'sm',
-            color: 'blue.700',
-            _dark: {
-              color: 'blue.300',
-            },
-          })}>
+          <CardDescription
+            className={css({
+              fontSize: 'sm',
+              color: 'blue.700',
+              _dark: {
+                color: 'blue.300',
+              },
+            })}
+          >
             A custom pointer with different color
           </CardDescription>
         </CardHeader>
-        <CardContent className={css({
-          position: 'relative',
-          display: 'flex',
-          height: '40',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '6',
-        })}>
-          <span class={css({
-            pointerEvents: 'none',
-            textAlign: 'center',
-            fontSize: 'xl',
-            fontWeight: 'medium',
-            color: 'blue.800',
-            _dark: {
-              color: 'blue.200',
-            },
-          })}>
+        <CardContent
+          className={css({
+            position: 'relative',
+            display: 'flex',
+            height: '40',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '6',
+          })}
+        >
+          <span
+            class={css({
+              pointerEvents: 'none',
+              textAlign: 'center',
+              fontSize: 'xl',
+              fontWeight: 'medium',
+              color: 'blue.800',
+              _dark: {
+                color: 'blue.200',
+              },
+            })}
+          >
             Try me out
           </span>
         </CardContent>
         <Pointer className={css({ fill: 'blue.500' })} />
       </Card>
 
-      <Card className={css({
-        gridColumn: '1',
-        gridRow: '1',
-        overflow: 'hidden',
-        border: '1px solid',
-        borderColor: 'gray.200',
-        background: 'linear-gradient(to bottom right, purple.50, purple.100)',
-        transition: 'all 0.3s',
-        boxShadow: 'none',
-        _dark: {
-          background: 'linear-gradient(to bottom right, purple.900, purple.800)',
-          borderColor: 'gray.700',
-        },
-      })}>
-        <CardHeader className={css({
-          position: 'relative',
-          paddingBottom: '2',
-          padding: '4',
-        })}>
-          <CardTitle className={css({
-            fontSize: 'xl',
-            fontWeight: 'bold',
-            color: 'gray.900',
-            _dark: {
-              color: 'white',
-            },
-          })}>
+      <Card
+        className={css({
+          gridColumn: '1',
+          gridRow: '1',
+          overflow: 'hidden',
+          border: '1px solid',
+          borderColor: 'gray.200',
+          background: 'linear-gradient(to bottom right, purple.50, purple.100)',
+          transition: 'all 0.3s',
+          boxShadow: 'none',
+          _dark: {
+            background: 'linear-gradient(to bottom right, purple.900, purple.800)',
+            borderColor: 'gray.700',
+          },
+        })}
+      >
+        <CardHeader
+          className={css({
+            position: 'relative',
+            paddingBottom: '2',
+            padding: '4',
+          })}
+        >
+          <CardTitle
+            className={css({
+              fontSize: 'xl',
+              fontWeight: 'bold',
+              color: 'gray.900',
+              _dark: {
+                color: 'white',
+              },
+            })}
+          >
             Custom Shape
           </CardTitle>
-          <CardDescription className={css({
-            fontSize: 'sm',
-            color: 'purple.700',
-            _dark: {
-              color: 'purple.300',
-            },
-          })}>
+          <CardDescription
+            className={css({
+              fontSize: 'sm',
+              color: 'purple.700',
+              _dark: {
+                color: 'purple.300',
+              },
+            })}
+          >
             A pointer with a custom SVG shape
           </CardDescription>
         </CardHeader>
-        <CardContent className={css({
-          position: 'relative',
-          display: 'flex',
-          height: '40',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '6',
-        })}>
-          <span class={css({
-            pointerEvents: 'none',
-            textAlign: 'center',
-            fontSize: 'xl',
-            fontWeight: 'medium',
-            color: 'purple.800',
-            _dark: {
-              color: 'purple.200',
-            },
-          })}>
+        <CardContent
+          className={css({
+            position: 'relative',
+            display: 'flex',
+            height: '40',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '6',
+          })}
+        >
+          <span
+            class={css({
+              pointerEvents: 'none',
+              textAlign: 'center',
+              fontSize: 'xl',
+              fontWeight: 'medium',
+              color: 'purple.800',
+              _dark: {
+                color: 'purple.200',
+              },
+            })}
+          >
             Hover here
           </span>
         </CardContent>
@@ -411,63 +479,75 @@ export const PointerDemo: Component = () => {
         </Pointer>
       </Card>
 
-      <Card className={css({
-        gridColumn: '1',
-        gridRow: '1',
-        overflow: 'hidden',
-        border: '1px solid',
-        borderColor: 'gray.200',
-        background: 'linear-gradient(to bottom right, green.50, green.100)',
-        transition: 'all 0.3s',
-        boxShadow: 'none',
-        _dark: {
-          background: 'linear-gradient(to bottom right, green.900, green.800)',
-          borderColor: 'gray.700',
-        },
-      })}>
-        <CardHeader className={css({
-          position: 'relative',
-          paddingBottom: '2',
-          padding: '4',
-        })}>
-          <CardTitle className={css({
-            fontSize: 'xl',
-            fontWeight: 'bold',
-            color: 'gray.900',
-            _dark: {
-              color: 'white',
-            },
-          })}>
+      <Card
+        className={css({
+          gridColumn: '1',
+          gridRow: '1',
+          overflow: 'hidden',
+          border: '1px solid',
+          borderColor: 'gray.200',
+          background: 'linear-gradient(to bottom right, green.50, green.100)',
+          transition: 'all 0.3s',
+          boxShadow: 'none',
+          _dark: {
+            background: 'linear-gradient(to bottom right, green.900, green.800)',
+            borderColor: 'gray.700',
+          },
+        })}
+      >
+        <CardHeader
+          className={css({
+            position: 'relative',
+            paddingBottom: '2',
+            padding: '4',
+          })}
+        >
+          <CardTitle
+            className={css({
+              fontSize: 'xl',
+              fontWeight: 'bold',
+              color: 'gray.900',
+              _dark: {
+                color: 'white',
+              },
+            })}
+          >
             Emoji Pointer
           </CardTitle>
-          <CardDescription className={css({
-            fontSize: 'sm',
-            color: 'green.700',
-            _dark: {
-              color: 'green.300',
-            },
-          })}>
+          <CardDescription
+            className={css({
+              fontSize: 'sm',
+              color: 'green.700',
+              _dark: {
+                color: 'green.300',
+              },
+            })}
+          >
             Using an emoji as a custom pointer
           </CardDescription>
         </CardHeader>
-        <CardContent className={css({
-          position: 'relative',
-          display: 'flex',
-          height: '40',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '6',
-        })}>
-          <span class={css({
-            pointerEvents: 'none',
-            textAlign: 'center',
-            fontSize: 'xl',
-            fontWeight: 'medium',
-            color: 'green.800',
-            _dark: {
-              color: 'green.200',
-            },
-          })}>
+        <CardContent
+          className={css({
+            position: 'relative',
+            display: 'flex',
+            height: '40',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '6',
+          })}
+        >
+          <span
+            class={css({
+              pointerEvents: 'none',
+              textAlign: 'center',
+              fontSize: 'xl',
+              fontWeight: 'medium',
+              color: 'green.800',
+              _dark: {
+                color: 'green.200',
+              },
+            })}
+          >
             Check this out
           </span>
         </CardContent>

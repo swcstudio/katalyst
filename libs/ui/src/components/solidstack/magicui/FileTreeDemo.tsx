@@ -1,5 +1,5 @@
-import { Component, For, createSignal } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For, createSignal, type JSX } from 'solid-js';
 
 interface TreeElement {
   id: string;
@@ -14,17 +14,22 @@ const Tree: Component<{
   initialSelectedId?: string;
   initialExpandedItems?: string[];
   elements?: TreeElement[];
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   const [selectedId, setSelectedId] = createSignal(props.initialSelectedId || '');
   const [expandedItems, setExpandedItems] = createSignal(props.initialExpandedItems || []);
 
   return (
-    <div class={css({
-      fontFamily: 'mono',
-      fontSize: 'sm',
-      lineHeight: '1.4',
-    }, props.className)}>
+    <div
+      class={css(
+        {
+          fontFamily: 'mono',
+          fontSize: 'sm',
+          lineHeight: '1.4',
+        },
+        props.className
+      )}
+    >
       {props.children}
     </div>
   );
@@ -34,15 +39,17 @@ const Tree: Component<{
 const Folder: Component<{
   element?: string;
   value: string;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   const [isExpanded, setIsExpanded] = createSignal(true);
 
   return (
-    <div class={css({
-      marginLeft: '0',
-    })}>
-      <div 
+    <div
+      class={css({
+        marginLeft: '0',
+      })}
+    >
+      <div
         class={css({
           display: 'flex',
           alignItems: 'center',
@@ -58,33 +65,39 @@ const Folder: Component<{
         })}
         onClick={() => setIsExpanded(!isExpanded())}
       >
-        <span class={css({
-          marginRight: '2',
-          fontSize: 'xs',
-          color: 'gray.500',
-        })}>
+        <span
+          class={css({
+            marginRight: '2',
+            fontSize: 'xs',
+            color: 'gray.500',
+          })}
+        >
           {isExpanded() ? '📂' : '📁'}
         </span>
-        <span class={css({
-          color: 'blue.600',
-          fontWeight: 'medium',
-          _dark: {
-            color: 'blue.400',
-          },
-        })}>
+        <span
+          class={css({
+            color: 'blue.600',
+            fontWeight: 'medium',
+            _dark: {
+              color: 'blue.400',
+            },
+          })}
+        >
           {props.element || props.value}
         </span>
       </div>
       {isExpanded() && (
-        <div class={css({
-          marginLeft: '4',
-          borderLeft: '1px solid',
-          borderColor: 'gray.200',
-          paddingLeft: '2',
-          _dark: {
-            borderColor: 'gray.700',
-          },
-        })}>
+        <div
+          class={css({
+            marginLeft: '4',
+            borderLeft: '1px solid',
+            borderColor: 'gray.200',
+            paddingLeft: '2',
+            _dark: {
+              borderColor: 'gray.700',
+            },
+          })}
+        >
           {props.children}
         </div>
       )}
@@ -95,12 +108,12 @@ const Folder: Component<{
 // Placeholder File component
 const File: Component<{
   value: string;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   const [isSelected, setIsSelected] = createSignal(false);
 
   return (
-    <div 
+    <div
       class={css({
         display: 'flex',
         alignItems: 'center',
@@ -120,18 +133,22 @@ const File: Component<{
       })}
       onClick={() => setIsSelected(!isSelected())}
     >
-      <span class={css({
-        marginRight: '2',
-        fontSize: 'xs',
-      })}>
+      <span
+        class={css({
+          marginRight: '2',
+          fontSize: 'xs',
+        })}
+      >
         📄
       </span>
-      <span class={css({
-        color: 'gray.700',
-        _dark: {
-          color: 'gray.300',
-        },
-      })}>
+      <span
+        class={css({
+          color: 'gray.700',
+          _dark: {
+            color: 'gray.300',
+          },
+        })}
+      >
         {props.children}
       </span>
     </div>
@@ -140,65 +157,65 @@ const File: Component<{
 
 const ELEMENTS = [
   {
-    id: "1",
+    id: '1',
     isSelectable: true,
-    name: "src",
+    name: 'src',
     children: [
       {
-        id: "2",
+        id: '2',
         isSelectable: true,
-        name: "app",
+        name: 'app',
         children: [
           {
-            id: "3",
+            id: '3',
             isSelectable: true,
-            name: "layout.tsx",
+            name: 'layout.tsx',
           },
           {
-            id: "4",
+            id: '4',
             isSelectable: true,
-            name: "page.tsx",
+            name: 'page.tsx',
           },
         ],
       },
       {
-        id: "5",
+        id: '5',
         isSelectable: true,
-        name: "components",
+        name: 'components',
         children: [
           {
-            id: "6",
+            id: '6',
             isSelectable: true,
-            name: "ui",
+            name: 'ui',
             children: [
               {
-                id: "7",
+                id: '7',
                 isSelectable: true,
-                name: "button.tsx",
+                name: 'button.tsx',
               },
             ],
           },
           {
-            id: "8",
+            id: '8',
             isSelectable: true,
-            name: "header.tsx",
+            name: 'header.tsx',
           },
           {
-            id: "9",
+            id: '9',
             isSelectable: true,
-            name: "footer.tsx",
+            name: 'footer.tsx',
           },
         ],
       },
       {
-        id: "10",
+        id: '10',
         isSelectable: true,
-        name: "lib",
+        name: 'lib',
         children: [
           {
-            id: "11",
+            id: '11',
             isSelectable: true,
-            name: "utils.ts",
+            name: 'utils.ts',
           },
         ],
       },
@@ -208,24 +225,26 @@ const ELEMENTS = [
 
 export const FileTreeDemo: Component = () => {
   return (
-    <div class={css({
-      position: 'relative',
-      display: 'flex',
-      height: '300px',
-      width: '1/2',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-      borderRadius: 'lg',
-      border: '1px solid',
-      borderColor: 'gray.200',
-      backgroundColor: 'white',
-      _dark: {
-        borderColor: 'gray.800',
-        backgroundColor: 'gray.900',
-      },
-    })}>
+    <div
+      class={css({
+        position: 'relative',
+        display: 'flex',
+        height: '300px',
+        width: '1/2',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        borderRadius: 'lg',
+        border: '1px solid',
+        borderColor: 'gray.200',
+        backgroundColor: 'white',
+        _dark: {
+          borderColor: 'gray.800',
+          backgroundColor: 'gray.900',
+        },
+      })}
+    >
       <Tree
         className={css({
           overflow: 'hidden',
@@ -237,19 +256,7 @@ export const FileTreeDemo: Component = () => {
           },
         })}
         initialSelectedId="7"
-        initialExpandedItems={[
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8",
-          "9",
-          "10",
-          "11",
-        ]}
+        initialExpandedItems={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']}
         elements={ELEMENTS}
       >
         <Folder element="src" value="1">

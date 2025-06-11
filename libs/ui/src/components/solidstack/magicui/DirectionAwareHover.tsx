@@ -1,7 +1,7 @@
-import { Component, JSX, createSignal, onMount, onCleanup } from 'solid-js';
 import { cx } from '@sse/ui/styled-system/css';
 import { css } from '@sse/ui/styled-system/css';
 import { animate } from 'motion';
+import { type Component, type JSX, createSignal, onCleanup, onMount } from 'solid-js';
 
 export interface DirectionAwareHoverProps {
   imageUrl: string;
@@ -14,16 +14,18 @@ type Direction = 'top' | 'bottom' | 'left' | 'right';
 
 export const DirectionAwareHoverDemo: Component = () => {
   const imageUrl =
-    "https://images.unsplash.com/photo-1663765970236-f2acfde22237?q=80&w=3542&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-  
+    'https://images.unsplash.com/photo-1663765970236-f2acfde22237?q=80&w=3542&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+
   return (
-    <div class={css({
-      height: '640px',
-      position: 'relative',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    })}>
+    <div
+      class={css({
+        height: '640px',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      })}
+    >
       <DirectionAwareHover imageUrl={imageUrl}>
         <p class={css({ fontWeight: 'bold', fontSize: 'xl' })}>In the mountains</p>
         <p class={css({ fontWeight: 'normal', fontSize: 'sm' })}>$1299 / night</p>
@@ -35,7 +37,7 @@ export const DirectionAwareHoverDemo: Component = () => {
 export const DirectionAwareHover: Component<DirectionAwareHoverProps> = (props) => {
   const [isHovered, setIsHovered] = createSignal(false);
   const [direction, setDirection] = createSignal<Direction>('top');
-  
+
   let containerRef: HTMLDivElement;
   let overlayRef: HTMLDivElement;
   let imageRef: HTMLImageElement;
@@ -44,26 +46,30 @@ export const DirectionAwareHover: Component<DirectionAwareHoverProps> = (props) 
     const rect = element.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     const width = rect.width;
     const height = rect.height;
-    
+
     // Calculate which edge is closest
     const distances = {
       top: y,
       bottom: height - y,
       left: x,
-      right: width - x
+      right: width - x,
     };
-    
+
     const minDistance = Math.min(...Object.values(distances));
-    
-    return Object.entries(distances).find(([_, distance]) => distance === minDistance)?.[0] as Direction || 'top';
+
+    return (
+      (Object.entries(distances).find(
+        ([_, distance]) => distance === minDistance
+      )?.[0] as Direction) || 'top'
+    );
   };
 
   const getOverlayTransform = (dir: Direction, isEntering: boolean) => {
     const offset = isEntering ? '0%' : getExitOffset(dir);
-    
+
     switch (dir) {
       case 'top':
         return `translateY(${isEntering ? '0%' : '-100%'})`;
@@ -80,11 +86,16 @@ export const DirectionAwareHover: Component<DirectionAwareHoverProps> = (props) 
 
   const getExitOffset = (dir: Direction) => {
     switch (dir) {
-      case 'top': return '-100%';
-      case 'bottom': return '100%';
-      case 'left': return '-100%';
-      case 'right': return '100%';
-      default: return '0%';
+      case 'top':
+        return '-100%';
+      case 'bottom':
+        return '100%';
+      case 'left':
+        return '-100%';
+      case 'right':
+        return '100%';
+      default:
+        return '0%';
     }
   };
 
@@ -92,24 +103,20 @@ export const DirectionAwareHover: Component<DirectionAwareHoverProps> = (props) 
     const dir = getDirection(e, containerRef);
     setDirection(dir);
     setIsHovered(true);
-    
+
     if (overlayRef && imageRef) {
       // Animate overlay entrance
       animate(
         overlayRef,
         {
           opacity: [0, 1],
-          transform: [getOverlayTransform(dir, false), getOverlayTransform(dir, true)]
+          transform: [getOverlayTransform(dir, false), getOverlayTransform(dir, true)],
         },
         { duration: 0.3, easing: 'ease-out' }
       );
-      
+
       // Animate image scale
-      animate(
-        imageRef,
-        { scale: [1, 1.1] },
-        { duration: 0.6, easing: 'ease-out' }
-      );
+      animate(imageRef, { scale: [1, 1.1] }, { duration: 0.6, easing: 'ease-out' });
     }
   };
 
@@ -117,24 +124,20 @@ export const DirectionAwareHover: Component<DirectionAwareHoverProps> = (props) 
     const dir = getDirection(e, containerRef);
     setDirection(dir);
     setIsHovered(false);
-    
+
     if (overlayRef && imageRef) {
       // Animate overlay exit
       animate(
         overlayRef,
         {
           opacity: [1, 0],
-          transform: [getOverlayTransform(dir, true), getOverlayTransform(dir, false)]
+          transform: [getOverlayTransform(dir, true), getOverlayTransform(dir, false)],
         },
         { duration: 0.3, easing: 'ease-in' }
       );
-      
+
       // Animate image scale back
-      animate(
-        imageRef,
-        { scale: [1.1, 1] },
-        { duration: 0.6, easing: 'ease-out' }
-      );
+      animate(imageRef, { scale: [1.1, 1] }, { duration: 0.6, easing: 'ease-out' });
     }
   };
 
@@ -149,7 +152,7 @@ export const DirectionAwareHover: Component<DirectionAwareHoverProps> = (props) 
           borderRadius: '12px',
           overflow: 'hidden',
           cursor: 'pointer',
-          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
         }),
         props.className
       )}
@@ -164,10 +167,10 @@ export const DirectionAwareHover: Component<DirectionAwareHoverProps> = (props) 
         class={css({
           width: '100%',
           height: '100%',
-          objectFit: 'cover'
+          objectFit: 'cover',
         })}
       />
-      
+
       {/* Overlay */}
       <div
         ref={overlayRef!}
@@ -182,17 +185,17 @@ export const DirectionAwareHover: Component<DirectionAwareHoverProps> = (props) 
             alignItems: 'center',
             color: 'white',
             padding: '24px',
-            opacity: 0
+            opacity: 0,
           }),
           props.overlayClassName
         )}
         style={{
-          transform: getOverlayTransform(direction(), false)
+          transform: getOverlayTransform(direction(), false),
         }}
       >
         {props.children}
       </div>
-      
+
       {/* Gradient overlay for better text readability */}
       <div
         class={css({
@@ -201,10 +204,10 @@ export const DirectionAwareHover: Component<DirectionAwareHoverProps> = (props) 
           background: 'linear-gradient(45deg, rgba(0,0,0,0.1), rgba(0,0,0,0.3))',
           opacity: 0,
           transition: 'opacity 0.3s ease',
-          pointerEvents: 'none'
+          pointerEvents: 'none',
         })}
         style={{
-          opacity: isHovered() ? 1 : 0
+          opacity: isHovered() ? 1 : 0,
         }}
       />
     </div>

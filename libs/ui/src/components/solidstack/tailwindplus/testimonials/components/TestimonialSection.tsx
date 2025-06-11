@@ -1,12 +1,27 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, createEffect, For, Show, createMemo } from 'solid-js';
+import {
+  type Component,
+  For,
+  type JSX,
+  Show,
+  createEffect,
+  createMemo,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 import { css } from '../../../../../styled-system/css';
-import { useTestimonialSection, Testimonial, TestimonialSection } from '../state/useTestimonialSection';
+import { BackgroundBeams } from '../../../magicui/BackgroundBeams';
 import { BlurFade } from '../../../magicui/BlurFade';
 import { BorderBeam } from '../../../magicui/BorderBeam';
 import { DotPattern } from '../../../magicui/DotPattern';
-import { BackgroundBeams } from '../../../magicui/BackgroundBeams';
-import { TextAnimate } from '../../../magicui/TextAnimate';
 import { NumberTicker } from '../../../magicui/NumberTicker';
+import { TextAnimate } from '../../../magicui/TextAnimate';
+import {
+  type Testimonial,
+  TestimonialSection,
+  useTestimonialSection,
+} from '../state/useTestimonialSection';
 
 export interface TestimonialSectionProps {
   className?: string;
@@ -16,7 +31,16 @@ export interface TestimonialSectionProps {
   badge?: string;
   testimonials: Testimonial[];
   theme?: 'light' | 'dark';
-  variant?: 'simple' | 'hero' | 'split' | 'grid' | 'masonry' | 'carousel' | 'featured' | 'centered' | 'branded';
+  variant?:
+    | 'simple'
+    | 'hero'
+    | 'split'
+    | 'grid'
+    | 'masonry'
+    | 'carousel'
+    | 'featured'
+    | 'centered'
+    | 'branded';
   layout?: 'grid' | 'masonry' | 'carousel' | 'split' | 'centered';
   animated?: boolean;
   showRatings?: boolean;
@@ -58,7 +82,7 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
       layout: merged.layout,
       theme: merged.theme,
       backgroundPattern: merged.backgroundPattern,
-      backgroundImage: merged.backgroundImage
+      backgroundImage: merged.backgroundImage,
     },
     theme: merged.theme,
     variant: merged.variant,
@@ -67,12 +91,12 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
     autoplayEnabled: merged.autoplay,
     showRatings: merged.showRatings,
     onTestimonialSelect: (testimonialId) => {
-      const testimonial = merged.testimonials.find(t => t.id === testimonialId);
+      const testimonial = merged.testimonials.find((t) => t.id === testimonialId);
       if (testimonial && merged.onTestimonialSelect) {
         merged.onTestimonialSelect(testimonial);
       }
     },
-    onAnimationComplete: merged.onAnimationComplete
+    onAnimationComplete: merged.onAnimationComplete,
   });
 
   // Intersection Observer for triggering animations
@@ -104,7 +128,7 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
     const baseClasses = css({
       position: 'relative',
       py: '24',
-      sm: { py: '32' }
+      sm: { py: '32' },
     });
 
     const themeClasses = (() => {
@@ -126,20 +150,24 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
     return `${baseClasses} ${themeClasses} ${merged.className || ''}`;
   });
 
-  const StarRating: Component<{ rating: number; animated?: boolean; delay?: number }> = (ratingProps) => {
+  const StarRating: Component<{ rating: number; animated?: boolean; delay?: number }> = (
+    ratingProps
+  ) => {
     const stars = Array.from({ length: 5 }, (_, i) => i + 1);
-    
+
     return (
-      <div class={css({
-        display: 'flex',
-        gap: '1',
-        color: merged.theme === 'dark' ? 'yellow.400' : 'indigo.600'
-      })}>
+      <div
+        class={css({
+          display: 'flex',
+          gap: '1',
+          color: merged.theme === 'dark' ? 'yellow.400' : 'indigo.600',
+        })}
+      >
         <span class={css({ srOnly: true })}>{ratingProps.rating} out of 5 stars</span>
         <For each={stars}>
           {(star, index) => (
-            <BlurFade 
-              delay={(ratingProps.delay || 0) + (index() * 0.05)}
+            <BlurFade
+              delay={(ratingProps.delay || 0) + index() * 0.05}
               inView={isIntersecting() && ratingProps.animated}
             >
               <svg
@@ -149,7 +177,7 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
                   flexShrink: '0',
                   fill: star <= ratingProps.rating ? 'currentColor' : 'none',
                   stroke: star <= ratingProps.rating ? 'currentColor' : 'currentColor',
-                  strokeWidth: star <= ratingProps.rating ? '0' : '1'
+                  strokeWidth: star <= ratingProps.rating ? '0' : '1',
                 })}
                 viewBox="0 0 20 20"
                 aria-hidden="true"
@@ -163,14 +191,18 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
     );
   };
 
-  const TestimonialCard: Component<{ testimonial: Testimonial; index: number; variant?: string }> = (cardProps) => {
+  const TestimonialCard: Component<{
+    testimonial: Testimonial;
+    index: number;
+    variant?: string;
+  }> = (cardProps) => {
     const [isHovered, setIsHovered] = createSignal(false);
-    
+
     const cardClasses = createMemo(() => {
       const baseClasses = css({
         position: 'relative',
         transition: 'all 0.3s ease',
-        cursor: 'pointer'
+        cursor: 'pointer',
       });
 
       const variantClasses = (() => {
@@ -185,8 +217,8 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
               ring: '1',
               ringColor: merged.theme === 'dark' ? 'white/10' : 'gray.900/5',
               _hover: {
-                bg: merged.theme === 'dark' ? 'white/10' : 'gray.100'
-              }
+                bg: merged.theme === 'dark' ? 'white/10' : 'gray.100',
+              },
             });
           case 'featured':
             return css({
@@ -197,8 +229,8 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
               ringColor: merged.theme === 'dark' ? 'white/10' : 'gray.900/5',
               overflow: 'hidden',
               _hover: {
-                shadow: '2xl'
-              }
+                shadow: '2xl',
+              },
             });
           case 'branded':
             return css({
@@ -206,17 +238,20 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
               flexDirection: 'column',
               p: '12',
               md: {
-                borderR: merged.theme === 'dark' ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)',
+                borderR:
+                  merged.theme === 'dark'
+                    ? '1px solid rgba(255,255,255,0.1)'
+                    : '1px solid rgba(0,0,0,0.1)',
                 py: '16',
                 pr: '10',
-                pl: '0'
-              }
+                pl: '0',
+              },
             });
           default:
             return css({
               display: 'flex',
               flexDirection: 'column',
-              gap: '4'
+              gap: '4',
             });
         }
       })();
@@ -235,7 +270,7 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
             letterSpacing: 'tight',
             textAlign: 'center',
             color: merged.theme === 'dark' ? 'white' : 'gray.900',
-            lineHeight: '8'
+            lineHeight: '8',
           });
         case 'featured':
           return css({
@@ -244,29 +279,26 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
             letterSpacing: 'tight',
             color: merged.theme === 'dark' ? 'white' : 'gray.900',
             p: '6',
-            sm: { p: '12', fontSize: 'xl', lineHeight: '8' }
+            sm: { p: '12', fontSize: 'xl', lineHeight: '8' },
           });
         case 'branded':
           return css({
             fontSize: 'lg',
             fontWeight: 'medium',
             color: merged.theme === 'dark' ? 'white' : 'gray.900',
-            md: { flexGrow: '1' }
+            md: { flexGrow: '1' },
           });
         default:
           return css({
             fontSize: 'base',
             color: merged.theme === 'dark' ? 'white' : 'gray.900',
-            lineHeight: '6'
+            lineHeight: '6',
           });
       }
     });
 
     return (
-      <BlurFade 
-        delay={cardProps.index * (merged.staggerDelay / 1000)}
-        inView={isIntersecting()}
-      >
+      <BlurFade delay={cardProps.index * (merged.staggerDelay / 1000)} inView={isIntersecting()}>
         <div
           class={cardClasses()}
           onMouseEnter={() => {
@@ -293,7 +325,7 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
                 w: '8',
                 h: '8',
                 transform: 'translate(-12px, -8px)',
-                color: merged.theme === 'dark' ? 'indigo.400' : 'indigo.600'
+                color: merged.theme === 'dark' ? 'indigo.400' : 'indigo.600',
               })}
               fill="currentColor"
               viewBox="0 0 32 32"
@@ -305,8 +337,8 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
 
           {/* Rating */}
           <Show when={merged.showRatings && cardProps.testimonial.rating}>
-            <StarRating 
-              rating={cardProps.testimonial.rating!} 
+            <StarRating
+              rating={cardProps.testimonial.rating!}
               animated={merged.animated}
               delay={cardProps.index * (merged.staggerDelay / 1000) + 0.2}
             />
@@ -314,70 +346,106 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
 
           {/* Quote */}
           <blockquote class={quoteClasses()}>
-            <TextAnimate 
+            <TextAnimate
               text={`"${cardProps.testimonial.body}"`}
               delay={cardProps.index * (merged.staggerDelay / 1000) + 0.3}
             />
           </blockquote>
 
           {/* Author */}
-          <figcaption class={css({
-            mt: merged.variant === 'featured' ? '0' : '6',
-            display: 'flex',
-            alignItems: merged.variant === 'centered' ? 'center' : 'start',
-            justifyContent: merged.variant === 'centered' ? 'center' : 'start',
-            gap: '4',
-            flexWrap: merged.variant === 'featured' ? 'wrap' : 'nowrap',
-            borderT: merged.variant === 'featured' ? (merged.theme === 'dark' ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)') : 'none',
-            px: merged.variant === 'featured' ? '6' : '0',
-            py: merged.variant === 'featured' ? '4' : '0',
-            sm: { flexWrap: merged.variant === 'featured' ? 'nowrap' : 'wrap' }
-          })}>
+          <figcaption
+            class={css({
+              mt: merged.variant === 'featured' ? '0' : '6',
+              display: 'flex',
+              alignItems: merged.variant === 'centered' ? 'center' : 'start',
+              justifyContent: merged.variant === 'centered' ? 'center' : 'start',
+              gap: '4',
+              flexWrap: merged.variant === 'featured' ? 'wrap' : 'nowrap',
+              borderT:
+                merged.variant === 'featured'
+                  ? merged.theme === 'dark'
+                    ? '1px solid rgba(255,255,255,0.1)'
+                    : '1px solid rgba(0,0,0,0.1)'
+                  : 'none',
+              px: merged.variant === 'featured' ? '6' : '0',
+              py: merged.variant === 'featured' ? '4' : '0',
+              sm: { flexWrap: merged.variant === 'featured' ? 'nowrap' : 'wrap' },
+            })}
+          >
             <Show when={cardProps.testimonial.author.imageUrl}>
               <img
                 src={cardProps.testimonial.author.imageUrl}
                 alt={cardProps.testimonial.author.name}
                 class={css({
-                  w: merged.variant === 'centered' ? '12' : merged.variant === 'branded' ? '12' : '10',
-                  h: merged.variant === 'centered' ? '12' : merged.variant === 'branded' ? '12' : '10',
+                  w:
+                    merged.variant === 'centered'
+                      ? '12'
+                      : merged.variant === 'branded'
+                        ? '12'
+                        : '10',
+                  h:
+                    merged.variant === 'centered'
+                      ? '12'
+                      : merged.variant === 'branded'
+                        ? '12'
+                        : '10',
                   rounded: 'full',
                   bg: merged.theme === 'dark' ? 'gray.800' : 'gray.50',
                   flexShrink: '0',
                   border: merged.variant === 'branded' ? '2px solid' : 'none',
-                  borderColor: merged.variant === 'branded' ? (merged.theme === 'dark' ? 'white' : 'white') : 'transparent'
+                  borderColor:
+                    merged.variant === 'branded'
+                      ? merged.theme === 'dark'
+                        ? 'white'
+                        : 'white'
+                      : 'transparent',
                 })}
               />
             </Show>
-            
-            <div class={css({
-              flexGrow: merged.variant === 'featured' ? '1' : '0'
-            })}>
-              <div class={css({
-                fontWeight: 'semibold',
-                color: merged.theme === 'dark' ? 'white' : 'gray.900',
-                fontSize: merged.variant === 'centered' ? 'sm' : 'base'
-              })}>
+
+            <div
+              class={css({
+                flexGrow: merged.variant === 'featured' ? '1' : '0',
+              })}
+            >
+              <div
+                class={css({
+                  fontWeight: 'semibold',
+                  color: merged.theme === 'dark' ? 'white' : 'gray.900',
+                  fontSize: merged.variant === 'centered' ? 'sm' : 'base',
+                })}
+              >
                 {cardProps.testimonial.author.name}
               </div>
-              <Show when={cardProps.testimonial.author.title || cardProps.testimonial.author.company}>
-                <div class={css({
-                  mt: merged.variant === 'centered' ? '0.5' : '1',
-                  fontSize: merged.variant === 'centered' ? 'sm' : 'base',
-                  color: merged.theme === 'dark' ? 'gray.400' : 'gray.600'
-                })}>
+              <Show
+                when={cardProps.testimonial.author.title || cardProps.testimonial.author.company}
+              >
+                <div
+                  class={css({
+                    mt: merged.variant === 'centered' ? '0.5' : '1',
+                    fontSize: merged.variant === 'centered' ? 'sm' : 'base',
+                    color: merged.theme === 'dark' ? 'gray.400' : 'gray.600',
+                  })}
+                >
                   {cardProps.testimonial.author.title}
-                  <Show when={cardProps.testimonial.author.title && cardProps.testimonial.author.company}>
-                    {", "}
+                  <Show
+                    when={
+                      cardProps.testimonial.author.title && cardProps.testimonial.author.company
+                    }
+                  >
+                    {', '}
                   </Show>
                   {cardProps.testimonial.author.company}
                 </div>
               </Show>
               <Show when={cardProps.testimonial.author.handle}>
-                <div class={css({
-                  mt: '0.5',
-                  fontSize: 'sm',
-                  color: merged.theme === 'dark' ? 'gray.400' : 'gray.600'
-                })}>
+                <div
+                  class={css({
+                    mt: '0.5',
+                    fontSize: 'sm',
+                    color: merged.theme === 'dark' ? 'gray.400' : 'gray.600',
+                  })}
+                >
                   @{cardProps.testimonial.author.handle}
                 </div>
               </Show>
@@ -390,7 +458,7 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
                 class={css({
                   h: '10',
                   w: 'auto',
-                  flexShrink: '0'
+                  flexShrink: '0',
                 })}
               />
             </Show>
@@ -409,7 +477,7 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
           gap: '8',
           gridTemplateColumns: '1',
           sm: { gridTemplateColumns: '2' },
-          xl: { gridTemplateColumns: merged.testimonials.length >= 3 ? '3' : '2' }
+          xl: { gridTemplateColumns: merged.testimonials.length >= 3 ? '3' : '2' },
         });
       case 'masonry':
         return css({
@@ -417,27 +485,27 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
           gap: '8',
           gridTemplateColumns: '1',
           sm: { gridTemplateColumns: '2' },
-          lg: { gridTemplateColumns: '3' }
+          lg: { gridTemplateColumns: '3' },
         });
       case 'split':
         return css({
           display: 'grid',
           gap: '10',
           gridTemplateColumns: '1',
-          lg: { gridTemplateColumns: '2' }
+          lg: { gridTemplateColumns: '2' },
         });
       case 'branded':
         return css({
           display: 'grid',
           gridTemplateColumns: '1',
-          md: { gridTemplateColumns: '2' }
+          md: { gridTemplateColumns: '2' },
         });
       default:
         return css({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '8'
+          gap: '8',
         });
     }
   });
@@ -450,7 +518,7 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
           className={css({
             position: 'absolute',
             inset: '0',
-            opacity: merged.theme === 'dark' ? '0.1' : '0.05'
+            opacity: merged.theme === 'dark' ? '0.1' : '0.05',
           })}
         />
       </Show>
@@ -460,36 +528,42 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
       </Show>
 
       <Show when={merged.backgroundPattern === 'gradient'}>
-        <div class={css({
-          position: 'absolute',
-          inset: '0',
-          bg: merged.theme === 'dark' 
-            ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%)'
-            : 'linear-gradient(135deg, rgba(239, 246, 255, 0.6) 0%, rgba(219, 234, 254, 0.6) 100%)'
-        })} />
+        <div
+          class={css({
+            position: 'absolute',
+            inset: '0',
+            bg:
+              merged.theme === 'dark'
+                ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%)'
+                : 'linear-gradient(135deg, rgba(239, 246, 255, 0.6) 0%, rgba(219, 234, 254, 0.6) 100%)',
+          })}
+        />
       </Show>
 
       {/* Complex gradient backgrounds for hero variant */}
       <Show when={merged.variant === 'hero'}>
-        <div class={css({
-          position: 'absolute',
-          insetX: '0',
-          top: '1/2',
-          '-z': '10',
-          transform: 'translateY(-50%) gpu',
-          overflow: 'hidden',
-          opacity: '0.3',
-          filter: 'blur(3xl)'
-        })}>
+        <div
+          class={css({
+            position: 'absolute',
+            insetX: '0',
+            top: '1/2',
+            '-z': '10',
+            transform: 'translateY(-50%) gpu',
+            overflow: 'hidden',
+            opacity: '0.3',
+            filter: 'blur(3xl)',
+          })}
+        >
           <div
             style={{
-              'clip-path': 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+              'clip-path':
+                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
             }}
             class={css({
               ml: 'max(50%, 38rem)',
               aspectRatio: '1313/771',
               w: '328.25',
-              bg: 'linear-gradient(to top right, #ff80b5, #9089fc)'
+              bg: 'linear-gradient(to top right, #ff80b5, #9089fc)',
             })}
           />
         </div>
@@ -505,62 +579,73 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
             w: 'full',
             h: 'full',
             objectFit: 'cover',
-            opacity: merged.theme === 'dark' ? '0.2' : '0.1'
+            opacity: merged.theme === 'dark' ? '0.2' : '0.1',
           })}
         />
       </Show>
 
-      <div class={css({
-        position: 'relative',
-        mx: 'auto',
-        maxW: '7xl',
-        px: '6',
-        lg: { px: '8' }
-      })}>
+      <div
+        class={css({
+          position: 'relative',
+          mx: 'auto',
+          maxW: '7xl',
+          px: '6',
+          lg: { px: '8' },
+        })}
+      >
         {/* Header Section */}
         <Show when={merged.badge || merged.title || merged.subtitle}>
           <BlurFade delay={0.1} inView={isIntersecting()}>
-            <div class={css({
-              mx: 'auto',
-              maxW: '2xl',
-              textAlign: merged.variant === 'split' || merged.variant === 'branded' ? 'left' : 'center',
-              mb: '16',
-              lg: { mb: '20' }
-            })}>
+            <div
+              class={css({
+                mx: 'auto',
+                maxW: '2xl',
+                textAlign:
+                  merged.variant === 'split' || merged.variant === 'branded' ? 'left' : 'center',
+                mb: '16',
+                lg: { mb: '20' },
+              })}
+            >
               <Show when={merged.badge}>
-                <div class={css({
-                  fontSize: 'base',
-                  lineHeight: '7',
-                  fontWeight: 'semibold',
-                  color: merged.theme === 'dark' ? 'indigo.400' : 'indigo.600',
-                  mb: '2'
-                })}>
+                <div
+                  class={css({
+                    fontSize: 'base',
+                    lineHeight: '7',
+                    fontWeight: 'semibold',
+                    color: merged.theme === 'dark' ? 'indigo.400' : 'indigo.600',
+                    mb: '2',
+                  })}
+                >
                   {merged.badge}
                 </div>
               </Show>
 
               <Show when={merged.title}>
-                <h2 class={css({
-                  mt: '2',
-                  fontSize: '4xl',
-                  fontWeight: 'semibold',
-                  letterSpacing: 'tight',
-                  textWrap: 'balance',
-                  color: merged.theme === 'dark' ? 'white' : 'gray.900',
-                  sm: { fontSize: '5xl' }
-                })}>
+                <h2
+                  class={css({
+                    mt: '2',
+                    fontSize: '4xl',
+                    fontWeight: 'semibold',
+                    letterSpacing: 'tight',
+                    textWrap: 'balance',
+                    color: merged.theme === 'dark' ? 'white' : 'gray.900',
+                    sm: { fontSize: '5xl' },
+                  })}
+                >
                   {merged.title}
                 </h2>
               </Show>
 
               <Show when={merged.subtitle}>
-                <p class={css({
-                  mt: '6',
-                  fontSize: 'lg',
-                  sm: { fontSize: 'xl' },
-                  color: merged.theme === 'dark' ? 'gray.300' : 'gray.600',
-                  lineHeight: '8'
-                })}>
+                <p
+                  class={css({
+                    mt: '6',
+                    fontSize: 'lg',
+                    sm: { fontSize: 'xl' },
+                    color: merged.theme === 'dark' ? 'gray.300' : 'gray.600',
+                    lineHeight: '8',
+                  })}
+                >
                   {merged.subtitle}
                 </p>
               </Show>
@@ -572,25 +657,25 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
         <div class={getGridClasses()}>
           <For each={merged.testimonials}>
             {(testimonial, index) => (
-              <TestimonialCard 
-                testimonial={testimonial} 
-                index={index()} 
-                variant={merged.variant}
-              />
+              <TestimonialCard testimonial={testimonial} index={index()} variant={merged.variant} />
             )}
           </For>
         </div>
 
         {/* Error State */}
         <Show when={testimonialSection.isError && testimonialSection.errorState}>
-          <div class={css({
-            textAlign: 'center',
-            py: '12'
-          })}>
-            <p class={css({
-              color: 'red.500',
-              mb: '4'
-            })}>
+          <div
+            class={css({
+              textAlign: 'center',
+              py: '12',
+            })}
+          >
+            <p
+              class={css({
+                color: 'red.500',
+                mb: '4',
+              })}
+            >
               {testimonialSection.errorState}
             </p>
             <button
@@ -601,7 +686,7 @@ export const TestimonialSection: Component<TestimonialSectionProps> = (props) =>
                 px: '4',
                 py: '2',
                 rounded: 'md',
-                _hover: { bg: 'red.700' }
+                _hover: { bg: 'red.700' },
               })}
             >
               Retry
@@ -626,12 +711,13 @@ export const TestimonialSectionDemo: Component<TestimonialSectionDemoProps> = (p
         name: 'Judith Black',
         title: 'CEO',
         company: 'Workcation',
-        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-600.svg'
+        imageUrl:
+          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-600.svg',
       },
       rating: 5,
       featured: true,
-      category: 'enterprise'
+      category: 'enterprise',
     },
     {
       id: '2',
@@ -641,10 +727,11 @@ export const TestimonialSectionDemo: Component<TestimonialSectionDemoProps> = (p
         handle: 'lesliealexander',
         title: 'Co-Founder',
         company: 'Tuple',
-        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+        imageUrl:
+          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
       rating: 5,
-      category: 'startup'
+      category: 'startup',
     },
     {
       id: '3',
@@ -654,11 +741,12 @@ export const TestimonialSectionDemo: Component<TestimonialSectionDemoProps> = (p
         handle: 'tomcook',
         title: 'Director of Product',
         company: 'Reform',
-        imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+        imageUrl:
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
       rating: 4,
-      category: 'enterprise'
-    }
+      category: 'enterprise',
+    },
   ];
 
   return (

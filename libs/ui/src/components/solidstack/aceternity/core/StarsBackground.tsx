@@ -1,5 +1,5 @@
-import { Component, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, createSignal, onCleanup, onMount } from 'solid-js';
 
 interface Star {
   x: number;
@@ -63,30 +63,30 @@ export const StarsBackground: Component<StarsBackgroundProps> = (props) => {
   const drawStar = (ctx: CanvasRenderingContext2D, star: Star) => {
     ctx.save();
     ctx.globalAlpha = star.opacity;
-    
+
     // Create a glowing effect
     ctx.shadowColor = config.starColor;
     ctx.shadowBlur = star.size;
     ctx.fillStyle = config.starColor;
-    
+
     // Draw the star as a small circle
     ctx.beginPath();
     ctx.arc(star.x, star.y, star.size * 0.5, 0, Math.PI * 2);
     ctx.fill();
-    
+
     // Add a bright center point
     ctx.shadowBlur = 0;
     ctx.globalAlpha = Math.min(star.opacity * 1.5, 1);
     ctx.beginPath();
     ctx.arc(star.x, star.y, star.size * 0.2, 0, Math.PI * 2);
     ctx.fill();
-    
+
     // Add sparkle effect for larger stars
     if (star.size > 2) {
       ctx.globalAlpha = star.opacity * 0.8;
       ctx.strokeStyle = config.starColor;
       ctx.lineWidth = 1;
-      
+
       // Draw cross sparkle
       ctx.beginPath();
       ctx.moveTo(star.x - star.size, star.y);
@@ -95,7 +95,7 @@ export const StarsBackground: Component<StarsBackgroundProps> = (props) => {
       ctx.lineTo(star.x, star.y + star.size);
       ctx.stroke();
     }
-    
+
     ctx.restore();
   };
 
@@ -113,9 +113,9 @@ export const StarsBackground: Component<StarsBackgroundProps> = (props) => {
 
     // Update and draw stars
     const currentStars = stars();
-    const updatedStars = currentStars.map(star => updateStar(star));
+    const updatedStars = currentStars.map((star) => updateStar(star));
 
-    updatedStars.forEach(star => {
+    updatedStars.forEach((star) => {
       drawStar(ctx, star);
     });
 
@@ -137,8 +137,8 @@ export const StarsBackground: Component<StarsBackgroundProps> = (props) => {
       ctx.scale(dpr, dpr);
     }
 
-    canvasRef.style.width = rect.width + 'px';
-    canvasRef.style.height = rect.height + 'px';
+    canvasRef.style.width = `${rect.width}px`;
+    canvasRef.style.height = `${rect.height}px`;
 
     initStars(rect.width, rect.height);
   };
@@ -166,14 +166,17 @@ export const StarsBackground: Component<StarsBackgroundProps> = (props) => {
   return (
     <canvas
       ref={canvasRef}
-      class={css({
-        position: 'absolute',
-        inset: '0',
-        width: 'full',
-        height: 'full',
-        pointerEvents: 'none',
-        backgroundColor: 'transparent',
-      }, props.className)}
+      class={css(
+        {
+          position: 'absolute',
+          inset: '0',
+          width: 'full',
+          height: 'full',
+          pointerEvents: 'none',
+          backgroundColor: 'transparent',
+        },
+        props.className
+      )}
     />
   );
 };

@@ -1,43 +1,47 @@
-import { z } from 'npm:zod';
 import { Resend } from 'npm:resend';
+import { z } from 'npm:zod';
 
 const newsletterSchema = z.object({
   email: z.string().email(),
   firstName: z.string().min(1).max(50).optional(),
   lastName: z.string().min(1).max(50).optional(),
   company: z.string().max(100).optional(),
-  interests: z.array(z.enum([
-    'solidjs',
-    'cloud-native',
-    'micro-frontends',
-    'kubernetes',
-    'ai-automation',
-    'devops',
-    'enterprise',
-    'tutorials'
-  ])).default(['solidjs']),
+  interests: z
+    .array(
+      z.enum([
+        'solidjs',
+        'cloud-native',
+        'micro-frontends',
+        'kubernetes',
+        'ai-automation',
+        'devops',
+        'enterprise',
+        'tutorials',
+      ])
+    )
+    .default(['solidjs']),
   frequency: z.enum(['daily', 'weekly', 'monthly']).default('weekly'),
   source: z.enum(['marketing', 'blog', 'docs', 'storefront']).default('marketing'),
   utm_source: z.string().optional(),
   utm_medium: z.string().optional(),
   utm_campaign: z.string().optional(),
   referralCode: z.string().optional(),
-  gdprConsent: z.boolean().refine(val => val === true, {
-    message: 'GDPR consent is required'
-  })
+  gdprConsent: z.boolean().refine((val) => val === true, {
+    message: 'GDPR consent is required',
+  }),
 });
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const interestDescriptions = {
-  'solidjs': 'SolidJS tutorials, tips, and best practices',
+  solidjs: 'SolidJS tutorials, tips, and best practices',
   'cloud-native': 'Cloud-native architecture and deployment strategies',
   'micro-frontends': 'Micro frontend patterns and implementation guides',
-  'kubernetes': 'Kubernetes deployment, management, and optimization',
+  kubernetes: 'Kubernetes deployment, management, and optimization',
   'ai-automation': 'AI-powered development tools and automation',
-  'devops': 'DevOps practices, CI/CD, and infrastructure as code',
-  'enterprise': 'Enterprise-grade solutions and case studies',
-  'tutorials': 'Step-by-step development tutorials and workshops'
+  devops: 'DevOps practices, CI/CD, and infrastructure as code',
+  enterprise: 'Enterprise-grade solutions and case studies',
+  tutorials: 'Step-by-step development tutorials and workshops',
 };
 
 export default defineEventHandler(async (event) => {
@@ -50,12 +54,12 @@ export default defineEventHandler(async (event) => {
     // Rate limiting
     const clientIP = getClientIP(event);
     const rateLimitKey = `newsletter:${clientIP}`;
-    
+
     const recentSubmission = await checkRateLimit(rateLimitKey);
     if (recentSubmission) {
       throw createError({
         statusCode: 429,
-        statusMessage: 'Please wait before subscribing again.'
+        statusMessage: 'Please wait before subscribing again.',
       });
     }
 
@@ -68,7 +72,7 @@ export default defineEventHandler(async (event) => {
         frequency: validatedData.frequency,
         firstName: validatedData.firstName,
         lastName: validatedData.lastName,
-        company: validatedData.company
+        company: validatedData.company,
       });
 
       return {
@@ -77,8 +81,8 @@ export default defineEventHandler(async (event) => {
         data: {
           status: 'updated',
           interests: validatedData.interests,
-          frequency: validatedData.frequency
-        }
+          frequency: validatedData.frequency,
+        },
       };
     }
 
@@ -113,9 +117,11 @@ export default defineEventHandler(async (event) => {
           <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="margin-top: 0; color: #374151;">What you'll receive:</h3>
             <ul style="margin: 0; padding-left: 20px;">
-              ${validatedData.interests.map(interest => 
-                `<li style="margin: 5px 0;">${interestDescriptions[interest]}</li>`
-              ).join('')}
+              ${validatedData.interests
+                .map(
+                  (interest) => `<li style="margin: 5px 0;">${interestDescriptions[interest]}</li>`
+                )
+                .join('')}
             </ul>
             <p style="margin-bottom: 0;"><strong>Frequency:</strong> ${validatedData.frequency.charAt(0).toUpperCase() + validatedData.frequency.slice(1)} updates</p>
           </div>
@@ -140,8 +146,8 @@ export default defineEventHandler(async (event) => {
       `,
       tags: [
         { name: 'type', value: 'newsletter_confirmation' },
-        { name: 'source', value: validatedData.source }
-      ]
+        { name: 'source', value: validatedData.source },
+      ],
     });
 
     // Store pending subscription
@@ -154,7 +160,7 @@ export default defineEventHandler(async (event) => {
       status: 'pending_confirmation',
       subscribed_at: new Date(),
       confirmation_email_id: confirmationEmailResult.data?.id,
-      expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
+      expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
     });
 
     // Notify team of new subscription
@@ -183,8 +189,8 @@ IP: ${clientIP}
       `.trim(),
       tags: [
         { name: 'type', value: 'team_notification' },
-        { name: 'source', value: validatedData.source }
-      ]
+        { name: 'source', value: validatedData.source },
+      ],
     });
 
     // Set rate limit
@@ -198,7 +204,7 @@ IP: ${clientIP}
       utm_medium: validatedData.utm_medium,
       utm_campaign: validatedData.utm_campaign,
       interests: validatedData.interests,
-      status: 'pending_confirmation'
+      status: 'pending_confirmation',
     });
 
     return {
@@ -209,24 +215,23 @@ IP: ${clientIP}
         email: validatedData.email,
         interests: validatedData.interests,
         frequency: validatedData.frequency,
-        confirmationRequired: true
-      }
+        confirmationRequired: true,
+      },
     };
-
   } catch (error) {
     if (error instanceof z.ZodError) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Invalid subscription data',
-        data: error.errors
+        data: error.errors,
       });
     }
 
     console.error('Newsletter subscription error:', error);
-    
+
     throw createError({
       statusCode: 500,
-      statusMessage: 'Unable to process your subscription. Please try again later.'
+      statusMessage: 'Unable to process your subscription. Please try again later.',
     });
   }
 });

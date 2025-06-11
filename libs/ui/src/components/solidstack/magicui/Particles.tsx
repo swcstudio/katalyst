@@ -1,5 +1,13 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, createEffect } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  type JSX,
+  createEffect,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface ParticlesProps {
   class?: string;
@@ -43,14 +51,14 @@ export const Particles: Component<ParticlesProps> = (props) => {
 
   const initializeParticles = () => {
     if (!canvasRef) return;
-    
+
     const canvas = canvasRef;
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width;
     canvas.height = rect.height;
-    
+
     ctx = canvas.getContext('2d')!;
-    
+
     const newParticles: Particle[] = [];
     for (let i = 0; i < merged.quantity; i++) {
       newParticles.push({
@@ -67,27 +75,27 @@ export const Particles: Component<ParticlesProps> = (props) => {
 
   const updateParticles = () => {
     if (!canvasRef || !ctx) return;
-    
+
     const canvas = canvasRef;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    setParticles(prevParticles => 
-      prevParticles.map(particle => {
+
+    setParticles((prevParticles) =>
+      prevParticles.map((particle) => {
         // Update position
         let newX = particle.x + particle.vx + merged.vx;
         let newY = particle.y + particle.vy + merged.vy;
-        
+
         // Wrap around edges
         if (newX > canvas.width) newX = 0;
         if (newX < 0) newX = canvas.width;
         if (newY > canvas.height) newY = 0;
         if (newY < 0) newY = canvas.height;
-        
+
         // Apply easing
         const easeFactor = merged.ease / 100;
         const newVx = particle.vx * easeFactor;
         const newVy = particle.vy * easeFactor;
-        
+
         return {
           ...particle,
           x: newX,
@@ -97,16 +105,16 @@ export const Particles: Component<ParticlesProps> = (props) => {
         };
       })
     );
-    
+
     // Draw particles
     ctx.fillStyle = merged.color;
-    particles().forEach(particle => {
+    particles().forEach((particle) => {
       ctx.globalAlpha = particle.opacity;
       ctx.beginPath();
       ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       ctx.fill();
     });
-    
+
     animationId = requestAnimationFrame(updateParticles);
   };
 
@@ -142,13 +150,16 @@ export const Particles: Component<ParticlesProps> = (props) => {
   return (
     <canvas
       ref={canvasRef}
-      class={css({
-        position: 'absolute',
-        inset: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-      }, merged.class)}
+      class={css(
+        {
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
+        },
+        merged.class
+      )}
       style={merged.style}
     />
   );
@@ -170,20 +181,23 @@ export const ParticlesDemo: Component<ParticlesDemoProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        display: 'flex',
-        height: '500px',
-        width: '100%',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        borderRadius: '8px',
-        border: '1px solid',
-        borderColor: 'border',
-        backgroundColor: 'background',
-      }, props.class)}
+      class={css(
+        {
+          position: 'relative',
+          display: 'flex',
+          height: '500px',
+          width: '100%',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          borderRadius: '8px',
+          border: '1px solid',
+          borderColor: 'border',
+          backgroundColor: 'background',
+        },
+        props.class
+      )}
     >
       <span
         class={css({

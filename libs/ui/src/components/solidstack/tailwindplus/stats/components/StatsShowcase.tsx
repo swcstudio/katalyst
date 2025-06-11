@@ -1,10 +1,25 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, createEffect, For, Show, createMemo } from 'solid-js';
+import {
+  type Component,
+  For,
+  type JSX,
+  Show,
+  createEffect,
+  createMemo,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 import { css } from '../../../../../styled-system/css';
+import type { StatItem, TimelineStatItem } from '../state/useStatsSection';
 import { StatisticsSection } from './StatisticsSection';
-import { StatsSimple, StatsSimpleDemo, StatsSimpleDarkDemo } from './StatsSimple';
-import { StatsWithHeader, StatsWithHeaderDemo, StatsWithHeaderBackgroundDemo } from './StatsWithHeader';
+import { StatsSimple, StatsSimpleDarkDemo, StatsSimpleDemo } from './StatsSimple';
 import { StatsTimeline, StatsTimelineDemo, StatsTimelineVerticalDemo } from './StatsTimeline';
-import { StatItem, TimelineStatItem } from '../state/useStatsSection';
+import {
+  StatsWithHeader,
+  StatsWithHeaderBackgroundDemo,
+  StatsWithHeaderDemo,
+} from './StatsWithHeader';
 
 export interface StatsShowcaseProps {
   className?: string;
@@ -26,25 +41,25 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       suffix: 'M',
       startValue: 0,
       category: 'financial',
-      priority: true
+      priority: true,
     },
     {
-      id: '2', 
+      id: '2',
       name: 'Assets under holding',
       value: 119,
       prefix: '$',
       suffix: ' trillion',
       startValue: 0,
-      category: 'financial'
+      category: 'financial',
     },
     {
       id: '3',
-      name: 'New users annually', 
+      name: 'New users annually',
       value: 46000,
       suffix: 'K',
       startValue: 0,
-      category: 'growth'
-    }
+      category: 'growth',
+    },
   ];
 
   const extendedStats: StatItem[] = [
@@ -55,26 +70,26 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       suffix: '+',
       startValue: 0,
       category: 'users',
-      description: 'Active content creators'
+      description: 'Active content creators',
     },
     {
-      id: '2', 
+      id: '2',
       name: 'Flat platform fee',
       value: 3,
       suffix: '%',
       startValue: 0,
       category: 'pricing',
-      description: 'Simple, transparent pricing'
+      description: 'Simple, transparent pricing',
     },
     {
       id: '3',
-      name: 'Uptime guarantee', 
+      name: 'Uptime guarantee',
       value: 99.9,
       suffix: '%',
       decimalPlaces: 1,
       startValue: 0,
       category: 'performance',
-      description: 'Reliable service guarantee'
+      description: 'Reliable service guarantee',
     },
     {
       id: '4',
@@ -84,42 +99,45 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       suffix: 'M',
       startValue: 0,
       category: 'financial',
-      description: 'Total creator earnings'
-    }
+      description: 'Total creator earnings',
+    },
   ];
 
   const timelineStats: TimelineStatItem[] = [
     {
       id: '1',
       milestone: 'Founded company',
-      description: 'Started with a vision to transform the industry through innovative solutions and cutting-edge technology.',
+      description:
+        'Started with a vision to transform the industry through innovative solutions and cutting-edge technology.',
       date: 'Aug 2021',
       dateTime: '2021-08',
       value: 1,
-      category: 'milestone'
+      category: 'milestone',
     },
     {
       id: '2',
       milestone: 'Secured $65m in funding',
-      description: 'Major Series A funding round from leading venture capital firms to accelerate growth.',
+      description:
+        'Major Series A funding round from leading venture capital firms to accelerate growth.',
       date: 'Dec 2021',
       dateTime: '2021-12',
       value: 65,
       prefix: '$',
       suffix: 'M',
       startValue: 0,
-      category: 'funding'
+      category: 'funding',
     },
     {
       id: '3',
       milestone: 'Released beta',
-      description: 'Public beta launch with core features, gaining initial user feedback and market validation.',
+      description:
+        'Public beta launch with core features, gaining initial user feedback and market validation.',
       date: 'Feb 2022',
       dateTime: '2022-02',
       value: 1000,
       suffix: ' users',
       startValue: 0,
-      category: 'product'
+      category: 'product',
     },
     {
       id: '4',
@@ -130,8 +148,8 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       value: 1000000,
       suffix: ' users',
       startValue: 0,
-      category: 'growth'
-    }
+      category: 'growth',
+    },
   ];
 
   const mixedLayoutStats: StatItem[] = [
@@ -142,7 +160,7 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       suffix: 'K',
       startValue: 0,
       description: 'Active monthly users',
-      category: 'growth'
+      category: 'growth',
     },
     {
       id: '2',
@@ -153,7 +171,7 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       decimalPlaces: 1,
       startValue: 0,
       description: 'Customer revenue milestone',
-      category: 'financial'
+      category: 'financial',
     },
     {
       id: '3',
@@ -161,8 +179,8 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       value: 401093,
       startValue: 0,
       description: 'Processing billions annually',
-      category: 'volume'
-    }
+      category: 'volume',
+    },
   ];
 
   const companyStats: StatItem[] = [
@@ -170,21 +188,21 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       id: '1',
       name: 'Founded',
       value: '2021',
-      category: 'info'
+      category: 'info',
     },
     {
       id: '2',
       name: 'Employees',
       value: 37,
       startValue: 0,
-      category: 'team'
+      category: 'team',
     },
     {
       id: '3',
       name: 'Countries',
       value: 12,
       startValue: 0,
-      category: 'global'
+      category: 'global',
     },
     {
       id: '4',
@@ -193,8 +211,8 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       prefix: '$',
       suffix: 'M',
       startValue: 0,
-      category: 'funding'
-    }
+      category: 'funding',
+    },
   ];
 
   const performanceStats: StatItem[] = [
@@ -204,7 +222,7 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       value: 44000000,
       suffix: 'M',
       startValue: 0,
-      category: 'performance'
+      category: 'performance',
     },
     {
       id: '2',
@@ -213,7 +231,7 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       prefix: '$',
       suffix: ' trillion',
       startValue: 0,
-      category: 'financial'
+      category: 'financial',
     },
     {
       id: '3',
@@ -221,8 +239,8 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       value: 46000,
       suffix: 'K',
       startValue: 0,
-      category: 'growth'
-    }
+      category: 'growth',
+    },
   ];
 
   const demoOptions = [
@@ -237,12 +255,12 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
     { id: 'timeline-grid', label: 'Timeline Grid', component: 'timeline' },
     { id: 'mixed-layout', label: 'Mixed Layout', component: 'mixed' },
     { id: 'centered', label: 'Centered Cards', component: 'centered' },
-    { id: 'company-info', label: 'Company Info', component: 'company' }
+    { id: 'company-info', label: 'Company Info', component: 'company' },
   ];
 
   const renderDemo = () => {
     const demo = activeDemo();
-    
+
     switch (demo) {
       case 'simple-light':
         return (
@@ -392,7 +410,7 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
             stats={[
               { id: '1', name: 'Pepperoni', value: '100%' },
               { id: '2', name: 'Delivery', value: '24/7' },
-              { id: '3', name: 'Calories', value: '100k' }
+              { id: '3', name: 'Calories', value: '100k' },
             ]}
             theme="light"
             variant="centered"
@@ -434,39 +452,47 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
   return (
     <div class={css({ minH: 'screen' })} style={merged.style}>
       {/* Controls */}
-      <div class={css({
-        position: 'sticky',
-        top: '0',
-        bg: 'white',
-        borderBottom: '1px solid',
-        borderColor: 'gray.200',
-        px: '6',
-        py: '4',
-        zIndex: '10'
-      })}>
-        <div class={css({
-          mx: 'auto',
-          maxW: '7xl',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          gap: '4'
-        })}>
-          <h1 class={css({
-            fontSize: 'xl',
-            fontWeight: 'bold',
-            color: 'gray.900'
-          })}>
-            Statistics Components Showcase
-          </h1>
-          
-          <div class={css({
+      <div
+        class={css({
+          position: 'sticky',
+          top: '0',
+          bg: 'white',
+          borderBottom: '1px solid',
+          borderColor: 'gray.200',
+          px: '6',
+          py: '4',
+          zIndex: '10',
+        })}
+      >
+        <div
+          class={css({
+            mx: 'auto',
+            maxW: '7xl',
             display: 'flex',
+            flexWrap: 'wrap',
             alignItems: 'center',
             gap: '4',
-            flex: '1',
-            flexWrap: 'wrap'
-          })}>
+          })}
+        >
+          <h1
+            class={css({
+              fontSize: 'xl',
+              fontWeight: 'bold',
+              color: 'gray.900',
+            })}
+          >
+            Statistics Components Showcase
+          </h1>
+
+          <div
+            class={css({
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4',
+              flex: '1',
+              flexWrap: 'wrap',
+            })}
+          >
             <select
               value={activeDemo()}
               onChange={(e) => setActiveDemo(e.target.value)}
@@ -476,45 +502,47 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
                 borderColor: 'gray.300',
                 px: '3',
                 py: '2',
-                fontSize: 'sm'
+                fontSize: 'sm',
               })}
             >
               <For each={demoOptions}>
-                {(option) => (
-                  <option value={option.id}>{option.label}</option>
-                )}
+                {(option) => <option value={option.id}>{option.label}</option>}
               </For>
             </select>
 
-            <label class={css({
-              display: 'flex',
-              alignItems: 'center',
-              gap: '2',
-              fontSize: 'sm'
-            })}>
+            <label
+              class={css({
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2',
+                fontSize: 'sm',
+              })}
+            >
               <input
                 type="checkbox"
                 checked={isAnimated()}
                 onChange={(e) => setIsAnimated(e.target.checked)}
                 class={css({
-                  rounded: 'sm'
+                  rounded: 'sm',
                 })}
               />
               Animations
             </label>
 
-            <label class={css({
-              display: 'flex',
-              alignItems: 'center',
-              gap: '2',
-              fontSize: 'sm'
-            })}>
+            <label
+              class={css({
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2',
+                fontSize: 'sm',
+              })}
+            >
               <input
                 type="checkbox"
                 checked={countersEnabled()}
                 onChange={(e) => setCountersEnabled(e.target.checked)}
                 class={css({
-                  rounded: 'sm'
+                  rounded: 'sm',
                 })}
               />
               Number Counters
@@ -529,7 +557,7 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
                 py: '2',
                 rounded: 'md',
                 fontSize: 'sm',
-                _hover: { bg: 'indigo.700' }
+                _hover: { bg: 'indigo.700' },
               })}
             >
               Reset Animations
@@ -539,49 +567,59 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
       </div>
 
       {/* Demo Content */}
-      <div class={css({ minH: 'screen' })}>
-        {renderDemo()}
-      </div>
+      <div class={css({ minH: 'screen' })}>{renderDemo()}</div>
 
       {/* Info Panel */}
-      <div class={css({
-        bg: 'gray.50',
-        py: '12',
-        px: '6'
-      })}>
-        <div class={css({
-          mx: 'auto',
-          maxW: '7xl'
-        })}>
-          <h2 class={css({
-            fontSize: '2xl',
-            fontWeight: 'bold',
-            color: 'gray.900',
-            mb: '6'
-          })}>
+      <div
+        class={css({
+          bg: 'gray.50',
+          py: '12',
+          px: '6',
+        })}
+      >
+        <div
+          class={css({
+            mx: 'auto',
+            maxW: '7xl',
+          })}
+        >
+          <h2
+            class={css({
+              fontSize: '2xl',
+              fontWeight: 'bold',
+              color: 'gray.900',
+              mb: '6',
+            })}
+          >
             Statistics Components Features
           </h2>
-          
-          <div class={css({
-            display: 'grid',
-            gap: '6',
-            gridTemplateColumns: '1',
-            lg: { gridTemplateColumns: '3' }
-          })}>
+
+          <div
+            class={css({
+              display: 'grid',
+              gap: '6',
+              gridTemplateColumns: '1',
+              lg: { gridTemplateColumns: '3' },
+            })}
+          >
             <div>
-              <h3 class={css({
-                fontSize: 'lg',
-                fontWeight: 'semibold',
-                color: 'gray.900',
-                mb: '2'
-              })}>
+              <h3
+                class={css({
+                  fontSize: 'lg',
+                  fontWeight: 'semibold',
+                  color: 'gray.900',
+                  mb: '2',
+                })}
+              >
                 Animation Augmentations
               </h3>
-              <ul class={css({
-                fontSize: 'sm',
-                color: 'gray.600',
-                space: 'y-1'
-              })}>
+              <ul
+                class={css({
+                  fontSize: 'sm',
+                  color: 'gray.600',
+                  space: 'y-1',
+                })}
+              >
                 <li>• NumberTicker for counting animations</li>
                 <li>• BlurFade for progressive reveals</li>
                 <li>• BorderBeam for interactive highlights</li>
@@ -591,19 +629,23 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
             </div>
 
             <div>
-              <h3 class={css({
-                fontSize: 'lg',
-                fontWeight: 'semibold',
-                color: 'gray.900',
-                mb: '2'
-              })}>
+              <h3
+                class={css({
+                  fontSize: 'lg',
+                  fontWeight: 'semibold',
+                  color: 'gray.900',
+                  mb: '2',
+                })}
+              >
                 Layout Variants
               </h3>
-              <ul class={css({
-                fontSize: 'sm',
-                color: 'gray.600',
-                space: 'y-1'
-              })}>
+              <ul
+                class={css({
+                  fontSize: 'sm',
+                  color: 'gray.600',
+                  space: 'y-1',
+                })}
+              >
                 <li>• Simple grid layouts</li>
                 <li>• Card-based presentations</li>
                 <li>• Timeline visualizations</li>
@@ -613,19 +655,23 @@ export const StatsShowcase: Component<StatsShowcaseProps> = (props) => {
             </div>
 
             <div>
-              <h3 class={css({
-                fontSize: 'lg',
-                fontWeight: 'semibold',
-                color: 'gray.900',
-                mb: '2'
-              })}>
+              <h3
+                class={css({
+                  fontSize: 'lg',
+                  fontWeight: 'semibold',
+                  color: 'gray.900',
+                  mb: '2',
+                })}
+              >
                 State Management
               </h3>
-              <ul class={css({
-                fontSize: 'sm',
-                color: 'gray.600',
-                space: 'y-1'
-              })}>
+              <ul
+                class={css({
+                  fontSize: 'sm',
+                  color: 'gray.600',
+                  space: 'y-1',
+                })}
+              >
                 <li>• Zag.js state machines</li>
                 <li>• Intersection observer triggers</li>
                 <li>• Hover and selection states</li>

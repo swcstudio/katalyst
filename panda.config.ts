@@ -11,6 +11,7 @@ export default defineConfig({
     './apps/astro-docs/src/**/*.{ts,tsx,astro}',
     './apps/remix-app/app/**/*.{ts,tsx}',
     './apps/sveltekit-spa/src/**/*.{ts,tsx,svelte}',
+    './apps/reactonrust/src/**/*.{ts,tsx}',
     './libs/*/src/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
     './libs/shared/**/*.{ts,tsx}',

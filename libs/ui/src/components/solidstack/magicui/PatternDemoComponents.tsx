@@ -1,39 +1,39 @@
-import { Component } from "solid-js";
-import { css } from "../../styled-system/css";
-import { WarpBackground } from "./WarpBackground";
-import { FlickeringGrid } from "./FlickeringGrid";
-import { AnimatedGridPattern } from "./AnimatedGridPattern";
-import { RetroGrid } from "./RetroGrid";
-import { Ripple } from "./Ripple";
-import { DotPattern } from "./DotPattern";
-import { GridPattern } from "./GridPattern";
-import { InteractiveGridPattern } from "./InteractiveGridPattern";
+import type { Component } from 'solid-js';
+import { css } from '../../styled-system/css';
+import { AnimatedGridPattern } from './AnimatedGridPattern';
+import { DotPattern } from './DotPattern';
+import { FlickeringGrid } from './FlickeringGrid';
+import { GridPattern } from './GridPattern';
+import { InteractiveGridPattern } from './InteractiveGridPattern';
+import { RetroGrid } from './RetroGrid';
+import { Ripple } from './Ripple';
+import { WarpBackground } from './WarpBackground';
 
 // Warp Background Demo
 export const ExampleComponentDemo: Component = () => {
   const cardStyles = css({
-    width: "20rem",
-    backgroundColor: "white",
-    borderRadius: "0.5rem",
-    boxShadow: "0 1px 3px 0 rgb(0 0 0 / 0.1)",
+    width: '20rem',
+    backgroundColor: 'white',
+    borderRadius: '0.5rem',
+    boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)',
   });
 
   const cardContentStyles = css({
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.5rem",
-    padding: "1rem",
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+    padding: '1rem',
   });
 
   const cardTitleStyles = css({
-    fontSize: "1.25rem",
-    fontWeight: "600",
-    color: "#1f2937",
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    color: '#1f2937',
   });
 
   const cardDescriptionStyles = css({
-    fontSize: "0.875rem",
-    color: "#6b7280",
+    fontSize: '0.875rem',
+    color: '#6b7280',
   });
 
   return (
@@ -42,9 +42,8 @@ export const ExampleComponentDemo: Component = () => {
         <div class={cardContentStyles}>
           <h3 class={cardTitleStyles}>Congratulations on Your Promotion!</h3>
           <p class={cardDescriptionStyles}>
-            Your hard work and dedication have paid off. We're thrilled to
-            see you take this next step in your career. Keep up the fantastic
-            work!
+            Your hard work and dedication have paid off. We're thrilled to see you take this next
+            step in your career. Keep up the fantastic work!
           </p>
         </div>
       </div>
@@ -55,13 +54,13 @@ export const ExampleComponentDemo: Component = () => {
 // Flickering Grid Demo
 export const FlickeringGridDemo: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    height: "500px",
-    width: "100%",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#ffffff",
+    position: 'relative',
+    height: '500px',
+    width: '100%',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#ffffff',
   });
 
   return (
@@ -83,13 +82,13 @@ export const FlickeringGridDemo: Component = () => {
 // Flickering Grid Rounded Demo
 export const FlickeringGridRoundedDemo: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    height: "600px",
-    width: "600px",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#ffffff",
+    position: 'relative',
+    height: '600px',
+    width: '600px',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#ffffff',
   });
 
   return (
@@ -111,17 +110,17 @@ export const FlickeringGridRoundedDemo: Component = () => {
 // Animated Grid Pattern Demo
 export const AnimatedGridPatternDemo: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    display: "flex",
-    height: "500px",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#ffffff",
-    padding: "5rem",
+    position: 'relative',
+    display: 'flex',
+    height: '500px',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#ffffff',
+    padding: '5rem',
   });
 
   return (
@@ -140,38 +139,36 @@ export const AnimatedGridPatternDemo: Component = () => {
 // Retro Grid Demo
 export const RetroGridDemo: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    display: "flex",
-    height: "500px",
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#000000",
+    position: 'relative',
+    display: 'flex',
+    height: '500px',
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#000000',
   });
 
   const titleStyles = css({
-    pointerEvents: "none",
+    pointerEvents: 'none',
     zIndex: 10,
-    whiteSpace: "pre-wrap",
-    background: "linear-gradient(to bottom, #ffd319, #ff2975, #8c1eff)",
-    backgroundClip: "text",
-    textAlign: "center",
-    fontSize: "3.5rem",
-    fontWeight: "700",
+    whiteSpace: 'pre-wrap',
+    background: 'linear-gradient(to bottom, #ffd319, #ff2975, #8c1eff)',
+    backgroundClip: 'text',
+    textAlign: 'center',
+    fontSize: '3.5rem',
+    fontWeight: '700',
     lineHeight: 1,
-    letterSpacing: "-0.05em",
-    color: "transparent",
+    letterSpacing: '-0.05em',
+    color: 'transparent',
   });
 
   return (
     <div class={containerStyles}>
-      <span class={titleStyles}>
-        Retro Grid
-      </span>
+      <span class={titleStyles}>Retro Grid</span>
       <RetroGrid />
     </div>
   );
@@ -180,34 +177,32 @@ export const RetroGridDemo: Component = () => {
 // Ripple Demo
 export const RippleDemo: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    display: "flex",
-    height: "500px",
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#000000",
+    position: 'relative',
+    display: 'flex',
+    height: '500px',
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#000000',
   });
 
   const titleStyles = css({
     zIndex: 10,
-    whiteSpace: "pre-wrap",
-    textAlign: "center",
-    fontSize: "3rem",
-    fontWeight: "500",
-    letterSpacing: "-0.05em",
-    color: "white",
+    whiteSpace: 'pre-wrap',
+    textAlign: 'center',
+    fontSize: '3rem',
+    fontWeight: '500',
+    letterSpacing: '-0.05em',
+    color: 'white',
   });
 
   return (
     <div class={containerStyles}>
-      <p class={titleStyles}>
-        Ripple
-      </p>
+      <p class={titleStyles}>Ripple</p>
       <Ripple />
     </div>
   );
@@ -216,24 +211,22 @@ export const RippleDemo: Component = () => {
 // Dot Pattern Demo
 export const DotPatternDemo: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    display: "flex",
-    height: "500px",
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#ffffff",
+    position: 'relative',
+    display: 'flex',
+    height: '500px',
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#ffffff',
   });
 
   return (
     <div class={containerStyles}>
-      <DotPattern
-        className="[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]"
-      />
+      <DotPattern className="[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]" />
     </div>
   );
 };
@@ -241,17 +234,17 @@ export const DotPatternDemo: Component = () => {
 // Dot Pattern Linear Gradient Demo
 export const DotPatternLinearGradient: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    display: "flex",
-    height: "100%",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#ffffff",
-    padding: "5rem",
+    position: 'relative',
+    display: 'flex',
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#ffffff',
+    padding: '5rem',
   });
 
   return (
@@ -271,14 +264,14 @@ export const DotPatternLinearGradient: Component = () => {
 // Dot Pattern With Glow Effect Demo
 export const DotPatternWithGlowEffectDemo: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    display: "flex",
-    height: "500px",
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
+    position: 'relative',
+    display: 'flex',
+    height: '500px',
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
   });
 
   return (
@@ -294,17 +287,17 @@ export const DotPatternWithGlowEffectDemo: Component = () => {
 // Grid Pattern Demo
 export const GridPatternDemo: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    display: "flex",
-    height: "500px",
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#ffffff",
+    position: 'relative',
+    display: 'flex',
+    height: '500px',
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#ffffff',
   });
 
   return (
@@ -333,17 +326,17 @@ export const GridPatternDemo: Component = () => {
 // Grid Pattern Linear Gradient Demo
 export const GridPatternLinearGradient: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    display: "flex",
-    height: "100%",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#ffffff",
-    padding: "5rem",
+    position: 'relative',
+    display: 'flex',
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#ffffff',
+    padding: '5rem',
   });
 
   return (
@@ -362,17 +355,17 @@ export const GridPatternLinearGradient: Component = () => {
 // Grid Pattern Dashed Demo
 export const GridPatternDashed: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    display: "flex",
-    height: "100%",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#ffffff",
-    padding: "5rem",
+    position: 'relative',
+    display: 'flex',
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#ffffff',
+    padding: '5rem',
   });
 
   return (
@@ -392,24 +385,22 @@ export const GridPatternDashed: Component = () => {
 // Interactive Grid Pattern Demo
 export const InteractiveGridPatternDemo: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    display: "flex",
-    height: "500px",
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#ffffff",
+    position: 'relative',
+    display: 'flex',
+    height: '500px',
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#ffffff',
   });
 
   return (
     <div class={containerStyles}>
-      <InteractiveGridPattern
-        className="[mask-image:radial-gradient(400px_circle_at_center,white,transparent)] inset-x-0 inset-y-[-30%] h-[200%] skew-y-12"
-      />
+      <InteractiveGridPattern className="[mask-image:radial-gradient(400px_circle_at_center,white,transparent)] inset-x-0 inset-y-[-30%] h-[200%] skew-y-12" />
     </div>
   );
 };
@@ -417,17 +408,17 @@ export const InteractiveGridPatternDemo: Component = () => {
 // Interactive Grid Pattern Custom Demo
 export const InteractiveGridPatternCustomDemo: Component = () => {
   const containerStyles = css({
-    position: "relative",
-    display: "flex",
-    height: "500px",
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderRadius: "0.5rem",
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#ffffff",
+    position: 'relative',
+    display: 'flex',
+    height: '500px',
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: '0.5rem',
+    border: '1px solid #e5e7eb',
+    backgroundColor: '#ffffff',
   });
 
   return (

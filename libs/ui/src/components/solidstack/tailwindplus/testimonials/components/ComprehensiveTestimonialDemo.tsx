@@ -1,16 +1,29 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, createEffect, For, Show, createMemo } from 'solid-js';
+import {
+  type Component,
+  For,
+  type JSX,
+  Show,
+  createEffect,
+  createMemo,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 import { css } from '../../../../../styled-system/css';
+import type { Testimonial } from '../state/useTestimonialSection';
+import { TestimonialHero } from './TestimonialHero';
 import { TestimonialSection } from './TestimonialSection';
 import { TestimonialSimple } from './TestimonialSimple';
-import { TestimonialHero } from './TestimonialHero';
-import { Testimonial } from '../state/useTestimonialSection';
 
 export interface ComprehensiveTestimonialDemoProps {
   className?: string;
   style?: JSX.CSSProperties;
 }
 
-export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDemoProps> = (props) => {
+export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDemoProps> = (
+  props
+) => {
   const merged = mergeProps({}, props);
 
   // Demo 1: Simple Centered with Radial Background
@@ -21,11 +34,12 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       name: 'Judith Black',
       title: 'CEO',
       company: 'Workcation',
-      imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-600.svg'
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-600.svg',
     },
     rating: 5,
-    category: 'enterprise'
+    category: 'enterprise',
   };
 
   // Demo 2: Grid Layout Testimonial
@@ -36,9 +50,10 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       name: 'Judith Black',
       title: 'CEO',
       company: 'Workcation',
-      imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=576&h=576&q=80',
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=576&h=576&q=80',
     },
-    category: 'design'
+    category: 'design',
   };
 
   // Demo 3: Split Hero Layout
@@ -49,10 +64,11 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       name: 'Judith Black',
       title: 'CEO',
       company: 'Workcation',
-      imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=576&h=576&q=80',
-      logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-white.svg'
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=576&h=576&q=80',
+      logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-white.svg',
     },
-    category: 'enterprise'
+    category: 'enterprise',
   };
 
   // Demo 4: Overlay with Background Image
@@ -63,9 +79,9 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       name: 'Judith Black',
       title: 'CEO',
       company: 'Workcation',
-      logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-white.svg'
+      logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-white.svg',
     },
-    category: 'enterprise'
+    category: 'enterprise',
   };
 
   // Demo 5: Split Side-by-Side Testimonials
@@ -77,10 +93,11 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
         name: 'Judith Black',
         title: 'CEO',
         company: 'Tuple',
-        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/tuple-logo-gray-900.svg'
+        imageUrl:
+          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/tuple-logo-gray-900.svg',
       },
-      category: 'enterprise'
+      category: 'enterprise',
     },
     {
       id: '2',
@@ -89,11 +106,12 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
         name: 'Joseph Rodriguez',
         title: 'CEO',
         company: 'Reform',
-        imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/reform-logo-gray-900.svg'
+        imageUrl:
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/reform-logo-gray-900.svg',
       },
-      category: 'enterprise'
-    }
+      category: 'enterprise',
+    },
   ];
 
   // Demo 6: Dark Side-by-Side
@@ -105,10 +123,11 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
         name: 'Judith Black',
         title: 'CEO',
         company: 'Tuple',
-        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/tuple-logo-white.svg'
+        imageUrl:
+          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/tuple-logo-white.svg',
       },
-      category: 'enterprise'
+      category: 'enterprise',
     },
     {
       id: '2',
@@ -117,11 +136,12 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
         name: 'Joseph Rodriguez',
         title: 'CEO',
         company: 'Reform',
-        imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/reform-logo-white.svg'
+        imageUrl:
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/reform-logo-white.svg',
       },
-      category: 'enterprise'
-    }
+      category: 'enterprise',
+    },
   ];
 
   // Demo 7: Star Rating Simple
@@ -132,10 +152,11 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       name: 'Judith Black',
       title: 'CEO',
       company: 'Workcation',
-      imageUrl: 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80'
+      imageUrl:
+        'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
     },
     rating: 5,
-    category: 'enterprise'
+    category: 'enterprise',
   };
 
   // Demo 8: Featured with Grid
@@ -145,11 +166,12 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
     author: {
       name: 'Brenna Goyette',
       handle: 'brennagoyette',
-      imageUrl: 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
+      imageUrl:
+        'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
       logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/savvycal-logo-gray-900.svg',
     },
     featured: true,
-    category: 'saas'
+    category: 'saas',
   };
 
   const gridTestimonials: Testimonial[] = [
@@ -160,9 +182,10 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       author: {
         name: 'Leslie Alexander',
         handle: 'lesliealexander',
-        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
-      category: 'startup'
+      category: 'startup',
     },
     {
       id: '2',
@@ -170,9 +193,10 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       author: {
         name: 'Lindsay Walton',
         handle: 'lindsaywalton',
-        imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
-      category: 'enterprise'
+      category: 'enterprise',
     },
     {
       id: '3',
@@ -180,9 +204,10 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       author: {
         name: 'Tom Cook',
         handle: 'tomcook',
-        imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
-      category: 'agency'
+      category: 'agency',
     },
     {
       id: '4',
@@ -190,10 +215,11 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       author: {
         name: 'Leonard Krasner',
         handle: 'leonardkrasner',
-        imageUrl: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
-      category: 'startup'
-    }
+      category: 'startup',
+    },
   ];
 
   // Demo 9: Masonry Layout
@@ -204,9 +230,10 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       author: {
         name: 'Leslie Alexander',
         handle: 'lesliealexander',
-        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
-      category: 'startup'
+      category: 'startup',
     },
     {
       id: '2',
@@ -214,9 +241,10 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       author: {
         name: 'Lindsay Walton',
         handle: 'lindsaywalton',
-        imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
-      category: 'enterprise'
+      category: 'enterprise',
     },
     {
       id: '3',
@@ -224,10 +252,11 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       author: {
         name: 'Tom Cook',
         handle: 'tomcook',
-        imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
-      category: 'agency'
-    }
+      category: 'agency',
+    },
   ];
 
   // Demo 10: Branded Section
@@ -239,10 +268,11 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
         name: 'Judith Black',
         title: 'CEO',
         company: 'Tuple',
-        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/tuple-logo-indigo-300.svg'
+        imageUrl:
+          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/tuple-logo-indigo-300.svg',
       },
-      category: 'enterprise'
+      category: 'enterprise',
     },
     {
       id: '2',
@@ -251,37 +281,44 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
         name: 'Joseph Rodriguez',
         title: 'CEO',
         company: 'Workcation',
-        imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-300.svg'
+        imageUrl:
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-300.svg',
       },
-      category: 'enterprise'
-    }
+      category: 'enterprise',
+    },
   ];
 
   return (
     <div class={css({ minH: 'screen' })} style={merged.style}>
       {/* Header */}
-      <div class={css({
-        bg: 'gray.900',
-        py: '16',
-        textAlign: 'center'
-      })}>
-        <h1 class={css({
-          fontSize: '4xl',
-          fontWeight: 'bold',
-          color: 'white',
-          mb: '4'
-        })}>
+      <div
+        class={css({
+          bg: 'gray.900',
+          py: '16',
+          textAlign: 'center',
+        })}
+      >
+        <h1
+          class={css({
+            fontSize: '4xl',
+            fontWeight: 'bold',
+            color: 'white',
+            mb: '4',
+          })}
+        >
           Comprehensive Testimonial Components
         </h1>
-        <p class={css({
-          fontSize: 'xl',
-          color: 'gray.300',
-          maxW: '3xl',
-          mx: 'auto'
-        })}>
-          State-of-the-art testimonial components with native animation augmentations from Aceternity UI & Magic UI, 
-          built with SolidJS, Zag.js state machines, and PandaCSS.
+        <p
+          class={css({
+            fontSize: 'xl',
+            color: 'gray.300',
+            maxW: '3xl',
+            mx: 'auto',
+          })}
+        >
+          State-of-the-art testimonial components with native animation augmentations from
+          Aceternity UI & Magic UI, built with SolidJS, Zag.js state machines, and PandaCSS.
         </p>
       </div>
 
@@ -396,88 +433,106 @@ export const ComprehensiveTestimonialDemo: Component<ComprehensiveTestimonialDem
       />
 
       {/* Footer */}
-      <div class={css({
-        bg: 'gray.50',
-        py: '16',
-        textAlign: 'center'
-      })}>
-        <h2 class={css({
-          fontSize: '2xl',
-          fontWeight: 'bold',
-          color: 'gray.900',
-          mb: '4'
-        })}>
+      <div
+        class={css({
+          bg: 'gray.50',
+          py: '16',
+          textAlign: 'center',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '2xl',
+            fontWeight: 'bold',
+            color: 'gray.900',
+            mb: '4',
+          })}
+        >
           SolidStack-UI Testimonial Components
         </h2>
-        <p class={css({
-          fontSize: 'lg',
-          color: 'gray.600',
-          maxW: '2xl',
-          mx: 'auto',
-          mb: '8'
-        })}>
-          Beautifully animated, state-of-the-art testimonial components with native augmentations 
+        <p
+          class={css({
+            fontSize: 'lg',
+            color: 'gray.600',
+            maxW: '2xl',
+            mx: 'auto',
+            mb: '8',
+          })}
+        >
+          Beautifully animated, state-of-the-art testimonial components with native augmentations
           from Aceternity UI and Magic UI, powered by Zag.js state machines.
         </p>
-        <div class={css({
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '4',
-          flexWrap: 'wrap'
-        })}>
-          <span class={css({
-            bg: 'indigo.100',
-            color: 'indigo.800',
-            px: '3',
-            py: '1',
-            rounded: 'full',
-            fontSize: 'sm',
-            fontWeight: 'medium'
-          })}>
+        <div
+          class={css({
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '4',
+            flexWrap: 'wrap',
+          })}
+        >
+          <span
+            class={css({
+              bg: 'indigo.100',
+              color: 'indigo.800',
+              px: '3',
+              py: '1',
+              rounded: 'full',
+              fontSize: 'sm',
+              fontWeight: 'medium',
+            })}
+          >
             SolidJS
           </span>
-          <span class={css({
-            bg: 'purple.100',
-            color: 'purple.800',
-            px: '3',
-            py: '1',
-            rounded: 'full',
-            fontSize: 'sm',
-            fontWeight: 'medium'
-          })}>
+          <span
+            class={css({
+              bg: 'purple.100',
+              color: 'purple.800',
+              px: '3',
+              py: '1',
+              rounded: 'full',
+              fontSize: 'sm',
+              fontWeight: 'medium',
+            })}
+          >
             Zag.js
           </span>
-          <span class={css({
-            bg: 'blue.100',
-            color: 'blue.800',
-            px: '3',
-            py: '1',
-            rounded: 'full',
-            fontSize: 'sm',
-            fontWeight: 'medium'
-          })}>
+          <span
+            class={css({
+              bg: 'blue.100',
+              color: 'blue.800',
+              px: '3',
+              py: '1',
+              rounded: 'full',
+              fontSize: 'sm',
+              fontWeight: 'medium',
+            })}
+          >
             PandaCSS
           </span>
-          <span class={css({
-            bg: 'green.100',
-            color: 'green.800',
-            px: '3',
-            py: '1',
-            rounded: 'full',
-            fontSize: 'sm',
-            fontWeight: 'medium'
-          })}>
+          <span
+            class={css({
+              bg: 'green.100',
+              color: 'green.800',
+              px: '3',
+              py: '1',
+              rounded: 'full',
+              fontSize: 'sm',
+              fontWeight: 'medium',
+            })}
+          >
             Aceternity UI
           </span>
-          <span class={css({
-            bg: 'pink.100',
-            color: 'pink.800',
-            px: '3',
-            py: '1',
-            rounded: 'full',
-            fontSize: 'sm',
-            fontWeight: 'medium'
-          })}>
+          <span
+            class={css({
+              bg: 'pink.100',
+              color: 'pink.800',
+              px: '3',
+              py: '1',
+              rounded: 'full',
+              fontSize: 'sm',
+              fontWeight: 'medium',
+            })}
+          >
             Magic UI
           </span>
         </div>

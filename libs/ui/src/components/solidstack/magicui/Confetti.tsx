@@ -1,12 +1,42 @@
-import { Component, JSX, mergeProps, ParentComponent, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  type JSX,
+  type ParentComponent,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 // Note: This assumes canvas-confetti is available. In a real implementation,
 // you would need to install and import it: npm install canvas-confetti
-declare const confetti: any;
+interface ConfettiOptions {
+  particleCount?: number;
+  angle?: number;
+  spread?: number;
+  startVelocity?: number;
+  decay?: number;
+  gravity?: number;
+  drift?: number;
+  ticks?: number;
+  origin?: { x?: number; y?: number };
+  colors?: string[];
+  shapes?: string[];
+  scalar?: number;
+  zIndex?: number;
+}
+
+interface ConfettiFunction {
+  (options?: ConfettiOptions): void;
+  shapeFromPath?: (options: { path: string }) => string;
+  shapeFromText?: (options: { text: string; scalar?: number }) => string;
+}
+
+declare const confetti: ConfettiFunction;
 
 export interface ConfettiRef {
-  fire: (options?: any) => void;
+  fire: (options?: ConfettiOptions) => void;
 }
 
 export interface ConfettiProps {
@@ -20,12 +50,12 @@ export const Confetti: Component<ConfettiProps> = (props) => {
   const merged = mergeProps({}, props);
   let canvasRef: HTMLCanvasElement | undefined;
 
-  const fire = (options: any = {}) => {
+  const fire = (options: ConfettiOptions = {}) => {
     if (canvasRef && typeof confetti !== 'undefined') {
       const rect = canvasRef.getBoundingClientRect();
       const x = (rect.left + rect.width / 2) / window.innerWidth;
       const y = (rect.top + rect.height / 2) / window.innerHeight;
-      
+
       confetti({
         origin: { x, y },
         ...options,
@@ -42,15 +72,18 @@ export const Confetti: Component<ConfettiProps> = (props) => {
   return (
     <canvas
       ref={canvasRef}
-      class={css({
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        zIndex: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-      }, merged.class)}
+      class={css(
+        {
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          zIndex: 0,
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
+        },
+        merged.class
+      )}
       style={merged.style}
       onMouseEnter={merged.onMouseEnter}
     />
@@ -60,18 +93,21 @@ export const Confetti: Component<ConfettiProps> = (props) => {
 export interface ConfettiButtonProps {
   children?: JSX.Element;
   class?: string;
-  options?: any;
+  options?: ConfettiOptions;
   onClick?: () => void;
 }
 
 export const ConfettiButton: ParentComponent<ConfettiButtonProps> = (props) => {
-  const merged = mergeProps({
-    options: {
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 },
+  const merged = mergeProps(
+    {
+      options: {
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+      },
     },
-  }, props);
+    props
+  );
 
   const handleClick = () => {
     if (typeof confetti !== 'undefined') {
@@ -84,20 +120,23 @@ export const ConfettiButton: ParentComponent<ConfettiButtonProps> = (props) => {
 
   return (
     <button
-      class={css({
-        padding: '8px 16px',
-        backgroundColor: 'primary',
-        color: 'primary.foreground',
-        border: 'none',
-        borderRadius: '6px',
-        fontSize: '14px',
-        fontWeight: 'medium',
-        cursor: 'pointer',
-        transition: 'background-color 0.2s ease',
-        '&:hover': {
-          backgroundColor: 'primary/90',
+      class={css(
+        {
+          padding: '8px 16px',
+          backgroundColor: 'primary',
+          color: 'primary.foreground',
+          border: 'none',
+          borderRadius: '6px',
+          fontSize: '14px',
+          fontWeight: 'medium',
+          cursor: 'pointer',
+          transition: 'background-color 0.2s ease',
+          '&:hover': {
+            backgroundColor: 'primary/90',
+          },
         },
-      }, merged.class)}
+        merged.class
+      )}
       onClick={handleClick}
     >
       {props.children}
@@ -109,33 +148,37 @@ export const ConfettiDemo: Component = () => {
   const [confettiRef, setConfettiRef] = createSignal<ConfettiRef>();
 
   return (
-    <div class={css({
-      position: 'relative',
-      display: 'flex',
-      height: '500px',
-      width: '100%',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-      borderRadius: '8px',
-      border: '1px solid',
-      borderColor: 'border',
-      backgroundColor: 'background',
-    })}>
-      <span class={css({
-        pointerEvents: 'none',
-        whiteSpace: 'pre-wrap',
-        background: 'linear-gradient(to bottom, black, rgba(128, 128, 128, 0.8))',
-        backgroundClip: 'text',
-        WebkitBackgroundClip: 'text',
-        textAlign: 'center',
-        fontSize: '64px',
-        fontWeight: '600',
-        lineHeight: 1,
-        color: 'transparent',
-        WebkitTextFillColor: 'transparent',
-      })}>
+    <div
+      class={css({
+        position: 'relative',
+        display: 'flex',
+        height: '500px',
+        width: '100%',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        borderRadius: '8px',
+        border: '1px solid',
+        borderColor: 'border',
+        backgroundColor: 'background',
+      })}
+    >
+      <span
+        class={css({
+          pointerEvents: 'none',
+          whiteSpace: 'pre-wrap',
+          background: 'linear-gradient(to bottom, black, rgba(128, 128, 128, 0.8))',
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text',
+          textAlign: 'center',
+          fontSize: '64px',
+          fontWeight: '600',
+          lineHeight: 1,
+          color: 'transparent',
+          WebkitTextFillColor: 'transparent',
+        })}
+      >
         Confetti
       </span>
 
@@ -184,13 +227,12 @@ export const ConfettiButtonRandomDemo: Component = () => {
 export const ConfettiFireworks: Component = () => {
   const handleClick = () => {
     if (typeof confetti === 'undefined') return;
-    
+
     const duration = 5 * 1000;
     const animationEnd = Date.now() + duration;
     const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-    const randomInRange = (min: number, max: number) =>
-      Math.random() * (max - min) + min;
+    const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
 
     const interval = window.setInterval(() => {
       const timeLeft = animationEnd - Date.now();
@@ -241,9 +283,9 @@ export const ConfettiFireworks: Component = () => {
 export const ConfettiSideCannons: Component = () => {
   const handleClick = () => {
     if (typeof confetti === 'undefined') return;
-    
+
     const end = Date.now() + 3 * 1000; // 3 seconds
-    const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
+    const colors = ['#a786ff', '#fd8bbc', '#eca184', '#f8deb1'];
 
     const frame = () => {
       if (Date.now() > end) return;
@@ -299,14 +341,14 @@ export const ConfettiSideCannons: Component = () => {
 export const ConfettiStars: Component = () => {
   const handleClick = () => {
     if (typeof confetti === 'undefined') return;
-    
+
     const defaults = {
       spread: 360,
       ticks: 50,
       gravity: 0,
       decay: 0.94,
       startVelocity: 30,
-      colors: ["#FFE400", "#FFBD00", "#E89400", "#FFCA6C", "#FDFFB8"],
+      colors: ['#FFE400', '#FFBD00', '#E89400', '#FFCA6C', '#FDFFB8'],
     };
 
     const shoot = () => {
@@ -314,14 +356,14 @@ export const ConfettiStars: Component = () => {
         ...defaults,
         particleCount: 40,
         scalar: 1.2,
-        shapes: ["star"],
+        shapes: ['star'],
       });
 
       confetti({
         ...defaults,
         particleCount: 10,
         scalar: 0.75,
-        shapes: ["circle"],
+        shapes: ['circle'],
       });
     };
 
@@ -358,19 +400,19 @@ export const ConfettiStars: Component = () => {
 export const ConfettiCustomShapes: Component = () => {
   const handleClick = () => {
     if (typeof confetti === 'undefined') return;
-    
+
     const scalar = 2;
     const triangle = confetti.shapeFromPath({
-      path: "M0 10 L5 0 L10 10z",
+      path: 'M0 10 L5 0 L10 10z',
     });
     const square = confetti.shapeFromPath({
-      path: "M0 0 L10 0 L10 10 L0 10 Z",
+      path: 'M0 0 L10 0 L10 10 L0 10 Z',
     });
     const coin = confetti.shapeFromPath({
-      path: "M5 0 A5 5 0 1 0 5 10 A5 5 0 1 0 5 0 Z",
+      path: 'M5 0 A5 5 0 1 0 5 10 A5 5 0 1 0 5 0 Z',
     });
     const tree = confetti.shapeFromPath({
-      path: "M5 0 L10 10 L0 10 Z",
+      path: 'M5 0 L10 10 L0 10 Z',
     });
 
     const defaults = {
@@ -398,7 +440,7 @@ export const ConfettiCustomShapes: Component = () => {
         ...defaults,
         particleCount: 15,
         scalar: scalar / 2,
-        shapes: ["circle"],
+        shapes: ['circle'],
       });
     };
 
@@ -408,12 +450,14 @@ export const ConfettiCustomShapes: Component = () => {
   };
 
   return (
-    <div class={css({ 
-      position: 'relative', 
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center' 
-    })}>
+    <div
+      class={css({
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      })}
+    >
       <button
         class={css({
           padding: '8px 16px',
@@ -440,9 +484,9 @@ export const ConfettiCustomShapes: Component = () => {
 export const ConfettiEmoji: Component = () => {
   const handleClick = () => {
     if (typeof confetti === 'undefined') return;
-    
+
     const scalar = 2;
-    const unicorn = confetti.shapeFromText({ text: "🦄", scalar });
+    const unicorn = confetti.shapeFromText({ text: '🦄', scalar });
 
     const defaults = {
       spread: 360,
@@ -469,7 +513,7 @@ export const ConfettiEmoji: Component = () => {
         ...defaults,
         particleCount: 15,
         scalar: scalar / 2,
-        shapes: ["circle"],
+        shapes: ['circle'],
       });
     };
 
@@ -479,10 +523,12 @@ export const ConfettiEmoji: Component = () => {
   };
 
   return (
-    <div class={css({ 
-      position: 'relative', 
-      justifyContent: 'center' 
-    })}>
+    <div
+      class={css({
+        position: 'relative',
+        justifyContent: 'center',
+      })}
+    >
       <button
         class={css({
           padding: '8px 16px',
@@ -506,8 +552,4 @@ export const ConfettiEmoji: Component = () => {
   );
 };
 
-export type { 
-  ConfettiRef, 
-  ConfettiProps, 
-  ConfettiButtonProps 
-};
+export type { ConfettiRef, ConfettiProps, ConfettiButtonProps };

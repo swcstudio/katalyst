@@ -1,7 +1,7 @@
-import { Component, JSX, createSignal, onMount, onCleanup, For } from 'solid-js';
 import { cx } from '@sse/ui/styled-system/css';
 import { css } from '@sse/ui/styled-system/css';
 import { animate } from 'motion';
+import { type Component, For, type JSX, createSignal, onCleanup, onMount } from 'solid-js';
 
 export interface GlowingStarsBackgroundCardProps {
   children: JSX.Element;
@@ -20,31 +20,37 @@ export interface GlowingStarsDescriptionProps {
 
 export const GlowingStarsBackgroundCardPreview: Component = () => {
   return (
-    <div class={css({
-      display: 'flex',
-      paddingY: '80px',
-      alignItems: 'center',
-      justifyContent: 'center'
-    })}>
+    <div
+      class={css({
+        display: 'flex',
+        paddingY: '80px',
+        alignItems: 'center',
+        justifyContent: 'center',
+      })}
+    >
       <GlowingStarsBackgroundCard>
         <GlowingStarsTitle>Next.js 14</GlowingStarsTitle>
-        <div class={css({
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'end'
-        })}>
+        <div
+          class={css({
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'end',
+          })}
+        >
           <GlowingStarsDescription>
             The power of full-stack to the frontend. Read the release notes.
           </GlowingStarsDescription>
-          <div class={css({
-            height: '32px',
-            width: '32px',
-            borderRadius: 'full',
-            backgroundColor: 'hsla(0,0%,100%,.1)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          })}>
+          <div
+            class={css({
+              height: '32px',
+              width: '32px',
+              borderRadius: 'full',
+              backgroundColor: 'hsla(0,0%,100%,.1)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            })}
+          >
             <ArrowIcon />
           </div>
         </div>
@@ -55,13 +61,15 @@ export const GlowingStarsBackgroundCardPreview: Component = () => {
 
 export const GlowingStarsBackgroundCard: Component<GlowingStarsBackgroundCardProps> = (props) => {
   const [mousePosition, setMousePosition] = createSignal({ x: 0, y: 0 });
-  const [stars] = createSignal(Array.from({ length: 20 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    opacity: Math.random() * 0.8 + 0.2,
-  })));
+  const [stars] = createSignal(
+    Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 2 + 1,
+      opacity: Math.random() * 0.8 + 0.2,
+    }))
+  );
 
   let cardRef: HTMLDivElement;
 
@@ -86,7 +94,7 @@ export const GlowingStarsBackgroundCard: Component<GlowingStarsBackgroundCardPro
           },
           {
             duration: 2 + Math.random() * 2,
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             delay: Math.random() * 2,
             easing: 'ease-in-out',
           }
@@ -113,18 +121,20 @@ export const GlowingStarsBackgroundCard: Component<GlowingStarsBackgroundCardPro
           _hover: {
             transform: 'translateY(-4px)',
             boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-          }
+          },
         }),
         props.className
       )}
       onMouseMove={handleMouseMove}
     >
       {/* Stars Background */}
-      <div class={css({
-        position: 'absolute',
-        inset: 0,
-        pointerEvents: 'none'
-      })}>
+      <div
+        class={css({
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+        })}
+      >
         <For each={stars()}>
           {(star, index) => (
             <div
@@ -163,28 +173,32 @@ export const GlowingStarsBackgroundCard: Component<GlowingStarsBackgroundCardPro
       />
 
       {/* Content */}
-      <div class={css({
-        position: 'relative',
-        zIndex: 10,
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between'
-      })}>
+      <div
+        class={css({
+          position: 'relative',
+          zIndex: 10,
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        })}
+      >
         {props.children}
       </div>
 
       {/* Noise Texture */}
-      <div class={css({
-        position: 'absolute',
-        inset: 0,
-        backgroundImage: `
+      <div
+        class={css({
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `
           radial-gradient(circle at 1px 1px, rgba(255,255,255,.15) 1px, transparent 0)
         `,
-        backgroundSize: '20px 20px',
-        opacity: 0.5,
-        pointerEvents: 'none'
-      })} />
+          backgroundSize: '20px 20px',
+          opacity: 0.5,
+          pointerEvents: 'none',
+        })}
+      />
     </div>
   );
 };
@@ -241,7 +255,7 @@ const ArrowIcon: Component = () => {
         height: '16px',
         width: '16px',
         color: 'white',
-        strokeWidth: 2
+        strokeWidth: 2,
       })}
     >
       <path

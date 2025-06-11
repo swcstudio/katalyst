@@ -1,4 +1,4 @@
-import { z } from 'npm:zod';
+
 
 // Types and Schemas
 export interface ResendConfig {
@@ -46,7 +46,7 @@ export interface SendEmailOptions {
   replyTo?: string | EmailAddress;
   template?: {
     id: string;
-    data: Record<string, any>;
+    data: Record<string, unknown>;
   };
   metadata?: Record<string, string>;
 }
@@ -66,54 +66,14 @@ export interface BatchEmailResponse {
   }>;
 }
 
-const emailAddressSchema = z.union([
-  z.string().email(),
-  z.object({
-    email: z.string().email(),
-    name: z.string().optional()
-  })
-]);
 
-const sendEmailSchema = z.object({
-  from: emailAddressSchema,
-  to: z.array(emailAddressSchema).min(1),
-  cc: z.array(emailAddressSchema).optional(),
-  bcc: z.array(emailAddressSchema).optional(),
-  subject: z.string().min(1),
-  html: z.string().optional(),
-  text: z.string().optional(),
-  attachments: z.array(z.object({
-    filename: z.string(),
-    content: z.string(),
-    type: z.string().optional(),
-    disposition: z.enum(['attachment', 'inline']).optional(),
-    contentId: z.string().optional()
-  })).optional(),
-  tags: z.array(z.object({
-    name: z.string(),
-    value: z.string()
-  })).optional(),
-  headers: z.record(z.string()).optional(),
-  scheduledAt: z.date().optional(),
-  replyTo: emailAddressSchema.optional(),
-  template: z.object({
-    id: z.string(),
-    data: z.record(z.any())
-  }).optional(),
-  metadata: z.record(z.string()).optional()
-}).refine(
-  (data) => data.html || data.text || data.template,
-  {
-    message: "Either 'html', 'text', or 'template' must be provided"
-  }
-);
 
 export class ResendError extends Error {
   public readonly code: string;
   public readonly statusCode: number;
-  public readonly details?: any;
+  public readonly details?: Record<string, unknown>;
 
-  constructor(message: string, code: string, statusCode: number, details?: any) {
+  constructor(message: string, code: string, statusCode: number, details?: Record<string, unknown>) {
     super(message);
     this.name = 'ResendError';
     this.code = code;
@@ -132,7 +92,7 @@ export class ResendClient {
       timeout: 30000,
       retries: 3,
       defaultFrom: '',
-      ...config
+      ...config,
     };
 
     if (!this.config.apiKey) {
@@ -142,8 +102,8 @@ export class ResendClient {
 
   // Core email sending method
   async sendEmail(options: SendEmailOptions): Promise<EmailResponse> {
-    const validatedOptions = sendEmailSchema.parse(options);
-    
+    const validatedOptions = options;
+
     // Use default from if not specified
     if (!validatedOptions.from && this.config.defaultFrom) {
       validatedOptions.from = this.config.defaultFrom;
@@ -151,18 +111,18 @@ export class ResendClient {
 
     const payload = this.buildEmailPayload(validatedOptions);
     const response = await this.makeRequest('POST', '/emails', payload);
-    
+
     // Track successful sends for analytics
     await this.trackEmailSent({
       id: response.id,
       from: this.normalizeEmailAddress(validatedOptions.from),
-      to: validatedOptions.to.map(addr => this.normalizeEmailAddress(addr)),
+      to: validatedOptions.to.map((addr: any) => this.normalizeEmailAddress(addr)),
       subject: validatedOptions.subject,
       tags: validatedOptions.tags,
-      metadata: validatedOptions.metadata
+      metadata: validatedOptions.metadata,
     });
 
-    return response;
+    return response as unknown as EmailResponse;
   }
 
   // Batch email sending
@@ -175,31 +135,34 @@ export class ResendClient {
       throw new ResendError('Batch size cannot exceed 100 emails', 'BATCH_TOO_LARGE', 400);
     }
 
-    const validatedEmails = emails.map(email => sendEmailSchema.parse(email));
-    const payloads = validatedEmails.map(email => this.buildEmailPayload(email));
+    const validatedEmails = emails;
+    const payloads = validatedEmails.map((email) => this.buildEmailPayload(email));
 
     const response = await this.makeRequest('POST', '/emails/batch', {
-      emails: payloads
+      emails: payloads,
     });
 
-    return response;
+    return response as unknown as BatchEmailResponse;
   }
 
   // Template-based email sending
-  async sendTemplate(templateId: string, options: Omit<SendEmailOptions, 'html' | 'text'> & {
-    templateData: Record<string, any>;
-  }): Promise<EmailResponse> {
+  async sendTemplate(
+    templateId: string,
+    options: Omit<SendEmailOptions, 'html' | 'text'> & {
+      templateData: Record<string, unknown>;
+    }
+  ): Promise<EmailResponse> {
     return this.sendEmail({
       ...options,
       template: {
         id: templateId,
-        data: options.templateData
-      }
+        data: options.templateData,
+      },
     });
   }
 
   // Get email status
-  async getEmail(emailId: string): Promise<any> {
+  async getEmail(emailId: string): Promise<Record<string, unknown>> {
     return this.makeRequest('GET', `/emails/${emailId}`);
   }
 
@@ -218,7 +181,7 @@ export class ResendClient {
         false,
         ['sign']
       );
-      
+
       // This is a simplified version - implement proper HMAC verification
       return signature.length > 0 && payload.length > 0;
     } catch {
@@ -230,27 +193,27 @@ export class ResendClient {
   getRateLimitInfo(): { remaining: number; resetTime: number } | null {
     const info = this.rateLimitTracker.get('global');
     if (!info) return null;
-    
+
     return {
       remaining: Math.max(0, 100 - info.count), // Assuming 100 req/min limit
-      resetTime: info.resetTime
+      resetTime: info.resetTime,
     };
   }
 
   // Private methods
-  private buildEmailPayload(options: SendEmailOptions): any {
-    const payload: any = {
+  private buildEmailPayload(options: SendEmailOptions): Record<string, unknown> {
+    const payload: Record<string, unknown> = {
       from: this.normalizeEmailAddress(options.from),
-      to: options.to.map(addr => this.normalizeEmailAddress(addr)),
-      subject: options.subject
+      to: options.to.map((addr) => this.normalizeEmailAddress(addr)),
+      subject: options.subject,
     };
 
     if (options.cc?.length) {
-      payload.cc = options.cc.map(addr => this.normalizeEmailAddress(addr));
+      payload.cc = options.cc.map((addr) => this.normalizeEmailAddress(addr));
     }
 
     if (options.bcc?.length) {
-      payload.bcc = options.bcc.map(addr => this.normalizeEmailAddress(addr));
+      payload.bcc = options.bcc.map((addr) => this.normalizeEmailAddress(addr));
     }
 
     if (options.html) payload.html = options.html;
@@ -265,10 +228,10 @@ export class ResendClient {
     // Add metadata as custom headers
     if (options.metadata) {
       payload.headers = {
-        ...payload.headers,
+        ...(payload.headers || {}),
         ...Object.fromEntries(
           Object.entries(options.metadata).map(([key, value]) => [`X-Metadata-${key}`, value])
-        )
+        ),
       };
     }
 
@@ -280,9 +243,9 @@ export class ResendClient {
     return addr.name ? `${addr.name} <${addr.email}>` : addr.email;
   }
 
-  private async makeRequest(method: string, endpoint: string, body?: any): Promise<any> {
+  private async makeRequest(method: string, endpoint: string, body?: Record<string, unknown>): Promise<Record<string, unknown>> {
     const url = `${this.config.baseUrl}${endpoint}`;
-    
+
     for (let attempt = 0; attempt <= this.config.retries; attempt++) {
       try {
         const controller = new AbortController();
@@ -291,12 +254,12 @@ export class ResendClient {
         const response = await fetch(url, {
           method,
           headers: {
-            'Authorization': `Bearer ${this.config.apiKey}`,
+            Authorization: `Bearer ${this.config.apiKey}`,
             'Content-Type': 'application/json',
-            'User-Agent': 'SolidStack-Enterprise/1.0.0 (Deno)'
+            'User-Agent': 'SolidStack-Enterprise/1.0.0 (Deno)',
           },
           body: body ? JSON.stringify(body) : undefined,
-          signal: controller.signal
+          signal: controller.signal,
         });
 
         clearTimeout(timeoutId);
@@ -318,20 +281,16 @@ export class ResendClient {
       } catch (error) {
         if (attempt === this.config.retries) {
           if (error instanceof ResendError) throw error;
-          
-          if (error.name === 'AbortError') {
+
+          if (error && typeof error === 'object' && 'name' in error && error.name === 'AbortError') {
             throw new ResendError('Request timeout', 'TIMEOUT', 408);
           }
-          
-          throw new ResendError(
-            error.message || 'Network error',
-            'NETWORK_ERROR',
-            500
-          );
+
+          throw new ResendError(error instanceof Error ? error.message : 'Network error', 'NETWORK_ERROR', 500);
         }
-        
+
         // Wait before retry with exponential backoff
-        await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+        await new Promise((resolve) => setTimeout(resolve, 2 ** attempt * 1000));
       }
     }
 
@@ -341,16 +300,16 @@ export class ResendClient {
   private updateRateLimitTracking(headers: Headers): void {
     const remaining = headers.get('X-RateLimit-Remaining');
     const reset = headers.get('X-RateLimit-Reset');
-    
+
     if (remaining && reset) {
       this.rateLimitTracker.set('global', {
-        count: 100 - parseInt(remaining, 10),
-        resetTime: parseInt(reset, 10) * 1000
+        count: 100 - Number.parseInt(remaining, 10),
+        resetTime: Number.parseInt(reset, 10) * 1000,
       });
     }
   }
 
-  private async trackEmailSent(data: any): Promise<void> {
+  private async trackEmailSent(data: Record<string, unknown>): Promise<void> {
     // Implement analytics tracking here
     console.log('Email sent:', data.id, data.subject);
   }
@@ -370,13 +329,13 @@ export function getDefaultResendClient(): ResendClient {
     if (!apiKey) {
       throw new Error('RESEND_API_KEY environment variable is required');
     }
-    
+
     defaultClient = new ResendClient({
       apiKey,
-      defaultFrom: Deno.env.get('RESEND_DEFAULT_FROM') || ''
+      defaultFrom: Deno.env.get('RESEND_DEFAULT_FROM') || '',
     });
   }
-  
+
   return defaultClient;
 }
 

@@ -1,11 +1,19 @@
-import { Component, createSignal, onMount, onCleanup, For, Show, createEffect } from 'solid-js';
+import {
+  type Component,
+  For,
+  Show,
+  createEffect,
+  createSignal,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 import { css } from '../../../../../styled-system/css';
-import { useBlogSection, BlogPost, BlogSection } from '../state/useBlogSection';
 import { BlurFade } from '../../../magicui/BlurFade';
-import { TextAnimate } from '../../../magicui/TextAnimate';
 import { BorderBeam } from '../../../magicui/BorderBeam';
 import { DotPattern } from '../../../magicui/DotPattern';
 import { NumberTicker } from '../../../magicui/NumberTicker';
+import { TextAnimate } from '../../../magicui/TextAnimate';
+import { type BlogPost, type BlogSection, useBlogSection } from '../state/useBlogSection';
 
 export interface BlogListProps {
   blogData: BlogSection;
@@ -34,7 +42,7 @@ export const BlogList: Component<BlogListProps> = (props) => {
     },
     onAnimationComplete: () => {
       console.log('Blog list animation completed');
-    }
+    },
   });
 
   onMount(() => {
@@ -66,18 +74,18 @@ export const BlogList: Component<BlogListProps> = (props) => {
     position: 'relative',
     backgroundColor: 'white',
     paddingY: { base: '24', sm: '32' },
-    overflow: 'hidden'
+    overflow: 'hidden',
   });
 
   const innerStyles = css({
     marginX: 'auto',
     maxWidth: '2xl',
-    paddingX: { base: '6', lg: '8' }
+    paddingX: { base: '6', lg: '8' },
   });
 
   const headerStyles = css({
     marginX: 'auto',
-    maxWidth: '2xl'
+    maxWidth: '2xl',
   });
 
   const titleStyles = css({
@@ -85,14 +93,14 @@ export const BlogList: Component<BlogListProps> = (props) => {
     fontWeight: 'semibold',
     letterSpacing: 'tight',
     color: 'gray.900',
-    lineHeight: 'tight'
+    lineHeight: 'tight',
   });
 
   const subtitleStyles = css({
     marginTop: '2',
     fontSize: { base: 'lg', sm: 'xl' },
     lineHeight: '8',
-    color: 'gray.600'
+    color: 'gray.600',
   });
 
   const listContainerStyles = css({
@@ -102,13 +110,13 @@ export const BlogList: Component<BlogListProps> = (props) => {
     borderTopColor: 'gray.200',
     '@media (min-width: 640px)': {
       marginTop: '16',
-      paddingTop: '16'
-    }
+      paddingTop: '16',
+    },
   });
 
   const timelineStyles = css({
     position: 'relative',
-    paddingLeft: { base: '0', sm: '12' }
+    paddingLeft: { base: '0', sm: '12' },
   });
 
   const timelineLineStyles = css({
@@ -118,16 +126,17 @@ export const BlogList: Component<BlogListProps> = (props) => {
     bottom: '0',
     width: '0.5',
     backgroundColor: 'gradient-to-b',
-    background: 'linear-gradient(to bottom, transparent 0%, #e5e7eb 10%, #e5e7eb 90%, transparent 100%)',
+    background:
+      'linear-gradient(to bottom, transparent 0%, #e5e7eb 10%, #e5e7eb 90%, transparent 100%)',
     '@media (max-width: 640px)': {
-      display: 'none'
-    }
+      display: 'none',
+    },
   });
 
   const listStyles = css({
     display: 'flex',
     flexDirection: 'column',
-    gap: '16'
+    gap: '16',
   });
 
   const articleStyles = css({
@@ -147,8 +156,8 @@ export const BlogList: Component<BlogListProps> = (props) => {
     '&:hover': {
       transform: 'translateX(8px)',
       boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
-      borderColor: 'gray.200'
-    }
+      borderColor: 'gray.200',
+    },
   });
 
   const timelineNodeStyles = css({
@@ -164,15 +173,15 @@ export const BlogList: Component<BlogListProps> = (props) => {
     zIndex: '10',
     transition: 'all 0.3s ease',
     '@media (max-width: 640px)': {
-      display: 'none'
-    }
+      display: 'none',
+    },
   });
 
   const timelineNodeActiveStyles = css({
     borderColor: 'indigo.500',
     backgroundColor: 'indigo.100',
     transform: 'scale(1.2)',
-    boxShadow: '0 0 20px rgba(79, 70, 229, 0.3)'
+    boxShadow: '0 0 20px rgba(79, 70, 229, 0.3)',
   });
 
   const numberIndicatorStyles = css({
@@ -196,8 +205,8 @@ export const BlogList: Component<BlogListProps> = (props) => {
       position: 'static',
       marginBottom: '4',
       width: '8',
-      height: '8'
-    }
+      height: '8',
+    },
   });
 
   const metaStyles = css({
@@ -205,12 +214,12 @@ export const BlogList: Component<BlogListProps> = (props) => {
     alignItems: 'center',
     gap: 'x-4',
     fontSize: 'xs',
-    marginBottom: '4'
+    marginBottom: '4',
   });
 
   const dateStyles = css({
     color: 'gray.500',
-    fontWeight: 'medium'
+    fontWeight: 'medium',
   });
 
   const categoryStyles = css({
@@ -225,14 +234,14 @@ export const BlogList: Component<BlogListProps> = (props) => {
     transition: 'all 0.2s ease',
     '&:hover': {
       backgroundColor: 'gray.100',
-      transform: 'scale(1.05)'
-    }
+      transform: 'scale(1.05)',
+    },
   });
 
   const titleGroupStyles = css({
     position: 'relative',
     display: 'group',
-    flex: '1'
+    flex: '1',
   });
 
   const postTitleStyles = css({
@@ -243,13 +252,13 @@ export const BlogList: Component<BlogListProps> = (props) => {
     color: 'gray.900',
     transition: 'color 0.2s ease',
     'group:hover &': {
-      color: 'gray.600'
-    }
+      color: 'gray.600',
+    },
   });
 
   const linkOverlayStyles = css({
     position: 'absolute',
-    inset: '0'
+    inset: '0',
   });
 
   const descriptionStyles = css({
@@ -258,7 +267,7 @@ export const BlogList: Component<BlogListProps> = (props) => {
     lineHeight: '6',
     color: 'gray.600',
     overflow: 'hidden',
-    maxHeight: '4.5rem'
+    maxHeight: '4.5rem',
   });
 
   const authorSectionStyles = css({
@@ -266,7 +275,7 @@ export const BlogList: Component<BlogListProps> = (props) => {
     marginTop: '8',
     display: 'flex',
     alignItems: 'center',
-    gap: 'x-4'
+    gap: 'x-4',
   });
 
   const avatarStyles = css({
@@ -276,28 +285,28 @@ export const BlogList: Component<BlogListProps> = (props) => {
     backgroundColor: 'gray.50',
     ring: '2px',
     ringColor: 'white',
-    transition: 'all 0.3s ease'
+    transition: 'all 0.3s ease',
   });
 
   const authorInfoStyles = css({
     fontSize: 'sm',
-    lineHeight: '6'
+    lineHeight: '6',
   });
 
   const authorNameStyles = css({
     fontWeight: 'semibold',
-    color: 'gray.900'
+    color: 'gray.900',
   });
 
   const authorRoleStyles = css({
-    color: 'gray.600'
+    color: 'gray.600',
   });
 
   const backgroundPatternStyles = css({
     position: 'absolute',
     inset: '0',
     opacity: '0.02',
-    zIndex: '0'
+    zIndex: '0',
   });
 
   const readingTimeStyles = css({
@@ -309,40 +318,28 @@ export const BlogList: Component<BlogListProps> = (props) => {
     paddingX: '2',
     paddingY: '1',
     borderRadius: 'md',
-    display: 'inline-block'
+    display: 'inline-block',
   });
 
   return (
     <div ref={containerRef} class={`${containerStyles} ${props.className || ''}`}>
       {/* Background Pattern */}
       <div class={backgroundPatternStyles}>
-        <DotPattern
-          width={16}
-          height={16}
-          cx={1}
-          cy={1}
-          cr={0.5}
-          className="fill-gray-300"
-        />
+        <DotPattern width={16} height={16} cx={1} cy={1} cr={0.5} className="fill-gray-300" />
       </div>
 
       <div class={innerStyles}>
         {/* Header Section */}
         <div class={headerStyles}>
           <BlurFade delay={0.1} inView={isVisible()}>
-            <TextAnimate
-              animation="blurInUp"
-              class={titleStyles}
-            >
+            <TextAnimate animation="blurInUp" class={titleStyles}>
               {blogSection.blogData.title}
             </TextAnimate>
           </BlurFade>
-          
+
           <Show when={blogSection.blogData.subtitle}>
             <BlurFade delay={0.2} inView={isVisible()}>
-              <p class={subtitleStyles}>
-                {blogSection.blogData.subtitle}
-              </p>
+              <p class={subtitleStyles}>{blogSection.blogData.subtitle}</p>
             </BlurFade>
           </Show>
         </div>
@@ -358,12 +355,12 @@ export const BlogList: Component<BlogListProps> = (props) => {
             <div class={listStyles}>
               <For each={blogSection.paginatedPosts}>
                 {(post, index) => (
-                  <BlurFade 
-                    delay={0.3 + (index() * (props.staggerDelay || 0.1))} 
+                  <BlurFade
+                    delay={0.3 + index() * (props.staggerDelay || 0.1)}
                     inView={isVisible()}
                     duration={props.animationDuration || 0.6}
                   >
-                    <article 
+                    <article
                       class={articleStyles}
                       onMouseEnter={() => {
                         blogSection.setBlogHover(String(post.id));
@@ -374,9 +371,11 @@ export const BlogList: Component<BlogListProps> = (props) => {
                     >
                       {/* Timeline Node */}
                       <Show when={props.showTimeline !== false}>
-                        <div 
+                        <div
                           class={`${timelineNodeStyles} ${
-                            blogSection.hoveredBlogId === String(post.id) ? timelineNodeActiveStyles : ''
+                            blogSection.hoveredBlogId === String(post.id)
+                              ? timelineNodeActiveStyles
+                              : ''
                           }`}
                         />
                       </Show>
@@ -384,8 +383,10 @@ export const BlogList: Component<BlogListProps> = (props) => {
                       {/* Number Indicator */}
                       <Show when={props.showNumbers !== false}>
                         <div class={numberIndicatorStyles}>
-                          <NumberTicker 
-                            value={index() + 1 + ((blogSection.currentPage - 1) * blogSection.postsPerPage)}
+                          <NumberTicker
+                            value={
+                              index() + 1 + (blogSection.currentPage - 1) * blogSection.postsPerPage
+                            }
                             className="text-xs font-bold"
                           />
                         </div>
@@ -406,9 +407,9 @@ export const BlogList: Component<BlogListProps> = (props) => {
                             href={post.category!.href}
                             class={categoryStyles}
                             style={{
-                              'background-color': post.category!.color?.includes('bg-') 
-                                ? undefined 
-                                : post.category!.color
+                              'background-color': post.category!.color?.includes('bg-')
+                                ? undefined
+                                : post.category!.color,
                             }}
                           >
                             {post.category!.title}
@@ -421,35 +422,31 @@ export const BlogList: Component<BlogListProps> = (props) => {
                         <h3 class={postTitleStyles}>
                           <a href={post.href}>
                             <span class={linkOverlayStyles} />
-                            <TextAnimate
-                              animation="slideUp"
-                              delay={0.4 + (index() * 0.05)}
-                            >
+                            <TextAnimate animation="slideUp" delay={0.4 + index() * 0.05}>
                               {post.title}
                             </TextAnimate>
                           </a>
                         </h3>
-                        <p class={descriptionStyles}>
-                          {post.description}
-                        </p>
+                        <p class={descriptionStyles}>{post.description}</p>
                       </div>
 
                       {/* Author Section */}
                       <Show when={blogSection.showAuthors}>
                         <div class={authorSectionStyles}>
-                          <img 
-                            alt={post.author.name} 
-                            src={post.author.imageUrl} 
+                          <img
+                            alt={post.author.name}
+                            src={post.author.imageUrl}
                             class={avatarStyles}
                             style={{
-                              transform: blogSection.hoveredBlogId === String(post.id) 
-                                ? 'scale(1.1)' 
-                                : 'scale(1)'
+                              transform:
+                                blogSection.hoveredBlogId === String(post.id)
+                                  ? 'scale(1.1)'
+                                  : 'scale(1)',
                             }}
                           />
                           <div class={authorInfoStyles}>
                             <p class={authorNameStyles}>
-                              <Show 
+                              <Show
                                 when={post.author.href}
                                 fallback={<span>{post.author.name}</span>}
                               >
@@ -460,9 +457,7 @@ export const BlogList: Component<BlogListProps> = (props) => {
                               </Show>
                             </p>
                             <Show when={post.author.role}>
-                              <p class={authorRoleStyles}>
-                                {post.author.role}
-                              </p>
+                              <p class={authorRoleStyles}>{post.author.role}</p>
                             </Show>
                           </div>
                         </div>
@@ -470,9 +465,7 @@ export const BlogList: Component<BlogListProps> = (props) => {
 
                       {/* Reading Time */}
                       <Show when={post.readingTime && blogSection.showReadingTime}>
-                        <div class={readingTimeStyles}>
-                          {post.readingTime} read
-                        </div>
+                        <div class={readingTimeStyles}>{post.readingTime} read</div>
                       </Show>
                     </article>
                   </BlurFade>
@@ -485,13 +478,15 @@ export const BlogList: Component<BlogListProps> = (props) => {
         {/* Pagination */}
         <Show when={blogSection.totalPages > 1}>
           <BlurFade delay={0.8} inView={isVisible()}>
-            <div class={css({
-              marginTop: '16',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '4'
-            })}>
+            <div
+              class={css({
+                marginTop: '16',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '4',
+              })}
+            >
               <button
                 disabled={!blogSection.hasPrevPage}
                 onClick={() => blogSection.prevPage()}
@@ -509,26 +504,28 @@ export const BlogList: Component<BlogListProps> = (props) => {
                   transition: 'all 0.2s ease',
                   '&:hover:not(:disabled)': {
                     backgroundColor: 'gray.50',
-                    transform: 'translateY(-1px)'
+                    transform: 'translateY(-1px)',
                   },
                   '&:disabled': {
                     opacity: '0.5',
-                    cursor: 'not-allowed'
-                  }
+                    cursor: 'not-allowed',
+                  },
                 })}
               >
                 ← Previous
               </button>
-              
-              <span class={css({
-                paddingX: '4',
-                fontSize: 'sm',
-                color: 'gray.700',
-                fontWeight: 'medium'
-              })}>
+
+              <span
+                class={css({
+                  paddingX: '4',
+                  fontSize: 'sm',
+                  color: 'gray.700',
+                  fontWeight: 'medium',
+                })}
+              >
                 Page {blogSection.currentPage} of {blogSection.totalPages}
               </span>
-              
+
               <button
                 disabled={!blogSection.hasNextPage}
                 onClick={() => blogSection.nextPage()}
@@ -546,12 +543,12 @@ export const BlogList: Component<BlogListProps> = (props) => {
                   transition: 'all 0.2s ease',
                   '&:hover:not(:disabled)': {
                     backgroundColor: 'gray.50',
-                    transform: 'translateY(-1px)'
+                    transform: 'translateY(-1px)',
                   },
                   '&:disabled': {
                     opacity: '0.5',
-                    cursor: 'not-allowed'
-                  }
+                    cursor: 'not-allowed',
+                  },
                 })}
               >
                 Next →

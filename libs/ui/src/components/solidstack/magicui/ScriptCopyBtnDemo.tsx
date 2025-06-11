@@ -1,5 +1,5 @@
-import { Component, createSignal, For } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For, createSignal } from 'solid-js';
 
 // Placeholder ScriptCopyBtn component - this would need to be implemented separately
 const ScriptCopyBtn: Component<{
@@ -25,30 +25,34 @@ const ScriptCopyBtn: Component<{
   };
 
   return (
-    <div class={css({
-      backgroundColor: 'gray.900',
-      borderRadius: 'lg',
-      border: '1px solid',
-      borderColor: 'gray.700',
-      overflow: 'hidden',
-      fontFamily: 'mono',
-      _dark: {
-        backgroundColor: 'gray.950',
-        borderColor: 'gray.800',
-      },
-    })}>
+    <div
+      class={css({
+        backgroundColor: 'gray.900',
+        borderRadius: 'lg',
+        border: '1px solid',
+        borderColor: 'gray.700',
+        overflow: 'hidden',
+        fontFamily: 'mono',
+        _dark: {
+          backgroundColor: 'gray.950',
+          borderColor: 'gray.800',
+        },
+      })}
+    >
       {/* Header with package manager tabs */}
       {props.showMultiplePackageOptions && (
-        <div class={css({
-          display: 'flex',
-          backgroundColor: 'gray.800',
-          borderBottom: '1px solid',
-          borderColor: 'gray.700',
-          _dark: {
-            backgroundColor: 'gray.900',
-            borderColor: 'gray.800',
-          },
-        })}>
+        <div
+          class={css({
+            display: 'flex',
+            backgroundColor: 'gray.800',
+            borderBottom: '1px solid',
+            borderColor: 'gray.700',
+            _dark: {
+              backgroundColor: 'gray.900',
+              borderColor: 'gray.800',
+            },
+          })}
+        >
           <For each={packageManagers}>
             {(pkg) => (
               <button
@@ -84,20 +88,24 @@ const ScriptCopyBtn: Component<{
       )}
 
       {/* Code block */}
-      <div class={css({
-        position: 'relative',
-        padding: '4',
-        backgroundColor: 'gray.900',
-        _dark: {
-          backgroundColor: 'gray.950',
-        },
-      })}>
-        <pre class={css({
-          fontSize: 'sm',
-          color: 'gray.100',
-          overflow: 'auto',
-          margin: '0',
-        })}>
+      <div
+        class={css({
+          position: 'relative',
+          padding: '4',
+          backgroundColor: 'gray.900',
+          _dark: {
+            backgroundColor: 'gray.950',
+          },
+        })}
+      >
+        <pre
+          class={css({
+            fontSize: 'sm',
+            color: 'gray.100',
+            overflow: 'auto',
+            margin: '0',
+          })}
+        >
           <code>{props.commandMap[selectedPackage()]}</code>
         </pre>
 
@@ -141,40 +149,48 @@ const ScriptCopyBtn: Component<{
 
 export const ScriptCopyBtnDemo: Component = () => {
   const customCommandMap = {
-    npm: "npm run shadcn add button",
-    yarn: "yarn shadcn add button",
-    pnpm: "pnpm dlx shadcn@latest add button",
-    bun: "bun x shadcn@latest add button",
+    npm: 'npm run shadcn add button',
+    yarn: 'yarn shadcn add button',
+    pnpm: 'pnpm dlx shadcn@latest add button',
+    bun: 'bun x shadcn@latest add button',
   };
 
   return (
-    <div class={css({
-      maxWidth: '2xl',
-      marginX: 'auto',
-      padding: '4',
-    })}>
-      <div class={css({
-        marginBottom: '4',
-        textAlign: 'center',
-      })}>
-        <h3 class={css({
-          fontSize: 'lg',
-          fontWeight: 'semibold',
-          color: 'gray.900',
-          marginBottom: '2',
-          _dark: {
-            color: 'white',
-          },
-        })}>
+    <div
+      class={css({
+        maxWidth: '2xl',
+        marginX: 'auto',
+        padding: '4',
+      })}
+    >
+      <div
+        class={css({
+          marginBottom: '4',
+          textAlign: 'center',
+        })}
+      >
+        <h3
+          class={css({
+            fontSize: 'lg',
+            fontWeight: 'semibold',
+            color: 'gray.900',
+            marginBottom: '2',
+            _dark: {
+              color: 'white',
+            },
+          })}
+        >
           Install Button Component
         </h3>
-        <p class={css({
-          fontSize: 'sm',
-          color: 'gray.600',
-          _dark: {
-            color: 'gray.400',
-          },
-        })}>
+        <p
+          class={css({
+            fontSize: 'sm',
+            color: 'gray.600',
+            _dark: {
+              color: 'gray.400',
+            },
+          })}
+        >
           Choose your preferred package manager
         </p>
       </div>

@@ -1,15 +1,15 @@
-import { Component, createSignal, For, Show } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For, Show, createSignal } from 'solid-js';
 
+import { Accordion } from './Accordion';
 // Foundation Components (Zag.js powered)
 import { Button } from './Button';
-import { Input } from './Input';
-import { Card, CardHeader, CardBody, CardFooter } from './Card';
+import { Card, CardBody, CardFooter, CardHeader } from './Card';
 import { Checkbox } from './Checkbox';
+import { Input } from './Input';
 import { Switch } from './Switch';
-import { Tooltip } from './Tooltip';
 import { Tabs } from './Tabs';
-import { Accordion } from './Accordion';
+import { Tooltip } from './Tooltip';
 
 // Demo Components (MysticUI inspired)
 import { AnimatedShinyTextDemo } from './demos/AnimatedShinyTextDemo';
@@ -33,7 +33,12 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
   const [activeTab, setActiveTab] = createSignal('overview');
 
   const sections = [
-    { id: 'foundation', name: 'Foundation Layer', icon: '🏗️', description: 'Zag.js powered components' },
+    {
+      id: 'foundation',
+      name: 'Foundation Layer',
+      icon: '🏗️',
+      description: 'Zag.js powered components',
+    },
     { id: 'demos', name: 'Demo Layer', icon: '✨', description: 'MysticUI inspired showcases' },
     { id: 'integration', name: 'Integration', icon: '🔗', description: 'Combined examples' },
     { id: 'performance', name: 'Performance', icon: '⚡', description: 'Metrics & benchmarks' },
@@ -58,9 +63,9 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
   ];
 
   const tabItems = [
-    { 
-      value: 'overview', 
-      label: 'Overview', 
+    {
+      value: 'overview',
+      label: 'Overview',
       content: (
         <div class={css({ padding: '6', textAlign: 'center' })}>
           <h3 class={css({ fontSize: 'xl', fontWeight: 'bold', marginBottom: '4' })}>
@@ -70,11 +75,11 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
             A two-layer design system combining robust state machines with beautiful visual effects.
           </p>
         </div>
-      )
+      ),
     },
-    { 
-      value: 'features', 
-      label: 'Features', 
+    {
+      value: 'features',
+      label: 'Features',
       content: (
         <div class={css({ padding: '6' })}>
           <ul class={css({ space: 'y-2' })}>
@@ -84,99 +89,108 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
             <li>📦 50% smaller bundle sizes</li>
           </ul>
         </div>
-      )
-    }
+      ),
+    },
   ];
 
   const accordionItems = [
     {
       title: 'What is SolidStack-UI?',
-      content: 'A next-generation design system built on SolidJS, Zag.js state machines, and PandaCSS for enterprise applications.'
+      content:
+        'A next-generation design system built on SolidJS, Zag.js state machines, and PandaCSS for enterprise applications.',
     },
     {
       title: 'How does it compare to other libraries?',
-      content: 'SolidStack-UI offers superior performance, smaller bundle sizes, and better accessibility than traditional React-based design systems.'
+      content:
+        'SolidStack-UI offers superior performance, smaller bundle sizes, and better accessibility than traditional React-based design systems.',
     },
     {
       title: 'Can I migrate from existing libraries?',
-      content: 'Yes! We provide automated migration tools and compatibility layers for popular libraries like Material-UI, Ant Design, and Chakra UI.'
-    }
+      content:
+        'Yes! We provide automated migration tools and compatibility layers for popular libraries like Material-UI, Ant Design, and Chakra UI.',
+    },
   ];
 
   return (
-    <div class={css({ 
-      minHeight: '100vh', 
-      backgroundColor: 'gray.50', 
-      position: 'relative',
-      overflow: 'hidden',
-      _dark: { backgroundColor: 'gray.900' }
-    }, props.className)}>
-      
+    <div
+      class={css(
+        {
+          minHeight: '100vh',
+          backgroundColor: 'gray.50',
+          position: 'relative',
+          overflow: 'hidden',
+          _dark: { backgroundColor: 'gray.900' },
+        },
+        props.className
+      )}
+    >
       {/* Background Pattern */}
-      <DotPattern 
-        width={20} 
-        height={20} 
-        className={css({ opacity: 0.1 })} 
-      />
+      <DotPattern width={20} height={20} className={css({ opacity: 0.1 })} />
 
       {/* Header */}
-      <div class={css({ 
-        position: 'relative', 
-        zIndex: 10, 
-        padding: '8',
-        textAlign: 'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        backdropFilter: 'blur(10px)',
-        borderBottom: '1px solid',
-        borderColor: 'gray.200',
-        _dark: {
-          backgroundColor: 'rgba(17, 24, 39, 0.9)',
-          borderColor: 'gray.700'
-        }
-      })}>
-        <AnimatedShinyText 
-          as="h1" 
-          className={css({ 
-            fontSize: '4xl', 
-            fontWeight: 'bold', 
-            marginBottom: '2'
+      <div
+        class={css({
+          position: 'relative',
+          zIndex: 10,
+          padding: '8',
+          textAlign: 'center',
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          backdropFilter: 'blur(10px)',
+          borderBottom: '1px solid',
+          borderColor: 'gray.200',
+          _dark: {
+            backgroundColor: 'rgba(17, 24, 39, 0.9)',
+            borderColor: 'gray.700',
+          },
+        })}
+      >
+        <AnimatedShinyText
+          as="h1"
+          className={css({
+            fontSize: '4xl',
+            fontWeight: 'bold',
+            marginBottom: '2',
           })}
           shimmerColor="#3b82f6"
           animationSpeed={2}
         >
           SolidStack-UI Design System
         </AnimatedShinyText>
-        <p class={css({ 
-          fontSize: 'xl', 
-          color: 'gray.600',
-          maxWidth: '3xl',
-          margin: '0 auto',
-          _dark: { color: 'gray.300' }
-        })}>
+        <p
+          class={css({
+            fontSize: 'xl',
+            color: 'gray.600',
+            maxWidth: '3xl',
+            margin: '0 auto',
+            _dark: { color: 'gray.300' },
+          })}
+        >
           Enterprise-grade components powered by SolidJS, Zag.js, and PandaCSS
         </p>
       </div>
 
       {/* Navigation */}
-      <div class={css({ 
-        position: 'relative',
-        zIndex: 10,
-        padding: '6',
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '4',
-        flexWrap: 'wrap'
-      })}>
+      <div
+        class={css({
+          position: 'relative',
+          zIndex: 10,
+          padding: '6',
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '4',
+          flexWrap: 'wrap',
+        })}
+      >
         <For each={sections}>
           {(section) => (
             <Button
               variant={activeSection() === section.id ? 'primary' : 'outline'}
               onClick={() => setActiveSection(section.id)}
-              class={css({ 
+              class={css({
                 display: 'flex',
                 alignItems: 'center',
                 gap: '2',
-                minWidth: '48'
+                minWidth: '48',
               })}
             >
               <span>{section.icon}</span>
@@ -190,33 +204,33 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
       </div>
 
       {/* Content */}
-      <div class={css({ 
-        position: 'relative',
-        zIndex: 10,
-        padding: '6',
-        maxWidth: '7xl',
-        margin: '0 auto'
-      })}>
-
+      <div
+        class={css({
+          position: 'relative',
+          zIndex: 10,
+          padding: '6',
+          maxWidth: '7xl',
+          margin: '0 auto',
+        })}
+      >
         {/* Foundation Layer */}
         <Show when={activeSection() === 'foundation'}>
           <div class={css({ space: 'y-8' })}>
             <Card variant="elevated">
               <CardHeader>
-                <h2 class={css({ fontSize: '2xl', fontWeight: 'bold' })}>
-                  Foundation Components
-                </h2>
+                <h2 class={css({ fontSize: '2xl', fontWeight: 'bold' })}>Foundation Components</h2>
                 <p class={css({ color: 'gray.600' })}>
                   Robust, accessible components powered by Zag.js state machines
                 </p>
               </CardHeader>
               <CardBody>
-                <div class={css({ 
-                  display: 'grid', 
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-                  gap: '6' 
-                })}>
-                  
+                <div
+                  class={css({
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                    gap: '6',
+                  })}
+                >
                   {/* Button Examples */}
                   <Card>
                     <CardHeader>
@@ -240,18 +254,14 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
                     </CardHeader>
                     <CardBody>
                       <div class={css({ space: 'y-4' })}>
-                        <Input 
+                        <Input
                           label="Email Address"
                           type="email"
                           placeholder="you@example.com"
                           value={inputValue()}
                           onInput={(e) => setInputValue(e.currentTarget.value)}
                         />
-                        <Input 
-                          label="Password"
-                          type="password"
-                          placeholder="••••••••"
-                        />
+                        <Input label="Password" type="password" placeholder="••••••••" />
                       </div>
                     </CardBody>
                   </Card>
@@ -299,14 +309,9 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
                       <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>Accordion</h3>
                     </CardHeader>
                     <CardBody>
-                      <Accordion
-                        items={accordionItems}
-                        multiple={true}
-                        collapsible={true}
-                      />
+                      <Accordion items={accordionItems} multiple={true} collapsible={true} />
                     </CardBody>
                   </Card>
-
                 </div>
               </CardBody>
             </Card>
@@ -318,20 +323,19 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
           <div class={css({ space: 'y-8' })}>
             <Card variant="elevated">
               <CardHeader>
-                <h2 class={css({ fontSize: '2xl', fontWeight: 'bold' })}>
-                  Demo Components
-                </h2>
+                <h2 class={css({ fontSize: '2xl', fontWeight: 'bold' })}>Demo Components</h2>
                 <p class={css({ color: 'gray.600' })}>
                   Beautiful showcase components inspired by MysticUI
                 </p>
               </CardHeader>
               <CardBody>
-                <div class={css({ 
-                  display: 'grid', 
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
-                  gap: '6' 
-                })}>
-                  
+                <div
+                  class={css({
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+                    gap: '6',
+                  })}
+                >
                   <Card>
                     <CardHeader>
                       <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>
@@ -345,9 +349,7 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
 
                   <Card>
                     <CardHeader>
-                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>
-                        Dot Pattern
-                      </h3>
+                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>Dot Pattern</h3>
                     </CardHeader>
                     <CardBody>
                       <div class={css({ height: '300px' })}>
@@ -358,9 +360,7 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
 
                   <Card>
                     <CardHeader>
-                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>
-                        Grid Pattern
-                      </h3>
+                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>Grid Pattern</h3>
                     </CardHeader>
                     <CardBody>
                       <div class={css({ height: '300px' })}>
@@ -381,7 +381,6 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
                       </div>
                     </CardBody>
                   </Card>
-
                 </div>
               </CardBody>
             </Card>
@@ -393,25 +392,18 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
           <div class={css({ space: 'y-8' })}>
             <Card variant="elevated">
               <CardHeader>
-                <h2 class={css({ fontSize: '2xl', fontWeight: 'bold' })}>
-                  Layer Integration
-                </h2>
+                <h2 class={css({ fontSize: '2xl', fontWeight: 'bold' })}>Layer Integration</h2>
                 <p class={css({ color: 'gray.600' })}>
                   Combining foundation components with visual effects
                 </p>
               </CardHeader>
               <CardBody>
                 <div class={css({ space: 'y-8' })}>
-                  
                   {/* Interactive Card with Background */}
                   <Card class={css({ position: 'relative', overflow: 'hidden' })}>
-                    <DotPattern 
-                      className={css({ opacity: 0.1 })}
-                      width={16}
-                      height={16}
-                    />
+                    <DotPattern className={css({ opacity: 0.1 })} width={16} height={16} />
                     <CardHeader class={css({ position: 'relative', zIndex: 10 })}>
-                      <AnimatedShinyText 
+                      <AnimatedShinyText
                         as="h3"
                         className={css({ fontSize: 'lg', fontWeight: 'semibold' })}
                       >
@@ -420,22 +412,15 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
                     </CardHeader>
                     <CardBody class={css({ position: 'relative', zIndex: 10 })}>
                       <div class={css({ space: 'y-4' })}>
-                        <Input 
-                          label="Name"
-                          placeholder="Enter your name"
-                        />
-                        <Input 
-                          label="Email"
-                          type="email"
-                          placeholder="Enter your email"
-                        />
+                        <Input label="Name" placeholder="Enter your name" />
+                        <Input label="Email" type="email" placeholder="Enter your email" />
                         <div class={css({ display: 'flex', gap: '4', alignItems: 'center' })}>
-                          <Checkbox 
+                          <Checkbox
                             label="Subscribe to newsletter"
                             checked={checked()}
                             onChange={setChecked}
                           />
-                          <Switch 
+                          <Switch
                             label="Enable notifications"
                             checked={switchEnabled()}
                             onChange={setSwitchEnabled}
@@ -451,20 +436,18 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
                   </Card>
 
                   {/* Dashboard Example */}
-                  <div class={css({ 
-                    display: 'grid', 
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-                    gap: '4' 
-                  })}>
+                  <div
+                    class={css({
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                      gap: '4',
+                    })}
+                  >
                     <For each={foundationComponents.slice(0, 4)}>
                       {(component, index) => (
                         <Card class={css({ position: 'relative', overflow: 'hidden' })}>
                           <Show when={index() % 2 === 0}>
-                            <DotPattern 
-                              className={css({ opacity: 0.05 })}
-                              width={12}
-                              height={12}
-                            />
+                            <DotPattern className={css({ opacity: 0.05 })} width={12} height={12} />
                           </Show>
                           <CardHeader class={css({ position: 'relative', zIndex: 10 })}>
                             <h4 class={css({ fontSize: 'md', fontWeight: 'semibold' })}>
@@ -480,7 +463,6 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
                       )}
                     </For>
                   </div>
-
                 </div>
               </CardBody>
             </Card>
@@ -492,29 +474,28 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
           <div class={css({ space: 'y-8' })}>
             <Card variant="elevated">
               <CardHeader>
-                <h2 class={css({ fontSize: '2xl', fontWeight: 'bold' })}>
-                  Performance Metrics
-                </h2>
+                <h2 class={css({ fontSize: '2xl', fontWeight: 'bold' })}>Performance Metrics</h2>
                 <p class={css({ color: 'gray.600' })}>
                   Real-world performance comparisons and benchmarks
                 </p>
               </CardHeader>
               <CardBody>
-                <div class={css({ 
-                  display: 'grid', 
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-                  gap: '6' 
-                })}>
-                  
+                <div
+                  class={css({
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                    gap: '6',
+                  })}
+                >
                   <Card>
                     <CardHeader>
-                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>
-                        Bundle Size
-                      </h3>
+                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>Bundle Size</h3>
                     </CardHeader>
                     <CardBody>
                       <div class={css({ textAlign: 'center' })}>
-                        <div class={css({ fontSize: '3xl', fontWeight: 'bold', color: 'green.600' })}>
+                        <div
+                          class={css({ fontSize: '3xl', fontWeight: 'bold', color: 'green.600' })}
+                        >
                           45KB
                         </div>
                         <div class={css({ fontSize: 'sm', color: 'gray.600' })}>
@@ -529,18 +510,16 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
 
                   <Card>
                     <CardHeader>
-                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>
-                        Render Time
-                      </h3>
+                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>Render Time</h3>
                     </CardHeader>
                     <CardBody>
                       <div class={css({ textAlign: 'center' })}>
-                        <div class={css({ fontSize: '3xl', fontWeight: 'bold', color: 'blue.600' })}>
+                        <div
+                          class={css({ fontSize: '3xl', fontWeight: 'bold', color: 'blue.600' })}
+                        >
                           15ms
                         </div>
-                        <div class={css({ fontSize: 'sm', color: 'gray.600' })}>
-                          Initial render
-                        </div>
+                        <div class={css({ fontSize: 'sm', color: 'gray.600' })}>Initial render</div>
                         <div class={css({ marginTop: '2', fontSize: 'xs' })}>
                           vs 45ms (React libraries)
                         </div>
@@ -550,18 +529,16 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
 
                   <Card>
                     <CardHeader>
-                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>
-                        Memory Usage
-                      </h3>
+                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>Memory Usage</h3>
                     </CardHeader>
                     <CardBody>
                       <div class={css({ textAlign: 'center' })}>
-                        <div class={css({ fontSize: '3xl', fontWeight: 'bold', color: 'purple.600' })}>
+                        <div
+                          class={css({ fontSize: '3xl', fontWeight: 'bold', color: 'purple.600' })}
+                        >
                           8MB
                         </div>
-                        <div class={css({ fontSize: 'sm', color: 'gray.600' })}>
-                          Runtime memory
-                        </div>
+                        <div class={css({ fontSize: 'sm', color: 'gray.600' })}>Runtime memory</div>
                         <div class={css({ marginTop: '2', fontSize: 'xs' })}>
                           vs 24MB (React alternatives)
                         </div>
@@ -571,37 +548,43 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
 
                   <Card>
                     <CardHeader>
-                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>
-                        Accessibility
-                      </h3>
+                      <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold' })}>Accessibility</h3>
                     </CardHeader>
                     <CardBody>
                       <div class={css({ textAlign: 'center' })}>
-                        <div class={css({ fontSize: '3xl', fontWeight: 'bold', color: 'green.600' })}>
+                        <div
+                          class={css({ fontSize: '3xl', fontWeight: 'bold', color: 'green.600' })}
+                        >
                           100%
                         </div>
-                        <div class={css({ fontSize: 'sm', color: 'gray.600' })}>
-                          WCAG 2.1 AAA
-                        </div>
+                        <div class={css({ fontSize: 'sm', color: 'gray.600' })}>WCAG 2.1 AAA</div>
                         <div class={css({ marginTop: '2', fontSize: 'xs' })}>
                           Built-in compliance
                         </div>
                       </div>
                     </CardBody>
                   </Card>
-
                 </div>
 
                 <div class={css({ marginTop: '8' })}>
                   <h3 class={css({ fontSize: 'lg', fontWeight: 'semibold', marginBottom: '4' })}>
                     Component Library Overview
                   </h3>
-                  <div class={css({ 
-                    display: 'grid', 
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-                    gap: '4' 
-                  })}>
-                    <div class={css({ textAlign: 'center', padding: '4', backgroundColor: 'blue.50', borderRadius: 'lg' })}>
+                  <div
+                    class={css({
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                      gap: '4',
+                    })}
+                  >
+                    <div
+                      class={css({
+                        textAlign: 'center',
+                        padding: '4',
+                        backgroundColor: 'blue.50',
+                        borderRadius: 'lg',
+                      })}
+                    >
                       <div class={css({ fontSize: '2xl', fontWeight: 'bold' })}>
                         {foundationComponents.length}
                       </div>
@@ -609,21 +592,29 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
                         Foundation Components
                       </div>
                     </div>
-                    <div class={css({ textAlign: 'center', padding: '4', backgroundColor: 'purple.50', borderRadius: 'lg' })}>
+                    <div
+                      class={css({
+                        textAlign: 'center',
+                        padding: '4',
+                        backgroundColor: 'purple.50',
+                        borderRadius: 'lg',
+                      })}
+                    >
                       <div class={css({ fontSize: '2xl', fontWeight: 'bold' })}>
                         {demoComponents.length}
                       </div>
-                      <div class={css({ fontSize: 'sm', color: 'gray.600' })}>
-                        Demo Components
-                      </div>
+                      <div class={css({ fontSize: 'sm', color: 'gray.600' })}>Demo Components</div>
                     </div>
-                    <div class={css({ textAlign: 'center', padding: '4', backgroundColor: 'green.50', borderRadius: 'lg' })}>
-                      <div class={css({ fontSize: '2xl', fontWeight: 'bold' })}>
-                        60+
-                      </div>
-                      <div class={css({ fontSize: 'sm', color: 'gray.600' })}>
-                        Planned for 2024
-                      </div>
+                    <div
+                      class={css({
+                        textAlign: 'center',
+                        padding: '4',
+                        backgroundColor: 'green.50',
+                        borderRadius: 'lg',
+                      })}
+                    >
+                      <div class={css({ fontSize: '2xl', fontWeight: 'bold' })}>60+</div>
+                      <div class={css({ fontSize: 'sm', color: 'gray.600' })}>Planned for 2024</div>
                     </div>
                   </div>
                 </div>
@@ -631,30 +622,28 @@ const SolidStackShowcase: Component<SolidStackShowcaseProps> = (props) => {
             </Card>
           </div>
         </Show>
-
       </div>
 
       {/* Footer */}
-      <div class={css({ 
-        position: 'relative',
-        zIndex: 10,
-        marginTop: '12',
-        padding: '8',
-        textAlign: 'center',
-        backgroundColor: 'gray.900',
-        color: 'white'
-      })}>
-        <AnimatedShinyText 
+      <div
+        class={css({
+          position: 'relative',
+          zIndex: 10,
+          marginTop: '12',
+          padding: '8',
+          textAlign: 'center',
+          backgroundColor: 'gray.900',
+          color: 'white',
+        })}
+      >
+        <AnimatedShinyText
           className={css({ fontSize: 'lg', marginBottom: '2' })}
           shimmerColor="#ffffff"
         >
           Built with ❤️ by the SolidStack team
         </AnimatedShinyText>
-        <p class={css({ color: 'gray.400' })}>
-          Powered by SolidJS • Zag.js • PandaCSS • Deno
-        </p>
+        <p class={css({ color: 'gray.400' })}>Powered by SolidJS • Zag.js • PandaCSS • Deno</p>
       </div>
-
     </div>
   );
 };

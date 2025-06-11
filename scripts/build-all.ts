@@ -10,6 +10,7 @@ const frameworks = [
   { name: 'docs', port: 20003, description: 'Astro Static Documentation' },
   { name: 'remix', port: 20004, description: 'Remix Application UIs' },
   { name: 'sveltekit', port: 20005, description: 'SvelteKit SPAs' },
+  { name: 'reactonrust', port: 20007, description: 'React on Rust Framework' },
 ];
 
 console.log('📋 Build Queue:');

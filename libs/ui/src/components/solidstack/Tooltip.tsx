@@ -1,14 +1,14 @@
-import * as tooltip from "@zag-js/tooltip"
-import { normalizeProps, useMachine } from "@zag-js/solid"
-import { createMemo, createUniqueId, JSX, Show } from "solid-js"
+import { normalizeProps, useMachine } from '@zag-js/solid';
+import * as tooltip from '@zag-js/tooltip';
+import { type JSX, Show, createMemo, createUniqueId } from 'solid-js';
 
 export interface TooltipProps {
-  content: string | JSX.Element
-  placement?: "top" | "bottom" | "left" | "right"
-  openDelay?: number
-  closeDelay?: number
-  disabled?: boolean
-  children: JSX.Element
+  content: string | JSX.Element;
+  placement?: 'top' | 'bottom' | 'left' | 'right';
+  openDelay?: number;
+  closeDelay?: number;
+  disabled?: boolean;
+  children: JSX.Element;
 }
 
 export function Tooltip(props: TooltipProps) {
@@ -16,24 +16,24 @@ export function Tooltip(props: TooltipProps) {
     tooltip.machine({
       id: createUniqueId(),
       positioning: {
-        placement: props.placement || "top"
+        placement: props.placement || 'top',
       },
       openDelay: props.openDelay || 700,
       closeDelay: props.closeDelay || 300,
-      disabled: props.disabled
+      disabled: props.disabled,
     })
-  )
+  );
 
-  const api = createMemo(() => tooltip.connect(state, send, normalizeProps))
+  const api = createMemo(() => tooltip.connect(state, send, normalizeProps));
 
   return (
     <>
       {props.children}
-      
+
       <Show when={api().open}>
         <div {...api().positionerProps}>
-          <div 
-            {...api().contentProps} 
+          <div
+            {...api().contentProps}
             class="z-50 px-3 py-2 text-sm text-white bg-gray-900 rounded-md shadow-lg max-w-xs"
           >
             {props.content}
@@ -41,5 +41,5 @@ export function Tooltip(props: TooltipProps) {
         </div>
       </Show>
     </>
-  )
+  );
 }

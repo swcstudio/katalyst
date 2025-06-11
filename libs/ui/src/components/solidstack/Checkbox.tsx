@@ -1,28 +1,39 @@
-import * as checkbox from "@zag-js/checkbox"
-import { normalizeProps, useMachine } from "@zag-js/solid"
-import { createMemo, createUniqueId, JSX, splitProps, Show } from "solid-js"
+import * as checkbox from '@zag-js/checkbox';
+import { normalizeProps, useMachine } from '@zag-js/solid';
+import { type JSX, Show, createMemo, createUniqueId, splitProps } from 'solid-js';
 
 export interface CheckboxProps {
-  checked?: boolean
-  defaultChecked?: boolean
-  disabled?: boolean
-  invalid?: boolean
-  required?: boolean
-  name?: string
-  value?: string
-  id?: string
-  class?: string
-  label?: string | JSX.Element
-  description?: string | JSX.Element
-  onChange?: (checked: boolean) => void
-  children?: JSX.Element
+  checked?: boolean;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  invalid?: boolean;
+  required?: boolean;
+  name?: string;
+  value?: string;
+  id?: string;
+  class?: string;
+  label?: string | JSX.Element;
+  description?: string | JSX.Element;
+  onChange?: (checked: boolean) => void;
+  children?: JSX.Element;
 }
 
 export function Checkbox(props: CheckboxProps) {
   const [local, others] = splitProps(props, [
-    "checked", "defaultChecked", "disabled", "invalid", "required",
-    "name", "value", "id", "class", "label", "description", "onChange", "children"
-  ])
+    'checked',
+    'defaultChecked',
+    'disabled',
+    'invalid',
+    'required',
+    'name',
+    'value',
+    'id',
+    'class',
+    'label',
+    'description',
+    'onChange',
+    'children',
+  ]);
 
   const [state, send] = useMachine(
     checkbox.machine({
@@ -34,42 +45,43 @@ export function Checkbox(props: CheckboxProps) {
       name: local.name,
       value: local.value,
       onCheckedChange: (details) => {
-        local.onChange?.(!!details.checked)
-      }
+        local.onChange?.(!!details.checked);
+      },
     })
-  )
+  );
 
-  const api = createMemo(() => checkbox.connect(state, send, normalizeProps))
+  const api = createMemo(() => checkbox.connect(state, send, normalizeProps));
 
   const containerClasses = () => {
-    return `flex items-start gap-3 ${local.class || ""}`
-  }
+    return `flex items-start gap-3 ${local.class || ''}`;
+  };
 
   const checkboxClasses = () => {
-    const base = "relative flex h-4 w-4 shrink-0 items-center justify-center rounded border-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-    const checked = "bg-blue-600 border-blue-600 text-white"
-    const unchecked = "border-gray-300 bg-white hover:border-gray-400"
-    const disabled = "opacity-50 cursor-not-allowed"
-    const invalid = "border-red-500"
-    
-    let classes = base
+    const base =
+      'relative flex h-4 w-4 shrink-0 items-center justify-center rounded border-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2';
+    const checked = 'bg-blue-600 border-blue-600 text-white';
+    const unchecked = 'border-gray-300 bg-white hover:border-gray-400';
+    const disabled = 'opacity-50 cursor-not-allowed';
+    const invalid = 'border-red-500';
+
+    let classes = base;
     if (api().isChecked) {
-      classes += ` ${checked}`
+      classes += ` ${checked}`;
     } else {
-      classes += ` ${unchecked}`
+      classes += ` ${unchecked}`;
     }
-    if (api().isDisabled) classes += ` ${disabled}`
-    if (local.invalid) classes += ` ${invalid}`
-    
-    return classes
-  }
+    if (api().isDisabled) classes += ` ${disabled}`;
+    if (local.invalid) classes += ` ${invalid}`;
+
+    return classes;
+  };
 
   const labelClasses = () => {
-    const base = "text-sm font-medium leading-none select-none cursor-pointer"
-    const disabled = "opacity-50 cursor-not-allowed"
-    
-    return api().isDisabled ? `${base} ${disabled}` : base
-  }
+    const base = 'text-sm font-medium leading-none select-none cursor-pointer';
+    const disabled = 'opacity-50 cursor-not-allowed';
+
+    return api().isDisabled ? `${base} ${disabled}` : base;
+  };
 
   return (
     <div {...others} class={containerClasses()}>
@@ -99,13 +111,11 @@ export function Checkbox(props: CheckboxProps) {
               {local.label || local.children}
             </span>
             <Show when={local.description}>
-              <span class="text-xs text-gray-500">
-                {local.description}
-              </span>
+              <span class="text-xs text-gray-500">{local.description}</span>
             </Show>
           </div>
         </Show>
       </label>
     </div>
-  )
+  );
 }

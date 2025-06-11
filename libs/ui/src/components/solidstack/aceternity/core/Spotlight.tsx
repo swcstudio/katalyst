@@ -1,5 +1,5 @@
-import { Component } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import type { Component } from 'solid-js';
 
 export interface SpotlightProps {
   className?: string;
@@ -25,12 +25,8 @@ export const Spotlight: Component<SpotlightProps> = (props) => {
     filter: `blur(${blur})`,
     pointerEvents: 'none',
     zIndex: '10',
-    animation: 'pulse 4s ease-in-out infinite'
+    animation: 'pulse 4s ease-in-out infinite',
   });
 
-  return (
-    <div
-      class={`${spotlightStyles} ${props.className || ''}`}
-    />
-  );
+  return <div class={`${spotlightStyles} ${props.className || ''}`} />;
 };

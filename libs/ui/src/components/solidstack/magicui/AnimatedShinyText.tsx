@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, ParentComponent } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, type ParentComponent, mergeProps } from 'solid-js';
 
 export interface AnimatedShinyTextProps {
   class?: string;
@@ -22,39 +22,44 @@ export const AnimatedShinyText: ParentComponent<AnimatedShinyTextProps> = (props
 
   return (
     <span
-      class={css({
-        position: 'relative',
-        display: 'inline-block',
-        background: 'linear-gradient(110deg, transparent 35%, var(--shimmer-color), transparent 65%)',
-        backgroundSize: `${merged.shimmerWidth * 2}% 100%`,
-        backgroundPosition: '-100% 0',
-        animation: `shimmer ${merged.animationDuration}s ease-in-out infinite`,
-        backgroundClip: 'text',
-        WebkitBackgroundClip: 'text',
-        color: 'transparent',
-        WebkitTextFillColor: 'transparent',
-        
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(110deg, transparent 35%, var(--shimmer-color), transparent 65%)',
+      class={css(
+        {
+          position: 'relative',
+          display: 'inline-block',
+          background:
+            'linear-gradient(110deg, transparent 35%, var(--shimmer-color), transparent 65%)',
           backgroundSize: `${merged.shimmerWidth * 2}% 100%`,
           backgroundPosition: '-100% 0',
           animation: `shimmer ${merged.animationDuration}s ease-in-out infinite`,
-          mixBlendMode: 'overlay',
-          pointerEvents: 'none',
-        },
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text',
+          color: 'transparent',
+          WebkitTextFillColor: 'transparent',
 
-        '@keyframes shimmer': {
-          '0%': {
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            inset: 0,
+            background:
+              'linear-gradient(110deg, transparent 35%, var(--shimmer-color), transparent 65%)',
+            backgroundSize: `${merged.shimmerWidth * 2}% 100%`,
             backgroundPosition: '-100% 0',
+            animation: `shimmer ${merged.animationDuration}s ease-in-out infinite`,
+            mixBlendMode: 'overlay',
+            pointerEvents: 'none',
           },
-          '100%': {
-            backgroundPosition: '200% 0',
+
+          '@keyframes shimmer': {
+            '0%': {
+              backgroundPosition: '-100% 0',
+            },
+            '100%': {
+              backgroundPosition: '200% 0',
+            },
           },
         },
-      }, merged.class)}
+        merged.class
+      )}
       style={{
         '--shimmer-color': merged.shimmerColor,
         ...merged.style,
@@ -71,13 +76,18 @@ export interface AnimatedShinyTextDemoProps {
 
 export const AnimatedShinyTextDemo: Component<AnimatedShinyTextDemoProps> = (props) => {
   return (
-    <div class={css({
-      zIndex: 10,
-      display: 'flex',
-      minHeight: '256px',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }, props.class)}>
+    <div
+      class={css(
+        {
+          zIndex: 10,
+          display: 'flex',
+          minHeight: '256px',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        props.class
+      )}
+    >
       <div
         class={css({
           group: true,
@@ -100,7 +110,7 @@ export const AnimatedShinyTextDemo: Component<AnimatedShinyTextDemoProps> = (pro
           },
         })}
       >
-        <AnimatedShinyText 
+        <AnimatedShinyText
           class={css({
             display: 'inline-flex',
             alignItems: 'center',
@@ -122,7 +132,7 @@ export const AnimatedShinyTextDemo: Component<AnimatedShinyTextDemoProps> = (pro
           })}
         >
           <span>✨ Introducing Magic UI</span>
-          <svg 
+          <svg
             class={css({
               marginLeft: '4px',
               width: '12px',
@@ -132,11 +142,16 @@ export const AnimatedShinyTextDemo: Component<AnimatedShinyTextDemoProps> = (pro
                 transform: 'translateX(2px)',
               },
             })}
-            fill="none" 
-            stroke="currentColor" 
+            fill="none"
+            stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </AnimatedShinyText>
       </div>

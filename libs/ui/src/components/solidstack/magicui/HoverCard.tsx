@@ -1,6 +1,6 @@
-import { Component, JSX } from 'solid-js';
 import { cx } from '@sse/ui/styled-system/css';
 import { css } from '@sse/ui/styled-system/css';
+import type { Component, JSX } from 'solid-js';
 
 export interface HoverCardProps {
   className?: string;
@@ -48,31 +48,34 @@ export const HoverCardDemo: Component = () => {
                 position: 'absolute',
                 inset: 0,
                 backgroundColor: 'black',
-                opacity: 0.5
-              }
-            }
+                opacity: 0.5,
+              },
+            },
           })
         )}
       >
         <div class={css({ position: 'relative', zIndex: 50 })}>
-          <h1 class={css({
-            fontWeight: 'bold',
-            fontSize: 'xl',
-            color: 'gray.50',
-            position: 'relative',
-            md: { fontSize: '3xl' }
-          })}>
+          <h1
+            class={css({
+              fontWeight: 'bold',
+              fontSize: 'xl',
+              color: 'gray.50',
+              position: 'relative',
+              md: { fontSize: '3xl' },
+            })}
+          >
             Background Overlays
           </h1>
-          <p class={css({
-            fontWeight: 'normal',
-            fontSize: 'base',
-            color: 'gray.50',
-            position: 'relative',
-            marginY: '16px'
-          })}>
-            This card is for some special elements, like displaying background
-            gifs on hover only.
+          <p
+            class={css({
+              fontWeight: 'normal',
+              fontSize: 'base',
+              color: 'gray.50',
+              position: 'relative',
+              marginY: '16px',
+            })}
+          >
+            This card is for some special elements, like displaying background gifs on hover only.
           </p>
         </div>
       </HoverCard>
@@ -98,12 +101,15 @@ export const AuthorCardDemo: Component = () => {
 export const HoverCard: Component<HoverCardProps> = (props) => {
   const backgroundStyle = () => ({
     'background-image': `url(${props.backgroundImage})`,
-    'background-size': 'cover'
+    'background-size': 'cover',
   });
 
-  const hoverBackgroundStyle = () => props.hoverBackgroundImage ? {
-    '--hover-bg': `url(${props.hoverBackgroundImage})`
-  } : {};
+  const hoverBackgroundStyle = () =>
+    props.hoverBackgroundImage
+      ? {
+          '--hover-bg': `url(${props.hoverBackgroundImage})`,
+        }
+      : {};
 
   return (
     <div
@@ -131,7 +137,7 @@ export const HoverCard: Component<HoverCardProps> = (props) => {
             inset: 0,
             opacity: 0,
             zIndex: -1,
-            backgroundImage: 'var(--hover-bg)'
+            backgroundImage: 'var(--hover-bg)',
           },
           _hover: {
             backgroundImage: 'var(--hover-bg)',
@@ -140,15 +146,15 @@ export const HoverCard: Component<HoverCardProps> = (props) => {
               position: 'absolute',
               inset: 0,
               backgroundColor: 'black',
-              opacity: 0.5
-            }
-          }
+              opacity: 0.5,
+            },
+          },
         }),
         props.className
       )}
       style={{
         ...backgroundStyle(),
-        ...hoverBackgroundStyle()
+        ...hoverBackgroundStyle(),
       }}
     >
       {props.children}
@@ -174,30 +180,34 @@ export const AuthorCard: Component<AuthorCardProps> = (props) => {
             flexDirection: 'column',
             justifyContent: 'space-between',
             padding: '16px',
-            backgroundSize: 'cover'
+            backgroundSize: 'cover',
           }),
           props.className
         )}
         style={{ 'background-image': `url(${props.backgroundImage})` }}
       >
-        <div class={css({
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          top: 0,
-          left: 0,
-          transition: 'all 0.3s',
-          opacity: 0.6,
-          _groupHover: { backgroundColor: 'black' }
-        })} />
-        
-        <div class={css({
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: '16px',
-          zIndex: 10
-        })}>
+        <div
+          class={css({
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            top: 0,
+            left: 0,
+            transition: 'all 0.3s',
+            opacity: 0.6,
+            _groupHover: { backgroundColor: 'black' },
+          })}
+        />
+
+        <div
+          class={css({
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: '16px',
+            zIndex: 10,
+          })}
+        >
           <img
             height="100"
             width="100"
@@ -208,44 +218,48 @@ export const AuthorCard: Component<AuthorCardProps> = (props) => {
               width: '40px',
               borderRadius: 'full',
               border: '2px solid white',
-              objectFit: 'cover'
+              objectFit: 'cover',
             })}
           />
           <div class={css({ display: 'flex', flexDirection: 'column' })}>
-            <p class={css({
-              fontWeight: 'normal',
-              fontSize: 'base',
-              color: 'gray.50',
-              position: 'relative',
-              zIndex: 10
-            })}>
+            <p
+              class={css({
+                fontWeight: 'normal',
+                fontSize: 'base',
+                color: 'gray.50',
+                position: 'relative',
+                zIndex: 10,
+              })}
+            >
               {props.authorName}
             </p>
-            <p class={css({ fontSize: 'sm', color: 'gray.400' })}>
-              {props.readTime}
-            </p>
+            <p class={css({ fontSize: 'sm', color: 'gray.400' })}>{props.readTime}</p>
           </div>
         </div>
-        
+
         <div class={css({ position: 'relative' })}>
-          <h1 class={css({
-            fontWeight: 'bold',
-            fontSize: 'xl',
-            color: 'gray.50',
-            position: 'relative',
-            zIndex: 10,
-            md: { fontSize: '2xl' }
-          })}>
+          <h1
+            class={css({
+              fontWeight: 'bold',
+              fontSize: 'xl',
+              color: 'gray.50',
+              position: 'relative',
+              zIndex: 10,
+              md: { fontSize: '2xl' },
+            })}
+          >
             {props.title}
           </h1>
-          <p class={css({
-            fontWeight: 'normal',
-            fontSize: 'sm',
-            color: 'gray.50',
-            position: 'relative',
-            zIndex: 10,
-            marginY: '16px'
-          })}>
+          <p
+            class={css({
+              fontWeight: 'normal',
+              fontSize: 'sm',
+              color: 'gray.50',
+              position: 'relative',
+              zIndex: 10,
+              marginY: '16px',
+            })}
+          >
             {props.description}
           </p>
         </div>

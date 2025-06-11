@@ -1,5 +1,13 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, For } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface MeteorsProps {
   className?: string;
@@ -46,7 +54,7 @@ const Meteors: Component<MeteorsProps> = (props) => {
 
   const generateMeteors = () => {
     const newMeteors: Meteor[] = [];
-    
+
     for (let i = 0; i < merged.number; i++) {
       newMeteors.push({
         id: i,
@@ -57,7 +65,7 @@ const Meteors: Component<MeteorsProps> = (props) => {
         opacity: Math.random() * merged.opacity + 0.2,
       });
     }
-    
+
     setMeteors(newMeteors);
   };
 
@@ -67,14 +75,17 @@ const Meteors: Component<MeteorsProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'absolute',
-        inset: 0,
-        width: 'full',
-        height: 'full',
-        overflow: 'hidden',
-        pointerEvents: 'none',
-      }, merged.className)}
+      class={css(
+        {
+          position: 'absolute',
+          inset: 0,
+          width: 'full',
+          height: 'full',
+          overflow: 'hidden',
+          pointerEvents: 'none',
+        },
+        merged.className
+      )}
       style={merged.style}
     >
       <For each={meteors()}>
@@ -84,7 +95,7 @@ const Meteors: Component<MeteorsProps> = (props) => {
               position: 'absolute',
               top: 0,
               height: '2px',
-              background: merged.tail 
+              background: merged.tail
                 ? `linear-gradient(${merged.direction === 'left' ? '90deg' : '-90deg'}, transparent, ${merged.color})`
                 : merged.color,
               borderRadius: '50%',

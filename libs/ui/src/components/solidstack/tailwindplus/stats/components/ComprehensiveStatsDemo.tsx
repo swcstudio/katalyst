@@ -1,10 +1,21 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, createEffect, For, Show, createMemo } from 'solid-js';
+import {
+  type Component,
+  For,
+  type JSX,
+  Show,
+  createEffect,
+  createMemo,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 import { css } from '../../../../../styled-system/css';
+import type { StatItem, TimelineStatItem } from '../state/useStatsSection';
 import { StatisticsSection } from './StatisticsSection';
 import { StatsSimple } from './StatsSimple';
-import { StatsWithHeader } from './StatsWithHeader';
 import { StatsTimeline } from './StatsTimeline';
-import { StatItem, TimelineStatItem } from '../state/useStatsSection';
+import { StatsWithHeader } from './StatsWithHeader';
 
 export interface ComprehensiveStatsDemoProps {
   className?: string;
@@ -19,18 +30,18 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
     {
       id: '1',
       name: 'Transactions every 24 hours',
-      value: '44 million'
+      value: '44 million',
     },
     {
-      id: '2', 
+      id: '2',
       name: 'Assets under holding',
-      value: '$119 trillion'
+      value: '$119 trillion',
     },
     {
       id: '3',
-      name: 'New users annually', 
-      value: '46,000'
-    }
+      name: 'New users annually',
+      value: '46,000',
+    },
   ];
 
   // Demo 2: Simple Dark Theme Stats
@@ -38,18 +49,18 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
     {
       id: '1',
       name: 'Transactions every 24 hours',
-      value: '44 million'
+      value: '44 million',
     },
     {
-      id: '2', 
+      id: '2',
       name: 'Assets under holding',
-      value: '$119 trillion'
+      value: '$119 trillion',
     },
     {
       id: '3',
-      name: 'New users annually', 
-      value: '46,000'
-    }
+      name: 'New users annually',
+      value: '46,000',
+    },
   ];
 
   // Demo 3: Cards Layout with Header (Light)
@@ -60,24 +71,24 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       value: 8000,
       suffix: '+',
       startValue: 0,
-      category: 'users'
+      category: 'users',
     },
     {
-      id: '2', 
+      id: '2',
       name: 'Flat platform fee',
       value: 3,
       suffix: '%',
       startValue: 0,
-      category: 'pricing'
+      category: 'pricing',
     },
     {
       id: '3',
-      name: 'Uptime guarantee', 
+      name: 'Uptime guarantee',
       value: 99.9,
       suffix: '%',
       decimalPlaces: 1,
       startValue: 0,
-      category: 'performance'
+      category: 'performance',
     },
     {
       id: '4',
@@ -86,8 +97,8 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       prefix: '$',
       suffix: 'M',
       startValue: 0,
-      category: 'financial'
-    }
+      category: 'financial',
+    },
   ];
 
   // Demo 4: Cards Layout with Header (Dark)
@@ -98,24 +109,24 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       value: 8000,
       suffix: '+',
       startValue: 0,
-      category: 'users'
+      category: 'users',
     },
     {
-      id: '2', 
+      id: '2',
       name: 'Flat platform fee',
       value: 3,
       suffix: '%',
       startValue: 0,
-      category: 'pricing'
+      category: 'pricing',
     },
     {
       id: '3',
-      name: 'Uptime guarantee', 
+      name: 'Uptime guarantee',
       value: 99.9,
       suffix: '%',
       decimalPlaces: 1,
       startValue: 0,
-      category: 'performance'
+      category: 'performance',
     },
     {
       id: '4',
@@ -124,8 +135,8 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       prefix: '$',
       suffix: 'M',
       startValue: 0,
-      category: 'financial'
-    }
+      category: 'financial',
+    },
   ];
 
   // Demo 5: Background Hero with Gradient
@@ -136,24 +147,24 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       value: 8000,
       suffix: '+',
       startValue: 0,
-      category: 'users'
+      category: 'users',
     },
     {
-      id: '2', 
+      id: '2',
       name: 'Flat platform fee',
       value: 3,
       suffix: '%',
       startValue: 0,
-      category: 'pricing'
+      category: 'pricing',
     },
     {
       id: '3',
-      name: 'Uptime guarantee', 
+      name: 'Uptime guarantee',
       value: 99.9,
       suffix: '%',
       decimalPlaces: 1,
       startValue: 0,
-      category: 'performance'
+      category: 'performance',
     },
     {
       id: '4',
@@ -162,8 +173,8 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       prefix: '$',
       suffix: 'M',
       startValue: 0,
-      category: 'financial'
-    }
+      category: 'financial',
+    },
   ];
 
   // Demo 6: Split Layout with Image
@@ -174,24 +185,24 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       value: 8000,
       suffix: '+',
       startValue: 0,
-      category: 'users'
+      category: 'users',
     },
     {
-      id: '2', 
+      id: '2',
       name: 'Flat platform fee',
       value: 3,
       suffix: '%',
       startValue: 0,
-      category: 'pricing'
+      category: 'pricing',
     },
     {
       id: '3',
-      name: 'Uptime guarantee', 
+      name: 'Uptime guarantee',
       value: 99.9,
       suffix: '%',
       decimalPlaces: 1,
       startValue: 0,
-      category: 'performance'
+      category: 'performance',
     },
     {
       id: '4',
@@ -200,8 +211,8 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       prefix: '$',
       suffix: 'M',
       startValue: 0,
-      category: 'financial'
-    }
+      category: 'financial',
+    },
   ];
 
   // Demo 7: Timeline Layout
@@ -209,46 +220,50 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
     {
       id: '1',
       milestone: 'Founded company',
-      description: 'Nihil aut nam. Dignissimos a pariatur et quos omnis. Aspernatur asperiores et dolorem dolorem optio voluptate repudiandae.',
+      description:
+        'Nihil aut nam. Dignissimos a pariatur et quos omnis. Aspernatur asperiores et dolorem dolorem optio voluptate repudiandae.',
       date: 'Aug 2021',
       dateTime: '2021-08',
       value: 1,
-      category: 'milestone'
+      category: 'milestone',
     },
     {
       id: '2',
       milestone: 'Secured $65m in funding',
-      description: 'Provident quia ut esse. Vero vel eos repudiandae aspernatur. Cumque minima impedit sapiente a architecto nihil.',
+      description:
+        'Provident quia ut esse. Vero vel eos repudiandae aspernatur. Cumque minima impedit sapiente a architecto nihil.',
       date: 'Dec 2021',
       dateTime: '2021-12',
       value: 65,
       prefix: '$',
       suffix: 'm',
       startValue: 0,
-      category: 'funding'
+      category: 'funding',
     },
     {
       id: '3',
       milestone: 'Released beta',
-      description: 'Sunt perspiciatis incidunt. Non necessitatibus aliquid. Consequatur ut officiis earum eum quia facilis. Hic deleniti dolorem quia et.',
+      description:
+        'Sunt perspiciatis incidunt. Non necessitatibus aliquid. Consequatur ut officiis earum eum quia facilis. Hic deleniti dolorem quia et.',
       date: 'Feb 2022',
       dateTime: '2022-02',
       value: 1000,
       suffix: ' users',
       startValue: 0,
-      category: 'product'
+      category: 'product',
     },
     {
       id: '4',
       milestone: 'Global launch of product',
-      description: 'Ut ipsa sint distinctio quod itaque nam qui. Possimus aut unde id architecto voluptatem hic aut pariatur velit.',
+      description:
+        'Ut ipsa sint distinctio quod itaque nam qui. Possimus aut unde id architecto voluptatem hic aut pariatur velit.',
       date: 'Dec 2022',
       dateTime: '2022-12',
       value: 1000000,
       suffix: ' users',
       startValue: 0,
-      category: 'growth'
-    }
+      category: 'growth',
+    },
   ];
 
   // Demo 8: Mixed Layout Stats
@@ -260,7 +275,7 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       suffix: 'k',
       startValue: 0,
       description: 'Vel labore deleniti veniam consequuntur sunt nobis.',
-      category: 'growth'
+      category: 'growth',
     },
     {
       id: '2',
@@ -270,17 +285,18 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       suffix: ' billion',
       decimalPlaces: 1,
       startValue: 0,
-      description: 'We\'re proud that our customers have made over $8 billion in total revenue.',
-      category: 'financial'
+      description: "We're proud that our customers have made over $8 billion in total revenue.",
+      category: 'financial',
     },
     {
       id: '3',
       name: 'Transactions this year',
       value: 401093,
       startValue: 0,
-      description: 'Eu duis porta aliquam ornare. Elementum eget magna egestas. Eu duis porta aliquam ornare.',
-      category: 'volume'
-    }
+      description:
+        'Eu duis porta aliquam ornare. Elementum eget magna egestas. Eu duis porta aliquam ornare.',
+      category: 'volume',
+    },
   ];
 
   // Demo 9: Company Info Stats (Dark Theme)
@@ -289,21 +305,21 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       id: '1',
       name: 'Founded',
       value: '2021',
-      category: 'info'
+      category: 'info',
     },
     {
       id: '2',
       name: 'Employees',
       value: 37,
       startValue: 0,
-      category: 'team'
+      category: 'team',
     },
     {
       id: '3',
       name: 'Countries',
       value: 12,
       startValue: 0,
-      category: 'global'
+      category: 'global',
     },
     {
       id: '4',
@@ -312,8 +328,8 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       prefix: '$',
       suffix: 'M',
       startValue: 0,
-      category: 'funding'
-    }
+      category: 'funding',
+    },
   ];
 
   // Demo 10: Mission Stats (Light Theme)
@@ -324,7 +340,7 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       value: 44000000,
       suffix: ' million',
       startValue: 0,
-      category: 'performance'
+      category: 'performance',
     },
     {
       id: '2',
@@ -333,7 +349,7 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       prefix: '$',
       suffix: ' trillion',
       startValue: 0,
-      category: 'financial'
+      category: 'financial',
     },
     {
       id: '3',
@@ -341,8 +357,8 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       value: 46000,
       suffix: ',000',
       startValue: 0,
-      category: 'growth'
-    }
+      category: 'growth',
+    },
   ];
 
   // Demo 11: Centered Card Stats
@@ -350,18 +366,18 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
     {
       id: '1',
       name: 'Pepperoni',
-      value: '100%'
+      value: '100%',
     },
     {
       id: '2',
       name: 'Delivery',
-      value: '24/7'
+      value: '24/7',
     },
     {
       id: '3',
       name: 'Calories',
-      value: '100k'
-    }
+      value: '100k',
+    },
   ];
 
   // Demo 12: Dark Centered Stats
@@ -369,18 +385,18 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
     {
       id: '1',
       name: 'Pepperoni',
-      value: '100%'
+      value: '100%',
     },
     {
       id: '2',
       name: 'Delivery',
-      value: '24/7'
+      value: '24/7',
     },
     {
       id: '3',
       name: 'Calories',
-      value: '100k+'
-    }
+      value: '100k+',
+    },
   ];
 
   // Demo 13: Hero with Image Stats
@@ -388,18 +404,18 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
     {
       id: '1',
       name: 'Delivery',
-      value: '24/7'
+      value: '24/7',
     },
     {
       id: '2',
       name: 'Pepperoni',
-      value: '99.9%'
+      value: '99.9%',
     },
     {
       id: '3',
       name: 'Calories',
-      value: '100k+'
-    }
+      value: '100k+',
+    },
   ];
 
   // Demo 14: Complex Background Stats
@@ -411,7 +427,7 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       suffix: 'K+',
       startValue: 0,
       description: 'use laoreet amet lacus nibh integer quis.',
-      category: 'business'
+      category: 'business',
     },
     {
       id: '2',
@@ -420,7 +436,7 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       suffix: 'K+',
       startValue: 0,
       description: 'lacus nibh integer quis.',
-      category: 'global'
+      category: 'global',
     },
     {
       id: '3',
@@ -429,7 +445,7 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       suffix: '%',
       startValue: 0,
       description: 'laoreet amet lacus nibh integer quis.',
-      category: 'satisfaction'
+      category: 'satisfaction',
     },
     {
       id: '4',
@@ -438,34 +454,40 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       suffix: 'M+',
       startValue: 0,
       description: 'lacus nibh integer quis.',
-      category: 'support'
-    }
+      category: 'support',
+    },
   ];
 
   return (
     <div class={css({ minH: 'screen' })} style={merged.style}>
       {/* Header */}
-      <div class={css({
-        bg: 'gray.900',
-        py: '16',
-        textAlign: 'center'
-      })}>
-        <h1 class={css({
-          fontSize: '4xl',
-          fontWeight: 'bold',
-          color: 'white',
-          mb: '4'
-        })}>
+      <div
+        class={css({
+          bg: 'gray.900',
+          py: '16',
+          textAlign: 'center',
+        })}
+      >
+        <h1
+          class={css({
+            fontSize: '4xl',
+            fontWeight: 'bold',
+            color: 'white',
+            mb: '4',
+          })}
+        >
           Comprehensive Statistics Components
         </h1>
-        <p class={css({
-          fontSize: 'xl',
-          color: 'gray.300',
-          maxW: '3xl',
-          mx: 'auto'
-        })}>
-          State-of-the-art statistics components with native animation augmentations from Aceternity UI & Magic UI, 
-          built with SolidJS, Zag.js state machines, and PandaCSS.
+        <p
+          class={css({
+            fontSize: 'xl',
+            color: 'gray.300',
+            maxW: '3xl',
+            mx: 'auto',
+          })}
+        >
+          State-of-the-art statistics components with native animation augmentations from Aceternity
+          UI & Magic UI, built with SolidJS, Zag.js state machines, and PandaCSS.
         </p>
       </div>
 
@@ -639,88 +661,106 @@ export const ComprehensiveStatsDemo: Component<ComprehensiveStatsDemoProps> = (p
       />
 
       {/* Footer */}
-      <div class={css({
-        bg: 'gray.50',
-        py: '16',
-        textAlign: 'center'
-      })}>
-        <h2 class={css({
-          fontSize: '2xl',
-          fontWeight: 'bold',
-          color: 'gray.900',
-          mb: '4'
-        })}>
+      <div
+        class={css({
+          bg: 'gray.50',
+          py: '16',
+          textAlign: 'center',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '2xl',
+            fontWeight: 'bold',
+            color: 'gray.900',
+            mb: '4',
+          })}
+        >
           SolidStack-UI Statistics Components
         </h2>
-        <p class={css({
-          fontSize: 'lg',
-          color: 'gray.600',
-          maxW: '2xl',
-          mx: 'auto',
-          mb: '8'
-        })}>
-          Beautifully animated, state-of-the-art statistics components with native augmentations 
+        <p
+          class={css({
+            fontSize: 'lg',
+            color: 'gray.600',
+            maxW: '2xl',
+            mx: 'auto',
+            mb: '8',
+          })}
+        >
+          Beautifully animated, state-of-the-art statistics components with native augmentations
           from Aceternity UI and Magic UI, powered by Zag.js state machines.
         </p>
-        <div class={css({
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '4',
-          flexWrap: 'wrap'
-        })}>
-          <span class={css({
-            bg: 'indigo.100',
-            color: 'indigo.800',
-            px: '3',
-            py: '1',
-            rounded: 'full',
-            fontSize: 'sm',
-            fontWeight: 'medium'
-          })}>
+        <div
+          class={css({
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '4',
+            flexWrap: 'wrap',
+          })}
+        >
+          <span
+            class={css({
+              bg: 'indigo.100',
+              color: 'indigo.800',
+              px: '3',
+              py: '1',
+              rounded: 'full',
+              fontSize: 'sm',
+              fontWeight: 'medium',
+            })}
+          >
             SolidJS
           </span>
-          <span class={css({
-            bg: 'purple.100',
-            color: 'purple.800',
-            px: '3',
-            py: '1',
-            rounded: 'full',
-            fontSize: 'sm',
-            fontWeight: 'medium'
-          })}>
+          <span
+            class={css({
+              bg: 'purple.100',
+              color: 'purple.800',
+              px: '3',
+              py: '1',
+              rounded: 'full',
+              fontSize: 'sm',
+              fontWeight: 'medium',
+            })}
+          >
             Zag.js
           </span>
-          <span class={css({
-            bg: 'blue.100',
-            color: 'blue.800',
-            px: '3',
-            py: '1',
-            rounded: 'full',
-            fontSize: 'sm',
-            fontWeight: 'medium'
-          })}>
+          <span
+            class={css({
+              bg: 'blue.100',
+              color: 'blue.800',
+              px: '3',
+              py: '1',
+              rounded: 'full',
+              fontSize: 'sm',
+              fontWeight: 'medium',
+            })}
+          >
             PandaCSS
           </span>
-          <span class={css({
-            bg: 'green.100',
-            color: 'green.800',
-            px: '3',
-            py: '1',
-            rounded: 'full',
-            fontSize: 'sm',
-            fontWeight: 'medium'
-          })}>
+          <span
+            class={css({
+              bg: 'green.100',
+              color: 'green.800',
+              px: '3',
+              py: '1',
+              rounded: 'full',
+              fontSize: 'sm',
+              fontWeight: 'medium',
+            })}
+          >
             Aceternity UI
           </span>
-          <span class={css({
-            bg: 'pink.100',
-            color: 'pink.800',
-            px: '3',
-            py: '1',
-            rounded: 'full',
-            fontSize: 'sm',
-            fontWeight: 'medium'
-          })}>
+          <span
+            class={css({
+              bg: 'pink.100',
+              color: 'pink.800',
+              px: '3',
+              py: '1',
+              rounded: 'full',
+              fontSize: 'sm',
+              fontWeight: 'medium',
+            })}
+          >
             Magic UI
           </span>
         </div>

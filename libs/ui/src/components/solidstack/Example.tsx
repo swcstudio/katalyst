@@ -1,75 +1,75 @@
-import { createSignal, createMemo, For } from "solid-js"
-import { 
-  Accordion, 
-  Button, 
-  Checkbox, 
-  Dialog, 
-  Input, 
-  Select, 
-  Toast, 
-  Switch, 
-  Card, 
-  CardHeader, 
-  CardBody, 
-  CardFooter,
-  createToastService,
+import { For, createMemo, createSignal } from 'solid-js';
+import {
+  Accordion,
   type AccordionItem,
-  type SelectOption 
-} from "./index"
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Checkbox,
+  Dialog,
+  Input,
+  Select,
+  type SelectOption,
+  Switch,
+  Toast,
+  createToastService,
+} from './index';
 
 export function ArkUIExample() {
-  const [inputValue, setInputValue] = createSignal("")
-  const [checkboxChecked, setCheckboxChecked] = createSignal(false)
-  const [switchChecked, setSwitchChecked] = createSignal(false)
-  const [selectedValue, setSelectedValue] = createSignal("")
-  const [dialogOpen, setDialogOpen] = createSignal(false)
-  const [loading, setLoading] = createSignal(false)
+  const [inputValue, setInputValue] = createSignal('');
+  const [checkboxChecked, setCheckboxChecked] = createSignal(false);
+  const [switchChecked, setSwitchChecked] = createSignal(false);
+  const [selectedValue, setSelectedValue] = createSignal('');
+  const [dialogOpen, setDialogOpen] = createSignal(false);
+  const [loading, setLoading] = createSignal(false);
 
-  const toastService = createToastService()
+  const toastService = createToastService();
 
   const accordionItems: AccordionItem[] = [
     {
-      title: "Getting Started",
-      content: "Learn how to set up and use our Ark UI components in your SolidJS project."
+      title: 'Getting Started',
+      content: 'Learn how to set up and use our Ark UI components in your SolidJS project.',
     },
     {
-      title: "Components",
-      content: "Explore our collection of accessible and customizable UI components."
+      title: 'Components',
+      content: 'Explore our collection of accessible and customizable UI components.',
     },
     {
-      title: "Styling",
-      content: "Customize the appearance of components using Tailwind CSS classes."
-    }
-  ]
+      title: 'Styling',
+      content: 'Customize the appearance of components using Tailwind CSS classes.',
+    },
+  ];
 
   const selectOptions: SelectOption[] = [
-    { label: "React", value: "react" },
-    { label: "Vue", value: "vue" },
-    { label: "Angular", value: "angular" },
-    { label: "Svelte", value: "svelte" },
-    { label: "SolidJS", value: "solid" }
-  ]
+    { label: 'React', value: 'react' },
+    { label: 'Vue', value: 'vue' },
+    { label: 'Angular', value: 'angular' },
+    { label: 'Svelte', value: 'svelte' },
+    { label: 'SolidJS', value: 'solid' },
+  ];
 
   const handleSubmit = async () => {
-    setLoading(true)
-    
+    setLoading(true);
+
     // Simulate API call
     setTimeout(() => {
-      setLoading(false)
+      setLoading(false);
       toastService.success({
-        title: "Success!",
-        description: "Form submitted successfully.",
-        duration: 3000
-      })
-    }, 2000)
-  }
+        title: 'Success!',
+        description: 'Form submitted successfully.',
+        duration: 3000,
+      });
+    }, 2000);
+  };
 
   const formData = createMemo(() => ({
     input: inputValue(),
     checkbox: checkboxChecked(),
     switch: switchChecked(),
-    select: selectedValue()
-  }))
+    select: selectedValue(),
+  }));
 
   return (
     <div class="min-h-screen bg-gray-50 p-8">
@@ -148,26 +148,24 @@ export function ArkUIExample() {
 
               <div class="bg-gray-100 p-4 rounded-lg">
                 <h4 class="font-medium mb-2">Form Data:</h4>
-                <pre class="text-sm text-gray-700">
-                  {JSON.stringify(formData(), null, 2)}
-                </pre>
+                <pre class="text-sm text-gray-700">{JSON.stringify(formData(), null, 2)}</pre>
               </div>
             </div>
           </CardBody>
           <CardFooter>
-            <Button 
-              variant="secondary" 
+            <Button
+              variant="secondary"
               onClick={() => {
-                setInputValue("")
-                setSelectedValue("")
-                setCheckboxChecked(false)
-                setSwitchChecked(false)
+                setInputValue('');
+                setSelectedValue('');
+                setCheckboxChecked(false);
+                setSwitchChecked(false);
               }}
             >
               Reset
             </Button>
-            <Button 
-              variant="primary" 
+            <Button
+              variant="primary"
               loading={loading()}
               onClick={handleSubmit}
               disabled={!inputValue() || !checkboxChecked()}
@@ -190,7 +188,7 @@ export function ArkUIExample() {
               <Button variant="ghost">Ghost</Button>
               <Button variant="destructive">Destructive</Button>
             </div>
-            
+
             <div class="mt-6">
               <h4 class="font-medium mb-3">Button Sizes</h4>
               <div class="flex items-center gap-4">
@@ -224,28 +222,30 @@ export function ArkUIExample() {
           </CardHeader>
           <CardBody>
             <div class="flex gap-4">
-              <Button onClick={() => setDialogOpen(true)}>
-                Open Dialog
-              </Button>
-              
-              <Button 
-                onClick={() => toastService.info({
-                  title: "Info Toast",
-                  description: "This is an informational message."
-                })}
+              <Button onClick={() => setDialogOpen(true)}>Open Dialog</Button>
+
+              <Button
+                onClick={() =>
+                  toastService.info({
+                    title: 'Info Toast',
+                    description: 'This is an informational message.',
+                  })
+                }
               >
                 Show Toast
               </Button>
 
-              <Button 
-                onClick={() => toastService.error({
-                  title: "Error Toast",
-                  description: "Something went wrong!",
-                  action: {
-                    label: "Retry",
-                    onClick: () => console.log("Retry clicked")
-                  }
-                })}
+              <Button
+                onClick={() =>
+                  toastService.error({
+                    title: 'Error Toast',
+                    description: 'Something went wrong!',
+                    action: {
+                      label: 'Retry',
+                      onClick: () => console.log('Retry clicked'),
+                    },
+                  })
+                }
               >
                 Show Error Toast
               </Button>
@@ -263,9 +263,7 @@ export function ArkUIExample() {
                   <Button variant="outline" onClick={() => setDialogOpen(false)}>
                     Cancel
                   </Button>
-                  <Button onClick={() => setDialogOpen(false)}>
-                    Confirm
-                  </Button>
+                  <Button onClick={() => setDialogOpen(false)}>Confirm</Button>
                 </div>
               </div>
             </Dialog>
@@ -276,5 +274,5 @@ export function ArkUIExample() {
         <Toast />
       </div>
     </div>
-  )
+  );
 }

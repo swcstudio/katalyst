@@ -1,5 +1,5 @@
-import { z } from 'npm:zod';
-import { Resend } from 'npm:resend';
+// import { Resend } from 'npm:resend';
+// import { z } from 'npm:zod';
 
 const waitlistSchema = z.object({
   email: z.string().email(),
@@ -11,21 +11,15 @@ const waitlistSchema = z.object({
     'solidstack-enterprise',
     'cloud-native-boilerplate',
     'ai-agent-framework',
-    'micro-frontend-toolkit'
+    'micro-frontend-toolkit',
   ]),
   useCase: z.string().max(500).optional(),
-  teamSize: z.enum([
-    '1-5',
-    '6-20',
-    '21-50',
-    '51-200',
-    '200+'
-  ]).optional(),
+  teamSize: z.enum(['1-5', '6-20', '21-50', '51-200', '200+']).optional(),
   source: z.enum(['marketing', 'blog', 'docs', 'storefront']).default('marketing'),
   utm_source: z.string().optional(),
   utm_medium: z.string().optional(),
   utm_campaign: z.string().optional(),
-  referralCode: z.string().optional()
+  referralCode: z.string().optional(),
 });
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -39,8 +33,8 @@ const productDetails = {
       '4 pre-built micro frontends',
       'Enterprise-grade authentication',
       'Cloud-native deployment ready',
-      'Complete CI/CD pipeline'
-    ]
+      'Complete CI/CD pipeline',
+    ],
   },
   'cloud-native-boilerplate': {
     name: 'Cloud-Native Boilerplate',
@@ -50,8 +44,8 @@ const productDetails = {
       'Multi-tenant architecture',
       'Kubernetes deployment templates',
       'Infrastructure as Code',
-      'Monitoring and observability'
-    ]
+      'Monitoring and observability',
+    ],
   },
   'ai-agent-framework': {
     name: 'AI Agent Framework',
@@ -61,8 +55,8 @@ const productDetails = {
       'Automated infrastructure provisioning',
       'Natural language infrastructure queries',
       'Code generation assistance',
-      'Terraform automation'
-    ]
+      'Terraform automation',
+    ],
   },
   'micro-frontend-toolkit': {
     name: 'Micro Frontend Toolkit',
@@ -72,9 +66,9 @@ const productDetails = {
       'Module federation setup',
       'Shared state management',
       'Cross-app communication',
-      'Performance optimization'
-    ]
-  }
+      'Performance optimization',
+    ],
+  },
 };
 
 export default defineEventHandler(async (event) => {
@@ -87,21 +81,24 @@ export default defineEventHandler(async (event) => {
     // Rate limiting
     const clientIP = getClientIP(event);
     const rateLimitKey = `waitlist:${clientIP}`;
-    
+
     const recentSubmission = await checkRateLimit(rateLimitKey);
     if (recentSubmission) {
       throw createError({
         statusCode: 429,
-        statusMessage: 'Please wait before joining another waitlist.'
+        statusMessage: 'Please wait before joining another waitlist.',
       });
     }
 
     // Check for duplicate email for this product
-    const existingEntry = await checkExistingWaitlistEntry(validatedData.email, validatedData.product);
+    const existingEntry = await checkExistingWaitlistEntry(
+      validatedData.email,
+      validatedData.product
+    );
     if (existingEntry) {
       throw createError({
         statusCode: 409,
-        statusMessage: 'You are already on the waitlist for this product.'
+        statusMessage: 'You are already on the waitlist for this product.',
       });
     }
 
@@ -136,7 +133,7 @@ export default defineEventHandler(async (event) => {
           <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="margin-top: 0; color: #374151;">What you'll get:</h3>
             <ul style="margin: 0; padding-left: 20px;">
-              ${product.benefits.map(benefit => `<li style="margin: 5px 0;">${benefit}</li>`).join('')}
+              ${product.benefits.map((benefit) => `<li style="margin: 5px 0;">${benefit}</li>`).join('')}
             </ul>
           </div>
           
@@ -170,8 +167,8 @@ export default defineEventHandler(async (event) => {
       tags: [
         { name: 'type', value: 'waitlist_confirmation' },
         { name: 'product', value: validatedData.product },
-        { name: 'source', value: validatedData.source }
-      ]
+        { name: 'source', value: validatedData.source },
+      ],
     });
 
     // Send notification to team
@@ -199,7 +196,7 @@ UTM Data:
 Submitted from: ${validatedData.source}
 Timestamp: ${new Date().toISOString()}
 IP: ${clientIP}
-      `.trim()
+      `.trim(),
     });
 
     // Store in database
@@ -212,7 +209,7 @@ IP: ${clientIP}
       user_email_id: userEmailResult.data?.id,
       team_email_id: teamEmailResult.data?.id,
       referral_code: generateReferralCode(validatedData.email),
-      status: 'active'
+      status: 'active',
     });
 
     // Set rate limit
@@ -224,7 +221,7 @@ IP: ${clientIP}
       source: validatedData.source,
       utm_source: validatedData.utm_source,
       utm_medium: validatedData.utm_medium,
-      utm_campaign: validatedData.utm_campaign
+      utm_campaign: validatedData.utm_campaign,
     });
 
     return {
@@ -235,24 +232,23 @@ IP: ${clientIP}
         product: product.name,
         estimatedLaunch: product.estimatedLaunch,
         referralCode: generateReferralCode(validatedData.email),
-        benefits: product.benefits
-      }
+        benefits: product.benefits,
+      },
     };
-
   } catch (error) {
     if (error instanceof z.ZodError) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Invalid form data',
-        data: error.errors
+        data: error.errors,
       });
     }
 
     console.error('Waitlist submission error:', error);
-    
+
     throw createError({
       statusCode: 500,
-      statusMessage: 'Unable to process your waitlist signup. Please try again later.'
+      statusMessage: 'Unable to process your waitlist signup. Please try again later.',
     });
   }
 });
@@ -278,7 +274,7 @@ async function getWaitlistPosition(product: string): Promise<number> {
   return Math.floor(Math.random() * 1000) + 1; // Placeholder
 }
 
-async function storeWaitlistEntry(data: any): Promise<any> {
+async function storeWaitlistEntry(data: Record<string, unknown>): Promise<Record<string, unknown>> {
   // Store in database
   console.log('Waitlist entry stored:', data.email, data.product);
   return data;
@@ -289,7 +285,7 @@ function generateReferralCode(email: string): string {
   return `${hash.substring(0, 4)}${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 }
 
-async function trackWaitlistConversion(data: any): Promise<void> {
+async function trackWaitlistConversion(data: Record<string, unknown>): Promise<void> {
   // Send to analytics platform
   console.log('Waitlist conversion tracked:', data);
 }

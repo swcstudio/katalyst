@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, onCleanup, createSignal, onMount } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, createSignal, mergeProps, onCleanup, onMount } from 'solid-js';
 
 export interface NoSignalScreenProps {
   className?: string;
@@ -26,10 +26,10 @@ const NoSignalScreen: Component<NoSignalScreenProps> = (props) => {
 
     for (let i = 0; i < data.length; i += 4) {
       const noise = Math.random() * 255;
-      data[i] = noise;     // Red
+      data[i] = noise; // Red
       data[i + 1] = noise; // Green
       data[i + 2] = noise; // Blue
-      data[i + 3] = 255;   // Alpha
+      data[i + 3] = 255; // Alpha
     }
 
     ctx.putImageData(imageData, 0, 0);
@@ -69,14 +69,17 @@ const NoSignalScreen: Component<NoSignalScreenProps> = (props) => {
   return (
     <canvas
       ref={setCanvasRef}
-      class={css({
-        position: 'absolute',
-        inset: 0,
-        width: 'full',
-        height: 'full',
-        pointerEvents: 'none',
-        opacity: merged.opacity,
-      }, merged.className)}
+      class={css(
+        {
+          position: 'absolute',
+          inset: 0,
+          width: 'full',
+          height: 'full',
+          pointerEvents: 'none',
+          opacity: merged.opacity,
+        },
+        merged.className
+      )}
       style={merged.style}
     />
   );

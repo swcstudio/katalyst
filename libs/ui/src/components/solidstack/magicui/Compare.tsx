@@ -1,6 +1,6 @@
-import { Component, JSX, createSignal, onMount, onCleanup } from 'solid-js';
 import { cx } from '@sse/ui/styled-system/css';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, JSX, createSignal, onCleanup, onMount } from 'solid-js';
 
 export interface CompareProps {
   firstImage: string;
@@ -16,18 +16,20 @@ export interface CompareProps {
 
 export const CompareDemo: Component = () => {
   return (
-    <div class={css({
-      padding: '16px',
-      border: '1px solid',
-      borderRadius: '24px',
-      backgroundColor: 'neutral.100',
-      borderColor: 'neutral.200',
-      paddingX: '16px',
-      _dark: {
-        backgroundColor: 'neutral.900',
-        borderColor: 'neutral.800'
-      }
-    })}>
+    <div
+      class={css({
+        padding: '16px',
+        border: '1px solid',
+        borderRadius: '24px',
+        backgroundColor: 'neutral.100',
+        borderColor: 'neutral.200',
+        paddingX: '16px',
+        _dark: {
+          backgroundColor: 'neutral.900',
+          borderColor: 'neutral.800',
+        },
+      })}
+    >
       <Compare
         firstImage="https://assets.aceternity.com/code-problem.png"
         secondImage="https://assets.aceternity.com/code-solution.png"
@@ -44,10 +46,10 @@ export const Compare: Component<CompareProps> = (props) => {
   const [sliderPosition, setSliderPosition] = createSignal(50);
   const [isDragging, setIsDragging] = createSignal(false);
   const [isHovering, setIsHovering] = createSignal(false);
-  
+
   let containerRef: HTMLDivElement;
   let animationFrame: number;
-  
+
   const slideMode = () => props.slideMode || 'hover';
   const showHandle = () => props.showHandle ?? true;
   const autoPlay = () => props.autoPlay ?? false;
@@ -55,7 +57,7 @@ export const Compare: Component<CompareProps> = (props) => {
 
   const getPositionFromEvent = (clientX: number): number => {
     if (!containerRef) return 50;
-    
+
     const rect = containerRef.getBoundingClientRect();
     const position = ((clientX - rect.left) / rect.width) * 100;
     return Math.min(Math.max(position, 0), 100);
@@ -152,7 +154,7 @@ export const Compare: Component<CompareProps> = (props) => {
           overflow: 'hidden',
           cursor: slideMode() === 'drag' ? 'grab' : 'default',
           userSelect: 'none',
-          _active: slideMode() === 'drag' ? { cursor: 'grabbing' } : {}
+          _active: slideMode() === 'drag' ? { cursor: 'grabbing' } : {},
         }),
         props.className
       )}
@@ -163,12 +165,14 @@ export const Compare: Component<CompareProps> = (props) => {
       onTouchStart={handleTouchStart}
     >
       {/* First Image (Background) */}
-      <div class={css({
-        position: 'absolute',
-        inset: 0,
-        width: '100%',
-        height: '100%'
-      })}>
+      <div
+        class={css({
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+        })}
+      >
         <img
           src={props.firstImage}
           alt="First comparison image"
@@ -176,7 +180,7 @@ export const Compare: Component<CompareProps> = (props) => {
             css({
               width: '100%',
               height: '100%',
-              objectFit: 'cover'
+              objectFit: 'cover',
             }),
             props.firstImageClassName
           )}
@@ -192,7 +196,7 @@ export const Compare: Component<CompareProps> = (props) => {
           width: '100%',
           height: '100%',
           transition: 'clip-path 0.3s ease',
-          clipPath: `polygon(0 0, ${sliderPosition()}% 0, ${sliderPosition()}% 100%, 0 100%)`
+          clipPath: `polygon(0 0, ${sliderPosition()}% 0, ${sliderPosition()}% 100%, 0 100%)`,
         })}
       >
         <img
@@ -202,7 +206,7 @@ export const Compare: Component<CompareProps> = (props) => {
             css({
               width: '100%',
               height: '100%',
-              objectFit: 'cover'
+              objectFit: 'cover',
             }),
             props.secondImageClassname
           )}
@@ -222,39 +226,43 @@ export const Compare: Component<CompareProps> = (props) => {
             transform: 'translateX(-50%)',
             transition: 'left 0.3s ease',
             zIndex: 10,
-            pointerEvents: 'none'
+            pointerEvents: 'none',
           })}
           style={{ left: `${sliderPosition()}%` }}
         >
           {/* Handle Circle */}
-          <div class={css({
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '20px',
-            height: '20px',
-            backgroundColor: 'white',
-            borderRadius: '50%',
-            border: '2px solid',
-            borderColor: 'gray.300',
-            cursor: slideMode() === 'drag' ? 'grab' : 'pointer',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-            pointerEvents: 'auto',
-            _active: slideMode() === 'drag' ? { cursor: 'grabbing' } : {},
-            _hover: {
-              transform: 'translate(-50%, -50%) scale(1.1)',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
-            }
-          })}>
-            {/* Arrow Icons */}
-            <div class={css({
+          <div
+            class={css({
               position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            })}>
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '20px',
+              height: '20px',
+              backgroundColor: 'white',
+              borderRadius: '50%',
+              border: '2px solid',
+              borderColor: 'gray.300',
+              cursor: slideMode() === 'drag' ? 'grab' : 'pointer',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+              pointerEvents: 'auto',
+              _active: slideMode() === 'drag' ? { cursor: 'grabbing' } : {},
+              _hover: {
+                transform: 'translate(-50%, -50%) scale(1.1)',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+              },
+            })}
+          >
+            {/* Arrow Icons */}
+            <div
+              class={css({
+                position: 'absolute',
+                inset: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              })}
+            >
               <svg
                 width="12"
                 height="12"
@@ -275,33 +283,37 @@ export const Compare: Component<CompareProps> = (props) => {
       )}
 
       {/* Labels */}
-      <div class={css({
-        position: 'absolute',
-        top: '16px',
-        left: '16px',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-        color: 'white',
-        paddingX: '8px',
-        paddingY: '4px',
-        borderRadius: '4px',
-        fontSize: 'sm',
-        fontWeight: '500'
-      })}>
+      <div
+        class={css({
+          position: 'absolute',
+          top: '16px',
+          left: '16px',
+          backgroundColor: 'rgba(0,0,0,0.7)',
+          color: 'white',
+          paddingX: '8px',
+          paddingY: '4px',
+          borderRadius: '4px',
+          fontSize: 'sm',
+          fontWeight: '500',
+        })}
+      >
         Before
       </div>
-      
-      <div class={css({
-        position: 'absolute',
-        top: '16px',
-        right: '16px',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-        color: 'white',
-        paddingX: '8px',
-        paddingY: '4px',
-        borderRadius: '4px',
-        fontSize: 'sm',
-        fontWeight: '500'
-      })}>
+
+      <div
+        class={css({
+          position: 'absolute',
+          top: '16px',
+          right: '16px',
+          backgroundColor: 'rgba(0,0,0,0.7)',
+          color: 'white',
+          paddingX: '8px',
+          paddingY: '4px',
+          borderRadius: '4px',
+          fontSize: 'sm',
+          fontWeight: '500',
+        })}
+      >
         After
       </div>
     </div>

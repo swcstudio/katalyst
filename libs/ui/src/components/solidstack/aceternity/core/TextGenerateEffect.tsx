@@ -1,5 +1,5 @@
-import { Component, createSignal, createEffect, For, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For, createEffect, createSignal, onCleanup } from 'solid-js';
 
 export interface TextGenerateEffectProps {
   words: string;
@@ -91,30 +91,29 @@ export const TextGenerateEffect: Component<TextGenerateEffectProps> = (props) =>
     const baseInterval = (config.duration * 1000) / totalCount;
     const interval = Math.max(baseInterval, 50); // Minimum 50ms between animations
 
-    const timer = setTimeout(() => {
-      const current = currentIndex();
-      
-      if (current < totalCount) {
-        if (config.mode === 'words') {
-          setAnimatedWords(prev => 
-            prev.map((word, index) => 
-              index === current ? { ...word, isVisible: true } : word
-            )
-          );
-        } else if (config.mode === 'characters') {
-          setAnimatedCharacters(prev => 
-            prev.map((char, index) => 
-              index === current ? { ...char, isVisible: true } : char
-            )
-          );
+    const timer = setTimeout(
+      () => {
+        const current = currentIndex();
+
+        if (current < totalCount) {
+          if (config.mode === 'words') {
+            setAnimatedWords((prev) =>
+              prev.map((word, index) => (index === current ? { ...word, isVisible: true } : word))
+            );
+          } else if (config.mode === 'characters') {
+            setAnimatedCharacters((prev) =>
+              prev.map((char, index) => (index === current ? { ...char, isVisible: true } : char))
+            );
+          }
+
+          setCurrentIndex(current + 1);
+        } else {
+          setIsComplete(true);
+          props.onComplete?.();
         }
-        
-        setCurrentIndex(current + 1);
-      } else {
-        setIsComplete(true);
-        props.onComplete?.();
-      }
-    }, interval + (currentIndex() * config.staggerDelay * 1000) + config.delay * 1000);
+      },
+      interval + currentIndex() * config.staggerDelay * 1000 + config.delay * 1000
+    );
 
     onCleanup(() => clearTimeout(timer));
   });
@@ -143,31 +142,26 @@ export const TextGenerateEffect: Component<TextGenerateEffectProps> = (props) =>
   };
 
   return (
-    <div 
-      class={css({
-        fontSize: 'lg',
-        lineHeight: 'relaxed',
-        color: 'gray.700',
-        _dark: { color: 'gray.300' },
-      }, props.className)}
+    <div
+      class={css(
+        {
+          fontSize: 'lg',
+          lineHeight: 'relaxed',
+          color: 'gray.700',
+          _dark: { color: 'gray.300' },
+        },
+        props.className
+      )}
     >
       {config.mode === 'words' && (
         <For each={animatedWords()}>
-          {(word) => (
-            <span class={getWordStyles(word)}>
-              {word.text}
-            </span>
-          )}
+          {(word) => <span class={getWordStyles(word)}>{word.text}</span>}
         </For>
       )}
 
       {config.mode === 'characters' && (
         <For each={animatedCharacters()}>
-          {(char) => (
-            <span class={getCharStyles(char)}>
-              {char.char}
-            </span>
-          )}
+          {(char) => <span class={getCharStyles(char)}>{char.char}</span>}
         </For>
       )}
 

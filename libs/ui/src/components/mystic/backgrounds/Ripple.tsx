@@ -1,5 +1,13 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, For } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface RippleProps {
   className?: string;
@@ -36,7 +44,7 @@ const Ripple: Component<RippleProps> = (props) => {
 
   const generateCircles = () => {
     const newCircles: Circle[] = [];
-    
+
     for (let i = 0; i < merged.numCircles; i++) {
       newCircles.push({
         id: i,
@@ -47,7 +55,7 @@ const Ripple: Component<RippleProps> = (props) => {
         delay: Math.random() * merged.duration,
       });
     }
-    
+
     setCircles(newCircles);
   };
 
@@ -57,14 +65,17 @@ const Ripple: Component<RippleProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'absolute',
-        inset: 0,
-        width: 'full',
-        height: 'full',
-        overflow: 'hidden',
-        pointerEvents: 'none',
-      }, merged.className)}
+      class={css(
+        {
+          position: 'absolute',
+          inset: 0,
+          width: 'full',
+          height: 'full',
+          overflow: 'hidden',
+          pointerEvents: 'none',
+        },
+        merged.className
+      )}
       style={merged.style}
     >
       {/* Main circle */}
@@ -84,7 +95,7 @@ const Ripple: Component<RippleProps> = (props) => {
           height: `${merged.mainCircleSize}px`,
         }}
       />
-      
+
       {/* Ripple circles */}
       <For each={circles()}>
         {(circle) => (

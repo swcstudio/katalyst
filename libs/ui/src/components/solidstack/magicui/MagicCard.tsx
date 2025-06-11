@@ -1,5 +1,13 @@
-import { Component, JSX, mergeProps, ParentComponent, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  type JSX,
+  type ParentComponent,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface MagicCardProps {
   class?: string;
@@ -26,7 +34,7 @@ export const MagicCard: ParentComponent<MagicCardProps> = (props) => {
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!cardRef) return;
-    
+
     const rect = cardRef.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -60,31 +68,34 @@ export const MagicCard: ParentComponent<MagicCardProps> = (props) => {
   return (
     <div
       ref={cardRef}
-      class={css({
-        position: 'relative',
-        overflow: 'hidden',
-        borderRadius: '8px',
-        border: '1px solid',
-        borderColor: 'border',
-        backgroundColor: 'background',
-        transition: 'all 0.3s ease',
-        cursor: 'pointer',
-        
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          inset: 0,
+      class={css(
+        {
+          position: 'relative',
+          overflow: 'hidden',
           borderRadius: '8px',
-          padding: '1px',
-          background: `radial-gradient(${merged.gradientSize}px circle at ${mousePosition().x}px ${mousePosition().y}px, ${merged.gradientColor}, transparent 40%)`,
-          maskImage: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          maskComposite: 'xor',
-          WebkitMaskComposite: 'xor',
-          opacity: isHovered() ? merged.gradientOpacity : 0,
-          transition: 'opacity 0.3s ease',
-          pointerEvents: 'none',
-        }
-      }, merged.class)}
+          border: '1px solid',
+          borderColor: 'border',
+          backgroundColor: 'background',
+          transition: 'all 0.3s ease',
+          cursor: 'pointer',
+
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            inset: 0,
+            borderRadius: '8px',
+            padding: '1px',
+            background: `radial-gradient(${merged.gradientSize}px circle at ${mousePosition().x}px ${mousePosition().y}px, ${merged.gradientColor}, transparent 40%)`,
+            maskImage: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+            maskComposite: 'xor',
+            WebkitMaskComposite: 'xor',
+            opacity: isHovered() ? merged.gradientOpacity : 0,
+            transition: 'opacity 0.3s ease',
+            pointerEvents: 'none',
+          },
+        },
+        merged.class
+      )}
       style={{
         '--gradient-color': merged.gradientColor,
         '--gradient-size': `${merged.gradientSize}px`,
@@ -115,49 +126,59 @@ export interface MagicCardDemoProps {
 export const MagicCardDemo: Component<MagicCardDemoProps> = (props) => {
   return (
     <div
-      class={css({
-        padding: '0',
-        maxWidth: '384px',
-        width: '100%',
-        boxShadow: 'none',
-        border: 'none',
-      }, props.class)}
+      class={css(
+        {
+          padding: '0',
+          maxWidth: '384px',
+          width: '100%',
+          boxShadow: 'none',
+          border: 'none',
+        },
+        props.class
+      )}
     >
-      <MagicCard
-        gradientColor={props.gradientColor || '#D9D9D955'}
-        class={css({ padding: '0' })}
-      >
-        <div class={css({
-          borderBottom: '1px solid',
-          borderColor: 'border',
-          padding: '16px',
-        })}>
-          <h3 class={css({
-            fontSize: '18px',
-            fontWeight: 'bold',
-            marginBottom: '8px',
-          })}>
+      <MagicCard gradientColor={props.gradientColor || '#D9D9D955'} class={css({ padding: '0' })}>
+        <div
+          class={css({
+            borderBottom: '1px solid',
+            borderColor: 'border',
+            padding: '16px',
+          })}
+        >
+          <h3
+            class={css({
+              fontSize: '18px',
+              fontWeight: 'bold',
+              marginBottom: '8px',
+            })}
+          >
             Login
           </h3>
-          <p class={css({
-            fontSize: '14px',
-            color: 'muted.foreground',
-          })}>
+          <p
+            class={css({
+              fontSize: '14px',
+              color: 'muted.foreground',
+            })}
+          >
             Enter your credentials to access your account
           </p>
         </div>
-        
+
         <div class={css({ padding: '16px' })}>
           <form>
-            <div class={css({
-              display: 'grid',
-              gap: '16px',
-            })}>
-              <div class={css({
+            <div
+              class={css({
                 display: 'grid',
-                gap: '8px',
-              })}>
-                <label 
+                gap: '16px',
+              })}
+            >
+              <div
+                class={css({
+                  display: 'grid',
+                  gap: '8px',
+                })}
+              >
+                <label
                   for="email"
                   class={css({
                     fontSize: '14px',
@@ -184,12 +205,14 @@ export const MagicCardDemo: Component<MagicCardDemoProps> = (props) => {
                   })}
                 />
               </div>
-              
-              <div class={css({
-                display: 'grid',
-                gap: '8px',
-              })}>
-                <label 
+
+              <div
+                class={css({
+                  display: 'grid',
+                  gap: '8px',
+                })}
+              >
+                <label
                   for="password"
                   class={css({
                     fontSize: '14px',
@@ -218,12 +241,14 @@ export const MagicCardDemo: Component<MagicCardDemoProps> = (props) => {
             </div>
           </form>
         </div>
-        
-        <div class={css({
-          padding: '16px',
-          borderTop: '1px solid',
-          borderColor: 'border',
-        })}>
+
+        <div
+          class={css({
+            padding: '16px',
+            borderTop: '1px solid',
+            borderColor: 'border',
+          })}
+        >
           <button
             class={css({
               width: '100%',

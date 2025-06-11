@@ -1,102 +1,117 @@
-import { Component } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import type { Component } from 'solid-js';
 import {
-  CardDemo,
-  HoverCardDemo,
   AuthorCardDemo,
+  CardDemo,
   CarouselDemo,
   CodeBlockDemo,
   ColourfulTextDemo,
   CompareDemo,
   CoverDemo,
-  HeroScrollDemo,
   DirectionAwareHoverDemo,
   FeaturesSectionWithGlobeDemo,
-  GridFeaturesSectionDemo,
-  IconFeaturesSection,
   FlipWordsDemo,
-  HeroHighlightDemo,
-  InfiniteMovingCardsDemo,
   GlowingStarsBackgroundCardPreview,
+  GridFeaturesSectionDemo,
+  HeroHighlightDemo,
+  HeroScrollDemo,
+  HoverCardDemo,
+  IconFeaturesSection,
+  InfiniteMovingCardsDemo,
   LampDemo,
   LayoutGridDemo,
   MeteorsDemo,
+  ParallaxScrollDemo,
   PlaceholdersAndVanishInputDemo,
-  ParallaxScrollDemo
 } from '../magicui/index';
 
 export const SolidStackNewComponentsDemo: Component = () => {
   return (
-    <div class={css({
-      width: '100%',
-      minHeight: '100vh',
-      backgroundColor: 'gray.50',
-      _dark: { backgroundColor: 'gray.900' }
-    })}>
+    <div
+      class={css({
+        width: '100%',
+        minHeight: '100vh',
+        backgroundColor: 'gray.50',
+        _dark: { backgroundColor: 'gray.900' },
+      })}
+    >
       {/* Header */}
-      <div class={css({
-        padding: '80px 24px 40px',
-        textAlign: 'center',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        color: 'white'
-      })}>
-        <h1 class={css({
-          fontSize: '4xl',
-          fontWeight: 'bold',
-          marginBottom: '16px',
-          md: { fontSize: '6xl' }
-        })}>
+      <div
+        class={css({
+          padding: '80px 24px 40px',
+          textAlign: 'center',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          color: 'white',
+        })}
+      >
+        <h1
+          class={css({
+            fontSize: '4xl',
+            fontWeight: 'bold',
+            marginBottom: '16px',
+            md: { fontSize: '6xl' },
+          })}
+        >
           SolidStack-UI Showcase
         </h1>
-        <p class={css({
-          fontSize: 'xl',
-          opacity: 0.9,
-          maxWidth: '800px',
-          marginX: 'auto'
-        })}>
+        <p
+          class={css({
+            fontSize: 'xl',
+            opacity: 0.9,
+            maxWidth: '800px',
+            marginX: 'auto',
+          })}
+        >
           Advanced React-to-SolidJS converted components with Motion animations
         </p>
       </div>
 
       {/* Components Grid */}
-      <div class={css({
-        maxWidth: '1400px',
-        marginX: 'auto',
-        padding: '80px 24px',
-        display: 'grid',
-        gap: '80px'
-      })}>
-        
+      <div
+        class={css({
+          maxWidth: '1400px',
+          marginX: 'auto',
+          padding: '80px 24px',
+          display: 'grid',
+          gap: '80px',
+        })}
+      >
         {/* Card Skeleton Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Animated Card Skeleton
           </h2>
-          <div class={css({
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            minHeight: '500px'
-          })}>
+          <div
+            class={css({
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '500px',
+            })}
+          >
             <CardDemo />
           </div>
         </section>
 
         {/* Colourful Text Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Animated Colourful Text
           </h2>
           <ColourfulTextDemo />
@@ -104,13 +119,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Cover Text Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Cover Text Effect
           </h2>
           <CoverDemo />
@@ -118,21 +135,25 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Hover Cards Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Interactive Hover Cards
           </h2>
-          <div class={css({
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '32px',
-            justifyItems: 'center'
-          })}>
+          <div
+            class={css({
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '32px',
+              justifyItems: 'center',
+            })}
+          >
             <HoverCardDemo />
             <AuthorCardDemo />
           </div>
@@ -140,13 +161,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Direction Aware Hover Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Direction Aware Hover
           </h2>
           <DirectionAwareHoverDemo />
@@ -154,13 +177,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Carousel Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Interactive Carousel
           </h2>
           <CarouselDemo />
@@ -168,13 +193,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Code Block Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Syntax Highlighted Code Block
           </h2>
           <CodeBlockDemo />
@@ -182,32 +209,38 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Compare Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Before/After Compare
           </h2>
-          <div class={css({
-            display: 'flex',
-            justifyContent: 'center'
-          })}>
+          <div
+            class={css({
+              display: 'flex',
+              justifyContent: 'center',
+            })}
+          >
             <CompareDemo />
           </div>
         </section>
 
         {/* Features Section with Globe */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Advanced Features with 3D Globe
           </h2>
           <FeaturesSectionWithGlobeDemo />
@@ -215,13 +248,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Grid Features Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Grid Features Layout
           </h2>
           <GridFeaturesSectionDemo />
@@ -229,13 +264,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Icon Features Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Icon-Based Features
           </h2>
           <IconFeaturesSection />
@@ -243,13 +280,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Flip Words Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Animated Flip Words
           </h2>
           <FlipWordsDemo />
@@ -257,13 +296,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Infinite Moving Cards Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Infinite Moving Testimonials
           </h2>
           <InfiniteMovingCardsDemo />
@@ -271,13 +312,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Glowing Stars Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Glowing Stars Card
           </h2>
           <GlowingStarsBackgroundCardPreview />
@@ -285,13 +328,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Meteors Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Meteors Effect
           </h2>
           <MeteorsDemo />
@@ -299,13 +344,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Layout Grid Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Interactive Layout Grid
           </h2>
           <LayoutGridDemo />
@@ -313,13 +360,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Placeholders Input Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Animated Input with Placeholders
           </h2>
           <PlaceholdersAndVanishInputDemo />
@@ -327,13 +376,15 @@ export const SolidStackNewComponentsDemo: Component = () => {
 
         {/* Parallax Scroll Section */}
         <section class={css({ textAlign: 'center' })}>
-          <h2 class={css({
-            fontSize: '3xl',
-            fontWeight: 'bold',
-            marginBottom: '32px',
-            color: 'gray.800',
-            _dark: { color: 'white' }
-          })}>
+          <h2
+            class={css({
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              marginBottom: '32px',
+              color: 'gray.800',
+              _dark: { color: 'white' },
+            })}
+          >
             Parallax Scroll Gallery
           </h2>
           <ParallaxScrollDemo />
@@ -356,92 +407,108 @@ export const SolidStackNewComponentsDemo: Component = () => {
       </section>
 
       {/* Footer */}
-      <footer class={css({
-        padding: '60px 24px',
-        textAlign: 'center',
-        backgroundColor: 'gray.100',
-        _dark: { backgroundColor: 'gray.800' }
-      })}>
-        <h3 class={css({
-          fontSize: '2xl',
-          fontWeight: 'bold',
-          marginBottom: '16px',
-          color: 'gray.800',
-          _dark: { color: 'white' }
-        })}>
+      <footer
+        class={css({
+          padding: '60px 24px',
+          textAlign: 'center',
+          backgroundColor: 'gray.100',
+          _dark: { backgroundColor: 'gray.800' },
+        })}
+      >
+        <h3
+          class={css({
+            fontSize: '2xl',
+            fontWeight: 'bold',
+            marginBottom: '16px',
+            color: 'gray.800',
+            _dark: { color: 'white' },
+          })}
+        >
           SolidStack-UI Component Library
         </h3>
-        <p class={css({
-          color: 'gray.600',
-          _dark: { color: 'gray.400' }
-        })}>
+        <p
+          class={css({
+            color: 'gray.600',
+            _dark: { color: 'gray.400' },
+          })}
+        >
           High-performance SolidJS components converted from React with Motion animations
         </p>
-        <div class={css({
-          marginTop: '24px',
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '16px',
-          flexWrap: 'wrap'
-        })}>
-          <span class={css({
-            paddingX: '12px',
-            paddingY: '6px',
-            backgroundColor: 'blue.100',
-            color: 'blue.800',
-            borderRadius: '20px',
-            fontSize: 'sm',
-            fontWeight: '500',
-            _dark: {
-              backgroundColor: 'blue.900',
-              color: 'blue.200'
-            }
-          })}>
+        <div
+          class={css({
+            marginTop: '24px',
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '16px',
+            flexWrap: 'wrap',
+          })}
+        >
+          <span
+            class={css({
+              paddingX: '12px',
+              paddingY: '6px',
+              backgroundColor: 'blue.100',
+              color: 'blue.800',
+              borderRadius: '20px',
+              fontSize: 'sm',
+              fontWeight: '500',
+              _dark: {
+                backgroundColor: 'blue.900',
+                color: 'blue.200',
+              },
+            })}
+          >
             SolidJS
           </span>
-          <span class={css({
-            paddingX: '12px',
-            paddingY: '6px',
-            backgroundColor: 'purple.100',
-            color: 'purple.800',
-            borderRadius: '20px',
-            fontSize: 'sm',
-            fontWeight: '500',
-            _dark: {
-              backgroundColor: 'purple.900',
-              color: 'purple.200'
-            }
-          })}>
+          <span
+            class={css({
+              paddingX: '12px',
+              paddingY: '6px',
+              backgroundColor: 'purple.100',
+              color: 'purple.800',
+              borderRadius: '20px',
+              fontSize: 'sm',
+              fontWeight: '500',
+              _dark: {
+                backgroundColor: 'purple.900',
+                color: 'purple.200',
+              },
+            })}
+          >
             Motion
           </span>
-          <span class={css({
-            paddingX: '12px',
-            paddingY: '6px',
-            backgroundColor: 'green.100',
-            color: 'green.800',
-            borderRadius: '20px',
-            fontSize: 'sm',
-            fontWeight: '500',
-            _dark: {
-              backgroundColor: 'green.900',
-              color: 'green.200'
-            }
-          })}>
+          <span
+            class={css({
+              paddingX: '12px',
+              paddingY: '6px',
+              backgroundColor: 'green.100',
+              color: 'green.800',
+              borderRadius: '20px',
+              fontSize: 'sm',
+              fontWeight: '500',
+              _dark: {
+                backgroundColor: 'green.900',
+                color: 'green.200',
+              },
+            })}
+          >
             PandaCSS
           </span>
-          <span class={css({
-            paddingX: '12px',
-            paddingY: '6px',
-            backgroundColor: 'orange.100',
-            color: 'orange.800',
-            borderRadius: '20px',
-            fontSize: 'sm',
-            fontWeight: '500',
-            _dark: {
-              backgroundColor: 'orange.900',
-              color: 'orange.200'
-            }
-          })}>
+          <span
+            class={css({
+              paddingX: '12px',
+              paddingY: '6px',
+              backgroundColor: 'orange.100',
+              color: 'orange.800',
+              borderRadius: '20px',
+              fontSize: 'sm',
+              fontWeight: '500',
+              _dark: {
+                backgroundColor: 'orange.900',
+                color: 'orange.200',
+              },
+            })}
+          >
             TypeScript
           </span>
         </div>

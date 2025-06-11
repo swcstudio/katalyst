@@ -7,14 +7,14 @@ export { BlogShowcase } from './components/BlogShowcase';
 export { ComprehensiveBlogDemo } from './components/ComprehensiveBlogDemo';
 
 // State Management
-export { 
+export {
   useBlogSection,
   type BlogPost,
   type BlogAuthor,
   type BlogCategory,
   type BlogSection,
   type BlogSectionAPI,
-  type BlogSectionMachineOptions
+  type BlogSectionMachineOptions,
 } from './state/useBlogSection';
 
 // Component Props Types

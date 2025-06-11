@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, ParentComponent, splitProps } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, type ParentComponent, mergeProps, splitProps } from 'solid-js';
 
 export interface RainbowButtonProps {
   class?: string;
@@ -11,8 +11,15 @@ export interface RainbowButtonProps {
 }
 
 export const RainbowButton: ParentComponent<RainbowButtonProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'style', 'children', 'variant', 'disabled', 'onClick']);
-  
+  const [local, others] = splitProps(props, [
+    'class',
+    'style',
+    'children',
+    'variant',
+    'disabled',
+    'onClick',
+  ]);
+
   const merged = mergeProps(
     {
       variant: 'default' as const,
@@ -44,7 +51,8 @@ export const RainbowButton: ParentComponent<RainbowButtonProps> = (props) => {
         ...baseStyles,
         background: 'transparent',
         border: '2px solid transparent',
-        backgroundImage: 'linear-gradient(var(--colors-background), var(--colors-background)), linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080)',
+        backgroundImage:
+          'linear-gradient(var(--colors-background), var(--colors-background)), linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080)',
         backgroundOrigin: 'border-box',
         backgroundClip: 'padding-box, border-box',
         animation: 'rainbow 3s linear infinite',
@@ -54,7 +62,8 @@ export const RainbowButton: ParentComponent<RainbowButtonProps> = (props) => {
 
     return {
       ...baseStyles,
-      background: 'linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080)',
+      background:
+        'linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080)',
       backgroundSize: '400% 100%',
       animation: 'rainbow 3s linear infinite',
       color: 'white',
@@ -77,7 +86,7 @@ export const RainbowButton: ParentComponent<RainbowButtonProps> = (props) => {
       {...others}
     >
       {merged.children}
-      
+
       <style>
         {`
           @keyframes rainbow {
@@ -97,13 +106,18 @@ export interface RainbowButtonDemoProps {
 
 export const RainbowButtonDemo: Component<RainbowButtonDemoProps> = (props) => {
   return (
-    <div class={css({
-      display: 'flex',
-      gap: '16px',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-    }, props.class)}>
+    <div
+      class={css(
+        {
+          display: 'flex',
+          gap: '16px',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '20px',
+        },
+        props.class
+      )}
+    >
       <RainbowButton>Get Unlimited Access</RainbowButton>
     </div>
   );
@@ -111,13 +125,18 @@ export const RainbowButtonDemo: Component<RainbowButtonDemoProps> = (props) => {
 
 export const RainbowButtonOutlineDemo: Component<RainbowButtonDemoProps> = (props) => {
   return (
-    <div class={css({
-      display: 'flex',
-      gap: '16px',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-    }, props.class)}>
+    <div
+      class={css(
+        {
+          display: 'flex',
+          gap: '16px',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '20px',
+        },
+        props.class
+      )}
+    >
       <RainbowButton variant="outline">Get Unlimited Access</RainbowButton>
     </div>
   );

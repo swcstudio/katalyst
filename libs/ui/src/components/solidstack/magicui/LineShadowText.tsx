@@ -1,5 +1,12 @@
-import { Component, JSX, mergeProps, ParentComponent, createSignal, createEffect } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  type JSX,
+  type ParentComponent,
+  createEffect,
+  createSignal,
+  mergeProps,
+} from 'solid-js';
 
 export interface LineShadowTextProps {
   class?: string;
@@ -30,10 +37,17 @@ export const LineShadowText: ParentComponent<LineShadowTextProps> = (props) => {
 
   return (
     <span
-      class={css({
-        display: 'inline-block',
-        textShadow: generateLineShadow(merged.shadowColor, merged.shadowIntensity, merged.shadowOffset),
-      }, merged.class)}
+      class={css(
+        {
+          display: 'inline-block',
+          textShadow: generateLineShadow(
+            merged.shadowColor,
+            merged.shadowIntensity,
+            merged.shadowOffset
+          ),
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       {props.children}
@@ -52,40 +66,40 @@ export const LineShadowTextDemo: Component<LineShadowTextDemoProps> = (props) =>
   createEffect(() => {
     const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     setShadowColor(isDark ? 'white' : 'black');
-    
+
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent) => {
       setShadowColor(e.matches ? 'white' : 'black');
     };
-    
+
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   });
 
   return (
-    <h1 
-      class={css({
-        textWrap: 'balance',
-        fontSize: '3rem',
-        fontWeight: '600',
-        lineHeight: 1,
-        letterSpacing: '-0.025em',
-        '@media (min-width: 640px)': {
-          fontSize: '3.75rem',
+    <h1
+      class={css(
+        {
+          textWrap: 'balance',
+          fontSize: '3rem',
+          fontWeight: '600',
+          lineHeight: 1,
+          letterSpacing: '-0.025em',
+          '@media (min-width: 640px)': {
+            fontSize: '3.75rem',
+          },
+          '@media (min-width: 768px)': {
+            fontSize: '4.5rem',
+          },
+          '@media (min-width: 1024px)': {
+            fontSize: '6rem',
+          },
         },
-        '@media (min-width: 768px)': {
-          fontSize: '4.5rem',
-        },
-        '@media (min-width: 1024px)': {
-          fontSize: '6rem',
-        },
-      }, props.class)}
+        props.class
+      )}
     >
       Ship
-      <LineShadowText 
-        class={css({ fontStyle: 'italic' })} 
-        shadowColor={shadowColor()}
-      >
+      <LineShadowText class={css({ fontStyle: 'italic' })} shadowColor={shadowColor()}>
         Fast
       </LineShadowText>
     </h1>

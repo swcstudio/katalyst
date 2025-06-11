@@ -1,8 +1,19 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, createEffect, For, Show, createMemo } from 'solid-js';
+import {
+  type Component,
+  For,
+  type JSX,
+  Show,
+  createEffect,
+  createMemo,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 import { css } from '../../../../../styled-system/css';
-import { useStatsSection, StatItem } from '../state/useStatsSection';
-import { NumberTicker } from '../../../magicui/NumberTicker';
 import { BlurFade } from '../../../magicui/BlurFade';
+import { NumberTicker } from '../../../magicui/NumberTicker';
+import { type StatItem, useStatsSection } from '../state/useStatsSection';
 
 export interface StatsSimpleProps {
   className?: string;
@@ -50,11 +61,11 @@ export const StatsSimple: Component<StatsSimpleProps> = (props) => {
     staggerDelay: merged.staggerDelay,
     countersEnabled: merged.countersEnabled,
     onStatSelect: (statId) => {
-      const stat = merged.stats.find(s => s.id === statId);
+      const stat = merged.stats.find((s) => s.id === statId);
       if (stat && merged.onStatSelect) {
         merged.onStatSelect(stat);
       }
-    }
+    },
   });
 
   onMount(() => {
@@ -84,12 +95,13 @@ export const StatsSimple: Component<StatsSimpleProps> = (props) => {
   const containerClasses = createMemo(() => {
     const baseClasses = css({
       py: '24',
-      sm: { py: '32' }
+      sm: { py: '32' },
     });
 
-    const themeClasses = merged.theme === 'dark'
-      ? css({ bg: 'gray.900', color: 'white' })
-      : css({ bg: 'white', color: 'gray.900' });
+    const themeClasses =
+      merged.theme === 'dark'
+        ? css({ bg: 'gray.900', color: 'white' })
+        : css({ bg: 'white', color: 'gray.900' });
 
     return `${baseClasses} ${themeClasses} ${merged.className || ''}`;
   });
@@ -100,7 +112,7 @@ export const StatsSimple: Component<StatsSimpleProps> = (props) => {
       gap: '8',
       gridTemplateColumns: '1',
       textAlign: 'center',
-      lg: { gridTemplateColumns: '3' }
+      lg: { gridTemplateColumns: '3' },
     });
 
     if (merged.variant === 'centered') {
@@ -109,7 +121,7 @@ export const StatsSimple: Component<StatsSimpleProps> = (props) => {
         gap: '16',
         gridTemplateColumns: '1',
         textAlign: 'center',
-        lg: { gridTemplateColumns: '3' }
+        lg: { gridTemplateColumns: '3' },
       });
     }
 
@@ -123,7 +135,7 @@ export const StatsSimple: Component<StatsSimpleProps> = (props) => {
         display: 'flex',
         maxW: 'xs',
         flexDirection: 'column',
-        gap: '4'
+        gap: '4',
       });
 
       if (merged.variant === 'description') {
@@ -133,7 +145,7 @@ export const StatsSimple: Component<StatsSimpleProps> = (props) => {
           maxW: 'xs',
           flexDirection: 'column',
           gap: '4',
-          textAlign: 'center'
+          textAlign: 'center',
         });
       }
 
@@ -147,39 +159,42 @@ export const StatsSimple: Component<StatsSimpleProps> = (props) => {
         fontWeight: 'semibold',
         letterSpacing: 'tight',
         color: merged.theme === 'dark' ? 'white' : 'gray.900',
-        sm: { fontSize: '5xl' }
+        sm: { fontSize: '5xl' },
       });
     });
 
     const nameClasses = createMemo(() => {
       const textColor = merged.theme === 'dark' ? 'gray.400' : 'gray.600';
-      
+
       if (merged.variant === 'description') {
         return css({
           fontSize: 'base',
           fontWeight: 'medium',
           color: textColor,
-          lineHeight: '7'
+          lineHeight: '7',
         });
       }
 
       return css({
         fontSize: 'base',
         color: textColor,
-        lineHeight: '7'
+        lineHeight: '7',
       });
     });
 
     return (
-      <BlurFade 
-        delay={itemProps.index * (merged.staggerDelay / 1000)}
-        inView={isIntersecting()}
-      >
+      <BlurFade delay={itemProps.index * (merged.staggerDelay / 1000)} inView={isIntersecting()}>
         <div class={itemClasses()}>
           <div class={valueClasses()}>
-            <Show 
+            <Show
               when={merged.countersEnabled && typeof itemProps.stat.value === 'number'}
-              fallback={<span>{itemProps.stat.prefix || ''}{itemProps.stat.value}{itemProps.stat.suffix || ''}</span>}
+              fallback={
+                <span>
+                  {itemProps.stat.prefix || ''}
+                  {itemProps.stat.value}
+                  {itemProps.stat.suffix || ''}
+                </span>
+              }
             >
               <NumberTicker
                 value={itemProps.stat.value as number}
@@ -191,17 +206,17 @@ export const StatsSimple: Component<StatsSimpleProps> = (props) => {
               <span>{itemProps.stat.suffix || ''}</span>
             </Show>
           </div>
-          
-          <div class={nameClasses()}>
-            {itemProps.stat.name}
-          </div>
+
+          <div class={nameClasses()}>{itemProps.stat.name}</div>
 
           <Show when={merged.variant === 'description' && itemProps.stat.description}>
-            <div class={css({
-              fontSize: 'sm',
-              color: merged.theme === 'dark' ? 'gray.400' : 'gray.500',
-              lineHeight: '6'
-            })}>
+            <div
+              class={css({
+                fontSize: 'sm',
+                color: merged.theme === 'dark' ? 'gray.400' : 'gray.500',
+                lineHeight: '6',
+              })}
+            >
               {itemProps.stat.description}
             </div>
           </Show>
@@ -212,41 +227,49 @@ export const StatsSimple: Component<StatsSimpleProps> = (props) => {
 
   return (
     <div ref={setContainerRef} class={containerClasses()} style={merged.style}>
-      <div class={css({
-        mx: 'auto',
-        maxW: '7xl',
-        px: '6',
-        lg: { px: '8' }
-      })}>
+      <div
+        class={css({
+          mx: 'auto',
+          maxW: '7xl',
+          px: '6',
+          lg: { px: '8' },
+        })}
+      >
         <Show when={merged.title || merged.subtitle}>
           <BlurFade delay={0.1} inView={isIntersecting()}>
-            <div class={css({
-              mx: 'auto',
-              maxW: '2xl',
-              textAlign: 'center',
-              mb: '16',
-              lg: { mb: '20' }
-            })}>
+            <div
+              class={css({
+                mx: 'auto',
+                maxW: '2xl',
+                textAlign: 'center',
+                mb: '16',
+                lg: { mb: '20' },
+              })}
+            >
               <Show when={merged.title}>
-                <h2 class={css({
-                  fontSize: '4xl',
-                  sm: { fontSize: '5xl' },
-                  fontWeight: 'bold',
-                  letterSpacing: 'tight',
-                  color: merged.theme === 'dark' ? 'white' : 'gray.900',
-                  mb: merged.subtitle ? '6' : '0'
-                })}>
+                <h2
+                  class={css({
+                    fontSize: '4xl',
+                    sm: { fontSize: '5xl' },
+                    fontWeight: 'bold',
+                    letterSpacing: 'tight',
+                    color: merged.theme === 'dark' ? 'white' : 'gray.900',
+                    mb: merged.subtitle ? '6' : '0',
+                  })}
+                >
                   {merged.title}
                 </h2>
               </Show>
 
               <Show when={merged.subtitle}>
-                <p class={css({
-                  fontSize: 'lg',
-                  sm: { fontSize: 'xl' },
-                  color: merged.theme === 'dark' ? 'gray.300' : 'gray.600',
-                  lineHeight: '8'
-                })}>
+                <p
+                  class={css({
+                    fontSize: 'lg',
+                    sm: { fontSize: 'xl' },
+                    color: merged.theme === 'dark' ? 'gray.300' : 'gray.600',
+                    lineHeight: '8',
+                  })}
+                >
                   {merged.subtitle}
                 </p>
               </Show>
@@ -255,9 +278,7 @@ export const StatsSimple: Component<StatsSimpleProps> = (props) => {
         </Show>
 
         <div class={gridClasses()}>
-          <For each={merged.stats}>
-            {(stat, index) => <StatItem stat={stat} index={index()} />}
-          </For>
+          <For each={merged.stats}>{(stat, index) => <StatItem stat={stat} index={index()} />}</For>
         </div>
       </div>
     </div>
@@ -273,18 +294,18 @@ export const StatsSimpleDemo: Component<StatsSimpleDemoProps> = (props) => {
     {
       id: '1',
       name: 'Transactions every 24 hours',
-      value: '44 million'
+      value: '44 million',
     },
     {
-      id: '2', 
+      id: '2',
       name: 'Assets under holding',
-      value: '$119 trillion'
+      value: '$119 trillion',
     },
     {
       id: '3',
-      name: 'New users annually', 
-      value: '46,000'
-    }
+      name: 'New users annually',
+      value: '46,000',
+    },
   ];
 
   return (
@@ -304,18 +325,18 @@ export const StatsSimpleDarkDemo: Component<StatsSimpleDemoProps> = (props) => {
     {
       id: '1',
       name: 'Transactions every 24 hours',
-      value: '44 million'
+      value: '44 million',
     },
     {
-      id: '2', 
+      id: '2',
       name: 'Assets under holding',
-      value: '$119 trillion'
+      value: '$119 trillion',
     },
     {
       id: '3',
-      name: 'New users annually', 
-      value: '46,000'
-    }
+      name: 'New users annually',
+      value: '46,000',
+    },
   ];
 
   return (

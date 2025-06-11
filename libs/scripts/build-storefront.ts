@@ -7,7 +7,7 @@ console.log('Building Storefront micro-frontend...');
 
 try {
   await Deno.mkdir('dist/storefront', { recursive: true });
-  
+
   const { close } = await build({
     plugins: [pluginSolid()],
     source: {
@@ -21,7 +21,7 @@ try {
       },
     },
   });
-  
+
   await close();
   console.log('Storefront build completed successfully!');
 } catch (error) {

@@ -13,7 +13,7 @@ export {
   type PaymentEmailData,
   type BatchEmailRequest,
   type EmailSendResult,
-  type BatchEmailResult
+  type BatchEmailResult,
 } from './email-service.ts';
 
 // Custom Resend client
@@ -29,7 +29,7 @@ export {
   type EmailHeaders,
   type SendEmailOptions,
   type EmailResponse,
-  type BatchEmailResponse
+  type BatchEmailResponse,
 } from './resend-client.ts';
 
 // Template engine
@@ -40,13 +40,11 @@ export {
   type TemplateProps,
   type EmailComponent,
   type TemplateConfig,
-  type EmailTheme
+  type EmailTheme,
 } from './template-engine.ts';
 
 // Pre-built SSE templates
-export {
-  SSETemplates
-} from './templates/sse-templates.ts';
+export { SSETemplates } from './templates/sse-templates.ts';
 
 // Re-export commonly used types
 export type { Component, JSX } from 'solid-js';

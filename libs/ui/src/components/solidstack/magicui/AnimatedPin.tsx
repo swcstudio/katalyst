@@ -1,5 +1,14 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, splitProps, children } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  type JSX,
+  children,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+  splitProps,
+} from 'solid-js';
 
 export interface PinContainerProps {
   children?: JSX.Element;
@@ -10,7 +19,13 @@ export interface PinContainerProps {
 }
 
 export const PinContainer: Component<PinContainerProps> = (props) => {
-  const [local, others] = splitProps(props, ['children', 'title', 'href', 'className', 'containerClassName']);
+  const [local, others] = splitProps(props, [
+    'children',
+    'title',
+    'href',
+    'className',
+    'containerClassName',
+  ]);
   const [transform, setTransform] = createSignal('');
   const [isHovered, setIsHovered] = createSignal(false);
   let containerRef: HTMLDivElement;
@@ -37,13 +52,16 @@ export const PinContainer: Component<PinContainerProps> = (props) => {
   return (
     <div
       ref={containerRef!}
-      class={css({
-        position: 'relative',
-        zIndex: 10,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }, local.containerClassName)}
+      class={css(
+        {
+          position: 'relative',
+          zIndex: 10,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        local.containerClassName
+      )}
       style={{
         perspective: '1000px',
       }}
@@ -52,14 +70,17 @@ export const PinContainer: Component<PinContainerProps> = (props) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onMouseMove={handleMouseMove}
-        class={css({
-          position: 'relative',
-          zIndex: 10,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-        }, local.className)}
+        class={css(
+          {
+            position: 'relative',
+            zIndex: 10,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+          },
+          local.className
+        )}
         style={{
           transform: isHovered() ? transform() : '',
           transition: 'transform 400ms cubic-bezier(0.03, 0.98, 0.52, 0.99)',
@@ -182,60 +203,72 @@ export interface AnimatedPinDemoProps {
 
 export const AnimatedPinDemo: Component<AnimatedPinDemoProps> = (props) => {
   return (
-    <div class={css({
-      height: '40rem',
-      width: 'full',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }, props.className)}>
-      <PinContainer
-        title="/ui.aceternity.com"
-        href="https://twitter.com/mannupaaji"
-      >
-        <div class={css({
+    <div
+      class={css(
+        {
+          height: '40rem',
+          width: 'full',
           display: 'flex',
-          flexBasis: 'full',
-          flexDirection: 'column',
-          padding: '4',
-          letterSpacing: 'tight',
-          color: 'rgba(226, 232, 240, 0.5)',
-          width: '20rem',
-          height: '20rem',
-          _sm: {
-            flexBasis: '1/2',
-          },
-        })}>
-          <h3 class={css({
-            maxWidth: 'xs',
-            paddingBottom: '2',
-            margin: '0',
-            fontWeight: 'bold',
-            fontSize: 'base',
-            color: 'slate.100',
-          })}>
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        props.className
+      )}
+    >
+      <PinContainer title="/ui.aceternity.com" href="https://twitter.com/mannupaaji">
+        <div
+          class={css({
+            display: 'flex',
+            flexBasis: 'full',
+            flexDirection: 'column',
+            padding: '4',
+            letterSpacing: 'tight',
+            color: 'rgba(226, 232, 240, 0.5)',
+            width: '20rem',
+            height: '20rem',
+            _sm: {
+              flexBasis: '1/2',
+            },
+          })}
+        >
+          <h3
+            class={css({
+              maxWidth: 'xs',
+              paddingBottom: '2',
+              margin: '0',
+              fontWeight: 'bold',
+              fontSize: 'base',
+              color: 'slate.100',
+            })}
+          >
             Aceternity UI
           </h3>
-          <div class={css({
-            fontSize: 'base',
-            margin: '0',
-            padding: '0',
-            fontWeight: 'normal',
-          })}>
-            <span class={css({
-              color: 'slate.500',
-            })}>
+          <div
+            class={css({
+              fontSize: 'base',
+              margin: '0',
+              padding: '0',
+              fontWeight: 'normal',
+            })}
+          >
+            <span
+              class={css({
+                color: 'slate.500',
+              })}
+            >
               Customizable Tailwind CSS and Framer Motion Components.
             </span>
           </div>
-          <div class={css({
-            display: 'flex',
-            flex: '1',
-            width: 'full',
-            borderRadius: 'lg',
-            marginTop: '4',
-            background: 'linear-gradient(135deg, #8b5cf6, #a855f7, #3b82f6)',
-          })} />
+          <div
+            class={css({
+              display: 'flex',
+              flex: '1',
+              width: 'full',
+              borderRadius: 'lg',
+              marginTop: '4',
+              background: 'linear-gradient(135deg, #8b5cf6, #a855f7, #3b82f6)',
+            })}
+          />
         </div>
       </PinContainer>
     </div>

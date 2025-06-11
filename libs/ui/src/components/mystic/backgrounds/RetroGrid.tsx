@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, mergeProps } from 'solid-js';
 
 export interface RetroGridProps {
   className?: string;
@@ -29,16 +29,19 @@ const RetroGrid: Component<RetroGridProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'absolute',
-        inset: 0,
-        width: 'full',
-        height: 'full',
-        overflow: 'hidden',
-        pointerEvents: 'none',
-        opacity: merged.opacity,
-        background: `linear-gradient(to bottom, transparent 0%, ${merged.fadeColor} 100%)`,
-      }, merged.className)}
+      class={css(
+        {
+          position: 'absolute',
+          inset: 0,
+          width: 'full',
+          height: 'full',
+          overflow: 'hidden',
+          pointerEvents: 'none',
+          opacity: merged.opacity,
+          background: `linear-gradient(to bottom, transparent 0%, ${merged.fadeColor} 100%)`,
+        },
+        merged.className
+      )}
       style={merged.style}
     >
       <svg
@@ -74,12 +77,7 @@ const RetroGrid: Component<RetroGridProps> = (props) => {
             <stop offset="100%" style={`stop-color:${merged.strokeColor};stop-opacity:0`} />
           </linearGradient>
         </defs>
-        <rect
-          width="100%"
-          height="200%"
-          fill={`url(#${id}-grid)`}
-          mask={`url(#${id}-fade)`}
-        />
+        <rect width="100%" height="200%" fill={`url(#${id}-grid)`} mask={`url(#${id}-fade)`} />
       </svg>
       <div
         class={css({

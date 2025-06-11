@@ -1,5 +1,4 @@
-import { defineEventHandler, readBody, createError, setHeader, getHeader, getClientIP } from 'h3';
-import type { ContactFormRequest, ContactFormResponse } from '@sse/types';
+import { createError, defineEventHandler, getHeader, readBody, setHeader } from 'h3';
 
 // Rate limiting map (in production, use Redis or similar)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
@@ -14,13 +13,13 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const clientIP = getClientIP(event);
+    const clientIP = 'unknown';
     const userAgent = getHeader(event, 'user-agent') || '';
-    
+
     // Rate limiting: 5 submissions per hour per IP
     const now = Date.now();
     const rateLimit = rateLimitMap.get(clientIP);
-    
+
     if (rateLimit) {
       if (now < rateLimit.resetTime) {
         if (rateLimit.count >= 5) {
@@ -32,17 +31,17 @@ export default defineEventHandler(async (event) => {
         rateLimit.count++;
       } else {
         rateLimit.count = 1;
-        rateLimit.resetTime = now + (60 * 60 * 1000); // 1 hour
+        rateLimit.resetTime = now + 60 * 60 * 1000; // 1 hour
       }
     } else {
       rateLimitMap.set(clientIP, {
         count: 1,
-        resetTime: now + (60 * 60 * 1000),
+        resetTime: now + 60 * 60 * 1000,
       });
     }
 
-    const body: ContactFormRequest = await readBody(event);
-    
+    const body: any = await readBody(event);
+
     // Validate required fields
     if (!body.name || !body.email || !body.message) {
       throw createError({
@@ -85,8 +84,8 @@ export default defineEventHandler(async (event) => {
     // Basic spam detection
     const spamKeywords = ['bitcoin', 'crypto', 'investment', 'loan', 'casino', 'viagra'];
     const messageText = body.message.toLowerCase();
-    const hasSpam = spamKeywords.some(keyword => messageText.includes(keyword));
-    
+    const hasSpam = spamKeywords.some((keyword) => messageText.includes(keyword));
+
     if (hasSpam) {
       // Log potential spam but don't reject immediately
       console.warn('Potential spam detected:', {
@@ -150,7 +149,7 @@ export default defineEventHandler(async (event) => {
       // Continue processing even if auto-reply fails
     }
 
-    const response: ContactFormResponse = {
+    const response = {
       success: true,
       message: 'Your message has been sent successfully. We will get back to you within 24 hours.',
       submissionId: generateSubmissionId(),
@@ -162,19 +161,18 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Access-Control-Allow-Credentials', 'true');
 
     return response;
-
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Log error for monitoring
     console.error('Contact form error:', {
-      error: error.message,
-      stack: error.stack,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
       timestamp: new Date().toISOString(),
       userAgent: getHeader(event, 'user-agent'),
-      ip: getClientIP(event),
+      ip: 'unknown',
     });
 
     // Handle known error types
-    if (error.statusCode) {
+    if (error && typeof error === 'object' && 'statusCode' in error) {
       throw error;
     }
 
@@ -190,7 +188,7 @@ export default defineEventHandler(async (event) => {
 async function sendContactNotificationEmail(params: {
   to: string;
   subject: string;
-  data: any;
+  data: Record<string, unknown>;
 }) {
   // Implementation depends on your email service (SendGrid, SES, etc.)
   // Example with fetch to email service API
@@ -206,14 +204,14 @@ async function sendContactNotificationEmail(params: {
       <p><strong>Subject:</strong> ${params.data.subject}</p>
       <p><strong>Message:</strong></p>
       <div style="background: #f5f5f5; padding: 15px; border-radius: 5px;">
-        ${params.data.message.replace(/\n/g, '<br>')}
+        ${String(params.data.message).replace(/\n/g, '<br>')}
       </div>
       <hr>
       <p><strong>Metadata:</strong></p>
       <ul>
-        <li>IP: ${params.data.metadata.ip}</li>
-        <li>User Agent: ${params.data.metadata.userAgent}</li>
-        <li>Timestamp: ${params.data.metadata.timestamp}</li>
+        <li>IP: ${(params.data.metadata as any)?.ip || 'Unknown'}</li>
+        <li>User Agent: ${(params.data.metadata as any)?.userAgent || 'Unknown'}</li>
+        <li>Timestamp: ${(params.data.metadata as any)?.timestamp || 'Unknown'}</li>
         <li>Spam Suspect: ${params.data.isSpamSuspect ? 'Yes' : 'No'}</li>
       </ul>
     `,

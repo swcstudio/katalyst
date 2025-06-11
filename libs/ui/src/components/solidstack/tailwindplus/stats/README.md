@@ -57,7 +57,7 @@ interface StatItem {
   name: string;
   value: string | number;
   description?: string;
-  icon?: any;
+  icon?: React.ComponentType | string;
   startValue?: number;
   animatedValue?: number;
   suffix?: string;
