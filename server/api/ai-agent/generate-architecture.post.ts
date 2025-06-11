@@ -1,5 +1,5 @@
-import { defineEventHandler, readBody, createError, setHeader, getHeader, getClientIP } from 'h3';
 import type { ArchitectureRequest, ArchitectureResponse } from '@sse/types';
+import { createError, defineEventHandler, getClientIP, getHeader, readBody, setHeader } from 'h3';
 
 // Cloud providers and their regions
 const CLOUD_PROVIDERS = {
@@ -33,19 +33,19 @@ const ARCHITECTURE_PATTERNS = {
     complexity: 'high',
     components: ['load-balancer', 'api-gateway', 'frontend-apps', 'shared-libraries'],
   },
-  'microservices': {
+  microservices: {
     name: 'Microservices Architecture',
     description: 'Distributed services with independent deployment',
     complexity: 'high',
     components: ['service-mesh', 'api-gateway', 'services', 'databases', 'message-queue'],
   },
-  'serverless': {
+  serverless: {
     name: 'Serverless Architecture',
     description: 'Function-as-a-service with event-driven components',
     complexity: 'medium',
     components: ['functions', 'api-gateway', 'event-triggers', 'storage'],
   },
-  'monolith': {
+  monolith: {
     name: 'Modular Monolith',
     description: 'Single deployable unit with modular structure',
     complexity: 'low',
@@ -67,33 +67,34 @@ export default defineEventHandler(async (event) => {
   try {
     const clientIP = getClientIP(event);
     const userAgent = getHeader(event, 'user-agent') || '';
-    
+
     // Rate limiting: 5 architecture generations per hour per IP
     const now = Date.now();
     const rateLimit = rateLimitMap.get(clientIP);
-    
+
     if (rateLimit) {
       if (now < rateLimit.resetTime) {
         if (rateLimit.count >= 5) {
           throw createError({
             statusCode: 429,
-            statusMessage: 'Rate limit exceeded. AI architecture generation is limited to 5 requests per hour.',
+            statusMessage:
+              'Rate limit exceeded. AI architecture generation is limited to 5 requests per hour.',
           });
         }
         rateLimit.count++;
       } else {
         rateLimit.count = 1;
-        rateLimit.resetTime = now + (60 * 60 * 1000);
+        rateLimit.resetTime = now + 60 * 60 * 1000;
       }
     } else {
       rateLimitMap.set(clientIP, {
         count: 1,
-        resetTime: now + (60 * 60 * 1000),
+        resetTime: now + 60 * 60 * 1000,
       });
     }
 
     const body: ArchitectureRequest = await readBody(event);
-    
+
     // Validate required fields
     if (!body.projectName || !body.cloudProvider || !body.architecturePattern) {
       throw createError({
@@ -106,7 +107,8 @@ export default defineEventHandler(async (event) => {
     if (!/^[a-z0-9-]+$/.test(body.projectName) || body.projectName.length > 50) {
       throw createError({
         statusCode: 400,
-        statusMessage: 'Project name must be lowercase alphanumeric with hyphens, max 50 characters',
+        statusMessage:
+          'Project name must be lowercase alphanumeric with hyphens, max 50 characters',
       });
     }
 
@@ -145,7 +147,14 @@ export default defineEventHandler(async (event) => {
     }
 
     // Validate scale requirements
-    const validScales = ['development', 'staging', 'production-small', 'production-medium', 'production-large', 'enterprise'];
+    const validScales = [
+      'development',
+      'staging',
+      'production-small',
+      'production-medium',
+      'production-large',
+      'enterprise',
+    ];
     if (body.scale && !validScales.includes(body.scale)) {
       throw createError({
         statusCode: 400,
@@ -153,9 +162,10 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const pattern = ARCHITECTURE_PATTERNS[body.architecturePattern as keyof typeof ARCHITECTURE_PATTERNS];
+    const pattern =
+      ARCHITECTURE_PATTERNS[body.architecturePattern as keyof typeof ARCHITECTURE_PATTERNS];
     const selectedRegion = body.region || provider.regions[0];
-    
+
     // Generate architecture configuration
     const architecture = await generateCloudNativeArchitecture({
       projectName: body.projectName,
@@ -249,8 +259,7 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Access-Control-Allow-Credentials', 'true');
 
     return response;
-
-  } catch (error: any) {
+  } catch (error: Error) {
     console.error('AI architecture generation error:', {
       error: error.message,
       stack: error.stack,
@@ -272,7 +281,18 @@ export default defineEventHandler(async (event) => {
 
 // AI-powered architecture generation
 async function generateCloudNativeArchitecture(params: any) {
-  const { projectName, cloudProvider, region, pattern, teamSize, scale, features, securityLevel, multiTenant, autoScaling } = params;
+  const {
+    projectName,
+    cloudProvider,
+    region,
+    pattern,
+    teamSize,
+    scale,
+    features,
+    securityLevel,
+    multiTenant,
+    autoScaling,
+  } = params;
 
   return {
     components: generateComponents(pattern, scale, features),
@@ -291,15 +311,21 @@ function generateComponents(pattern: string, scale: string, features: string[]) 
       version: '1.29',
       nodeGroups: scale === 'enterprise' ? 3 : scale === 'production-large' ? 2 : 1,
     },
-    applications: pattern === 'micro-frontend' ? [
-      'marketing-app',
-      'blog-app', 
-      'docs-app',
-      'storefront-app',
-    ] : ['main-application'],
-    databases: features.includes('postgresql') ? ['postgresql'] : features.includes('mysql') ? ['mysql'] : ['postgresql'],
+    applications:
+      pattern === 'micro-frontend'
+        ? ['marketing-app', 'blog-app', 'docs-app', 'storefront-app']
+        : ['main-application'],
+    databases: features.includes('postgresql')
+      ? ['postgresql']
+      : features.includes('mysql')
+        ? ['mysql']
+        : ['postgresql'],
     cache: features.includes('redis') ? ['redis'] : [],
-    messageQueue: features.includes('kafka') ? ['kafka'] : features.includes('rabbitmq') ? ['rabbitmq'] : [],
+    messageQueue: features.includes('kafka')
+      ? ['kafka']
+      : features.includes('rabbitmq')
+        ? ['rabbitmq']
+        : [],
   };
 
   return baseComponents;
@@ -361,8 +387,9 @@ function generateScalability(autoScaling: boolean, scale: string) {
 }
 
 function generateStorage(cloudProvider: string, scale: string) {
-  const storageClass = cloudProvider === 'aws' ? 'gp3' : cloudProvider === 'azure' ? 'premium-ssd' : 'ssd';
-  
+  const storageClass =
+    cloudProvider === 'aws' ? 'gp3' : cloudProvider === 'azure' ? 'premium-ssd' : 'ssd';
+
   return {
     persistent: {
       storageClass,
@@ -475,7 +502,7 @@ function calculateCostEstimate(architecture: any) {
 function calculateSetupTime(complexity: string, teamSize?: string) {
   const baseHours = complexity === 'high' ? 40 : complexity === 'medium' ? 24 : 16;
   const teamMultiplier = teamSize === '1-5' ? 1 : teamSize === '6-20' ? 0.7 : 0.5;
-  
+
   return `${Math.round(baseHours * teamMultiplier)}-${Math.round(baseHours * teamMultiplier * 1.5)} hours`;
 }
 

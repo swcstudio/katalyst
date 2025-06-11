@@ -1,5 +1,5 @@
-import { Component, onMount, onCleanup, createSignal } from "solid-js";
-import { css } from "../../styled-system/css";
+import { type Component, createSignal, onCleanup, onMount } from 'solid-js';
+import { css } from '../../styled-system/css';
 
 interface FlickeringGridProps {
   className?: string;
@@ -19,7 +19,7 @@ export const FlickeringGrid: Component<FlickeringGridProps> = (props) => {
 
   const squareSize = () => props.squareSize ?? 4;
   const gridGap = () => props.gridGap ?? 6;
-  const color = () => props.color ?? "#6B7280";
+  const color = () => props.color ?? '#6B7280';
   const maxOpacity = () => props.maxOpacity ?? 0.5;
   const flickerChance = () => props.flickerChance ?? 0.1;
   const width = () => props.width ?? 800;
@@ -29,9 +29,9 @@ export const FlickeringGrid: Component<FlickeringGridProps> = (props) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
+          r: Number.parseInt(result[1], 16),
+          g: Number.parseInt(result[2], 16),
+          b: Number.parseInt(result[3], 16),
         }
       : { r: 107, g: 114, b: 128 };
   };
@@ -40,11 +40,11 @@ export const FlickeringGrid: Component<FlickeringGridProps> = (props) => {
     if (!canvasRef) return;
 
     const canvas = canvasRef;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     const { r, g, b } = hexToRgb(color());
-    
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const cols = Math.floor(width() / (squareSize() + gridGap()));
@@ -55,10 +55,10 @@ export const FlickeringGrid: Component<FlickeringGridProps> = (props) => {
         if (Math.random() < flickerChance()) {
           const opacity = Math.random() * maxOpacity();
           ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
-          
+
           const x = i * (squareSize() + gridGap());
           const y = j * (squareSize() + gridGap());
-          
+
           ctx.fillRect(x, y, squareSize(), squareSize());
         }
       }
@@ -86,18 +86,18 @@ export const FlickeringGrid: Component<FlickeringGridProps> = (props) => {
   });
 
   const canvasStyles = css({
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
-    width: "100%",
-    height: "100%",
-    pointerEvents: "none",
+    width: '100%',
+    height: '100%',
+    pointerEvents: 'none',
   });
 
   return (
     <canvas
       ref={canvasRef}
-      class={`${canvasStyles} ${props.className || ""}`}
+      class={`${canvasStyles} ${props.className || ''}`}
       width={width()}
       height={height()}
     />

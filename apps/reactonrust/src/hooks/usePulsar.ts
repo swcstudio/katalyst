@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export interface PulsarMessage {
   topic: string;
@@ -24,7 +24,7 @@ export const createPulsarClient = (config: {
   return {
     async connect() {
       console.log(`Connecting to Pulsar at ${config.serviceUrl}...`);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       isConnected = true;
       console.log('Connected to Pulsar');
     },
@@ -39,15 +39,15 @@ export const createPulsarClient = (config: {
       if (!isConnected) {
         throw new Error('Not connected to Pulsar');
       }
-      
+
       const message: PulsarMessage = {
         topic,
         payload,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
 
       console.log('Publishing message:', message);
-      
+
       subscribers.forEach((callback, subscribedTopic) => {
         if (subscribedTopic === topic || subscribedTopic.includes('*')) {
           setTimeout(() => callback(message), 100);
@@ -59,10 +59,10 @@ export const createPulsarClient = (config: {
       if (!isConnected) {
         throw new Error('Not connected to Pulsar');
       }
-      
+
       subscribers.set(topic, callback);
       console.log(`Subscribed to topic: ${topic}`);
-    }
+    },
   };
 };
 
@@ -75,7 +75,7 @@ export const usePulsar = () => {
     const pulsarClient = createPulsarClient({
       serviceUrl: 'pulsar://localhost:6650',
       tenant: 'sse',
-      namespace: 'reactonrust'
+      namespace: 'reactonrust',
     });
 
     const initClient = async () => {
@@ -110,6 +110,6 @@ export const usePulsar = () => {
   return {
     connected,
     messages,
-    publishMessage
+    publishMessage,
   };
 };

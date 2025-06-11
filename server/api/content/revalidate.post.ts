@@ -1,27 +1,27 @@
-import { defineEventHandler, readBody, createError, setHeader, getHeader, getClientIP } from 'h3';
 import type { RevalidateRequest, RevalidateResponse } from '@sse/types';
+import { createError, defineEventHandler, getClientIP, getHeader, readBody, setHeader } from 'h3';
 
 // Revalidation configurations for different content types
 const REVALIDATION_CONFIGS = {
-  'documentation': {
+  documentation: {
     interval: 30 * 60, // 30 minutes in seconds
     paths: ['/docs/**', '/api-reference/**', '/guides/**'],
     tags: ['docs', 'api-docs', 'guides'],
     priority: 'high',
   },
-  'marketing': {
+  marketing: {
     interval: 3 * 60 * 60, // 3 hours in seconds
     paths: ['/', '/about', '/contact', '/features', '/pricing'],
     tags: ['marketing', 'homepage', 'landing'],
     priority: 'medium',
   },
-  'storefront': {
+  storefront: {
     interval: 3 * 60 * 60, // 3 hours in seconds
     paths: ['/store/**', '/products/**', '/cart', '/checkout'],
     tags: ['storefront', 'products', 'e-commerce'],
     priority: 'medium',
   },
-  'blog': {
+  blog: {
     interval: 60 * 60, // 1 hour in seconds
     paths: ['/blog/**', '/posts/**'],
     tags: ['blog', 'posts', 'articles'],
@@ -48,7 +48,7 @@ export default defineEventHandler(async (event) => {
     const userAgent = getHeader(event, 'user-agent') || '';
     const authHeader = getHeader(event, 'authorization');
     const webhookSignature = getHeader(event, 'x-webhook-signature');
-    
+
     // Authenticate request
     if (!authenticateRequest(authHeader, webhookSignature)) {
       throw createError({
@@ -60,7 +60,7 @@ export default defineEventHandler(async (event) => {
     // Rate limiting: 50 revalidation requests per hour per IP
     const now = Date.now();
     const rateLimit = rateLimitMap.get(clientIP);
-    
+
     if (rateLimit) {
       if (now < rateLimit.resetTime) {
         if (rateLimit.count >= 50) {
@@ -72,17 +72,17 @@ export default defineEventHandler(async (event) => {
         rateLimit.count++;
       } else {
         rateLimit.count = 1;
-        rateLimit.resetTime = now + (60 * 60 * 1000); // 1 hour
+        rateLimit.resetTime = now + 60 * 60 * 1000; // 1 hour
       }
     } else {
       rateLimitMap.set(clientIP, {
         count: 1,
-        resetTime: now + (60 * 60 * 1000),
+        resetTime: now + 60 * 60 * 1000,
       });
     }
 
     const body: RevalidateRequest = await readBody(event);
-    
+
     // Validate request body
     if (!body.type && !body.paths && !body.tags) {
       throw createError({
@@ -95,7 +95,8 @@ export default defineEventHandler(async (event) => {
     if (body.type && !REVALIDATION_CONFIGS[body.type as keyof typeof REVALIDATION_CONFIGS]) {
       throw createError({
         statusCode: 400,
-        statusMessage: 'Invalid content type. Valid types: documentation, marketing, storefront, blog',
+        statusMessage:
+          'Invalid content type. Valid types: documentation, marketing, storefront, blog',
       });
     }
 
@@ -137,7 +138,7 @@ export default defineEventHandler(async (event) => {
 
     // Check if it's a scheduled revalidation
     const isScheduled = body.source === 'cron' || body.source === 'scheduled';
-    
+
     // For Vercel deployment, use the revalidate function
     const revalidationResults = await performRevalidation({
       paths: pathsToRevalidate,
@@ -204,8 +205,7 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Cache-Control', 'no-cache, no-store, must-revalidate');
 
     return response;
-
-  } catch (error: any) {
+  } catch (error: Error) {
     console.error('Revalidation error:', {
       error: error.message,
       stack: error.stack,
@@ -226,7 +226,10 @@ export default defineEventHandler(async (event) => {
 });
 
 // Authentication helper
-function authenticateRequest(authHeader: string | undefined, webhookSignature: string | undefined): boolean {
+function authenticateRequest(
+  authHeader: string | undefined,
+  webhookSignature: string | undefined
+): boolean {
   // Check API key authentication
   if (authHeader) {
     const token = authHeader.replace('Bearer ', '');
@@ -235,7 +238,7 @@ function authenticateRequest(authHeader: string | undefined, webhookSignature: s
       process.env.CMS_WEBHOOK_KEY,
       process.env.VERCEL_REVALIDATION_KEY,
     ].filter(Boolean);
-    
+
     if (validApiKeys.includes(token)) {
       return true;
     }
@@ -278,7 +281,7 @@ async function performRevalidation(params: {
       // For now, we'll simulate the revalidation
       await simulateRevalidation(path, 'path');
       revalidatedPaths.push(path);
-    } catch (error: any) {
+    } catch (error: Error) {
       errors.push({
         path,
         error: error.message || 'Unknown error',
@@ -293,7 +296,7 @@ async function performRevalidation(params: {
       // For now, we'll simulate the revalidation
       await simulateRevalidation(tag, 'tag');
       revalidatedTags.push(tag);
-    } catch (error: any) {
+    } catch (error: Error) {
       errors.push({
         tag,
         error: error.message || 'Unknown error',
@@ -315,7 +318,7 @@ async function performRevalidation(params: {
 // Simulate revalidation (replace with actual Vercel functions)
 async function simulateRevalidation(target: string, type: 'path' | 'tag'): Promise<void> {
   // Simulate API call delay
-  await new Promise(resolve => setTimeout(resolve, Math.random() * 100 + 50));
+  await new Promise((resolve) => setTimeout(resolve, Math.random() * 100 + 50));
 
   // In production, this would be:
   // if (type === 'path') {
@@ -332,7 +335,7 @@ async function simulateRevalidation(target: string, type: 'path' | 'tag'): Promi
 async function storeRevalidationHistory(data: any): Promise<void> {
   // In production, store in your database
   // await db.revalidationHistory.create({ data });
-  
+
   // For now, just log
   console.debug('Revalidation history stored:', {
     type: data.type,

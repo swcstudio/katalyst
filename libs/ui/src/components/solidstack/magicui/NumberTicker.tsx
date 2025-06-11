@@ -1,5 +1,13 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, createEffect } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  type JSX,
+  createEffect,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface NumberTickerProps {
   class?: string;
@@ -31,7 +39,7 @@ export const NumberTicker: Component<NumberTickerProps> = (props) => {
   let timeoutId: number;
 
   const easeOutCubic = (t: number): number => {
-    return 1 - Math.pow(1 - t, 3);
+    return 1 - (1 - t) ** 3;
   };
 
   const formatNumber = (num: number): string => {
@@ -50,8 +58,8 @@ export const NumberTicker: Component<NumberTickerProps> = (props) => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / merged.duration, 1);
       const easedProgress = easeOutCubic(progress);
-      
-      const currentValue = startVal + (difference * easedProgress);
+
+      const currentValue = startVal + difference * easedProgress;
       setDisplayValue(currentValue);
 
       if (progress < 1) {
@@ -104,10 +112,13 @@ export const NumberTicker: Component<NumberTickerProps> = (props) => {
 
   return (
     <span
-      class={css({
-        fontVariantNumeric: 'tabular-nums',
-        fontFeatureSettings: '"tnum"',
-      }, merged.class)}
+      class={css(
+        {
+          fontVariantNumeric: 'tabular-nums',
+          fontFeatureSettings: '"tnum"',
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       {formatNumber(displayValue())}
@@ -123,13 +134,16 @@ export const NumberTickerDemo: Component<NumberTickerDemoProps> = (props) => {
   return (
     <NumberTicker
       value={100}
-      class={css({
-        whiteSpace: 'pre-wrap',
-        fontSize: '4rem',
-        fontWeight: 'medium',
-        letterSpacing: '-0.025em',
-        color: 'foreground',
-      }, props.class)}
+      class={css(
+        {
+          whiteSpace: 'pre-wrap',
+          fontSize: '4rem',
+          fontWeight: 'medium',
+          letterSpacing: '-0.025em',
+          color: 'foreground',
+        },
+        props.class
+      )}
     />
   );
 };
@@ -139,13 +153,16 @@ export const NumberTickerDecimalDemo: Component<NumberTickerDemoProps> = (props)
     <NumberTicker
       value={5.67}
       decimalPlaces={2}
-      class={css({
-        whiteSpace: 'pre-wrap',
-        fontSize: '4rem',
-        fontWeight: 'medium',
-        letterSpacing: '-0.025em',
-        color: 'foreground',
-      }, props.class)}
+      class={css(
+        {
+          whiteSpace: 'pre-wrap',
+          fontSize: '4rem',
+          fontWeight: 'medium',
+          letterSpacing: '-0.025em',
+          color: 'foreground',
+        },
+        props.class
+      )}
     />
   );
 };
@@ -155,13 +172,16 @@ export const NumberTickerStartValueDemo: Component<NumberTickerDemoProps> = (pro
     <NumberTicker
       value={100}
       startValue={80}
-      class={css({
-        whiteSpace: 'pre-wrap',
-        fontSize: '4rem',
-        fontWeight: 'medium',
-        letterSpacing: '-0.025em',
-        color: 'foreground',
-      }, props.class)}
+      class={css(
+        {
+          whiteSpace: 'pre-wrap',
+          fontSize: '4rem',
+          fontWeight: 'medium',
+          letterSpacing: '-0.025em',
+          color: 'foreground',
+        },
+        props.class
+      )}
     />
   );
 };

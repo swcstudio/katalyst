@@ -1,6 +1,6 @@
-import { z } from 'npm:zod';
-import { OpenAI } from 'npm:openai';
 import { verifyToken } from 'npm:@clerk/clerk-sdk-node';
+import { OpenAI } from 'npm:openai';
+import { z } from 'npm:zod';
 
 const aiRequestSchema = z.object({
   message: z.string().min(1).max(4000),
@@ -15,25 +15,33 @@ const aiRequestSchema = z.object({
     'performance',
     'troubleshooting',
     'code-generation',
-    'architecture-review'
+    'architecture-review',
   ]),
   conversationId: z.string().uuid().optional(),
-  attachments: z.array(z.object({
-    type: z.enum(['terraform', 'yaml', 'dockerfile', 'code', 'config']),
-    content: z.string(),
-    filename: z.string()
-  })).optional(),
-  preferences: z.object({
-    cloudProvider: z.enum(['aws', 'gcp', 'azure', 'digitalocean', 'ovhcloud']).default('aws'),
-    infraTool: z.enum(['terraform', 'pulumi', 'cloudformation', 'cdk']).default('terraform'),
-    orchestrator: z.enum(['kubernetes', 'docker-swarm', 'nomad']).default('kubernetes'),
-    responseFormat: z.enum(['conversational', 'code-only', 'detailed', 'quick']).default('conversational')
-  }).optional(),
-  streaming: z.boolean().default(true)
+  attachments: z
+    .array(
+      z.object({
+        type: z.enum(['terraform', 'yaml', 'dockerfile', 'code', 'config']),
+        content: z.string(),
+        filename: z.string(),
+      })
+    )
+    .optional(),
+  preferences: z
+    .object({
+      cloudProvider: z.enum(['aws', 'gcp', 'azure', 'digitalocean', 'ovhcloud']).default('aws'),
+      infraTool: z.enum(['terraform', 'pulumi', 'cloudformation', 'cdk']).default('terraform'),
+      orchestrator: z.enum(['kubernetes', 'docker-swarm', 'nomad']).default('kubernetes'),
+      responseFormat: z
+        .enum(['conversational', 'code-only', 'detailed', 'quick'])
+        .default('conversational'),
+    })
+    .optional(),
+  streaming: z.boolean().default(true),
 });
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const SYSTEM_PROMPTS = {
@@ -84,7 +92,7 @@ Provide production-ready YAML manifests with proper resource limits, security co
 - Real-time features and WebSocket implementation
 - Performance optimization and caching strategies
 
-Generate clean, maintainable, and well-documented code following industry best practices.`
+Generate clean, maintainable, and well-documented code following industry best practices.`,
 };
 
 export default defineEventHandler(async (event) => {
@@ -96,19 +104,19 @@ export default defineEventHandler(async (event) => {
     if (!authHeader?.startsWith('Bearer ')) {
       throw createError({
         statusCode: 401,
-        statusMessage: 'Authentication required'
+        statusMessage: 'Authentication required',
       });
     }
 
     const token = authHeader.substring(7);
     const payload = await verifyToken(token, {
-      issuer: `https://clerk.${process.env.CLERK_DOMAIN}`
+      issuer: `https://clerk.${process.env.CLERK_DOMAIN}`,
     });
 
     if (!payload.sub) {
       throw createError({
         statusCode: 401,
-        statusMessage: 'Invalid token'
+        statusMessage: 'Invalid token',
       });
     }
 
@@ -121,7 +129,7 @@ export default defineEventHandler(async (event) => {
     if (!userPermissions.includes('ai:access')) {
       throw createError({
         statusCode: 403,
-        statusMessage: 'AI access not available in your plan'
+        statusMessage: 'AI access not available in your plan',
       });
     }
 
@@ -133,18 +141,18 @@ export default defineEventHandler(async (event) => {
     if (currentUsage >= maxCalls) {
       throw createError({
         statusCode: 429,
-        statusMessage: `Daily AI limit reached (${maxCalls} calls). Upgrade your plan for more.`
+        statusMessage: `Daily AI limit reached (${maxCalls} calls). Upgrade your plan for more.`,
       });
     }
 
     // Get or create conversation
-    let conversation;
+    let conversation: any;
     if (validatedData.conversationId) {
       conversation = await getConversation(validatedData.conversationId, payload.sub);
       if (!conversation) {
         throw createError({
           statusCode: 404,
-          statusMessage: 'Conversation not found'
+          statusMessage: 'Conversation not found',
         });
       }
     } else {
@@ -153,12 +161,12 @@ export default defineEventHandler(async (event) => {
 
     // Build context-aware system prompt
     const systemPrompt = SYSTEM_PROMPTS[validatedData.context] || SYSTEM_PROMPTS.infrastructure;
-    
+
     // Prepare conversation history
     const messages = [
       { role: 'system', content: systemPrompt },
       ...conversation.messages.slice(-10), // Keep last 10 messages for context
-      { role: 'user', content: buildUserMessage(validatedData) }
+      { role: 'user', content: buildUserMessage(validatedData) },
     ];
 
     // Handle streaming response
@@ -174,30 +182,38 @@ export default defineEventHandler(async (event) => {
         temperature: 0.1,
         max_tokens: 2000,
         presence_penalty: 0.1,
-        frequency_penalty: 0.1
+        frequency_penalty: 0.1,
       });
 
       let fullResponse = '';
-      
+
       // Start streaming response
       const encoder = new TextEncoder();
       const responseStream = new ReadableStream({
         async start(controller) {
           try {
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({
-              type: 'start',
-              conversationId: conversation.id,
-              timestamp: new Date().toISOString()
-            })}\n\n`));
+            controller.enqueue(
+              encoder.encode(
+                `data: ${JSON.stringify({
+                  type: 'start',
+                  conversationId: conversation.id,
+                  timestamp: new Date().toISOString(),
+                })}\n\n`
+              )
+            );
 
             for await (const chunk of stream) {
               const content = chunk.choices[0]?.delta?.content;
               if (content) {
                 fullResponse += content;
-                controller.enqueue(encoder.encode(`data: ${JSON.stringify({
-                  type: 'content',
-                  content: content
-                })}\n\n`));
+                controller.enqueue(
+                  encoder.encode(
+                    `data: ${JSON.stringify({
+                      type: 'content',
+                      content: content,
+                    })}\n\n`
+                  )
+                );
               }
             }
 
@@ -205,7 +221,7 @@ export default defineEventHandler(async (event) => {
             await addMessageToConversation(conversation.id, {
               role: 'user',
               content: validatedData.message,
-              timestamp: new Date()
+              timestamp: new Date(),
             });
 
             await addMessageToConversation(conversation.id, {
@@ -213,7 +229,7 @@ export default defineEventHandler(async (event) => {
               content: fullResponse,
               timestamp: new Date(),
               context: validatedData.context,
-              tokens: estimateTokens(fullResponse)
+              tokens: estimateTokens(fullResponse),
             });
 
             await incrementAIUsage(rateLimitKey);
@@ -221,26 +237,34 @@ export default defineEventHandler(async (event) => {
               userId: payload.sub,
               context: validatedData.context,
               tokens: estimateTokens(fullResponse),
-              conversationId: conversation.id
+              conversationId: conversation.id,
             });
 
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({
-              type: 'end',
-              usage: {
-                tokens: estimateTokens(fullResponse),
-                remainingCalls: maxCalls - currentUsage - 1
-              }
-            })}\n\n`));
+            controller.enqueue(
+              encoder.encode(
+                `data: ${JSON.stringify({
+                  type: 'end',
+                  usage: {
+                    tokens: estimateTokens(fullResponse),
+                    remainingCalls: maxCalls - currentUsage - 1,
+                  },
+                })}\n\n`
+              )
+            );
 
             controller.close();
           } catch (error) {
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({
-              type: 'error',
-              error: 'Stream processing failed'
-            })}\n\n`));
+            controller.enqueue(
+              encoder.encode(
+                `data: ${JSON.stringify({
+                  type: 'error',
+                  error: 'Stream processing failed',
+                })}\n\n`
+              )
+            );
             controller.close();
           }
-        }
+        },
       });
 
       return responseStream;
@@ -253,7 +277,7 @@ export default defineEventHandler(async (event) => {
       temperature: 0.1,
       max_tokens: 2000,
       presence_penalty: 0.1,
-      frequency_penalty: 0.1
+      frequency_penalty: 0.1,
     });
 
     const responseContent = completion.choices[0].message.content;
@@ -263,7 +287,7 @@ export default defineEventHandler(async (event) => {
     await addMessageToConversation(conversation.id, {
       role: 'user',
       content: validatedData.message,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
 
     await addMessageToConversation(conversation.id, {
@@ -271,7 +295,7 @@ export default defineEventHandler(async (event) => {
       content: responseContent,
       timestamp: new Date(),
       context: validatedData.context,
-      tokens: tokensUsed
+      tokens: tokensUsed,
     });
 
     // Track usage
@@ -280,7 +304,7 @@ export default defineEventHandler(async (event) => {
       userId: payload.sub,
       context: validatedData.context,
       tokens: tokensUsed,
-      conversationId: conversation.id
+      conversationId: conversation.id,
     });
 
     return {
@@ -291,18 +315,17 @@ export default defineEventHandler(async (event) => {
         context: validatedData.context,
         usage: {
           tokens: tokensUsed,
-          remainingCalls: maxCalls - currentUsage - 1
+          remainingCalls: maxCalls - currentUsage - 1,
         },
-        suggestions: generateFollowUpSuggestions(validatedData.context, responseContent)
-      }
+        suggestions: generateFollowUpSuggestions(validatedData.context, responseContent),
+      },
     };
-
   } catch (error) {
     if (error instanceof z.ZodError) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Invalid request data',
-        data: error.errors
+        data: error.errors,
       });
     }
 
@@ -310,7 +333,7 @@ export default defineEventHandler(async (event) => {
 
     throw createError({
       statusCode: 500,
-      statusMessage: 'AI service temporarily unavailable'
+      statusMessage: 'AI service temporarily unavailable',
     });
   }
 });
@@ -343,7 +366,7 @@ async function getConversation(id: string, userId: string): Promise<any> {
     userId,
     messages: [],
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   };
 }
 
@@ -355,7 +378,7 @@ async function createConversation(userId: string, context: string): Promise<any>
     context,
     messages: [],
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   };
 }
 
@@ -366,18 +389,18 @@ async function addMessageToConversation(conversationId: string, message: any): P
 
 function buildUserMessage(data: any): string {
   let message = data.message;
-  
+
   if (data.attachments?.length > 0) {
     message += '\n\nAttached files:\n';
     data.attachments.forEach((attachment: any) => {
       message += `\n${attachment.filename} (${attachment.type}):\n${attachment.content}\n`;
     });
   }
-  
+
   if (data.preferences) {
     message += `\n\nPreferences: Cloud Provider: ${data.preferences.cloudProvider}, Infrastructure Tool: ${data.preferences.infraTool}, Orchestrator: ${data.preferences.orchestrator}`;
   }
-  
+
   return message;
 }
 
@@ -395,22 +418,22 @@ function generateFollowUpSuggestions(context: string, response: string): string[
       'How can I optimize costs for this setup?',
       'What monitoring should I add?',
       'How do I implement auto-scaling?',
-      'What security measures should I consider?'
+      'What security measures should I consider?',
     ],
     terraform: [
       'How do I manage state for this configuration?',
       'Can you create modules for reusability?',
       'How do I handle different environments?',
-      'What validation rules should I add?'
+      'What validation rules should I add?',
     ],
     kubernetes: [
       'How do I set up monitoring for these resources?',
       'What RBAC policies do I need?',
       'How can I optimize resource usage?',
-      'How do I implement blue-green deployments?'
-    ]
+      'How do I implement blue-green deployments?',
+    ],
   };
-  
+
   return suggestions[context as keyof typeof suggestions] || suggestions.infrastructure;
 }
 

@@ -1,12 +1,20 @@
-import { Component, createSignal, onMount, onCleanup, For, Show, createEffect } from 'solid-js';
+import {
+  type Component,
+  For,
+  Show,
+  createEffect,
+  createSignal,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 import { css } from '../../../../../styled-system/css';
-import { useBlogSection, BlogPost, BlogSection } from '../state/useBlogSection';
-import { BlurFade } from '../../../magicui/BlurFade';
-import { TextAnimate } from '../../../magicui/TextAnimate';
 import { BackgroundBeams } from '../../../aceternity/core/BackgroundBeams';
 import { Spotlight } from '../../../aceternity/core/Spotlight';
-import { Meteors } from '../../../magicui/Meteors';
+import { BlurFade } from '../../../magicui/BlurFade';
 import { BorderBeam } from '../../../magicui/BorderBeam';
+import { Meteors } from '../../../magicui/Meteors';
+import { TextAnimate } from '../../../magicui/TextAnimate';
+import { type BlogPost, type BlogSection, useBlogSection } from '../state/useBlogSection';
 
 export interface BlogOverlayProps {
   blogData: BlogSection;
@@ -35,7 +43,7 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     },
     onAnimationComplete: () => {
       console.log('Blog overlay animation completed');
-    }
+    },
   });
 
   onMount(() => {
@@ -68,7 +76,7 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     backgroundColor: 'gray.900',
     paddingY: { base: '24', sm: '32' },
     overflow: 'hidden',
-    minHeight: '100vh'
+    minHeight: '100vh',
   });
 
   const innerStyles = css({
@@ -76,14 +84,14 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     maxWidth: '7xl',
     paddingX: { base: '6', lg: '8' },
     position: 'relative',
-    zIndex: '10'
+    zIndex: '10',
   });
 
   const headerStyles = css({
     marginX: 'auto',
     maxWidth: '2xl',
     textAlign: 'center',
-    marginBottom: '16'
+    marginBottom: '16',
   });
 
   const titleStyles = css({
@@ -92,7 +100,7 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     letterSpacing: 'tight',
     color: 'white',
     lineHeight: 'tight',
-    textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)'
+    textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
   });
 
   const subtitleStyles = css({
@@ -100,7 +108,7 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     fontSize: { base: 'lg', sm: 'xl' },
     lineHeight: '8',
     color: 'gray.300',
-    textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)'
+    textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',
   });
 
   const gridStyles = css({
@@ -110,7 +118,7 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     maxWidth: '2xl',
     gridTemplateColumns: { base: '1', lg: 'repeat(3, minmax(0, 1fr))' },
     gap: { base: '8', lg: '8' },
-    autoRows: 'fr'
+    autoRows: 'fr',
   });
 
   const articleStyles = css({
@@ -129,8 +137,8 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     transition: 'all 0.5s ease',
     '&:hover': {
       transform: 'scale(1.02) translateY(-4px)',
-      boxShadow: '0 25px 50px rgba(0, 0, 0, 0.5)'
-    }
+      boxShadow: '0 25px 50px rgba(0, 0, 0, 0.5)',
+    },
   });
 
   const imageStyles = css({
@@ -140,15 +148,16 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     width: 'full',
     height: 'full',
     objectFit: 'cover',
-    transition: 'all 0.5s ease'
+    transition: 'all 0.5s ease',
   });
 
   const gradientOverlayStyles = css({
     position: 'absolute',
     inset: '0',
     zIndex: '-10',
-    background: 'linear-gradient(to top, rgba(17, 24, 39, 0.9) 0%, rgba(17, 24, 39, 0.4) 40%, transparent 100%)',
-    transition: 'all 0.3s ease'
+    background:
+      'linear-gradient(to top, rgba(17, 24, 39, 0.9) 0%, rgba(17, 24, 39, 0.4) 40%, transparent 100%)',
+    transition: 'all 0.3s ease',
   });
 
   const ringOverlayStyles = css({
@@ -158,7 +167,7 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     borderRadius: '2xl',
     ring: '1px',
     ringColor: 'gray.900/10',
-    ringInset: true
+    ringInset: true,
   });
 
   const metaStyles = css({
@@ -170,20 +179,20 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     fontSize: 'sm',
     lineHeight: '6',
     color: 'gray.300',
-    marginBottom: '4'
+    marginBottom: '4',
   });
 
   const dateStyles = css({
     marginRight: '8',
     color: 'gray.300',
-    textShadow: '0 1px 3px rgba(0, 0, 0, 0.7)'
+    textShadow: '0 1px 3px rgba(0, 0, 0, 0.7)',
   });
 
   const authorSectionStyles = css({
     marginLeft: '-4',
     display: 'flex',
     alignItems: 'center',
-    gap: 'x-4'
+    gap: 'x-4',
   });
 
   const separatorStyles = css({
@@ -191,12 +200,12 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     width: '0.5',
     height: '0.5',
     flexShrink: '0',
-    fill: 'white/50'
+    fill: 'white/50',
   });
 
   const authorInfoStyles = css({
     display: 'flex',
-    gap: 'x-2.5'
+    gap: 'x-2.5',
   });
 
   const avatarStyles = css({
@@ -206,13 +215,13 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     borderRadius: 'full',
     backgroundColor: 'white/10',
     ring: '2px',
-    ringColor: 'white/20'
+    ringColor: 'white/20',
   });
 
   const authorNameStyles = css({
     color: 'gray.200',
     fontWeight: 'medium',
-    textShadow: '0 1px 3px rgba(0, 0, 0, 0.7)'
+    textShadow: '0 1px 3px rgba(0, 0, 0, 0.7)',
   });
 
   const titleLinkStyles = css({
@@ -224,20 +233,20 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)',
     transition: 'all 0.3s ease',
     '&:hover': {
-      color: 'gray.200'
-    }
+      color: 'gray.200',
+    },
   });
 
   const linkOverlayStyles = css({
     position: 'absolute',
-    inset: '0'
+    inset: '0',
   });
 
   const backgroundBeamsStyles = css({
     position: 'absolute',
     inset: '0',
     opacity: '0.1',
-    zIndex: '0'
+    zIndex: '0',
   });
 
   const spotlightStyles = css({
@@ -247,7 +256,7 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     width: 'full',
     height: '169',
     opacity: '0.3',
-    zIndex: '1'
+    zIndex: '1',
   });
 
   const meteorContainerStyles = css({
@@ -255,7 +264,7 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
     inset: '0',
     overflow: 'hidden',
     pointerEvents: 'none',
-    borderRadius: '2xl'
+    borderRadius: '2xl',
   });
 
   return (
@@ -277,19 +286,14 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
         {/* Header Section */}
         <div class={headerStyles}>
           <BlurFade delay={0.1} inView={isVisible()}>
-            <TextAnimate
-              animation="slideUp"
-              class={titleStyles}
-            >
+            <TextAnimate animation="slideUp" class={titleStyles}>
               {blogSection.blogData.title}
             </TextAnimate>
           </BlurFade>
-          
+
           <Show when={blogSection.blogData.subtitle}>
             <BlurFade delay={0.2} inView={isVisible()}>
-              <p class={subtitleStyles}>
-                {blogSection.blogData.subtitle}
-              </p>
+              <p class={subtitleStyles}>{blogSection.blogData.subtitle}</p>
             </BlurFade>
           </Show>
         </div>
@@ -298,12 +302,12 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
         <div class={gridStyles}>
           <For each={blogSection.paginatedPosts}>
             {(post, index) => (
-              <BlurFade 
-                delay={0.4 + (index() * (props.staggerDelay || 0.2))} 
+              <BlurFade
+                delay={0.4 + index() * (props.staggerDelay || 0.2)}
                 inView={isVisible()}
                 duration={props.animationDuration || 1.0}
               >
-                <article 
+                <article
                   class={articleStyles}
                   onMouseEnter={() => {
                     blogSection.setBlogHover(String(post.id));
@@ -314,28 +318,31 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
                 >
                   {/* Background Image */}
                   <Show when={post.imageUrl}>
-                    <img 
-                      alt={post.title} 
-                      src={post.imageUrl} 
+                    <img
+                      alt={post.title}
+                      src={post.imageUrl}
                       class={imageStyles}
                       style={{
-                        transform: blogSection.hoveredBlogId === String(post.id) 
-                          ? 'scale(1.1)' 
-                          : 'scale(1.05)',
-                        filter: blogSection.hoveredBlogId === String(post.id)
-                          ? 'brightness(1.1) contrast(1.1)'
-                          : 'brightness(0.9) contrast(1.05)'
+                        transform:
+                          blogSection.hoveredBlogId === String(post.id)
+                            ? 'scale(1.1)'
+                            : 'scale(1.05)',
+                        filter:
+                          blogSection.hoveredBlogId === String(post.id)
+                            ? 'brightness(1.1) contrast(1.1)'
+                            : 'brightness(0.9) contrast(1.05)',
                       }}
                     />
                   </Show>
 
                   {/* Gradient Overlay */}
-                  <div 
+                  <div
                     class={gradientOverlayStyles}
                     style={{
-                      background: blogSection.hoveredBlogId === String(post.id)
-                        ? 'linear-gradient(to top, rgba(17, 24, 39, 0.95) 0%, rgba(17, 24, 39, 0.3) 50%, transparent 100%)'
-                        : 'linear-gradient(to top, rgba(17, 24, 39, 0.9) 0%, rgba(17, 24, 39, 0.4) 40%, transparent 100%)'
+                      background:
+                        blogSection.hoveredBlogId === String(post.id)
+                          ? 'linear-gradient(to top, rgba(17, 24, 39, 0.95) 0%, rgba(17, 24, 39, 0.3) 50%, transparent 100%)'
+                          : 'linear-gradient(to top, rgba(17, 24, 39, 0.9) 0%, rgba(17, 24, 39, 0.4) 40%, transparent 100%)',
                     }}
                   />
 
@@ -346,9 +353,9 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
                     <div class={meteorContainerStyles}>
                       <Meteors number={5} />
                     </div>
-                    <BorderBeam 
-                      size={400} 
-                      duration={3} 
+                    <BorderBeam
+                      size={400}
+                      duration={3}
                       delay={0}
                       borderWidth={1}
                       colorFrom="#60a5fa"
@@ -367,7 +374,11 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
                           <circle r={1} cx={1} cy={1} />
                         </svg>
                         <div class={authorInfoStyles}>
-                          <img alt={post.author.name} src={post.author.imageUrl} class={avatarStyles} />
+                          <img
+                            alt={post.author.name}
+                            src={post.author.imageUrl}
+                            class={avatarStyles}
+                          />
                           <span class={authorNameStyles}>{post.author.name}</span>
                         </div>
                       </div>
@@ -377,10 +388,7 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
                   <h3 class={titleLinkStyles}>
                     <a href={post.href}>
                       <span class={linkOverlayStyles} />
-                      <TextAnimate
-                        animation="slideUp"
-                        delay={0.6 + (index() * 0.1)}
-                      >
+                      <TextAnimate animation="slideUp" delay={0.6 + index() * 0.1}>
                         {post.title}
                       </TextAnimate>
                     </a>
@@ -394,13 +402,15 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
         {/* Pagination */}
         <Show when={blogSection.totalPages > 1}>
           <BlurFade delay={1.2} inView={isVisible()}>
-            <div class={css({
-              marginTop: '20',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '6'
-            })}>
+            <div
+              class={css({
+                marginTop: '20',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '6',
+              })}
+            >
               <button
                 disabled={!blogSection.hasPrevPage}
                 onClick={() => blogSection.prevPage()}
@@ -420,30 +430,32 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
                   '&:hover:not(:disabled)': {
                     backgroundColor: 'white/20',
                     borderColor: 'white/30',
-                    transform: 'translateY(-1px)'
+                    transform: 'translateY(-1px)',
                   },
                   '&:disabled': {
                     opacity: '0.4',
-                    cursor: 'not-allowed'
-                  }
+                    cursor: 'not-allowed',
+                  },
                 })}
               >
                 ← Previous
               </button>
-              
-              <span class={css({
-                paddingX: '6',
-                paddingY: '3',
-                fontSize: 'sm',
-                fontWeight: 'medium',
-                color: 'white',
-                backgroundColor: 'white/20',
-                borderRadius: 'lg',
-                backdropFilter: 'blur(4px)'
-              })}>
+
+              <span
+                class={css({
+                  paddingX: '6',
+                  paddingY: '3',
+                  fontSize: 'sm',
+                  fontWeight: 'medium',
+                  color: 'white',
+                  backgroundColor: 'white/20',
+                  borderRadius: 'lg',
+                  backdropFilter: 'blur(4px)',
+                })}
+              >
                 {blogSection.currentPage} of {blogSection.totalPages}
               </span>
-              
+
               <button
                 disabled={!blogSection.hasNextPage}
                 onClick={() => blogSection.nextPage()}
@@ -463,12 +475,12 @@ export const BlogOverlay: Component<BlogOverlayProps> = (props) => {
                   '&:hover:not(:disabled)': {
                     backgroundColor: 'white/20',
                     borderColor: 'white/30',
-                    transform: 'translateY(-1px)'
+                    transform: 'translateY(-1px)',
                   },
                   '&:disabled': {
                     opacity: '0.4',
-                    cursor: 'not-allowed'
-                  }
+                    cursor: 'not-allowed',
+                  },
                 })}
               >
                 Next →

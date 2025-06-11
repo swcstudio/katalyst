@@ -1,9 +1,20 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, createEffect, For, Show, createMemo } from 'solid-js';
+import {
+  type Component,
+  For,
+  type JSX,
+  Show,
+  createEffect,
+  createMemo,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 import { css } from '../../../../../styled-system/css';
-import { useTestimonialSection, Testimonial } from '../state/useTestimonialSection';
 import { BlurFade } from '../../../magicui/BlurFade';
-import { TextAnimate } from '../../../magicui/TextAnimate';
 import { DotPattern } from '../../../magicui/DotPattern';
+import { TextAnimate } from '../../../magicui/TextAnimate';
+import { type Testimonial, useTestimonialSection } from '../state/useTestimonialSection';
 
 export interface TestimonialSimpleProps {
   className?: string;
@@ -42,7 +53,7 @@ export const TestimonialSimple: Component<TestimonialSimpleProps> = (props) => {
       id: 'testimonial-simple',
       testimonials: [merged.testimonial],
       layout: 'centered',
-      theme: merged.theme
+      theme: merged.theme,
     },
     theme: merged.theme,
     variant: merged.variant,
@@ -51,7 +62,7 @@ export const TestimonialSimple: Component<TestimonialSimpleProps> = (props) => {
       if (merged.onTestimonialSelect) {
         merged.onTestimonialSelect(merged.testimonial);
       }
-    }
+    },
   });
 
   onMount(() => {
@@ -85,20 +96,22 @@ export const TestimonialSimple: Component<TestimonialSimpleProps> = (props) => {
       px: '6',
       py: '24',
       sm: { py: '32' },
-      lg: { px: '8' }
+      lg: { px: '8' },
     });
 
-    const themeClasses = merged.theme === 'dark'
-      ? css({ bg: 'gray.900', color: 'white' })
-      : css({ bg: 'white', color: 'gray.900' });
+    const themeClasses =
+      merged.theme === 'dark'
+        ? css({ bg: 'gray.900', color: 'white' })
+        : css({ bg: 'white', color: 'gray.900' });
 
     const variantClasses = (() => {
       switch (merged.variant) {
         case 'gradient':
           return css({
-            bg: merged.theme === 'dark' 
-              ? 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)'
-              : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)'
+            bg:
+              merged.theme === 'dark'
+                ? 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)'
+                : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
           });
         default:
           return '';
@@ -110,26 +123,25 @@ export const TestimonialSimple: Component<TestimonialSimpleProps> = (props) => {
 
   const StarRating: Component<{ rating: number }> = (ratingProps) => {
     const stars = Array.from({ length: 5 }, (_, i) => i + 1);
-    
+
     return (
-      <div class={css({
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '1',
-        color: merged.theme === 'dark' ? 'yellow.400' : 'indigo.600'
-      })}>
+      <div
+        class={css({
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '1',
+          color: merged.theme === 'dark' ? 'yellow.400' : 'indigo.600',
+        })}
+      >
         <span class={css({ srOnly: true })}>{ratingProps.rating} out of 5 stars</span>
         <For each={stars}>
           {(star, index) => (
-            <BlurFade 
-              delay={merged.animationDelay + (index() * 0.05)}
-              inView={isIntersecting()}
-            >
+            <BlurFade delay={merged.animationDelay + index() * 0.05} inView={isIntersecting()}>
               <svg
                 class={css({
                   w: '5',
                   h: '5',
-                  flexShrink: '0'
+                  flexShrink: '0',
                 })}
                 fill={star <= ratingProps.rating ? 'currentColor' : 'none'}
                 stroke={star <= ratingProps.rating ? 'currentColor' : 'currentColor'}
@@ -154,48 +166,55 @@ export const TestimonialSimple: Component<TestimonialSimpleProps> = (props) => {
           className={css({
             position: 'absolute',
             inset: '0',
-            opacity: merged.theme === 'dark' ? '0.1' : '0.05'
+            opacity: merged.theme === 'dark' ? '0.1' : '0.05',
           })}
         />
       </Show>
 
       <Show when={merged.backgroundPattern === 'radial'}>
-        <div class={css({
-          position: 'absolute',
-          inset: '0',
-          '-z': '10',
-          bg: merged.theme === 'dark'
-            ? 'radial-gradient(45rem 50rem at top, rgba(79, 70, 229, 0.1), transparent)'
-            : 'radial-gradient(45rem 50rem at top, rgba(99, 102, 241, 0.1), white)',
-          opacity: '0.2'
-        })} />
+        <div
+          class={css({
+            position: 'absolute',
+            inset: '0',
+            '-z': '10',
+            bg:
+              merged.theme === 'dark'
+                ? 'radial-gradient(45rem 50rem at top, rgba(79, 70, 229, 0.1), transparent)'
+                : 'radial-gradient(45rem 50rem at top, rgba(99, 102, 241, 0.1), white)',
+            opacity: '0.2',
+          })}
+        />
       </Show>
 
       <Show when={merged.variant === 'gradient'}>
-        <div class={css({
-          position: 'absolute',
-          insetY: '0',
-          right: '1/2',
-          '-z': '10',
-          mr: '16',
-          w: '200%',
-          originBottomLeft: true,
-          skewX: '-30deg',
-          bg: merged.theme === 'dark' ? 'gray.800' : 'white',
-          shadow: 'xl',
-          ring: '1',
-          ringColor: merged.theme === 'dark' ? 'indigo.400/10' : 'indigo.600/10',
-          sm: { mr: '28' },
-          lg: { mr: '0' },
-          xl: { mr: '16', originCenter: true }
-        })} />
+        <div
+          class={css({
+            position: 'absolute',
+            insetY: '0',
+            right: '1/2',
+            '-z': '10',
+            mr: '16',
+            w: '200%',
+            originBottomLeft: true,
+            skewX: '-30deg',
+            bg: merged.theme === 'dark' ? 'gray.800' : 'white',
+            shadow: 'xl',
+            ring: '1',
+            ringColor: merged.theme === 'dark' ? 'indigo.400/10' : 'indigo.600/10',
+            sm: { mr: '28' },
+            lg: { mr: '0' },
+            xl: { mr: '16', originCenter: true },
+          })}
+        />
       </Show>
 
-      <div class={css({
-        mx: 'auto',
-        maxW: '2xl',
-        lg: { maxW: '4xl' }
-      })}>
+      <div
+        class={css({
+          mx: 'auto',
+          maxW: '2xl',
+          lg: { maxW: '4xl' },
+        })}
+      >
         <figure class={css({ mx: 'auto', maxW: '2xl' })}>
           {/* Company Logo */}
           <Show when={merged.showLogo && (merged.companyLogo || merged.testimonial.author.logoUrl)}>
@@ -205,7 +224,7 @@ export const TestimonialSimple: Component<TestimonialSimpleProps> = (props) => {
                 alt="Company logo"
                 class={css({
                   mx: 'auto',
-                  h: '12'
+                  h: '12',
                 })}
               />
             </BlurFade>
@@ -219,18 +238,19 @@ export const TestimonialSimple: Component<TestimonialSimpleProps> = (props) => {
           </Show>
 
           {/* Quote */}
-          <blockquote class={css({
-            mt: '10',
-            textAlign: 'center',
-            fontSize: 'xl',
-            sm: { fontSize: '2xl' },
-            fontWeight: 'semibold',
-            letterSpacing: 'tight',
-            color: merged.theme === 'dark' ? 'white' : 'gray.900',
-            lineHeight: '8',
-            sm: { lineHeight: '9' }
-          })}>
-            <TextAnimate 
+          <blockquote
+            class={css({
+              mt: '10',
+              textAlign: 'center',
+              fontSize: 'xl',
+              fontWeight: 'semibold',
+              letterSpacing: 'tight',
+              color: merged.theme === 'dark' ? 'white' : 'gray.900',
+              lineHeight: '8',
+              sm: { lineHeight: '9' },
+            })}
+          >
+            <TextAnimate
               text={`"${merged.testimonial.body}"`}
               delay={merged.animationDelay + 0.3}
             />
@@ -248,40 +268,54 @@ export const TestimonialSimple: Component<TestimonialSimpleProps> = (props) => {
                     w: merged.variant === 'minimal' ? '10' : '12',
                     h: merged.variant === 'minimal' ? '10' : '12',
                     rounded: 'full',
-                    bg: merged.theme === 'dark' ? 'gray.800' : 'gray.50'
+                    bg: merged.theme === 'dark' ? 'gray.800' : 'gray.50',
                   })}
                 />
               </Show>
-              
-              <div class={css({
-                mt: '4',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                spaceX: '3',
-                fontSize: merged.variant === 'minimal' ? 'sm' : 'base',
-                textAlign: 'center'
-              })}>
-                <div class={css({
-                  fontWeight: 'semibold',
-                  color: merged.theme === 'dark' ? 'white' : 'gray.900'
-                })}>
+
+              <div
+                class={css({
+                  mt: '4',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  spaceX: '3',
+                  fontSize: merged.variant === 'minimal' ? 'sm' : 'base',
+                  textAlign: 'center',
+                })}
+              >
+                <div
+                  class={css({
+                    fontWeight: 'semibold',
+                    color: merged.theme === 'dark' ? 'white' : 'gray.900',
+                  })}
+                >
                   {merged.testimonial.author.name}
                 </div>
-                
+
                 <Show when={merged.testimonial.author.title || merged.testimonial.author.company}>
-                  <svg width={3} height={3} viewBox="0 0 2 2" aria-hidden="true" class={css({
-                    fill: merged.theme === 'dark' ? 'white' : 'gray.900'
-                  })}>
+                  <svg
+                    width={3}
+                    height={3}
+                    viewBox="0 0 2 2"
+                    aria-hidden="true"
+                    class={css({
+                      fill: merged.theme === 'dark' ? 'white' : 'gray.900',
+                    })}
+                  >
                     <circle r={1} cx={1} cy={1} />
                   </svg>
-                  
-                  <div class={css({
-                    color: merged.theme === 'dark' ? 'gray.400' : 'gray.600'
-                  })}>
+
+                  <div
+                    class={css({
+                      color: merged.theme === 'dark' ? 'gray.400' : 'gray.600',
+                    })}
+                  >
                     {merged.testimonial.author.title}
-                    <Show when={merged.testimonial.author.title && merged.testimonial.author.company}>
-                      {" of "}
+                    <Show
+                      when={merged.testimonial.author.title && merged.testimonial.author.company}
+                    >
+                      {' of '}
                     </Show>
                     {merged.testimonial.author.company}
                   </div>
@@ -307,11 +341,12 @@ export const TestimonialSimpleDemo: Component<TestimonialSimpleDemoProps> = (pro
       name: 'Judith Black',
       title: 'CEO',
       company: 'Workcation',
-      imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-600.svg'
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-600.svg',
     },
     rating: 5,
-    category: 'enterprise'
+    category: 'enterprise',
   };
 
   return (
@@ -336,10 +371,11 @@ export const TestimonialSimpleGradientDemo: Component<TestimonialSimpleDemoProps
       name: 'Judith Black',
       title: 'CEO',
       company: 'Workcation',
-      imageUrl: 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80'
+      imageUrl:
+        'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
     },
     rating: 5,
-    category: 'enterprise'
+    category: 'enterprise',
   };
 
   return (

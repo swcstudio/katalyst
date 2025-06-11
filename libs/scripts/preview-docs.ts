@@ -8,9 +8,9 @@ try {
     port: 4003,
     config: {
       integrations: ['@astrojs/solid-js', '@astrojs/mdx'],
-    }
+    },
   });
-  
+
   console.log('Docs preview server started on http://localhost:4003');
 } catch (error) {
   console.error('Failed to start Docs preview server:', error);

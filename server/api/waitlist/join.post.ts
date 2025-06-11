@@ -1,5 +1,5 @@
-import { defineEventHandler, readBody, createError, setHeader, getHeader, getClientIP } from 'h3';
 import type { WaitlistRequest, WaitlistResponse } from '@sse/types';
+import { createError, defineEventHandler, getClientIP, getHeader, readBody, setHeader } from 'h3';
 
 // Available software products for waitlist
 const AVAILABLE_PRODUCTS = {
@@ -44,11 +44,11 @@ export default defineEventHandler(async (event) => {
   try {
     const clientIP = getClientIP(event);
     const userAgent = getHeader(event, 'user-agent') || '';
-    
+
     // Rate limiting: 3 waitlist joins per hour per IP
     const now = Date.now();
     const rateLimit = rateLimitMap.get(clientIP);
-    
+
     if (rateLimit) {
       if (now < rateLimit.resetTime) {
         if (rateLimit.count >= 3) {
@@ -60,17 +60,17 @@ export default defineEventHandler(async (event) => {
         rateLimit.count++;
       } else {
         rateLimit.count = 1;
-        rateLimit.resetTime = now + (60 * 60 * 1000); // 1 hour
+        rateLimit.resetTime = now + 60 * 60 * 1000; // 1 hour
       }
     } else {
       rateLimitMap.set(clientIP, {
         count: 1,
-        resetTime: now + (60 * 60 * 1000),
+        resetTime: now + 60 * 60 * 1000,
       });
     }
 
     const body: WaitlistRequest = await readBody(event);
-    
+
     // Validate required fields
     if (!body.email || !body.productId) {
       throw createError({
@@ -168,7 +168,6 @@ export default defineEventHandler(async (event) => {
       // const existingSubscription = await db.waitlist.findFirst({
       //   where: { email: waitlistData.email, productId: waitlistData.productId }
       // });
-      
       // if (existingSubscription) {
       //   return {
       //     success: true,
@@ -189,10 +188,10 @@ export default defineEventHandler(async (event) => {
       //   data: waitlistData,
       // });
       // waitlistPosition = result.position;
-      
+
       // For now, generate a mock position
       waitlistPosition = Math.floor(Math.random() * 500) + 1;
-      
+
       console.info('Waitlist subscription stored:', {
         email: waitlistData.email,
         productId: waitlistData.productId,
@@ -255,8 +254,7 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Access-Control-Allow-Credentials', 'true');
 
     return response;
-
-  } catch (error: any) {
+  } catch (error: Error) {
     // Log error for monitoring
     console.error('Waitlist error:', {
       error: error.message,
@@ -311,7 +309,7 @@ async function sendWaitlistConfirmationEmail(params: {
         <p><strong>What happens next?</strong></p>
         <ul>
           <li>We'll keep you updated on development progress</li>
-          <li>${params.earlyAccess ? 'You\'ll get early access before public launch' : 'You\'ll be notified when we launch'}</li>
+          <li>${params.earlyAccess ? "You'll get early access before public launch" : "You'll be notified when we launch"}</li>
           <li>Exclusive waitlist member perks and discounts</li>
           <li>Priority support and onboarding</li>
         </ul>
@@ -378,11 +376,7 @@ function getWaitlistPerks(tier: string): string[] {
         'Email support',
       ];
     default:
-      return [
-        '10% discount on launch',
-        'Launch day notification',
-        'Community access',
-      ];
+      return ['10% discount on launch', 'Launch day notification', 'Community access'];
   }
 }
 

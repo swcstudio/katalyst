@@ -8,7 +8,7 @@ export default defineConfig({
       bundle: false,
       dts: true,
       source: './src/index.ts',
-      output: './dist'
+      output: './dist',
     },
   ],
 });

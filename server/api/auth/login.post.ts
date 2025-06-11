@@ -1,6 +1,6 @@
-import { defineEventHandler, readBody, createError } from 'h3';
 import { createClerkClient } from '@clerk/backend';
-import type { SignInRequest, AuthResponse } from '@sse/types';
+import type { AuthResponse, SignInRequest } from '@sse/types';
+import { createError, defineEventHandler, readBody } from 'h3';
 
 const clerk = createClerkClient({
   secretKey: process.env.CLERK_SECRET_KEY!,
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const body: SignInRequest = await readBody(event);
-    
+
     // Validate required fields
     if (!body.emailAddress || !body.password) {
       throw createError({
@@ -90,8 +90,7 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Access-Control-Allow-Credentials', 'true');
 
     return response;
-
-  } catch (error: any) {
+  } catch (error: Error) {
     // Log error for monitoring (use your preferred logging service)
     console.error('Login error:', {
       error: error.message,

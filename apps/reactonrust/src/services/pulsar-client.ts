@@ -12,7 +12,7 @@ export interface PulsarConfig {
 
 export class PulsarClient {
   private config: PulsarConfig;
-  private connected: boolean = false;
+  private connected = false;
 
   constructor(config: PulsarConfig) {
     this.config = config;
@@ -37,7 +37,7 @@ export class PulsarClient {
     const message: PulsarMessage = {
       topic,
       payload,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     console.log(`Publishing message to topic: ${topic}`, message);
@@ -49,12 +49,12 @@ export class PulsarClient {
     }
 
     console.log(`Subscribing to topic: ${topic}`);
-    
+
     setTimeout(() => {
       const mockMessage: PulsarMessage = {
         topic,
         payload: { type: 'welcome', data: 'Hello from React on Rust!' },
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
       callback(mockMessage);
     }, 1000);

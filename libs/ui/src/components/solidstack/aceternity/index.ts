@@ -1,7 +1,10 @@
 export { SpotlightPreview } from './SpotlightPreview';
 export { ShootingStarsAndStarsBackgroundDemo } from './ShootingStarsDemo';
 export { SparklesPreview, SparklesFullPagePreview } from './SparklesPreview';
-export { TextGenerateEffectDemo, TextGenerateEffectDemoWithOptions } from './TextGenerateEffectDemo';
+export {
+  TextGenerateEffectDemo,
+  TextGenerateEffectDemoWithOptions,
+} from './TextGenerateEffectDemo';
 export { TypewriterEffectSmoothDemo, TypewriterEffectDemo } from './TypewriterEffectDemo';
 export { StickyBannerDemo } from './StickyBannerDemo';
 export { SignupFormDemo } from './SignupFormDemo';
@@ -23,26 +26,40 @@ export { VortexDemo, VortexDemoSecond } from './VortexDemo';
 export { WavyBackgroundDemo } from './WavyBackgroundDemo';
 export { WobbleCardDemo } from './WobbleCardDemo';
 export { WorldMapDemo } from './WorldMapDemo';
-export { FeaturesSectionDemo, SkeletonOne, SkeletonTwo, SkeletonThree, SkeletonFour } from './FeaturesSectionDemo';
+export {
+  FeaturesSectionDemo,
+  SkeletonOne,
+  SkeletonTwo,
+  SkeletonThree,
+  SkeletonFour,
+} from './FeaturesSectionDemo';
 export { GridFeaturesSectionDemo, Grid, GridPattern } from './GridFeaturesSectionDemo';
 export { IconFeaturesSectionDemo } from './IconFeaturesSectionDemo';
-export { CardDemo, BackgroundOverlayCardDemo, AuthorCardDemo, Card, CardTitle, CardDescription, CardSkeletonContainer } from './CardDemo';
+export {
+  CardDemo,
+  BackgroundOverlayCardDemo,
+  AuthorCardDemo,
+  Card,
+  CardTitle,
+  CardDescription,
+  CardSkeletonContainer,
+} from './CardDemo';
 export { HeroSectionDemo } from './HeroSectionDemo';
 
 // Core Components
-export { 
-  SparklesCore, 
-  ShootingStars, 
-  StarsBackground, 
-  TextGenerateEffect 
+export {
+  SparklesCore,
+  ShootingStars,
+  StarsBackground,
+  TextGenerateEffect,
 } from './core';
 
 // Motion Utilities
-export { 
-  Motion, 
-  Stagger, 
-  ScrollReveal, 
-  Parallax, 
+export {
+  Motion,
+  Stagger,
+  ScrollReveal,
+  Parallax,
   HoverMotion,
   motionPresets,
   animationVariants,
@@ -53,5 +70,5 @@ export {
   createStagger,
   createSpring,
   animateElement,
-  observeInView
+  observeInView,
 } from './core/motion';

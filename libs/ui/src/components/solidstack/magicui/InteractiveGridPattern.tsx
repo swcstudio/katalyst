@@ -1,5 +1,5 @@
-import { Component, onMount, createSignal, For, createEffect, onCleanup } from "solid-js";
-import { css } from "../../styled-system/css";
+import { type Component, For, createEffect, createSignal, onCleanup, onMount } from 'solid-js';
+import { css } from '../../styled-system/css';
 
 interface InteractiveGridPatternProps {
   className?: string;
@@ -26,24 +26,24 @@ export const InteractiveGridPattern: Component<InteractiveGridPatternProps> = (p
   const [mounted, setMounted] = createSignal(false);
   const [gridSquares, setGridSquares] = createSignal<GridSquare[]>([]);
   const [containerSize, setContainerSize] = createSignal({ width: 800, height: 600 });
-  
+
   let containerRef: SVGSVGElement | undefined;
 
   const width = () => props.width ?? 40;
   const height = () => props.height ?? 40;
   const x = () => props.x ?? -1;
   const y = () => props.y ?? -1;
-  const strokeDasharray = () => props.strokeDasharray ?? "0";
+  const strokeDasharray = () => props.strokeDasharray ?? '0';
   const squares = () => props.squares ?? [20, 20];
-  const squaresClassName = () => props.squaresClassName ?? "hover:fill-blue-500";
-  const fill = () => props.fill ?? "none";
-  const stroke = () => props.stroke ?? "#e5e7eb";
+  const squaresClassName = () => props.squaresClassName ?? 'hover:fill-blue-500';
+  const fill = () => props.fill ?? 'none';
+  const stroke = () => props.stroke ?? '#e5e7eb';
   const strokeWidth = () => props.strokeWidth ?? 1;
 
   const generateGridSquares = () => {
     const [cols, rows] = squares();
     const newSquares: GridSquare[] = [];
-    
+
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
         newSquares.push({
@@ -54,27 +54,19 @@ export const InteractiveGridPattern: Component<InteractiveGridPatternProps> = (p
         });
       }
     }
-    
+
     setGridSquares(newSquares);
   };
 
   const handleSquareMouseEnter = (squareId: string) => {
-    setGridSquares(prev => 
-      prev.map(square => 
-        square.id === squareId 
-          ? { ...square, isHovered: true }
-          : square
-      )
+    setGridSquares((prev) =>
+      prev.map((square) => (square.id === squareId ? { ...square, isHovered: true } : square))
     );
   };
 
   const handleSquareMouseLeave = (squareId: string) => {
-    setGridSquares(prev => 
-      prev.map(square => 
-        square.id === squareId 
-          ? { ...square, isHovered: false }
-          : square
-      )
+    setGridSquares((prev) =>
+      prev.map((square) => (square.id === squareId ? { ...square, isHovered: false } : square))
     );
   };
 
@@ -110,22 +102,22 @@ export const InteractiveGridPattern: Component<InteractiveGridPatternProps> = (p
   });
 
   const svgStyles = css({
-    position: "absolute",
+    position: 'absolute',
     inset: 0,
-    height: "100%",
-    width: "100%",
-    fill: "rgba(255, 255, 255, 0.03)",
-    stroke: "rgba(255, 255, 255, 0.03)",
-    strokeWidth: "1",
-    pointerEvents: "auto",
-    cursor: "crosshair",
+    height: '100%',
+    width: '100%',
+    fill: 'rgba(255, 255, 255, 0.03)',
+    stroke: 'rgba(255, 255, 255, 0.03)',
+    strokeWidth: '1',
+    pointerEvents: 'auto',
+    cursor: 'crosshair',
   });
 
   const squareStyles = css({
-    transition: "all 0.2s ease-in-out",
-    cursor: "pointer",
-    "&:hover": {
-      fill: "#3b82f6",
+    transition: 'all 0.2s ease-in-out',
+    cursor: 'pointer',
+    '&:hover': {
+      fill: '#3b82f6',
       opacity: 0.3,
     },
   });
@@ -133,11 +125,7 @@ export const InteractiveGridPattern: Component<InteractiveGridPatternProps> = (p
   const patternId = `interactive-grid-pattern-${Math.random().toString(36).substr(2, 9)}`;
 
   return (
-    <svg
-      ref={containerRef}
-      class={`${svgStyles} ${props.className || ""}`}
-      aria-hidden="true"
-    >
+    <svg ref={containerRef} class={`${svgStyles} ${props.className || ''}`} aria-hidden="true">
       <defs>
         <pattern
           id={patternId}
@@ -156,9 +144,9 @@ export const InteractiveGridPattern: Component<InteractiveGridPatternProps> = (p
           />
         </pattern>
       </defs>
-      
+
       <rect width="100%" height="100%" fill={`url(#${patternId})`} />
-      
+
       {mounted() && (
         <For each={gridSquares()}>
           {(square) => (
@@ -172,7 +160,7 @@ export const InteractiveGridPattern: Component<InteractiveGridPatternProps> = (p
               class={`${squareStyles} ${squaresClassName()}`}
               style={{
                 opacity: square.isHovered ? 0.3 : 0,
-                fill: square.isHovered ? "#3b82f6" : "transparent",
+                fill: square.isHovered ? '#3b82f6' : 'transparent',
               }}
               onMouseEnter={() => handleSquareMouseEnter(square.id)}
               onMouseLeave={() => handleSquareMouseLeave(square.id)}

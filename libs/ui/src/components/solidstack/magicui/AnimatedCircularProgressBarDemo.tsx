@@ -1,5 +1,5 @@
-import { Component, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, createSignal, onCleanup, onMount } from 'solid-js';
 
 // Placeholder AnimatedCircularProgressBar component - this would need to be implemented separately
 const AnimatedCircularProgressBar: Component<{
@@ -11,16 +11,18 @@ const AnimatedCircularProgressBar: Component<{
 }> = (props) => {
   const circumference = 2 * Math.PI * 45; // radius of 45
   const strokeDashoffset = circumference - (props.value / props.max) * circumference;
-  
+
   return (
-    <div class={css({
-      position: 'relative',
-      width: '120px',
-      height: '120px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    })}>
+    <div
+      class={css({
+        position: 'relative',
+        width: '120px',
+        height: '120px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      })}
+    >
       <svg
         width="120"
         height="120"
@@ -54,20 +56,22 @@ const AnimatedCircularProgressBar: Component<{
           })}
         />
       </svg>
-      
+
       {/* Center text */}
-      <div class={css({
-        position: 'absolute',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: 'xl',
-        fontWeight: 'bold',
-        color: 'gray.700',
-        _dark: {
-          color: 'gray.300',
-        },
-      })}>
+      <div
+        class={css({
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: 'xl',
+          fontWeight: 'bold',
+          color: 'gray.700',
+          _dark: {
+            color: 'gray.300',
+          },
+        })}
+      >
         {Math.round(props.value)}%
       </div>
     </div>
@@ -88,7 +92,7 @@ export const AnimatedCircularProgressBarDemo: Component = () => {
   onMount(() => {
     setValue(handleIncrement);
     intervalId = setInterval(() => {
-      setValue(prev => handleIncrement(prev));
+      setValue((prev) => handleIncrement(prev));
     }, 2000);
   });
 
@@ -99,12 +103,14 @@ export const AnimatedCircularProgressBarDemo: Component = () => {
   });
 
   return (
-    <div class={css({
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '8',
-    })}>
+    <div
+      class={css({
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '8',
+      })}
+    >
       <AnimatedCircularProgressBar
         max={100}
         min={0}

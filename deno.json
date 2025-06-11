@@ -49,7 +49,7 @@
   },
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "react",
+    "jsxImportSource": "solid-js",
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   },
   "imports": {

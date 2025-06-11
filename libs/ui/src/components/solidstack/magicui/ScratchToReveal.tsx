@@ -1,5 +1,14 @@
-import { Component, JSX, mergeProps, ParentComponent, createSignal, onMount, onCleanup, createEffect } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  type JSX,
+  type ParentComponent,
+  createEffect,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface ScratchToRevealProps {
   width: number;
@@ -38,7 +47,7 @@ export const ScratchToReveal: ParentComponent<ScratchToRevealProps> = (props) =>
     canvasRef.width = merged.width;
     canvasRef.height = merged.height;
     ctx = canvasRef.getContext('2d');
-    
+
     if (!ctx) return;
 
     totalPixels = merged.width * merged.height;
@@ -51,7 +60,7 @@ export const ScratchToReveal: ParentComponent<ScratchToRevealProps> = (props) =>
 
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, merged.width, merged.height);
-    
+
     // Set up for scratching
     ctx.globalCompositeOperation = 'destination-out';
     ctx.lineCap = 'round';
@@ -62,7 +71,8 @@ export const ScratchToReveal: ParentComponent<ScratchToRevealProps> = (props) =>
     if (!canvasRef) return { x: 0, y: 0 };
 
     const rect = canvasRef.getBoundingClientRect();
-    let clientX: number, clientY: number;
+    let clientX: number;
+    let clientY: number;
 
     if ('touches' in event && event.touches.length > 0) {
       clientX = event.touches[0].clientX;
@@ -166,13 +176,16 @@ export const ScratchToReveal: ParentComponent<ScratchToRevealProps> = (props) =>
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        width: `${merged.width}px`,
-        height: `${merged.height}px`,
-        userSelect: 'none',
-        touchAction: 'none',
-      }, merged.class)}
+      class={css(
+        {
+          position: 'relative',
+          width: `${merged.width}px`,
+          height: `${merged.height}px`,
+          userSelect: 'none',
+          touchAction: 'none',
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       {/* Content to be revealed */}
@@ -232,12 +245,17 @@ export interface ScratchToRevealDemoProps {
 
 export const ScratchToRevealDemo: Component<ScratchToRevealDemoProps> = (props) => {
   return (
-    <div class={css({
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-    }, props.class)}>
+    <div
+      class={css(
+        {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '20px',
+        },
+        props.class
+      )}
+    >
       <ScratchToReveal
         width={250}
         height={250}
@@ -252,12 +270,14 @@ export const ScratchToRevealDemo: Component<ScratchToRevealDemoProps> = (props) 
           borderColor: 'border',
           backgroundColor: 'muted',
         })}
-        gradientColors={["#A97CF8", "#F38CB8", "#FDCC92"]}
+        gradientColors={['#A97CF8', '#F38CB8', '#FDCC92']}
       >
-        <p class={css({
-          fontSize: '72px',
-          margin: 0,
-        })}>
+        <p
+          class={css({
+            fontSize: '72px',
+            margin: 0,
+          })}
+        >
           😎
         </p>
       </ScratchToReveal>

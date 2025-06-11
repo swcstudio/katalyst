@@ -15,15 +15,15 @@ try {
       port: 30000,
     },
   });
-  
+
   const handleSignal = () => {
     console.log('Shutting down Marketing development server...');
     close().then(() => process.exit(0));
   };
-  
+
   process.on('SIGINT', handleSignal);
   process.on('SIGTERM', handleSignal);
-  
+
   console.log('Marketing development server started on http://localhost:30000');
 } catch (error) {
   console.error('Failed to start Marketing development server:', error);

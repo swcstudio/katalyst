@@ -43,16 +43,34 @@ export { PricingSimple } from './pricing/PricingSimple';
 export type { PricingSimpleProps, PricingTier, PricingFrequency } from './pricing/PricingSimple';
 
 export { PricingDemo } from './pricing/PricingDemo';
-export type { PricingDemoProps, PricingTier as DemoPricingTier, PricingFrequency as DemoPricingFrequency } from './pricing/PricingDemo';
+export type {
+  PricingDemoProps,
+  PricingTier as DemoPricingTier,
+  PricingFrequency as DemoPricingFrequency,
+} from './pricing/PricingDemo';
 
 export { PricingGrid } from './pricing/components/PricingGrid';
-export type { PricingGridProps, PricingTier as GridPricingTier, PricingFrequency as GridPricingFrequency } from './pricing/components/PricingGrid';
+export type {
+  PricingGridProps,
+  PricingTier as GridPricingTier,
+  PricingFrequency as GridPricingFrequency,
+} from './pricing/components/PricingGrid';
 
 export { PricingTable } from './pricing/components/PricingTable';
-export type { PricingTableProps, PricingTier as TablePricingTier, PricingFeature, PricingSection, PricingFrequency as TablePricingFrequency } from './pricing/components/PricingTable';
+export type {
+  PricingTableProps,
+  PricingTier as TablePricingTier,
+  PricingFeature,
+  PricingSection,
+  PricingFrequency as TablePricingFrequency,
+} from './pricing/components/PricingTable';
 
 export { PricingSplit } from './pricing/components/PricingSplit';
-export type { PricingSplitProps, PricingTier as SplitPricingTier, PricingFrequency as SplitPricingFrequency } from './pricing/components/PricingSplit';
+export type {
+  PricingSplitProps,
+  PricingTier as SplitPricingTier,
+  PricingFrequency as SplitPricingFrequency,
+} from './pricing/components/PricingSplit';
 
 export { PricingShowcase } from './pricing/components/PricingShowcase';
 
@@ -63,14 +81,26 @@ export { SupportCenter } from './support/components/SupportCenter';
 export type { SupportCenterProps, SupportCard } from './support/components/SupportCenter';
 
 export { useSupportSection } from './support/state/useSupportSection';
-export type { SupportSectionAPI, SupportSectionContext, SupportSectionState } from './support/state/useSupportSection';
+export type {
+  SupportSectionAPI,
+  SupportSectionContext,
+  SupportSectionState,
+} from './support/state/useSupportSection';
 
 // TailwindPlus Newsletter Components
 export { NewsletterSubscription } from './newsletter/components/NewsletterSubscription';
-export type { NewsletterSubscriptionProps, NewsletterFeature } from './newsletter/components/NewsletterSubscription';
+export type {
+  NewsletterSubscriptionProps,
+  NewsletterFeature,
+} from './newsletter/components/NewsletterSubscription';
 
 export { useNewsletterSection } from './newsletter/state/useNewsletterSection';
-export type { NewsletterSectionAPI, NewsletterFormData, NewsletterSectionContext, NewsletterSectionState } from './newsletter/state/useNewsletterSection';
+export type {
+  NewsletterSectionAPI,
+  NewsletterFormData,
+  NewsletterSectionContext,
+  NewsletterSectionState,
+} from './newsletter/state/useNewsletterSection';
 
 // TailwindPlus Support & Newsletter Showcase
 export { SupportNewsletterShowcase } from './SupportNewsletterShowcase';
@@ -103,39 +133,57 @@ export type { PricingSectionAPI } from './pricing/state/usePricingSection';
 // Navigation State Machine Types
 export type {
   NavigationContext,
-  NavigationState
+  NavigationState,
 } from './hooks/useNavigation';
 
 // Feature Section State Machine Types
 export type {
   FeatureSectionContext,
-  FeatureSectionState
+  FeatureSectionState,
 } from './features/state/useFeatureSection';
 
 // CTA Section State Machine Types
 export type {
   CTASectionContext,
-  CTASectionState
+  CTASectionState,
 } from './cta/state/useCTASection';
 
 // Pricing Section State Machine Types
 export type {
   PricingSectionContext,
-  PricingSectionState
+  PricingSectionState,
 } from './pricing/state/usePricingSection';
 
 // TailwindPlus Statistics Components
 export { StatisticsSection } from './stats/components/StatisticsSection';
-export type { StatisticsSectionProps, StatisticsSectionDemoProps } from './stats/components/StatisticsSection';
+export type {
+  StatisticsSectionProps,
+  StatisticsSectionDemoProps,
+} from './stats/components/StatisticsSection';
 
 export { StatsSimple, StatsSimpleDemo, StatsSimpleDarkDemo } from './stats/components/StatsSimple';
 export type { StatsSimpleProps, StatsSimpleDemoProps } from './stats/components/StatsSimple';
 
-export { StatsWithHeader, StatsWithHeaderDemo, StatsWithHeaderBackgroundDemo } from './stats/components/StatsWithHeader';
-export type { StatsWithHeaderProps, StatsWithHeaderDemoProps } from './stats/components/StatsWithHeader';
+export {
+  StatsWithHeader,
+  StatsWithHeaderDemo,
+  StatsWithHeaderBackgroundDemo,
+} from './stats/components/StatsWithHeader';
+export type {
+  StatsWithHeaderProps,
+  StatsWithHeaderDemoProps,
+} from './stats/components/StatsWithHeader';
 
-export { StatsTimeline, StatsTimelineDemo, StatsTimelineVerticalDemo } from './stats/components/StatsTimeline';
-export type { StatsTimelineProps, StatsTimelineDemoProps, TimelineStatItem } from './stats/components/StatsTimeline';
+export {
+  StatsTimeline,
+  StatsTimelineDemo,
+  StatsTimelineVerticalDemo,
+} from './stats/components/StatsTimeline';
+export type {
+  StatsTimelineProps,
+  StatsTimelineDemoProps,
+  TimelineStatItem,
+} from './stats/components/StatsTimeline';
 
 export { StatsShowcase } from './stats/components/StatsShowcase';
 export type { StatsShowcaseProps } from './stats/components/StatsShowcase';
@@ -144,23 +192,40 @@ export { ComprehensiveStatsDemo } from './stats/components/ComprehensiveStatsDem
 export type { ComprehensiveStatsDemoProps } from './stats/components/ComprehensiveStatsDemo';
 
 export { useStatsSection } from './stats/state/useStatsSection';
-export type { 
-  StatsSectionAPI, 
-  StatsSectionContext, 
-  StatsSectionState, 
-  StatItem, 
-  StatsSection 
+export type {
+  StatsSectionAPI,
+  StatsSectionContext,
+  StatsSectionState,
+  StatItem,
+  StatsSection,
 } from './stats/state/useStatsSection';
 
 // TailwindPlus Testimonial Components
 export { TestimonialSection } from './testimonials/components/TestimonialSection';
-export type { TestimonialSectionProps, TestimonialSectionDemoProps } from './testimonials/components/TestimonialSection';
+export type {
+  TestimonialSectionProps,
+  TestimonialSectionDemoProps,
+} from './testimonials/components/TestimonialSection';
 
-export { TestimonialSimple, TestimonialSimpleDemo, TestimonialSimpleGradientDemo } from './testimonials/components/TestimonialSimple';
-export type { TestimonialSimpleProps, TestimonialSimpleDemoProps } from './testimonials/components/TestimonialSimple';
+export {
+  TestimonialSimple,
+  TestimonialSimpleDemo,
+  TestimonialSimpleGradientDemo,
+} from './testimonials/components/TestimonialSimple';
+export type {
+  TestimonialSimpleProps,
+  TestimonialSimpleDemoProps,
+} from './testimonials/components/TestimonialSimple';
 
-export { TestimonialHero, TestimonialHeroDemo, TestimonialHeroOverlayDemo } from './testimonials/components/TestimonialHero';
-export type { TestimonialHeroProps, TestimonialHeroDemoProps } from './testimonials/components/TestimonialHero';
+export {
+  TestimonialHero,
+  TestimonialHeroDemo,
+  TestimonialHeroOverlayDemo,
+} from './testimonials/components/TestimonialHero';
+export type {
+  TestimonialHeroProps,
+  TestimonialHeroDemoProps,
+} from './testimonials/components/TestimonialHero';
 
 export { TestimonialShowcase } from './testimonials/components/TestimonialShowcase';
 export type { TestimonialShowcaseProps } from './testimonials/components/TestimonialShowcase';
@@ -169,13 +234,13 @@ export { ComprehensiveTestimonialDemo } from './testimonials/components/Comprehe
 export type { ComprehensiveTestimonialDemoProps } from './testimonials/components/ComprehensiveTestimonialDemo';
 
 export { useTestimonialSection } from './testimonials/state/useTestimonialSection';
-export type { 
-  TestimonialSectionAPI, 
-  TestimonialSectionContext, 
-  TestimonialSectionState, 
+export type {
+  TestimonialSectionAPI,
+  TestimonialSectionContext,
+  TestimonialSectionState,
   Testimonial,
   TestimonialAuthor,
-  TestimonialSection as TestimonialSectionType
+  TestimonialSection as TestimonialSectionType,
 } from './testimonials/state/useTestimonialSection';
 
 // TailwindPlus Blog Components
@@ -198,13 +263,13 @@ export { ComprehensiveBlogDemo } from './blog/components/ComprehensiveBlogDemo';
 export type { ComprehensiveBlogDemoProps } from './blog/components/ComprehensiveBlogDemo';
 
 export { useBlogSection } from './blog/state/useBlogSection';
-export type { 
-  BlogSectionAPI, 
-  BlogSectionContext, 
-  BlogSectionState, 
+export type {
+  BlogSectionAPI,
+  BlogSectionContext,
+  BlogSectionState,
   BlogPost,
   BlogAuthor,
   BlogCategory,
   BlogSection as BlogSectionType,
-  BlogSectionMachineOptions
+  BlogSectionMachineOptions,
 } from './blog/state/useBlogSection';

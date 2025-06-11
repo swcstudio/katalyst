@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, children, createSignal, For } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For, type JSX, children, createSignal, mergeProps } from 'solid-js';
 
 export interface SafariTab {
   id: string;
@@ -43,7 +43,9 @@ const Safari: Component<SafariProps> = (props) => {
   );
 
   const resolved = children(() => props.children);
-  const [activeTab, setActiveTab] = createSignal(merged.tabs.find(tab => tab.active)?.id || merged.tabs[0]?.id);
+  const [activeTab, setActiveTab] = createSignal(
+    merged.tabs.find((tab) => tab.active)?.id || merged.tabs[0]?.id
+  );
 
   const getSizeStyles = () => {
     const sizes = {
@@ -88,14 +90,17 @@ const Safari: Component<SafariProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        borderRadius: sizeStyles.borderRadius,
-        overflow: 'hidden',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-      }, merged.className)}
+      class={css(
+        {
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          borderRadius: sizeStyles.borderRadius,
+          overflow: 'hidden',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+        },
+        merged.className
+      )}
       style={{
         ...sizeStyles,
         ...themeStyles,
@@ -184,22 +189,28 @@ const Safari: Component<SafariProps> = (props) => {
                 maxWidth: '240px',
                 flex: 1,
                 cursor: 'pointer',
-                backgroundColor: tab.id === activeTab() 
-                  ? (merged.darkMode ? '#1c1c1e' : '#ffffff')
-                  : 'transparent',
+                backgroundColor:
+                  tab.id === activeTab()
+                    ? merged.darkMode
+                      ? '#1c1c1e'
+                      : '#ffffff'
+                    : 'transparent',
                 borderRight: merged.darkMode ? '1px solid #38383a' : '1px solid #d1d5db',
                 _hover: {
-                  backgroundColor: tab.id === activeTab() 
-                    ? (merged.darkMode ? '#1c1c1e' : '#ffffff')
-                    : (merged.darkMode ? '#38383a' : '#e5e5e7'),
+                  backgroundColor:
+                    tab.id === activeTab()
+                      ? merged.darkMode
+                        ? '#1c1c1e'
+                        : '#ffffff'
+                      : merged.darkMode
+                        ? '#38383a'
+                        : '#e5e5e7',
                 },
               })}
               onClick={() => setActiveTab(tab.id)}
             >
               {tab.favicon && (
-                <span class={css({ marginRight: '6px', fontSize: '12px' })}>
-                  {tab.favicon}
-                </span>
+                <span class={css({ marginRight: '6px', fontSize: '12px' })}>{tab.favicon}</span>
               )}
               <span
                 class={css({
@@ -215,7 +226,7 @@ const Safari: Component<SafariProps> = (props) => {
             </div>
           )}
         </For>
-        
+
         {/* Add tab button */}
         <div
           class={css({
@@ -348,13 +359,28 @@ const Safari: Component<SafariProps> = (props) => {
             color: merged.darkMode ? '#8e8e93' : '#8e8e93',
           })}
         >
-          <div class={css({ cursor: 'pointer', _hover: { color: merged.darkMode ? '#ffffff' : '#1d1d1f' } })}>
+          <div
+            class={css({
+              cursor: 'pointer',
+              _hover: { color: merged.darkMode ? '#ffffff' : '#1d1d1f' },
+            })}
+          >
             📁 Favorites
           </div>
-          <div class={css({ cursor: 'pointer', _hover: { color: merged.darkMode ? '#ffffff' : '#1d1d1f' } })}>
+          <div
+            class={css({
+              cursor: 'pointer',
+              _hover: { color: merged.darkMode ? '#ffffff' : '#1d1d1f' },
+            })}
+          >
             🔖 Work
           </div>
-          <div class={css({ cursor: 'pointer', _hover: { color: merged.darkMode ? '#ffffff' : '#1d1d1f' } })}>
+          <div
+            class={css({
+              cursor: 'pointer',
+              _hover: { color: merged.darkMode ? '#ffffff' : '#1d1d1f' },
+            })}
+          >
             💻 Dev
           </div>
         </div>

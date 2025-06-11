@@ -53,8 +53,8 @@ export function TanstackIntegration() {
               <p>Published: {new Date(postQuery.data.publishedAt).toLocaleDateString()}</p>
               <div class="mt-2">
                 <span class="font-medium">Tags: </span>
-                {postQuery.data.tags.map((tag) => (
-                  <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-1">
+                {postQuery.data.tags.map((tag, index) => (
+                  <span key={index} class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-1">
                     {tag}
                   </span>
                 ))}

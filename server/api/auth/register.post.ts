@@ -1,6 +1,14 @@
-import { defineEventHandler, readBody, createError, setCookie, setHeader, getHeader, getClientIP } from 'h3';
 import { createClerkClient } from '@clerk/backend';
-import type { SignUpRequest, AuthResponse } from '@sse/types';
+import type { AuthResponse, SignUpRequest } from '@sse/types';
+import {
+  createError,
+  defineEventHandler,
+  getClientIP,
+  getHeader,
+  readBody,
+  setCookie,
+  setHeader,
+} from 'h3';
 
 const clerk = createClerkClient({
   secretKey: process.env.CLERK_SECRET_KEY!,
@@ -17,7 +25,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const body: SignUpRequest = await readBody(event);
-    
+
     // Validate required fields
     if (!body.emailAddress || !body.password || !body.firstName) {
       throw createError({
@@ -47,7 +55,8 @@ export default defineEventHandler(async (event) => {
     if (!passwordRegex.test(body.password)) {
       throw createError({
         statusCode: 400,
-        statusMessage: 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+        statusMessage:
+          'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
       });
     }
 
@@ -131,8 +140,7 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Access-Control-Allow-Credentials', 'true');
 
     return response;
-
-  } catch (error: any) {
+  } catch (error: Error) {
     // Log error for monitoring
     console.error('Registration error:', {
       error: error.message,

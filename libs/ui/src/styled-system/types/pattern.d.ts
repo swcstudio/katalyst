@@ -12,12 +12,12 @@ export type PatternProperty =
   | { type: 'string' | 'boolean' | 'number' }
 
 export interface PatternHelpers {
-  map: (value: any, fn: (value: string) => string | undefined) => any
+  map: (value: unknown, fn: (value: string) => string | undefined) => unknown
 }
 
 export type PatternProperties = Record<string, PatternProperty>
 
-type Props<T> = Record<LiteralUnion<keyof T>, any>
+type Props<T> = Record<LiteralUnion<keyof T>, unknown>
 
 export interface PatternConfig<T extends PatternProperties = PatternProperties> {
   /**

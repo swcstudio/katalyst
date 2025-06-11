@@ -1,5 +1,5 @@
-import { Component } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import type { Component } from 'solid-js';
 
 // Placeholder CodeComparison component - this would need to be implemented separately
 const CodeComparison: Component<{
@@ -12,123 +12,141 @@ const CodeComparison: Component<{
   highlightColor: string;
 }> = (props) => {
   return (
-    <div class={css({
-      display: 'grid',
-      gridTemplateColumns: '2',
-      gap: '4',
-      backgroundColor: 'gray.50',
-      borderRadius: 'lg',
-      border: '1px solid',
-      borderColor: 'gray.200',
-      overflow: 'hidden',
-      _dark: {
-        backgroundColor: 'gray.900',
-        borderColor: 'gray.700',
-      },
-    })}>
-      {/* Header */}
-      <div class={css({
-        gridColumn: 'span 2',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '3',
-        backgroundColor: 'gray.100',
-        borderBottom: '1px solid',
+    <div
+      class={css({
+        display: 'grid',
+        gridTemplateColumns: '2',
+        gap: '4',
+        backgroundColor: 'gray.50',
+        borderRadius: 'lg',
+        border: '1px solid',
         borderColor: 'gray.200',
+        overflow: 'hidden',
         _dark: {
-          backgroundColor: 'gray.800',
+          backgroundColor: 'gray.900',
           borderColor: 'gray.700',
         },
-      })}>
-        <span class={css({
-          fontSize: 'sm',
-          fontWeight: 'medium',
-          color: 'gray.700',
+      })}
+    >
+      {/* Header */}
+      <div
+        class={css({
+          gridColumn: 'span 2',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '3',
+          backgroundColor: 'gray.100',
+          borderBottom: '1px solid',
+          borderColor: 'gray.200',
           _dark: {
-            color: 'gray.300',
+            backgroundColor: 'gray.800',
+            borderColor: 'gray.700',
           },
-        })}>
+        })}
+      >
+        <span
+          class={css({
+            fontSize: 'sm',
+            fontWeight: 'medium',
+            color: 'gray.700',
+            _dark: {
+              color: 'gray.300',
+            },
+          })}
+        >
           {props.filename}
         </span>
       </div>
 
       {/* Before Code */}
-      <div class={css({
-        position: 'relative',
-      })}>
-        <div class={css({
-          position: 'absolute',
-          top: '2',
-          left: '2',
-          backgroundColor: 'red.100',
-          color: 'red.800',
-          fontSize: 'xs',
-          fontWeight: 'medium',
-          paddingX: '2',
-          paddingY: '1',
-          borderRadius: 'sm',
-          _dark: {
-            backgroundColor: 'red.900/20',
-            color: 'red.400',
-          },
-        })}>
+      <div
+        class={css({
+          position: 'relative',
+        })}
+      >
+        <div
+          class={css({
+            position: 'absolute',
+            top: '2',
+            left: '2',
+            backgroundColor: 'red.100',
+            color: 'red.800',
+            fontSize: 'xs',
+            fontWeight: 'medium',
+            paddingX: '2',
+            paddingY: '1',
+            borderRadius: 'sm',
+            _dark: {
+              backgroundColor: 'red.900/20',
+              color: 'red.400',
+            },
+          })}
+        >
           Before
         </div>
-        <pre class={css({
-          padding: '4',
-          paddingTop: '10',
-          fontSize: 'sm',
-          fontFamily: 'mono',
-          color: 'gray.800',
-          backgroundColor: 'white',
-          overflow: 'auto',
-          height: '400px',
-          _dark: {
-            color: 'gray.200',
-            backgroundColor: 'gray.950',
-          },
-        })}>
+        <pre
+          class={css({
+            padding: '4',
+            paddingTop: '10',
+            fontSize: 'sm',
+            fontFamily: 'mono',
+            color: 'gray.800',
+            backgroundColor: 'white',
+            overflow: 'auto',
+            height: '400px',
+            _dark: {
+              color: 'gray.200',
+              backgroundColor: 'gray.950',
+            },
+          })}
+        >
           <code>{props.beforeCode}</code>
         </pre>
       </div>
 
       {/* After Code */}
-      <div class={css({
-        position: 'relative',
-      })}>
-        <div class={css({
-          position: 'absolute',
-          top: '2',
-          right: '2',
-          backgroundColor: 'green.100',
-          color: 'green.800',
-          fontSize: 'xs',
-          fontWeight: 'medium',
-          paddingX: '2',
-          paddingY: '1',
-          borderRadius: 'sm',
-          _dark: {
-            backgroundColor: 'green.900/20',
-            color: 'green.400',
-          },
-        })}>
+      <div
+        class={css({
+          position: 'relative',
+        })}
+      >
+        <div
+          class={css({
+            position: 'absolute',
+            top: '2',
+            right: '2',
+            backgroundColor: 'green.100',
+            color: 'green.800',
+            fontSize: 'xs',
+            fontWeight: 'medium',
+            paddingX: '2',
+            paddingY: '1',
+            borderRadius: 'sm',
+            _dark: {
+              backgroundColor: 'green.900/20',
+              color: 'green.400',
+            },
+          })}
+        >
           After
         </div>
-        <pre class={css({
-          padding: '4',
-          paddingTop: '10',
-          fontSize: 'sm',
-          fontFamily: 'mono',
-          color: 'gray.800',
-          backgroundColor: 'white',
-          overflow: 'auto',
-          height: '400px',
-          _dark: {
-            color: 'gray.200',
-            backgroundColor: 'gray.950',
-          },
-        })}>
+        <pre
+          class={css({
+            padding: '4',
+            paddingTop: '10',
+            fontSize: 'sm',
+            fontFamily: 'mono',
+            color: 'gray.800',
+            backgroundColor: 'white',
+            overflow: 'auto',
+            height: '400px',
+            _dark: {
+              color: 'gray.200',
+              backgroundColor: 'gray.950',
+            },
+          })}
+        >
           <code>{props.afterCode}</code>
         </pre>
       </div>
@@ -191,11 +209,13 @@ export const config = {
 
 export const CodeComparisonDemo: Component = () => {
   return (
-    <div class={css({
-      maxWidth: '6xl',
-      marginX: 'auto',
-      padding: '4',
-    })}>
+    <div
+      class={css({
+        maxWidth: '6xl',
+        marginX: 'auto',
+        padding: '4',
+      })}
+    >
       <CodeComparison
         beforeCode={beforeCode}
         afterCode={afterCode}

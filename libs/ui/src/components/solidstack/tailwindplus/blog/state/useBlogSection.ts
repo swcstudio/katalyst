@@ -1,4 +1,4 @@
-import { createSignal, createMemo, onMount, onCleanup } from 'solid-js'
+import { createMemo, createSignal, onCleanup, onMount } from 'solid-js';
 
 export interface BlogAuthor {
   name: string;
@@ -69,7 +69,7 @@ export interface BlogSectionContext {
   showReadingTime: boolean;
 }
 
-export type BlogSectionState = 
+export type BlogSectionState =
   | 'initializing'
   | 'idle'
   | 'loading'
@@ -167,20 +167,22 @@ export function useBlogSection(
 ): BlogSectionAPI {
   // Core state signals
   const [state, setState] = createSignal<BlogSectionState>('initializing');
-  const [blogData, setBlogData] = createSignal<BlogSection>(initialData || {
-    title: '',
-    posts: [],
-    variant: 'grid',
-    layout: 'centered',
-    showImages: true,
-    showCategories: true,
-    showAuthors: true,
-    showReadingTime: true,
-    enableFiltering: false,
-    enableSorting: false,
-    enablePagination: false,
-    postsPerPage: 9
-  });
+  const [blogData, setBlogData] = createSignal<BlogSection>(
+    initialData || {
+      title: '',
+      posts: [],
+      variant: 'grid',
+      layout: 'centered',
+      showImages: true,
+      showCategories: true,
+      showAuthors: true,
+      showReadingTime: true,
+      enableFiltering: false,
+      enableSorting: false,
+      enablePagination: false,
+      postsPerPage: 9,
+    }
+  );
 
   // Interaction state
   const [activeBlogId, setActiveBlogId] = createSignal<string | null>(null);
@@ -190,7 +192,9 @@ export function useBlogSection(
   const [completedBlogs, setCompletedBlogs] = createSignal<Set<string>>(new Set());
 
   // Animation state
-  const [animationPhase, setAnimationPhase] = createSignal<'idle' | 'loading' | 'animating' | 'complete'>('idle');
+  const [animationPhase, setAnimationPhase] = createSignal<
+    'idle' | 'loading' | 'animating' | 'complete'
+  >('idle');
   const [animationProgress, setAnimationProgress] = createSignal(0);
 
   // UI state
@@ -224,25 +228,22 @@ export function useBlogSection(
 
     // Apply category filter
     if (filterCategory()) {
-      filtered = filtered.filter(post => 
-        post.category?.title === filterCategory()
-      );
+      filtered = filtered.filter((post) => post.category?.title === filterCategory());
     }
 
     // Apply tag filters
     if (filterTags().length > 0) {
-      filtered = filtered.filter(post =>
-        post.tags?.some(tag => filterTags().includes(tag))
-      );
+      filtered = filtered.filter((post) => post.tags?.some((tag) => filterTags().includes(tag)));
     }
 
     // Apply search query
     if (searchQuery()) {
       const query = searchQuery().toLowerCase();
-      filtered = filtered.filter(post =>
-        post.title.toLowerCase().includes(query) ||
-        post.description.toLowerCase().includes(query) ||
-        post.author.name.toLowerCase().includes(query)
+      filtered = filtered.filter(
+        (post) =>
+          post.title.toLowerCase().includes(query) ||
+          post.description.toLowerCase().includes(query) ||
+          post.author.name.toLowerCase().includes(query)
       );
     }
 
@@ -251,7 +252,7 @@ export function useBlogSection(
 
   const sortedPosts = createMemo(() => {
     const filtered = filteredPosts();
-    
+
     return [...filtered].sort((a, b) => {
       switch (sortOrder()) {
         case 'date-desc':
@@ -262,10 +263,11 @@ export function useBlogSection(
           return a.title.localeCompare(b.title);
         case 'title-desc':
           return b.title.localeCompare(a.title);
-        case 'reading-time':
-          const aTime = parseInt(a.readingTime?.replace(/\D/g, '') || '0');
-          const bTime = parseInt(b.readingTime?.replace(/\D/g, '') || '0');
+        case 'reading-time': {
+          const aTime = Number.parseInt(a.readingTime?.replace(/\D/g, '') || '0');
+          const bTime = Number.parseInt(b.readingTime?.replace(/\D/g, '') || '0');
           return aTime - bTime;
+        }
         default:
           return 0;
       }
@@ -273,7 +275,7 @@ export function useBlogSection(
   });
 
   const featuredPosts = createMemo(() => {
-    return sortedPosts().filter(post => post.featured);
+    return sortedPosts().filter((post) => post.featured);
   });
 
   const totalPages = createMemo(() => {
@@ -321,17 +323,17 @@ export function useBlogSection(
   };
 
   const markBlogVisible = (id: string) => {
-    setVisibleBlogs(prev => new Set([...prev, id]));
+    setVisibleBlogs((prev) => new Set([...prev, id]));
   };
 
   const markBlogAnimated = (id: string) => {
-    setAnimatedBlogs(prev => new Set([...prev, id]));
-    setCompletedBlogs(prev => new Set([...prev, id]));
+    setAnimatedBlogs((prev) => new Set([...prev, id]));
+    setCompletedBlogs((prev) => new Set([...prev, id]));
   };
 
   const setBlogHover = (id: string) => {
     setHoveredBlogId(id);
-    const post = blogData().posts.find(p => String(p.id) === id);
+    const post = blogData().posts.find((p) => String(p.id) === id);
     if (post) {
       options.onBlogHover?.(id, post);
     }
@@ -343,7 +345,7 @@ export function useBlogSection(
 
   const handleBlogClick = (id: string) => {
     setActiveBlogId(id);
-    const post = blogData().posts.find(p => String(p.id) === id);
+    const post = blogData().posts.find((p) => String(p.id) === id);
     if (post) {
       options.onBlogClick?.(id, post);
     }
@@ -389,7 +391,7 @@ export function useBlogSection(
         showImages: showImages(),
         showCategories: showCategories(),
         showAuthors: showAuthors(),
-        showReadingTime: showReadingTime()
+        showReadingTime: showReadingTime(),
       });
     }, 100);
   };
@@ -435,7 +437,7 @@ export function useBlogSection(
         showImages: showImages(),
         showCategories: showCategories(),
         showAuthors: showAuthors(),
-        showReadingTime: showReadingTime()
+        showReadingTime: showReadingTime(),
       });
     }, 100);
   };
@@ -468,7 +470,7 @@ export function useBlogSection(
         showImages: showImages(),
         showCategories: showCategories(),
         showAuthors: showAuthors(),
-        showReadingTime: showReadingTime()
+        showReadingTime: showReadingTime(),
       });
     }, 100);
   };
@@ -527,50 +529,130 @@ export function useBlogSection(
 
   return {
     // State getters
-    get isInitializing() { return state() === 'initializing'; },
-    get isIdle() { return state() === 'idle'; },
-    get isLoading() { return state() === 'loading'; },
-    get isAnimating() { return state() === 'animating'; },
-    get isInteractive() { return state() === 'interactive'; },
-    get isFiltering() { return state() === 'filtering'; },
-    get isSorting() { return state() === 'sorting'; },
-    get isPaginating() { return state() === 'paginating'; },
-    get isComplete() { return state() === 'complete'; },
-    get isError() { return state() === 'error'; },
+    get isInitializing() {
+      return state() === 'initializing';
+    },
+    get isIdle() {
+      return state() === 'idle';
+    },
+    get isLoading() {
+      return state() === 'loading';
+    },
+    get isAnimating() {
+      return state() === 'animating';
+    },
+    get isInteractive() {
+      return state() === 'interactive';
+    },
+    get isFiltering() {
+      return state() === 'filtering';
+    },
+    get isSorting() {
+      return state() === 'sorting';
+    },
+    get isPaginating() {
+      return state() === 'paginating';
+    },
+    get isComplete() {
+      return state() === 'complete';
+    },
+    get isError() {
+      return state() === 'error';
+    },
 
     // Data getters
-    get blogData() { return blogData(); },
-    get posts() { return blogData().posts; },
-    get activeBlogId() { return activeBlogId(); },
-    get hoveredBlogId() { return hoveredBlogId(); },
-    get visibleBlogs() { return visibleBlogs(); },
-    get animatedBlogs() { return animatedBlogs(); },
-    get completedBlogs() { return completedBlogs(); },
-    get animationPhase() { return animationPhase(); },
-    get theme() { return theme(); },
-    get variant() { return variant(); },
-    get layout() { return layout(); },
-    get isVisible() { return isVisible(); },
-    get filterCategory() { return filterCategory(); },
-    get filterTags() { return filterTags(); },
-    get sortOrder() { return sortOrder(); },
-    get searchQuery() { return searchQuery(); },
-    get currentPage() { return currentPage(); },
-    get postsPerPage() { return postsPerPage(); },
-    get totalPages() { return totalPages(); },
-    get showImages() { return showImages(); },
-    get showCategories() { return showCategories(); },
-    get showAuthors() { return showAuthors(); },
-    get showReadingTime() { return showReadingTime(); },
+    get blogData() {
+      return blogData();
+    },
+    get posts() {
+      return blogData().posts;
+    },
+    get activeBlogId() {
+      return activeBlogId();
+    },
+    get hoveredBlogId() {
+      return hoveredBlogId();
+    },
+    get visibleBlogs() {
+      return visibleBlogs();
+    },
+    get animatedBlogs() {
+      return animatedBlogs();
+    },
+    get completedBlogs() {
+      return completedBlogs();
+    },
+    get animationPhase() {
+      return animationPhase();
+    },
+    get theme() {
+      return theme();
+    },
+    get variant() {
+      return variant();
+    },
+    get layout() {
+      return layout();
+    },
+    get isVisible() {
+      return isVisible();
+    },
+    get filterCategory() {
+      return filterCategory();
+    },
+    get filterTags() {
+      return filterTags();
+    },
+    get sortOrder() {
+      return sortOrder();
+    },
+    get searchQuery() {
+      return searchQuery();
+    },
+    get currentPage() {
+      return currentPage();
+    },
+    get postsPerPage() {
+      return postsPerPage();
+    },
+    get totalPages() {
+      return totalPages();
+    },
+    get showImages() {
+      return showImages();
+    },
+    get showCategories() {
+      return showCategories();
+    },
+    get showAuthors() {
+      return showAuthors();
+    },
+    get showReadingTime() {
+      return showReadingTime();
+    },
 
     // Computed getters
-    get filteredPosts() { return filteredPosts(); },
-    get sortedPosts() { return sortedPosts(); },
-    get featuredPosts() { return featuredPosts(); },
-    get paginatedPosts() { return paginatedPosts(); },
-    get animationProgress() { return animationProgress(); },
-    get hasNextPage() { return hasNextPage(); },
-    get hasPrevPage() { return hasPrevPage(); },
+    get filteredPosts() {
+      return filteredPosts();
+    },
+    get sortedPosts() {
+      return sortedPosts();
+    },
+    get featuredPosts() {
+      return featuredPosts();
+    },
+    get paginatedPosts() {
+      return paginatedPosts();
+    },
+    get animationProgress() {
+      return animationProgress();
+    },
+    get hasNextPage() {
+      return hasNextPage();
+    },
+    get hasPrevPage() {
+      return hasPrevPage();
+    },
 
     // Actions
     initialize,
@@ -592,6 +674,6 @@ export function useBlogSection(
     prevPage,
     toggleOption,
     retry,
-    reset
+    reset,
   };
 }

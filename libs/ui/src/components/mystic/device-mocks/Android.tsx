@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, children } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, children, mergeProps } from 'solid-js';
 
 export interface AndroidProps {
   children?: JSX.Element;
@@ -42,7 +42,7 @@ const Android: Component<AndroidProps> = (props) => {
     };
 
     const size = sizes[merged.size];
-    
+
     if (merged.orientation === 'landscape') {
       return {
         width: size.height,
@@ -50,7 +50,7 @@ const Android: Component<AndroidProps> = (props) => {
         borderRadius: size.borderRadius,
       };
     }
-    
+
     return size;
   };
 
@@ -79,39 +79,42 @@ const Android: Component<AndroidProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '16px',
-        borderRadius: sizeStyles.borderRadius,
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
-        _before: {
-          content: '""',
-          position: 'absolute',
-          top: '8px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: merged.orientation === 'landscape' ? '8px' : '40px',
-          height: merged.orientation === 'landscape' ? '40px' : '4px',
-          backgroundColor: '#666',
-          borderRadius: '2px',
-          zIndex: 10,
+      class={css(
+        {
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '16px',
+          borderRadius: sizeStyles.borderRadius,
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
+          _before: {
+            content: '""',
+            position: 'absolute',
+            top: '8px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: merged.orientation === 'landscape' ? '8px' : '40px',
+            height: merged.orientation === 'landscape' ? '40px' : '4px',
+            backgroundColor: '#666',
+            borderRadius: '2px',
+            zIndex: 10,
+          },
+          _after: {
+            content: '""',
+            position: 'absolute',
+            bottom: '8px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '32px',
+            height: '4px',
+            backgroundColor: '#666',
+            borderRadius: '2px',
+            zIndex: 10,
+          },
         },
-        _after: {
-          content: '""',
-          position: 'absolute',
-          bottom: '8px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '32px',
-          height: '4px',
-          backgroundColor: '#666',
-          borderRadius: '2px',
-          zIndex: 10,
-        },
-      }, merged.className)}
+        merged.className
+      )}
       style={{
         ...sizeStyles,
         ...variantStyles,
@@ -130,7 +133,7 @@ const Android: Component<AndroidProps> = (props) => {
           borderRadius: '0 2px 2px 0',
         })}
       />
-      
+
       {/* Volume buttons */}
       <div
         class={css({

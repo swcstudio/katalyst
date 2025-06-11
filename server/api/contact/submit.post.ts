@@ -1,5 +1,5 @@
-import { defineEventHandler, readBody, createError, setHeader, getHeader, getClientIP } from 'h3';
 import type { ContactFormRequest, ContactFormResponse } from '@sse/types';
+import { createError, defineEventHandler, getClientIP, getHeader, readBody, setHeader } from 'h3';
 
 // Rate limiting map (in production, use Redis or similar)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
@@ -16,11 +16,11 @@ export default defineEventHandler(async (event) => {
   try {
     const clientIP = getClientIP(event);
     const userAgent = getHeader(event, 'user-agent') || '';
-    
+
     // Rate limiting: 5 submissions per hour per IP
     const now = Date.now();
     const rateLimit = rateLimitMap.get(clientIP);
-    
+
     if (rateLimit) {
       if (now < rateLimit.resetTime) {
         if (rateLimit.count >= 5) {
@@ -32,17 +32,17 @@ export default defineEventHandler(async (event) => {
         rateLimit.count++;
       } else {
         rateLimit.count = 1;
-        rateLimit.resetTime = now + (60 * 60 * 1000); // 1 hour
+        rateLimit.resetTime = now + 60 * 60 * 1000; // 1 hour
       }
     } else {
       rateLimitMap.set(clientIP, {
         count: 1,
-        resetTime: now + (60 * 60 * 1000),
+        resetTime: now + 60 * 60 * 1000,
       });
     }
 
     const body: ContactFormRequest = await readBody(event);
-    
+
     // Validate required fields
     if (!body.name || !body.email || !body.message) {
       throw createError({
@@ -85,8 +85,8 @@ export default defineEventHandler(async (event) => {
     // Basic spam detection
     const spamKeywords = ['bitcoin', 'crypto', 'investment', 'loan', 'casino', 'viagra'];
     const messageText = body.message.toLowerCase();
-    const hasSpam = spamKeywords.some(keyword => messageText.includes(keyword));
-    
+    const hasSpam = spamKeywords.some((keyword) => messageText.includes(keyword));
+
     if (hasSpam) {
       // Log potential spam but don't reject immediately
       console.warn('Potential spam detected:', {
@@ -162,8 +162,7 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Access-Control-Allow-Credentials', 'true');
 
     return response;
-
-  } catch (error: any) {
+  } catch (error: Error) {
     // Log error for monitoring
     console.error('Contact form error:', {
       error: error.message,

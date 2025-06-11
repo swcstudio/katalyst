@@ -5,15 +5,15 @@ console.log('Building Docs micro-frontend...');
 
 try {
   await Deno.mkdir('dist/docs', { recursive: true });
-  
+
   await build({
     root: './apps/docs',
     outDir: '../../dist/docs',
     config: {
       integrations: ['@astrojs/solid-js', '@astrojs/mdx'],
-    }
+    },
   });
-  
+
   console.log('Docs build completed successfully!');
 } catch (error) {
   console.error('Docs build failed:', error);

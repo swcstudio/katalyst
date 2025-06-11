@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, For, children } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For, type JSX, children, mergeProps } from 'solid-js';
 
 export interface BentoGridProps {
   className?: string;
@@ -20,16 +20,19 @@ export const BentoGrid: Component<BentoGridProps> = (props) => {
 
   return (
     <div
-      class={css({
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '4',
-        maxWidth: '7xl',
-        marginX: 'auto',
-        _md: {
-          gridTemplateColumns: 'repeat(3, 1fr)',
+      class={css(
+        {
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '4',
+          maxWidth: '7xl',
+          marginX: 'auto',
+          _md: {
+            gridTemplateColumns: 'repeat(3, 1fr)',
+          },
         },
-      }, merged.className)}
+        merged.className
+      )}
     >
       {resolved()}
     </div>
@@ -41,58 +44,63 @@ export const BentoGridItem: Component<BentoGridItemProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        overflow: 'hidden',
-        borderRadius: 'xl',
-        border: '1px solid',
-        borderColor: 'transparent',
-        background: 'linear-gradient(white, white) padding-box, linear-gradient(145deg, transparent, rgba(255,255,255,0.1)) border-box',
-        padding: '4',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        cursor: 'pointer',
-        transition: 'all 0.3s ease',
-        _hover: {
-          transform: 'translateY(-2px)',
-          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+      class={css(
+        {
+          position: 'relative',
+          overflow: 'hidden',
+          borderRadius: 'xl',
+          border: '1px solid',
+          borderColor: 'transparent',
+          background:
+            'linear-gradient(white, white) padding-box, linear-gradient(145deg, transparent, rgba(255,255,255,0.1)) border-box',
+          padding: '4',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          _hover: {
+            transform: 'translateY(-2px)',
+            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+          },
+          _dark: {
+            background:
+              'linear-gradient(rgb(17 24 39), rgb(17 24 39)) padding-box, linear-gradient(145deg, transparent, rgba(255,255,255,0.1)) border-box',
+            borderColor: 'rgba(255, 255, 255, 0.1)',
+          },
         },
-        _dark: {
-          background: 'linear-gradient(rgb(17 24 39), rgb(17 24 39)) padding-box, linear-gradient(145deg, transparent, rgba(255,255,255,0.1)) border-box',
-          borderColor: 'rgba(255, 255, 255, 0.1)',
-        },
-      }, merged.className)}
+        merged.className
+      )}
     >
       {merged.header}
       <div class={css({ marginTop: '4' })}>
-        {merged.icon && (
-          <div class={css({ marginBottom: '2' })}>
-            {merged.icon}
-          </div>
-        )}
+        {merged.icon && <div class={css({ marginBottom: '2' })}>{merged.icon}</div>}
         {merged.title && (
-          <div class={css({
-            fontSize: 'lg',
-            fontWeight: 'bold',
-            color: 'neutral.800',
-            marginBottom: '2',
-            _dark: {
-              color: 'neutral.200',
-            },
-          })}>
+          <div
+            class={css({
+              fontSize: 'lg',
+              fontWeight: 'bold',
+              color: 'neutral.800',
+              marginBottom: '2',
+              _dark: {
+                color: 'neutral.200',
+              },
+            })}
+          >
             {merged.title}
           </div>
         )}
         {merged.description && (
-          <div class={css({
-            fontSize: 'sm',
-            color: 'neutral.600',
-            lineHeight: 'relaxed',
-            _dark: {
-              color: 'neutral.400',
-            },
-          })}>
+          <div
+            class={css({
+              fontSize: 'sm',
+              color: 'neutral.600',
+              lineHeight: 'relaxed',
+              _dark: {
+                color: 'neutral.400',
+              },
+            })}
+          >
             {merged.description}
           </div>
         )}
@@ -102,18 +110,20 @@ export const BentoGridItem: Component<BentoGridItemProps> = (props) => {
 };
 
 const Skeleton: Component = () => (
-  <div class={css({
-    display: 'flex',
-    flex: '1',
-    width: 'full',
-    height: 'full',
-    minHeight: '6rem',
-    borderRadius: 'xl',
-    background: 'linear-gradient(135deg, #f3f4f6, #e5e7eb)',
-    _dark: {
-      background: 'linear-gradient(135deg, #1f2937, #374151)',
-    },
-  })} />
+  <div
+    class={css({
+      display: 'flex',
+      flex: '1',
+      width: 'full',
+      height: 'full',
+      minHeight: '6rem',
+      borderRadius: 'xl',
+      background: 'linear-gradient(135deg, #f3f4f6, #e5e7eb)',
+      _dark: {
+        background: 'linear-gradient(135deg, #1f2937, #374151)',
+      },
+    })}
+  />
 );
 
 // Icon components
@@ -255,47 +265,57 @@ export interface BentoGridDemoProps {
 export const BentoGridDemo: Component<BentoGridDemoProps> = (props) => {
   const items = [
     {
-      title: "The Dawn of Innovation",
-      description: "Explore the birth of groundbreaking ideas and inventions.",
+      title: 'The Dawn of Innovation',
+      description: 'Explore the birth of groundbreaking ideas and inventions.',
       header: <Skeleton />,
-      icon: <IconClipboardCopy className={css({ height: '4', width: '4', color: 'neutral.500' })} />,
+      icon: (
+        <IconClipboardCopy className={css({ height: '4', width: '4', color: 'neutral.500' })} />
+      ),
     },
     {
-      title: "The Digital Revolution",
-      description: "Dive into the transformative power of technology.",
+      title: 'The Digital Revolution',
+      description: 'Dive into the transformative power of technology.',
       header: <Skeleton />,
       icon: <IconFileBroken className={css({ height: '4', width: '4', color: 'neutral.500' })} />,
     },
     {
-      title: "The Art of Design",
-      description: "Discover the beauty of thoughtful and functional design.",
+      title: 'The Art of Design',
+      description: 'Discover the beauty of thoughtful and functional design.',
       header: <Skeleton />,
       icon: <IconSignature className={css({ height: '4', width: '4', color: 'neutral.500' })} />,
     },
     {
-      title: "The Power of Communication",
-      description: "Understand the impact of effective communication in our lives.",
+      title: 'The Power of Communication',
+      description: 'Understand the impact of effective communication in our lives.',
       header: <Skeleton />,
       icon: <IconTableColumn className={css({ height: '4', width: '4', color: 'neutral.500' })} />,
       className: css({ _md: { colSpan: 2 } }),
     },
     {
-      title: "The Pursuit of Knowledge",
-      description: "Join the quest for understanding and enlightenment.",
+      title: 'The Pursuit of Knowledge',
+      description: 'Join the quest for understanding and enlightenment.',
       header: <Skeleton />,
-      icon: <IconArrowWaveRightUp className={css({ height: '4', width: '4', color: 'neutral.500' })} />,
+      icon: (
+        <IconArrowWaveRightUp className={css({ height: '4', width: '4', color: 'neutral.500' })} />
+      ),
     },
     {
-      title: "The Joy of Creation",
-      description: "Experience the thrill of bringing ideas to life.",
+      title: 'The Joy of Creation',
+      description: 'Experience the thrill of bringing ideas to life.',
       header: <Skeleton />,
-      icon: <IconBoxAlignTopLeft className={css({ height: '4', width: '4', color: 'neutral.500' })} />,
+      icon: (
+        <IconBoxAlignTopLeft className={css({ height: '4', width: '4', color: 'neutral.500' })} />
+      ),
     },
     {
-      title: "The Spirit of Adventure",
-      description: "Embark on exciting journeys and thrilling discoveries.",
+      title: 'The Spirit of Adventure',
+      description: 'Embark on exciting journeys and thrilling discoveries.',
       header: <Skeleton />,
-      icon: <IconBoxAlignRightFilled className={css({ height: '4', width: '4', color: 'neutral.500' })} />,
+      icon: (
+        <IconBoxAlignRightFilled
+          className={css({ height: '4', width: '4', color: 'neutral.500' })}
+        />
+      ),
       className: css({ _md: { colSpan: 2 } }),
     },
   ];
@@ -309,7 +329,9 @@ export const BentoGridDemo: Component<BentoGridDemoProps> = (props) => {
             description={item.description}
             header={item.header}
             icon={item.icon}
-            className={item.className || (i() === 3 || i() === 6 ? css({ _md: { colSpan: 2 } }) : "")}
+            className={
+              item.className || (i() === 3 || i() === 6 ? css({ _md: { colSpan: 2 } }) : '')
+            }
           />
         )}
       </For>

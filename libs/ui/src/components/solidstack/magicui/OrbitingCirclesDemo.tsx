@@ -1,5 +1,5 @@
-import { Component, For, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For, createSignal, onCleanup, onMount } from 'solid-js';
 
 // Placeholder OrbitingCircles component - this would need to be implemented separately
 const OrbitingCircles: Component<{
@@ -7,22 +7,24 @@ const OrbitingCircles: Component<{
   radius?: number;
   reverse?: boolean;
   speed?: number;
-  children: any;
+  children: JSX.Element | JSX.Element[];
 }> = (props) => {
   const iconSize = props.iconSize || 30;
   const radius = props.radius || 80;
   const speed = props.speed || 1;
-  
+
   return (
-    <div class={css({
-      position: 'absolute',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: 'full',
-      height: 'full',
-    })}>
-      <div 
+    <div
+      class={css({
+        position: 'absolute',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 'full',
+        height: 'full',
+      })}
+    >
+      <div
         class={css({
           position: 'relative',
           display: 'flex',
@@ -36,7 +38,7 @@ const OrbitingCircles: Component<{
       >
         <For each={Array.isArray(props.children) ? props.children : [props.children]}>
           {(child, index) => (
-            <div 
+            <div
               class={css({
                 position: 'absolute',
                 display: 'flex',
@@ -63,14 +65,17 @@ const OrbitingCircles: Component<{
             </div>
           )}
         </For>
-        
+
         <style>{`
-          ${Array.from({ length: Array.isArray(props.children) ? props.children.length : 1 }, (_, i) => `
+          ${Array.from(
+            { length: Array.isArray(props.children) ? props.children.length : 1 },
+            (_, i) => `
             @keyframes orbit-${i} {
               from { transform: rotate(${(360 / (Array.isArray(props.children) ? props.children.length : 1)) * i}deg) translateX(${radius}px) rotate(-${(360 / (Array.isArray(props.children) ? props.children.length : 1)) * i}deg); }
               to { transform: rotate(${(360 / (Array.isArray(props.children) ? props.children.length : 1)) * i + 360}deg) translateX(${radius}px) rotate(-${(360 / (Array.isArray(props.children) ? props.children.length : 1)) * i + 360}deg); }
             }
-          `).join('')}
+          `
+          ).join('')}
         `}</style>
       </div>
     </div>
@@ -80,12 +85,7 @@ const OrbitingCircles: Component<{
 // Icon Components
 const Icons = {
   whatsapp: () => (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 175.216 175.552"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="20" height="20" viewBox="0 0 175.216 175.552" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient
           id="b"
@@ -142,12 +142,7 @@ const Icons = {
     </svg>
   ),
   googleDrive: () => (
-    <svg 
-      width="20" 
-      height="20" 
-      viewBox="0 0 87.3 78" 
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="20" height="20" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
       <path
         d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z"
         fill="#0066da"
@@ -178,16 +173,18 @@ const Icons = {
 
 export const OrbitingCirclesDemo: Component = () => {
   return (
-    <div class={css({
-      position: 'relative',
-      display: 'flex',
-      height: '500px',
-      width: 'full',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-    })}>
+    <div
+      class={css({
+        position: 'relative',
+        display: 'flex',
+        height: '500px',
+        width: 'full',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+      })}
+    >
       <OrbitingCircles iconSize={40}>
         <Icons.whatsapp />
         <Icons.notion />

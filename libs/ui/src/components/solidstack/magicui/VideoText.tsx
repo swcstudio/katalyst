@@ -1,5 +1,12 @@
-import { Component, JSX, mergeProps, ParentComponent, createSignal, onMount } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  type JSX,
+  type ParentComponent,
+  createSignal,
+  mergeProps,
+  onMount,
+} from 'solid-js';
 
 export interface VideoTextProps {
   class?: string;
@@ -36,15 +43,18 @@ export const VideoText: ParentComponent<VideoTextProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-        overflow: 'hidden',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }, merged.class)}
+      class={css(
+        {
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       {/* Background video */}
@@ -142,17 +152,18 @@ export interface VideoTextDemoProps {
 
 export const VideoTextDemo: Component<VideoTextDemoProps> = (props) => {
   return (
-    <div 
-      class={css({
-        position: 'relative',
-        height: '200px',
-        width: '100%',
-        overflow: 'hidden',
-      }, props.class)}
+    <div
+      class={css(
+        {
+          position: 'relative',
+          height: '200px',
+          width: '100%',
+          overflow: 'hidden',
+        },
+        props.class
+      )}
     >
-      <VideoText src="https://cdn.magicui.design/ocean-small.webm">
-        OCEAN
-      </VideoText>
+      <VideoText src="https://cdn.magicui.design/ocean-small.webm">OCEAN</VideoText>
     </div>
   );
 };

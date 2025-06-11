@@ -6,19 +6,12 @@ const contactFormSchema = z.object({
   email: z.string().email(),
   company: z.string().optional(),
   phone: z.string().optional(),
-  subject: z.enum([
-    'general',
-    'consultation',
-    'enterprise',
-    'support',
-    'partnership',
-    'custom'
-  ]),
+  subject: z.enum(['general', 'consultation', 'enterprise', 'support', 'partnership', 'custom']),
   message: z.string().min(10).max(2000),
   source: z.enum(['marketing', 'blog', 'docs', 'storefront']).default('marketing'),
   utm_source: z.string().optional(),
   utm_medium: z.string().optional(),
-  utm_campaign: z.string().optional()
+  utm_campaign: z.string().optional(),
 });
 
 const emailService = getDefaultEmailService();
@@ -35,13 +28,13 @@ export default defineEventHandler(async (event) => {
     // Rate limiting check (basic implementation)
     const clientIP = getClientIP(event);
     const rateLimitKey = `contact_form:${clientIP}`;
-    
+
     // Check if this IP has submitted recently (implement with Redis/KV in production)
     const recentSubmission = await checkRateLimit(rateLimitKey);
     if (recentSubmission) {
       throw createError({
         statusCode: 429,
-        statusMessage: 'Too many requests. Please wait before submitting again.'
+        statusMessage: 'Too many requests. Please wait before submitting again.',
       });
     }
 
@@ -54,7 +47,7 @@ export default defineEventHandler(async (event) => {
       email: validatedData.email,
       subject: validatedData.subject,
       message: validatedData.message,
-      referenceId
+      referenceId,
     });
 
     // Send notification email to team (plain text for internal use)
@@ -92,13 +85,13 @@ User Agent: ${getHeader(event, 'user-agent')}
       tags: [
         { name: 'type', value: 'admin-notification' },
         { name: 'source', value: validatedData.source },
-        { name: 'subject', value: validatedData.subject }
+        { name: 'subject', value: validatedData.subject },
       ],
       metadata: {
         template: 'admin-notification',
         referenceId,
-        source: validatedData.source
-      }
+        source: validatedData.source,
+      },
     });
 
     // Store in database (implement with your preferred DB)
@@ -109,7 +102,7 @@ User Agent: ${getHeader(event, 'user-agent')}
       user_agent: getHeader(event, 'user-agent'),
       submitted_at: new Date(),
       admin_email_id: adminEmailResult.messageId,
-      user_email_id: userEmailResult.messageId
+      user_email_id: userEmailResult.messageId,
     });
 
     // Set rate limit (implement with Redis/KV in production)
@@ -117,18 +110,17 @@ User Agent: ${getHeader(event, 'user-agent')}
 
     return {
       success: true,
-      message: 'Thank you for your message. We\'ll be in touch soon!',
+      message: "Thank you for your message. We'll be in touch soon!",
       reference_id: referenceId,
-      email_sent: userEmailResult.success
+      email_sent: userEmailResult.success,
     };
-
   } catch (error) {
     // Handle validation errors
     if (error instanceof z.ZodError) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Invalid form data',
-        data: error.errors
+        data: error.errors,
       });
     }
 
@@ -138,7 +130,7 @@ User Agent: ${getHeader(event, 'user-agent')}
     // Return generic error to user
     throw createError({
       statusCode: 500,
-      statusMessage: 'Unable to process your request. Please try again later.'
+      statusMessage: 'Unable to process your request. Please try again later.',
     });
   }
 });

@@ -23,9 +23,7 @@
       "types": "./dist/styled-system/index.d.ts"
     }
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts",
     "dev": "tsup src/index.ts --format esm --dts --watch",
@@ -52,13 +50,7 @@
     "url": "git+https://github.com/spectrum-web-co/sse.git",
     "directory": "libs/ui"
   },
-  "keywords": [
-    "solidjs",
-    "ui",
-    "components",
-    "typescript",
-    "sse"
-  ],
+  "keywords": ["solidjs", "ui", "components", "typescript", "sse"],
   "author": "Spectrum Web Co LLC",
   "license": "MIT"
 }

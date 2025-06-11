@@ -1,10 +1,10 @@
-import { Component, createSignal, For, Show } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For, Show, createSignal } from 'solid-js';
 
 interface Tab {
   title: string;
   value: string;
-  content: any;
+  content: JSX.Element;
 }
 
 // Placeholder Tabs component - this would need to be implemented separately
@@ -15,22 +15,29 @@ const Tabs: Component<{
   const [activeTab, setActiveTab] = createSignal(props.tabs[0]?.value || '');
 
   return (
-    <div class={css({
-      width: 'full',
-      height: 'full',
-    }, props.className)}>
-      {/* Tab Headers */}
-      <div class={css({
-        display: 'flex',
-        gap: '1',
-        marginBottom: '6',
-        backgroundColor: 'gray.100',
-        padding: '1',
-        borderRadius: 'xl',
-        _dark: {
-          backgroundColor: 'gray.800',
+    <div
+      class={css(
+        {
+          width: 'full',
+          height: 'full',
         },
-      })}>
+        props.className
+      )}
+    >
+      {/* Tab Headers */}
+      <div
+        class={css({
+          display: 'flex',
+          gap: '1',
+          marginBottom: '6',
+          backgroundColor: 'gray.100',
+          padding: '1',
+          borderRadius: 'xl',
+          _dark: {
+            backgroundColor: 'gray.800',
+          },
+        })}
+      >
         <For each={props.tabs}>
           {(tab) => (
             <button
@@ -64,24 +71,28 @@ const Tabs: Component<{
       </div>
 
       {/* Tab Content */}
-      <div class={css({
-        width: 'full',
-        height: 'full',
-        position: 'relative',
-        overflow: 'hidden',
-        borderRadius: '2xl',
-        perspective: '1000px',
-      })}>
+      <div
+        class={css({
+          width: 'full',
+          height: 'full',
+          position: 'relative',
+          overflow: 'hidden',
+          borderRadius: '2xl',
+          perspective: '1000px',
+        })}
+      >
         <For each={props.tabs}>
           {(tab) => (
             <Show when={activeTab() === tab.value}>
-              <div class={css({
-                width: 'full',
-                height: 'full',
-                position: 'absolute',
-                inset: '0',
-                animation: 'fadeInScale 0.3s ease-out',
-              })}>
+              <div
+                class={css({
+                  width: 'full',
+                  height: 'full',
+                  position: 'absolute',
+                  inset: '0',
+                  animation: 'fadeInScale 0.3s ease-out',
+                })}
+              >
                 {tab.content}
               </div>
             </Show>
@@ -133,120 +144,130 @@ const DummyContent: Component = () => {
 export const TabsDemo: Component = () => {
   const tabs: Tab[] = [
     {
-      title: "Product",
-      value: "product",
+      title: 'Product',
+      value: 'product',
       content: (
-        <div class={css({
-          width: 'full',
-          overflow: 'hidden',
-          position: 'relative',
-          height: 'full',
-          borderRadius: '2xl',
-          padding: '10',
-          fontSize: 'xl',
-          fontWeight: 'bold',
-          color: 'white',
-          background: 'linear-gradient(to bottom right, rgb(126, 34, 206), rgb(109, 40, 217))', // from-purple-700 to-violet-900
-          md: {
-            fontSize: '4xl',
-          },
-        })}>
+        <div
+          class={css({
+            width: 'full',
+            overflow: 'hidden',
+            position: 'relative',
+            height: 'full',
+            borderRadius: '2xl',
+            padding: '10',
+            fontSize: 'xl',
+            fontWeight: 'bold',
+            color: 'white',
+            background: 'linear-gradient(to bottom right, rgb(126, 34, 206), rgb(109, 40, 217))', // from-purple-700 to-violet-900
+            md: {
+              fontSize: '4xl',
+            },
+          })}
+        >
           <p>Product Tab</p>
           <DummyContent />
         </div>
       ),
     },
     {
-      title: "Services",
-      value: "services",
+      title: 'Services',
+      value: 'services',
       content: (
-        <div class={css({
-          width: 'full',
-          overflow: 'hidden',
-          position: 'relative',
-          height: 'full',
-          borderRadius: '2xl',
-          padding: '10',
-          fontSize: 'xl',
-          fontWeight: 'bold',
-          color: 'white',
-          background: 'linear-gradient(to bottom right, rgb(126, 34, 206), rgb(109, 40, 217))', // from-purple-700 to-violet-900
-          md: {
-            fontSize: '4xl',
-          },
-        })}>
+        <div
+          class={css({
+            width: 'full',
+            overflow: 'hidden',
+            position: 'relative',
+            height: 'full',
+            borderRadius: '2xl',
+            padding: '10',
+            fontSize: 'xl',
+            fontWeight: 'bold',
+            color: 'white',
+            background: 'linear-gradient(to bottom right, rgb(126, 34, 206), rgb(109, 40, 217))', // from-purple-700 to-violet-900
+            md: {
+              fontSize: '4xl',
+            },
+          })}
+        >
           <p>Services tab</p>
           <DummyContent />
         </div>
       ),
     },
     {
-      title: "Playground",
-      value: "playground",
+      title: 'Playground',
+      value: 'playground',
       content: (
-        <div class={css({
-          width: 'full',
-          overflow: 'hidden',
-          position: 'relative',
-          height: 'full',
-          borderRadius: '2xl',
-          padding: '10',
-          fontSize: 'xl',
-          fontWeight: 'bold',
-          color: 'white',
-          background: 'linear-gradient(to bottom right, rgb(126, 34, 206), rgb(109, 40, 217))', // from-purple-700 to-violet-900
-          md: {
-            fontSize: '4xl',
-          },
-        })}>
+        <div
+          class={css({
+            width: 'full',
+            overflow: 'hidden',
+            position: 'relative',
+            height: 'full',
+            borderRadius: '2xl',
+            padding: '10',
+            fontSize: 'xl',
+            fontWeight: 'bold',
+            color: 'white',
+            background: 'linear-gradient(to bottom right, rgb(126, 34, 206), rgb(109, 40, 217))', // from-purple-700 to-violet-900
+            md: {
+              fontSize: '4xl',
+            },
+          })}
+        >
           <p>Playground tab</p>
           <DummyContent />
         </div>
       ),
     },
     {
-      title: "Content",
-      value: "content",
+      title: 'Content',
+      value: 'content',
       content: (
-        <div class={css({
-          width: 'full',
-          overflow: 'hidden',
-          position: 'relative',
-          height: 'full',
-          borderRadius: '2xl',
-          padding: '10',
-          fontSize: 'xl',
-          fontWeight: 'bold',
-          color: 'white',
-          background: 'linear-gradient(to bottom right, rgb(126, 34, 206), rgb(109, 40, 217))', // from-purple-700 to-violet-900
-          md: {
-            fontSize: '4xl',
-          },
-        })}>
+        <div
+          class={css({
+            width: 'full',
+            overflow: 'hidden',
+            position: 'relative',
+            height: 'full',
+            borderRadius: '2xl',
+            padding: '10',
+            fontSize: 'xl',
+            fontWeight: 'bold',
+            color: 'white',
+            background: 'linear-gradient(to bottom right, rgb(126, 34, 206), rgb(109, 40, 217))', // from-purple-700 to-violet-900
+            md: {
+              fontSize: '4xl',
+            },
+          })}
+        >
           <p>Content tab</p>
           <DummyContent />
         </div>
       ),
     },
     {
-      title: "Random",
-      value: "random",
+      title: 'Random',
+      value: 'random',
       content: (
-        <div class={css({
-          width: 'full',
-          overflow: 'hidden',
-          position: 'relative',
-          height: 'full',
-          borderRadius: '2xl',
-          padding: '10',
-          fontSize: 'xl',
-          fontWeight: 'bold',
-          color: 'white',
-          background: 'linear-gradient(to bottom right, rgb(126, 34, 206), rgb(109, 40, 217))', // from-purple-700 to-violet-900
-          md: {
-            fontSize: '4xl',
-          },
-        })}>
+        <div
+          class={css({
+            width: 'full',
+            overflow: 'hidden',
+            position: 'relative',
+            height: 'full',
+            borderRadius: '2xl',
+            padding: '10',
+            fontSize: 'xl',
+            fontWeight: 'bold',
+            color: 'white',
+            background: 'linear-gradient(to bottom right, rgb(126, 34, 206), rgb(109, 40, 217))', // from-purple-700 to-violet-900
+            md: {
+              fontSize: '4xl',
+            },
+          })}
+        >
           <p>Random tab</p>
           <DummyContent />
         </div>
@@ -255,22 +276,24 @@ export const TabsDemo: Component = () => {
   ];
 
   return (
-    <div class={css({
-      height: '20rem',
-      perspective: '1000px',
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      maxWidth: '5xl',
-      marginX: 'auto',
-      width: 'full',
-      alignItems: 'flex-start',
-      justifyContent: 'flex-start',
-      marginY: '40',
-      md: {
-        height: '40rem',
-      },
-    })}>
+    <div
+      class={css({
+        height: '20rem',
+        perspective: '1000px',
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        maxWidth: '5xl',
+        marginX: 'auto',
+        width: 'full',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        marginY: '40',
+        md: {
+          height: '40rem',
+        },
+      })}
+    >
       <Tabs tabs={tabs} />
     </div>
   );

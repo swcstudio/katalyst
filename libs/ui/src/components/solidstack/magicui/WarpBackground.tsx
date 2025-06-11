@@ -1,5 +1,5 @@
-import { Component, JSX, onMount, createSignal, onCleanup } from "solid-js";
-import { css } from "../../styled-system/css";
+import { type Component, type JSX, createSignal, onCleanup, onMount } from 'solid-js';
+import { css } from '../../styled-system/css';
 
 interface WarpBackgroundProps {
   children?: JSX.Element;
@@ -15,82 +15,76 @@ export const WarpBackground: Component<WarpBackgroundProps> = (props) => {
 
   const intensity = () => props.intensity ?? 0.5;
   const speed = () => props.speed ?? 1;
-  const colors = () => props.colors ?? [
-    "#ff6b6b",
-    "#4ecdc4",
-    "#45b7d1",
-    "#96ceb4",
-    "#ffeaa7",
-    "#dda0dd",
-  ];
+  const colors = () =>
+    props.colors ?? ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dda0dd'];
 
   onMount(() => {
     setMounted(true);
   });
 
   const warpStyles = css({
-    position: "relative",
-    width: "100%",
-    height: "100%",
-    overflow: "hidden",
-    background: "linear-gradient(45deg, #1a1a2e, #16213e, #0f3460)",
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
+    background: 'linear-gradient(45deg, #1a1a2e, #16213e, #0f3460)',
   });
 
   const warpLayerStyles = css({
-    position: "absolute",
-    top: "0",
-    left: "0",
-    width: "200%",
-    height: "200%",
-    background: `radial-gradient(circle, ${colors().join(", ")})`,
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '200%',
+    height: '200%',
+    background: `radial-gradient(circle, ${colors().join(', ')})`,
     opacity: 0.3,
     animation: `warpMove ${20 / speed()}s linear infinite`,
-    filter: "blur(3px)",
-    transform: "scale(1.5)",
+    filter: 'blur(3px)',
+    transform: 'scale(1.5)',
   });
 
   const warpLayer2Styles = css({
-    position: "absolute",
-    top: "0",
-    left: "0",
-    width: "150%",
-    height: "150%",
-    background: `conic-gradient(from 0deg, ${colors().slice(0, 4).join(", ")})`,
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '150%',
+    height: '150%',
+    background: `conic-gradient(from 0deg, ${colors().slice(0, 4).join(', ')})`,
     opacity: 0.2,
     animation: `warpRotate ${30 / speed()}s linear infinite reverse`,
-    filter: "blur(5px)",
-    transform: "scale(1.2)",
+    filter: 'blur(5px)',
+    transform: 'scale(1.2)',
   });
 
   const warpLayer3Styles = css({
-    position: "absolute",
-    top: "0",
-    left: "0",
-    width: "180%",
-    height: "180%",
-    background: `linear-gradient(90deg, ${colors().slice(2).join(", ")})`,
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '180%',
+    height: '180%',
+    background: `linear-gradient(90deg, ${colors().slice(2).join(', ')})`,
     opacity: 0.15,
     animation: `warpPulse ${15 / speed()}s ease-in-out infinite`,
-    filter: "blur(8px)",
-    transform: "scale(1.3)",
+    filter: 'blur(8px)',
+    transform: 'scale(1.3)',
   });
 
   const contentStyles = css({
-    position: "relative",
+    position: 'relative',
     zIndex: 10,
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   });
 
   return (
     <div
       ref={containerRef}
-      class={`${warpStyles} ${props.className || ""}`}
+      class={`${warpStyles} ${props.className || ''}`}
       style={{
-        "--warp-intensity": intensity().toString(),
+        '--warp-intensity': intensity().toString(),
       }}
     >
       <style>{`
@@ -125,7 +119,7 @@ export const WarpBackground: Component<WarpBackgroundProps> = (props) => {
           75% { filter: blur(10px) hue-rotate(270deg); }
         }
       `}</style>
-      
+
       {mounted() && (
         <>
           <div class={warpLayerStyles} />
@@ -133,10 +127,8 @@ export const WarpBackground: Component<WarpBackgroundProps> = (props) => {
           <div class={warpLayer3Styles} />
         </>
       )}
-      
-      <div class={contentStyles}>
-        {props.children}
-      </div>
+
+      <div class={contentStyles}>{props.children}</div>
     </div>
   );
 };

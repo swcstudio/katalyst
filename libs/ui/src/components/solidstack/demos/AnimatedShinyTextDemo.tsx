@@ -1,16 +1,18 @@
-import { Component } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import type { Component } from 'solid-js';
 import { AnimatedShinyText } from '../../mystic/text-effects/AnimatedShinyText';
 
 export const AnimatedShinyTextDemo: Component = () => {
   return (
-    <div class={css({
-      zIndex: 10,
-      display: 'flex',
-      minHeight: '64',
-      alignItems: 'center',
-      justifyContent: 'center'
-    })}>
+    <div
+      class={css({
+        zIndex: 10,
+        display: 'flex',
+        minHeight: '64',
+        alignItems: 'center',
+        justifyContent: 'center',
+      })}
+    >
       <div
         class={css({
           borderRadius: 'full',
@@ -22,15 +24,15 @@ export const AnimatedShinyTextDemo: Component = () => {
           transition: 'all 0.2s ease-in',
           cursor: 'pointer',
           _hover: {
-            backgroundColor: 'neutral.200'
+            backgroundColor: 'neutral.200',
           },
           _dark: {
             borderColor: 'rgba(255, 255, 255, 0.05)',
             backgroundColor: 'neutral.900',
             _hover: {
-              backgroundColor: 'neutral.800'
-            }
-          }
+              backgroundColor: 'neutral.800',
+            },
+          },
         })}
       >
         <AnimatedShinyText
@@ -45,9 +47,9 @@ export const AnimatedShinyTextDemo: Component = () => {
               color: 'neutral.600',
               transitionDuration: '300ms',
               _dark: {
-                color: 'neutral.400'
-              }
-            }
+                color: 'neutral.400',
+              },
+            },
           })}
           shimmerColor="#ffffff"
           animationSpeed={3}
@@ -60,8 +62,8 @@ export const AnimatedShinyTextDemo: Component = () => {
               height: '3',
               transition: 'transform 0.3s ease-in-out',
               _groupHover: {
-                transform: 'translateX(0.125rem)'
-              }
+                transform: 'translateX(0.125rem)',
+              },
             })}
             fill="none"
             viewBox="0 0 24 24"

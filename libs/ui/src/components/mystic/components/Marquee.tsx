@@ -1,5 +1,14 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, children, For } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  children,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface MarqueeProps {
   children: JSX.Element;
@@ -49,10 +58,10 @@ const Marquee: Component<MarqueeProps> = (props) => {
 
   const getGradientMask = () => {
     if (!merged.gradient) return 'none';
-    
+
     const gradientWidth = merged.gradientWidth;
     const color = merged.gradientColor;
-    
+
     if (merged.vertical) {
       return `linear-gradient(to bottom, 
         transparent 0%, 
@@ -60,7 +69,7 @@ const Marquee: Component<MarqueeProps> = (props) => {
         ${color} calc(100% - ${gradientWidth}px), 
         transparent 100%)`;
     }
-    
+
     return `linear-gradient(to right, 
       transparent 0%, 
       ${color} ${gradientWidth}px, 
@@ -70,7 +79,7 @@ const Marquee: Component<MarqueeProps> = (props) => {
 
   const getFadeClass = () => {
     if (!merged.fade) return '';
-    
+
     return css({
       _before: {
         content: '""',
@@ -98,14 +107,18 @@ const Marquee: Component<MarqueeProps> = (props) => {
   return (
     <div
       ref={setContainerRef}
-      class={css({
-        position: 'relative',
-        overflow: 'hidden',
-        width: merged.vertical ? 'auto' : '100%',
-        height: merged.vertical ? '100%' : 'auto',
-        mask: getGradientMask(),
-        WebkitMask: getGradientMask(),
-      }, getFadeClass(), merged.className)}
+      class={css(
+        {
+          position: 'relative',
+          overflow: 'hidden',
+          width: merged.vertical ? 'auto' : '100%',
+          height: merged.vertical ? '100%' : 'auto',
+          mask: getGradientMask(),
+          WebkitMask: getGradientMask(),
+        },
+        getFadeClass(),
+        merged.className
+      )}
       style={merged.style}
       onMouseEnter={() => merged.pauseOnHover && setIsPaused(true)}
       onMouseLeave={() => merged.pauseOnHover && setIsPaused(false)}

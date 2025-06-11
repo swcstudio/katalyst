@@ -1,5 +1,5 @@
-import { Component, onMount, createSignal } from "solid-js";
-import { css } from "../../styled-system/css";
+import { type Component, createSignal, onMount } from 'solid-js';
+import { css } from '../../styled-system/css';
 
 interface RetroGridProps {
   className?: string;
@@ -16,7 +16,7 @@ export const RetroGrid: Component<RetroGridProps> = (props) => {
   const angle = () => props.angle ?? 65;
   const speed = () => props.speed ?? 5;
   const opacity = () => props.opacity ?? 0.5;
-  const color = () => props.color ?? "#00ffff";
+  const color = () => props.color ?? '#00ffff';
   const gridSize = () => props.gridSize ?? 50;
 
   onMount(() => {
@@ -24,28 +24,28 @@ export const RetroGrid: Component<RetroGridProps> = (props) => {
   });
 
   const retroGridStyles = css({
-    position: "absolute",
+    position: 'absolute',
     inset: 0,
-    width: "100%",
-    height: "100%",
-    pointerEvents: "none",
-    overflow: "hidden",
+    width: '100%',
+    height: '100%',
+    pointerEvents: 'none',
+    overflow: 'hidden',
   });
 
   const gridContainerStyles = css({
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
-    left: "50%",
-    width: "200%",
-    height: "200%",
+    left: '50%',
+    width: '200%',
+    height: '200%',
     transform: `translateX(-50%) rotateX(${angle()}deg)`,
-    transformOrigin: "bottom center",
-    perspective: "1000px",
+    transformOrigin: 'bottom center',
+    perspective: '1000px',
   });
 
   const gridStyles = css({
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
     backgroundImage: `
       linear-gradient(to right, ${color()} 1px, transparent 1px),
       linear-gradient(to bottom, ${color()} 1px, transparent 1px)
@@ -56,7 +56,7 @@ export const RetroGrid: Component<RetroGridProps> = (props) => {
   });
 
   return (
-    <div class={`${retroGridStyles} ${props.className || ""}`}>
+    <div class={`${retroGridStyles} ${props.className || ''}`}>
       <style>{`
         @keyframes retroGridMove {
           0% {
@@ -96,7 +96,7 @@ export const RetroGrid: Component<RetroGridProps> = (props) => {
           pointer-events: none;
         }
       `}</style>
-      
+
       {mounted() && (
         <>
           <div class={gridContainerStyles}>

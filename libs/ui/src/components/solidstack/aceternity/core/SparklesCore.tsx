@@ -1,5 +1,5 @@
-import { Component, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, createSignal, onCleanup, onMount } from 'solid-js';
 
 interface Particle {
   x: number;
@@ -49,13 +49,13 @@ export const SparklesCore: Component<SparklesCoreProps> = (props) => {
   };
 
   const initParticles = (width: number, height: number) => {
-    const particleCount = Math.floor((width * height) / 10000 * config.particleDensity);
+    const particleCount = Math.floor(((width * height) / 10000) * config.particleDensity);
     const newParticles: Particle[] = [];
-    
+
     for (let i = 0; i < particleCount; i++) {
       newParticles.push(createParticle(width, height));
     }
-    
+
     setParticles(newParticles);
   };
 
@@ -75,9 +75,13 @@ export const SparklesCore: Component<SparklesCoreProps> = (props) => {
     }
 
     // Reset particle if it's dead or out of bounds
-    if (particle.life >= particle.maxLife || 
-        particle.x < 0 || particle.x > width || 
-        particle.y < 0 || particle.y > height) {
+    if (
+      particle.life >= particle.maxLife ||
+      particle.x < 0 ||
+      particle.x > width ||
+      particle.y < 0 ||
+      particle.y > height
+    ) {
       return createParticle(width, height);
     }
 
@@ -88,22 +92,22 @@ export const SparklesCore: Component<SparklesCoreProps> = (props) => {
     ctx.save();
     ctx.globalAlpha = particle.opacity;
     ctx.fillStyle = config.particleColor;
-    
+
     // Create a glowing effect
     ctx.shadowColor = config.particleColor;
     ctx.shadowBlur = particle.size * 2;
-    
+
     ctx.beginPath();
     ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
     ctx.fill();
-    
+
     // Add a bright center
     ctx.shadowBlur = 0;
     ctx.globalAlpha = particle.opacity * 0.8;
     ctx.beginPath();
     ctx.arc(particle.x, particle.y, particle.size * 0.3, 0, Math.PI * 2);
     ctx.fill();
-    
+
     ctx.restore();
   };
 
@@ -120,11 +124,11 @@ export const SparklesCore: Component<SparklesCoreProps> = (props) => {
 
     // Update and draw particles
     const currentParticles = particles();
-    const updatedParticles = currentParticles.map(particle => 
+    const updatedParticles = currentParticles.map((particle) =>
       updateParticle(particle, width, height)
     );
 
-    updatedParticles.forEach(particle => {
+    updatedParticles.forEach((particle) => {
       drawParticle(ctx, particle);
     });
 
@@ -146,8 +150,8 @@ export const SparklesCore: Component<SparklesCoreProps> = (props) => {
       ctx.scale(dpr, dpr);
     }
 
-    canvasRef.style.width = rect.width + 'px';
-    canvasRef.style.height = rect.height + 'px';
+    canvasRef.style.width = `${rect.width}px`;
+    canvasRef.style.height = `${rect.height}px`;
 
     initParticles(rect.width, rect.height);
   };
@@ -176,14 +180,17 @@ export const SparklesCore: Component<SparklesCoreProps> = (props) => {
     <canvas
       ref={canvasRef}
       id={props.id}
-      class={css({
-        position: 'absolute',
-        inset: '0',
-        width: 'full',
-        height: 'full',
-        pointerEvents: 'none',
-        backgroundColor: config.background,
-      }, props.className)}
+      class={css(
+        {
+          position: 'absolute',
+          inset: '0',
+          width: 'full',
+          height: 'full',
+          pointerEvents: 'none',
+          backgroundColor: config.background,
+        },
+        props.className
+      )}
     />
   );
 };

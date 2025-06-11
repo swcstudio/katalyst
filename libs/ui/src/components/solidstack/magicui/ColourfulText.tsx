@@ -1,7 +1,7 @@
-import { Component, JSX, onMount, onCleanup, createSignal, For } from 'solid-js';
 import { cx } from '@sse/ui/styled-system/css';
 import { css } from '@sse/ui/styled-system/css';
 import { animate } from 'motion';
+import { type Component, For, JSX, createSignal, onCleanup, onMount } from 'solid-js';
 
 export interface ColourfulTextProps {
   text: string;
@@ -14,10 +14,7 @@ export const ColourfulTextDemo: Component = () => {
   const [backgroundOpacity, setBackgroundOpacity] = createSignal(0);
 
   onMount(() => {
-    const controls = animate(
-      (progress) => setBackgroundOpacity(progress * 0.5),
-      { duration: 1 }
-    );
+    const controls = animate((progress) => setBackgroundOpacity(progress * 0.5), { duration: 1 });
 
     onCleanup(() => {
       controls.stop();
@@ -25,16 +22,18 @@ export const ColourfulTextDemo: Component = () => {
   });
 
   return (
-    <div class={css({
-      height: '100vh',
-      width: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      position: 'relative',
-      overflow: 'hidden',
-      backgroundColor: 'black'
-    })}>
+    <div
+      class={css({
+        height: '100vh',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        backgroundColor: 'black',
+      })}
+    >
       <img
         src="https://assets.aceternity.com/linear-demo.webp"
         class={css({
@@ -44,21 +43,23 @@ export const ColourfulTextDemo: Component = () => {
           position: 'absolute',
           inset: 0,
           maskImage: 'radial-gradient(circle, transparent, black 80%)',
-          pointerEvents: 'none'
+          pointerEvents: 'none',
         })}
         style={{ opacity: backgroundOpacity() }}
       />
-      <h1 class={css({
-        fontSize: '2xl',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: 'white',
-        position: 'relative',
-        zIndex: 2,
-        fontFamily: 'sans',
-        md: { fontSize: '5xl' },
-        lg: { fontSize: '7xl' }
-      })}>
+      <h1
+        class={css({
+          fontSize: '2xl',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          color: 'white',
+          position: 'relative',
+          zIndex: 2,
+          fontFamily: 'sans',
+          md: { fontSize: '5xl' },
+          lg: { fontSize: '7xl' },
+        })}
+      >
         The best <ColourfulText text="components" /> <br /> you will ever find
       </h1>
     </div>
@@ -67,8 +68,16 @@ export const ColourfulTextDemo: Component = () => {
 
 export const ColourfulText: Component<ColourfulTextProps> = (props) => {
   const defaultColors = [
-    '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FECA57',
-    '#FF9FF3', '#54A0FF', '#5F27CD', '#00D2D3', '#FF9F43'
+    '#FF6B6B',
+    '#4ECDC4',
+    '#45B7D1',
+    '#96CEB4',
+    '#FECA57',
+    '#FF9FF3',
+    '#54A0FF',
+    '#5F27CD',
+    '#00D2D3',
+    '#FF9F43',
   ];
 
   const colors = () => props.colors || defaultColors;
@@ -87,8 +96,8 @@ export const ColourfulText: Component<ColourfulTextProps> = (props) => {
         },
         {
           duration: animationDuration(),
-          repeat: Infinity,
-          easing: "ease-in-out"
+          repeat: Number.POSITIVE_INFINITY,
+          easing: 'ease-in-out',
         }
       );
     };
@@ -108,8 +117,8 @@ export const ColourfulText: Component<ColourfulTextProps> = (props) => {
           {
             duration: animationDuration() * 0.8,
             delay: index * 0.1,
-            repeat: Infinity,
-            easing: "ease-in-out"
+            repeat: Number.POSITIVE_INFINITY,
+            easing: 'ease-in-out',
           }
         );
       }
@@ -127,7 +136,7 @@ export const ColourfulText: Component<ColourfulTextProps> = (props) => {
           color: 'transparent',
           animation: 'gradient-shift 3s ease-in-out infinite',
           fontWeight: 'bold',
-          position: 'relative'
+          position: 'relative',
         }),
         props.className
       )}
@@ -142,25 +151,27 @@ export const ColourfulText: Component<ColourfulTextProps> = (props) => {
                 transition: 'all 0.3s ease',
                 _hover: {
                   transform: 'translateY(-2px) scale(1.1)',
-                  textShadow: '0 0 20px currentColor'
-                }
+                  textShadow: '0 0 20px currentColor',
+                },
               })
             )}
             style={{
-              color: colors()[currentColorIndex()]
+              color: colors()[currentColorIndex()],
             }}
           >
             {letter}
           </span>
         )}
       </For>
-      
+
       {/* Add some sparkle effects */}
-      <div class={css({
-        position: 'absolute',
-        inset: 0,
-        pointerEvents: 'none'
-      })}>
+      <div
+        class={css({
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+        })}
+      >
         <For each={Array.from({ length: 3 }, (_, i) => i)}>
           {(i) => {
             onMount(() => {
@@ -171,13 +182,13 @@ export const ColourfulText: Component<ColourfulTextProps> = (props) => {
                   {
                     opacity: [0, 1, 0],
                     scale: [0, 1, 0],
-                    rotate: [0, 180, 360]
+                    rotate: [0, 180, 360],
                   },
                   {
                     duration: animationDuration() + i,
                     delay: i * 0.5,
-                    repeat: Infinity,
-                    easing: "ease-in-out"
+                    repeat: Number.POSITIVE_INFINITY,
+                    easing: 'ease-in-out',
                   }
                 );
               }
@@ -193,12 +204,12 @@ export const ColourfulText: Component<ColourfulTextProps> = (props) => {
                     height: '4px',
                     backgroundColor: colors()[i % colors().length],
                     borderRadius: '50%',
-                    opacity: 0.7
+                    opacity: 0.7,
                   })
                 )}
                 style={{
                   left: `${20 + i * 30}%`,
-                  top: `${10 + i * 20}%`
+                  top: `${10 + i * 20}%`,
                 }}
               />
             );

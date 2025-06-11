@@ -1,46 +1,46 @@
-import { createSignal } from "solid-js"
-import { 
-  Button, 
-  Input, 
-  Card, 
-  CardHeader, 
-  CardBody, 
-  CardFooter,
+import { createSignal } from 'solid-js';
+import {
   Accordion,
-  type AccordionItem
-} from "./index.ts"
+  type AccordionItem,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Input,
+} from './index.ts';
 
 export function SimpleExample() {
-  const [inputValue, setInputValue] = createSignal("")
-  const [message, setMessage] = createSignal("")
+  const [inputValue, setInputValue] = createSignal('');
+  const [message, setMessage] = createSignal('');
 
   const accordionItems: AccordionItem[] = [
     {
-      title: "Getting Started",
-      content: "Learn how to set up and use our Ark UI components in your SolidJS project."
+      title: 'Getting Started',
+      content: 'Learn how to set up and use our Ark UI components in your SolidJS project.',
     },
     {
-      title: "Components",
-      content: "Explore our collection of accessible and customizable UI components."
+      title: 'Components',
+      content: 'Explore our collection of accessible and customizable UI components.',
     },
     {
-      title: "Styling",
-      content: "Customize the appearance of components using Tailwind CSS classes."
-    }
-  ]
+      title: 'Styling',
+      content: 'Customize the appearance of components using Tailwind CSS classes.',
+    },
+  ];
 
   const handleSubmit = () => {
     if (inputValue()) {
-      setMessage(`Hello, ${inputValue()}! Form submitted successfully.`)
+      setMessage(`Hello, ${inputValue()}! Form submitted successfully.`);
     } else {
-      setMessage("Please enter your name.")
+      setMessage('Please enter your name.');
     }
-  }
+  };
 
   const handleReset = () => {
-    setInputValue("")
-    setMessage("")
-  }
+    setInputValue('');
+    setMessage('');
+  };
 
   return (
     <div class="min-h-screen bg-gray-50 p-8">
@@ -61,7 +61,7 @@ export function SimpleExample() {
                 label="Your Name"
                 placeholder="Enter your name"
                 value={inputValue()}
-                onInput={(e: any) => setInputValue(e.currentTarget.value)}
+                onInput={(e: InputEvent & { currentTarget: HTMLInputElement }) => setInputValue(e.currentTarget.value)}
                 helperText="This field is required"
               />
 
@@ -95,7 +95,7 @@ export function SimpleExample() {
               <Button variant="ghost">Ghost</Button>
               <Button variant="destructive">Destructive</Button>
             </div>
-            
+
             <div class="mt-6">
               <h4 class="font-medium mb-3">Button Sizes</h4>
               <div class="flex items-center gap-4">
@@ -123,5 +123,5 @@ export function SimpleExample() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

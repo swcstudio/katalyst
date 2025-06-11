@@ -1,5 +1,5 @@
-import { Component, onMount, createSignal } from "solid-js";
-import { css } from "../../styled-system/css";
+import { type Component, createSignal, onMount } from 'solid-js';
+import { css } from '../../styled-system/css';
 
 interface DotPatternProps {
   className?: string;
@@ -26,9 +26,9 @@ export const DotPattern: Component<DotPatternProps> = (props) => {
   const cx = () => props.cx ?? 1;
   const cy = () => props.cy ?? 1;
   const cr = () => props.cr ?? 1;
-  const fill = () => props.fill ?? "#d1d5db";
+  const fill = () => props.fill ?? '#d1d5db';
   const glow = () => props.glow ?? false;
-  const glowColor = () => props.glowColor ?? "#3b82f6";
+  const glowColor = () => props.glowColor ?? '#3b82f6';
   const glowSize = () => props.glowSize ?? 3;
 
   onMount(() => {
@@ -36,22 +36,19 @@ export const DotPattern: Component<DotPatternProps> = (props) => {
   });
 
   const svgStyles = css({
-    position: "absolute",
+    position: 'absolute',
     inset: 0,
-    height: "100%",
-    width: "100%",
-    fill: "rgba(255, 255, 255, 0.03)",
-    pointerEvents: "none",
+    height: '100%',
+    width: '100%',
+    fill: 'rgba(255, 255, 255, 0.03)',
+    pointerEvents: 'none',
   });
 
   const patternId = `dot-pattern-${Math.random().toString(36).substr(2, 9)}`;
   const glowPatternId = `dot-pattern-glow-${Math.random().toString(36).substr(2, 9)}`;
 
   return (
-    <svg
-      class={`${svgStyles} ${props.className || ""}`}
-      aria-hidden="true"
-    >
+    <svg class={`${svgStyles} ${props.className || ''}`} aria-hidden="true">
       <defs>
         <pattern
           id={patternId}
@@ -61,14 +58,9 @@ export const DotPattern: Component<DotPatternProps> = (props) => {
           x={x()}
           y={y()}
         >
-          <circle
-            cx={cx()}
-            cy={cy()}
-            r={cr()}
-            fill={fill()}
-          />
+          <circle cx={cx()} cy={cy()} r={cr()} fill={fill()} />
         </pattern>
-        
+
         {glow() && (
           <pattern
             id={glowPatternId}
@@ -86,30 +78,14 @@ export const DotPattern: Component<DotPatternProps> = (props) => {
               filter={`blur(${glowSize()}px)`}
               opacity="0.5"
             />
-            <circle
-              cx={cx()}
-              cy={cy()}
-              r={cr()}
-              fill={glowColor()}
-              opacity="0.8"
-            />
+            <circle cx={cx()} cy={cy()} r={cr()} fill={glowColor()} opacity="0.8" />
           </pattern>
         )}
       </defs>
-      
-      {glow() && (
-        <rect 
-          width="100%" 
-          height="100%" 
-          fill={`url(#${glowPatternId})`} 
-        />
-      )}
-      
-      <rect 
-        width="100%" 
-        height="100%" 
-        fill={`url(#${patternId})`} 
-      />
+
+      {glow() && <rect width="100%" height="100%" fill={`url(#${glowPatternId})`} />}
+
+      <rect width="100%" height="100%" fill={`url(#${patternId})`} />
     </svg>
   );
 };

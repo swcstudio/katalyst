@@ -1,5 +1,14 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, For, Show } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  JSX,
+  Show,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface Testimonial {
   quote: string;
@@ -41,7 +50,9 @@ export const AnimatedTestimonials: Component<AnimatedTestimonialsProps> = (props
     if (isAnimating()) return;
     setIsAnimating(true);
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev - 1 + merged.testimonials.length) % merged.testimonials.length);
+      setCurrentIndex(
+        (prev) => (prev - 1 + merged.testimonials.length) % merged.testimonials.length
+      );
       setIsAnimating(false);
     }, 300);
   };
@@ -70,39 +81,50 @@ export const AnimatedTestimonials: Component<AnimatedTestimonialsProps> = (props
   const currentTestimonial = () => merged.testimonials[currentIndex()];
 
   return (
-    <div class={css({
-      maxWidth: '4xl',
-      marginX: 'auto',
-      padding: '8',
-      position: 'relative',
-    }, merged.className)}>
-      <div class={css({
-        position: 'relative',
-        minHeight: '400px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      })}>
+    <div
+      class={css(
+        {
+          maxWidth: '4xl',
+          marginX: 'auto',
+          padding: '8',
+          position: 'relative',
+        },
+        merged.className
+      )}
+    >
+      <div
+        class={css({
+          position: 'relative',
+          minHeight: '400px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        })}
+      >
         {/* Main testimonial content */}
-        <div class={css({
-          textAlign: 'center',
-          maxWidth: '3xl',
-          opacity: isAnimating() ? 0 : 1,
-          transform: isAnimating() ? 'translateY(20px)' : 'translateY(0)',
-          transition: 'all 0.3s ease-in-out',
-        })}>
+        <div
+          class={css({
+            textAlign: 'center',
+            maxWidth: '3xl',
+            opacity: isAnimating() ? 0 : 1,
+            transform: isAnimating() ? 'translateY(20px)' : 'translateY(0)',
+            transition: 'all 0.3s ease-in-out',
+          })}
+        >
           {/* Avatar */}
-          <div class={css({
-            width: '24',
-            height: '24',
-            borderRadius: 'full',
-            overflow: 'hidden',
-            marginX: 'auto',
-            marginBottom: '6',
-            border: '4px solid',
-            borderColor: 'white',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-          })}>
+          <div
+            class={css({
+              width: '24',
+              height: '24',
+              borderRadius: 'full',
+              overflow: 'hidden',
+              marginX: 'auto',
+              marginBottom: '6',
+              border: '4px solid',
+              borderColor: 'white',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+            })}
+          >
             <img
               src={currentTestimonial()?.src}
               alt={currentTestimonial()?.name}
@@ -115,47 +137,55 @@ export const AnimatedTestimonials: Component<AnimatedTestimonialsProps> = (props
           </div>
 
           {/* Quote */}
-          <blockquote class={css({
-            fontSize: 'xl',
-            lineHeight: 'relaxed',
-            fontWeight: 'medium',
-            color: 'gray.700',
-            marginBottom: '8',
-            fontStyle: 'italic',
-            _md: {
-              fontSize: '2xl',
-            },
-            _dark: {
-              color: 'gray.300',
-            },
-          })}>
+          <blockquote
+            class={css({
+              fontSize: 'xl',
+              lineHeight: 'relaxed',
+              fontWeight: 'medium',
+              color: 'gray.700',
+              marginBottom: '8',
+              fontStyle: 'italic',
+              _md: {
+                fontSize: '2xl',
+              },
+              _dark: {
+                color: 'gray.300',
+              },
+            })}
+          >
             "{currentTestimonial()?.quote}"
           </blockquote>
 
           {/* Author info */}
-          <div class={css({
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1',
-          })}>
-            <div class={css({
-              fontSize: 'lg',
-              fontWeight: 'semibold',
-              color: 'gray.900',
-              _dark: {
-                color: 'white',
-              },
-            })}>
+          <div
+            class={css({
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '1',
+            })}
+          >
+            <div
+              class={css({
+                fontSize: 'lg',
+                fontWeight: 'semibold',
+                color: 'gray.900',
+                _dark: {
+                  color: 'white',
+                },
+              })}
+            >
               {currentTestimonial()?.name}
             </div>
-            <div class={css({
-              fontSize: 'sm',
-              color: 'gray.600',
-              _dark: {
-                color: 'gray.400',
-              },
-            })}>
+            <div
+              class={css({
+                fontSize: 'sm',
+                color: 'gray.600',
+                _dark: {
+                  color: 'gray.400',
+                },
+              })}
+            >
               {currentTestimonial()?.designation}
             </div>
           </div>
@@ -256,12 +286,14 @@ export const AnimatedTestimonials: Component<AnimatedTestimonialsProps> = (props
       </div>
 
       {/* Dots indicator */}
-      <div class={css({
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '2',
-        marginTop: '8',
-      })}>
+      <div
+        class={css({
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '2',
+          marginTop: '8',
+        })}
+      >
         <For each={merged.testimonials}>
           {(_, index) => (
             <button
@@ -297,37 +329,37 @@ export const AnimatedTestimonialsDemo: Component<AnimatedTestimonialsDemoProps> 
     {
       quote:
         "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
-      name: "Sarah Chen",
-      designation: "Product Manager at TechFlow",
-      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: 'Sarah Chen',
+      designation: 'Product Manager at TechFlow',
+      src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       quote:
         "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
-      name: "Michael Rodriguez",
-      designation: "CTO at InnovateSphere",
-      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: 'Michael Rodriguez',
+      designation: 'CTO at InnovateSphere',
+      src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       quote:
         "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-      name: "Emily Watson",
-      designation: "Operations Director at CloudScale",
-      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: 'Emily Watson',
+      designation: 'Operations Director at CloudScale',
+      src: 'https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       quote:
         "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-      name: "James Kim",
-      designation: "Engineering Lead at DataPro",
-      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: 'James Kim',
+      designation: 'Engineering Lead at DataPro',
+      src: 'https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       quote:
-        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-      name: "Lisa Thompson",
-      designation: "VP of Technology at FutureNet",
-      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        'The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.',
+      name: 'Lisa Thompson',
+      designation: 'VP of Technology at FutureNet',
+      src: 'https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
   ];
 

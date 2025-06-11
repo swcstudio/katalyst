@@ -7,7 +7,7 @@ console.log('Building Marketing micro-frontend...');
 
 try {
   await Deno.mkdir('dist/marketing', { recursive: true });
-  
+
   const { close } = await build({
     plugins: [pluginSolid()],
     source: {
@@ -21,7 +21,7 @@ try {
       },
     },
   });
-  
+
   await close();
   console.log('Marketing build completed successfully!');
 } catch (error) {

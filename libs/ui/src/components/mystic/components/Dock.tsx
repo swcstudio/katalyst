@@ -1,5 +1,14 @@
-import { Component, JSX, mergeProps, createSignal, For, children, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  children,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface DockItem {
   id: string;
@@ -80,20 +89,23 @@ const Dock: Component<DockProps> = (props) => {
 
   const getDockClasses = () => {
     const positionClasses = getPositionClasses();
-    
-    return css({
-      ...positionClasses,
-      display: 'flex',
-      flexDirection: merged.direction === 'horizontal' ? 'row' : 'column',
-      alignItems: 'center',
-      gap: 2,
-      padding: 3,
-      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-      backdropFilter: 'blur(10px)',
-      borderRadius: merged.largeRadius,
-      border: '1px solid rgba(255, 255, 255, 0.2)',
-      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-    }, merged.className);
+
+    return css(
+      {
+        ...positionClasses,
+        display: 'flex',
+        flexDirection: merged.direction === 'horizontal' ? 'row' : 'column',
+        alignItems: 'center',
+        gap: 2,
+        padding: 3,
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(10px)',
+        borderRadius: merged.largeRadius,
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+      },
+      merged.className
+    );
   };
 
   const handleMouseMove = (e: MouseEvent) => {
@@ -117,11 +129,7 @@ const Dock: Component<DockProps> = (props) => {
   });
 
   return (
-    <div
-      class={getDockClasses()}
-      style={merged.style}
-      onMouseLeave={() => setHoveredIndex(null)}
-    >
+    <div class={getDockClasses()} style={merged.style} onMouseLeave={() => setHoveredIndex(null)}>
       <For each={merged.items}>
         {(item, index) => {
           const scale = calculateItemScale(index());

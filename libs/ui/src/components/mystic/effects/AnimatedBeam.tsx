@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, createSignal, mergeProps, onCleanup, onMount } from 'solid-js';
 
 export interface AnimatedBeamProps {
   className?: string;
@@ -70,16 +70,16 @@ const AnimatedBeam: Component<AnimatedBeamProps> = (props) => {
       const midY = (startY + endY) / 2;
       const distance = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);
       const curvature = merged.curvature * distance * 0.2;
-      
+
       const angle = Math.atan2(endY - startY, endX - startX) + Math.PI / 2;
       const controlX = midX + Math.cos(angle) * curvature;
       const controlY = midY + Math.sin(angle) * curvature;
-      
+
       path = `M ${startX} ${startY} Q ${controlX} ${controlY} ${endX} ${endY}`;
     }
 
     setPathData(path);
-    
+
     const maxX = Math.max(startX, endX, startX + merged.curvature * 50);
     const maxY = Math.max(startY, endY, startY + merged.curvature * 50);
     setSvgDimensions({ width: maxX + 100, height: maxY + 100 });
@@ -89,12 +89,12 @@ const AnimatedBeam: Component<AnimatedBeamProps> = (props) => {
 
   onMount(() => {
     updatePath();
-    
+
     if (typeof ResizeObserver !== 'undefined') {
       resizeObserver = new ResizeObserver(() => {
         updatePath();
       });
-      
+
       if (merged.fromRef) resizeObserver.observe(merged.fromRef);
       if (merged.toRef) resizeObserver.observe(merged.toRef);
     }
@@ -114,15 +114,18 @@ const AnimatedBeam: Component<AnimatedBeamProps> = (props) => {
   return (
     <svg
       ref={setSvgRef}
-      class={css({
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        pointerEvents: 'none',
-        zIndex: 1,
-      }, merged.className)}
+      class={css(
+        {
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          pointerEvents: 'none',
+          zIndex: 1,
+        },
+        merged.className
+      )}
       style={merged.style}
       width={svgDimensions().width}
       height={svgDimensions().height}
@@ -133,7 +136,7 @@ const AnimatedBeam: Component<AnimatedBeamProps> = (props) => {
           <stop offset="50%" style={`stop-color:${merged.gradientStopColor};stop-opacity:1`} />
           <stop offset="100%" style={`stop-color:${merged.gradientStartColor};stop-opacity:0`} />
         </linearGradient>
-        
+
         <linearGradient id={`${id}-pulse`} x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style={`stop-color:${merged.gradientStartColor};stop-opacity:0`}>
             <animate
@@ -184,7 +187,7 @@ const AnimatedBeam: Component<AnimatedBeamProps> = (props) => {
       >
         <animate
           attributeName="stroke-dasharray"
-          values={`0 1000;50 1000;0 1000`}
+          values={'0 1000;50 1000;0 1000'}
           dur={`${merged.duration}ms`}
           begin={`${merged.delay}ms`}
           repeatCount="indefinite"

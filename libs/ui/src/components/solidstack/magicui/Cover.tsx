@@ -1,6 +1,6 @@
-import { Component, JSX } from 'solid-js';
 import { cx } from '@sse/ui/styled-system/css';
 import { css } from '@sse/ui/styled-system/css';
+import type { Component, JSX } from 'solid-js';
 
 export interface CoverProps {
   children: JSX.Element;
@@ -10,25 +10,27 @@ export interface CoverProps {
 export const CoverDemo: Component = () => {
   return (
     <div>
-      <h1 class={css({
-        fontSize: '4xl',
-        fontWeight: '600',
-        maxWidth: '1280px',
-        marginX: 'auto',
-        textAlign: 'center',
-        marginTop: '24px',
-        position: 'relative',
-        zIndex: 20,
-        paddingY: '24px',
-        backgroundClip: 'text',
-        color: 'transparent',
-        backgroundImage: 'linear-gradient(to bottom, #525252, #404040, #404040)',
-        md: { fontSize: '4xl' },
-        lg: { fontSize: '6xl' },
-        _dark: {
-          backgroundImage: 'linear-gradient(to bottom, #525252, white, white)'
-        }
-      })}>
+      <h1
+        class={css({
+          fontSize: '4xl',
+          fontWeight: '600',
+          maxWidth: '1280px',
+          marginX: 'auto',
+          textAlign: 'center',
+          marginTop: '24px',
+          position: 'relative',
+          zIndex: 20,
+          paddingY: '24px',
+          backgroundClip: 'text',
+          color: 'transparent',
+          backgroundImage: 'linear-gradient(to bottom, #525252, #404040, #404040)',
+          md: { fontSize: '4xl' },
+          lg: { fontSize: '6xl' },
+          _dark: {
+            backgroundImage: 'linear-gradient(to bottom, #525252, white, white)',
+          },
+        })}
+      >
         Build amazing websites <br /> at <Cover>warp speed</Cover>
       </h1>
     </div>
@@ -56,7 +58,7 @@ export const Cover: Component<CoverProps> = (props) => {
             padding: '2px',
             zIndex: -1,
             opacity: 0.1,
-            filter: 'blur(10px)'
+            filter: 'blur(10px)',
           },
           _after: {
             content: '""',
@@ -70,25 +72,25 @@ export const Cover: Component<CoverProps> = (props) => {
             borderRadius: '12px',
             zIndex: -2,
             opacity: 0.05,
-            filter: 'blur(20px)'
+            filter: 'blur(20px)',
           },
           _hover: {
             _before: {
               opacity: 0.2,
-              filter: 'blur(8px)'
+              filter: 'blur(8px)',
             },
             _after: {
               opacity: 0.1,
-              filter: 'blur(15px)'
-            }
+              filter: 'blur(15px)',
+            },
           },
-          animation: 'shimmer 3s ease-in-out infinite'
+          animation: 'shimmer 3s ease-in-out infinite',
         }),
         props.className
       )}
     >
       {props.children}
-      
+
       <style>
         {`
           @keyframes shimmer {

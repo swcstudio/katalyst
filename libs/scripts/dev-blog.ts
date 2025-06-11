@@ -8,9 +8,9 @@ try {
     port: 30001,
     config: {
       integrations: ['@astrojs/solid-js', '@astrojs/mdx'],
-    }
+    },
   });
-  
+
   console.log('Blog development server started on http://localhost:30001');
 } catch (error) {
   console.error('Failed to start Blog development server:', error);

@@ -49,7 +49,7 @@ interface SupportCard {
   id: string;
   name: string;
   description: string;
-  icon: any;
+  icon: React.ComponentType | string;
   href?: string;
   contactMethod?: "email" | "phone" | "chat" | "form";
   available?: boolean;
@@ -165,7 +165,7 @@ interface NewsletterSubscriptionProps {
   backgroundPattern?: "none" | "dots" | "beams" | "gradient";
   showPrivacyPolicy?: boolean;
   showFeatures?: boolean;
-  onSubscribe?: (email: string, data?: any) => void;
+  onSubscribe?: (email: string, data?: Record<string, unknown>) => void;
   onError?: (error: string) => void;
   privacyPolicyUrl?: string;
   backgroundImage?: string;
@@ -173,7 +173,7 @@ interface NewsletterSubscriptionProps {
 
 interface NewsletterFeature {
   id: string;
-  icon: any;
+  icon: React.ComponentType | string;
   title: string;
   description: string;
 }
@@ -392,7 +392,7 @@ const handleContactSelection = (card: SupportCard, method?: string) => {
 
 ### Newsletter API Integration
 ```tsx
-const handleNewsletterSubscription = async (email: string, data: any) => {
+const handleNewsletterSubscription = async (email: string, data: Record<string, unknown>) => {
   try {
     const response = await fetch('/api/newsletter/subscribe', {
       method: 'POST',

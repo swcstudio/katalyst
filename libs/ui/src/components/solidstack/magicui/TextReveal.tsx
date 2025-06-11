@@ -1,5 +1,14 @@
-import { Component, JSX, mergeProps, ParentComponent, createSignal, onMount, onCleanup, createEffect } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  type JSX,
+  type ParentComponent,
+  createEffect,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface TextRevealProps {
   class?: string;
@@ -82,10 +91,13 @@ export const TextReveal: ParentComponent<TextRevealProps> = (props) => {
   return (
     <div
       ref={containerRef}
-      class={css({
-        display: 'inline-block',
-        position: 'relative',
-      }, merged.class)}
+      class={css(
+        {
+          display: 'inline-block',
+          position: 'relative',
+        },
+        merged.class
+      )}
       style={{
         ...getTransformStyle(),
         ...merged.style,
@@ -102,10 +114,15 @@ export interface TextRevealDemoProps {
 
 export const TextRevealDemo: Component<TextRevealDemoProps> = (props) => {
   return (
-    <div class={css({
-      padding: '40px',
-      textAlign: 'center',
-    }, props.class)}>
+    <div
+      class={css(
+        {
+          padding: '40px',
+          textAlign: 'center',
+        },
+        props.class
+      )}
+    >
       <TextReveal
         class={css({
           fontSize: '2.5rem',

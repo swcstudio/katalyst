@@ -1,5 +1,14 @@
-import { Component, JSX, mergeProps, ParentComponent, splitProps, createSignal, onCleanup, For } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  type ParentComponent,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  splitProps,
+} from 'solid-js';
 
 interface Ripple {
   id: number;
@@ -22,10 +31,17 @@ export interface RippleButtonProps {
 
 export const RippleButton: ParentComponent<RippleButtonProps> = (props) => {
   const [local, others] = splitProps(props, [
-    'class', 'style', 'children', 'disabled', 'onClick', 
-    'rippleColor', 'rippleDuration', 'background', 'maxRipples'
+    'class',
+    'style',
+    'children',
+    'disabled',
+    'onClick',
+    'rippleColor',
+    'rippleDuration',
+    'background',
+    'maxRipples',
   ]);
-  
+
   const merged = mergeProps(
     {
       disabled: false,
@@ -56,7 +72,7 @@ export const RippleButton: ParentComponent<RippleButtonProps> = (props) => {
       size,
     };
 
-    setRipples(prev => {
+    setRipples((prev) => {
       const updated = [...prev, newRipple];
       // Limit the number of concurrent ripples
       if (updated.length > merged.maxRipples) {
@@ -67,7 +83,7 @@ export const RippleButton: ParentComponent<RippleButtonProps> = (props) => {
 
     // Remove ripple after animation completes
     setTimeout(() => {
-      setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id));
+      setRipples((prev) => prev.filter((ripple) => ripple.id !== newRipple.id));
     }, merged.rippleDuration);
   };
 
@@ -85,57 +101,64 @@ export const RippleButton: ParentComponent<RippleButtonProps> = (props) => {
   return (
     <button
       ref={buttonRef}
-      class={css({
-        position: 'relative',
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '12px 24px',
-        borderRadius: '8px',
-        fontSize: '14px',
-        fontWeight: '600',
-        border: 'none',
-        cursor: merged.disabled ? 'not-allowed' : 'pointer',
-        transition: 'all 0.3s ease',
-        overflow: 'hidden',
-        opacity: merged.disabled ? 0.6 : 1,
-        background: merged.background,
-        color: 'white',
-        userSelect: 'none',
-        
-        '&:hover': {
-          transform: merged.disabled ? 'none' : 'translateY(-1px)',
-          boxShadow: merged.disabled ? 'none' : '0 8px 25px rgba(0, 0, 0, 0.2)',
+      class={css(
+        {
+          position: 'relative',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '12px 24px',
+          borderRadius: '8px',
+          fontSize: '14px',
+          fontWeight: '600',
+          border: 'none',
+          cursor: merged.disabled ? 'not-allowed' : 'pointer',
+          transition: 'all 0.3s ease',
+          overflow: 'hidden',
+          opacity: merged.disabled ? 0.6 : 1,
+          background: merged.background,
+          color: 'white',
+          userSelect: 'none',
+
+          '&:hover': {
+            transform: merged.disabled ? 'none' : 'translateY(-1px)',
+            boxShadow: merged.disabled ? 'none' : '0 8px 25px rgba(0, 0, 0, 0.2)',
+          },
+
+          '&:active': {
+            transform: merged.disabled ? 'none' : 'translateY(0)',
+          },
+
+          '&:focus': {
+            outline: 'none',
+            boxShadow: `0 0 0 3px ${merged.rippleColor}40`,
+          },
         },
-        
-        '&:active': {
-          transform: merged.disabled ? 'none' : 'translateY(0)',
-        },
-        
-        '&:focus': {
-          outline: 'none',
-          boxShadow: `0 0 0 3px ${merged.rippleColor}40`,
-        },
-      }, merged.class)}
+        merged.class
+      )}
       style={merged.style}
       disabled={merged.disabled}
       onClick={handleClick}
       {...others}
     >
-      <span class={css({
-        position: 'relative',
-        zIndex: 1,
-      })}>
+      <span
+        class={css({
+          position: 'relative',
+          zIndex: 1,
+        })}
+      >
         {merged.children}
       </span>
-      
+
       {/* Ripple container */}
-      <span class={css({
-        position: 'absolute',
-        inset: 0,
-        pointerEvents: 'none',
-        zIndex: 0,
-      })}>
+      <span
+        class={css({
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          zIndex: 0,
+        })}
+      >
         <For each={ripples()}>
           {(ripple) => (
             <span
@@ -145,7 +168,7 @@ export const RippleButton: ParentComponent<RippleButtonProps> = (props) => {
                 transform: 'scale(0)',
                 animation: `ripple ${merged.rippleDuration}ms ease-out`,
                 pointerEvents: 'none',
-                
+
                 '@keyframes ripple': {
                   '0%': {
                     transform: 'scale(0)',
@@ -178,12 +201,17 @@ export interface RippleButtonDemoProps {
 
 export const RippleButtonDemo: Component<RippleButtonDemoProps> = (props) => {
   return (
-    <div class={css({
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-    }, props.class)}>
+    <div
+      class={css(
+        {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '20px',
+        },
+        props.class
+      )}
+    >
       <RippleButton rippleColor="#ADD8E6">Click me</RippleButton>
     </div>
   );

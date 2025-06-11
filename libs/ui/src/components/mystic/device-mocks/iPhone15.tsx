@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, children } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, children, mergeProps } from 'solid-js';
 
 export interface iPhone15Props {
   children?: JSX.Element;
@@ -8,7 +8,16 @@ export interface iPhone15Props {
   variant?: 'standard' | 'plus' | 'pro' | 'pro-max';
   size?: 'sm' | 'md' | 'lg';
   orientation?: 'portrait' | 'landscape';
-  color?: 'black' | 'blue' | 'green' | 'yellow' | 'pink' | 'natural' | 'blue-titanium' | 'white-titanium' | 'black-titanium';
+  color?:
+    | 'black'
+    | 'blue'
+    | 'green'
+    | 'yellow'
+    | 'pink'
+    | 'natural'
+    | 'blue-titanium'
+    | 'white-titanium'
+    | 'black-titanium';
 }
 
 const iPhone15: Component<iPhone15Props> = (props) => {
@@ -44,7 +53,7 @@ const iPhone15: Component<iPhone15Props> = (props) => {
     };
 
     const size = sizes[merged.size];
-    
+
     if (merged.orientation === 'landscape') {
       return {
         width: size.height,
@@ -52,7 +61,7 @@ const iPhone15: Component<iPhone15Props> = (props) => {
         borderRadius: size.borderRadius,
       };
     }
-    
+
     return size;
   };
 
@@ -111,15 +120,18 @@ const iPhone15: Component<iPhone15Props> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '12px',
-        borderRadius: sizeStyles.borderRadius,
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
-      }, merged.className)}
+      class={css(
+        {
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '12px',
+          borderRadius: sizeStyles.borderRadius,
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
+        },
+        merged.className
+      )}
       style={{
         ...sizeStyles,
         ...colorStyles,
@@ -138,7 +150,7 @@ const iPhone15: Component<iPhone15Props> = (props) => {
           borderRadius: '2px 0 0 2px',
         })}
       />
-      
+
       {/* Volume buttons */}
       <div
         class={css({
@@ -223,7 +235,9 @@ const iPhone15: Component<iPhone15Props> = (props) => {
           })}
         >
           <div class={css({ marginLeft: '40px' })}>9:41</div>
-          <div class={css({ display: 'flex', alignItems: 'center', gap: '4px', marginRight: '40px' })}>
+          <div
+            class={css({ display: 'flex', alignItems: 'center', gap: '4px', marginRight: '40px' })}
+          >
             <div class={css({ fontSize: '12px' })}>●●●</div>
             <div class={css({ fontSize: '12px' })}>📶</div>
             <div class={css({ fontSize: '12px' })}>🔋</div>

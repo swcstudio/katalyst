@@ -1,5 +1,14 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, For, children } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  children,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface BackgroundBeamsProps {
   className?: string;
@@ -8,26 +17,29 @@ export interface BackgroundBeamsProps {
 
 export const BackgroundBeams: Component<BackgroundBeamsProps> = (props) => {
   const merged = mergeProps({}, props);
-  
+
   const beamPaths = [
-    "M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875",
-    "M-373 -197C-373 -197 -305 208 159 335C623 462 691 867 691 867",
-    "M-366 -205C-366 -205 -298 200 166 327C630 454 698 859 698 859",
-    "M-359 -213C-359 -213 -291 192 173 319C637 446 705 851 705 851",
-    "M-352 -221C-352 -221 -284 184 180 311C644 438 712 843 712 843",
-    "M-345 -229C-345 -229 -277 176 187 303C651 430 719 835 719 835",
+    'M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875',
+    'M-373 -197C-373 -197 -305 208 159 335C623 462 691 867 691 867',
+    'M-366 -205C-366 -205 -298 200 166 327C630 454 698 859 698 859',
+    'M-359 -213C-359 -213 -291 192 173 319C637 446 705 851 705 851',
+    'M-352 -221C-352 -221 -284 184 180 311C644 438 712 843 712 843',
+    'M-345 -229C-345 -229 -277 176 187 303C651 430 719 835 719 835',
   ];
 
   return (
     <div
-      class={css({
-        position: 'absolute',
-        inset: 0,
-        width: 'full',
-        height: 'full',
-        overflow: 'hidden',
-        pointerEvents: 'none',
-      }, merged.className)}
+      class={css(
+        {
+          position: 'absolute',
+          inset: 0,
+          width: 'full',
+          height: 'full',
+          overflow: 'hidden',
+          pointerEvents: 'none',
+        },
+        merged.className
+      )}
       style={merged.style}
     >
       <svg
@@ -59,7 +71,7 @@ export const BackgroundBeams: Component<BackgroundBeamsProps> = (props) => {
             <g>
               <path
                 d={path}
-                stroke={index() % 2 === 0 ? "url(#beam-gradient)" : "url(#beam-gradient-2)"}
+                stroke={index() % 2 === 0 ? 'url(#beam-gradient)' : 'url(#beam-gradient-2)'}
                 stroke-width="2"
                 fill="none"
                 stroke-linecap="round"
@@ -127,53 +139,63 @@ export const BackgroundBeamsDemo: Component<BackgroundBeamsDemoProps> = (props) 
   const [inputValue, setInputValue] = createSignal('');
 
   return (
-    <div class={css({
-      height: '40rem',
-      width: 'full',
-      borderRadius: 'md',
-      backgroundColor: 'neutral.950',
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSmoothing: 'antialiased',
-    }, props.className)}>
-      <div class={css({
-        maxWidth: '2xl',
-        marginX: 'auto',
-        padding: '4',
-      })}>
-        <h1 class={css({
+    <div
+      class={css(
+        {
+          height: '40rem',
+          width: 'full',
+          borderRadius: 'md',
+          backgroundColor: 'neutral.950',
           position: 'relative',
-          zIndex: 10,
-          fontSize: 'lg',
-          backgroundClip: 'text',
-          color: 'transparent',
-          background: 'linear-gradient(to bottom, #e5e5e5, #737373)',
-          textAlign: 'center',
-          fontFamily: 'sans',
-          fontWeight: 'bold',
-          _md: {
-            fontSize: '7xl',
-          },
-        })}>
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSmoothing: 'antialiased',
+        },
+        props.className
+      )}
+    >
+      <div
+        class={css({
+          maxWidth: '2xl',
+          marginX: 'auto',
+          padding: '4',
+        })}
+      >
+        <h1
+          class={css({
+            position: 'relative',
+            zIndex: 10,
+            fontSize: 'lg',
+            backgroundClip: 'text',
+            color: 'transparent',
+            background: 'linear-gradient(to bottom, #e5e5e5, #737373)',
+            textAlign: 'center',
+            fontFamily: 'sans',
+            fontWeight: 'bold',
+            _md: {
+              fontSize: '7xl',
+            },
+          })}
+        >
           Join the waitlist
         </h1>
-        <p class={css({
-          color: 'neutral.500',
-          maxWidth: 'lg',
-          marginX: 'auto',
-          marginY: '2',
-          fontSize: 'sm',
-          textAlign: 'center',
-          position: 'relative',
-          zIndex: 10,
-        })}>
-          Welcome to MailJet, the best transactional email service on the web.
-          We provide reliable, scalable, and customizable email solutions for
-          your business. Whether you're sending order confirmations,
-          password reset emails, or promotional campaigns, MailJet has got you
+        <p
+          class={css({
+            color: 'neutral.500',
+            maxWidth: 'lg',
+            marginX: 'auto',
+            marginY: '2',
+            fontSize: 'sm',
+            textAlign: 'center',
+            position: 'relative',
+            zIndex: 10,
+          })}
+        >
+          Welcome to MailJet, the best transactional email service on the web. We provide reliable,
+          scalable, and customizable email solutions for your business. Whether you're sending order
+          confirmations, password reset emails, or promotional campaigns, MailJet has got you
           covered.
         </p>
         <input

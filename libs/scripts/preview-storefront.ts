@@ -20,16 +20,16 @@ try {
       port: 4002,
     },
   });
-  
+
   const handleSignal = async () => {
     console.log('Shutting down Storefront preview server...');
     await close();
     Deno.exit(0);
   };
-  
-  Deno.addSignalListener("SIGINT", handleSignal);
-  Deno.addSignalListener("SIGTERM", handleSignal);
-  
+
+  Deno.addSignalListener('SIGINT', handleSignal);
+  Deno.addSignalListener('SIGTERM', handleSignal);
+
   console.log('Storefront preview server started on http://localhost:4002');
 } catch (error) {
   console.error('Failed to start Storefront preview server:', error);

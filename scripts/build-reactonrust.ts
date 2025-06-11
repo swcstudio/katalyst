@@ -10,7 +10,7 @@ try {
 
   const child = command.spawn();
   const result = await child.status;
-  
+
   if (result.success) {
     console.log('✅ React on Rust build completed successfully!');
   } else {

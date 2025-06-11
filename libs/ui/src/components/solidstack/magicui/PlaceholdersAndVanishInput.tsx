@@ -1,7 +1,7 @@
-import { Component, JSX, createSignal, onMount, onCleanup, For } from 'solid-js';
 import { cx } from '@sse/ui/styled-system/css';
 import { css } from '@sse/ui/styled-system/css';
 import { animate } from 'motion';
+import { type Component, For, JSX, createSignal, onCleanup, onMount } from 'solid-js';
 
 export interface PlaceholdersAndVanishInputProps {
   placeholders: string[];
@@ -13,38 +13,44 @@ export interface PlaceholdersAndVanishInputProps {
 export const PlaceholdersAndVanishInputDemo: Component = () => {
   const placeholders = [
     "What's the first rule of Fight Club?",
-    "Who is Tyler Durden?",
-    "Where is Andrew Laeddis Hiding?",
-    "Write a Javascript method to reverse a string",
-    "How to assemble your own PC?",
+    'Who is Tyler Durden?',
+    'Where is Andrew Laeddis Hiding?',
+    'Write a Javascript method to reverse a string',
+    'How to assemble your own PC?',
   ];
 
-  const handleChange = (e: Event & { currentTarget: HTMLInputElement; target: HTMLInputElement }) => {
+  const handleChange = (
+    e: Event & { currentTarget: HTMLInputElement; target: HTMLInputElement }
+  ) => {
     console.log(e.target.value);
   };
-  
+
   const onSubmit = (e: Event & { currentTarget: HTMLFormElement; target: HTMLFormElement }) => {
     e.preventDefault();
-    console.log("submitted");
+    console.log('submitted');
   };
 
   return (
-    <div class={css({
-      height: '640px',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      paddingX: '16px'
-    })}>
-      <h2 class={css({
-        marginBottom: '40px',
-        fontSize: 'xl',
-        textAlign: 'center',
-        color: 'black',
-        sm: { marginBottom: '80px', fontSize: '5xl' },
-        _dark: { color: 'white' }
-      })}>
+    <div
+      class={css({
+        height: '640px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingX: '16px',
+      })}
+    >
+      <h2
+        class={css({
+          marginBottom: '40px',
+          fontSize: 'xl',
+          textAlign: 'center',
+          color: 'black',
+          sm: { marginBottom: '80px', fontSize: '5xl' },
+          _dark: { color: 'white' },
+        })}
+      >
         Ask Aceternity UI Anything
       </h2>
       <PlaceholdersAndVanishInput
@@ -61,16 +67,16 @@ export const PlaceholdersAndVanishInput: Component<PlaceholdersAndVanishInputPro
   const [inputValue, setInputValue] = createSignal('');
   const [animating, setAnimating] = createSignal(false);
   const [submitted, setSubmitted] = createSignal(false);
-  
+
   let inputRef: HTMLInputElement;
   let placeholderRef: HTMLDivElement;
   let intervalId: number;
 
   const cyclePlaceholders = () => {
     if (animating()) return;
-    
+
     setAnimating(true);
-    
+
     if (placeholderRef) {
       animate(
         placeholderRef,
@@ -84,7 +90,7 @@ export const PlaceholdersAndVanishInput: Component<PlaceholdersAndVanishInputPro
         }
       ).then(() => {
         setCurrentPlaceholder((prev) => (prev + 1) % props.placeholders.length);
-        
+
         animate(
           placeholderRef,
           {
@@ -105,7 +111,7 @@ export const PlaceholdersAndVanishInput: Component<PlaceholdersAndVanishInputPro
   const handleSubmit = (e: Event & { currentTarget: HTMLFormElement; target: HTMLFormElement }) => {
     e.preventDefault();
     setSubmitted(true);
-    
+
     if (inputRef) {
       animate(
         inputRef,
@@ -119,7 +125,7 @@ export const PlaceholdersAndVanishInput: Component<PlaceholdersAndVanishInputPro
         }
       );
     }
-    
+
     if (placeholderRef) {
       animate(
         placeholderRef,
@@ -133,9 +139,9 @@ export const PlaceholdersAndVanishInput: Component<PlaceholdersAndVanishInputPro
         }
       );
     }
-    
+
     props.onSubmit?.(e);
-    
+
     setTimeout(() => {
       setSubmitted(false);
       setInputValue('');
@@ -168,14 +174,16 @@ export const PlaceholdersAndVanishInput: Component<PlaceholdersAndVanishInputPro
     }, 2000);
   };
 
-  const handleChange = (e: Event & { currentTarget: HTMLInputElement; target: HTMLInputElement }) => {
+  const handleChange = (
+    e: Event & { currentTarget: HTMLInputElement; target: HTMLInputElement }
+  ) => {
     setInputValue(e.target.value);
     props.onChange?.(e);
   };
 
   onMount(() => {
     intervalId = setInterval(cyclePlaceholders, 3000);
-    
+
     onCleanup(() => {
       if (intervalId) {
         clearInterval(intervalId);
@@ -190,24 +198,26 @@ export const PlaceholdersAndVanishInput: Component<PlaceholdersAndVanishInputPro
           position: 'relative',
           width: '100%',
           maxWidth: '512px',
-          marginX: 'auto'
+          marginX: 'auto',
         }),
         props.className
       )}
       onSubmit={handleSubmit}
     >
-      <div class={css({
-        position: 'relative',
-        overflow: 'hidden',
-        borderRadius: '12px',
-        border: '1px solid',
-        borderColor: 'gray.300',
-        backgroundColor: 'white',
-        _dark: {
-          borderColor: 'gray.700',
-          backgroundColor: 'gray.900'
-        }
-      })}>
+      <div
+        class={css({
+          position: 'relative',
+          overflow: 'hidden',
+          borderRadius: '12px',
+          border: '1px solid',
+          borderColor: 'gray.300',
+          backgroundColor: 'white',
+          _dark: {
+            borderColor: 'gray.700',
+            backgroundColor: 'gray.900',
+          },
+        })}
+      >
         <input
           ref={inputRef!}
           value={inputValue()}
@@ -223,12 +233,12 @@ export const PlaceholdersAndVanishInput: Component<PlaceholdersAndVanishInputPro
             color: 'gray.900',
             _dark: { color: 'gray.100' },
             _placeholder: {
-              color: 'transparent'
-            }
+              color: 'transparent',
+            },
           })}
           placeholder=""
         />
-        
+
         <div
           ref={placeholderRef!}
           class={css({
@@ -239,10 +249,10 @@ export const PlaceholdersAndVanishInput: Component<PlaceholdersAndVanishInputPro
             fontSize: 'base',
             color: 'gray.500',
             transition: 'all 0.3s ease',
-            _dark: { color: 'gray.400' }
+            _dark: { color: 'gray.400' },
           })}
           style={{
-            opacity: inputValue() ? 0 : 1
+            opacity: inputValue() ? 0 : 1,
           }}
         >
           {props.placeholders[currentPlaceholder()]}
@@ -267,15 +277,15 @@ export const PlaceholdersAndVanishInput: Component<PlaceholdersAndVanishInputPro
             transition: 'all 0.2s ease',
             _hover: {
               backgroundColor: 'gray.700',
-              transform: 'translateY(-50%) scale(1.05)'
+              transform: 'translateY(-50%) scale(1.05)',
             },
             _dark: {
               backgroundColor: 'white',
               color: 'gray.900',
               _hover: {
-                backgroundColor: 'gray.200'
-              }
-            }
+                backgroundColor: 'gray.200',
+              },
+            },
           })}
         >
           →
@@ -283,26 +293,30 @@ export const PlaceholdersAndVanishInput: Component<PlaceholdersAndVanishInputPro
       </div>
 
       {submitted() && (
-        <div class={css({
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'green.50',
-          borderRadius: '12px',
-          border: '1px solid',
-          borderColor: 'green.200',
-          _dark: {
-            backgroundColor: 'green.900',
-            borderColor: 'green.700'
-          }
-        })}>
-          <span class={css({
-            color: 'green.700',
-            fontWeight: '500',
-            _dark: { color: 'green.300' }
-          })}>
+        <div
+          class={css({
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'green.50',
+            borderRadius: '12px',
+            border: '1px solid',
+            borderColor: 'green.200',
+            _dark: {
+              backgroundColor: 'green.900',
+              borderColor: 'green.700',
+            },
+          })}
+        >
+          <span
+            class={css({
+              color: 'green.700',
+              fontWeight: '500',
+              _dark: { color: 'green.300' },
+            })}
+          >
             ✓ Submitted!
           </span>
         </div>

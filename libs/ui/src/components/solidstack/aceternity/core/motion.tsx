@@ -1,6 +1,6 @@
-import { Component, createSignal, onMount, onCleanup } from 'solid-js';
-import { animate, spring, stagger, timeline, inView } from '@motionone/dom';
+import { animate, inView, spring, stagger, timeline } from '@motionone/dom';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, createSignal, onCleanup, onMount } from 'solid-js';
 
 // Motion configuration presets
 export const motionPresets = {
@@ -11,7 +11,7 @@ export const motionPresets = {
     snappy: spring({ stiffness: 500, damping: 40 }),
     bouncy: spring({ stiffness: 400, damping: 8 }),
   },
-  
+
   // Easing functions
   easing: {
     easeOut: [0.4, 0, 0.2, 1],
@@ -21,7 +21,7 @@ export const motionPresets = {
     backOut: [0.34, 1.56, 0.64, 1],
     anticipate: [0.2, 1, 0.3, 1],
   },
-  
+
   // Duration presets
   duration: {
     fast: 0.2,
@@ -37,48 +37,48 @@ export const animationVariants = {
     opacity: [0, 1],
     transform: ['translateY(20px)', 'translateY(0px)'],
   },
-  
+
   fadeInUp: {
     opacity: [0, 1],
     transform: ['translateY(30px)', 'translateY(0px)'],
   },
-  
+
   fadeInDown: {
     opacity: [0, 1],
     transform: ['translateY(-30px)', 'translateY(0px)'],
   },
-  
+
   fadeInLeft: {
     opacity: [0, 1],
     transform: ['translateX(-30px)', 'translateX(0px)'],
   },
-  
+
   fadeInRight: {
     opacity: [0, 1],
     transform: ['translateX(30px)', 'translateX(0px)'],
   },
-  
+
   scaleIn: {
     opacity: [0, 1],
     transform: ['scale(0.8)', 'scale(1)'],
   },
-  
+
   slideInUp: {
     transform: ['translateY(100%)', 'translateY(0%)'],
   },
-  
+
   slideInDown: {
     transform: ['translateY(-100%)', 'translateY(0%)'],
   },
-  
+
   slideInLeft: {
     transform: ['translateX(-100%)', 'translateX(0%)'],
   },
-  
+
   slideInRight: {
     transform: ['translateX(100%)', 'translateX(0%)'],
   },
-  
+
   bounce: {
     transform: [
       'translateY(0px)',
@@ -88,7 +88,7 @@ export const animationVariants = {
       'translateY(0px)',
     ],
   },
-  
+
   wiggle: {
     transform: [
       'rotate(0deg)',
@@ -99,11 +99,11 @@ export const animationVariants = {
       'rotate(0deg)',
     ],
   },
-  
+
   pulse: {
     transform: ['scale(1)', 'scale(1.05)', 'scale(1)'],
   },
-  
+
   spin: {
     transform: ['rotate(0deg)', 'rotate(360deg)'],
   },
@@ -111,16 +111,16 @@ export const animationVariants = {
 
 // Motion component wrapper
 export interface MotionProps {
-  children: any;
+  children: JSX.Element;
   className?: string;
   variant?: keyof typeof animationVariants;
   duration?: number;
   delay?: number;
   easing?: number[];
-  spring?: any;
+  spring?: ReturnType<typeof spring>;
   onInView?: boolean;
   staggerChildren?: number;
-  custom?: Record<string, any>;
+  custom?: Record<string, string | number | string[]>;
   onComplete?: () => void;
 }
 
@@ -137,7 +137,7 @@ export const Motion: Component<MotionProps> = (props) => {
       delay: props.delay || 0,
     };
 
-    const animation = props.variant 
+    const animation = props.variant
       ? animationVariants[props.variant]
       : props.custom || animationVariants.fadeIn;
 
@@ -148,7 +148,7 @@ export const Motion: Component<MotionProps> = (props) => {
           props.onComplete?.();
         });
       });
-      
+
       onCleanup(() => stopInView());
     } else {
       animate(elementRef, animation, config).finished.then(() => {
@@ -167,9 +167,12 @@ export const Motion: Component<MotionProps> = (props) => {
   return (
     <div
       ref={elementRef}
-      class={css({
-        display: 'inline-block',
-      }, props.className)}
+      class={css(
+        {
+          display: 'inline-block',
+        },
+        props.className
+      )}
     >
       {props.children}
     </div>
@@ -178,7 +181,7 @@ export const Motion: Component<MotionProps> = (props) => {
 
 // Stagger container for animating multiple children
 export interface StaggerProps {
-  children: any;
+  children: JSX.Element;
   className?: string;
   staggerDelay?: number;
   variant?: keyof typeof animationVariants;
@@ -194,22 +197,20 @@ export const Stagger: Component<StaggerProps> = (props) => {
 
     const children = Array.from(containerRef.children) as HTMLElement[];
     const staggerDelay = props.staggerDelay || 0.1;
-    
+
     const config = {
       duration: props.duration || motionPresets.duration.normal,
       easing: motionPresets.easing.easeOut,
       delay: stagger(staggerDelay),
     };
 
-    const animation = props.variant 
-      ? animationVariants[props.variant]
-      : animationVariants.fadeIn;
+    const animation = props.variant ? animationVariants[props.variant] : animationVariants.fadeIn;
 
     if (props.onInView) {
       const stopInView = inView(containerRef, () => {
         animate(children, animation, config);
       });
-      
+
       onCleanup(() => stopInView());
     } else {
       animate(children, animation, config);
@@ -219,11 +220,14 @@ export const Stagger: Component<StaggerProps> = (props) => {
   return (
     <div
       ref={containerRef}
-      class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '2',
-      }, props.className)}
+      class={css(
+        {
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2',
+        },
+        props.className
+      )}
     >
       {props.children}
     </div>
@@ -232,7 +236,7 @@ export const Stagger: Component<StaggerProps> = (props) => {
 
 // Scroll-triggered animation
 export interface ScrollRevealProps {
-  children: any;
+  children: JSX.Element;
   className?: string;
   variant?: keyof typeof animationVariants;
   threshold?: number;
@@ -246,20 +250,17 @@ export const ScrollReveal: Component<ScrollRevealProps> = (props) => {
   onMount(() => {
     if (!elementRef) return;
 
-    const animation = props.variant 
-      ? animationVariants[props.variant]
-      : animationVariants.fadeInUp;
+    const animation = props.variant ? animationVariants[props.variant] : animationVariants.fadeInUp;
 
     const config = {
       duration: props.duration || motionPresets.duration.normal,
       easing: motionPresets.easing.easeOut,
     };
 
-    const stopInView = inView(
-      elementRef,
-      () => animate(elementRef!, animation, config),
-      { amount: props.threshold || 0.3, once: props.once !== false }
-    );
+    const stopInView = inView(elementRef, () => animate(elementRef!, animation, config), {
+      amount: props.threshold || 0.3,
+      once: props.once !== false,
+    });
 
     onCleanup(() => stopInView());
   });
@@ -267,9 +268,12 @@ export const ScrollReveal: Component<ScrollRevealProps> = (props) => {
   return (
     <div
       ref={elementRef}
-      class={css({
-        opacity: 0,
-      }, props.className)}
+      class={css(
+        {
+          opacity: 0,
+        },
+        props.className
+      )}
     >
       {props.children}
     </div>
@@ -278,7 +282,7 @@ export const ScrollReveal: Component<ScrollRevealProps> = (props) => {
 
 // Parallax effect component
 export interface ParallaxProps {
-  children: any;
+  children: JSX.Element;
   className?: string;
   offset?: number;
   speed?: number;
@@ -296,14 +300,14 @@ export const Parallax: Component<ParallaxProps> = (props) => {
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       const parallax = scrolled * speed;
-      
+
       if (elementRef) {
         elementRef.style.transform = `translateY(${parallax + offset}px)`;
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    
+
     onCleanup(() => {
       window.removeEventListener('scroll', handleScroll);
     });
@@ -312,9 +316,12 @@ export const Parallax: Component<ParallaxProps> = (props) => {
   return (
     <div
       ref={elementRef}
-      class={css({
-        willChange: 'transform',
-      }, props.className)}
+      class={css(
+        {
+          willChange: 'transform',
+        },
+        props.className
+      )}
     >
       {props.children}
     </div>
@@ -323,7 +330,7 @@ export const Parallax: Component<ParallaxProps> = (props) => {
 
 // Hover animation wrapper
 export interface HoverMotionProps {
-  children: any;
+  children: JSX.Element;
   className?: string;
   scale?: number;
   rotate?: number;
@@ -342,15 +349,9 @@ export const HoverMotion: Component<HoverMotionProps> = (props) => {
     const duration = props.duration || motionPresets.duration.fast;
 
     const hoverAnimation = {
-      transform: [
-        'scale(1) rotate(0deg)',
-        `scale(${scale}) rotate(${rotate}deg)`,
-      ],
+      transform: ['scale(1) rotate(0deg)', `scale(${scale}) rotate(${rotate}deg)`],
       ...(props.lift && {
-        boxShadow: [
-          '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-          '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-        ],
+        boxShadow: ['0 4px 6px -1px rgba(0, 0, 0, 0.1)', '0 10px 15px -3px rgba(0, 0, 0, 0.1)'],
       }),
     };
 
@@ -378,10 +379,13 @@ export const HoverMotion: Component<HoverMotionProps> = (props) => {
   return (
     <div
       ref={elementRef}
-      class={css({
-        cursor: 'pointer',
-        willChange: 'transform',
-      }, props.className)}
+      class={css(
+        {
+          cursor: 'pointer',
+          willChange: 'transform',
+        },
+        props.className
+      )}
     >
       {props.children}
     </div>
@@ -397,26 +401,18 @@ export const observeInView = inView;
 
 // Common animation helpers
 export const fadeInStagger = (elements: HTMLElement[], delay = 0.1) => {
-  return animate(
-    elements,
-    animationVariants.fadeIn,
-    {
-      duration: motionPresets.duration.normal,
-      easing: motionPresets.easing.easeOut,
-      delay: stagger(delay),
-    }
-  );
+  return animate(elements, animationVariants.fadeIn, {
+    duration: motionPresets.duration.normal,
+    easing: motionPresets.easing.easeOut,
+    delay: stagger(delay),
+  });
 };
 
 export const slideInFromLeft = (element: HTMLElement, duration = 0.5) => {
-  return animate(
-    element,
-    animationVariants.slideInLeft,
-    {
-      duration,
-      easing: motionPresets.easing.easeOut,
-    }
-  );
+  return animate(element, animationVariants.slideInLeft, {
+    duration,
+    easing: motionPresets.easing.easeOut,
+  });
 };
 
 export const scaleInWithBounce = (element: HTMLElement) => {

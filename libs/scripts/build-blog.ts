@@ -5,15 +5,15 @@ console.log('Building Blog micro-frontend...');
 
 try {
   await Deno.mkdir('dist/blog', { recursive: true });
-  
+
   await build({
     root: './apps/blog',
     outDir: '../../dist/blog',
     config: {
       integrations: ['@astrojs/solid-js', '@astrojs/mdx'],
-    }
+    },
   });
-  
+
   console.log('Blog build completed successfully!');
 } catch (error) {
   console.error('Blog build failed:', error);

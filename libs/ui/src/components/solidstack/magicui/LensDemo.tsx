@@ -1,101 +1,122 @@
-import { Component, createSignal } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, createSignal, type JSX } from 'solid-js';
 
 // Placeholder Card components
 const Card: Component<{
   className?: string;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <div class={css({
-      borderRadius: 'lg',
-      border: '1px solid',
-      borderColor: 'gray.200',
-      backgroundColor: 'white',
-      boxShadow: 'sm',
-      _dark: {
-        borderColor: 'gray.800',
-        backgroundColor: 'gray.900',
-      },
-    }, props.className)}>
+    <div
+      class={css(
+        {
+          borderRadius: 'lg',
+          border: '1px solid',
+          borderColor: 'gray.200',
+          backgroundColor: 'white',
+          boxShadow: 'sm',
+          _dark: {
+            borderColor: 'gray.800',
+            backgroundColor: 'gray.900',
+          },
+        },
+        props.className
+      )}
+    >
       {props.children}
     </div>
   );
 };
 
 const CardHeader: Component<{
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <div class={css({
-      padding: '6',
-      paddingBottom: '0',
-    })}>
+    <div
+      class={css({
+        padding: '6',
+        paddingBottom: '0',
+      })}
+    >
       {props.children}
     </div>
   );
 };
 
 const CardContent: Component<{
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <div class={css({
-      padding: '6',
-      paddingTop: '0',
-    })}>
+    <div
+      class={css({
+        padding: '6',
+        paddingTop: '0',
+      })}
+    >
       {props.children}
     </div>
   );
 };
 
 const CardFooter: Component<{
-  children: any;
+  children: JSX.Element;
   className?: string;
 }> = (props) => {
   return (
-    <div class={css({
-      display: 'flex',
-      alignItems: 'center',
-      padding: '6',
-      paddingTop: '0',
-    }, props.className)}>
+    <div
+      class={css(
+        {
+          display: 'flex',
+          alignItems: 'center',
+          padding: '6',
+          paddingTop: '0',
+        },
+        props.className
+      )}
+    >
       {props.children}
     </div>
   );
 };
 
 const CardTitle: Component<{
-  children: any;
+  children: JSX.Element;
   className?: string;
 }> = (props) => {
   return (
-    <h3 class={css({
-      fontSize: 'lg',
-      fontWeight: 'semibold',
-      lineHeight: 'none',
-      letterSpacing: 'tight',
-      color: 'gray.900',
-      _dark: {
-        color: 'white',
-      },
-    }, props.className)}>
+    <h3
+      class={css(
+        {
+          fontSize: 'lg',
+          fontWeight: 'semibold',
+          lineHeight: 'none',
+          letterSpacing: 'tight',
+          color: 'gray.900',
+          _dark: {
+            color: 'white',
+          },
+        },
+        props.className
+      )}
+    >
       {props.children}
     </h3>
   );
 };
 
 const CardDescription: Component<{
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <p class={css({
-      fontSize: 'sm',
-      color: 'gray.600',
-      _dark: {
-        color: 'gray.400',
-      },
-    })}>
+    <p
+      class={css({
+        fontSize: 'sm',
+        color: 'gray.600',
+        _dark: {
+          color: 'gray.400',
+        },
+      })}
+    >
       {props.children}
     </p>
   );
@@ -103,33 +124,35 @@ const CardDescription: Component<{
 
 // Placeholder Button components
 const Button: Component<{
-  children: any;
+  children: JSX.Element;
   variant?: 'default' | 'secondary';
 }> = (props) => {
   return (
-    <button class={css({
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 'md',
-      fontSize: 'sm',
-      fontWeight: 'medium',
-      transition: 'colors 0.2s',
-      paddingX: '4',
-      paddingY: '2',
-      backgroundColor: props.variant === 'secondary' ? 'gray.100' : 'gray.900',
-      color: props.variant === 'secondary' ? 'gray.900' : 'white',
-      _hover: {
-        backgroundColor: props.variant === 'secondary' ? 'gray.200' : 'gray.800',
-      },
-      _dark: {
-        backgroundColor: props.variant === 'secondary' ? 'gray.800' : 'gray.50',
-        color: props.variant === 'secondary' ? 'gray.50' : 'gray.900',
+    <button
+      class={css({
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 'md',
+        fontSize: 'sm',
+        fontWeight: 'medium',
+        transition: 'colors 0.2s',
+        paddingX: '4',
+        paddingY: '2',
+        backgroundColor: props.variant === 'secondary' ? 'gray.100' : 'gray.900',
+        color: props.variant === 'secondary' ? 'gray.900' : 'white',
         _hover: {
-          backgroundColor: props.variant === 'secondary' ? 'gray.700' : 'gray.200',
+          backgroundColor: props.variant === 'secondary' ? 'gray.200' : 'gray.800',
         },
-      },
-    })}>
+        _dark: {
+          backgroundColor: props.variant === 'secondary' ? 'gray.800' : 'gray.50',
+          color: props.variant === 'secondary' ? 'gray.50' : 'gray.900',
+          _hover: {
+            backgroundColor: props.variant === 'secondary' ? 'gray.700' : 'gray.200',
+          },
+        },
+      })}
+    >
       {props.children}
     </button>
   );
@@ -140,7 +163,7 @@ const Lens: Component<{
   isStatic?: boolean;
   defaultPosition?: { x: number; y: number };
   position?: { x: number; y: number };
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   const [mousePosition, setMousePosition] = createSignal({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = createSignal(false);
@@ -153,12 +176,12 @@ const Lens: Component<{
     });
   };
 
-  const lensPosition = props.isStatic 
+  const lensPosition = props.isStatic
     ? props.position || { x: 260, y: 150 }
     : props.defaultPosition || mousePosition();
 
   return (
-    <div 
+    <div
       class={css({
         position: 'relative',
         overflow: 'hidden',
@@ -169,10 +192,10 @@ const Lens: Component<{
       onMouseLeave={() => setIsHovering(false)}
     >
       {props.children}
-      
+
       {/* Lens effect */}
       {(isHovering() || props.isStatic) && (
-        <div 
+        <div
           class={css({
             position: 'absolute',
             width: '100px',
@@ -191,7 +214,7 @@ const Lens: Component<{
           }}
         >
           {/* Magnified content */}
-          <div 
+          <div
             class={css({
               position: 'absolute',
               width: '200px',
@@ -214,11 +237,13 @@ const Lens: Component<{
 
 export const LensDemo: Component = () => {
   return (
-    <Card className={css({
-      position: 'relative',
-      maxWidth: 'md',
-      boxShadow: 'none',
-    })}>
+    <Card
+      className={css({
+        position: 'relative',
+        maxWidth: 'md',
+        boxShadow: 'none',
+      })}
+    >
       <CardHeader>
         <Lens isStatic position={{ x: 260, y: 150 }}>
           <img
@@ -237,8 +262,7 @@ export const LensDemo: Component = () => {
       <CardContent>
         <CardTitle className={css({ fontSize: '2xl' })}>Your next camp</CardTitle>
         <CardDescription>
-          See our latest and best camp destinations all across the five
-          continents of the globe.
+          See our latest and best camp destinations all across the five continents of the globe.
         </CardDescription>
       </CardContent>
       <CardFooter className={css({ gap: '4' })}>
@@ -251,11 +275,13 @@ export const LensDemo: Component = () => {
 
 export const LensDemoInteractive: Component = () => {
   return (
-    <Card className={css({
-      position: 'relative',
-      maxWidth: 'md',
-      boxShadow: 'none',
-    })}>
+    <Card
+      className={css({
+        position: 'relative',
+        maxWidth: 'md',
+        boxShadow: 'none',
+      })}
+    >
       <CardHeader>
         <Lens defaultPosition={{ x: 260, y: 150 }}>
           <img
@@ -274,8 +300,7 @@ export const LensDemoInteractive: Component = () => {
       <CardContent>
         <CardTitle className={css({ fontSize: '2xl' })}>Your next camp</CardTitle>
         <CardDescription>
-          See our latest and best camp destinations all across the five
-          continents of the globe.
+          See our latest and best camp destinations all across the five continents of the globe.
         </CardDescription>
       </CardContent>
       <CardFooter className={css({ gap: '4' })}>

@@ -1,7 +1,7 @@
-import { Component, JSX, onMount, onCleanup, createSignal, For } from 'solid-js';
-import { animate } from 'motion';
 import { cx } from '@sse/ui/styled-system/css';
 import { css } from '@sse/ui/styled-system/css';
+import { animate } from 'motion';
+import { type Component, For, type JSX, createSignal, onCleanup, onMount } from 'solid-js';
 
 export interface CardProps {
   className?: string;
@@ -41,8 +41,7 @@ export const CardDemo: Component = () => {
       </CardSkeletonContainer>
       <CardTitle>Damn good card</CardTitle>
       <CardDescription>
-        A card that showcases a set of tools that you use to create your
-        product.
+        A card that showcases a set of tools that you use to create your product.
       </CardDescription>
     </Card>
   );
@@ -52,7 +51,7 @@ const Skeleton: Component = () => {
   onMount(() => {
     const sequence = [
       [
-        ".circle-1",
+        '.circle-1',
         {
           scale: [1, 1.1, 1],
           y: [0, -4, 0],
@@ -60,7 +59,7 @@ const Skeleton: Component = () => {
         { duration: 0.8 },
       ],
       [
-        ".circle-2",
+        '.circle-2',
         {
           scale: [1, 1.1, 1],
           y: [0, -4, 0],
@@ -68,7 +67,7 @@ const Skeleton: Component = () => {
         { duration: 0.8 },
       ],
       [
-        ".circle-3",
+        '.circle-3',
         {
           scale: [1, 1.1, 1],
           y: [0, -4, 0],
@@ -76,7 +75,7 @@ const Skeleton: Component = () => {
         { duration: 0.8 },
       ],
       [
-        ".circle-4",
+        '.circle-4',
         {
           scale: [1, 1.1, 1],
           y: [0, -4, 0],
@@ -84,7 +83,7 @@ const Skeleton: Component = () => {
         { duration: 0.8 },
       ],
       [
-        ".circle-5",
+        '.circle-5',
         {
           scale: [1, 1.1, 1],
           y: [0, -4, 0],
@@ -94,7 +93,7 @@ const Skeleton: Component = () => {
     ];
 
     const controls = animate(sequence, {
-      repeat: Infinity,
+      repeat: Number.POSITIVE_INFINITY,
       repeatDelay: 1,
     });
 
@@ -104,23 +103,27 @@ const Skeleton: Component = () => {
   });
 
   return (
-    <div class={css({
-      padding: '32px',
-      overflow: 'hidden',
-      height: '100%',
-      position: 'relative',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    })}>
-      <div class={css({
+    <div
+      class={css({
+        padding: '32px',
+        overflow: 'hidden',
+        height: '100%',
+        position: 'relative',
         display: 'flex',
-        flexDirection: 'row',
-        flexShrink: 0,
-        justifyContent: 'center',
         alignItems: 'center',
-        gap: '8px'
-      })}>
+        justifyContent: 'center',
+      })}
+    >
+      <div
+        class={css({
+          display: 'flex',
+          flexDirection: 'row',
+          flexShrink: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '8px',
+        })}
+      >
         <Container className="h-8 w-8 circle-1">
           <ClaudeLogo className="h-4 w-4" />
         </Container>
@@ -138,24 +141,28 @@ const Skeleton: Component = () => {
         </Container>
       </div>
 
-      <div class={css({
-        height: '160px',
-        width: '1px',
-        position: 'absolute',
-        top: '80px',
-        margin: 'auto',
-        zIndex: 40,
-        background: 'linear-gradient(to bottom, transparent, #06b6d4, transparent)',
-        animation: 'move 4s linear infinite'
-      })}>
-        <div class={css({
-          width: '40px',
-          height: '128px',
-          top: '50%',
-          transform: 'translateY(-50%)',
+      <div
+        class={css({
+          height: '160px',
+          width: '1px',
           position: 'absolute',
-          left: '-40px'
-        })}>
+          top: '80px',
+          margin: 'auto',
+          zIndex: 40,
+          background: 'linear-gradient(to bottom, transparent, #06b6d4, transparent)',
+          animation: 'move 4s linear infinite',
+        })}
+      >
+        <div
+          class={css({
+            width: '40px',
+            height: '128px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            position: 'absolute',
+            left: '-40px',
+          })}
+        >
           <Sparkles />
         </div>
       </div>
@@ -176,7 +183,7 @@ const Sparkles: Component = () => {
   const randomMove = () => Math.random() * 2 - 1;
   const randomOpacity = () => Math.random();
   const random = () => Math.random();
-  
+
   const [sparkles] = createSignal(Array.from({ length: 12 }, (_, i) => i));
 
   onMount(() => {
@@ -193,8 +200,8 @@ const Sparkles: Component = () => {
           },
           {
             duration: random() * 2 + 4,
-            repeat: Infinity,
-            easing: "linear",
+            repeat: Number.POSITIVE_INFINITY,
+            easing: 'linear',
           }
         );
       }
@@ -215,12 +222,12 @@ const Sparkles: Component = () => {
                 borderRadius: '50%',
                 zIndex: 1,
                 backgroundColor: 'black',
-                _dark: { backgroundColor: 'white' }
+                _dark: { backgroundColor: 'white' },
               })
             )}
             style={{
               top: `${random() * 100}%`,
-              left: `${random() * 100}%`
+              left: `${random() * 100}%`,
             }}
           />
         )}
@@ -243,8 +250,8 @@ export const Card: Component<CardProps> = (props) => {
           backgroundColor: 'gray.100',
           boxShadow: '2px 4px 16px 0px rgba(248,248,248,0.06) inset',
           _dark: {
-            backgroundColor: 'rgba(40,40,40,0.70)'
-          }
+            backgroundColor: 'rgba(40,40,40,0.70)',
+          },
         }),
         props.className
       )}
@@ -263,7 +270,7 @@ export const CardTitle: Component<CardTitleProps> = (props) => {
           fontWeight: '600',
           color: 'gray.800',
           paddingY: '8px',
-          _dark: { color: 'white' }
+          _dark: { color: 'white' },
         }),
         props.className
       )}
@@ -282,7 +289,7 @@ export const CardDescription: Component<CardDescriptionProps> = (props) => {
           fontWeight: '400',
           color: 'neutral.600',
           maxWidth: '384px',
-          _dark: { color: 'neutral.400' }
+          _dark: { color: 'neutral.400' },
         }),
         props.className
       )}
@@ -294,7 +301,7 @@ export const CardDescription: Component<CardDescriptionProps> = (props) => {
 
 export const CardSkeletonContainer: Component<CardSkeletonContainerProps> = (props) => {
   const showGradient = props.showGradient ?? true;
-  
+
   return (
     <div
       class={cx(
@@ -302,13 +309,14 @@ export const CardSkeletonContainer: Component<CardSkeletonContainerProps> = (pro
           height: '240px',
           borderRadius: '12px',
           zIndex: 40,
-          md: { height: '320px' }
+          md: { height: '320px' },
         }),
-        showGradient && css({
-          backgroundColor: 'neutral.300',
-          maskImage: 'radial-gradient(50% 50% at 50% 50%, white 0%, transparent 100%)',
-          _dark: { backgroundColor: 'rgba(40,40,40,0.70)' }
-        }),
+        showGradient &&
+          css({
+            backgroundColor: 'neutral.300',
+            maskImage: 'radial-gradient(50% 50% at 50% 50%, white 0%, transparent 100%)',
+            _dark: { backgroundColor: 'rgba(40,40,40,0.70)' },
+          }),
         props.className
       )}
     >
@@ -329,7 +337,8 @@ const Container: Component<ContainerProps> = (props) => {
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: 'rgba(248,248,248,0.01)',
-          boxShadow: '0px 0px 8px 0px rgba(248,248,248,0.25) inset, 0px 32px 24px -16px rgba(0,0,0,0.40)'
+          boxShadow:
+            '0px 0px 8px 0px rgba(248,248,248,0.25) inset, 0px 32px 24px -16px rgba(0,0,0,0.40)',
         }),
         props.className
       )}
@@ -380,12 +389,7 @@ export const OpenAILogo: Component<LogoProps> = (props) => {
 
 export const GeminiLogo: Component<LogoProps> = (props) => {
   return (
-    <svg
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 16 16"
-      class={props.className}
-    >
+    <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class={props.className}>
       <path
         d="M16 8.016A8.522 8.522 0 008.016 16h-.032A8.521 8.521 0 000 8.016v-.032A8.521 8.521 0 007.984 0h.032A8.522 8.522 0 0016 7.984v.032z"
         fill="url(#prefix__paint0_radial_980_20147)"
@@ -469,10 +473,10 @@ export const CopilotLogo: Component<LogoProps> = (props) => {
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M11.998 2c-4.963 0-8.999 4.038-8.999 9.001 0 1.393.32 2.708.889 3.882L2 19.001l4.136-1.888c1.174.569 2.489.889 3.881.889h.963c-.001-.33-.001-.66.018-.989C10.999 13.003 11.998 2 11.998 2z"/>
-      <circle cx="8.5" cy="11.5" r="1.5"/>
-      <circle cx="15.5" cy="11.5" r="1.5"/>
-      <path d="M12 15.5c-1.5 0-2.7-.8-3.2-2h6.4c-.5 1.2-1.7 2-3.2 2z"/>
+      <path d="M11.998 2c-4.963 0-8.999 4.038-8.999 9.001 0 1.393.32 2.708.889 3.882L2 19.001l4.136-1.888c1.174.569 2.489.889 3.881.889h.963c-.001-.33-.001-.66.018-.989C10.999 13.003 11.998 2 11.998 2z" />
+      <circle cx="8.5" cy="11.5" r="1.5" />
+      <circle cx="15.5" cy="11.5" r="1.5" />
+      <path d="M12 15.5c-1.5 0-2.7-.8-3.2-2h6.4c-.5 1.2-1.7 2-3.2 2z" />
     </svg>
   );
 };

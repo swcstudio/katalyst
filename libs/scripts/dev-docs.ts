@@ -8,9 +8,9 @@ try {
     port: 30002,
     config: {
       integrations: ['@astrojs/solid-js', '@astrojs/mdx'],
-    }
+    },
   });
-  
+
   console.log('Docs development server started on http://localhost:30002');
 } catch (error) {
   console.error('Failed to start Docs development server:', error);
