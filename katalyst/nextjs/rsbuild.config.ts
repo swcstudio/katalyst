@@ -26,28 +26,28 @@ export default defineConfig({
     }),
   ],
   html: {
-    template: './src/index.html',
-    title: 'Katalyst Remix - React 19 + Remix Framework',
+    template: './src/app/layout.tsx',
+    title: 'Katalyst Next.js - React 19 + Next.js Framework',
     meta: {
-      description: 'High-performance React 19 + Remix framework with Rust toolchain',
+      description: 'High-performance React 19 + Next.js framework with Rust toolchain',
       viewport: 'width=device-width, initial-scale=1.0',
     },
   },
   source: {
     entry: {
-      index: './src/main.tsx',
+      index: './src/app/page.tsx',
     },
     alias: {
-      '@': './app',
-      '@/components': './app/components',
-      '@/hooks': './app/hooks',
-      '@/utils': './app/utils',
-      '@/stores': './app/stores',
-      '@/routes': './app/routes',
+      '@': './src',
+      '@/components': './src/components',
+      '@/hooks': './src/hooks',
+      '@/utils': './src/utils',
+      '@/stores': './src/stores',
+      '@/app': './src/app',
     },
   },
   server: {
-    port: 20008,
+    port: 20009,
     host: '0.0.0.0',
     open: false,
   },
@@ -59,7 +59,7 @@ export default defineConfig({
   output: {
     target: 'web',
     distPath: {
-      root: 'dist',
+      root: '.next',
       js: 'static/js',
       css: 'static/css',
       svg: 'static/svg',
@@ -92,9 +92,9 @@ export default defineConfig({
             chunks: 'all',
             priority: 20,
           },
-          remix: {
-            test: /[\\/]node_modules[\\/]@remix-run[\\/]/,
-            name: 'remix',
+          nextjs: {
+            test: /[\\/]node_modules[\\/]next[\\/]/,
+            name: 'nextjs',
             chunks: 'all',
             priority: 18,
           },
