@@ -1,15 +1,15 @@
 console.log('Starting Katalyst Core development server...');
 
 try {
-  const command = new Deno.Command('deno', {
-    args: ['run', '--allow-all', 'npm:@rsbuild/core', 'dev', '--port', '20007'],
-    cwd: './katalyst/core',
+  const process = Deno.run({
+    cmd: ['deno', 'run', '--allow-all', 'npm:@rsbuild/core', 'dev', '--port', '20007'],
+    cwd: './core',
     stdout: 'inherit',
     stderr: 'inherit',
   });
 
-  const child = command.spawn();
-  const status = await child.status;
+  const status = await process.status();
+  process.close();
   
   if (!status.success) {
     Deno.exit(1);
