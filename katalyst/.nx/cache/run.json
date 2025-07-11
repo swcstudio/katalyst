@@ -1,0 +1,43 @@
+{
+  "run": {
+    "command": "nx run-many --target=build --all",
+    "startTime": "2025-07-11T13:44:37.180Z",
+    "endTime": "2025-07-11T13:44:53.610Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "@sse/katalyst-remix:build",
+      "target": "build",
+      "projectName": "@sse/katalyst-remix",
+      "hash": "9367119317661015521",
+      "startTime": "2025-07-11T13:44:37.191Z",
+      "endTime": "2025-07-11T13:44:37.601Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "@sse/katalyst-nextjs:build",
+      "target": "build",
+      "projectName": "@sse/katalyst-nextjs",
+      "hash": "11529896102576065321",
+      "startTime": "2025-07-11T13:44:37.191Z",
+      "endTime": "2025-07-11T13:44:43.699Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "@sse/katalyst-shared:build",
+      "target": "build",
+      "projectName": "@sse/katalyst-shared",
+      "hash": "7395032561414062446",
+      "startTime": "2025-07-11T13:44:37.191Z",
+      "endTime": "2025-07-11T13:44:53.606Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}

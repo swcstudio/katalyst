@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "name": "katalyst-core",
+  "builds": [
+    {
+      "src": "dist/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/dist/$1"
+    }
+  ],
+  "functions": {
+    "dist/index.html": {
+      "includeFiles": "dist/**"
+    }
+  }
+}
