@@ -24,7 +24,7 @@
     "@rsbuild/plugin-svgr": "npm:@rsbuild/plugin-svgr@1.0.1",
     "@rsbuild/plugin-type-check": "npm:@rsbuild/plugin-type-check@1.0.1",
     "@biomejs/biome": "npm:@biomejs/biome@1.9.4",
-    "@clerk/clerk-react": "npm:@clerk/clerk-react@5.17.3",
+    "@clerk/clerk-react": "npm:@clerk/clerk-react@5.17.0",
     "@nx/react": "npm:@nx/react@20.2.4",
     "nx": "npm:nx@20.2.4",
     "nitropack": "npm:nitropack@2.9.7",
