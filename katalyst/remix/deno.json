@@ -29,8 +29,8 @@
     "@rsbuild/plugin-type-check": "npm:@rsbuild/plugin-type-check@1.0.1",
     "@biomejs/biome": "npm:@biomejs/biome@1.9.4",
     "@clerk/clerk-react": "npm:@clerk/clerk-react@5.17.0",
-    "@nx/react": "npm:@nx/react@20.2.4",
-    "nx": "npm:nx@20.2.4",
+    "@nx/react": "npm:@nx/react@21.2.2",
+    "nx": "npm:nx@21.2.2",
     "nitropack": "npm:nitropack@2.9.7",
     "typescript": "npm:typescript@5.6.3"
   },
