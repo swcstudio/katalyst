@@ -14,7 +14,9 @@ export class KatalystPluginManager {
       name: 'react',
       options: {
         refresh: true,
-        development: typeof process !== 'undefined' ? process.env.NODE_ENV === 'development' : false
+        development: typeof globalThis !== 'undefined' && 
+                     typeof (globalThis as any).process !== 'undefined' ? 
+                     (globalThis as any).process.env?.NODE_ENV === 'development' : false
       }
     });
 
@@ -70,7 +72,9 @@ export class KatalystPluginManager {
 
   generateRSpackConfig(variant: 'core' | 'remix' | 'nextjs') {
     const baseConfig = {
-      mode: typeof process !== 'undefined' && process.env.NODE_ENV === 'production' ? 'production' : 'development',
+      mode: typeof globalThis !== 'undefined' && 
+            typeof (globalThis as any).process !== 'undefined' && 
+            (globalThis as any).process.env?.NODE_ENV === 'production' ? 'production' : 'development',
       entry: this.getEntryPoint(variant),
       output: {
         path: './dist',

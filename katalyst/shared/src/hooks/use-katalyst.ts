@@ -18,7 +18,7 @@ export function useKatalyst(initialConfig: KatalystConfig) {
   }, []);
 
   const updateConfig = (updates: Partial<KatalystConfig>) => {
-    setConfig(prev => ({ ...prev, ...updates }));
+    setConfig((prev: KatalystConfig) => ({ ...prev, ...updates }));
   };
 
   return {

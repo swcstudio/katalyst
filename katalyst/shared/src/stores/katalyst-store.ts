@@ -12,9 +12,9 @@ interface KatalystStore {
 export const useKatalystStore = create<KatalystStore>((set, get) => ({
   config: null,
   isInitialized: false,
-  setConfig: (config) => set({ config }),
-  updateConfig: (updates) => set((state) => ({
+  setConfig: (config: KatalystConfig) => set({ config }),
+  updateConfig: (updates: Partial<KatalystConfig>) => set((state: KatalystStore) => ({
     config: state.config ? { ...state.config, ...updates } : null
   })),
-  setInitialized: (initialized) => set({ isInitialized: initialized })
+  setInitialized: (initialized: boolean) => set({ isInitialized: initialized })
 }));
