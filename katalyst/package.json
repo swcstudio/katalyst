@@ -64,7 +64,7 @@
     "@rsbuild/plugin-type-check": "^1.0.1",
     "nitropack": "^2.9.7",
     "storybook": "^8.4.7",
-    "@storybook/react-rsbuild": "^8.4.7",
+    "@storybook/react-webpack5": "^8.4.7",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-interactions": "^8.4.7",
     "@storybook/addon-a11y": "^8.4.7",

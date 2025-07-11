@@ -1,4 +1,4 @@
-import type { StorybookConfig } from '@storybook/react-rsbuild';
+import type { StorybookConfig } from '@storybook/react-webpack5';
 
 const config: StorybookConfig = {
   stories: [
@@ -17,12 +17,8 @@ const config: StorybookConfig = {
     '@storybook/addon-backgrounds',
   ],
   framework: {
-    name: '@storybook/react-rsbuild',
-    options: {
-      builder: {
-        rsbuildConfigPath: '../shared/rsbuild.config.ts',
-      },
-    },
+    name: '@storybook/react-webpack5',
+    options: {},
   },
   typescript: {
     check: false,
@@ -39,7 +35,7 @@ const config: StorybookConfig = {
   features: {
     buildStoriesJson: true,
   },
-  rsbuildFinal: async (config) => {
+  webpackFinal: async (config) => {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
@@ -49,8 +45,6 @@ const config: StorybookConfig = {
       '@katalyst/remix': '../remix/app/root.tsx',
       '@katalyst/nextjs': '../nextjs/src/app/page.tsx',
     };
-
-    config.plugins = config.plugins || [];
     
     return config;
   },

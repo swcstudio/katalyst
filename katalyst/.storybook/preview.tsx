@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react';
 import { themes } from '@storybook/theming';
+import React from 'react';
 
 import '../shared/src/styles/globals.css';
 
@@ -77,10 +78,13 @@ const preview: Preview = {
     (Story, context) => {
       const theme = context.globals.theme;
       
-      return (
-        <div className={`katalyst-theme-${theme}`} style={{ padding: '1rem' }}>
-          <Story />
-        </div>
+      return React.createElement(
+        'div',
+        { 
+          className: `katalyst-theme-${theme}`, 
+          style: { padding: '1rem' } 
+        },
+        React.createElement(Story)
       );
     },
   ],
