@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
+  },
+  "imports": {
+    "react": "npm:react@19.0.0",
+    "react-dom": "npm:react-dom@19.0.0",
+    "@types/react": "npm:@types/react@19.1.4",
+    "@types/react-dom": "npm:@types/react-dom@19.1.5",
+    "@remix-run/node": "npm:@remix-run/node@2.12.1",
+    "@remix-run/react": "npm:@remix-run/react@2.12.1",
+    "@remix-run/serve": "npm:@remix-run/serve@2.12.1",
+    "@remix-run/dev": "npm:@remix-run/dev@2.12.1",
+    "@tanstack/react-router": "npm:@tanstack/react-router@1.120.17",
+    "@tanstack/react-query": "npm:@tanstack/react-query@5.59.20",
+    "@tanstack/react-form": "npm:@tanstack/react-form@0.34.1",
+    "@tanstack/react-table": "npm:@tanstack/react-table@8.20.5",
+    "@tanstack/react-virtual": "npm:@tanstack/react-virtual@3.10.8",
+    "@rsbuild/core": "npm:@rsbuild/core@1.0.17",
+    "@rsbuild/plugin-react": "npm:@rsbuild/plugin-react@1.0.3",
+    "zustand": "npm:zustand@5.0.1",
+    "animejs": "npm:animejs@3.2.2",
+    "@pandacss/dev": "npm:@pandacss/dev@0.46.1",
+    "typescript": "npm:typescript@5.6.3"
+  },
+  "tasks": {
+    "dev": "deno run --allow-all npm:@remix-run/dev dev --port 20008",
+    "build": "deno run --allow-all npm:@remix-run/dev build",
+    "preview": "deno run --allow-all npm:@remix-run/serve build --port 20008"
+  }
+}
