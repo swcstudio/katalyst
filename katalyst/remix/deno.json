@@ -27,6 +27,7 @@
     "autoprefixer": "npm:autoprefixer@10.4.20",
     "@rsbuild/plugin-svgr": "npm:@rsbuild/plugin-svgr@1.0.1",
     "@rsbuild/plugin-type-check": "npm:@rsbuild/plugin-type-check@1.0.1",
+    "@module-federation/enhanced": "npm:@module-federation/enhanced@0.8.0",
     "@biomejs/biome": "npm:@biomejs/biome@1.9.4",
     "@clerk/clerk-react": "npm:@clerk/clerk-react@5.17.0",
     "@nx/react": "npm:@nx/react@21.2.2",
