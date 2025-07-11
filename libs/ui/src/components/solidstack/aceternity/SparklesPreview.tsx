@@ -1,7 +1,7 @@
 import { css } from '@sse/ui/styled-system/css';
 import type { Component } from 'solid-js';
-import { SparklesCore } from './core/SparklesCore';
 import { Motion, ScrollReveal } from './core/motion';
+import { SparklesCore } from './core/SparklesCore';
 
 export const SparklesPreview: Component = () => {
   return (

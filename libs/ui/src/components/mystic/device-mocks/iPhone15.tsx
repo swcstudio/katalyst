@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, type JSX, children, mergeProps } from 'solid-js';
+import { type Component, children, type JSX, mergeProps } from 'solid-js';
 
 export interface iPhone15Props {
   children?: JSX.Element;

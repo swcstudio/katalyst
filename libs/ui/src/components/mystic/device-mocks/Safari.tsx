@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, type JSX, children, createSignal, mergeProps } from 'solid-js';
+import { type Component, children, createSignal, For, type JSX, mergeProps } from 'solid-js';
 
 export interface SafariTab {
   id: string;

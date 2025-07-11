@@ -1,4 +1,4 @@
-import { type Component, For, createSignal } from 'solid-js';
+import { type Component, createSignal, For } from 'solid-js';
 import { css } from '../../styled-system/css';
 import { HeroSimple } from './HeroSimple';
 import { HeroSplit } from './HeroSplit';

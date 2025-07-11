@@ -1,4 +1,4 @@
-import { type Component, type JSX, createSignal, onCleanup, onMount } from 'solid-js';
+import { type Component, createSignal, type JSX, onCleanup, onMount } from 'solid-js';
 import { css } from '../../styled-system/css';
 
 interface WarpBackgroundProps {

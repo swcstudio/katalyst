@@ -1,5 +1,4 @@
-import { cx } from '@sse/ui/styled-system/css';
-import { css } from '@sse/ui/styled-system/css';
+import { css, cx } from '@sse/ui/styled-system/css';
 import type { Component, JSX } from 'solid-js';
 
 export interface CoverProps {

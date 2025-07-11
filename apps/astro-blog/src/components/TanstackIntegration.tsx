@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider, createQuery } from '@tanstack/solid-query';
+import { createQuery, QueryClient, QueryClientProvider } from '@tanstack/solid-query';
 import { createSignal } from 'solid-js';
 
 const queryClient = new QueryClient();

@@ -1,291 +1,113 @@
-name: SSE Micro-Frameworks CI/CD
+name: Katalyst CI/CD
 
 on:
   push:
-    branches: [main, staging, development]
+    branches: [ main, develop ]
   pull_request:
-    branches: [main, staging, development]
-
-env:
-  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+    branches: [ main, develop ]
 
 jobs:
-  setup:
-    name: Setup and Analysis
+  lint:
     runs-on: ubuntu-latest
-    outputs:
-      affected-projects: ${{ steps.affected.outputs.projects }}
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
         with:
           deno-version: v2.x
-
-      - name: Setup Node.js for Nx
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
-
+          cache: 'npm'
+      
       - name: Install dependencies
-        run: npm install
-        
-      - name: Install Nx CLI
-        run: npm install -g nx@18.3.0 nx-cloud@latest
+        run: npm ci
+      
+      - name: Run Biome lint
+        run: npm run lint
+      
+      - name: Type check
+        run: npm run typecheck
 
-      - name: Cache Deno dependencies
-        run: deno cache --reload deno.json
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests
+        run: npm run test
 
-      - name: Determine affected projects
-        id: affected
-        run: |
-          echo "projects=$(nx show projects --affected --base=origin/main --head=HEAD --json)" >> $GITHUB_OUTPUT
-
-  test-and-build:
-    name: Test & Build
-    needs: setup
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        framework: [marketing, blog, docs, storefront, remix-app, sveltekit-spa, shared]
-    
+        variant: [core, remix, nextjs]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
         with:
           deno-version: v2.x
-
-      - name: Setup Node.js for Nx
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
-
+          cache: 'npm'
+      
       - name: Install dependencies
-        run: npm install
-        
-      - name: Install Nx CLI
-        run: npm install -g nx@18.3.0
-
-      - name: Cache Deno dependencies
-        uses: actions/cache@v3
+        run: npm ci
+      
+      - name: Build ${{ matrix.variant }}
+        run: npm run build:${{ matrix.variant }}
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          path: ~/.cache/deno
-          key: ${{ runner.os }}-deno-${{ hashFiles('**/deno.json') }}
-          restore-keys: |
-            ${{ runner.os }}-deno-
+          name: katalyst-${{ matrix.variant }}-build
+          path: ${{ matrix.variant }}/dist/
 
-      - name: Run Biomjs linting
-        run: deno task biome
-
-      - name: Test framework
-        run: |
-          if [[ "${{ matrix.framework }}" == "shared" ]]; then
-            deno task test:shared
-          elif [[ "${{ matrix.framework }}" == "blog" ]]; then
-            deno task test:astro-blog
-          elif [[ "${{ matrix.framework }}" == "docs" ]]; then
-            deno task test:astro-docs
-          elif [[ "${{ matrix.framework }}" == "sveltekit-spa" ]]; then
-            deno task test:sveltekit-spa
-          else
-            deno task test:${{ matrix.framework }}
-          fi
-
-      - name: Build framework
-        run: |
-          if [[ "${{ matrix.framework }}" == "shared" ]]; then
-            echo "Skipping build for shared library"
-          elif [[ "${{ matrix.framework }}" == "blog" ]]; then
-            deno task build:blog
-          elif [[ "${{ matrix.framework }}" == "docs" ]]; then
-            deno task build:docs
-          elif [[ "${{ matrix.framework }}" == "sveltekit-spa" ]]; then
-            deno task build:sveltekit
-          else
-            deno task build:${{ matrix.framework }}
-          fi
-
-  integration-tests:
-    name: Integration Tests
-    needs: [setup, test-and-build]
+  storybook:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
-        with:
-          deno-version: v2.x
-
-      - name: Run comprehensive test suite
-        run: deno task test:all
-
-      - name: Test PandaCSS generation
-        run: deno task generate:panda
-
-      - name: Test Storybook build
-        run: deno task build-storybook
-
-      - name: Run rsdoctor analysis
-        run: deno task rsdoctor
-
-      - name: Test anime.js integration
-        run: deno task test:animations
-
-  nx-cloud-ci:
-    name: Nx Cloud AI-Powered CI
-    needs: setup
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
-        with:
-          deno-version: v2.x
-
-      - name: Setup Node.js for Nx
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
-
+          cache: 'npm'
+      
       - name: Install dependencies
-        run: npm install
-        
-      - name: Install Nx CLI
-        run: npm install -g nx@18.3.0 nx-cloud@latest
+        run: npm ci
+      
+      - name: Build Storybook
+        run: npm run build-storybook
+      
+      - name: Upload Storybook
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-static
+          path: storybook-static/
 
-      - name: Start Nx Cloud CI
-        run: |
-          if [ -n "${{ secrets.NX_CLOUD_ACCESS_TOKEN }}" ]; then
-            nx-cloud start-ci-run
-          else
-            echo "Skipping Nx Cloud - no access token configured"
-          fi
-
-      - name: Run affected tasks with AI
-        run: nx affected --target=build,test,lint --parallel=4 --cloud
-
-      - name: Stop Nx Cloud CI
-        if: always()
-        run: |
-          if [ -n "${{ secrets.NX_CLOUD_ACCESS_TOKEN }}" ]; then
-            nx-cloud stop-all-agents
-          else
-            echo "Skipping Nx Cloud stop - no access token configured"
-          fi
-
-  deploy-staging:
-    name: Deploy to Staging
-    needs: [test-and-build, integration-tests]
-    if: github.ref == 'refs/heads/staging' && github.event_name == 'push'
+  e2e:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          deno-version: v2.x
-
-      - name: Build all micro-frontends
-        run: deno task build
-
-      - name: Deploy to Vercel (Staging)
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./
-          vercel-args: '--prebuilt'
-
-  deploy-production:
-    name: Deploy to Production
-    needs: [test-and-build, integration-tests, nx-cloud-ci]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
-        with:
-          deno-version: v2.x
-
-      - name: Build all micro-frontends for production
-        run: deno task build
-
-      - name: Deploy Marketing to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_MARKETING_PROJECT_ID }}
-          working-directory: ./apps/marketing
-          vercel-args: '--prod'
-
-      - name: Deploy Blog to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_BLOG_PROJECT_ID }}
-          working-directory: ./apps/astro-blog
-          vercel-args: '--prod'
-
-      - name: Deploy Docs to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
-          working-directory: ./apps/astro-docs
-          vercel-args: '--prod'
-
-      - name: Deploy Storefront to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_STOREFRONT_PROJECT_ID }}
-          working-directory: ./apps/storefront
-          vercel-args: '--prod'
-
-      - name: Deploy Remix App to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_REMIX_PROJECT_ID }}
-          working-directory: ./apps/remix-app
-          vercel-args: '--prod'
-
-      - name: Deploy SvelteKit SPA to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_SVELTEKIT_PROJECT_ID }}
-          working-directory: ./apps/sveltekit-spa
-          vercel-args: '--prod'
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      
+      - name: Run E2E tests
+        run: npm run e2e

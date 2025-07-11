@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/solid-router';
-import { For, createEffect, createSignal } from 'solid-js';
+import { createEffect, createSignal, For } from 'solid-js';
 import { css } from '../../styled-system/css';
 import { flex } from '../../styled-system/patterns';
 

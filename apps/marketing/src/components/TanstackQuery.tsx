@@ -1,4 +1,4 @@
-import { For, Show, createResource } from 'solid-js';
+import { createResource, For, Show } from 'solid-js';
 import { css } from '../styled-system/css';
 import { flex } from '../styled-system/patterns';
 

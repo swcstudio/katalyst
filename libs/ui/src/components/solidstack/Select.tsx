@@ -1,6 +1,6 @@
 import * as select from '@zag-js/select';
 import { normalizeProps, useMachine } from '@zag-js/solid';
-import { For, type JSX, createMemo, createUniqueId, splitProps } from 'solid-js';
+import { createMemo, createUniqueId, For, type JSX, splitProps } from 'solid-js';
 
 export interface SelectOption {
   label: string;

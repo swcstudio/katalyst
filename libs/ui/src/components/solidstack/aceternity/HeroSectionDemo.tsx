@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, createSignal, onMount } from 'solid-js';
+import { type Component, createSignal, For, onMount } from 'solid-js';
 
 // Navbar component
 const Navbar: Component = () => {

@@ -1,7 +1,6 @@
-import { cx } from '@sse/ui/styled-system/css';
-import { css } from '@sse/ui/styled-system/css';
+import { css, cx } from '@sse/ui/styled-system/css';
 import { animate } from 'motion';
-import { type Component, For, JSX, createSignal, onCleanup, onMount } from 'solid-js';
+import { type Component, createSignal, For, JSX, onCleanup, onMount } from 'solid-js';
 
 export interface MeteorProps {
   number?: number;

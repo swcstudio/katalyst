@@ -1,10 +1,10 @@
 import { z } from 'npm:zod';
 import {
+  createResendClient,
+  getDefaultResendClient,
   type ResendClient,
   ResendError,
   SendEmailOptions,
-  createResendClient,
-  getDefaultResendClient,
 } from './resend-client.ts';
 import { SSETemplates } from './templates/sse-templates.ts';
 
@@ -88,7 +88,13 @@ export interface BatchEmailRequest {
   template: string;
   recipients: Array<{
     email: string;
-    data: ContactFormEmailData | WaitlistEmailData | NewsletterEmailData | UserWelcomeEmailData | AIAgentEmailData | PaymentEmailData;
+    data:
+      | ContactFormEmailData
+      | WaitlistEmailData
+      | NewsletterEmailData
+      | UserWelcomeEmailData
+      | AIAgentEmailData
+      | PaymentEmailData;
   }>;
   options?: {
     delay?: number;
@@ -491,7 +497,10 @@ export class EmailService {
   }
 
   // Health check
-  async healthCheck(): Promise<{ status: 'healthy' | 'unhealthy'; details: Record<string, unknown> }> {
+  async healthCheck(): Promise<{
+    status: 'healthy' | 'unhealthy';
+    details: Record<string, unknown>;
+  }> {
     try {
       const rateLimitInfo = this.resendClient.getRateLimitInfo();
 

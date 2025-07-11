@@ -1,14 +1,14 @@
 import { css } from '@sse/ui/styled-system/css';
 import {
   type Component,
-  For,
-  type JSX,
-  type ParentComponent,
   createEffect,
   createSignal,
+  For,
+  type JSX,
   mergeProps,
   onCleanup,
   onMount,
+  type ParentComponent,
 } from 'solid-js';
 
 // BoxReveal Component

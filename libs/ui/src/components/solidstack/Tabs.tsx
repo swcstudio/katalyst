@@ -1,6 +1,6 @@
 import { normalizeProps, useMachine } from '@zag-js/solid';
 import * as tabs from '@zag-js/tabs';
-import { For, type JSX, Show, createMemo, createUniqueId, splitProps } from 'solid-js';
+import { createMemo, createUniqueId, For, type JSX, Show, splitProps } from 'solid-js';
 
 export interface TabItem {
   value: string;

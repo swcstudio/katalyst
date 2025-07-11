@@ -1,12 +1,12 @@
 import { css } from '@sse/ui/styled-system/css';
 import {
   type Component,
-  type JSX,
-  type ParentComponent,
   createSignal,
+  type JSX,
   mergeProps,
   onCleanup,
   onMount,
+  type ParentComponent,
 } from 'solid-js';
 
 export interface MagicCardProps {

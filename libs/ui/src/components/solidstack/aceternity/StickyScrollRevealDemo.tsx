@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, createEffect, createSignal, onCleanup, onMount } from 'solid-js';
+import { type Component, createEffect, createSignal, For, onCleanup, onMount } from 'solid-js';
 
 interface ContentItem {
   title: string;

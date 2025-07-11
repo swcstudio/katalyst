@@ -1,5 +1,3 @@
-
-
 // Types and Schemas
 export interface ResendConfig {
   apiKey: string;
@@ -66,14 +64,17 @@ export interface BatchEmailResponse {
   }>;
 }
 
-
-
 export class ResendError extends Error {
   public readonly code: string;
   public readonly statusCode: number;
   public readonly details?: Record<string, unknown>;
 
-  constructor(message: string, code: string, statusCode: number, details?: Record<string, unknown>) {
+  constructor(
+    message: string,
+    code: string,
+    statusCode: number,
+    details?: Record<string, unknown>
+  ) {
     super(message);
     this.name = 'ResendError';
     this.code = code;
@@ -243,7 +244,11 @@ export class ResendClient {
     return addr.name ? `${addr.name} <${addr.email}>` : addr.email;
   }
 
-  private async makeRequest(method: string, endpoint: string, body?: Record<string, unknown>): Promise<Record<string, unknown>> {
+  private async makeRequest(
+    method: string,
+    endpoint: string,
+    body?: Record<string, unknown>
+  ): Promise<Record<string, unknown>> {
     const url = `${this.config.baseUrl}${endpoint}`;
 
     for (let attempt = 0; attempt <= this.config.retries; attempt++) {
@@ -282,11 +287,20 @@ export class ResendClient {
         if (attempt === this.config.retries) {
           if (error instanceof ResendError) throw error;
 
-          if (error && typeof error === 'object' && 'name' in error && error.name === 'AbortError') {
+          if (
+            error &&
+            typeof error === 'object' &&
+            'name' in error &&
+            error.name === 'AbortError'
+          ) {
             throw new ResendError('Request timeout', 'TIMEOUT', 408);
           }
 
-          throw new ResendError(error instanceof Error ? error.message : 'Network error', 'NETWORK_ERROR', 500);
+          throw new ResendError(
+            error instanceof Error ? error.message : 'Network error',
+            'NETWORK_ERROR',
+            500
+          );
         }
 
         // Wait before retry with exponential backoff

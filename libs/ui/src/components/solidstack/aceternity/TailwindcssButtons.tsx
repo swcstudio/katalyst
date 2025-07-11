@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, createSignal } from 'solid-js';
+import { type Component, createSignal, For } from 'solid-js';
 
 // Placeholder toast functionality - this would need to be implemented separately
 const toast = {

@@ -1,25 +1,22 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, Show, createSignal } from 'solid-js';
-
+import { type Component, createSignal, For, Show } from 'solid-js';
+// Background Components for effects
+import DotPattern from '../mystic/backgrounds/DotPattern';
+import { AnimatedShinyText } from '../mystic/text-effects/AnimatedShinyText';
 import { Accordion } from './Accordion';
 // Foundation Components (Zag.js powered)
 import { Button } from './Button';
 import { Card, CardBody, CardFooter, CardHeader } from './Card';
 import { Checkbox } from './Checkbox';
-import { Input } from './Input';
-import { Switch } from './Switch';
-import { Tabs } from './Tabs';
-import { Tooltip } from './Tooltip';
-
 // Demo Components (MysticUI inspired)
 import { AnimatedShinyTextDemo } from './demos/AnimatedShinyTextDemo';
 import { DotPatternDemo } from './demos/DotPatternDemo';
 import { GridPatternDemo } from './demos/GridPatternDemo';
 import { OrbitingCirclesDemo } from './demos/OrbitingCirclesDemo';
-
-// Background Components for effects
-import DotPattern from '../mystic/backgrounds/DotPattern';
-import { AnimatedShinyText } from '../mystic/text-effects/AnimatedShinyText';
+import { Input } from './Input';
+import { Switch } from './Switch';
+import { Tabs } from './Tabs';
+import { Tooltip } from './Tooltip';
 
 export interface SolidStackShowcaseProps {
   className?: string;

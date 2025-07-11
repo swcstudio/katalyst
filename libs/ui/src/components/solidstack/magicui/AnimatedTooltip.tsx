@@ -1,13 +1,13 @@
 import { css } from '@sse/ui/styled-system/css';
 import {
   type Component,
+  createSignal,
   For,
   JSX,
-  Show,
-  createSignal,
   mergeProps,
   onCleanup,
   onMount,
+  Show,
 } from 'solid-js';
 
 export interface TooltipItem {

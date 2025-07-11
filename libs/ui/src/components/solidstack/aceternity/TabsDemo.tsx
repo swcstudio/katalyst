@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, Show, createSignal } from 'solid-js';
+import { type Component, createSignal, For, Show } from 'solid-js';
 
 interface Tab {
   title: string;

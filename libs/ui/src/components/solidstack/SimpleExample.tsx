@@ -61,7 +61,9 @@ export function SimpleExample() {
                 label="Your Name"
                 placeholder="Enter your name"
                 value={inputValue()}
-                onInput={(e: InputEvent & { currentTarget: HTMLInputElement }) => setInputValue(e.currentTarget.value)}
+                onInput={(e: InputEvent & { currentTarget: HTMLInputElement }) =>
+                  setInputValue(e.currentTarget.value)
+                }
                 helperText="This field is required"
               />
 

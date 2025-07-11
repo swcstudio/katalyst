@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, createSignal, onMount } from 'solid-js';
+import { type Component, createSignal, For, onMount } from 'solid-js';
 
 // Placeholder TextHoverEffect component - this would need to be implemented separately
 const TextHoverEffect: Component<{

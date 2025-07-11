@@ -1,7 +1,6 @@
-import { cx } from '@sse/ui/styled-system/css';
-import { css } from '@sse/ui/styled-system/css';
+import { css, cx } from '@sse/ui/styled-system/css';
 import { animate, scroll } from 'motion';
-import { type Component, type JSX, createSignal, onCleanup, onMount } from 'solid-js';
+import { type Component, createSignal, type JSX, onCleanup, onMount } from 'solid-js';
 
 export interface ContainerScrollProps {
   titleComponent: JSX.Element;

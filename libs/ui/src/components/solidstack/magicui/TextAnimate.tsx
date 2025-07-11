@@ -1,10 +1,10 @@
 import { css } from '@sse/ui/styled-system/css';
 import {
   type Component,
-  For,
-  type JSX,
   createEffect,
   createSignal,
+  For,
+  type JSX,
   mergeProps,
   onCleanup,
   onMount,
@@ -173,7 +173,11 @@ export const TextAnimate: Component<TextAnimateProps> = (props) => {
     return defaultVariants[merged.animation];
   };
 
-  const getTransformStyle = (variant: AnimationVariant, index: number, isShow: boolean): JSX.CSSProperties => {
+  const getTransformStyle = (
+    variant: AnimationVariant,
+    index: number,
+    isShow: boolean
+  ): JSX.CSSProperties => {
     const baseDelay = merged.delay;
     const itemDelay = isShow ? index * 0.05 : 0;
     const totalDelay = baseDelay + itemDelay;

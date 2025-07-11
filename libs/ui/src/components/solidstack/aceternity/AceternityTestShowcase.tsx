@@ -1,9 +1,9 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, createSignal } from 'solid-js';
+import { type Component, createSignal, For } from 'solid-js';
 import {
   HoverMotion,
   Motion,
-  SVGMaskEffectDemo,
+  motionPresets,
   ScrollReveal,
   ShootingStars,
   ShootingStarsAndStarsBackgroundDemo,
@@ -17,6 +17,7 @@ import {
   StarsBackground,
   StickyBannerDemo,
   StickyScrollRevealDemo,
+  SVGMaskEffectDemo,
   TabsDemo,
   TailwindcssButtons,
   TextGenerateEffect,
@@ -27,7 +28,6 @@ import {
   TracingBeamDemo,
   TypewriterEffectDemo,
   TypewriterEffectSmoothDemo,
-  motionPresets,
 } from './index';
 
 interface TestSection {

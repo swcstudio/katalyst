@@ -1,4 +1,5 @@
 import { createSignal } from 'solid-js';
+
 interface UserStore {
   id: number;
   name: string;
@@ -9,6 +10,7 @@ interface UserStore {
     language: string;
   };
 }
+
 import { css } from '../styled-system/css';
 
 export default function TanstackStore() {

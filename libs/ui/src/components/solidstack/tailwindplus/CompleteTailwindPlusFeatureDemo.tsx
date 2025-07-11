@@ -1,4 +1,4 @@
-import { type Component, For, createSignal, onMount } from 'solid-js';
+import { type Component, createSignal, For, onMount } from 'solid-js';
 import { css } from '../../styled-system/css';
 import { FeatureGrid } from './FeatureGrid';
 import { FeatureSimple } from './FeatureSimple';

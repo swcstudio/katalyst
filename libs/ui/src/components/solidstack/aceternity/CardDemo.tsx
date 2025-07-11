@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, createSignal, onCleanup, onMount } from 'solid-js';
+import { type Component, createSignal, For, onCleanup, onMount } from 'solid-js';
 
 // Card wrapper component
 export const Card: Component<{

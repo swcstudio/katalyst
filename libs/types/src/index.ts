@@ -96,8 +96,16 @@ export type DeepPartial<T> = {
 };
 
 // Re-export commonly used SolidJS types
-export type { Component, JSX, Accessor, Setter, Signal } from 'solid-js';
-export type { ParentComponent, ParentProps, ComponentProps } from 'solid-js';
+export type {
+  Accessor,
+  Component,
+  ComponentProps,
+  JSX,
+  ParentComponent,
+  ParentProps,
+  Setter,
+  Signal,
+} from 'solid-js';
 
 // Global type definitions
 declare global {

@@ -1,10 +1,10 @@
 import { css } from '@sse/ui/styled-system/css';
 import {
   type Component,
-  For,
-  type JSX,
   children,
   createSignal,
+  For,
+  type JSX,
   mergeProps,
   onCleanup,
   onMount,

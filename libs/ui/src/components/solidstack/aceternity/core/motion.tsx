@@ -1,6 +1,6 @@
 import { animate, inView, spring, stagger, timeline } from '@motionone/dom';
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, type JSX, createSignal, onCleanup, onMount } from 'solid-js';
+import { type Component, createSignal, type JSX, onCleanup, onMount } from 'solid-js';
 
 // Motion configuration presets
 export const motionPresets = {

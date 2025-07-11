@@ -1,5 +1,5 @@
 import { createVirtualizer } from '@tanstack/solid-virtual';
-import { For, createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 import { css } from '../styled-system/css';
 
 interface Item {

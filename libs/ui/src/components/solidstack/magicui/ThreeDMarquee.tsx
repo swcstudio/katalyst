@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, JSX, createSignal, mergeProps, onCleanup, onMount } from 'solid-js';
+import { type Component, createSignal, For, JSX, mergeProps, onCleanup, onMount } from 'solid-js';
 
 export interface ThreeDMarqueeProps {
   images: string[];

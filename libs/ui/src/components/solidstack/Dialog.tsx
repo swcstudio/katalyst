@@ -1,6 +1,6 @@
 import * as dialog from '@zag-js/dialog';
 import { normalizeProps, useMachine } from '@zag-js/solid';
-import { type JSX, Show, createMemo, createUniqueId, splitProps } from 'solid-js';
+import { createMemo, createUniqueId, type JSX, Show, splitProps } from 'solid-js';
 
 export interface DialogProps {
   open?: boolean;

@@ -1,4 +1,4 @@
-import { For, createMemo, createSignal } from 'solid-js';
+import { createMemo, createSignal, For } from 'solid-js';
 import {
   Accordion,
   type AccordionItem,
@@ -8,13 +8,13 @@ import {
   CardFooter,
   CardHeader,
   Checkbox,
+  createToastService,
   Dialog,
   Input,
   Select,
   type SelectOption,
   Switch,
   Toast,
-  createToastService,
 } from './index';
 
 export function ArkUIExample() {

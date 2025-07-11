@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, createUniqueId } from 'solid-js';
+import { type Component, createUniqueId, For } from 'solid-js';
 
 const grid = [
   {

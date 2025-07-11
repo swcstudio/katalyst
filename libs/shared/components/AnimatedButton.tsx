@@ -1,5 +1,5 @@
-import { createSignal } from 'solid-js';
 import type { JSX } from 'solid-js';
+import { createSignal } from 'solid-js';
 import { animeWrapper } from '../animations/anime-wrapper';
 import { css } from '../styled-system/css';
 

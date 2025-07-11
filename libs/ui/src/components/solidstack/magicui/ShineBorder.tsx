@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { Component, type JSX, type ParentComponent, mergeProps } from 'solid-js';
+import { Component, type JSX, mergeProps, type ParentComponent } from 'solid-js';
 
 export interface ShineBorderProps {
   class?: string;

@@ -1,4 +1,4 @@
-import { type Component, For, type JSX, createSignal, onMount } from 'solid-js';
+import { type Component, createSignal, For, type JSX, onMount } from 'solid-js';
 import { css } from '../../styled-system/css';
 import { BlurFade } from '../magicui/BlurFade';
 import { BorderBeam } from '../magicui/BorderBeam';

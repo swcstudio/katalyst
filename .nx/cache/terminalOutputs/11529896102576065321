@@ -1,0 +1,30 @@
+[0m[2m[35m$[0m [2m[1mnext build[0m
+ [33m[1m⚠[22m[39m Invalid next.config.js options detected: 
+ [33m[1m⚠[22m[39m     Unrecognized key(s) in object: 'appDir' at "experimental"
+ [33m[1m⚠[22m[39m See more info here: https://nextjs.org/docs/messages/invalid-next-config
+[35m[1mAttention[22m[39m: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+[36mhttps://nextjs.org/telemetry[39m
+
+   [1m[38;2;173;127;168m▲ Next.js 15.3.5[39m[22m
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+[31m[1mError[22m[39m: A PostCSS Plugin was passed as a function using require(), but it must be provided as a [1mstring[22m.
+Read more: https://nextjs.org/docs/messages/postcss-shape
+[31mFailed to compile.
+[39m
+src/app/layout.tsx
+An error occurred in `next/font`.
+
+Error: Malformed PostCSS Configuration
+    at /home/ubuntu/repos/sse/katalyst/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:171:41
+    at Array.forEach (<anonymous>)
+    at getPostCssPlugins (/home/ubuntu/repos/sse/katalyst/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:141:13)
+    at async /home/ubuntu/repos/sse/katalyst/node_modules/next/dist/build/webpack/config/blocks/css/index.js:125:36
+    at async /home/ubuntu/repos/sse/katalyst/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:94:33
+    at async Span.traceAsyncFn (/home/ubuntu/repos/sse/katalyst/node_modules/next/dist/trace/trace.js:157:20)
+
+
+> Build failed because of webpack errors
+[0m[31merror[0m[2m:[0m script [1m"build"[0m exited with code 1[0m

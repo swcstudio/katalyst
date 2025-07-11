@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, type JSX, createSignal, mergeProps, onCleanup, onMount } from 'solid-js';
+import { type Component, createSignal, type JSX, mergeProps, onCleanup, onMount } from 'solid-js';
 
 export interface TypingAnimationProps {
   text: string | string[];

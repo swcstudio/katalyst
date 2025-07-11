@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, Show, createSignal, type JSX } from 'solid-js';
+import { type Component, createSignal, For, type JSX, Show } from 'solid-js';
 
 // Placeholder Icon components
 const IconBrandTabler: Component<{ class?: string }> = (props) => (

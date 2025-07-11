@@ -1,6 +1,6 @@
 import * as accordion from '@zag-js/accordion';
 import { normalizeProps, useMachine } from '@zag-js/solid';
-import { For, type JSX, createMemo, createUniqueId } from 'solid-js';
+import { createMemo, createUniqueId, For, type JSX } from 'solid-js';
 
 export interface AccordionItem {
   title: string;

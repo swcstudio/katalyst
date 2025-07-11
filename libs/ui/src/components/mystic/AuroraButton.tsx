@@ -1,4 +1,4 @@
-import { type JSX, createSignal, onMount, splitProps } from 'solid-js';
+import { createSignal, type JSX, onMount, splitProps } from 'solid-js';
 import { animations, cn, sizeVariants } from './utils.ts';
 
 export interface AuroraButtonProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {

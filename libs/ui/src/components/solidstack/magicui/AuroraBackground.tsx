@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, type JSX, children, createSignal, mergeProps, onMount } from 'solid-js';
+import { type Component, children, createSignal, type JSX, mergeProps, onMount } from 'solid-js';
 
 export interface AuroraBackgroundProps {
   children?: JSX.Element;

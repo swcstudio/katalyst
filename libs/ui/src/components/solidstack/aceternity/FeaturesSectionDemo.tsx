@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, createEffect, createSignal, onCleanup } from 'solid-js';
+import { type Component, createEffect, createSignal, For, onCleanup } from 'solid-js';
 
 // Placeholder Globe component
 const Globe: Component<{ className?: string }> = (props) => {

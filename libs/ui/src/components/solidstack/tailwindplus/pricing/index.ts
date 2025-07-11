@@ -1,45 +1,39 @@
-export { PricingSimple } from './PricingSimple';
-export { PricingDemo } from './PricingDemo';
-export { PricingGrid } from './components/PricingGrid';
-export { PricingTable } from './components/PricingTable';
-export { PricingSplit } from './components/PricingSplit';
-export { PricingShowcase } from './components/PricingShowcase';
-export { usePricingSection } from './state/usePricingSection';
-
 export type {
-  PricingTier,
-  PricingFrequency,
-  PricingSimpleProps,
-} from './PricingSimple';
-
-export type {
-  PricingTier as DemoPricingTier,
-  PricingFrequency as DemoPricingFrequency,
-  PricingDemoProps,
-} from './PricingDemo';
-
-export type {
-  PricingTier as GridPricingTier,
   PricingFrequency as GridPricingFrequency,
   PricingGridProps,
+  PricingTier as GridPricingTier,
 } from './components/PricingGrid';
-
+export { PricingGrid } from './components/PricingGrid';
+export { PricingShowcase } from './components/PricingShowcase';
 export type {
-  PricingTier as TablePricingTier,
-  PricingFeature,
-  PricingSection,
-  PricingFrequency as TablePricingFrequency,
-  PricingTableProps,
-} from './components/PricingTable';
-
-export type {
-  PricingTier as SplitPricingTier,
   PricingFrequency as SplitPricingFrequency,
   PricingSplitProps,
+  PricingTier as SplitPricingTier,
 } from './components/PricingSplit';
-
+export { PricingSplit } from './components/PricingSplit';
 export type {
+  PricingFeature,
+  PricingFrequency as TablePricingFrequency,
+  PricingSection,
+  PricingTableProps,
+  PricingTier as TablePricingTier,
+} from './components/PricingTable';
+export { PricingTable } from './components/PricingTable';
+export type {
+  PricingDemoProps,
+  PricingFrequency as DemoPricingFrequency,
+  PricingTier as DemoPricingTier,
+} from './PricingDemo';
+export { PricingDemo } from './PricingDemo';
+export type {
+  PricingFrequency,
+  PricingSimpleProps,
+  PricingTier,
+} from './PricingSimple';
+export { PricingSimple } from './PricingSimple';
+export type {
+  PricingSectionAPI,
   PricingSectionContext,
   PricingSectionState,
-  PricingSectionAPI,
 } from './state/usePricingSection';
+export { usePricingSection } from './state/usePricingSection';

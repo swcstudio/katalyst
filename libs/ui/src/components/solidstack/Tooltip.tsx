@@ -1,6 +1,6 @@
 import { normalizeProps, useMachine } from '@zag-js/solid';
 import * as tooltip from '@zag-js/tooltip';
-import { type JSX, Show, createMemo, createUniqueId } from 'solid-js';
+import { createMemo, createUniqueId, type JSX, Show } from 'solid-js';
 
 export interface TooltipProps {
   content: string | JSX.Element;

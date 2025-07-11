@@ -1,0 +1,17 @@
+[0m[2m[35m$[0m [2m[1mdeno lint[0m
+Unsupported compiler options in "file:///home/ubuntu/repos/sse/katalyst/deno.json".
+  The following options were ignored:
+    allowImportingTsExtensions, allowJs, allowSyntheticDefaultImports, esModuleInterop, moduleDetection, skipLibCheck
+[0m[1m[31merror[no-unused-vars][0m: [0m[1m`ModuleFederationPlugin` is never used[0m
+ [0m[38;5;12m-->[0m [0m[36m/home/ubuntu/repos/sse/katalyst/core/rsbuild.config.ts[0m[0m[33m:5:10[0m
+ [0m[38;5;12m | [0m
+[0m[38;5;12m5 | [0mimport { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
+ [0m[38;5;12m | [0m         [0m[1m[31m^^^^^^^^^^^^^^^^^^^^^^[0m
+  [0m[38;5;12m=[0m [0m[1mhint[0m: If this is intentional, alias it with an underscore like `ModuleFederationPlugin as _ModuleFederationPlugin`
+
+  [0m[38;5;12mdocs[0m: https://docs.deno.com/lint/rules/no-unused-vars
+
+
+Found 1 problem
+Checked 9 files
+[0m[31merror[0m[2m:[0m script [1m"lint"[0m exited with code 1[0m

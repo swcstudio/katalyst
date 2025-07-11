@@ -2,7 +2,6 @@ import { css } from '@sse/ui/styled-system/css';
 import type { Component } from 'solid-js';
 import { HoverMotion, Motion, ScrollReveal, Stagger } from './core/motion';
 import {
-  SVGMaskEffectDemo,
   ShootingStarsAndStarsBackgroundDemo,
   SidebarDemo,
   SignupFormDemo,
@@ -11,6 +10,7 @@ import {
   SpotlightPreview,
   StickyBannerDemo,
   StickyScrollRevealDemo,
+  SVGMaskEffectDemo,
   TabsDemo,
   TailwindcssButtons,
   TextGenerateEffectDemo,

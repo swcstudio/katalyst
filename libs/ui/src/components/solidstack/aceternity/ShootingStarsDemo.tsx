@@ -1,8 +1,8 @@
 import { css } from '@sse/ui/styled-system/css';
 import type { Component } from 'solid-js';
+import { Motion, ScrollReveal } from './core/motion';
 import { ShootingStars } from './core/ShootingStars';
 import { StarsBackground } from './core/StarsBackground';
-import { Motion, ScrollReveal } from './core/motion';
 
 export const ShootingStarsAndStarsBackgroundDemo: Component = () => {
   return (

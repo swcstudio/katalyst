@@ -1,6 +1,6 @@
 import * as numberInput from '@zag-js/number-input';
 import { normalizeProps, useMachine } from '@zag-js/solid';
-import { type JSX, Show, createMemo, createUniqueId, splitProps } from 'solid-js';
+import { createMemo, createUniqueId, type JSX, Show, splitProps } from 'solid-js';
 
 export interface NumberInputProps {
   value?: number;

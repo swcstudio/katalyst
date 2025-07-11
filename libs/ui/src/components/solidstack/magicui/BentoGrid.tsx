@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, type JSX, children, mergeProps } from 'solid-js';
+import { type Component, children, For, type JSX, mergeProps } from 'solid-js';
 
 export interface BentoGridProps {
   className?: string;

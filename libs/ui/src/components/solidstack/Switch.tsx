@@ -1,6 +1,6 @@
 import { normalizeProps, useMachine } from '@zag-js/solid';
 import * as switchMachine from '@zag-js/switch';
-import { type JSX, Show, createMemo, createUniqueId, splitProps } from 'solid-js';
+import { createMemo, createUniqueId, type JSX, Show, splitProps } from 'solid-js';
 
 export interface SwitchProps {
   checked?: boolean;

@@ -1,4 +1,4 @@
-import { For, type JSX, createSignal, onCleanup, onMount, splitProps } from 'solid-js';
+import { createSignal, For, type JSX, onCleanup, onMount, splitProps } from 'solid-js';
 import { cn } from './utils.ts';
 
 export interface Particle {

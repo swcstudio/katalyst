@@ -11,11 +11,25 @@ export const CTAPricingShowcase: Component = () => {
     setCurrentTheme(currentTheme() === 'light' ? 'dark' : 'light');
   };
 
-  const handleButtonClick = (button: { id: string; text: string; variant: 'primary' | 'secondary' }) => {
+  const handleButtonClick = (button: {
+    id: string;
+    text: string;
+    variant: 'primary' | 'secondary';
+  }) => {
     console.log('Button clicked:', button);
   };
 
-  const handleTierSelect = (tier: { id: string; name: string; price: { monthly: string; annually: string }; description: string; features: string[]; href: string; cta: string; popular?: boolean; featured?: boolean }) => {
+  const handleTierSelect = (tier: {
+    id: string;
+    name: string;
+    price: { monthly: string; annually: string };
+    description: string;
+    features: string[];
+    href: string;
+    cta: string;
+    popular?: boolean;
+    featured?: boolean;
+  }) => {
     console.log('Tier selected:', tier);
   };
 

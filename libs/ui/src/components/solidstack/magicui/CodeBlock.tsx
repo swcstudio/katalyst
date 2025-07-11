@@ -1,6 +1,5 @@
-import { cx } from '@sse/ui/styled-system/css';
-import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, JSX, createSignal } from 'solid-js';
+import { css, cx } from '@sse/ui/styled-system/css';
+import { type Component, createSignal, For, JSX } from 'solid-js';
 
 export interface CodeBlockProps {
   language: string;

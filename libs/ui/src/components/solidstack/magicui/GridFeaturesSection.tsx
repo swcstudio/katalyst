@@ -1,7 +1,5 @@
-import { cx } from '@sse/ui/styled-system/css';
-import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, type JSX, createSignal } from 'solid-js';
-import { createUniqueId } from 'solid-js';
+import { css, cx } from '@sse/ui/styled-system/css';
+import { type Component, createSignal, createUniqueId, For, type JSX } from 'solid-js';
 
 export interface GridFeatureData {
   title: string;

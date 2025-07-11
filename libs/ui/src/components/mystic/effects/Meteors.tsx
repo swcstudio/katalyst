@@ -1,9 +1,9 @@
 import { css } from '@sse/ui/styled-system/css';
 import {
   type Component,
+  createSignal,
   For,
   type JSX,
-  createSignal,
   mergeProps,
   onCleanup,
   onMount,

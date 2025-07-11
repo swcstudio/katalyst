@@ -1,0 +1,30 @@
+import { createContext, type ReactNode, useContext } from 'react';
+import { useKatalyst } from '../hooks/use-katalyst.ts';
+import type { KatalystConfig } from '../types/index.ts';
+
+interface KatalystContextValue {
+  config: KatalystConfig;
+  updateConfig: (updates: Partial<KatalystConfig>) => void;
+  isInitialized: boolean;
+}
+
+const KatalystContext = createContext<KatalystContextValue | null>(null);
+
+interface KatalystProviderProps {
+  children: ReactNode;
+  config: KatalystConfig;
+}
+
+export function KatalystProvider({ children, config }: KatalystProviderProps) {
+  const katalyst = useKatalyst(config);
+
+  return <KatalystContext.Provider value={katalyst}>{children}</KatalystContext.Provider>;
+}
+
+export function useKatalystContext() {
+  const context = useContext(KatalystContext);
+  if (!context) {
+    throw new Error('useKatalystContext must be used within a KatalystProvider');
+  }
+  return context;
+}

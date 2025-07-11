@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, createSignal } from 'solid-js';
+import { type Component, createSignal, For } from 'solid-js';
 
 import DotPattern from './backgrounds/DotPattern.tsx';
 import GridPattern from './backgrounds/GridPattern.tsx';
@@ -10,8 +10,8 @@ import Dock from './components/Dock.tsx';
 import Marquee from './components/Marquee.tsx';
 import OrbitingCircles from './components/OrbitingCircles.tsx';
 import Android from './device-mocks/Android.tsx';
-import Safari from './device-mocks/Safari.tsx';
 import iPhone15 from './device-mocks/iPhone15.tsx';
+import Safari from './device-mocks/Safari.tsx';
 import AnimatedBeam from './effects/AnimatedBeam.tsx';
 import BorderBeam from './effects/BorderBeam.tsx';
 import Meteors from './effects/Meteors.tsx';

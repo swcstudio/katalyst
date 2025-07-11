@@ -1,4 +1,4 @@
-import { type JSX, createEffect, createSignal, onCleanup, splitProps } from 'solid-js';
+import { createEffect, createSignal, type JSX, onCleanup, splitProps } from 'solid-js';
 import { animations, cn, gradients, typography } from './utils.ts';
 
 export interface AnimatedTextProps {

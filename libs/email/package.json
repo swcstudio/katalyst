@@ -31,7 +31,10 @@
       "types": "./dist/templates/sse-templates.d.ts"
     }
   },
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts",
     "dev": "tsup src/index.ts --format esm --dts --watch",
@@ -77,6 +80,9 @@
     "node": ">=18.0.0"
   },
   "nx": {
-    "tags": ["scope:shared", "type:email"]
+    "tags": [
+      "scope:shared",
+      "type:email"
+    ]
   }
 }

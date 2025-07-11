@@ -1,6 +1,5 @@
-import { cx } from '@sse/ui/styled-system/css';
-import { css } from '@sse/ui/styled-system/css';
-import { type Component, JSX, createSignal, onCleanup, onMount } from 'solid-js';
+import { css, cx } from '@sse/ui/styled-system/css';
+import { type Component, createSignal, JSX, onCleanup, onMount } from 'solid-js';
 
 export interface CompareProps {
   firstImage: string;

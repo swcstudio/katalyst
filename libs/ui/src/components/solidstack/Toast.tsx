@@ -1,6 +1,6 @@
 import { normalizeProps, useMachine } from '@zag-js/solid';
 import * as toast from '@zag-js/toast';
-import { For, type JSX, Show, createMemo, createUniqueId, splitProps } from 'solid-js';
+import { createMemo, createUniqueId, For, type JSX, Show, splitProps } from 'solid-js';
 
 export interface ToastData {
   id?: string;

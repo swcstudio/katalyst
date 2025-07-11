@@ -1,14 +1,14 @@
 import { css } from '@sse/ui/styled-system/css';
 import {
   type Component,
-  For,
-  type JSX,
-  ParentComponent,
   createEffect,
   createSignal,
+  For,
+  type JSX,
   mergeProps,
   onCleanup,
   onMount,
+  ParentComponent,
 } from 'solid-js';
 
 // WordRotate Component

@@ -11,7 +11,13 @@ export const FeatureShowcaseDemo: Component = () => {
     setCurrentTheme(currentTheme() === 'light' ? 'dark' : 'light');
   };
 
-  const handleFeatureClick = (feature: { id: string; name: string; description: string; href?: string; icon?: string }) => {
+  const handleFeatureClick = (feature: {
+    id: string;
+    name: string;
+    description: string;
+    href?: string;
+    icon?: string;
+  }) => {
     console.log('Feature clicked:', feature);
   };
 

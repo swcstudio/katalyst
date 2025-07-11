@@ -1,10 +1,10 @@
 import { css } from '@sse/ui/styled-system/css';
 import {
   type Component,
-  type JSX,
-  type ParentComponent,
   createSignal,
+  type JSX,
   mergeProps,
+  type ParentComponent,
   splitProps,
 } from 'solid-js';
 

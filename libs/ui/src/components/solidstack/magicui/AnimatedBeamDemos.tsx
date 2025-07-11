@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, For, type JSX, createSignal } from 'solid-js';
+import { type Component, createSignal, For, type JSX } from 'solid-js';
 import AnimatedBeam from '../../mystic/effects/AnimatedBeam';
 
 interface CircleProps {

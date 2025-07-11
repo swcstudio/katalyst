@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, type JSX, type ParentComponent, mergeProps, splitProps } from 'solid-js';
+import { type Component, type JSX, mergeProps, type ParentComponent, splitProps } from 'solid-js';
 
 export interface ShimmerButtonProps {
   class?: string;

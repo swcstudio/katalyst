@@ -1,0 +1,118 @@
+stages:
+  - lint
+  - test
+  - build
+  - deploy
+
+variables:
+  NODE_VERSION: "18"
+  DENO_VERSION: "2.x"
+
+before_script:
+  - curl -fsSL https://deno.land/install.sh | sh
+  - export PATH="$HOME/.deno/bin:$PATH"
+  - npm ci
+
+lint:
+  stage: lint
+  image: node:18
+  script:
+    - npm run lint
+    - npm run typecheck
+  only:
+    - main
+    - develop
+    - merge_requests
+
+test:
+  stage: test
+  image: node:18
+  script:
+    - npm run test
+  coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+  only:
+    - main
+    - develop
+    - merge_requests
+
+build:core:
+  stage: build
+  image: node:18
+  script:
+    - npm run build:core
+  artifacts:
+    paths:
+      - core/dist/
+    expire_in: 1 week
+  only:
+    - main
+    - develop
+
+build:remix:
+  stage: build
+  image: node:18
+  script:
+    - npm run build:remix
+  artifacts:
+    paths:
+      - remix/dist/
+    expire_in: 1 week
+  only:
+    - main
+    - develop
+
+build:nextjs:
+  stage: build
+  image: node:18
+  script:
+    - npm run build:nextjs
+  artifacts:
+    paths:
+      - nextjs/dist/
+    expire_in: 1 week
+  only:
+    - main
+    - develop
+
+storybook:
+  stage: build
+  image: node:18
+  script:
+    - npm run build-storybook
+  artifacts:
+    paths:
+      - storybook-static/
+    expire_in: 1 week
+  only:
+    - main
+    - develop
+
+deploy:staging:
+  stage: deploy
+  image: node:18
+  script:
+    - echo "Deploy to staging environment"
+    - npm run deploy
+  environment:
+    name: staging
+    url: https://katalyst-staging.vercel.app
+  only:
+    - develop
+
+deploy:production:
+  stage: deploy
+  image: node:18
+  script:
+    - echo "Deploy to production environment"
+    - npm run deploy
+  environment:
+    name: production
+    url: https://katalyst.vercel.app
+  only:
+    - main
+  when: manual

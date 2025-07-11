@@ -1,4 +1,4 @@
-import { type Component, For, JSX, createSignal, onMount } from 'solid-js';
+import { type Component, createSignal, For, JSX, onMount } from 'solid-js';
 import { css } from '../../styled-system/css';
 import { AnimatedGradientText } from '../magicui/AnimatedGradientText';
 import { BlurFade } from '../magicui/BlurFade';

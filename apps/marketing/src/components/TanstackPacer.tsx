@@ -1,4 +1,5 @@
 import { createSignal, onCleanup } from 'solid-js';
+
 interface PacerOptions {
   fps: number;
   onUpdate: () => void;
@@ -28,6 +29,7 @@ function createPacer(options: PacerOptions): Pacer {
 
   return { start, stop };
 }
+
 import { css } from '../styled-system/css';
 
 export default function TanstackPacer() {

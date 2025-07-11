@@ -1,6 +1,6 @@
 import * as radioGroup from '@zag-js/radio-group';
 import { normalizeProps, useMachine } from '@zag-js/solid';
-import { For, type JSX, Show, createMemo, createUniqueId, splitProps } from 'solid-js';
+import { createMemo, createUniqueId, For, type JSX, Show, splitProps } from 'solid-js';
 
 export interface RadioOption {
   value: string;

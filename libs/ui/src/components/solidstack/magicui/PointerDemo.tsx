@@ -1,5 +1,5 @@
 import { css } from '@sse/ui/styled-system/css';
-import { type Component, createSignal, onCleanup, onMount, type JSX } from 'solid-js';
+import { type Component, createSignal, type JSX, onCleanup, onMount } from 'solid-js';
 
 // Placeholder Card components
 const Card: Component<{

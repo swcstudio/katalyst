@@ -1,4 +1,4 @@
-import { type JSX, Show, children as resolveChildren, splitProps } from 'solid-js';
+import { type JSX, children as resolveChildren, Show, splitProps } from 'solid-js';
 import { animations, cn, glassMorphism, shadows, sizeVariants } from './utils.ts';
 
 export interface GlassCardProps extends JSX.HTMLAttributes<HTMLDivElement> {
