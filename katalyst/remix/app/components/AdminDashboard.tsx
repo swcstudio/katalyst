@@ -1,13 +1,12 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Card, Button } from '../../../shared/src/components/DesignSystem';
-import { DataTable } from './DataTable';
-import { Analytics } from './Analytics';
+// import { Card, Button } from '../../../shared/src/components/DesignSystem.tsx';
+import { DataTable } from './DataTable.tsx';
+import { Analytics } from './Analytics.tsx';
 
 export default function AdminDashboard() {
   const { data: dashboardData, isLoading } = useQuery({
     queryKey: ['admin-dashboard'],
-    queryFn: async () => {
+    queryFn: () => {
       return {
         totalUsers: 1234,
         activeUsers: 856,
@@ -30,30 +29,38 @@ export default function AdminDashboard() {
     <div className="admin-dashboard p-6 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <Button variant="primary">Export Data</Button>
+        <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          Export Data
+        </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card title="Total Users">
+        <div className="p-4 border rounded-lg bg-white shadow">
+          <h3 className="text-sm font-medium text-gray-600 mb-2">Total Users</h3>
           <div className="text-2xl font-bold text-blue-600">{dashboardData?.totalUsers}</div>
-        </Card>
-        <Card title="Active Users">
+        </div>
+        <div className="p-4 border rounded-lg bg-white shadow">
+          <h3 className="text-sm font-medium text-gray-600 mb-2">Active Users</h3>
           <div className="text-2xl font-bold text-green-600">{dashboardData?.activeUsers}</div>
-        </Card>
-        <Card title="Revenue">
+        </div>
+        <div className="p-4 border rounded-lg bg-white shadow">
+          <h3 className="text-sm font-medium text-gray-600 mb-2">Revenue</h3>
           <div className="text-2xl font-bold text-purple-600">${dashboardData?.revenue}</div>
-        </Card>
-        <Card title="Orders">
+        </div>
+        <div className="p-4 border rounded-lg bg-white shadow">
+          <h3 className="text-sm font-medium text-gray-600 mb-2">Orders</h3>
           <div className="text-2xl font-bold text-orange-600">{dashboardData?.orders}</div>
-        </Card>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card title="Analytics Overview">
+        <div className="p-4 border rounded-lg bg-white shadow">
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Analytics Overview</h3>
           <Analytics />
-        </Card>
+        </div>
         
-        <Card title="Recent Activity">
+        <div className="p-4 border rounded-lg bg-white shadow">
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Recent Activity</h3>
           <div className="space-y-3">
             {dashboardData?.recentActivity.map((activity) => (
               <div key={activity.id} className="flex items-center justify-between p-3 bg-gray-50 rounded">
@@ -67,12 +74,13 @@ export default function AdminDashboard() {
               </div>
             ))}
           </div>
-        </Card>
+        </div>
       </div>
 
-      <Card title="Data Management">
+      <div className="p-4 border rounded-lg bg-white shadow">
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Data Management</h3>
         <DataTable />
-      </Card>
+      </div>
     </div>
   );
 }

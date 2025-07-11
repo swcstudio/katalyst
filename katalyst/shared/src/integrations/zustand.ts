@@ -308,9 +308,9 @@ export class ZustandIntegration {
   private getStorageAdapter(storageType: string) {
     switch (storageType) {
       case 'localStorage':
-        return typeof window !== 'undefined' ? window.localStorage : undefined;
+        return typeof window !== 'undefined' ? globalThis.localStorage : undefined;
       case 'sessionStorage':
-        return typeof window !== 'undefined' ? window.sessionStorage : undefined;
+        return typeof window !== 'undefined' ? globalThis.sessionStorage : undefined;
       case 'indexedDB':
         return 'idb-keyval';
       default:

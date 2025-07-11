@@ -1,4 +1,4 @@
-import { StorybookConfig } from '../types';
+import { StorybookConfig } from '../types/index.ts';
 
 export interface StorybookConfiguration {
   stories: string[];

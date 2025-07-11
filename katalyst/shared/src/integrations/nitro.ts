@@ -3,8 +3,8 @@ export interface NitroConfig {
   srcDir: string;
   buildDir: string;
   output: NitroOutputConfig;
-  runtimeConfig: Record<string, any>;
-  appConfig: Record<string, any>;
+  runtimeConfig: Record<string, unknown>;
+  appConfig: Record<string, unknown>;
   routes: NitroRoutesConfig;
   plugins: string[];
   modules: string[];
@@ -32,7 +32,7 @@ export interface NitroStorageConfig {
 
 export interface NitroStorageDriver {
   driver: string;
-  options: Record<string, any>;
+  options: Record<string, unknown>;
 }
 
 export interface NitroDevtoolsConfig {
@@ -71,7 +71,7 @@ export class NitroIntegration {
     this.config = config;
   }
 
-  async setupServer() {
+  setupServer() {
     return {
       name: 'nitro-server',
       setup: () => ({
@@ -118,7 +118,7 @@ export class NitroIntegration {
     };
   }
 
-  async setupRouting() {
+  setupRouting() {
     return {
       name: 'nitro-routing',
       setup: () => ({
@@ -151,7 +151,7 @@ export class NitroIntegration {
     };
   }
 
-  async setupStorage() {
+  setupStorage() {
     return {
       name: 'nitro-storage',
       setup: () => ({
@@ -188,7 +188,7 @@ export class NitroIntegration {
     };
   }
 
-  async setupCaching() {
+  setupCaching() {
     return {
       name: 'nitro-caching',
       setup: () => ({
@@ -221,7 +221,7 @@ export class NitroIntegration {
     };
   }
 
-  async setupMiddleware() {
+  setupMiddleware() {
     return {
       name: 'nitro-middleware',
       setup: () => ({
@@ -255,7 +255,7 @@ export class NitroIntegration {
     };
   }
 
-  async setupPlugins() {
+  setupPlugins() {
     return {
       name: 'nitro-plugins',
       setup: () => ({
@@ -288,7 +288,7 @@ export class NitroIntegration {
     };
   }
 
-  async setupDeployment() {
+  setupDeployment() {
     return {
       name: 'nitro-deployment',
       setup: () => ({
@@ -332,7 +332,7 @@ export class NitroIntegration {
     };
   }
 
-  async setupDevelopment() {
+  setupDevelopment() {
     return {
       name: 'nitro-development',
       setup: () => ({

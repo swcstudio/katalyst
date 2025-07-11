@@ -124,7 +124,7 @@ export class BiomeIntegration {
     this.config = config;
   }
 
-  async setupFormatter() {
+  setupFormatter() {
     return {
       name: 'biome-formatter',
       setup: () => ({
@@ -159,7 +159,7 @@ export class BiomeIntegration {
     };
   }
 
-  async setupLinter() {
+  setupLinter() {
     return {
       name: 'biome-linter',
       setup: () => ({
@@ -194,7 +194,7 @@ export class BiomeIntegration {
     };
   }
 
-  async setupOrganizeImports() {
+  setupOrganizeImports() {
     return {
       name: 'biome-organize-imports',
       setup: () => ({
@@ -214,7 +214,7 @@ export class BiomeIntegration {
     };
   }
 
-  async setupLanguageSupport() {
+  setupLanguageSupport() {
     return {
       name: 'biome-language-support',
       setup: () => ({
@@ -242,7 +242,7 @@ export class BiomeIntegration {
     };
   }
 
-  async setupEditorIntegration() {
+  setupEditorIntegration() {
     return {
       name: 'biome-editor-integration',
       setup: () => ({
@@ -286,7 +286,7 @@ export class BiomeIntegration {
     };
   }
 
-  async setupContinuousIntegration() {
+  setupContinuousIntegration() {
     return {
       name: 'biome-ci',
       setup: () => ({
@@ -454,10 +454,10 @@ export class BiomeIntegration {
       }
 
       declare namespace Biome {
-        function format(code: string, options?: any): Promise<string>;
-        function lint(code: string, options?: any): Promise<any[]>;
-        function check(code: string, options?: any): Promise<any>;
-        function organizeImports(code: string, options?: any): Promise<string>;
+        function format(code: string, options?: Record<string, unknown>): Promise<string>;
+        function lint(code: string, options?: Record<string, unknown>): Promise<Record<string, unknown>[]>;
+        function check(code: string, options?: Record<string, unknown>): Promise<Record<string, unknown>>;
+        function organizeImports(code: string, options?: Record<string, unknown>): Promise<string>;
       }
     `;
   }

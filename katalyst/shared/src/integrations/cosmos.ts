@@ -1,4 +1,4 @@
-import { Web3Config } from '../types';
+import { Web3Config } from '../types/index.ts';
 
 export interface CosmosConfig extends Web3Config {
   evmosRpc: string;

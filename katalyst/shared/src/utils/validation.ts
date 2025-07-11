@@ -1,4 +1,4 @@
-import { KatalystConfig, KatalystFeature, KatalystPlugin, KatalystIntegration } from '../types';
+import { KatalystConfig, KatalystFeature, KatalystPlugin, KatalystIntegration } from '../types/index.ts';
 
 export function validateKatalystConfig(config: KatalystConfig): boolean {
   if (!config.variant || !['core', 'remix', 'nextjs'].includes(config.variant)) {

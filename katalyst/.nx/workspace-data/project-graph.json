@@ -739,13 +739,7 @@
   "dependencies": {
     "@sse/katalyst-nextjs": [],
     "@sse/katalyst-shared": [],
-    "@sse/katalyst-remix": [
-      {
-        "source": "@sse/katalyst-remix",
-        "target": "@sse/katalyst-shared",
-        "type": "static"
-      }
-    ],
+    "@sse/katalyst-remix": [],
     "@sse/katalyst-core": [
       {
         "source": "@sse/katalyst-core",
@@ -773,5 +767,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1752237969668
+  "computedAt": 1752241475870
 }

@@ -1,3 +1,3 @@
-export * from './use-katalyst';
-export * from './use-integration';
-export * from './use-config';
+export * from './use-katalyst.ts';
+export * from './use-integration.ts';
+export * from './use-config.ts';

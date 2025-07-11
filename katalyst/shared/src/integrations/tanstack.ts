@@ -1,4 +1,4 @@
-import { TanStackConfig } from '../types';
+import { TanStackConfig } from '../types/index';
 
 export interface TanStackRouterConfig {
   routes: RouteConfig[];
@@ -21,15 +21,15 @@ export interface RouteConfig {
 }
 
 export interface RouteLoader {
-  fn: Function;
-  cache: 'swr' | 'stale-while-revalidate' | 'none';
+  fn: (...args: unknown[]) => unknown;
+  cache: 'swr' | 'stale-while-revalidate' | 'none' | 'fresh';
   staleTime?: number;
   gcTime?: number;
 }
 
 export interface RouteMiddleware {
   name: string;
-  fn: Function;
+  fn: (context?: Record<string, unknown>) => unknown;
   order: number;
 }
 
@@ -40,10 +40,10 @@ export class TanStackIntegration {
     this.config = config;
   }
 
-  async setupRouter(): Promise<any> {
-    if (!this.config.router) return null;
+  setupRouter(): Promise<unknown> {
+    if (!this.config.router) return Promise.resolve(null);
     
-    return {
+    return Promise.resolve({
       name: 'tanstack-router',
       setup: (): TanStackRouterConfig => ({
         routes: [
@@ -69,29 +69,29 @@ export class TanStackIntegration {
         ],
         loaders: new Map([
           ['homeLoader', {
-            fn: async () => ({ title: 'Welcome', content: 'Marketing content' }),
+            fn: (..._args: unknown[]) => ({ title: 'Welcome', content: 'Marketing content' }),
             cache: 'swr',
             staleTime: 5 * 60 * 1000,
             gcTime: 10 * 60 * 1000
           }],
           ['productsLoader', {
-            fn: async () => ({ products: [], category: 'all' }),
+            fn: (..._args: unknown[]) => ({ products: [], category: 'all' }),
             cache: 'swr',
             staleTime: 2 * 60 * 1000
           }],
           ['categoryLoader', {
-            fn: async (params: any) => ({ 
+            fn: (...args: unknown[]) => ({ 
               products: [], 
-              category: params.category 
+              category: args[0] 
             }),
             cache: 'swr'
           }]
-        ]),
+        ] as [string, RouteLoader][]),
         middleware: [
           {
             name: 'auth',
-            fn: (context: any) => {
-              if (context.route.meta?.requiresAuth && !context.user) {
+            fn: (context?: Record<string, unknown>) => {
+              if ((context as any)?.route?.meta?.requiresAuth && !(context as any).user) {
                 throw new Error('Authentication required');
               }
             },
@@ -99,9 +99,9 @@ export class TanStackIntegration {
           },
           {
             name: 'analytics',
-            fn: (context: any) => {
+            fn: (context?: Record<string, unknown>) => {
               if (typeof window !== 'undefined') {
-                console.log('Page view:', context.route.path);
+                console.log('Page view:', (context as any)?.route?.path);
               }
             },
             order: 2
@@ -121,10 +121,10 @@ export class TanStackIntegration {
         '@tanstack/react-router',
         '@tanstack/router-devtools'
       ]
-    };
+    });
   }
 
-  async setupQuery(): Promise<any> {
+  setupQuery(): Record<string, unknown> | null {
     if (!this.config.query) return null;
     
     return {
@@ -153,7 +153,7 @@ export class TanStackIntegration {
         ]),
         mutations: new Map([
           ['updateProfile', {
-            mutationFn: async (data: any) => {
+            mutationFn: async (data: Record<string, unknown>) => {
               const response = await fetch('/api/profile', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -164,12 +164,12 @@ export class TanStackIntegration {
             onSuccess: () => {
               console.log('Profile updated successfully');
             },
-            onError: (error: any) => {
+            onError: (error: Record<string, unknown>) => {
               console.error('Profile update failed:', error);
             }
           }],
           ['submitContact', {
-            mutationFn: async (data: any) => {
+            mutationFn: async (data: Record<string, unknown>) => {
               const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -197,7 +197,7 @@ export class TanStackIntegration {
     };
   }
 
-  async setupForm(): Promise<any> {
+  setupForm(): Record<string, unknown> | null {
     if (!this.config.form) return null;
     
     return {
@@ -212,7 +212,7 @@ export class TanStackIntegration {
             async: false
           }],
           ['required', {
-            fn: (value: any) => {
+            fn: (value: unknown) => {
               return (value !== null && value !== undefined && value !== '') || 'This field is required';
             },
             async: false
@@ -239,7 +239,7 @@ export class TanStackIntegration {
               email: { validators: ['required', 'email'] },
               message: { validators: ['required', 'minLength:10'] }
             },
-            onSubmit: async (data: any) => {
+            onSubmit: async (data: Record<string, unknown>) => {
               const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -254,7 +254,7 @@ export class TanStackIntegration {
               password: { validators: ['required', 'minLength:8'] },
               confirmPassword: { 
                 validators: ['required'],
-                validate: (value: string, formData: any) => {
+                validate: (value: string, formData: Record<string, unknown>) => {
                   return value === formData.password || 'Passwords do not match';
                 }
               }
@@ -280,7 +280,7 @@ export class TanStackIntegration {
     };
   }
 
-  async setupTable(): Promise<any> {
+  setupTable(): Record<string, unknown> | null {
     if (!this.config.table) return null;
     
     return {
@@ -321,9 +321,9 @@ export class TanStackIntegration {
             enableSorting: true,
             enableFiltering: true,
             filterFn: 'equals',
-            cell: (info: any) => {
-              const status = info.getValue();
-              return `<span class="status-${status.toLowerCase()}">${status}</span>`;
+            cell: (info: Record<string, unknown>) => {
+              const status = (info as any).getValue();
+              return `<span class="status-${(status as string).toLowerCase()}">${status}</span>`;
             }
           },
           {
@@ -332,10 +332,11 @@ export class TanStackIntegration {
             size: 150,
             enableSorting: false,
             enableFiltering: false,
-            cell: (info: any) => {
+            cell: (info: Record<string, unknown>) => {
+              const row = (info as any).row;
               return `
-                <button onclick="editRow(${info.row.original.id})">Edit</button>
-                <button onclick="deleteRow(${info.row.original.id})">Delete</button>
+                <button onclick="editRow(${row.original.id})">Edit</button>
+                <button onclick="deleteRow(${row.original.id})">Delete</button>
               `;
             }
           }
@@ -388,7 +389,7 @@ export class TanStackIntegration {
     };
   }
 
-  async setupVirtual(): Promise<any> {
+  setupVirtual(): Record<string, unknown> | null {
     if (!this.config.virtual) return null;
     
     return {
@@ -406,8 +407,8 @@ export class TanStackIntegration {
           scrollPaddingEnd: 0,
           initialOffset: 0,
           initialRect: { width: 0, height: 0 },
-          onChange: (instance: any) => {
-            console.log('Virtual items changed:', instance.getVirtualItems().length);
+          onChange: (instance: Record<string, unknown>) => {
+            console.log('Virtual items changed:', (instance as any).getVirtualItems().length);
           }
         },
         scrollElement: null,
@@ -419,7 +420,7 @@ export class TanStackIntegration {
           },
           'chat-messages': {
             count: 5000,
-            estimateSize: (index: number) => {
+            estimateSize: (_index: number) => {
               return Math.random() > 0.5 ? 60 : 90;
             },
             overscan: 10
@@ -460,14 +461,14 @@ export class TanStackIntegration {
 
   getServerFunctions() {
     return {
-      'get_marketing_content': async (section: string) => {
+      'get_marketing_content': (section: string) => {
         return {
           title: `${section} Content`,
           content: `Dynamic content for ${section}`,
           lastUpdated: new Date().toISOString()
         };
       },
-      'load_products': async (params: { category?: string; limit?: number }) => {
+      'load_products': (params: { category?: string; limit?: number }) => {
         return {
           products: Array.from({ length: params.limit || 10 }, (_, i) => ({
             id: i + 1,

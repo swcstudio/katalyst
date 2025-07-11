@@ -1,10 +1,9 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 export function Analytics() {
   const { data: analyticsData } = useQuery({
     queryKey: ['analytics'],
-    queryFn: async () => ({
+    queryFn: () => ({
       pageViews: [
         { date: '2024-01-01', views: 1200 },
         { date: '2024-01-02', views: 1350 },

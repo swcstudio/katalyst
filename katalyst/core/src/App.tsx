@@ -1,14 +1,14 @@
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
-import { routeTree } from './routeTree.gen';
-import { useConfigStore } from '../../shared/src/stores/config-store';
-import { KatalystProvider } from '../../shared/src/components/KatalystProvider';
-import { DesignSystem } from '../../shared/src/components/DesignSystem';
+import { routeTree } from './routeTree.gen.ts';
+import { useConfigStore } from '../../shared/src/stores/config-store.ts';
+import { KatalystProvider } from '../../shared/src/components/KatalystProvider.tsx';
+import { DesignSystem } from '../../shared/src/components/DesignSystem.tsx';
 import './index.css';
 
-const RemixAdminDashboard = lazy(() => import('../../remix/app/components/AdminDashboard'));
-const NextjsMarketing = lazy(() => import('../../nextjs/src/components/Marketing'));
+const RemixAdminDashboard = lazy(() => import('../../remix/app/components/AdminDashboard.tsx'));
+const NextjsMarketing = lazy(() => import('../../nextjs/src/components/Marketing.tsx'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,14 +47,16 @@ export default function App() {
               <h1 className="text-2xl font-bold">Katalyst Core - React 19 Web App</h1>
               <nav className="mt-2 space-x-4">
                 <button 
+                  type="button"
                   className="px-3 py-1 bg-secondary rounded hover:bg-secondary/80"
-                  onClick={() => window.dispatchEvent(new CustomEvent('katalyst:navigate', { detail: { to: 'admin' } }))}
+                  onClick={() => globalThis.dispatchEvent(new CustomEvent('katalyst:navigate', { detail: { to: 'admin' } }))}
                 >
                   Admin Dashboard
                 </button>
                 <button 
+                  type="button"
                   className="px-3 py-1 bg-secondary rounded hover:bg-secondary/80"
-                  onClick={() => window.dispatchEvent(new CustomEvent('katalyst:navigate', { detail: { to: 'marketing' } }))}
+                  onClick={() => globalThis.dispatchEvent(new CustomEvent('katalyst:navigate', { detail: { to: 'marketing' } }))}
                 >
                   Marketing Site
                 </button>

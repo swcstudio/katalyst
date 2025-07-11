@@ -1,5 +1,5 @@
 import React from 'react';
-import { useConfigContext } from './ConfigProvider';
+import { useConfigContext } from './ConfigProvider.tsx';
 
 interface DesignSystemProps {
   children: React.ReactNode;
@@ -51,7 +51,7 @@ export function Button({
   };
   
   return (
-    <button
+    <button type="button"
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       onClick={onClick}
       disabled={disabled}

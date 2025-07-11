@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { KatalystConfig } from '../types';
+import { KatalystConfig } from '../types/index.ts';
 
 export function useKatalyst(initialConfig: KatalystConfig) {
   const [config, setConfig] = useState<KatalystConfig>(initialConfig);

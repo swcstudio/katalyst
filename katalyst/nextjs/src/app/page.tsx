@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense } from 'react';
-import Marketing from '../components/Marketing';
+import Marketing from '../components/Marketing.tsx';
 
 export default function Home() {
   return (

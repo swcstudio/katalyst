@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { KatalystConfig } from '../types';
+import { KatalystConfig } from '../types/index.ts';
 
 export function useConfig(initialConfig: KatalystConfig) {
   const [config, setConfig] = useState<KatalystConfig>(initialConfig);
@@ -13,7 +13,7 @@ export function useConfig(initialConfig: KatalystConfig) {
     }));
   }, []);
 
-  const updatePlugin = useCallback((name: string, config: Record<string, any>) => {
+  const updatePlugin = useCallback((name: string, config: Record<string, unknown>) => {
     setConfig(prev => ({
       ...prev,
       plugins: prev.plugins.map(p => 

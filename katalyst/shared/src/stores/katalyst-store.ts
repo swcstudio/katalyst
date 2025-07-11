@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { KatalystConfig } from '../types';
+import { KatalystConfig } from '../types/index.ts';
 
 interface KatalystStore {
   config: KatalystConfig | null;
@@ -9,7 +9,7 @@ interface KatalystStore {
   setInitialized: (initialized: boolean) => void;
 }
 
-export const useKatalystStore = create<KatalystStore>((set, get) => ({
+export const useKatalystStore = create<KatalystStore>((set, _get) => ({
   config: null,
   isInitialized: false,
   setConfig: (config: KatalystConfig) => set({ config }),

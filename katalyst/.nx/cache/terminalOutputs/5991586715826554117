@@ -1,0 +1,57 @@
+[0m[2m[35m$[0m [2m[1mdeno lint[0m
+Unsupported compiler options in "file:///home/ubuntu/repos/sse/katalyst/deno.json".
+  The following options were ignored:
+    allowImportingTsExtensions, allowJs, allowSyntheticDefaultImports, esModuleInterop, moduleDetection, skipLibCheck
+[0m[1m[31merror[no-unused-vars][0m: [0m[1m`ModuleFederationPlugin` is never used[0m
+ [0m[38;5;12m-->[0m [0m[36m/home/ubuntu/repos/sse/katalyst/nextjs/rsbuild.config.ts[0m[0m[33m:3:10[0m
+ [0m[38;5;12m | [0m
+[0m[38;5;12m3 | [0mimport { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
+ [0m[38;5;12m | [0m         [0m[1m[31m^^^^^^^^^^^^^^^^^^^^^^[0m
+  [0m[38;5;12m=[0m [0m[1mhint[0m: If this is intentional, alias it with an underscore like `ModuleFederationPlugin as _ModuleFederationPlugin`
+
+  [0m[38;5;12mdocs[0m: https://docs.deno.com/lint/rules/no-unused-vars
+
+
+[0m[1m[31merror[no-unused-vars][0m: [0m[1m`QueryClient` is never used[0m
+ [0m[38;5;12m-->[0m [0m[36m/home/ubuntu/repos/sse/katalyst/nextjs/src/app/layout.tsx[0m[0m[33m:3:10[0m
+ [0m[38;5;12m | [0m
+[0m[38;5;12m3 | [0mimport { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+ [0m[38;5;12m | [0m         [0m[1m[31m^^^^^^^^^^^[0m
+  [0m[38;5;12m=[0m [0m[1mhint[0m: If this is intentional, alias it with an underscore like `QueryClient as _QueryClient`
+
+  [0m[38;5;12mdocs[0m: https://docs.deno.com/lint/rules/no-unused-vars
+
+
+[0m[1m[31merror[no-unused-vars][0m: [0m[1m`QueryClientProvider` is never used[0m
+ [0m[38;5;12m-->[0m [0m[36m/home/ubuntu/repos/sse/katalyst/nextjs/src/app/layout.tsx[0m[0m[33m:3:23[0m
+ [0m[38;5;12m | [0m
+[0m[38;5;12m3 | [0mimport { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+ [0m[38;5;12m | [0m                      [0m[1m[31m^^^^^^^^^^^^^^^^^^^[0m
+  [0m[38;5;12m=[0m [0m[1mhint[0m: If this is intentional, alias it with an underscore like `QueryClientProvider as _QueryClientProvider`
+
+  [0m[38;5;12mdocs[0m: https://docs.deno.com/lint/rules/no-unused-vars
+
+
+[0m[1m[31merror[no-unused-vars][0m: [0m[1m`React` is never used[0m
+ [0m[38;5;12m-->[0m [0m[36m/home/ubuntu/repos/sse/katalyst/nextjs/src/components/Features.tsx[0m[0m[33m:1:8[0m
+ [0m[38;5;12m | [0m
+[0m[38;5;12m1 | [0mimport React from 'react';
+ [0m[38;5;12m | [0m       [0m[1m[31m^^^^^[0m
+  [0m[38;5;12m=[0m [0m[1mhint[0m: If this is intentional, prefix it with an underscore like `_React`
+
+  [0m[38;5;12mdocs[0m: https://docs.deno.com/lint/rules/no-unused-vars
+
+
+[0m[1m[31merror[require-await][0m: [0m[1mAsync arrow function has no 'await' expression or 'await using' declaration.[0m
+ [0m[38;5;12m-->[0m [0m[36m/home/ubuntu/repos/sse/katalyst/nextjs/src/components/Marketing.tsx[0m[0m[33m:9:14[0m
+ [0m[38;5;12m | [0m
+[0m[38;5;12m9 | [0m    queryFn: async () => ({
+ [0m[38;5;12m | [0m             [0m[1m[31m^^^^^[0m
+  [0m[38;5;12m=[0m [0m[1mhint[0m: Remove 'async' keyword from the function or use 'await' expression or 'await using' declaration inside.
+
+  [0m[38;5;12mdocs[0m: https://docs.deno.com/lint/rules/require-await
+
+
+Found 5 problems
+Checked 12 files
+[0m[31merror[0m[2m:[0m script [1m"lint"[0m exited with code 1[0m

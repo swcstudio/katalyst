@@ -6,7 +6,7 @@ declare namespace React {
   }
 }
 
-declare type JSXElementConstructor<P> = ((props: P) => React.ReactElement<any, any> | null) | (new (props: P) => Component<P, any>);
+declare type JSXElementConstructor<P> = ((props: P) => React.ReactElement<Record<string, unknown>, string | JSXElementConstructor<Record<string, unknown>>> | null) | (new (props: P) => Component<P, Record<string, unknown>>);
 declare type Key = string | number;
 declare class Component<P, S> {}
 
@@ -53,7 +53,7 @@ export class ParetoIntegration {
     this.config = config;
   }
 
-  async setupStreaming() {
+  setupStreaming() {
     return {
       name: 'pareto-streaming',
       setup: () => ({
@@ -123,7 +123,7 @@ export class ParetoIntegration {
     };
   }
 
-  async setupProgressiveHydration() {
+  setupProgressiveHydration() {
     return {
       name: 'pareto-progressive-hydration',
       setup: () => ({
@@ -155,7 +155,7 @@ export class ParetoIntegration {
     };
   }
 
-  async setupSelectiveHydration() {
+  setupSelectiveHydration() {
     return {
       name: 'pareto-selective-hydration',
       setup: () => ({
@@ -181,7 +181,7 @@ export class ParetoIntegration {
     };
   }
 
-  async setupResourceOptimization() {
+  setupResourceOptimization() {
     return {
       name: 'pareto-resource-optimization',
       setup: () => ({
@@ -223,7 +223,7 @@ export class ParetoIntegration {
     };
   }
 
-  async setupPerformanceMonitoring() {
+  setupPerformanceMonitoring() {
     return {
       name: 'pareto-performance-monitoring',
       setup: () => ({
@@ -262,7 +262,7 @@ export class ParetoIntegration {
     };
   }
 
-  async setupCacheOptimization() {
+  setupCacheOptimization() {
     return {
       name: 'pareto-cache-optimization',
       setup: () => ({
@@ -322,40 +322,40 @@ export class ParetoIntegration {
   }
 
   getStreamingAPI() {
-    const self = this;
+    const paretoInstance = this;
     return {
-      renderToReadableStream: (element: React.ReactElement, options?: any) => {
+      renderToReadableStream: (element: React.ReactElement, options: Record<string, unknown> = {}) => {
         return new ReadableStream({
           start(controller) {
-            const stream = self.createSSRStream(element, options);
-            self.pipeToController(stream, controller);
+            const stream = paretoInstance.createSSRStream(element, options);
+            paretoInstance.pipeToController(stream, controller);
           }
         });
       },
       renderToString: (element: React.ReactElement) => {
-        return self.renderToStaticMarkup(element);
+        return paretoInstance.renderToStaticMarkup(element);
       },
       hydrateRoot: (container: Element, element: React.ReactElement) => {
-        return self.progressiveHydrate(container, element);
+        return paretoInstance.progressiveHydrate(container, element);
       }
     };
   }
 
-  private createSSRStream(element: React.ReactElement, options: any) {
+  private createSSRStream(_element: React.ReactElement, _options?: Record<string, unknown>) {
     return {
-      pipe: (destination: any) => {
+      pipe: (_destination: Record<string, unknown>) => {
       }
     };
   }
 
-  private pipeToController(stream: any, controller: ReadableStreamDefaultController) {
+  private pipeToController(_stream: Record<string, unknown>, _controller: ReadableStreamDefaultController) {
   }
 
-  private renderToStaticMarkup(element: React.ReactElement): string {
+  private renderToStaticMarkup(_element: React.ReactElement): string {
     return '';
   }
 
-  private progressiveHydrate(container: Element, element: React.ReactElement) {
+  private progressiveHydrate(_container: Element, _element: React.ReactElement) {
     return {
       unmount: () => {
       }
@@ -400,7 +400,7 @@ export class ParetoIntegration {
       declare namespace Pareto {
         function renderToReadableStream(
           element: React.ReactElement,
-          options?: any
+          options?: Record<string, unknown>
         ): ReadableStream;
 
         function renderToString(element: React.ReactElement): string;

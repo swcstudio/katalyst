@@ -1,7 +1,10 @@
-export * from './components';
-export * from './tokens';
-export * from './themes';
-export * from './primitives';
-export * from './ant-components';
-export * from './utils';
-export type * from './types';
+// export * from './components/index.ts';
+// export * from './tokens.ts';
+// export * from './themes.ts';
+// export * from './primitives/index.ts';
+// export * from './ant-components/index.ts';
+export * from './utils.ts';
+// export * from './types.ts';
+
+export const Button = 'button';
+export const Card = 'div';

@@ -1,51 +1,40 @@
 {
   "run": {
-    "command": "nx run-many --target=lint --projects=core,remix,nextjs,shared --parallel",
-    "startTime": "2025-07-11T12:46:09.844Z",
-    "endTime": "2025-07-11T12:46:11.376Z",
+    "command": "nx run-many --target=build --all",
+    "startTime": "2025-07-11T13:44:37.180Z",
+    "endTime": "2025-07-11T13:44:53.610Z",
     "inner": false
   },
   "tasks": [
     {
-      "taskId": "@sse/katalyst-nextjs:lint",
-      "target": "lint",
-      "projectName": "@sse/katalyst-nextjs",
-      "hash": "17092745740642691301",
-      "startTime": "2025-07-11T12:46:09.907Z",
-      "endTime": "2025-07-11T12:46:10.531Z",
-      "params": "",
-      "cacheStatus": "cache-miss",
-      "status": 1
-    },
-    {
-      "taskId": "@sse/katalyst-shared:lint",
-      "target": "lint",
-      "projectName": "@sse/katalyst-shared",
-      "hash": "1531971166763101710",
-      "startTime": "2025-07-11T12:46:09.907Z",
-      "endTime": "2025-07-11T12:46:10.824Z",
-      "params": "",
-      "cacheStatus": "cache-miss",
-      "status": 1
-    },
-    {
-      "taskId": "@sse/katalyst-remix:lint",
-      "target": "lint",
+      "taskId": "@sse/katalyst-remix:build",
+      "target": "build",
       "projectName": "@sse/katalyst-remix",
-      "hash": "13808360506655253641",
-      "startTime": "2025-07-11T12:46:09.907Z",
-      "endTime": "2025-07-11T12:46:10.999Z",
+      "hash": "9367119317661015521",
+      "startTime": "2025-07-11T13:44:37.191Z",
+      "endTime": "2025-07-11T13:44:37.601Z",
       "params": "",
       "cacheStatus": "cache-miss",
       "status": 1
     },
     {
-      "taskId": "@sse/katalyst-core:lint",
-      "target": "lint",
-      "projectName": "@sse/katalyst-core",
-      "hash": "12372974642518141941",
-      "startTime": "2025-07-11T12:46:10.541Z",
-      "endTime": "2025-07-11T12:46:11.349Z",
+      "taskId": "@sse/katalyst-nextjs:build",
+      "target": "build",
+      "projectName": "@sse/katalyst-nextjs",
+      "hash": "11529896102576065321",
+      "startTime": "2025-07-11T13:44:37.191Z",
+      "endTime": "2025-07-11T13:44:43.699Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "@sse/katalyst-shared:build",
+      "target": "build",
+      "projectName": "@sse/katalyst-shared",
+      "hash": "7395032561414062446",
+      "startTime": "2025-07-11T13:44:37.191Z",
+      "endTime": "2025-07-11T13:44:53.606Z",
       "params": "",
       "cacheStatus": "cache-miss",
       "status": 1

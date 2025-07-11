@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { KatalystIntegration } from '../types';
+import { KatalystIntegration } from '../types/index.ts';
 
 interface IntegrationStore {
   integrations: Map<string, KatalystIntegration>;
@@ -10,7 +10,7 @@ interface IntegrationStore {
   markAsLoaded: (name: string) => void;
 }
 
-export const useIntegrationStore = create<IntegrationStore>((set, get) => ({
+export const useIntegrationStore = create<IntegrationStore>((set, _get) => ({
   integrations: new Map(),
   loadedIntegrations: new Set(),
   addIntegration: (integration: KatalystIntegration) => set((state: IntegrationStore) => {

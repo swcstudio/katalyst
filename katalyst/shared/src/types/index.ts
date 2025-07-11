@@ -9,20 +9,20 @@ export interface KatalystConfig {
 export interface KatalystFeature {
   name: string;
   enabled: boolean;
-  config?: Record<string, any>;
+  config?: Record<string, unknown>;
 }
 
 export interface KatalystPlugin {
   name: string;
   version: string;
-  config?: Record<string, any>;
+  config?: Record<string, unknown>;
 }
 
 export interface KatalystIntegration {
   name: string;
   type: 'bundler' | 'framework' | 'ui' | 'testing' | 'deployment' | 'development' | 'validation' | 'automation';
   enabled: boolean;
-  config?: Record<string, any>;
+  config?: Record<string, unknown>;
 }
 
 export interface TanStackConfig {
@@ -35,8 +35,8 @@ export interface TanStackConfig {
 
 export interface RSpackConfig {
   plugins: string[];
-  optimization: Record<string, any>;
-  performance: Record<string, any>;
+  optimization: Record<string, unknown>;
+  performance: Record<string, unknown>;
 }
 
 export interface Web3Config {
@@ -47,8 +47,8 @@ export interface Web3Config {
 }
 
 export interface StyleXConfig {
-  theme: Record<string, any>;
-  tokens: Record<string, any>;
+  theme: Record<string, unknown>;
+  tokens: Record<string, unknown>;
   plugins: string[];
 }
 

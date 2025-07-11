@@ -1,8 +1,9 @@
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
-import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
+// import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
 import { pluginSvgr } from '@rsbuild/plugin-svgr';
 import { pluginTypeCheck } from '@rsbuild/plugin-type-check';
+import process from "node:process";
 
 export default defineConfig({
   plugins: [

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function Pricing() {
   const plans = [
     {
@@ -92,6 +90,7 @@ export function Pricing() {
               </ul>
 
               <button
+                type="button"
                 className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
                   plan.popular
                     ? 'bg-blue-500 text-white hover:bg-blue-600'

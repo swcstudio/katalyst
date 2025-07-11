@@ -1,5 +1,5 @@
-import React, { createContext, useContext, ReactNode } from 'react';
-import { useConfigStore } from '../stores/config-store';
+import { createContext, useContext, ReactNode } from 'react';
+import { useConfigStore } from '../stores/config-store.ts';
 
 interface ConfigContextValue {
   theme: 'light' | 'dark' | 'system';

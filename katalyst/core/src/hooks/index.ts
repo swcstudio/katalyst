@@ -1,1 +1,1 @@
-export * from '@shared/hooks';
+export * from '../../../shared/src/hooks/index.ts';

@@ -1,3 +1,3 @@
-export * from './rspack-plugins';
-export * from './vite-plugins';
-export * from './webpack-plugins';
+export * from './rspack-plugins.ts';
+export * from './vite-plugins.ts';
+export * from './webpack-plugins.ts';

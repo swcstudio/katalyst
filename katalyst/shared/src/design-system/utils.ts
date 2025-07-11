@@ -1,8 +1,9 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+// import { type ClassValue, clsx } from 'clsx';
+// import { twMerge } from 'tailwind-merge';
+import process from "node:process";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+export function cn(...inputs: (string | undefined | null | boolean)[]) {
+  return inputs.filter(Boolean).join(' ');
 }
 
 export function formatBytes(
@@ -45,7 +46,7 @@ export function slugify(str: string) {
     .replace(/[^a-z0-9 -]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
-    .trim('-');
+    .trim();
 }
 
 export function unslugify(str: string) {

@@ -1,5 +1,5 @@
-import { RSpackPluginManager } from './rspack-plugins';
-import { integrationConfigs, IntegrationConfig } from '../config/integrations.config';
+import { RSpackPluginManager } from './rspack-plugins.ts';
+import { integrationConfigs, IntegrationConfig } from '../config/integrations.config.ts';
 
 export class KatalystPluginManager {
   private rspackManager: RSpackPluginManager;

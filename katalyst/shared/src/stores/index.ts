@@ -1,3 +1,3 @@
-export * from './katalyst-store';
-export * from './integration-store';
-export * from './config-store';
+export * from './katalyst-store.ts';
+export * from './integration-store.ts';
+export * from './config-store.ts';

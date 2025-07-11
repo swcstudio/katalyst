@@ -1,4 +1,4 @@
-import { KatalystConfig } from '../types';
+import { KatalystConfig } from '../types/index.ts';
 
 export const defaultKatalystConfig: KatalystConfig = {
   variant: 'core',

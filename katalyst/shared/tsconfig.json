@@ -18,6 +18,7 @@
     "declaration": true,
     "outDir": "./dist",
     "rootDir": "./src",
+    "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],

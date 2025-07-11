@@ -1,6 +1,6 @@
-import React, { createContext, useContext, ReactNode } from 'react';
-import { KatalystConfig } from '../types';
-import { useKatalyst } from '../hooks/use-katalyst';
+import { createContext, useContext, ReactNode } from 'react';
+import { KatalystConfig } from '../types/index.ts';
+import { useKatalyst } from '../hooks/use-katalyst.ts';
 
 interface KatalystContextValue {
   config: KatalystConfig;

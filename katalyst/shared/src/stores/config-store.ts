@@ -12,7 +12,7 @@ interface ConfigStore {
 
 export const useConfigStore = create<ConfigStore>()(
   persist(
-    (set, get) => ({
+    (set, _get) => ({
       theme: 'system' as const,
       variant: 'core' as const,
       devMode: false,

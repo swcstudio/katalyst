@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -8,7 +8,7 @@ import {
   createColumnHelper,
   flexRender,
 } from '@tanstack/react-table';
-import { Button } from '../../../shared/src/components/DesignSystem';
+// import { Button } from '../../../shared/src/components/DesignSystem.tsx';
 
 interface User {
   id: number;
@@ -69,8 +69,8 @@ export function DataTable() {
       header: 'Actions',
       cell: () => (
         <div className="space-x-2">
-          <Button size="sm" variant="outline">Edit</Button>
-          <Button size="sm" variant="outline">Delete</Button>
+          <button className="px-2 py-1 text-xs border rounded hover:bg-gray-50">Edit</button>
+          <button className="px-2 py-1 text-xs border rounded hover:bg-gray-50">Delete</button>
         </div>
       ),
     }),
@@ -93,7 +93,9 @@ export function DataTable() {
           className="px-3 py-2 border rounded-md"
           onChange={(e) => table.setGlobalFilter(e.target.value)}
         />
-        <Button variant="primary">Add User</Button>
+        <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          Add User
+        </button>
       </div>
 
       <div className="overflow-x-auto">
@@ -130,22 +132,20 @@ export function DataTable() {
 
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
+          <button
+            className="px-3 py-1 text-sm border rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
             Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
+          </button>
+          <button
+            className="px-3 py-1 text-sm border rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
             Next
-          </Button>
+          </button>
         </div>
         <span className="text-sm text-gray-600">
           Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}

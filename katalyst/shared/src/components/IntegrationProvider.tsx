@@ -1,6 +1,6 @@
-import React, { createContext, useContext, ReactNode, useEffect } from 'react';
-import { KatalystIntegration } from '../types';
-import { useIntegrationStore } from '../stores/integration-store';
+import { createContext, useContext, ReactNode, useEffect } from 'react';
+import { KatalystIntegration } from '../types/index.ts';
+import { useIntegrationStore } from '../stores/integration-store.ts';
 
 interface IntegrationContextValue {
   integrations: Map<string, KatalystIntegration>;

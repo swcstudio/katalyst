@@ -54,6 +54,7 @@
     "allowJs": true,
     "lib": ["dom", "dom.iterable", "es6"],
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,

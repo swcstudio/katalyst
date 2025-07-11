@@ -1,4 +1,4 @@
-import { KatalystConfig } from '../types';
+import { KatalystConfig } from '../types/index.ts';
 
 export class ConfigManager {
   private config: KatalystConfig;

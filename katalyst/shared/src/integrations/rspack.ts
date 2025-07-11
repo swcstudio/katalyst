@@ -1,4 +1,4 @@
-import { RSpackConfig } from '../types';
+import { RSpackConfig } from '../types/index.ts';
 
 declare const process: {
   env: {
