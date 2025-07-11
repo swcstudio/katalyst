@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
+  },
+  "imports": {
+    "react": "npm:react@19.0.0",
+    "react-dom": "npm:react-dom@19.0.0",
+    "@types/react": "npm:@types/react@19.1.4",
+    "@types/react-dom": "npm:@types/react-dom@19.1.5",
+    "@tanstack/react-router": "npm:@tanstack/react-router@1.120.17",
+    "@tanstack/react-query": "npm:@tanstack/react-query@5.59.20",
+    "@tanstack/react-form": "npm:@tanstack/react-form@0.34.1",
+    "@tanstack/react-table": "npm:@tanstack/react-table@8.20.5",
+    "@tanstack/react-virtual": "npm:@tanstack/react-virtual@3.10.8",
+    "zustand": "npm:zustand@5.0.1",
+    "animejs": "npm:animejs@3.2.2",
+    "typia": "npm:typia@6.11.3",
+    "rspack-plugin-virtual-module": "npm:rspack-plugin-virtual-module@0.1.13",
+    "rspack-manifest-plugin": "npm:rspack-manifest-plugin@5.0.0",
+    "rspack-plugin-react-refresh": "npm:rspack-plugin-react-refresh@1.0.0",
+    "@stylexjs/stylex": "npm:@stylexjs/stylex@0.8.0",
+    "unplugin-stylex": "npm:unplugin-stylex@0.1.1",
+    "@arco-design/web-react": "npm:@arco-design/web-react@2.63.2",
+    "@arco-plugins/unplugin-react": "npm:@arco-plugins/unplugin-react@1.0.1",
+    "react-cosmos": "npm:react-cosmos@6.2.0",
+    "@evmos/evmosjs": "npm:@evmos/evmosjs@0.2.12",
+    "@cosmjs/stargate": "npm:@cosmjs/stargate@0.32.4",
+    "sails": "npm:sails@1.5.11",
+    "tapable": "npm:tapable@2.2.1",
+    "@midscene/web": "npm:@midscene/web@1.0.0",
+    "emp": "npm:emp@2.6.0",
+    "esmx": "npm:esmx@0.1.0",
+    "pareto": "npm:pareto@1.0.0",
+    "@callstack/repack": "npm:@callstack/repack@4.3.2",
+    "umi": "npm:umi@4.3.23",
+    "aumi": "npm:aumi@1.0.0",
+    "rspeedy": "npm:rspeedy@1.0.0",
+    "electron-rsbuild": "npm:electron-rsbuild@1.0.0",
+    "zephyr-cloud": "npm:zephyr-cloud@1.0.0",
+    "storybook": "npm:storybook@8.4.7",
+    "storybook-builder-rsbuild": "npm:storybook-builder-rsbuild@0.2.1",
+    "ngrok": "npm:ngrok@5.0.0-beta.2",
+    "rsbuild-plugin-react-inspector": "npm:rsbuild-plugin-react-inspector@1.0.0"
+  },
+  "tasks": {
+    "build": "deno run --allow-all npm:typescript tsc"
+  }
+}
