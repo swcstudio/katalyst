@@ -43,7 +43,6 @@
     "tailwindcss": "^4.0.0",
     "@arco-design/web-react": "^2.63.2",
     "react-cosmos": "^6.2.0",
-    "@stylex/stylex": "^0.8.0",
     "typia": "^6.11.3"
   },
   "devDependencies": {
