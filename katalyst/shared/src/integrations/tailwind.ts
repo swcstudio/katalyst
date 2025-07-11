@@ -1,4 +1,4 @@
-Oexport interface TailwindConfig {
+export interface TailwindConfig {
   content: string[];
   theme: TailwindThemeConfig;
   plugins: TailwindPlugin[];

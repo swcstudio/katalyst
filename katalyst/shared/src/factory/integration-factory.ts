@@ -34,55 +34,55 @@ export class IntegrationFactory {
     
     switch (integration.name) {
       case 'tanstack':
-        return new TanStackIntegration(config);
+        return new TanStackIntegration(config as any);
       case 'rspack':
-        return new RSpackIntegration(config);
+        return new RSpackIntegration(config as any);
       case 'emp':
-        return new EMPIntegration(config);
+        return new EMPIntegration(config as any);
       case 'esmx':
-        return new EsmxIntegration(config);
+        return new EsmxIntegration(config as any);
       case 'pareto':
-        return new ParetoIntegration(config);
+        return new ParetoIntegration(config as any);
       case 'repack':
-        return new RePackIntegration(config);
+        return new RePackIntegration(config as any);
       case 'umi':
-        return new UmiIntegration(config);
+        return new UmiIntegration(config as any);
       case 'rspeedy':
-        return new RspeedyIntegration(config);
+        return new RspeedyIntegration(config as any);
       case 'electron':
-        return new ElectronIntegration(config);
+        return new ElectronIntegration(config as any);
       case 'nx':
-        return new NxIntegration(config);
+        return new NxIntegration(config as any);
       case 'arco':
-        return new ArcoIntegration(config);
+        return new ArcoIntegration(config as any);
       case 'cosmos':
-        return new CosmosIntegration(config);
+        return new CosmosIntegration(config as any);
       case 'stylex':
-        return new StyleXIntegration(config);
+        return new StyleXIntegration(config as any);
       case 'zephyr':
-        return new ZephyrIntegration(config);
+        return new ZephyrIntegration(config as any);
       case 'virtual-modules':
-        return new VirtualModulesIntegration(config);
+        return new VirtualModulesIntegration(config as any);
       case 'asset-manifest':
-        return new AssetManifestIntegration(config);
+        return new AssetManifestIntegration(config as any);
       case 'fast-refresh':
-        return new FastRefreshIntegration(config);
+        return new FastRefreshIntegration(config as any);
       case 'typia':
-        return new TypiaIntegration(config);
+        return new TypiaIntegration(config as any);
       case 'storybook':
-        return new StorybookIntegration(config);
+        return new StorybookIntegration(config as any);
       case 'ngrok':
-        return new NgrokIntegration(config);
+        return new NgrokIntegration(config as any);
       case 'inspector':
-        return new InspectorIntegration(config);
+        return new InspectorIntegration(config as any);
       case 'svgr':
-        return new SvgrIntegration(config);
+        return new SvgrIntegration(config as any);
       case 'sails':
-        return new SailsIntegration(config);
+        return new SailsIntegration(config as any);
       case 'tapable':
-        return new TapableIntegration(config);
+        return new TapableIntegration(config as any);
       case 'midscene':
-        return new MidsceneIntegration(config);
+        return new MidsceneIntegration(config as any);
       default:
         throw new Error(`Unknown integration: ${integration.name}`);
     }
@@ -95,7 +95,7 @@ export class IntegrationFactory {
       if (integration.enabled) {
         try {
           const instance = this.createIntegration(integration);
-          const initialized = await instance.initialize();
+          const initialized = await (instance as any).initialize();
           results.push(...initialized);
           this.integrations.set(integration.name, instance);
         } catch (error) {
