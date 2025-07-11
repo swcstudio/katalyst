@@ -1,0 +1,108 @@
+{
+  "name": "@katalyst/framework",
+  "version": "0.1.0",
+  "description": "Katalyst React 19 Framework - State-of-the-Art micro-frontend platform with 24 integrated technologies",
+  "type": "module",
+  "main": "./shared/src/index.ts",
+  "exports": {
+    ".": "./shared/src/index.ts",
+    "./core": "./core/src/main.tsx",
+    "./remix": "./remix/app/root.tsx",
+    "./nextjs": "./nextjs/src/app/page.tsx",
+    "./shared": "./shared/src/index.ts"
+  },
+  "scripts": {
+    "dev": "nx run-many --target=dev --projects=core,remix,nextjs --parallel",
+    "build": "nx run-many --target=build --projects=core,remix,nextjs --parallel",
+    "test": "nx run-many --target=test --projects=core,remix,nextjs,shared --parallel",
+    "lint": "nx run-many --target=lint --projects=core,remix,nextjs,shared --parallel",
+    "preview": "nx run-many --target=preview --projects=core,remix,nextjs --parallel",
+    "clean": "nx reset && rm -rf dist .next .remix node_modules/.cache",
+    "typecheck": "nx run-many --target=typecheck --projects=core,remix,nextjs,shared --parallel",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "deploy": "nx run-many --target=deploy --projects=core,remix,nextjs --parallel"
+  },
+  "workspaces": [
+    "core",
+    "remix", 
+    "nextjs",
+    "shared"
+  ],
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@tanstack/react-router": "^1.120.17",
+    "@tanstack/react-query": "^5.59.20",
+    "@tanstack/react-form": "^0.34.1",
+    "@tanstack/react-table": "^8.20.5",
+    "@tanstack/react-virtual": "^3.10.8",
+    "zustand": "^5.0.2",
+    "@clerk/clerk-react": "^5.17.3",
+    "tailwindcss": "^4.0.0",
+    "@arco-design/web-react": "^2.63.2",
+    "@cosmos/react": "^6.2.0",
+    "@stylex/stylex": "^0.8.0",
+    "typia": "^6.11.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.6.3",
+    "@biomejs/biome": "^1.9.4",
+    "nx": "^20.2.4",
+    "@nx/react": "^20.2.4",
+    "@nx/rspack": "^20.2.4",
+    "@nx/storybook": "^20.2.4",
+    "@nx/playwright": "^20.2.4",
+    "@rspack/core": "^1.0.17",
+    "@rspack/cli": "^1.0.17",
+    "@rsbuild/core": "^1.0.17",
+    "@rsbuild/plugin-react": "^1.0.3",
+    "@rsbuild/plugin-svgr": "^1.0.1",
+    "@rsbuild/plugin-type-check": "^1.0.1",
+    "nitropack": "^2.9.7",
+    "storybook": "^8.4.7",
+    "@storybook/react-rsbuild": "^8.4.7",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-interactions": "^8.4.7",
+    "@storybook/addon-a11y": "^8.4.7",
+    "playwright": "^1.48.2",
+    "vitest": "^2.1.4",
+    "@vitest/ui": "^2.1.4",
+    "postcss": "^8.4.49",
+    "autoprefixer": "^10.4.20",
+    "deno": "^2.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "deno": ">=2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swcstudio/sse.git",
+    "directory": "katalyst"
+  },
+  "keywords": [
+    "react",
+    "react19",
+    "framework",
+    "micro-frontend",
+    "rspack",
+    "tanstack",
+    "typescript",
+    "tailwindcss",
+    "biome",
+    "nx",
+    "storybook",
+    "web3",
+    "ai",
+    "performance"
+  ],
+  "author": "SWC Studio",
+  "license": "MIT",
+  "nx": {
+    "includedScripts": []
+  }
+}

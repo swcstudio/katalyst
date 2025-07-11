@@ -1,5 +1,11 @@
 import { RSpackConfig } from '../types';
 
+declare const process: {
+  env: {
+    NODE_ENV?: string;
+  };
+} | undefined;
+
 export class RSpackIntegration {
   private config: RSpackConfig;
 
@@ -9,7 +15,7 @@ export class RSpackIntegration {
 
   generateConfig(variant: 'core' | 'remix' | 'nextjs') {
     const baseConfig = {
-      mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+      mode: (typeof process !== 'undefined' && process?.env?.NODE_ENV === 'production') ? 'production' : 'development',
       entry: this.getEntryPoint(variant),
       output: {
         path: './dist',
@@ -85,21 +91,21 @@ export class RSpackIntegration {
   private getPlugins(variant: 'core' | 'remix' | 'nextjs') {
     const plugins = [];
 
-    if (this.config.plugins.includes('react')) {
+    if (this.config.plugins && Array.isArray(this.config.plugins) && (this.config.plugins as string[]).indexOf('react') !== -1) {
       plugins.push({
         name: 'react-plugin',
         setup: () => ({})
       });
     }
 
-    if (this.config.plugins.includes('svgr')) {
+    if (this.config.plugins && Array.isArray(this.config.plugins) && (this.config.plugins as string[]).indexOf('svgr') !== -1) {
       plugins.push({
         name: 'svgr-plugin',
         setup: () => ({})
       });
     }
 
-    if (this.config.plugins.includes('type-check')) {
+    if (this.config.plugins && Array.isArray(this.config.plugins) && (this.config.plugins as string[]).indexOf('type-check') !== -1) {
       plugins.push({
         name: 'type-check-plugin',
         setup: () => ({})
