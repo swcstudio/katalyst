@@ -37,8 +37,7 @@
     "pareto": "^0.75.2",
     "@callstack/repack": "^4.3.2",
     "umi": "^4.3.23",
-    "electron-rsbuild": "^0.0.1",
-    "zephyr-cloud": "^1.0.0"
+    "electron-rsbuild": "^0.0.1"
   },
   "devDependencies": {
     "@types/react": "^19.1.4",

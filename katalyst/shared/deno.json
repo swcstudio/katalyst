@@ -33,7 +33,6 @@
     "@callstack/repack": "npm:@callstack/repack@4.3.2",
     "umi": "npm:umi@4.3.23",
     "electron-rsbuild": "npm:electron-rsbuild@0.0.1",
-    "zephyr-cloud": "npm:zephyr-cloud@1.0.0",
     "storybook": "npm:storybook@8.4.7",
     "storybook-builder-rsbuild": "npm:storybook-builder-rsbuild@2.0.2",
     "ngrok": "npm:ngrok@5.0.0-beta.2",
