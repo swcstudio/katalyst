@@ -1,7 +1,7 @@
-import { Component, JSX, createSignal, onMount } from 'solid-js';
 import { cx } from '@sse/ui/styled-system/css';
 import { css } from '@sse/ui/styled-system/css';
 import { animate } from 'motion';
+import { type Component, type JSX, createSignal, onMount } from 'solid-js';
 
 export interface HeroHighlightProps {
   children: JSX.Element;
@@ -53,11 +53,11 @@ export const HeroHighlightDemo: Component = () => {
           marginX: 'auto',
           md: { fontSize: '4xl' },
           lg: { fontSize: '5xl', lineHeight: 'snug' },
-          _dark: { color: 'white' }
+          _dark: { color: 'white' },
         })}
       >
         {"With insomnia, nothing's real. Everything is far away. Everything is a"
-          .split(" ")
+          .split(' ')
           .map((word, index) => (
             <span key={index} class="hero-word mr-2 inline-block opacity-0">
               {word}
@@ -89,12 +89,14 @@ export const HeroHighlight: Component<HeroHighlightProps> = (props) => {
             content: '""',
             position: 'absolute',
             inset: 0,
-            backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(120, 119, 198, 0.3), transparent 50%)',
+            backgroundImage:
+              'radial-gradient(circle at 50% 50%, rgba(120, 119, 198, 0.3), transparent 50%)',
             filter: 'blur(40px)',
             opacity: 0.7,
             _dark: {
-              backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(120, 119, 198, 0.15), transparent 50%)'
-            }
+              backgroundImage:
+                'radial-gradient(circle at 50% 50%, rgba(120, 119, 198, 0.15), transparent 50%)',
+            },
           },
           _after: {
             content: '""',
@@ -109,16 +111,14 @@ export const HeroHighlight: Component<HeroHighlightProps> = (props) => {
               backgroundImage: `
                 linear-gradient(90deg, transparent 79px, rgba(255, 255, 255, 0.03) 81px, transparent 82px),
                 linear-gradient(rgba(255, 255, 255, 0.03) 0.5px, transparent 0.5px)
-              `
-            }
-          }
+              `,
+            },
+          },
         }),
         props.className
       )}
     >
-      <div class={css({ position: 'relative', zIndex: 10 })}>
-        {props.children}
-      </div>
+      <div class={css({ position: 'relative', zIndex: 10 })}>{props.children}</div>
     </div>
   );
 };
@@ -151,14 +151,16 @@ export const Highlight: Component<HighlightProps> = (props) => {
           display: 'inline-block',
           paddingX: '4px',
           paddingY: '2px',
-          backgroundImage: 'linear-gradient(120deg, rgba(120, 119, 198, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%)',
+          backgroundImage:
+            'linear-gradient(120deg, rgba(120, 119, 198, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%)',
           backgroundRepeat: 'no-repeat',
           backgroundSize: '0% 100%',
           backgroundPosition: 'left',
           borderRadius: '4px',
           _dark: {
-            backgroundImage: 'linear-gradient(120deg, rgba(120, 119, 198, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%)'
-          }
+            backgroundImage:
+              'linear-gradient(120deg, rgba(120, 119, 198, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%)',
+          },
         }),
         props.className
       )}

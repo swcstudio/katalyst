@@ -1,6 +1,24 @@
-import { Component, For } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For } from 'solid-js';
 import {
+  AnimatedGradientTextDemo,
+  AnimatedGradientTextFastDemo,
+  AnimatedShinyTextDemo,
+  AuroraTextDemo,
+  BoxRevealDemo,
+  FlipTextDemo,
+  HyperTextDemo,
+  HyperTextFastDemo,
+  HyperTextSlowDemo,
+  LineShadowTextDemo,
+  MorphingTextDemo,
+  NumberTickerDecimalDemo,
+  NumberTickerDemo,
+  NumberTickerStartValueDemo,
+  ScrollBasedVelocityDemo,
+  SparklesTextDemo,
+  SpinningTextBasic,
+  SpinningTextReverse,
   TextAnimateDemo,
   TextAnimateDemo2,
   TextAnimateDemo3,
@@ -10,84 +28,78 @@ import {
   TextAnimateDemo7,
   TextAnimateDemo8,
   TextAnimateDemo9,
-  LineShadowTextDemo,
-  AuroraTextDemo,
-  VideoTextDemo,
-  NumberTickerDemo,
-  NumberTickerDecimalDemo,
-  NumberTickerStartValueDemo,
-  AnimatedShinyTextDemo,
-  AnimatedGradientTextDemo,
-  AnimatedGradientTextFastDemo,
   TextRevealDemo,
-  HyperTextDemo,
-  HyperTextFastDemo,
-  HyperTextSlowDemo,
-  WordRotateDemo,
   TypingAnimationDemo,
-  FlipTextDemo,
-  ScrollBasedVelocityDemo,
-  BoxRevealDemo,
-  SparklesTextDemo,
-  MorphingTextDemo,
-  SpinningTextBasic,
-  SpinningTextReverse,
+  VideoTextDemo,
+  WordRotateDemo,
 } from './index';
 
 export const TextAnimationShowcase: Component = () => {
   return (
-    <div class={css({
-      padding: '40px',
-      maxWidth: '1400px',
-      margin: '0 auto',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '80px',
-    })}>
+    <div
+      class={css({
+        padding: '40px',
+        maxWidth: '1400px',
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '80px',
+      })}
+    >
       {/* Header */}
       <div class={css({ textAlign: 'center' })}>
-        <h1 class={css({
-          fontSize: '3rem',
-          fontWeight: 'bold',
-          marginBottom: '16px',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          backgroundClip: 'text',
-          WebkitBackgroundClip: 'text',
-          color: 'transparent',
-          WebkitTextFillColor: 'transparent',
-        })}>
+        <h1
+          class={css({
+            fontSize: '3rem',
+            fontWeight: 'bold',
+            marginBottom: '16px',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
+            WebkitTextFillColor: 'transparent',
+          })}
+        >
           Text Animation Components
         </h1>
-        <p class={css({
-          fontSize: '18px',
-          color: 'muted.foreground',
-          maxWidth: '600px',
-          margin: '0 auto',
-        })}>
+        <p
+          class={css({
+            fontSize: '18px',
+            color: 'muted.foreground',
+            maxWidth: '600px',
+            margin: '0 auto',
+          })}
+        >
           Explore our comprehensive collection of text animation components for SolidStack-UI
         </p>
       </div>
 
       {/* TextAnimate Section */}
-      <section class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-      })}>
-        <h2 class={css({
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: '16px',
-        })}>
+      <section
+        class={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '16px',
+          })}
+        >
           TextAnimate Component
         </h2>
-        
-        <div class={css({
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '24px',
-        })}>
+
+        <div
+          class={css({
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: '24px',
+          })}
+        >
           <div class={css({ ...demoCardStyles })}>
             <h3 class={css({ ...demoTitleStyles })}>Blur In by Character</h3>
             <div class={css({ ...demoContentStyles })}>
@@ -154,25 +166,31 @@ export const TextAnimationShowcase: Component = () => {
       </section>
 
       {/* Special Effects Section */}
-      <section class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-      })}>
-        <h2 class={css({
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: '16px',
-        })}>
+      <section
+        class={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '16px',
+          })}
+        >
           Special Text Effects
         </h2>
-        
-        <div class={css({
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-          gap: '24px',
-        })}>
+
+        <div
+          class={css({
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+            gap: '24px',
+          })}
+        >
           <div class={css({ ...demoCardStyles })}>
             <h3 class={css({ ...demoTitleStyles })}>Line Shadow Text</h3>
             <div class={css({ ...demoContentStyles })}>
@@ -204,25 +222,31 @@ export const TextAnimationShowcase: Component = () => {
       </section>
 
       {/* Interactive Text Section */}
-      <section class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-      })}>
-        <h2 class={css({
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: '16px',
-        })}>
+      <section
+        class={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '16px',
+          })}
+        >
           Interactive Text Components
         </h2>
-        
-        <div class={css({
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '24px',
-        })}>
+
+        <div
+          class={css({
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: '24px',
+          })}
+        >
           <div class={css({ ...demoCardStyles })}>
             <h3 class={css({ ...demoTitleStyles })}>Hyper Text (Hover)</h3>
             <div class={css({ ...demoContentStyles })}>
@@ -254,25 +278,31 @@ export const TextAnimationShowcase: Component = () => {
       </section>
 
       {/* Animated Content Section */}
-      <section class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-      })}>
-        <h2 class={css({
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: '16px',
-        })}>
+      <section
+        class={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '16px',
+          })}
+        >
           Animated Content
         </h2>
-        
-        <div class={css({
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '24px',
-        })}>
+
+        <div
+          class={css({
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: '24px',
+          })}
+        >
           <div class={css({ ...demoCardStyles })}>
             <h3 class={css({ ...demoTitleStyles })}>Word Rotate</h3>
             <div class={css({ ...demoContentStyles })}>
@@ -304,25 +334,31 @@ export const TextAnimationShowcase: Component = () => {
       </section>
 
       {/* Number and Gradient Effects */}
-      <section class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-      })}>
-        <h2 class={css({
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: '16px',
-        })}>
+      <section
+        class={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '16px',
+          })}
+        >
           Numbers and Gradients
         </h2>
-        
-        <div class={css({
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '24px',
-        })}>
+
+        <div
+          class={css({
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: '24px',
+          })}
+        >
           <div class={css({ ...demoCardStyles })}>
             <h3 class={css({ ...demoTitleStyles })}>Number Ticker</h3>
             <div class={css({ ...demoContentStyles })}>
@@ -368,25 +404,31 @@ export const TextAnimationShowcase: Component = () => {
       </section>
 
       {/* Motion Effects Section */}
-      <section class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-      })}>
-        <h2 class={css({
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: '16px',
-        })}>
+      <section
+        class={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '16px',
+          })}
+        >
           Motion Effects
         </h2>
-        
-        <div class={css({
-          display: 'grid',
-          gridTemplateColumns: '1fr',
-          gap: '24px',
-        })}>
+
+        <div
+          class={css({
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            gap: '24px',
+          })}
+        >
           <div class={css({ ...demoCardStyles })}>
             <h3 class={css({ ...demoTitleStyles })}>Velocity Scroll</h3>
             <div class={css({ ...demoContentStyles })}>
@@ -394,11 +436,13 @@ export const TextAnimationShowcase: Component = () => {
             </div>
           </div>
 
-          <div class={css({
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '24px',
-          })}>
+          <div
+            class={css({
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: '24px',
+            })}
+          >
             <div class={css({ ...demoCardStyles })}>
               <h3 class={css({ ...demoTitleStyles })}>Spinning Text Basic</h3>
               <div class={css({ ...demoContentStyles })}>
@@ -417,29 +461,37 @@ export const TextAnimationShowcase: Component = () => {
       </section>
 
       {/* Box Reveal Section */}
-      <section class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-      })}>
-        <h2 class={css({
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: '16px',
-        })}>
+      <section
+        class={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '16px',
+          })}
+        >
           Reveal Animations
         </h2>
-        
-        <div class={css({
-          display: 'flex',
-          justifyContent: 'center',
-        })}>
-          <div class={css({ 
-            ...demoCardStyles,
-            maxWidth: '600px',
-            width: '100%',
-          })}>
+
+        <div
+          class={css({
+            display: 'flex',
+            justifyContent: 'center',
+          })}
+        >
+          <div
+            class={css({
+              ...demoCardStyles,
+              maxWidth: '600px',
+              width: '100%',
+            })}
+          >
             <h3 class={css({ ...demoTitleStyles })}>Box Reveal</h3>
             <div class={css({ ...demoContentStyles })}>
               <BoxRevealDemo />
@@ -449,24 +501,30 @@ export const TextAnimationShowcase: Component = () => {
       </section>
 
       {/* Footer */}
-      <footer class={css({
-        textAlign: 'center',
-        padding: '40px 0',
-        borderTop: '1px solid',
-        borderColor: 'border',
-        marginTop: '40px',
-      })}>
-        <p class={css({
-          fontSize: '16px',
-          color: 'muted.foreground',
-        })}>
+      <footer
+        class={css({
+          textAlign: 'center',
+          padding: '40px 0',
+          borderTop: '1px solid',
+          borderColor: 'border',
+          marginTop: '40px',
+        })}
+      >
+        <p
+          class={css({
+            fontSize: '16px',
+            color: 'muted.foreground',
+          })}
+        >
           Built with SolidStack-UI • Text Animation Components
         </p>
-        <p class={css({
-          fontSize: '14px',
-          color: 'muted.foreground',
-          marginTop: '8px',
-        })}>
+        <p
+          class={css({
+            fontSize: '14px',
+            color: 'muted.foreground',
+            marginTop: '8px',
+          })}
+        >
           Converted from React to SolidJS with love ❤️
         </p>
       </footer>

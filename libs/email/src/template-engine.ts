@@ -1,7 +1,7 @@
 import { css } from '../../../panda.config.ts';
 
 export interface TemplateProps {
-  [key: string]: any;
+  [key: string]: string | number | boolean | string[] | Record<string, unknown> | undefined;
 }
 
 export interface EmailComponent {
@@ -69,12 +69,12 @@ const defaultTheme: EmailTheme = {
     border: '#e2e8f0',
     success: '#10b981',
     warning: '#f59e0b',
-    error: '#ef4444'
+    error: '#ef4444',
   },
   fonts: {
     primary: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     secondary: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
-    mono: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, monospace'
+    mono: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, monospace',
   },
   spacing: {
     xs: '4px',
@@ -82,19 +82,19 @@ const defaultTheme: EmailTheme = {
     md: '16px',
     lg: '24px',
     xl: '32px',
-    xxl: '48px'
+    xxl: '48px',
   },
   borderRadius: {
     sm: '4px',
     md: '8px',
     lg: '12px',
-    full: '9999px'
+    full: '9999px',
   },
   shadows: {
     sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
     md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
-  }
+    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+  },
 };
 
 class EmailStyler {
@@ -112,7 +112,7 @@ class EmailStyler {
   }
 
   // Email container styles
-  container(width: number = 600): string {
+  container(width = 600): string {
     return this.inlineStyles({
       maxWidth: `${width}px`,
       margin: '0 auto',
@@ -120,7 +120,7 @@ class EmailStyler {
       fontFamily: this.theme.fonts.primary,
       fontSize: '16px',
       lineHeight: '1.6',
-      color: this.theme.colors.text
+      color: this.theme.colors.text,
     });
   }
 
@@ -129,7 +129,7 @@ class EmailStyler {
     return this.inlineStyles({
       backgroundColor: this.theme.colors.primary,
       padding: this.theme.spacing.lg,
-      textAlign: 'center'
+      textAlign: 'center',
     });
   }
 
@@ -137,7 +137,7 @@ class EmailStyler {
   content(): string {
     return this.inlineStyles({
       padding: this.theme.spacing.xl,
-      backgroundColor: this.theme.colors.background
+      backgroundColor: this.theme.colors.background,
     });
   }
 
@@ -152,7 +152,7 @@ class EmailStyler {
       textAlign: 'center',
       fontSize: '16px',
       lineHeight: '1',
-      cursor: 'pointer'
+      cursor: 'pointer',
     };
 
     const variants = {
@@ -160,20 +160,20 @@ class EmailStyler {
         ...baseStyles,
         backgroundColor: this.theme.colors.primary,
         color: '#ffffff',
-        border: `2px solid ${this.theme.colors.primary}`
+        border: `2px solid ${this.theme.colors.primary}`,
       },
       secondary: {
         ...baseStyles,
         backgroundColor: this.theme.colors.secondary,
         color: '#ffffff',
-        border: `2px solid ${this.theme.colors.secondary}`
+        border: `2px solid ${this.theme.colors.secondary}`,
       },
       outline: {
         ...baseStyles,
         backgroundColor: 'transparent',
         color: this.theme.colors.primary,
-        border: `2px solid ${this.theme.colors.primary}`
-      }
+        border: `2px solid ${this.theme.colors.primary}`,
+      },
     };
 
     return this.inlineStyles(variants[variant]);
@@ -186,7 +186,7 @@ class EmailStyler {
       border: `1px solid ${this.theme.colors.border}`,
       borderRadius: this.theme.borderRadius.lg,
       padding: this.theme.spacing.lg,
-      margin: `${this.theme.spacing.md} 0`
+      margin: `${this.theme.spacing.md} 0`,
     });
   }
 
@@ -198,7 +198,7 @@ class EmailStyler {
       textAlign: 'center',
       fontSize: '14px',
       color: this.theme.colors.textSecondary,
-      borderTop: `1px solid ${this.theme.colors.border}`
+      borderTop: `1px solid ${this.theme.colors.border}`,
     });
   }
 
@@ -208,7 +208,7 @@ class EmailStyler {
       1: '32px',
       2: '24px',
       3: '20px',
-      4: '18px'
+      4: '18px',
     };
 
     return this.inlineStyles({
@@ -216,7 +216,7 @@ class EmailStyler {
       fontWeight: '700',
       lineHeight: '1.2',
       margin: `${this.theme.spacing.lg} 0 ${this.theme.spacing.md} 0`,
-      color: this.theme.colors.text
+      color: this.theme.colors.text,
     });
   }
 
@@ -224,14 +224,14 @@ class EmailStyler {
     return this.inlineStyles({
       margin: `${this.theme.spacing.md} 0`,
       lineHeight: '1.6',
-      color: this.theme.colors.text
+      color: this.theme.colors.text,
     });
   }
 
   link(): string {
     return this.inlineStyles({
       color: this.theme.colors.primary,
-      textDecoration: 'underline'
+      textDecoration: 'underline',
     });
   }
 
@@ -283,11 +283,15 @@ export class EmailTemplateEngine {
     
     /* Dark mode support */
     @media (prefers-color-scheme: dark) {
-      ${darkMode ? `
+      ${
+        darkMode
+          ? `
         .dark-mode { background-color: #1a1a1a !important; color: #ffffff !important; }
         .dark-surface { background-color: #2d2d2d !important; }
         .dark-border { border-color: #404040 !important; }
-      ` : ''}
+      `
+          : ''
+      }
     }
     
     /* Mobile responsive */
@@ -300,16 +304,20 @@ export class EmailTemplateEngine {
   </style>
 </head>
 <body style="${this.styler.inlineStyles({
-  margin: '0',
-  padding: '0',
-  backgroundColor: this.theme.colors.background,
-  fontFamily: this.theme.fonts.primary
-})}">
-  ${preheader ? `
+      margin: '0',
+      padding: '0',
+      backgroundColor: this.theme.colors.background,
+      fontFamily: this.theme.fonts.primary,
+    })}">
+  ${
+    preheader
+      ? `
   <div style="display: none; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: transparent;">
     ${preheader}
   </div>
-  ` : ''}
+  `
+      : ''
+  }
   
   <div role="article" aria-roledescription="email" lang="en" style="${this.styler.container(width)}">
     ${content}
@@ -322,31 +330,43 @@ export class EmailTemplateEngine {
   createHeader(props: { logo?: string; title?: string; subtitle?: string }): string {
     return `
     <div style="${this.styler.header()}">
-      ${props.logo ? `
+      ${
+        props.logo
+          ? `
         <img src="${props.logo}" alt="Logo" style="height: 50px; margin-bottom: ${this.theme.spacing.md};">
-      ` : ''}
-      ${props.title ? `
+      `
+          : ''
+      }
+      ${
+        props.title
+          ? `
         <h1 style="${this.styler.heading(1)}; color: white; margin: 0;">
           ${props.title}
         </h1>
-      ` : ''}
-      ${props.subtitle ? `
+      `
+          : ''
+      }
+      ${
+        props.subtitle
+          ? `
         <p style="${this.styler.paragraph()}; color: rgba(255, 255, 255, 0.9); margin: ${this.theme.spacing.sm} 0 0 0;">
           ${props.subtitle}
         </p>
-      ` : ''}
+      `
+          : ''
+      }
     </div>`;
   }
 
   // Button component
-  createButton(props: { 
-    text: string; 
-    url: string; 
+  createButton(props: {
+    text: string;
+    url: string;
     variant?: 'primary' | 'secondary' | 'outline';
     fullWidth?: boolean;
   }): string {
     const { text, url, variant = 'primary', fullWidth = false } = props;
-    
+
     return `
     <div style="text-align: center; margin: ${this.theme.spacing.lg} 0;">
       <a href="${url}" style="${this.styler.button(variant)}${fullWidth ? '; width: 100%; box-sizing: border-box;' : ''}">
@@ -359,27 +379,37 @@ export class EmailTemplateEngine {
   createCard(props: { title?: string; content: string; footer?: string }): string {
     return `
     <div style="${this.styler.card()}">
-      ${props.title ? `
+      ${
+        props.title
+          ? `
         <h3 style="${this.styler.heading(3)}; margin-top: 0;">
           ${props.title}
         </h3>
-      ` : ''}
+      `
+          : ''
+      }
       <div style="${this.styler.paragraph()}">
         ${props.content}
       </div>
-      ${props.footer ? `
+      ${
+        props.footer
+          ? `
         <div style="margin-top: ${this.theme.spacing.md}; padding-top: ${this.theme.spacing.md}; border-top: 1px solid ${this.theme.colors.border}; font-size: 14px; color: ${this.theme.colors.textSecondary};">
           ${props.footer}
         </div>
-      ` : ''}
+      `
+          : ''
+      }
     </div>`;
   }
 
   // List component
-  createList(items: string[], ordered: boolean = false): string {
+  createList(items: string[], ordered = false): string {
     const tag = ordered ? 'ol' : 'ul';
-    const listItems = items.map(item => `<li style="margin: ${this.theme.spacing.sm} 0;">${item}</li>`).join('');
-    
+    const listItems = items
+      .map((item) => `<li style="margin: ${this.theme.spacing.sm} 0;">${item}</li>`)
+      .join('');
+
     return `
     <${tag} style="margin: ${this.theme.spacing.md} 0; padding-left: ${this.theme.spacing.lg}; color: ${this.theme.colors.text};">
       ${listItems}
@@ -398,27 +428,43 @@ export class EmailTemplateEngine {
       <p style="margin: 0 0 ${this.theme.spacing.md} 0; font-weight: 600;">
         ${props.companyName}
       </p>
-      ${props.address ? `
+      ${
+        props.address
+          ? `
         <p style="margin: 0 0 ${this.theme.spacing.md} 0;">
           ${props.address}
         </p>
-      ` : ''}
-      ${props.socialLinks?.length ? `
+      `
+          : ''
+      }
+      ${
+        props.socialLinks?.length
+          ? `
         <div style="margin: ${this.theme.spacing.md} 0;">
-          ${props.socialLinks.map(link => `
+          ${props.socialLinks
+            .map(
+              (link) => `
             <a href="${link.url}" style="color: ${this.theme.colors.textSecondary}; text-decoration: none; margin: 0 ${this.theme.spacing.sm};">
               ${link.icon || link.platform}
             </a>
-          `).join('')}
+          `
+            )
+            .join('')}
         </div>
-      ` : ''}
-      ${props.unsubscribeUrl ? `
+      `
+          : ''
+      }
+      ${
+        props.unsubscribeUrl
+          ? `
         <p style="margin: ${this.theme.spacing.md} 0 0 0; font-size: 12px;">
           <a href="${props.unsubscribeUrl}" style="${this.styler.link()}; font-size: 12px;">
             Unsubscribe
           </a> from these emails
         </p>
-      ` : ''}
+      `
+          : ''
+      }
     </div>`;
   }
 
@@ -432,10 +478,10 @@ export class EmailTemplateEngine {
     benefits?: string[];
   }): string {
     const content = `
-      ${this.createHeader({ 
-        logo: props.logo, 
+      ${this.createHeader({
+        logo: props.logo,
         title: `Welcome to ${props.companyName}!`,
-        subtitle: 'We\'re excited to have you on board'
+        subtitle: "We're excited to have you on board",
       })}
       
       <div style="${this.styler.content()}">
@@ -447,17 +493,21 @@ export class EmailTemplateEngine {
           Welcome to ${props.companyName}! We're thrilled that you've joined our community of developers building the future of cloud-native applications.
         </p>
         
-        ${props.benefits?.length ? `
+        ${
+          props.benefits?.length
+            ? `
           ${this.createCard({
             title: 'What you get access to:',
-            content: this.createList(props.benefits)
+            content: this.createList(props.benefits),
           })}
-        ` : ''}
+        `
+            : ''
+        }
         
         ${this.createButton({
           text: props.ctaText,
           url: props.ctaUrl,
-          variant: 'primary'
+          variant: 'primary',
         })}
         
         <p style="${this.styler.paragraph()}">
@@ -473,15 +523,18 @@ export class EmailTemplateEngine {
       ${this.createFooter({
         companyName: props.companyName,
         address: 'Brisbane, Australia',
-        unsubscribeUrl: '#unsubscribe'
+        unsubscribeUrl: '#unsubscribe',
       })}
     `;
 
-    return this.createLayout({
-      name: 'welcome',
-      subject: `Welcome to ${props.companyName}!`,
-      preheader: 'Get started with your new account'
-    }, content);
+    return this.createLayout(
+      {
+        name: 'welcome',
+        subject: `Welcome to ${props.companyName}!`,
+        preheader: 'Get started with your new account',
+      },
+      content
+    );
   }
 
   createNotificationTemplate(props: {
@@ -496,7 +549,7 @@ export class EmailTemplateEngine {
       success: this.theme.colors.success,
       warning: this.theme.colors.warning,
       error: this.theme.colors.error,
-      info: this.theme.colors.primary
+      info: this.theme.colors.primary,
     };
 
     const content = `
@@ -511,24 +564,31 @@ export class EmailTemplateEngine {
           ${props.message}
         </p>
         
-        ${props.ctaText && props.ctaUrl ? this.createButton({
-          text: props.ctaText,
-          url: props.ctaUrl,
-          variant: 'primary'
-        }) : ''}
+        ${
+          props.ctaText && props.ctaUrl
+            ? this.createButton({
+                text: props.ctaText,
+                url: props.ctaUrl,
+                variant: 'primary',
+              })
+            : ''
+        }
       </div>
       
       ${this.createFooter({
         companyName: props.companyName,
-        address: 'Brisbane, Australia'
+        address: 'Brisbane, Australia',
       })}
     `;
 
-    return this.createLayout({
-      name: 'notification',
-      subject: props.title,
-      preheader: props.message.substring(0, 100)
-    }, content);
+    return this.createLayout(
+      {
+        name: 'notification',
+        subject: props.title,
+        preheader: props.message.substring(0, 100),
+      },
+      content
+    );
   }
 
   // Template compilation method

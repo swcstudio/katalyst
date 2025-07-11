@@ -1,5 +1,5 @@
-import { Component, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, createSignal, onCleanup, onMount } from 'solid-js';
 
 export interface BackgroundBeamsProps {
   className?: string;
@@ -29,7 +29,7 @@ export const BackgroundBeams: Component<BackgroundBeamsProps> = (props) => {
     height: 'full',
     overflow: 'hidden',
     zIndex: '0',
-    pointerEvents: 'none'
+    pointerEvents: 'none',
   });
 
   const svgStyles = css({
@@ -38,7 +38,7 @@ export const BackgroundBeams: Component<BackgroundBeamsProps> = (props) => {
     left: '0',
     width: 'full',
     height: 'full',
-    opacity: '0.4'
+    opacity: '0.4',
   });
 
   const gradientBackgroundStart = props.gradientBackgroundStart || '#18181b';
@@ -81,7 +81,7 @@ export const BackgroundBeams: Component<BackgroundBeamsProps> = (props) => {
               />
             </stop>
           </linearGradient>
-          
+
           <linearGradient id="gradient2" x1="100%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style={`stop-color:${thirdColor};stop-opacity:0.6`}>
               <animate
@@ -168,85 +168,22 @@ export const BackgroundBeams: Component<BackgroundBeamsProps> = (props) => {
         </path>
 
         {/* Floating orbs */}
-        <circle
-          cx="100"
-          cy="100"
-          r="3"
-          fill="url(#gradient3)"
-          filter="url(#blur)"
-        >
-          <animate
-            attributeName="cx"
-            values="100;300;100"
-            dur="20s"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="cy"
-            values="100;200;300;100"
-            dur="20s"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="r"
-            values="3;8;3"
-            dur="8s"
-            repeatCount="indefinite"
-          />
+        <circle cx="100" cy="100" r="3" fill="url(#gradient3)" filter="url(#blur)">
+          <animate attributeName="cx" values="100;300;100" dur="20s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="100;200;300;100" dur="20s" repeatCount="indefinite" />
+          <animate attributeName="r" values="3;8;3" dur="8s" repeatCount="indefinite" />
         </circle>
 
-        <circle
-          cx="300"
-          cy="300"
-          r="4"
-          fill="url(#gradient2)"
-          filter="url(#blur)"
-        >
-          <animate
-            attributeName="cx"
-            values="300;100;300"
-            dur="18s"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="cy"
-            values="300;100;200;300"
-            dur="18s"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="r"
-            values="4;10;4"
-            dur="10s"
-            repeatCount="indefinite"
-          />
+        <circle cx="300" cy="300" r="4" fill="url(#gradient2)" filter="url(#blur)">
+          <animate attributeName="cx" values="300;100;300" dur="18s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="300;100;200;300" dur="18s" repeatCount="indefinite" />
+          <animate attributeName="r" values="4;10;4" dur="10s" repeatCount="indefinite" />
         </circle>
 
-        <circle
-          cx="200"
-          cy="200"
-          r="2"
-          fill="url(#gradient1)"
-          filter="url(#blur)"
-        >
-          <animate
-            attributeName="cx"
-            values="200;50;350;200"
-            dur="25s"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="cy"
-            values="200;350;50;200"
-            dur="25s"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="r"
-            values="2;6;2"
-            dur="6s"
-            repeatCount="indefinite"
-          />
+        <circle cx="200" cy="200" r="2" fill="url(#gradient1)" filter="url(#blur)">
+          <animate attributeName="cx" values="200;50;350;200" dur="25s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="200;350;50;200" dur="25s" repeatCount="indefinite" />
+          <animate attributeName="r" values="2;6;2" dur="6s" repeatCount="indefinite" />
         </circle>
       </svg>
 
@@ -257,7 +194,7 @@ export const BackgroundBeams: Component<BackgroundBeamsProps> = (props) => {
           inset: '0',
           background: `linear-gradient(135deg, ${gradientBackgroundStart} 0%, ${gradientBackgroundEnd} 100%)`,
           opacity: '0.3',
-          mixBlendMode: blendingValue as any
+          mixBlendMode: blendingValue as any,
         })}
       />
     </div>

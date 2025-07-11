@@ -1,7 +1,7 @@
-import { Component, JSX, onMount } from 'solid-js';
 import { cx } from '@sse/ui/styled-system/css';
 import { css } from '@sse/ui/styled-system/css';
 import { animate, inView } from 'motion';
+import { type Component, type JSX, onMount } from 'solid-js';
 
 export interface LampContainerProps {
   children: JSX.Element;
@@ -45,7 +45,7 @@ export const LampDemo: Component = () => {
           letterSpacing: 'tight',
           color: 'transparent',
           opacity: 0.5,
-          md: { fontSize: '7xl' }
+          md: { fontSize: '7xl' },
         })}
       >
         Build lamps <br /> the right way
@@ -67,7 +67,7 @@ export const LampContainer: Component<LampContainerProps> = (props) => {
         },
         {
           duration: 4 + index * 0.5,
-          repeat: Infinity,
+          repeat: Number.POSITIVE_INFINITY,
           easing: 'ease-in-out',
         }
       );
@@ -84,7 +84,7 @@ export const LampContainer: Component<LampContainerProps> = (props) => {
         },
         {
           duration: 3,
-          repeat: Infinity,
+          repeat: Number.POSITIVE_INFINITY,
           easing: 'ease-in-out',
         }
       );
@@ -103,21 +103,23 @@ export const LampContainer: Component<LampContainerProps> = (props) => {
           justifyContent: 'center',
           overflow: 'hidden',
           background: 'linear-gradient(to bottom, #0f172a, #1e293b, #334155)',
-          width: '100%'
+          width: '100%',
         }),
         props.className
       )}
     >
       {/* Lamp Structure */}
-      <div class={css({
-        position: 'absolute',
-        top: '-50vh',
-        width: '100%',
-        height: '200vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      })}>
+      <div
+        class={css({
+          position: 'absolute',
+          top: '-50vh',
+          width: '100%',
+          height: '200vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        })}
+      >
         {/* Main Lamp Beam */}
         <div
           class={cx(
@@ -127,9 +129,10 @@ export const LampContainer: Component<LampContainerProps> = (props) => {
               top: 0,
               width: '200px',
               height: '100vh',
-              background: 'linear-gradient(to bottom, rgba(147, 197, 253, 0.5) 0%, rgba(147, 197, 253, 0.2) 50%, transparent 100%)',
+              background:
+                'linear-gradient(to bottom, rgba(147, 197, 253, 0.5) 0%, rgba(147, 197, 253, 0.2) 50%, transparent 100%)',
               clipPath: 'polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)',
-              filter: 'blur(2px)'
+              filter: 'blur(2px)',
             })
           )}
         />
@@ -143,9 +146,10 @@ export const LampContainer: Component<LampContainerProps> = (props) => {
               top: 0,
               width: '150px',
               height: '80vh',
-              background: 'linear-gradient(to bottom, rgba(239, 246, 255, 0.4) 0%, rgba(219, 234, 254, 0.2) 40%, transparent 100%)',
+              background:
+                'linear-gradient(to bottom, rgba(239, 246, 255, 0.4) 0%, rgba(219, 234, 254, 0.2) 40%, transparent 100%)',
               clipPath: 'polygon(45% 0%, 55% 0%, 90% 100%, 10% 100%)',
-              filter: 'blur(1px)'
+              filter: 'blur(1px)',
             })
           )}
         />
@@ -158,9 +162,10 @@ export const LampContainer: Component<LampContainerProps> = (props) => {
               top: 0,
               width: '300px',
               height: '120vh',
-              background: 'linear-gradient(to bottom, rgba(96, 165, 250, 0.3) 0%, rgba(96, 165, 250, 0.1) 30%, transparent 100%)',
+              background:
+                'linear-gradient(to bottom, rgba(96, 165, 250, 0.3) 0%, rgba(96, 165, 250, 0.1) 30%, transparent 100%)',
               clipPath: 'polygon(35% 0%, 65% 0%, 100% 100%, 0% 100%)',
-              filter: 'blur(3px)'
+              filter: 'blur(3px)',
             })
           )}
         />
@@ -174,68 +179,79 @@ export const LampContainer: Component<LampContainerProps> = (props) => {
               top: '-100px',
               width: '400px',
               height: '200px',
-              background: 'radial-gradient(ellipse, rgba(147, 197, 253, 0.6) 0%, rgba(59, 130, 246, 0.3) 40%, transparent 70%)',
+              background:
+                'radial-gradient(ellipse, rgba(147, 197, 253, 0.6) 0%, rgba(59, 130, 246, 0.3) 40%, transparent 70%)',
               borderRadius: '50%',
-              filter: 'blur(20px)'
+              filter: 'blur(20px)',
             })
           )}
         />
 
         {/* Lamp Top */}
-        <div class={css({
-          position: 'absolute',
-          top: '-80px',
-          width: '60px',
-          height: '20px',
-          backgroundColor: '#374151',
-          borderRadius: '10px',
-          boxShadow: '0 0 20px rgba(147, 197, 253, 0.5)'
-        })} />
+        <div
+          class={css({
+            position: 'absolute',
+            top: '-80px',
+            width: '60px',
+            height: '20px',
+            backgroundColor: '#374151',
+            borderRadius: '10px',
+            boxShadow: '0 0 20px rgba(147, 197, 253, 0.5)',
+          })}
+        />
 
         {/* Lamp Cord */}
-        <div class={css({
-          position: 'absolute',
-          top: '-80px',
-          width: '2px',
-          height: '40px',
-          backgroundColor: '#4b5563'
-        })} />
+        <div
+          class={css({
+            position: 'absolute',
+            top: '-80px',
+            width: '2px',
+            height: '40px',
+            backgroundColor: '#4b5563',
+          })}
+        />
       </div>
 
       {/* Content */}
-      <div class={css({
-        position: 'relative',
-        zIndex: 10,
-        textAlign: 'center',
-        paddingX: '24px'
-      })}>
+      <div
+        class={css({
+          position: 'relative',
+          zIndex: 10,
+          textAlign: 'center',
+          paddingX: '24px',
+        })}
+      >
         {props.children}
       </div>
 
       {/* Ambient Light Spots */}
-      <div class={css({
-        position: 'absolute',
-        bottom: '20%',
-        left: '10%',
-        width: '100px',
-        height: '100px',
-        background: 'radial-gradient(circle, rgba(147, 197, 253, 0.1) 0%, transparent 70%)',
-        borderRadius: '50%',
-        filter: 'blur(15px)',
-        animation: 'float 6s ease-in-out infinite'
-      })} />
+      <div
+        class={css({
+          position: 'absolute',
+          bottom: '20%',
+          left: '10%',
+          width: '100px',
+          height: '100px',
+          background: 'radial-gradient(circle, rgba(147, 197, 253, 0.1) 0%, transparent 70%)',
+          borderRadius: '50%',
+          filter: 'blur(15px)',
+          animation: 'float 6s ease-in-out infinite',
+        })}
+      />
 
-      <div class={css({
-        position: 'absolute',
-        bottom: '30%',
-        right: '15%',
-        width: '80px',
-        height: '80px',
-        background: 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
-        borderRadius: '50%',
-        filter: 'blur(12px)',
-        animation: 'float 8s ease-in-out infinite reverse'
-      })} />
+      <div
+        class={css({
+          position: 'absolute',
+          bottom: '30%',
+          right: '15%',
+          width: '80px',
+          height: '80px',
+          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
+          borderRadius: '50%',
+          filter: 'blur(12px)',
+          animation: 'float 8s ease-in-out infinite reverse',
+        })}
+      />
 
       <style>
         {`

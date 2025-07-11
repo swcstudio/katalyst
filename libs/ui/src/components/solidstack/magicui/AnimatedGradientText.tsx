@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, ParentComponent } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, type ParentComponent, mergeProps } from 'solid-js';
 
 export interface AnimatedGradientTextProps {
   class?: string;
@@ -29,32 +29,37 @@ export const AnimatedGradientText: ParentComponent<AnimatedGradientTextProps> = 
     return merged.colors.join(', ');
   };
 
-  const animationSpeed = merged.speed ? merged.animationDuration / merged.speed : merged.animationDuration;
+  const animationSpeed = merged.speed
+    ? merged.animationDuration / merged.speed
+    : merged.animationDuration;
 
   return (
     <span
-      class={css({
-        display: 'inline-block',
-        background: `linear-gradient(-45deg, ${getGradientColors()})`,
-        backgroundSize: '300% 300%',
-        backgroundClip: 'text',
-        WebkitBackgroundClip: 'text',
-        color: 'transparent',
-        WebkitTextFillColor: 'transparent',
-        animation: `gradient ${animationSpeed}s ease infinite`,
-        
-        '@keyframes gradient': {
-          '0%': {
-            backgroundPosition: '0% 50%',
-          },
-          '50%': {
-            backgroundPosition: '100% 50%',
-          },
-          '100%': {
-            backgroundPosition: '0% 50%',
+      class={css(
+        {
+          display: 'inline-block',
+          background: `linear-gradient(-45deg, ${getGradientColors()})`,
+          backgroundSize: '300% 300%',
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text',
+          color: 'transparent',
+          WebkitTextFillColor: 'transparent',
+          animation: `gradient ${animationSpeed}s ease infinite`,
+
+          '@keyframes gradient': {
+            '0%': {
+              backgroundPosition: '0% 50%',
+            },
+            '50%': {
+              backgroundPosition: '100% 50%',
+            },
+            '100%': {
+              backgroundPosition: '0% 50%',
+            },
           },
         },
-      }, merged.class)}
+        merged.class
+      )}
       style={merged.style}
     >
       {props.children}
@@ -68,22 +73,27 @@ export interface AnimatedGradientTextDemoProps {
 
 export const AnimatedGradientTextDemo: Component<AnimatedGradientTextDemoProps> = (props) => {
   return (
-    <div class={css({
-      group: true,
-      position: 'relative',
-      margin: '0 auto',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: '9999px',
-      paddingX: '16px',
-      paddingY: '6px',
-      boxShadow: 'inset 0 -8px 10px #8fdfff1f',
-      transition: 'box-shadow 500ms ease-out',
-      '&:hover': {
-        boxShadow: 'inset 0 -5px 10px #8fdfff3f',
-      },
-    }, props.class)}>
+    <div
+      class={css(
+        {
+          group: true,
+          position: 'relative',
+          margin: '0 auto',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '9999px',
+          paddingX: '16px',
+          paddingY: '6px',
+          boxShadow: 'inset 0 -8px 10px #8fdfff1f',
+          transition: 'box-shadow 500ms ease-out',
+          '&:hover': {
+            boxShadow: 'inset 0 -5px 10px #8fdfff3f',
+          },
+        },
+        props.class
+      )}
+    >
       <span
         class={css({
           position: 'absolute',
@@ -106,20 +116,24 @@ export const AnimatedGradientTextDemo: Component<AnimatedGradientTextDemoProps> 
         }}
       />
       <span>🎉</span>
-      <hr class={css({
-        marginX: '8px',
-        height: '16px',
-        width: '1px',
-        flexShrink: 0,
-        backgroundColor: 'rgb(115, 115, 115)',
-      })} />
-      <AnimatedGradientText class={css({
-        fontSize: '14px',
-        fontWeight: 'medium',
-      })}>
+      <hr
+        class={css({
+          marginX: '8px',
+          height: '16px',
+          width: '1px',
+          flexShrink: 0,
+          backgroundColor: 'rgb(115, 115, 115)',
+        })}
+      />
+      <AnimatedGradientText
+        class={css({
+          fontSize: '14px',
+          fontWeight: 'medium',
+        })}
+      >
         Introducing Magic UI
       </AnimatedGradientText>
-      <svg 
+      <svg
         class={css({
           marginLeft: '4px',
           width: '16px',
@@ -130,8 +144,8 @@ export const AnimatedGradientTextDemo: Component<AnimatedGradientTextDemoProps> 
             transform: 'translateX(2px)',
           },
         })}
-        fill="none" 
-        stroke="currentColor" 
+        fill="none"
+        stroke="currentColor"
         viewBox="0 0 24 24"
       >
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -146,11 +160,14 @@ export const AnimatedGradientTextFastDemo: Component<AnimatedGradientTextDemoPro
       speed={2}
       colorFrom="#4ade80"
       colorTo="#06b6d4"
-      class={css({
-        fontSize: '2.25rem',
-        fontWeight: '600',
-        letterSpacing: '-0.025em',
-      }, props.class)}
+      class={css(
+        {
+          fontSize: '2.25rem',
+          fontWeight: '600',
+          letterSpacing: '-0.025em',
+        },
+        props.class
+      )}
     >
       Fast Gradient
     </AnimatedGradientText>

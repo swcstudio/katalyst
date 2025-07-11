@@ -1,5 +1,5 @@
-import { Component, createEffect, createSignal, onCleanup, For } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For, createEffect, createSignal, onCleanup } from 'solid-js';
 
 // Placeholder Globe component
 const Globe: Component<{ className?: string }> = (props) => {
@@ -20,12 +20,12 @@ const Globe: Component<{ className?: string }> = (props) => {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       // Draw globe background
       const gradient = ctx.createRadialGradient(300, 300, 0, 300, 300, 200);
       gradient.addColorStop(0, 'rgba(59, 130, 246, 0.8)');
       gradient.addColorStop(1, 'rgba(30, 58, 138, 0.4)');
-      
+
       ctx.fillStyle = gradient;
       ctx.beginPath();
       ctx.arc(300, 300, 200, 0, Math.PI * 2);
@@ -34,7 +34,7 @@ const Globe: Component<{ className?: string }> = (props) => {
       // Draw grid lines
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
       ctx.lineWidth = 1;
-      
+
       for (let i = 0; i < 8; i++) {
         const angle = (i * Math.PI) / 4 + rotation;
         ctx.beginPath();
@@ -46,11 +46,11 @@ const Globe: Component<{ className?: string }> = (props) => {
       // Draw markers
       const markers = [
         { x: 300 + Math.cos(rotation) * 150, y: 300 + Math.sin(rotation) * 150 },
-        { x: 300 + Math.cos(rotation + 1) * 120, y: 300 + Math.sin(rotation + 1) * 120 }
+        { x: 300 + Math.cos(rotation + 1) * 120, y: 300 + Math.sin(rotation + 1) * 120 },
       ];
 
       ctx.fillStyle = 'rgba(34, 197, 94, 0.8)';
-      markers.forEach(marker => {
+      markers.forEach((marker) => {
         ctx.beginPath();
         ctx.arc(marker.x, marker.y, 4, 0, Math.PI * 2);
         ctx.fill();
@@ -72,78 +72,86 @@ const Globe: Component<{ className?: string }> = (props) => {
   return (
     <canvas
       ref={canvasRef}
-      class={css({
-        width: '600px',
-        height: '600px',
-        maxWidth: '100%',
-        aspectRatio: '1',
-      }, props.className)}
+      class={css(
+        {
+          width: '600px',
+          height: '600px',
+          maxWidth: '100%',
+          aspectRatio: '1',
+        },
+        props.className
+      )}
     />
   );
 };
 
 // Feature Card Components
 const FeatureCard: Component<{
-  children: any;
+  children: JSX.Element;
   className?: string;
 }> = (props) => {
   return (
-    <div class={css({
-      padding: '4',
-      position: 'relative',
-      overflow: 'hidden',
-      sm: {
-        padding: '8',
-      },
-    }, props.className)}>
+    <div
+      class={css(
+        {
+          padding: '4',
+          position: 'relative',
+          overflow: 'hidden',
+          sm: {
+            padding: '8',
+          },
+        },
+        props.className
+      )}
+    >
       {props.children}
     </div>
   );
 };
 
-const FeatureTitle: Component<{ children: any }> = (props) => {
+const FeatureTitle: Component<{ children: JSX.Element }> = (props) => {
   return (
-    <p class={css({
-      maxWidth: '5xl',
-      marginX: 'auto',
-      textAlign: 'left',
-      letterSpacing: 'tight',
-      color: 'black',
-      fontSize: 'xl',
-      _dark: {
-        color: 'white',
-      },
-      md: {
-        fontSize: '2xl',
-        lineHeight: 'snug',
-      },
-    })}>
+    <p
+      class={css({
+        maxWidth: '5xl',
+        marginX: 'auto',
+        textAlign: 'left',
+        letterSpacing: 'tight',
+        color: 'black',
+        fontSize: 'xl',
+        _dark: {
+          color: 'white',
+        },
+        md: {
+          fontSize: '2xl',
+          lineHeight: 'snug',
+        },
+      })}
+    >
       {props.children}
     </p>
   );
 };
 
-const FeatureDescription: Component<{ children: any }> = (props) => {
+const FeatureDescription: Component<{ children: JSX.Element }> = (props) => {
   return (
-    <p class={css({
-      fontSize: 'sm',
-      maxWidth: '4xl',
-      textAlign: 'left',
-      marginX: 'auto',
-      color: 'neutral.500',
-      textAlign: 'center',
-      fontWeight: 'normal',
-      _dark: {
-        color: 'neutral.300',
-      },
-      textAlign: 'left',
-      maxWidth: 'sm',
-      marginX: '0',
-      marginY: '2',
-      md: {
+    <p
+      class={css({
         fontSize: 'sm',
-      },
-    })}>
+        color: 'neutral.500',
+        fontWeight: 'normal',
+        _dark: {
+          color: 'neutral.300',
+        },
+        textAlign: 'left',
+        maxWidth: 'sm',
+        marginX: '0',
+        marginY: '2',
+        md: {
+          fontSize: 'sm',
+        },
+      })}
+    >
       {props.children}
     </p>
   );
@@ -152,34 +160,40 @@ const FeatureDescription: Component<{ children: any }> = (props) => {
 // Skeleton Components
 export const SkeletonOne: Component = () => {
   return (
-    <div class={css({
-      position: 'relative',
-      display: 'flex',
-      paddingY: '8',
-      paddingX: '2',
-      gap: '10',
-      height: 'full',
-    })}>
-      <div class={css({
-        width: 'full',
-        padding: '5',
-        marginX: 'auto',
-        backgroundColor: 'white',
-        boxShadow: '2xl',
+    <div
+      class={css({
+        position: 'relative',
+        display: 'flex',
+        paddingY: '8',
+        paddingX: '2',
+        gap: '10',
         height: 'full',
-        _dark: {
-          backgroundColor: 'neutral.900',
-        },
-        _groupHover: {},
-      })}>
-        <div class={css({
-          display: 'flex',
-          flex: '1',
+      })}
+    >
+      <div
+        class={css({
           width: 'full',
+          padding: '5',
+          marginX: 'auto',
+          backgroundColor: 'white',
+          boxShadow: '2xl',
           height: 'full',
-          flexDirection: 'column',
-          gap: '2',
-        })}>
+          _dark: {
+            backgroundColor: 'neutral.900',
+          },
+          _groupHover: {},
+        })}
+      >
+        <div
+          class={css({
+            display: 'flex',
+            flex: '1',
+            width: 'full',
+            height: 'full',
+            flexDirection: 'column',
+            gap: '2',
+          })}
+        >
           <img
             src="/linear.webp"
             alt="header"
@@ -197,32 +211,36 @@ export const SkeletonOne: Component = () => {
         </div>
       </div>
 
-      <div class={css({
-        position: 'absolute',
-        bottom: '0',
-        zIndex: '40',
-        insetX: '0',
-        height: '60',
-        background: 'linear-gradient(to top, white, white, transparent)',
-        width: 'full',
-        pointerEvents: 'none',
-        _dark: {
-          background: 'linear-gradient(to top, black, black, transparent)',
-        },
-      })} />
-      <div class={css({
-        position: 'absolute',
-        top: '0',
-        zIndex: '40',
-        insetX: '0',
-        height: '60',
-        background: 'linear-gradient(to bottom, white, transparent, transparent)',
-        width: 'full',
-        pointerEvents: 'none',
-        _dark: {
-          background: 'linear-gradient(to bottom, black, transparent, transparent)',
-        },
-      })} />
+      <div
+        class={css({
+          position: 'absolute',
+          bottom: '0',
+          zIndex: '40',
+          insetX: '0',
+          height: '60',
+          background: 'linear-gradient(to top, white, white, transparent)',
+          width: 'full',
+          pointerEvents: 'none',
+          _dark: {
+            background: 'linear-gradient(to top, black, black, transparent)',
+          },
+        })}
+      />
+      <div
+        class={css({
+          position: 'absolute',
+          top: '0',
+          zIndex: '40',
+          insetX: '0',
+          height: '60',
+          background: 'linear-gradient(to bottom, white, transparent, transparent)',
+          width: 'full',
+          pointerEvents: 'none',
+          _dark: {
+            background: 'linear-gradient(to bottom, black, transparent, transparent)',
+          },
+        })}
+      />
     </div>
   );
 };
@@ -239,39 +257,46 @@ export const SkeletonThree: Component = () => {
         height: 'full',
         _groupHover: {},
       })}
+      rel="noreferrer"
     >
-      <div class={css({
-        width: 'full',
-        marginX: 'auto',
-        backgroundColor: 'transparent',
-        height: 'full',
-        _dark: {
-          backgroundColor: 'transparent',
-        },
-      })}>
-        <div class={css({
-          display: 'flex',
-          flex: '1',
+      <div
+        class={css({
           width: 'full',
+          marginX: 'auto',
+          backgroundColor: 'transparent',
           height: 'full',
-          flexDirection: 'column',
-          gap: '2',
-          position: 'relative',
-        })}>
-          {/* YouTube Icon */}
-          <div class={css({
-            position: 'absolute',
-            zIndex: '10',
-            inset: '0',
-            margin: 'auto',
-            height: '20',
-            width: '20',
-            color: 'red.500',
+          _dark: {
+            backgroundColor: 'transparent',
+          },
+        })}
+      >
+        <div
+          class={css({
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '4xl',
-          })}>
+            flex: '1',
+            width: 'full',
+            height: 'full',
+            flexDirection: 'column',
+            gap: '2',
+            position: 'relative',
+          })}
+        >
+          {/* YouTube Icon */}
+          <div
+            class={css({
+              position: 'absolute',
+              zIndex: '10',
+              inset: '0',
+              margin: 'auto',
+              height: '20',
+              width: '20',
+              color: 'red.500',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '4xl',
+            })}
+          >
             ▶
           </div>
           <img
@@ -301,32 +326,36 @@ export const SkeletonThree: Component = () => {
 
 export const SkeletonTwo: Component = () => {
   const images = [
-    "https://images.unsplash.com/photo-1517322048670-4fba75cbbb62?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1573790387438-4da905039392?q=80&w=3425&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1554931670-4ebfabf6e7a9?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1546484475-7f7bd55792da?q=80&w=2581&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    'https://images.unsplash.com/photo-1517322048670-4fba75cbbb62?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1573790387438-4da905039392?q=80&w=3425&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1554931670-4ebfabf6e7a9?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1546484475-7f7bd55792da?q=80&w=2581&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   ];
 
   return (
-    <div class={css({
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'start',
-      padding: '8',
-      gap: '10',
-      height: 'full',
-      overflow: 'hidden',
-    })}>
-      <div class={css({
+    <div
+      class={css({
+        position: 'relative',
         display: 'flex',
-        flexDirection: 'row',
-        marginLeft: '-20',
-      })}>
+        flexDirection: 'column',
+        alignItems: 'start',
+        padding: '8',
+        gap: '10',
+        height: 'full',
+        overflow: 'hidden',
+      })}
+    >
+      <div
+        class={css({
+          display: 'flex',
+          flexDirection: 'row',
+          marginLeft: '-20',
+        })}
+      >
         <For each={images}>
           {(image, idx) => (
-            <div 
+            <div
               class={css({
                 borderRadius: 'xl',
                 marginRight: '-4',
@@ -373,13 +402,15 @@ export const SkeletonTwo: Component = () => {
           )}
         </For>
       </div>
-      <div class={css({
-        display: 'flex',
-        flexDirection: 'row',
-      })}>
+      <div
+        class={css({
+          display: 'flex',
+          flexDirection: 'row',
+        })}
+      >
         <For each={images}>
           {(image, idx) => (
-            <div 
+            <div
               class={css({
                 borderRadius: 'xl',
                 marginRight: '-4',
@@ -427,62 +458,70 @@ export const SkeletonTwo: Component = () => {
         </For>
       </div>
 
-      <div class={css({
-        position: 'absolute',
-        left: '0',
-        zIndex: '100',
-        insetY: '0',
-        width: '20',
-        background: 'linear-gradient(to right, white, transparent)',
-        height: 'full',
-        pointerEvents: 'none',
-        _dark: {
-          background: 'linear-gradient(to right, black, transparent)',
-        },
-      })} />
-      <div class={css({
-        position: 'absolute',
-        right: '0',
-        zIndex: '100',
-        insetY: '0',
-        width: '20',
-        background: 'linear-gradient(to left, white, transparent)',
-        height: 'full',
-        pointerEvents: 'none',
-        _dark: {
-          background: 'linear-gradient(to left, black, transparent)',
-        },
-      })} />
+      <div
+        class={css({
+          position: 'absolute',
+          left: '0',
+          zIndex: '100',
+          insetY: '0',
+          width: '20',
+          background: 'linear-gradient(to right, white, transparent)',
+          height: 'full',
+          pointerEvents: 'none',
+          _dark: {
+            background: 'linear-gradient(to right, black, transparent)',
+          },
+        })}
+      />
+      <div
+        class={css({
+          position: 'absolute',
+          right: '0',
+          zIndex: '100',
+          insetY: '0',
+          width: '20',
+          background: 'linear-gradient(to left, white, transparent)',
+          height: 'full',
+          pointerEvents: 'none',
+          _dark: {
+            background: 'linear-gradient(to left, black, transparent)',
+          },
+        })}
+      />
     </div>
   );
 };
 
 export const SkeletonFour: Component = () => {
   return (
-    <div class={css({
-      height: '60',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      position: 'relative',
-      backgroundColor: 'transparent',
-      marginTop: '10',
-      _dark: {
-        backgroundColor: 'transparent',
-      },
-      md: {
+    <div
+      class={css({
         height: '60',
-      },
-    })}>
-      <Globe className={css({
-        position: 'absolute',
-        right: '-10',
-        bottom: '-80',
-        md: {
-          right: '-10',
-          bottom: '-72',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        position: 'relative',
+        backgroundColor: 'transparent',
+        marginTop: '10',
+        _dark: {
+          backgroundColor: 'transparent',
         },
-      })} />
+        md: {
+          height: '60',
+        },
+      })}
+    >
+      <Globe
+        className={css({
+          position: 'absolute',
+          right: '-10',
+          bottom: '-80',
+          md: {
+            right: '-10',
+            bottom: '-72',
+          },
+        })}
+      />
     </div>
   );
 };
@@ -490,9 +529,8 @@ export const SkeletonFour: Component = () => {
 export const FeaturesSectionDemo: Component = () => {
   const features = [
     {
-      title: "Track issues effectively",
-      description:
-        "Track and manage your project issues with ease using our intuitive interface.",
+      title: 'Track issues effectively',
+      description: 'Track and manage your project issues with ease using our intuitive interface.',
       skeleton: <SkeletonOne />,
       className: css({
         gridColumn: '1',
@@ -509,9 +547,8 @@ export const FeaturesSectionDemo: Component = () => {
       }),
     },
     {
-      title: "Capture pictures with AI",
-      description:
-        "Capture stunning photos effortlessly using our advanced AI technology.",
+      title: 'Capture pictures with AI',
+      description: 'Capture stunning photos effortlessly using our advanced AI technology.',
       skeleton: <SkeletonTwo />,
       className: css({
         borderBottom: '1px solid',
@@ -526,9 +563,9 @@ export const FeaturesSectionDemo: Component = () => {
       }),
     },
     {
-      title: "Watch our AI on YouTube",
+      title: 'Watch our AI on YouTube',
       description:
-        "Whether its you or Tyler Durden, you can get to know about our product on YouTube",
+        'Whether its you or Tyler Durden, you can get to know about our product on YouTube',
       skeleton: <SkeletonThree />,
       className: css({
         gridColumn: '1',
@@ -544,9 +581,9 @@ export const FeaturesSectionDemo: Component = () => {
       }),
     },
     {
-      title: "Deploy in seconds",
+      title: 'Deploy in seconds',
       description:
-        "With our blazing fast, state of the art, cutting edge, we are so back cloud servies (read AWS) - you can deploy your model in seconds.",
+        'With our blazing fast, state of the art, cutting edge, we are so back cloud servies (read AWS) - you can deploy your model in seconds.',
       skeleton: <SkeletonFour />,
       className: css({
         gridColumn: '1',
@@ -564,87 +601,97 @@ export const FeaturesSectionDemo: Component = () => {
   ];
 
   return (
-    <div class={css({
-      position: 'relative',
-      zIndex: '20',
-      paddingY: '10',
-      maxWidth: '7xl',
-      marginX: 'auto',
-      lg: {
-        paddingY: '40',
-      },
-    })}>
-      <div class={css({
-        paddingX: '8',
-      })}>
-        <h4 class={css({
-          fontSize: '3xl',
-          maxWidth: '5xl',
-          marginX: 'auto',
-          textAlign: 'center',
-          letterSpacing: 'tight',
-          fontWeight: 'medium',
-          color: 'black',
-          _dark: {
-            color: 'white',
-          },
-          lg: {
-            fontSize: '5xl',
-            lineHeight: 'tight',
-          },
-        })}>
+    <div
+      class={css({
+        position: 'relative',
+        zIndex: '20',
+        paddingY: '10',
+        maxWidth: '7xl',
+        marginX: 'auto',
+        lg: {
+          paddingY: '40',
+        },
+      })}
+    >
+      <div
+        class={css({
+          paddingX: '8',
+        })}
+      >
+        <h4
+          class={css({
+            fontSize: '3xl',
+            maxWidth: '5xl',
+            marginX: 'auto',
+            textAlign: 'center',
+            letterSpacing: 'tight',
+            fontWeight: 'medium',
+            color: 'black',
+            _dark: {
+              color: 'white',
+            },
+            lg: {
+              fontSize: '5xl',
+              lineHeight: 'tight',
+            },
+          })}
+        >
           Packed with thousands of features
         </h4>
 
-        <p class={css({
-          fontSize: 'sm',
-          maxWidth: '2xl',
-          marginY: '4',
-          marginX: 'auto',
-          color: 'neutral.500',
-          textAlign: 'center',
-          fontWeight: 'normal',
-          _dark: {
-            color: 'neutral.300',
-          },
-          lg: {
-            fontSize: 'base',
-          },
-        })}>
-          From Image generation to video generation, Everything AI has APIs for
-          literally everything. It can even create this website copy for you.
+        <p
+          class={css({
+            fontSize: 'sm',
+            maxWidth: '2xl',
+            marginY: '4',
+            marginX: 'auto',
+            color: 'neutral.500',
+            textAlign: 'center',
+            fontWeight: 'normal',
+            _dark: {
+              color: 'neutral.300',
+            },
+            lg: {
+              fontSize: 'base',
+            },
+          })}
+        >
+          From Image generation to video generation, Everything AI has APIs for literally
+          everything. It can even create this website copy for you.
         </p>
       </div>
 
-      <div class={css({
-        position: 'relative',
-      })}>
-        <div class={css({
-          display: 'grid',
-          gridTemplateColumns: '1',
-          marginTop: '12',
-          border: '1px solid',
-          borderColor: 'neutral.800',
-          borderRadius: 'md',
-          lg: {
-            gridTemplateColumns: '6',
-          },
-          xl: {
+      <div
+        class={css({
+          position: 'relative',
+        })}
+      >
+        <div
+          class={css({
+            display: 'grid',
+            gridTemplateColumns: '1',
+            marginTop: '12',
             border: '1px solid',
             borderColor: 'neutral.800',
-          },
-          _dark: {
-            borderColor: 'neutral.800',
-          },
-        })}>
+            borderRadius: 'md',
+            lg: {
+              gridTemplateColumns: '6',
+            },
+            xl: {
+              border: '1px solid',
+              borderColor: 'neutral.800',
+            },
+            _dark: {
+              borderColor: 'neutral.800',
+            },
+          })}
+        >
           <For each={features}>
             {(feature) => (
               <FeatureCard className={feature.className}>
                 <FeatureTitle>{feature.title}</FeatureTitle>
                 <FeatureDescription>{feature.description}</FeatureDescription>
-                <div class={css({ height: 'full', width: 'full' })}>
-                  {feature.skeleton}
-                </div>
+                <div class={css({ height: 'full', width: 'full' })}>{feature.skeleton}</div>
               </FeatureCard>
             )}
           </For>

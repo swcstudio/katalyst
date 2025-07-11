@@ -1,5 +1,18 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, splitProps, children, For, Show, createContext, useContext } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  Show,
+  children,
+  createContext,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+  splitProps,
+  useContext,
+} from 'solid-js';
 
 interface ModalContextType {
   isOpen: () => boolean;
@@ -43,11 +56,7 @@ export const Modal: Component<ModalProps> = (props) => {
     setIsOpen,
   };
 
-  return (
-    <ModalContext.Provider value={contextValue}>
-      {resolved()}
-    </ModalContext.Provider>
-  );
+  return <ModalContext.Provider value={contextValue}>{resolved()}</ModalContext.Provider>;
 };
 
 export const ModalTrigger: Component<ModalTriggerProps> = (props) => {
@@ -62,23 +71,26 @@ export const ModalTrigger: Component<ModalTriggerProps> = (props) => {
 
   return (
     <button
-      class={css({
-        backgroundColor: 'black',
-        color: 'white',
-        display: 'flex',
-        justifyContent: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-        border: 'none',
-        padding: '12px 24px',
-        borderRadius: '8px',
-        cursor: 'pointer',
-        transition: 'all 0.3s ease',
-        _dark: {
-          backgroundColor: 'white',
-          color: 'black',
+      class={css(
+        {
+          backgroundColor: 'black',
+          color: 'white',
+          display: 'flex',
+          justifyContent: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+          border: 'none',
+          padding: '12px 24px',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          _dark: {
+            backgroundColor: 'white',
+            color: 'black',
+          },
         },
-      }, local.className)}
+        local.className
+      )}
       onClick={handleClick}
       {...others}
     >
@@ -130,19 +142,22 @@ export const ModalBody: Component<ModalBodyProps> = (props) => {
         onClick={handleBackdropClick}
       >
         <div
-          class={css({
-            backgroundColor: 'white',
-            borderRadius: 'xl',
-            maxWidth: '2xl',
-            width: 'full',
-            maxHeight: '90vh',
-            overflow: 'auto',
-            position: 'relative',
-            animation: 'scaleIn 0.3s ease-out',
-            _dark: {
-              backgroundColor: 'gray.900',
+          class={css(
+            {
+              backgroundColor: 'white',
+              borderRadius: 'xl',
+              maxWidth: '2xl',
+              width: 'full',
+              maxHeight: '90vh',
+              overflow: 'auto',
+              position: 'relative',
+              animation: 'scaleIn 0.3s ease-out',
+              _dark: {
+                backgroundColor: 'gray.900',
+              },
             },
-          }, props.className)}
+            props.className
+          )}
         >
           <button
             class={css({
@@ -202,9 +217,12 @@ export const ModalContent: Component<ModalContentProps> = (props) => {
 
   return (
     <div
-      class={css({
-        padding: '6',
-      }, props.className)}
+      class={css(
+        {
+          padding: '6',
+        },
+        props.className
+      )}
     >
       {resolved()}
     </div>
@@ -216,13 +234,16 @@ export const ModalFooter: Component<ModalFooterProps> = (props) => {
 
   return (
     <div
-      class={css({
-        display: 'flex',
-        justifyContent: 'flex-end',
-        padding: '6',
-        paddingTop: '0',
-        gap: '4',
-      }, props.className)}
+      class={css(
+        {
+          display: 'flex',
+          justifyContent: 'flex-end',
+          padding: '6',
+          paddingTop: '0',
+          gap: '4',
+        },
+        props.className
+      )}
     >
       {resolved()}
     </div>
@@ -365,98 +386,115 @@ export interface AnimatedModalDemoProps {
 
 export const AnimatedModalDemo: Component<AnimatedModalDemoProps> = (props) => {
   const images = [
-    "https://images.unsplash.com/photo-1517322048670-4fba75cbbb62?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1573790387438-4da905039392?q=80&w=3425&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1554931670-4ebfabf6e7a9?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1546484475-7f7bd55792da?q=80&w=2581&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    'https://images.unsplash.com/photo-1517322048670-4fba75cbbb62?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1573790387438-4da905039392?q=80&w=3425&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1554931670-4ebfabf6e7a9?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1546484475-7f7bd55792da?q=80&w=2581&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   ];
 
   return (
-    <div class={css({
-      paddingY: '40',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }, props.className)}>
-      <Modal>
-        <ModalTrigger class={css({
-          backgroundColor: 'black',
-          color: 'white',
+    <div
+      class={css(
+        {
+          paddingY: '40',
           display: 'flex',
+          alignItems: 'center',
           justifyContent: 'center',
-          position: 'relative',
-          overflow: 'hidden',
-          _dark: {
-            backgroundColor: 'white',
-            color: 'black',
-          },
-        })}>
-          <span class={css({
-            transition: 'transform 0.5s',
-            textAlign: 'center',
-            _groupHover: {
-              transform: 'translateX(10rem)',
+        },
+        props.className
+      )}
+    >
+      <Modal>
+        <ModalTrigger
+          class={css({
+            backgroundColor: 'black',
+            color: 'white',
+            display: 'flex',
+            justifyContent: 'center',
+            position: 'relative',
+            overflow: 'hidden',
+            _dark: {
+              backgroundColor: 'white',
+              color: 'black',
             },
-          })}>
+          })}
+        >
+          <span
+            class={css({
+              transition: 'transform 0.5s',
+              textAlign: 'center',
+              _groupHover: {
+                transform: 'translateX(10rem)',
+              },
+            })}
+          >
             Book your flight
           </span>
-          <div class={css({
-            transform: 'translateX(-10rem)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'absolute',
-            inset: 0,
-            transition: 'transform 0.5s',
-            color: 'white',
-            zIndex: 20,
-            _groupHover: {
-              transform: 'translateX(0)',
-            },
-          })}>
+          <div
+            class={css({
+              transform: 'translateX(-10rem)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'absolute',
+              inset: 0,
+              transition: 'transform 0.5s',
+              color: 'white',
+              zIndex: 20,
+              _groupHover: {
+                transform: 'translateX(0)',
+              },
+            })}
+          >
             ✈️
           </div>
         </ModalTrigger>
         <ModalBody>
           <ModalContent>
-            <h4 class={css({
-              fontSize: 'lg',
-              fontWeight: 'bold',
-              textAlign: 'center',
-              marginBottom: '8',
-              color: 'neutral.600',
-              _md: {
-                fontSize: '2xl',
-              },
-              _dark: {
-                color: 'neutral.100',
-              },
-            })}>
-              Book your trip to{' '}
-              <span class={css({
-                paddingX: '1',
-                paddingY: '0.5',
-                borderRadius: 'md',
-                backgroundColor: 'gray.100',
-                border: '1px solid',
-                borderColor: 'gray.200',
-                _dark: {
-                  backgroundColor: 'neutral.800',
-                  borderColor: 'neutral.700',
+            <h4
+              class={css({
+                fontSize: 'lg',
+                fontWeight: 'bold',
+                textAlign: 'center',
+                marginBottom: '8',
+                color: 'neutral.600',
+                _md: {
+                  fontSize: '2xl',
                 },
-              })}>
+                _dark: {
+                  color: 'neutral.100',
+                },
+              })}
+            >
+              Book your trip to{' '}
+              <span
+                class={css({
+                  paddingX: '1',
+                  paddingY: '0.5',
+                  borderRadius: 'md',
+                  backgroundColor: 'gray.100',
+                  border: '1px solid',
+                  borderColor: 'gray.200',
+                  _dark: {
+                    backgroundColor: 'neutral.800',
+                    borderColor: 'neutral.700',
+                  },
+                })}
+              >
                 Bali
               </span>{' '}
               now! ✈️
             </h4>
-            <div class={css({
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexWrap: 'wrap',
-              gap: '2',
-            })}>
+            <div
+              class={css({
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '2',
+              })}
+            >
               <For each={images}>
                 {(image, idx) => (
                   <div
@@ -504,88 +542,178 @@ export const AnimatedModalDemo: Component<AnimatedModalDemoProps> = (props) => {
                 )}
               </For>
             </div>
-            <div class={css({
-              paddingY: '10',
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '4',
-              alignItems: 'flex-start',
-              justifyContent: 'flex-start',
-              maxWidth: 'sm',
-              marginX: 'auto',
-            })}>
+            <div
+              class={css({
+                paddingY: '10',
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '4',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                maxWidth: 'sm',
+                marginX: 'auto',
+              })}
+            >
               <div class={css({ display: 'flex', alignItems: 'center', justifyContent: 'center' })}>
-                <PlaneIcon class={css({ marginRight: '1', color: 'neutral.700', height: '4', width: '4', _dark: { color: 'neutral.300' } })} />
-                <span class={css({ color: 'neutral.700', fontSize: 'sm', _dark: { color: 'neutral.300' } })}>
+                <PlaneIcon
+                  class={css({
+                    marginRight: '1',
+                    color: 'neutral.700',
+                    height: '4',
+                    width: '4',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                />
+                <span
+                  class={css({
+                    color: 'neutral.700',
+                    fontSize: 'sm',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                >
                   5 connecting flights
                 </span>
               </div>
               <div class={css({ display: 'flex', alignItems: 'center', justifyContent: 'center' })}>
-                <ElevatorIcon class={css({ marginRight: '1', color: 'neutral.700', height: '4', width: '4', _dark: { color: 'neutral.300' } })} />
-                <span class={css({ color: 'neutral.700', fontSize: 'sm', _dark: { color: 'neutral.300' } })}>
+                <ElevatorIcon
+                  class={css({
+                    marginRight: '1',
+                    color: 'neutral.700',
+                    height: '4',
+                    width: '4',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                />
+                <span
+                  class={css({
+                    color: 'neutral.700',
+                    fontSize: 'sm',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                >
                   12 hotels
                 </span>
               </div>
               <div class={css({ display: 'flex', alignItems: 'center', justifyContent: 'center' })}>
-                <VacationIcon class={css({ marginRight: '1', color: 'neutral.700', height: '4', width: '4', _dark: { color: 'neutral.300' } })} />
-                <span class={css({ color: 'neutral.700', fontSize: 'sm', _dark: { color: 'neutral.300' } })}>
+                <VacationIcon
+                  class={css({
+                    marginRight: '1',
+                    color: 'neutral.700',
+                    height: '4',
+                    width: '4',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                />
+                <span
+                  class={css({
+                    color: 'neutral.700',
+                    fontSize: 'sm',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                >
                   69 visiting spots
                 </span>
               </div>
               <div class={css({ display: 'flex', alignItems: 'center', justifyContent: 'center' })}>
-                <FoodIcon class={css({ marginRight: '1', color: 'neutral.700', height: '4', width: '4', _dark: { color: 'neutral.300' } })} />
-                <span class={css({ color: 'neutral.700', fontSize: 'sm', _dark: { color: 'neutral.300' } })}>
+                <FoodIcon
+                  class={css({
+                    marginRight: '1',
+                    color: 'neutral.700',
+                    height: '4',
+                    width: '4',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                />
+                <span
+                  class={css({
+                    color: 'neutral.700',
+                    fontSize: 'sm',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                >
                   Good food everyday
                 </span>
               </div>
               <div class={css({ display: 'flex', alignItems: 'center', justifyContent: 'center' })}>
-                <MicIcon class={css({ marginRight: '1', color: 'neutral.700', height: '4', width: '4', _dark: { color: 'neutral.300' } })} />
-                <span class={css({ color: 'neutral.700', fontSize: 'sm', _dark: { color: 'neutral.300' } })}>
+                <MicIcon
+                  class={css({
+                    marginRight: '1',
+                    color: 'neutral.700',
+                    height: '4',
+                    width: '4',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                />
+                <span
+                  class={css({
+                    color: 'neutral.700',
+                    fontSize: 'sm',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                >
                   Open Mic
                 </span>
               </div>
               <div class={css({ display: 'flex', alignItems: 'center', justifyContent: 'center' })}>
-                <ParachuteIcon class={css({ marginRight: '1', color: 'neutral.700', height: '4', width: '4', _dark: { color: 'neutral.300' } })} />
-                <span class={css({ color: 'neutral.700', fontSize: 'sm', _dark: { color: 'neutral.300' } })}>
+                <ParachuteIcon
+                  class={css({
+                    marginRight: '1',
+                    color: 'neutral.700',
+                    height: '4',
+                    width: '4',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                />
+                <span
+                  class={css({
+                    color: 'neutral.700',
+                    fontSize: 'sm',
+                    _dark: { color: 'neutral.300' },
+                  })}
+                >
                   Paragliding
                 </span>
               </div>
             </div>
           </ModalContent>
           <ModalFooter class={css({ gap: '4' })}>
-            <button class={css({
-              paddingX: '2',
-              paddingY: '1',
-              backgroundColor: 'gray.200',
-              color: 'black',
-              border: '1px solid',
-              borderColor: 'gray.300',
-              borderRadius: 'md',
-              fontSize: 'sm',
-              width: '28',
-              _dark: {
-                backgroundColor: 'black',
-                borderColor: 'black',
-                color: 'white',
-              },
-            })}>
+            <button
+              class={css({
+                paddingX: '2',
+                paddingY: '1',
+                backgroundColor: 'gray.200',
+                color: 'black',
+                border: '1px solid',
+                borderColor: 'gray.300',
+                borderRadius: 'md',
+                fontSize: 'sm',
+                width: '28',
+                _dark: {
+                  backgroundColor: 'black',
+                  borderColor: 'black',
+                  color: 'white',
+                },
+              })}
+            >
               Cancel
             </button>
-            <button class={css({
-              backgroundColor: 'black',
-              color: 'white',
-              fontSize: 'sm',
-              paddingX: '2',
-              paddingY: '1',
-              borderRadius: 'md',
-              border: '1px solid',
-              borderColor: 'black',
-              width: '28',
-              _dark: {
-                backgroundColor: 'white',
-                color: 'black',
-              },
-            })}>
+            <button
+              class={css({
+                backgroundColor: 'black',
+                color: 'white',
+                fontSize: 'sm',
+                paddingX: '2',
+                paddingY: '1',
+                borderRadius: 'md',
+                border: '1px solid',
+                borderColor: 'black',
+                width: '28',
+                _dark: {
+                  backgroundColor: 'white',
+                  color: 'black',
+                },
+              })}
+            >
               Book Now
             </button>
           </ModalFooter>

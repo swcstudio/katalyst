@@ -1,51 +1,53 @@
-import { createSignal, For } from "solid-js"
-import { 
-  AuroraButton, 
-  GlassCard, 
-  AnimatedText, 
+import { For, createSignal } from 'solid-js';
+import {
+  AnimatedText,
+  AuroraButton,
   FloatingParticles,
+  GlassCard,
   cn,
   gradients,
-  typography
-} from "./index.ts"
+  typography,
+} from './index.ts';
 
 export function MysticShowcase() {
-  const [activeDemo, setActiveDemo] = createSignal("buttons")
-  const [textVariant, setTextVariant] = createSignal<"typewriter" | "fade" | "slide" | "wave" | "glitch" | "rainbow">("typewriter")
+  const [activeDemo, setActiveDemo] = createSignal('buttons');
+  const [textVariant, setTextVariant] = createSignal<
+    'typewriter' | 'fade' | 'slide' | 'wave' | 'glitch' | 'rainbow'
+  >('typewriter');
 
   const demoSections = [
-    { id: "buttons", label: "Aurora Buttons", icon: "✨" },
-    { id: "cards", label: "Glass Cards", icon: "🔮" },
-    { id: "text", label: "Animated Text", icon: "📝" },
-    { id: "particles", label: "Floating Particles", icon: "🌟" }
-  ]
+    { id: 'buttons', label: 'Aurora Buttons', icon: '✨' },
+    { id: 'cards', label: 'Glass Cards', icon: '🔮' },
+    { id: 'text', label: 'Animated Text', icon: '📝' },
+    { id: 'particles', label: 'Floating Particles', icon: '🌟' },
+  ];
 
   const buttonVariants = [
-    { variant: "aurora" as const, label: "Aurora" },
-    { variant: "cosmic" as const, label: "Cosmic" },
-    { variant: "mystic" as const, label: "Mystic" },
-    { variant: "ocean" as const, label: "Ocean" },
-    { variant: "forest" as const, label: "Forest" },
-    { variant: "sunset" as const, label: "Sunset" }
-  ]
+    { variant: 'aurora' as const, label: 'Aurora' },
+    { variant: 'cosmic' as const, label: 'Cosmic' },
+    { variant: 'mystic' as const, label: 'Mystic' },
+    { variant: 'ocean' as const, label: 'Ocean' },
+    { variant: 'forest' as const, label: 'Forest' },
+    { variant: 'sunset' as const, label: 'Sunset' },
+  ];
 
   const cardVariants = [
-    { variant: "light" as const, label: "Light Glass" },
-    { variant: "medium" as const, label: "Medium Glass" },
-    { variant: "heavy" as const, label: "Heavy Glass" },
-    { variant: "rainbow" as const, label: "Rainbow" },
-    { variant: "aurora" as const, label: "Aurora" },
-    { variant: "dark" as const, label: "Dark" }
-  ]
+    { variant: 'light' as const, label: 'Light Glass' },
+    { variant: 'medium' as const, label: 'Medium Glass' },
+    { variant: 'heavy' as const, label: 'Heavy Glass' },
+    { variant: 'rainbow' as const, label: 'Rainbow' },
+    { variant: 'aurora' as const, label: 'Aurora' },
+    { variant: 'dark' as const, label: 'Dark' },
+  ];
 
   const textVariants = [
-    { variant: "typewriter" as const, label: "Typewriter" },
-    { variant: "fade" as const, label: "Fade In" },
-    { variant: "slide" as const, label: "Slide Up" },
-    { variant: "wave" as const, label: "Wave" },
-    { variant: "glitch" as const, label: "Glitch" },
-    { variant: "rainbow" as const, label: "Rainbow" }
-  ]
+    { variant: 'typewriter' as const, label: 'Typewriter' },
+    { variant: 'fade' as const, label: 'Fade In' },
+    { variant: 'slide' as const, label: 'Slide Up' },
+    { variant: 'wave' as const, label: 'Wave' },
+    { variant: 'glitch' as const, label: 'Glitch' },
+    { variant: 'rainbow' as const, label: 'Rainbow' },
+  ];
 
   return (
     <div class="min-h-screen relative bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 overflow-hidden">
@@ -58,11 +60,11 @@ export function MysticShowcase() {
         interactive={true}
         glow={true}
         colors={[
-          "rgba(59, 130, 246, 0.3)",
-          "rgba(147, 51, 234, 0.3)",
-          "rgba(236, 72, 153, 0.3)",
-          "rgba(6, 182, 212, 0.3)",
-          "rgba(16, 185, 129, 0.3)"
+          'rgba(59, 130, 246, 0.3)',
+          'rgba(147, 51, 234, 0.3)',
+          'rgba(236, 72, 153, 0.3)',
+          'rgba(6, 182, 212, 0.3)',
+          'rgba(16, 185, 129, 0.3)',
         ]}
       />
 
@@ -77,31 +79,26 @@ export function MysticShowcase() {
             size="3xl"
             as="h1"
             cursor={true}
-            class={cn(typography.display.lg, "mb-6")}
+            class={cn(typography.display.lg, 'mb-6')}
           />
-          
+
           <AnimatedText
             text="Beautiful components inspired by Aceternity UI, Magic UI, and modern design"
             variant="fade"
             gradient="primary"
             size="lg"
             delay={2000}
-            class={cn(typography.body.lg, "text-gray-300 max-w-3xl mx-auto")}
+            class={cn(typography.body.lg, 'text-gray-300 max-w-3xl mx-auto')}
           />
         </div>
 
         {/* Navigation */}
-        <GlassCard
-          variant="medium"
-          size="sm"
-          rounded="2xl"
-          class="max-w-2xl mx-auto mb-12"
-        >
+        <GlassCard variant="medium" size="sm" rounded="2xl" class="max-w-2xl mx-auto mb-12">
           <div class="flex flex-wrap justify-center gap-2">
             <For each={demoSections}>
               {(section) => (
                 <AuroraButton
-                  variant={activeDemo() === section.id ? "aurora" : "cosmic"}
+                  variant={activeDemo() === section.id ? 'aurora' : 'cosmic'}
                   size="sm"
                   onClick={() => setActiveDemo(section.id)}
                   class="min-w-0"
@@ -117,7 +114,7 @@ export function MysticShowcase() {
         {/* Demo Content */}
         <div class="max-w-7xl mx-auto">
           {/* Aurora Buttons Demo */}
-          {activeDemo() === "buttons" && (
+          {activeDemo() === 'buttons' && (
             <GlassCard
               variant="aurora"
               size="lg"
@@ -159,11 +156,21 @@ export function MysticShowcase() {
                 <div class="space-y-4">
                   <h3 class="text-lg font-semibold text-white text-center">Different Sizes</h3>
                   <div class="flex flex-wrap items-center justify-center gap-4">
-                    <AuroraButton variant="aurora" size="xs">Extra Small</AuroraButton>
-                    <AuroraButton variant="cosmic" size="sm">Small</AuroraButton>
-                    <AuroraButton variant="mystic" size="md">Medium</AuroraButton>
-                    <AuroraButton variant="ocean" size="lg">Large</AuroraButton>
-                    <AuroraButton variant="sunset" size="xl">Extra Large</AuroraButton>
+                    <AuroraButton variant="aurora" size="xs">
+                      Extra Small
+                    </AuroraButton>
+                    <AuroraButton variant="cosmic" size="sm">
+                      Small
+                    </AuroraButton>
+                    <AuroraButton variant="mystic" size="md">
+                      Medium
+                    </AuroraButton>
+                    <AuroraButton variant="ocean" size="lg">
+                      Large
+                    </AuroraButton>
+                    <AuroraButton variant="sunset" size="xl">
+                      Extra Large
+                    </AuroraButton>
                   </div>
                 </div>
 
@@ -171,9 +178,15 @@ export function MysticShowcase() {
                 <div class="space-y-4">
                   <h3 class="text-lg font-semibold text-white text-center">Interactive States</h3>
                   <div class="flex flex-wrap justify-center gap-4">
-                    <AuroraButton variant="forest" loading={true}>Loading...</AuroraButton>
-                    <AuroraButton variant="sunset" disabled={true}>Disabled</AuroraButton>
-                    <AuroraButton variant="aurora" glowIntensity="intense">Intense Glow</AuroraButton>
+                    <AuroraButton variant="forest" loading={true}>
+                      Loading...
+                    </AuroraButton>
+                    <AuroraButton variant="sunset" disabled={true}>
+                      Disabled
+                    </AuroraButton>
+                    <AuroraButton variant="aurora" glowIntensity="intense">
+                      Intense Glow
+                    </AuroraButton>
                   </div>
                 </div>
               </div>
@@ -181,7 +194,7 @@ export function MysticShowcase() {
           )}
 
           {/* Glass Cards Demo */}
-          {activeDemo() === "cards" && (
+          {activeDemo() === 'cards' && (
             <div class="space-y-8">
               <GlassCard
                 variant="aurora"
@@ -197,7 +210,9 @@ export function MysticShowcase() {
                   />
                 }
               >
-                <p class="text-gray-300">Beautiful glass morphism effects with different variants and animations</p>
+                <p class="text-gray-300">
+                  Beautiful glass morphism effects with different variants and animations
+                </p>
               </GlassCard>
 
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -212,7 +227,7 @@ export function MysticShowcase() {
                       shadow="glow"
                       header={
                         <div class="flex items-center gap-2">
-                          <div class="w-3 h-3 bg-white/30 rounded-full"></div>
+                          <div class="w-3 h-3 bg-white/30 rounded-full" />
                           <h3 class="text-white font-semibold">{card.label}</h3>
                         </div>
                       }
@@ -224,12 +239,13 @@ export function MysticShowcase() {
                     >
                       <div class="space-y-3">
                         <p class="text-white/80 text-sm">
-                          Experience the beauty of glass morphism with {card.label.toLowerCase()} transparency and backdrop blur effects.
+                          Experience the beauty of glass morphism with {card.label.toLowerCase()}{' '}
+                          transparency and backdrop blur effects.
                         </p>
                         <div class="flex gap-2">
-                          <div class="w-8 h-8 bg-white/20 rounded-full"></div>
-                          <div class="w-8 h-8 bg-white/15 rounded-full"></div>
-                          <div class="w-8 h-8 bg-white/10 rounded-full"></div>
+                          <div class="w-8 h-8 bg-white/20 rounded-full" />
+                          <div class="w-8 h-8 bg-white/15 rounded-full" />
+                          <div class="w-8 h-8 bg-white/10 rounded-full" />
                         </div>
                       </div>
                     </GlassCard>
@@ -240,7 +256,7 @@ export function MysticShowcase() {
           )}
 
           {/* Animated Text Demo */}
-          {activeDemo() === "text" && (
+          {activeDemo() === 'text' && (
             <GlassCard
               variant="rainbow"
               size="lg"
@@ -262,7 +278,7 @@ export function MysticShowcase() {
                 <For each={textVariants}>
                   {(variant) => (
                     <AuroraButton
-                      variant={textVariant() === variant.variant ? "aurora" : "cosmic"}
+                      variant={textVariant() === variant.variant ? 'aurora' : 'cosmic'}
                       size="xs"
                       onClick={() => setTextVariant(variant.variant)}
                     >
@@ -281,9 +297,9 @@ export function MysticShowcase() {
                     variant={textVariant()}
                     gradient="accent"
                     size="2xl"
-                    cursor={textVariant() === "typewriter"}
-                    repeat={textVariant() === "typewriter"}
-                    stagger={textVariant() !== "typewriter"}
+                    cursor={textVariant() === 'typewriter'}
+                    repeat={textVariant() === 'typewriter'}
+                    stagger={textVariant() !== 'typewriter'}
                     shimmer={true}
                     class="font-bold"
                   />
@@ -294,20 +310,60 @@ export function MysticShowcase() {
                   <div class="space-y-4">
                     <h3 class="text-white text-lg font-semibold text-center">Gradient Examples</h3>
                     <div class="space-y-3">
-                      <AnimatedText text="Ocean Gradient" variant="fade" gradient="ocean" size="lg" />
-                      <AnimatedText text="Forest Gradient" variant="fade" gradient="forest" size="lg" />
-                      <AnimatedText text="Sunset Gradient" variant="fade" gradient="sunset" size="lg" />
-                      <AnimatedText text="Rainbow Gradient" variant="fade" gradient="rainbow" size="lg" />
+                      <AnimatedText
+                        text="Ocean Gradient"
+                        variant="fade"
+                        gradient="ocean"
+                        size="lg"
+                      />
+                      <AnimatedText
+                        text="Forest Gradient"
+                        variant="fade"
+                        gradient="forest"
+                        size="lg"
+                      />
+                      <AnimatedText
+                        text="Sunset Gradient"
+                        variant="fade"
+                        gradient="sunset"
+                        size="lg"
+                      />
+                      <AnimatedText
+                        text="Rainbow Gradient"
+                        variant="fade"
+                        gradient="rainbow"
+                        size="lg"
+                      />
                     </div>
                   </div>
 
                   <div class="space-y-4">
                     <h3 class="text-white text-lg font-semibold text-center">Size Variations</h3>
                     <div class="space-y-3">
-                      <AnimatedText text="Extra Large Text" variant="slide" gradient="primary" size="xl" />
-                      <AnimatedText text="Large Text" variant="slide" gradient="primary" size="lg" />
-                      <AnimatedText text="Medium Text" variant="slide" gradient="primary" size="md" />
-                      <AnimatedText text="Small Text" variant="slide" gradient="primary" size="sm" />
+                      <AnimatedText
+                        text="Extra Large Text"
+                        variant="slide"
+                        gradient="primary"
+                        size="xl"
+                      />
+                      <AnimatedText
+                        text="Large Text"
+                        variant="slide"
+                        gradient="primary"
+                        size="lg"
+                      />
+                      <AnimatedText
+                        text="Medium Text"
+                        variant="slide"
+                        gradient="primary"
+                        size="md"
+                      />
+                      <AnimatedText
+                        text="Small Text"
+                        variant="slide"
+                        gradient="primary"
+                        size="sm"
+                      />
                     </div>
                   </div>
                 </div>
@@ -334,7 +390,7 @@ export function MysticShowcase() {
           )}
 
           {/* Floating Particles Demo */}
-          {activeDemo() === "particles" && (
+          {activeDemo() === 'particles' && (
             <div class="space-y-8">
               <GlassCard
                 variant="cosmic"
@@ -358,30 +414,40 @@ export function MysticShowcase() {
                   interactive={true}
                   shape="star"
                   glow={true}
-                  colors={["rgba(255, 215, 0, 0.6)", "rgba(255, 165, 0, 0.6)", "rgba(255, 69, 0, 0.6)"]}
+                  colors={[
+                    'rgba(255, 215, 0, 0.6)',
+                    'rgba(255, 165, 0, 0.6)',
+                    'rgba(255, 69, 0, 0.6)',
+                  ]}
                 />
-                
+
                 <div class="relative z-10 space-y-6">
                   <p class="text-white/90 text-center">
-                    Interactive particle system with multiple patterns, shapes, and behaviors.
-                    Move your mouse around to see the particles react!
+                    Interactive particle system with multiple patterns, shapes, and behaviors. Move
+                    your mouse around to see the particles react!
                   </p>
-                  
+
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                     <div class="space-y-2">
                       <div class="text-2xl">🔄</div>
                       <h4 class="text-white font-semibold">Multiple Patterns</h4>
-                      <p class="text-white/70 text-sm">Wave, orbit, flow, and random movement patterns</p>
+                      <p class="text-white/70 text-sm">
+                        Wave, orbit, flow, and random movement patterns
+                      </p>
                     </div>
                     <div class="space-y-2">
                       <div class="text-2xl">🎨</div>
                       <h4 class="text-white font-semibold">Custom Shapes</h4>
-                      <p class="text-white/70 text-sm">Circles, squares, triangles, stars, and dots</p>
+                      <p class="text-white/70 text-sm">
+                        Circles, squares, triangles, stars, and dots
+                      </p>
                     </div>
                     <div class="space-y-2">
                       <div class="text-2xl">⚡</div>
                       <h4 class="text-white font-semibold">Interactive</h4>
-                      <p class="text-white/70 text-sm">Particles respond to mouse movement and interactions</p>
+                      <p class="text-white/70 text-sm">
+                        Particles respond to mouse movement and interactions
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -402,7 +468,11 @@ export function MysticShowcase() {
                     speed="slow"
                     pattern="wave"
                     shape="circle"
-                    colors={["rgba(6, 182, 212, 0.4)", "rgba(59, 130, 246, 0.4)", "rgba(147, 197, 253, 0.4)"]}
+                    colors={[
+                      'rgba(6, 182, 212, 0.4)',
+                      'rgba(59, 130, 246, 0.4)',
+                      'rgba(147, 197, 253, 0.4)',
+                    ]}
                   />
                 </GlassCard>
 
@@ -420,7 +490,11 @@ export function MysticShowcase() {
                     pattern="flow"
                     shape="dot"
                     glow={true}
-                    colors={["rgba(16, 185, 129, 0.5)", "rgba(34, 197, 94, 0.5)", "rgba(132, 204, 22, 0.5)"]}
+                    colors={[
+                      'rgba(16, 185, 129, 0.5)',
+                      'rgba(34, 197, 94, 0.5)',
+                      'rgba(132, 204, 22, 0.5)',
+                    ]}
                   />
                 </GlassCard>
               </div>
@@ -430,11 +504,7 @@ export function MysticShowcase() {
 
         {/* Footer */}
         <div class="mt-20 text-center">
-          <GlassCard
-            variant="dark"
-            size="sm"
-            class="max-w-2xl mx-auto"
-          >
+          <GlassCard variant="dark" size="sm" class="max-w-2xl mx-auto">
             <AnimatedText
               text="Built with ❤️ using SolidJS + Zag.js + PandaCSS"
               variant="fade"
@@ -454,5 +524,5 @@ export function MysticShowcase() {
         </div>
       </div>
     </div>
-  )
+  );
 }

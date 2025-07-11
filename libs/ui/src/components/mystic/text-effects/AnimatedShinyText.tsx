@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, children } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, children, mergeProps } from 'solid-js';
 
 export interface AnimatedShinyTextProps {
   children?: JSX.Element;
@@ -36,11 +36,14 @@ const AnimatedShinyText: Component<AnimatedShinyTextProps> = (props) => {
 
   return (
     <Dynamic
-      class={css({
-        position: 'relative',
-        display: 'inline-block',
-        overflow: 'hidden',
-        background: merged.disabled ? 'transparent' : `linear-gradient(
+      class={css(
+        {
+          position: 'relative',
+          display: 'inline-block',
+          overflow: 'hidden',
+          background: merged.disabled
+            ? 'transparent'
+            : `linear-gradient(
           110deg,
           transparent 0%,
           transparent 40%,
@@ -49,27 +52,35 @@ const AnimatedShinyText: Component<AnimatedShinyTextProps> = (props) => {
           transparent 55%,
           transparent 100%
         )`,
-        backgroundSize: `${merged.shimmerWidth * 2}% 100%`,
-        backgroundPosition: merged.direction === 'left-to-right' ? '-100% 0' : '100% 0',
-        backgroundRepeat: 'no-repeat',
-        animation: merged.disabled ? 'none' : `${getAnimationDirection()} ${merged.animationSpeed}s ease-in-out infinite`,
-        WebkitBackgroundClip: 'text',
-        backgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        color: 'transparent',
-        _before: {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
-          transform: merged.direction === 'left-to-right' ? 'translateX(-100%)' : 'translateX(100%)',
-          animation: merged.disabled ? 'none' : `shimmer-overlay ${merged.animationSpeed}s ease-in-out infinite`,
-          zIndex: 1,
+          backgroundSize: `${merged.shimmerWidth * 2}% 100%`,
+          backgroundPosition: merged.direction === 'left-to-right' ? '-100% 0' : '100% 0',
+          backgroundRepeat: 'no-repeat',
+          animation: merged.disabled
+            ? 'none'
+            : `${getAnimationDirection()} ${merged.animationSpeed}s ease-in-out infinite`,
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          color: 'transparent',
+          _before: {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background:
+              'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+            transform:
+              merged.direction === 'left-to-right' ? 'translateX(-100%)' : 'translateX(100%)',
+            animation: merged.disabled
+              ? 'none'
+              : `shimmer-overlay ${merged.animationSpeed}s ease-in-out infinite`,
+            zIndex: 1,
+          },
         },
-      }, merged.className)}
+        merged.className
+      )}
       style={merged.style}
     >
       <span

@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, createSignal, mergeProps, onCleanup, onMount } from 'solid-js';
 
 export interface TypingAnimationProps {
   text: string | string[];
@@ -47,24 +47,27 @@ const TypingAnimation: Component<TypingAnimationProps> = (props) => {
 
   const Dynamic = merged.as as any;
   const texts = Array.isArray(merged.text) ? merged.text : [merged.text];
-  
+
   let timeoutId: number;
   let observer: IntersectionObserver;
 
   const getSpeed = () => {
     if (typeof merged.speed === 'number') return merged.speed;
-    
+
     switch (merged.speed) {
-      case 'slow': return 150;
-      case 'fast': return 50;
-      default: return 100;
+      case 'slow':
+        return 150;
+      case 'fast':
+        return 50;
+      default:
+        return 100;
     }
   };
 
   const startTyping = () => {
     const currentText = texts[currentStringIndex()];
     const currentChar = currentIndex();
-    
+
     if (!isDeleting()) {
       if (currentChar < currentText.length) {
         setDisplayText(currentText.substring(0, currentChar + 1));
@@ -108,9 +111,9 @@ const TypingAnimation: Component<TypingAnimationProps> = (props) => {
         setIsDeleting(false);
         const nextIndex = (currentStringIndex() + 1) % texts.length;
         setCurrentStringIndex(nextIndex);
-        
+
         if (nextIndex === 0 && !merged.loop) return;
-        
+
         timeoutId = setTimeout(startTyping, getSpeed());
       }
     }
@@ -152,15 +155,16 @@ const TypingAnimation: Component<TypingAnimationProps> = (props) => {
   return (
     <Dynamic
       ref={setElementRef}
-      class={css({
-        display: 'inline-block',
-        fontFamily: 'monospace',
-      }, merged.className)}
+      class={css(
+        {
+          display: 'inline-block',
+          fontFamily: 'monospace',
+        },
+        merged.className
+      )}
       style={merged.style}
     >
-      <span>
-        {displayText()}
-      </span>
+      <span>{displayText()}</span>
       {merged.cursor && (
         <span
           class={css({
@@ -173,7 +177,7 @@ const TypingAnimation: Component<TypingAnimationProps> = (props) => {
           {merged.cursorChar}
         </span>
       )}
-      
+
       <style>{`
         @keyframes cursor-blink {
           0%, 50% {

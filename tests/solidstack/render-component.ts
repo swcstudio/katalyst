@@ -1,11 +1,11 @@
-import { createRoot, createSignal } from "solid-js";
-import { renderToString } from "solid-js/web";
+import { createRoot, createSignal } from 'solid-js';
+import { renderToString } from 'solid-js/web';
 
 // Import demo components
-import { AnimatedShinyTextDemo } from "../../libs/ui/src/components/solidstack/demos/AnimatedShinyTextDemo.tsx";
-import { DotPatternDemo } from "../../libs/ui/src/components/solidstack/demos/DotPatternDemo.tsx";
-import { GridPatternDemo } from "../../libs/ui/src/components/solidstack/demos/GridPatternDemo.tsx";
-import { OrbitingCirclesDemo } from "../../libs/ui/src/components/solidstack/demos/OrbitingCirclesDemo.tsx";
+import { AnimatedShinyTextDemo } from '../../libs/ui/src/components/solidstack/demos/AnimatedShinyTextDemo.tsx';
+import { DotPatternDemo } from '../../libs/ui/src/components/solidstack/demos/DotPatternDemo.tsx';
+import { GridPatternDemo } from '../../libs/ui/src/components/solidstack/demos/GridPatternDemo.tsx';
+import { OrbitingCirclesDemo } from '../../libs/ui/src/components/solidstack/demos/OrbitingCirclesDemo.tsx';
 
 const componentMap = {
   AnimatedShinyTextDemo,
@@ -16,7 +16,7 @@ const componentMap = {
 
 function renderComponent(componentName: string): string {
   const Component = componentMap[componentName as keyof typeof componentMap];
-  
+
   if (!Component) {
     throw new Error(`Component ${componentName} not found`);
   }
@@ -31,9 +31,9 @@ function renderComponent(componentName: string): string {
 
 function main() {
   const componentName = Deno.args[0];
-  
+
   if (!componentName) {
-    console.error("Component name is required");
+    console.error('Component name is required');
     Deno.exit(1);
   }
 
@@ -41,7 +41,7 @@ function main() {
     const startTime = performance.now();
     const html = renderComponent(componentName);
     const endTime = performance.now();
-    
+
     console.log(html);
     console.error(`Render time: ${endTime - startTime}ms`);
   } catch (error) {

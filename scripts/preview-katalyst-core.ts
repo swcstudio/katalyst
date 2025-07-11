@@ -1,8 +1,10 @@
+import { PORTS } from './ports.ts';
+
 console.log('Starting Katalyst Core preview server...');
 
 try {
   const command = new Deno.Command('deno', {
-    args: ['run', '--allow-all', 'npm:@rsbuild/core', 'preview', '--port', '20007'],
+    args: ['run', '--allow-all', 'npm:@rsbuild/core', 'preview', '--port', PORTS.KATALYST_CORE.toString()],
     cwd: './katalyst/core',
     stdout: 'inherit',
     stderr: 'inherit',

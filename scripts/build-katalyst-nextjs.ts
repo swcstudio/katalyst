@@ -1,3 +1,5 @@
+import { PORTS } from './ports.ts';
+
 console.log('Building Katalyst Next.js application...');
 
 try {

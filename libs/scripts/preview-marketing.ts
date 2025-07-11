@@ -20,16 +20,16 @@ try {
       port: 4000,
     },
   });
-  
+
   const handleSignal = async () => {
     console.log('Shutting down Marketing preview server...');
     await close();
     Deno.exit(0);
   };
-  
-  Deno.addSignalListener("SIGINT", handleSignal);
-  Deno.addSignalListener("SIGTERM", handleSignal);
-  
+
+  Deno.addSignalListener('SIGINT', handleSignal);
+  Deno.addSignalListener('SIGTERM', handleSignal);
+
   console.log('Marketing preview server started on http://localhost:4000');
 } catch (error) {
   console.error('Failed to start Marketing preview server:', error);

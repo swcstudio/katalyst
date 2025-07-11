@@ -1,6 +1,6 @@
+import { Link } from '@tanstack/solid-router';
 import { css } from '../styled-system/css';
 import { flex } from '../styled-system/patterns';
-import { Link } from '@tanstack/solid-router';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

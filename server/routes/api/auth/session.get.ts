@@ -7,11 +7,11 @@ export default defineEventHandler(async (event) => {
   try {
     // Get authorization header
     const authHeader = getHeader(event, 'authorization');
-    
+
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       throw createError({
         statusCode: 401,
-        statusMessage: 'Missing or invalid authorization header'
+        statusMessage: 'Missing or invalid authorization header',
       });
     }
 
@@ -20,13 +20,13 @@ export default defineEventHandler(async (event) => {
     // Verify the JWT token with Clerk
     const payload = await verifyToken(token, {
       issuer: `https://clerk.${process.env.CLERK_DOMAIN}`,
-      authorizedParties: [process.env.CLERK_FRONTEND_API_URL]
+      authorizedParties: [process.env.CLERK_FRONTEND_API_URL],
     });
 
     if (!payload.sub) {
       throw createError({
         statusCode: 401,
-        statusMessage: 'Invalid token payload'
+        statusMessage: 'Invalid token payload',
       });
     }
 
@@ -36,18 +36,18 @@ export default defineEventHandler(async (event) => {
     if (!user) {
       throw createError({
         statusCode: 404,
-        statusMessage: 'User not found'
+        statusMessage: 'User not found',
       });
     }
 
     // Get user's organizations
     const userOrganizations = await clerkClient.users.getOrganizationMembershipList({
-      userId: user.id
+      userId: user.id,
     });
 
     // Get user's current session
     const sessions = await clerkClient.users.getUserList({
-      userId: [user.id]
+      userId: [user.id],
     });
 
     // Check if user has active subscription
@@ -62,7 +62,7 @@ export default defineEventHandler(async (event) => {
       email: user.emailAddresses[0]?.emailAddress,
       ip: getClientIP(event),
       userAgent: getHeader(event, 'user-agent'),
-      timestamp: new Date()
+      timestamp: new Date(),
     });
 
     // Build response
@@ -80,31 +80,33 @@ export default defineEventHandler(async (event) => {
         phoneVerified: user.phoneNumbers[0]?.verification?.status === 'verified',
         twoFactorEnabled: user.twoFactorEnabled,
         publicMetadata: user.publicMetadata,
-        privateMetadata: user.privateMetadata
+        privateMetadata: user.privateMetadata,
       },
       session: {
         id: payload.sid,
         status: 'active',
         lastActiveAt: new Date(),
         expireAt: new Date(payload.exp * 1000),
-        issuedAt: new Date(payload.iat * 1000)
+        issuedAt: new Date(payload.iat * 1000),
       },
-      organizations: userOrganizations.map(org => ({
+      organizations: userOrganizations.map((org) => ({
         id: org.organization.id,
         name: org.organization.name,
         slug: org.organization.slug,
         role: org.role,
         permissions: org.permissions,
-        createdAt: org.createdAt
+        createdAt: org.createdAt,
       })),
-      subscription: subscription ? {
-        id: subscription.id,
-        plan: subscription.plan,
-        status: subscription.status,
-        currentPeriodEnd: subscription.currentPeriodEnd,
-        features: subscription.features,
-        usage: subscription.usage
-      } : null,
+      subscription: subscription
+        ? {
+            id: subscription.id,
+            plan: subscription.plan,
+            status: subscription.status,
+            currentPeriodEnd: subscription.currentPeriodEnd,
+            features: subscription.features,
+            usage: subscription.usage,
+          }
+        : null,
       permissions: permissions,
       features: {
         tutorials: permissions.includes('tutorials:access'),
@@ -113,9 +115,9 @@ export default defineEventHandler(async (event) => {
         adminPanel: permissions.includes('admin:access'),
         analytics: permissions.includes('analytics:access'),
         exportData: permissions.includes('data:export'),
-        customBranding: permissions.includes('branding:custom')
+        customBranding: permissions.includes('branding:custom'),
       },
-      preferences: await getUserPreferences(user.id)
+      preferences: await getUserPreferences(user.id),
     };
 
     // Set security headers
@@ -126,22 +128,21 @@ export default defineEventHandler(async (event) => {
     return {
       success: true,
       data: sessionData,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
-
   } catch (error) {
     // Handle specific Clerk errors
     if (error.message?.includes('jwt')) {
       throw createError({
         statusCode: 401,
-        statusMessage: 'Invalid or expired token'
+        statusMessage: 'Invalid or expired token',
       });
     }
 
     if (error.status === 404) {
       throw createError({
         statusCode: 404,
-        statusMessage: 'User session not found'
+        statusMessage: 'User session not found',
       });
     }
 
@@ -149,7 +150,7 @@ export default defineEventHandler(async (event) => {
 
     throw createError({
       statusCode: 500,
-      statusMessage: 'Unable to verify session'
+      statusMessage: 'Unable to verify session',
     });
   }
 });
@@ -159,7 +160,7 @@ async function getUserSubscription(userId: string): Promise<any> {
   // Implement subscription lookup
   // This could integrate with Stripe, Paddle, or your billing system
   return {
-    id: 'sub_' + userId,
+    id: `sub_${userId}`,
     plan: 'enterprise',
     status: 'active',
     currentPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
@@ -167,33 +168,25 @@ async function getUserSubscription(userId: string): Promise<any> {
     usage: {
       apiCalls: 1250,
       deployments: 15,
-      storage: '2.5GB'
-    }
+      storage: '2.5GB',
+    },
   };
 }
 
 async function getUserPermissions(userId: string, plan?: string): Promise<string[]> {
-  const basePermissions = [
-    'profile:read',
-    'profile:update',
-    'tutorials:access'
-  ];
+  const basePermissions = ['profile:read', 'profile:update', 'tutorials:access'];
 
   const planPermissions = {
-    'starter': [
-      ...basePermissions,
-      'projects:create',
-      'projects:read'
-    ],
-    'professional': [
+    starter: [...basePermissions, 'projects:create', 'projects:read'],
+    professional: [
       ...basePermissions,
       'projects:create',
       'projects:read',
       'projects:update',
       'ai:access',
-      'analytics:basic'
+      'analytics:basic',
     ],
-    'enterprise': [
+    enterprise: [
       ...basePermissions,
       'projects:*',
       'ai:access',
@@ -203,8 +196,8 @@ async function getUserPermissions(userId: string, plan?: string): Promise<string
       'analytics:advanced',
       'data:export',
       'branding:custom',
-      'support:priority'
-    ]
+      'support:priority',
+    ],
   };
 
   return planPermissions[plan || 'starter'] || basePermissions;
@@ -219,12 +212,12 @@ async function getUserPreferences(userId: string): Promise<any> {
     notifications: {
       email: true,
       push: false,
-      sms: false
+      sms: false,
     },
     dashboard: {
       layout: 'grid',
-      widgets: ['analytics', 'recent-projects', 'tutorials']
-    }
+      widgets: ['analytics', 'recent-projects', 'tutorials'],
+    },
   };
 }
 

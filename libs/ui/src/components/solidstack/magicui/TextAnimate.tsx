@@ -1,5 +1,15 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, createEffect, For, splitProps } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  createEffect,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+  splitProps,
+} from 'solid-js';
 
 export interface AnimationVariant {
   hidden: {
@@ -10,62 +20,66 @@ export interface AnimationVariant {
     rotate?: number;
     blur?: string;
   };
-  show: ((i: number) => {
-    opacity?: number;
-    y?: number;
-    x?: number;
-    scale?: number;
-    rotate?: number;
-    blur?: string;
-    transition?: {
-      delay?: number;
-      duration?: number;
-      type?: string;
-      damping?: number;
-      stiffness?: number;
-      mass?: number;
-      [key: string]: any;
-    };
-  }) | {
-    opacity?: number;
-    y?: number;
-    x?: number;
-    scale?: number;
-    rotate?: number;
-    blur?: string;
-    transition?: {
-      delay?: number;
-      duration?: number;
-      type?: string;
-      damping?: number;
-      stiffness?: number;
-      mass?: number;
-      [key: string]: any;
-    };
-  };
-  exit?: ((i: number) => {
-    opacity?: number;
-    y?: number;
-    x?: number;
-    scale?: number;
-    rotate?: number;
-    blur?: string;
-    transition?: {
-      delay?: number;
-      duration?: number;
-    };
-  }) | {
-    opacity?: number;
-    y?: number;
-    x?: number;
-    scale?: number;
-    rotate?: number;
-    blur?: string;
-    transition?: {
-      delay?: number;
-      duration?: number;
-    };
-  };
+  show:
+    | ((i: number) => {
+        opacity?: number;
+        y?: number;
+        x?: number;
+        scale?: number;
+        rotate?: number;
+        blur?: string;
+        transition?: {
+          delay?: number;
+          duration?: number;
+          type?: string;
+          damping?: number;
+          stiffness?: number;
+          mass?: number;
+          [key: string]: string | number | boolean;
+        };
+      })
+    | {
+        opacity?: number;
+        y?: number;
+        x?: number;
+        scale?: number;
+        rotate?: number;
+        blur?: string;
+        transition?: {
+          delay?: number;
+          duration?: number;
+          type?: string;
+          damping?: number;
+          stiffness?: number;
+          mass?: number;
+          [key: string]: string | number | boolean;
+        };
+      };
+  exit?:
+    | ((i: number) => {
+        opacity?: number;
+        y?: number;
+        x?: number;
+        scale?: number;
+        rotate?: number;
+        blur?: string;
+        transition?: {
+          delay?: number;
+          duration?: number;
+        };
+      })
+    | {
+        opacity?: number;
+        y?: number;
+        x?: number;
+        scale?: number;
+        rotate?: number;
+        blur?: string;
+        transition?: {
+          delay?: number;
+          duration?: number;
+        };
+      };
 }
 
 export interface TextAnimateProps {
@@ -84,36 +98,44 @@ export interface TextAnimateProps {
 const defaultVariants: Record<string, AnimationVariant> = {
   blurInUp: {
     hidden: { opacity: 0, y: 20, blur: '10px' },
-    show: { opacity: 1, y: 0, blur: '0px', transition: { duration: 0.6 } }
+    show: { opacity: 1, y: 0, blur: '0px', transition: { duration: 0.6 } },
   },
   blurIn: {
     hidden: { opacity: 0, blur: '10px' },
-    show: { opacity: 1, blur: '0px', transition: { duration: 0.6 } }
+    show: { opacity: 1, blur: '0px', transition: { duration: 0.6 } },
   },
   slideUp: {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   },
   slideLeft: {
     hidden: { opacity: 0, x: 30 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+    show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
   },
   scaleUp: {
     hidden: { opacity: 0, scale: 0.8 },
-    show: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
+    show: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
   },
   fadeIn: {
     hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { duration: 0.5 } }
-  }
+    show: { opacity: 1, transition: { duration: 0.5 } },
+  },
 };
 
 export const TextAnimate: Component<TextAnimateProps> = (props) => {
   const [local, others] = splitProps(props, [
-    'children', 'class', 'style', 'animation', 'by', 'variants', 
-    'delay', 'duration', 'once', 'as'
+    'children',
+    'class',
+    'style',
+    'animation',
+    'by',
+    'variants',
+    'delay',
+    'duration',
+    'once',
+    'as',
   ]);
-  
+
   const merged = mergeProps(
     {
       animation: 'fadeIn' as const,
@@ -151,11 +173,11 @@ export const TextAnimate: Component<TextAnimateProps> = (props) => {
     return defaultVariants[merged.animation];
   };
 
-  const getTransformStyle = (variant: any, index: number, isShow: boolean): JSX.CSSProperties => {
+  const getTransformStyle = (variant: AnimationVariant, index: number, isShow: boolean): JSX.CSSProperties => {
     const baseDelay = merged.delay;
     const itemDelay = isShow ? index * 0.05 : 0;
     const totalDelay = baseDelay + itemDelay;
-    
+
     if (!isShow) {
       return {
         opacity: variant.hidden.opacity ?? 1,
@@ -218,9 +240,12 @@ export const TextAnimate: Component<TextAnimateProps> = (props) => {
   return (
     <Component
       ref={containerRef}
-      class={css({
-        display: 'inline-block',
-      }, merged.class)}
+      class={css(
+        {
+          display: 'inline-block',
+        },
+        merged.class
+      )}
       style={merged.style}
       {...others}
     >
@@ -294,7 +319,9 @@ export const TextAnimateDemo4: Component = () => {
 export const TextAnimateDemo5: Component = () => {
   return (
     <TextAnimate animation="fadeIn" by="line" as="p">
-      {`Fade in by line as paragraph\n\nFade in by line as paragraph\n\nFade in by line as paragraph`}
+      {
+        'Fade in by line as paragraph\n\nFade in by line as paragraph\n\nFade in by line as paragraph'
+      }
     </TextAnimate>
   );
 };

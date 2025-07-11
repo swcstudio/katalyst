@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, ParentComponent } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, type ParentComponent, mergeProps } from 'solid-js';
 
 export interface BorderBeamProps {
   class?: string;
@@ -27,21 +27,8 @@ export const BorderBeam: Component<BorderBeamProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'absolute',
-        inset: 0,
-        borderRadius: 'inherit',
-        padding: `${merged.borderWidth}px`,
-        background: `linear-gradient(90deg, transparent, transparent, ${merged.colorFrom}, ${merged.colorTo}, transparent, transparent)`,
-        backgroundSize: `${merged.size * 2}px ${merged.borderWidth * 2}px`,
-        maskImage: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-        maskComposite: 'xor',
-        WebkitMaskComposite: 'xor',
-        animation: `borderBeam ${merged.duration}s infinite linear`,
-        animationDelay: `${merged.delay}s`,
-        
-        '&::before': {
-          content: '""',
+      class={css(
+        {
           position: 'absolute',
           inset: 0,
           borderRadius: 'inherit',
@@ -53,8 +40,24 @@ export const BorderBeam: Component<BorderBeamProps> = (props) => {
           WebkitMaskComposite: 'xor',
           animation: `borderBeam ${merged.duration}s infinite linear`,
           animationDelay: `${merged.delay}s`,
-        }
-      }, merged.class)}
+
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            inset: 0,
+            borderRadius: 'inherit',
+            padding: `${merged.borderWidth}px`,
+            background: `linear-gradient(90deg, transparent, transparent, ${merged.colorFrom}, ${merged.colorTo}, transparent, transparent)`,
+            backgroundSize: `${merged.size * 2}px ${merged.borderWidth * 2}px`,
+            maskImage: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+            maskComposite: 'xor',
+            WebkitMaskComposite: 'xor',
+            animation: `borderBeam ${merged.duration}s infinite linear`,
+            animationDelay: `${merged.delay}s`,
+          },
+        },
+        merged.class
+      )}
       style={{
         '--border-beam-size': `${merged.size}px`,
         '--border-beam-duration': `${merged.duration}s`,
@@ -75,11 +78,14 @@ export interface BorderBeamCardProps {
 export const BorderBeamCard: ParentComponent<BorderBeamCardProps> = (props) => {
   return (
     <div
-      class={css({
-        position: 'relative',
-        borderRadius: '8px',
-        overflow: 'hidden',
-      }, props.class)}
+      class={css(
+        {
+          position: 'relative',
+          borderRadius: '8px',
+          overflow: 'hidden',
+        },
+        props.class
+      )}
     >
       {props.children}
       <BorderBeam {...props.borderBeamProps} />

@@ -1,5 +1,15 @@
-import { Component, JSX, mergeProps, ParentComponent, createSignal, onMount, onCleanup, createEffect, For } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  type ParentComponent,
+  createEffect,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 // BoxReveal Component
 export interface BoxRevealProps {
@@ -37,13 +47,16 @@ export const BoxReveal: ParentComponent<BoxRevealProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        display: 'inline-block',
-        overflow: 'hidden',
-        width: merged.width,
-        height: merged.height,
-      }, merged.class)}
+      class={css(
+        {
+          position: 'relative',
+          display: 'inline-block',
+          overflow: 'hidden',
+          width: merged.width,
+          height: merged.height,
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       <div
@@ -55,7 +68,7 @@ export const BoxReveal: ParentComponent<BoxRevealProps> = (props) => {
       >
         {props.children}
       </div>
-      
+
       <div
         class={css({
           position: 'absolute',
@@ -77,31 +90,36 @@ export const BoxReveal: ParentComponent<BoxRevealProps> = (props) => {
 
 export const BoxRevealDemo: Component = () => {
   return (
-    <div class={css({
-      width: '100%',
-      height: '100%',
-      maxWidth: '512px',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-      paddingTop: '32px',
-    })}>
+    <div
+      class={css({
+        width: '100%',
+        height: '100%',
+        maxWidth: '512px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        paddingTop: '32px',
+      })}
+    >
       <BoxReveal boxColor="#5046e6" duration={0.5}>
-        <p class={css({
-          fontSize: '3.5rem',
-          fontWeight: '600',
-        })}>
+        <p
+          class={css({
+            fontSize: '3.5rem',
+            fontWeight: '600',
+          })}
+        >
           Magic UI<span style={{ color: '#5046e6' }}>.</span>
         </p>
       </BoxReveal>
 
       <BoxReveal boxColor="#5046e6" duration={0.5}>
-        <h2 class={css({
-          marginTop: '0.5rem',
-          fontSize: '1rem',
-        })}>
-          UI library for{' '}
-          <span style={{ color: '#5046e6' }}>Design Engineers</span>
+        <h2
+          class={css({
+            marginTop: '0.5rem',
+            fontSize: '1rem',
+          })}
+        >
+          UI library for <span style={{ color: '#5046e6' }}>Design Engineers</span>
         </h2>
       </BoxReveal>
 
@@ -111,17 +129,15 @@ export const BoxRevealDemo: Component = () => {
             -&gt; 20+ free and open-source animated components built with
             <span class={css({ fontWeight: '600', color: '#5046e6' })}>React</span>,
             <span class={css({ fontWeight: '600', color: '#5046e6' })}>Typescript</span>,
-            <span class={css({ fontWeight: '600', color: '#5046e6' })}>Tailwind CSS</span>,
-            and
-            <span class={css({ fontWeight: '600', color: '#5046e6' })}>Motion</span>
-            . <br />
+            <span class={css({ fontWeight: '600', color: '#5046e6' })}>Tailwind CSS</span>, and
+            <span class={css({ fontWeight: '600', color: '#5046e6' })}>Motion</span>. <br />
             -&gt; 100% open-source, and customizable. <br />
           </p>
         </div>
       </BoxReveal>
 
       <BoxReveal boxColor="#5046e6" duration={0.5}>
-        <button 
+        <button
           class={css({
             marginTop: '1.6rem',
             padding: '8px 16px',
@@ -195,15 +211,11 @@ export const SparklesText: Component<SparklesTextProps> = (props) => {
   };
 
   onMount(() => {
-    const sparkleArray = Array.from({ length: merged.sparklesCount }, (_, i) => 
-      generateSparkle(i)
-    );
+    const sparkleArray = Array.from({ length: merged.sparklesCount }, (_, i) => generateSparkle(i));
     setSparkles(sparkleArray);
 
     const interval = setInterval(() => {
-      setSparkles(prev => 
-        prev.map(sparkle => generateSparkle(sparkle.id))
-      );
+      setSparkles((prev) => prev.map((sparkle) => generateSparkle(sparkle.id)));
     }, merged.duration * 1000);
 
     return () => clearInterval(interval);
@@ -212,14 +224,17 @@ export const SparklesText: Component<SparklesTextProps> = (props) => {
   return (
     <span
       ref={containerRef}
-      class={css({
-        position: 'relative',
-        display: 'inline-block',
-      }, merged.class)}
+      class={css(
+        {
+          position: 'relative',
+          display: 'inline-block',
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       {props.children}
-      
+
       <For each={sparkles()}>
         {(sparkle) => (
           <span
@@ -230,7 +245,7 @@ export const SparklesText: Component<SparklesTextProps> = (props) => {
               animation: `sparkle ${sparkle.animationDuration}s ease-in-out infinite`,
               animationDelay: `${sparkle.animationDelay}s`,
               pointerEvents: 'none',
-              
+
               '@keyframes sparkle': {
                 '0%, 100%': {
                   opacity: 0,
@@ -246,7 +261,8 @@ export const SparklesText: Component<SparklesTextProps> = (props) => {
               left: `${sparkle.x}%`,
               top: `${sparkle.y}%`,
               backgroundColor: sparkle.color,
-              'clip-path': 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
+              'clip-path':
+                'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
             }}
           />
         )}
@@ -293,7 +309,7 @@ export const MorphingText: Component<MorphingTextProps> = (props) => {
 
   const morphToNext = () => {
     setIsTransitioning(true);
-    
+
     setTimeout(() => {
       const nextIndex = (currentIndex() + 1) % merged.texts.length;
       setCurrentIndex(nextIndex);
@@ -309,13 +325,16 @@ export const MorphingText: Component<MorphingTextProps> = (props) => {
 
   return (
     <span
-      class={css({
-        display: 'inline-block',
-        transform: isTransitioning() ? 'scale(0.95)' : 'scale(1)',
-        opacity: isTransitioning() ? 0.7 : 1,
-        filter: isTransitioning() ? 'blur(2px)' : 'blur(0px)',
-        transition: `all ${merged.morphDuration}ms ease-in-out`,
-      }, merged.class)}
+      class={css(
+        {
+          display: 'inline-block',
+          transform: isTransitioning() ? 'scale(0.95)' : 'scale(1)',
+          opacity: isTransitioning() ? 0.7 : 1,
+          filter: isTransitioning() ? 'blur(2px)' : 'blur(0px)',
+          transition: `all ${merged.morphDuration}ms ease-in-out`,
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       {displayText()}
@@ -325,15 +344,15 @@ export const MorphingText: Component<MorphingTextProps> = (props) => {
 
 export const MorphingTextDemo: Component = () => {
   const texts = [
-    "Hello",
-    "Morphing",
-    "Text",
-    "Animation",
-    "SolidJS",
-    "Component",
-    "Smooth",
-    "Transition",
-    "Engaging",
+    'Hello',
+    'Morphing',
+    'Text',
+    'Animation',
+    'SolidJS',
+    'Component',
+    'Smooth',
+    'Transition',
+    'Engaging',
   ];
 
   return (
@@ -375,23 +394,26 @@ export const SpinningText: Component<SpinningTextProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        display: 'inline-block',
-        width: `${merged.radius * 2}rem`,
-        height: `${merged.radius * 2}rem`,
-        animation: `spin ${merged.duration}s linear infinite`,
-        animationDirection: merged.reverse ? 'reverse' : 'normal',
-        
-        '@keyframes spin': {
-          '0%': {
-            transform: 'rotate(0deg)',
-          },
-          '100%': {
-            transform: 'rotate(360deg)',
+      class={css(
+        {
+          position: 'relative',
+          display: 'inline-block',
+          width: `${merged.radius * 2}rem`,
+          height: `${merged.radius * 2}rem`,
+          animation: `spin ${merged.duration}s linear infinite`,
+          animationDirection: merged.reverse ? 'reverse' : 'normal',
+
+          '@keyframes spin': {
+            '0%': {
+              transform: 'rotate(0deg)',
+            },
+            '100%': {
+              transform: 'rotate(360deg)',
+            },
           },
         },
-      }, merged.class)}
+        merged.class
+      )}
       style={merged.style}
     >
       <For each={characters}>
@@ -405,7 +427,7 @@ export const SpinningText: Component<SpinningTextProps> = (props) => {
               transformOrigin: '0 0',
               animation: `counterSpin ${merged.duration}s linear infinite`,
               animationDirection: merged.reverse ? 'normal' : 'reverse',
-              
+
               '@keyframes counterSpin': {
                 '0%': {
                   transform: 'rotate(0deg)',
@@ -454,9 +476,4 @@ export const SpinningTextReverse: Component = () => {
   );
 };
 
-export type {
-  BoxRevealProps,
-  SparklesTextProps,
-  MorphingTextProps,
-  SpinningTextProps,
-};
+export type { BoxRevealProps, SparklesTextProps, MorphingTextProps, SpinningTextProps };

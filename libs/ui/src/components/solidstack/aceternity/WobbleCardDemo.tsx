@@ -1,42 +1,53 @@
-import { Component } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import type { Component } from 'solid-js';
 
 // Placeholder WobbleCard component - this would need to be implemented separately
 const WobbleCard: Component<{
   containerClassName?: string;
   className?: string;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <div 
-      class={css({
-        position: 'relative',
-        borderRadius: 'lg',
-        padding: '6',
-        overflow: 'hidden',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        transition: 'all 0.3s ease',
-        _hover: {
-          transform: 'translateY(-2px)',
+    <div
+      class={css(
+        {
+          position: 'relative',
+          borderRadius: 'lg',
+          padding: '6',
+          overflow: 'hidden',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          transition: 'all 0.3s ease',
+          _hover: {
+            transform: 'translateY(-2px)',
+          },
         },
-      }, props.containerClassName)}
+        props.containerClassName
+      )}
     >
-      <div class={css({
-        position: 'relative',
-        zIndex: '10',
-      }, props.className)}>
+      <div
+        class={css(
+          {
+            position: 'relative',
+            zIndex: '10',
+          },
+          props.className
+        )}
+      >
         {props.children}
       </div>
-      
+
       {/* Wobble effect overlay */}
-      <div class={css({
-        position: 'absolute',
-        inset: '0',
-        background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 70%)',
-        animation: 'wobble 4s ease-in-out infinite',
-        pointerEvents: 'none',
-      })} />
-      
+      <div
+        class={css({
+          position: 'absolute',
+          inset: '0',
+          background:
+            'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 70%)',
+          animation: 'wobble 4s ease-in-out infinite',
+          pointerEvents: 'none',
+        })}
+      />
+
       <style>{`
         @keyframes wobble {
           0%, 100% { transform: translateX(0%) rotate(0deg); }
@@ -53,17 +64,19 @@ const WobbleCard: Component<{
 
 export const WobbleCardDemo: Component = () => {
   return (
-    <div class={css({
-      display: 'grid',
-      gridTemplateColumns: '1',
-      gap: '4',
-      maxWidth: '7xl',
-      marginX: 'auto',
-      width: 'full',
-      lg: {
-        gridTemplateColumns: '3',
-      },
-    })}>
+    <div
+      class={css({
+        display: 'grid',
+        gridTemplateColumns: '1',
+        gap: '4',
+        maxWidth: '7xl',
+        marginX: 'auto',
+        width: 'full',
+        lg: {
+          gridTemplateColumns: '3',
+        },
+      })}
+    >
       <WobbleCard
         containerClassName={css({
           gridColumn: '1',
@@ -77,33 +90,39 @@ export const WobbleCardDemo: Component = () => {
         })}
         className=""
       >
-        <div class={css({
-          maxWidth: 'xs',
-        })}>
-          <h2 class={css({
-            textAlign: 'left',
-            fontSize: 'base',
-            fontWeight: 'semibold',
-            letterSpacing: 'tight',
-            color: 'white',
-            md: {
-              fontSize: 'xl',
-            },
-            lg: {
-              fontSize: '3xl',
-            },
-          })}>
+        <div
+          class={css({
+            maxWidth: 'xs',
+          })}
+        >
+          <h2
+            class={css({
+              textAlign: 'left',
+              fontSize: 'base',
+              fontWeight: 'semibold',
+              letterSpacing: 'tight',
+              color: 'white',
+              md: {
+                fontSize: 'xl',
+              },
+              lg: {
+                fontSize: '3xl',
+              },
+            })}
+          >
             Gippity AI powers the entire universe
           </h2>
-          <p class={css({
-            marginTop: '4',
-            textAlign: 'left',
-            fontSize: 'base',
-            lineHeight: '1.5',
-            color: 'neutral.200',
-          })}>
-            With over 100,000 mothly active bot users, Gippity AI is the most
-            popular AI platform for developers.
+          <p
+            class={css({
+              marginTop: '4',
+              textAlign: 'left',
+              fontSize: 'base',
+              lineHeight: '1.5',
+              color: 'neutral.200',
+            })}
+          >
+            With over 100,000 mothly active bot users, Gippity AI is the most popular AI platform
+            for developers.
           </p>
         </div>
         <img
@@ -124,82 +143,95 @@ export const WobbleCardDemo: Component = () => {
           })}
         />
       </WobbleCard>
-      
-      <WobbleCard containerClassName={css({
-        gridColumn: '1',
-        minHeight: '300px',
-      })}>
-        <h2 class={css({
-          maxWidth: '80',
-          textAlign: 'left',
-          fontSize: 'base',
-          fontWeight: 'semibold',
-          letterSpacing: 'tight',
-          color: 'white',
-          md: {
-            fontSize: 'xl',
-          },
-          lg: {
-            fontSize: '3xl',
-          },
-        })}>
-          No shirt, no shoes, no weapons.
-        </h2>
-        <p class={css({
-          marginTop: '4',
-          maxWidth: '26rem',
-          textAlign: 'left',
-          fontSize: 'base',
-          lineHeight: '1.5',
-          color: 'neutral.200',
-        })}>
-          If someone yells "stop!", goes limp, or taps out, the fight is over.
-        </p>
-      </WobbleCard>
-      
-      <WobbleCard containerClassName={css({
-        gridColumn: '1',
-        backgroundColor: 'blue.900',
-        minHeight: '500px',
-        lg: {
-          gridColumn: 'span 3',
-          minHeight: '600px',
-        },
-        xl: {
+
+      <WobbleCard
+        containerClassName={css({
+          gridColumn: '1',
           minHeight: '300px',
-        },
-      })}>
-        <div class={css({
-          maxWidth: 'sm',
-        })}>
-          <h2 class={css({
-            maxWidth: 'sm',
+        })}
+      >
+        <h2
+          class={css({
+            maxWidth: '80',
             textAlign: 'left',
             fontSize: 'base',
             fontWeight: 'semibold',
             letterSpacing: 'tight',
             color: 'white',
             md: {
-              maxWidth: 'lg',
               fontSize: 'xl',
             },
             lg: {
               fontSize: '3xl',
             },
-          })}>
-            Signup for blazing-fast cutting-edge state of the art Gippity AI
-            wrapper today!
-          </h2>
-          <p class={css({
+          })}
+        >
+          No shirt, no shoes, no weapons.
+        </h2>
+        <p
+          class={css({
             marginTop: '4',
             maxWidth: '26rem',
             textAlign: 'left',
             fontSize: 'base',
             lineHeight: '1.5',
             color: 'neutral.200',
-          })}>
-            With over 100,000 mothly active bot users, Gippity AI is the most
-            popular AI platform for developers.
+          })}
+        >
+          If someone yells "stop!", goes limp, or taps out, the fight is over.
+        </p>
+      </WobbleCard>
+
+      <WobbleCard
+        containerClassName={css({
+          gridColumn: '1',
+          backgroundColor: 'blue.900',
+          minHeight: '500px',
+          lg: {
+            gridColumn: 'span 3',
+            minHeight: '600px',
+          },
+          xl: {
+            minHeight: '300px',
+          },
+        })}
+      >
+        <div
+          class={css({
+            maxWidth: 'sm',
+          })}
+        >
+          <h2
+            class={css({
+              maxWidth: 'sm',
+              textAlign: 'left',
+              fontSize: 'base',
+              fontWeight: 'semibold',
+              letterSpacing: 'tight',
+              color: 'white',
+              md: {
+                maxWidth: 'lg',
+                fontSize: 'xl',
+              },
+              lg: {
+                fontSize: '3xl',
+              },
+            })}
+          >
+            Signup for blazing-fast cutting-edge state of the art Gippity AI wrapper today!
+          </h2>
+          <p
+            class={css({
+              marginTop: '4',
+              maxWidth: '26rem',
+              textAlign: 'left',
+              fontSize: 'base',
+              lineHeight: '1.5',
+              color: 'neutral.200',
+            })}
+          >
+            With over 100,000 mothly active bot users, Gippity AI is the most popular AI platform
+            for developers.
           </p>
         </div>
         <img

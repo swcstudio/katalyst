@@ -31,9 +31,7 @@
       "types": "./dist/content/index.d.ts"
     }
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --dts-only",
     "dev": "tsup src/index.ts --format esm --dts --dts-only --watch",
@@ -54,14 +52,7 @@
     "url": "git+https://github.com/spectrum-web-co/sse.git",
     "directory": "libs/types"
   },
-  "keywords": [
-    "typescript",
-    "types",
-    "interfaces",
-    "definitions",
-    "sse",
-    "solidjs"
-  ],
+  "keywords": ["typescript", "types", "interfaces", "definitions", "sse", "solidjs"],
   "author": "Spectrum Web Co LLC",
   "license": "MIT"
 }

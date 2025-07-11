@@ -1,6 +1,11 @@
 // 3D Card Components
 export { CardContainer, CardBody, CardItem, ThreeDCardDemo } from './3DCard';
-export type { CardContainerProps, CardBodyProps, CardItemProps, ThreeDCardDemoProps } from './3DCard';
+export type {
+  CardContainerProps,
+  CardBodyProps,
+  CardItemProps,
+  ThreeDCardDemoProps,
+} from './3DCard';
 
 // 3D Marquee Components
 export { ThreeDMarquee, ThreeDMarqueeDemo } from './ThreeDMarquee';
@@ -11,90 +16,90 @@ export { PinContainer, AnimatedPinDemo } from './AnimatedPin';
 export type { PinContainerProps, AnimatedPinDemoProps } from './AnimatedPin';
 
 // Animated Modal Components
-export { 
-  Modal, 
-  ModalTrigger, 
-  ModalBody, 
-  ModalContent, 
-  ModalFooter, 
-  AnimatedModalDemo 
+export {
+  Modal,
+  ModalTrigger,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  AnimatedModalDemo,
 } from './AnimatedModal';
-export type { 
-  ModalProps, 
-  ModalTriggerProps, 
-  ModalBodyProps, 
-  ModalContentProps, 
-  ModalFooterProps, 
-  AnimatedModalDemoProps 
+export type {
+  ModalProps,
+  ModalTriggerProps,
+  ModalBodyProps,
+  ModalContentProps,
+  ModalFooterProps,
+  AnimatedModalDemoProps,
 } from './AnimatedModal';
 
 // Animated Testimonials Components
 export { AnimatedTestimonials, AnimatedTestimonialsDemo } from './AnimatedTestimonials';
-export type { 
-  Testimonial, 
-  AnimatedTestimonialsProps, 
-  AnimatedTestimonialsDemoProps 
+export type {
+  Testimonial,
+  AnimatedTestimonialsProps,
+  AnimatedTestimonialsDemoProps,
 } from './AnimatedTestimonials';
 
 // Animated Tooltip Components
 export { AnimatedTooltip, AnimatedTooltipPreview } from './AnimatedTooltip';
-export type { 
-  TooltipItem, 
-  AnimatedTooltipProps, 
-  AnimatedTooltipPreviewProps 
+export type {
+  TooltipItem,
+  AnimatedTooltipProps,
+  AnimatedTooltipPreviewProps,
 } from './AnimatedTooltip';
 
 // Apple Cards Carousel Components
 export { Card, Carousel, AppleCardsCarouselDemo } from './AppleCardsCarousel';
-export type { 
-  CardData, 
-  CardProps, 
-  CarouselProps, 
-  AppleCardsCarouselDemoProps 
+export type {
+  CardData,
+  CardProps,
+  CarouselProps,
+  AppleCardsCarouselDemoProps,
 } from './AppleCardsCarousel';
 
 // Aurora Background Components
 export { AuroraBackground, AuroraBackgroundDemo } from './AuroraBackground';
-export type { 
-  AuroraBackgroundProps, 
-  AuroraBackgroundDemoProps 
+export type {
+  AuroraBackgroundProps,
+  AuroraBackgroundDemoProps,
 } from './AuroraBackground';
 
 // Background Beams Components
 export { BackgroundBeams, BackgroundBeamsDemo } from './BackgroundBeams';
-export type { 
-  BackgroundBeamsProps, 
-  BackgroundBeamsDemoProps 
+export type {
+  BackgroundBeamsProps,
+  BackgroundBeamsDemoProps,
 } from './BackgroundBeams';
 
 // Bento Grid Components
 export { BentoGrid, BentoGridItem, BentoGridDemo } from './BentoGrid';
-export type { 
-  BentoGridProps, 
-  BentoGridItemProps, 
-  BentoGridDemoProps 
+export type {
+  BentoGridProps,
+  BentoGridItemProps,
+  BentoGridDemoProps,
 } from './BentoGrid';
 
 // Card Skeleton Components
-export { 
-  CardDemo, 
-  Card, 
-  CardTitle, 
-  CardDescription, 
+export {
+  CardDemo,
+  Card,
+  CardTitle,
+  CardDescription,
   CardSkeletonContainer,
   ClaudeLogo,
   OpenAILogo,
   GeminiLogo,
   MetaIconOutline,
-  CopilotLogo
+  CopilotLogo,
 } from './CardSkeleton';
-export type { 
-  CardProps, 
-  CardTitleProps, 
-  CardDescriptionProps, 
+export type {
+  CardProps,
+  CardTitleProps,
+  CardDescriptionProps,
   CardSkeletonContainerProps,
   ContainerProps,
-  LogoProps 
+  LogoProps,
 } from './CardSkeleton';
 
 // Hover Card Components
@@ -130,33 +135,33 @@ export { DirectionAwareHoverDemo, DirectionAwareHover } from './DirectionAwareHo
 export type { DirectionAwareHoverProps } from './DirectionAwareHover';
 
 // Features Section with Globe Components
-export { 
-  FeaturesSectionWithGlobeDemo, 
-  SkeletonOne, 
-  SkeletonTwo, 
-  SkeletonThree, 
-  SkeletonFour, 
-  Globe 
+export {
+  FeaturesSectionWithGlobeDemo,
+  SkeletonOne,
+  SkeletonTwo,
+  SkeletonThree,
+  SkeletonFour,
+  Globe,
 } from './FeaturesSectionWithGlobe';
-export type { 
-  FeatureData, 
-  FeatureCardProps, 
-  FeatureTitleProps, 
-  FeatureDescriptionProps 
+export type {
+  FeatureData,
+  FeatureCardProps,
+  FeatureTitleProps,
+  FeatureDescriptionProps,
 } from './FeaturesSectionWithGlobe';
 
 // Grid Features Section Components
-export { 
-  GridFeaturesSectionDemo, 
-  IconFeaturesSection, 
-  Grid, 
-  GridPattern 
+export {
+  GridFeaturesSectionDemo,
+  IconFeaturesSection,
+  Grid,
+  GridPattern,
 } from './GridFeaturesSection';
-export type { 
-  GridFeatureData, 
-  GridFeaturesSectionProps, 
-  GridPatternProps, 
-  GridProps 
+export type {
+  GridFeatureData,
+  GridFeaturesSectionProps,
+  GridPatternProps,
+  GridProps,
 } from './GridFeaturesSection';
 
 // Flip Words Components
@@ -172,16 +177,16 @@ export { InfiniteMovingCardsDemo, InfiniteMovingCards } from './InfiniteMovingCa
 export type { TestimonialItem, InfiniteMovingCardsProps } from './InfiniteMovingCards';
 
 // Glowing Stars Components
-export { 
-  GlowingStarsBackgroundCardPreview, 
-  GlowingStarsBackgroundCard, 
-  GlowingStarsTitle, 
-  GlowingStarsDescription 
+export {
+  GlowingStarsBackgroundCardPreview,
+  GlowingStarsBackgroundCard,
+  GlowingStarsTitle,
+  GlowingStarsDescription,
 } from './GlowingStars';
-export type { 
-  GlowingStarsBackgroundCardProps, 
-  GlowingStarsTitleProps, 
-  GlowingStarsDescriptionProps 
+export type {
+  GlowingStarsBackgroundCardProps,
+  GlowingStarsTitleProps,
+  GlowingStarsDescriptionProps,
 } from './GlowingStars';
 
 // Lamp Components
@@ -197,7 +202,10 @@ export { MeteorsDemo, Meteors } from './Meteors';
 export type { MeteorProps, MeteorItem } from './Meteors';
 
 // Placeholders And Vanish Input Components
-export { PlaceholdersAndVanishInputDemo, PlaceholdersAndVanishInput } from './PlaceholdersAndVanishInput';
+export {
+  PlaceholdersAndVanishInputDemo,
+  PlaceholdersAndVanishInput,
+} from './PlaceholdersAndVanishInput';
 export type { PlaceholdersAndVanishInputProps } from './PlaceholdersAndVanishInput';
 
 // Parallax Scroll Components
@@ -232,34 +240,34 @@ export { LensDemo, LensDemoInteractive } from './LensDemo';
 export { PointerDemo } from './PointerDemo';
 
 // Device Mockup Components
-export { 
-  SafariDemo, 
-  SafariImageDemo, 
-  SafariVideoDemo, 
-  SafariSimpleDemo, 
-  Iphone15ProDemo, 
-  Iphone15ProImageDemo, 
-  Iphone15ProVideoDemo, 
-  AndroidDemo, 
-  AndroidImageDemo, 
-  AndroidVideoDemo, 
-  DeviceMockupShowcase 
+export {
+  SafariDemo,
+  SafariImageDemo,
+  SafariVideoDemo,
+  SafariSimpleDemo,
+  Iphone15ProDemo,
+  Iphone15ProImageDemo,
+  Iphone15ProVideoDemo,
+  AndroidDemo,
+  AndroidImageDemo,
+  AndroidVideoDemo,
+  DeviceMockupShowcase,
 } from './DeviceMockupDemos';
 
 // Smooth Cursor Components
 export { SmoothCursorDemo } from './SmoothCursorDemo';
 
 // Animated Beam Components
-export { 
+export {
   AnimatedBeamDemo,
-  AnimatedBeamSimpleDemo, 
+  AnimatedBeamSimpleDemo,
   AnimatedBeamBidirectionalDemo,
   AnimatedBeamMultipleOutputDemo,
-  AnimatedBeamMultipleOutputReverseDemo
+  AnimatedBeamMultipleOutputReverseDemo,
 } from './AnimatedBeamDemos';
-export type { 
-  CircleProps, 
-  AnimatedBeamMultipleOutputDemoProps 
+export type {
+  CircleProps,
+  AnimatedBeamMultipleOutputDemoProps,
 } from './AnimatedBeamDemos';
 
 // Border Beam Components
@@ -279,7 +287,7 @@ export { NeonGradientCard, NeonGradientCardDemo } from './NeonGradientCard';
 export type { NeonGradientCardProps, NeonGradientCardDemoProps } from './NeonGradientCard';
 
 // Confetti Components
-export { 
+export {
   Confetti,
   ConfettiButton,
   ConfettiDemo,
@@ -289,12 +297,12 @@ export {
   ConfettiSideCannons,
   ConfettiStars,
   ConfettiCustomShapes,
-  ConfettiEmoji
+  ConfettiEmoji,
 } from './Confetti';
-export type { 
-  ConfettiRef, 
-  ConfettiProps, 
-  ConfettiButtonProps 
+export type {
+  ConfettiRef,
+  ConfettiProps,
+  ConfettiButtonProps,
 } from './Confetti';
 
 // Particles Components
@@ -314,7 +322,7 @@ export { BlurFade, BlurFadeDemo, BlurFadeTextDemo } from './BlurFade';
 export type { BlurFadeProps, BlurFadeDemoProps, BlurFadeTextDemoProps } from './BlurFade';
 
 // Text Animation Components
-export { 
+export {
   TextAnimate,
   TextAnimateDemo,
   TextAnimateDemo2,
@@ -324,7 +332,7 @@ export {
   TextAnimateDemo6,
   TextAnimateDemo7,
   TextAnimateDemo8,
-  TextAnimateDemo9
+  TextAnimateDemo9,
 } from './TextAnimate';
 export type { TextAnimateProps, AnimationVariant } from './TextAnimate';
 
@@ -341,11 +349,11 @@ export { VideoText, VideoTextDemo } from './VideoText';
 export type { VideoTextProps, VideoTextDemoProps } from './VideoText';
 
 // Number Ticker Components
-export { 
-  NumberTicker, 
-  NumberTickerDemo, 
-  NumberTickerDecimalDemo, 
-  NumberTickerStartValueDemo 
+export {
+  NumberTicker,
+  NumberTickerDemo,
+  NumberTickerDecimalDemo,
+  NumberTickerStartValueDemo,
 } from './NumberTicker';
 export type { NumberTickerProps, NumberTickerDemoProps } from './NumberTicker';
 
@@ -354,28 +362,31 @@ export { AnimatedShinyText, AnimatedShinyTextDemo } from './AnimatedShinyText';
 export type { AnimatedShinyTextProps, AnimatedShinyTextDemoProps } from './AnimatedShinyText';
 
 // Animated Gradient Text Components
-export { 
-  AnimatedGradientText, 
-  AnimatedGradientTextDemo, 
-  AnimatedGradientTextFastDemo 
+export {
+  AnimatedGradientText,
+  AnimatedGradientTextDemo,
+  AnimatedGradientTextFastDemo,
 } from './AnimatedGradientText';
-export type { AnimatedGradientTextProps, AnimatedGradientTextDemoProps } from './AnimatedGradientText';
+export type {
+  AnimatedGradientTextProps,
+  AnimatedGradientTextDemoProps,
+} from './AnimatedGradientText';
 
 // Text Reveal Components
 export { TextReveal, TextRevealDemo } from './TextReveal';
 export type { TextRevealProps, TextRevealDemoProps } from './TextReveal';
 
 // Hyper Text Components
-export { 
-  HyperText, 
-  HyperTextDemo, 
-  HyperTextFastDemo, 
-  HyperTextSlowDemo 
+export {
+  HyperText,
+  HyperTextDemo,
+  HyperTextFastDemo,
+  HyperTextSlowDemo,
 } from './HyperText';
 export type { HyperTextProps, HyperTextDemoProps } from './HyperText';
 
 // Additional Text Animation Components
-export { 
+export {
   WordRotate,
   WordRotateDemo,
   TypingAnimation,
@@ -383,17 +394,17 @@ export {
   FlipText,
   FlipTextDemo,
   VelocityScroll,
-  ScrollBasedVelocityDemo
+  ScrollBasedVelocityDemo,
 } from './TextAnimationComponents';
-export type { 
+export type {
   WordRotateProps,
   TypingAnimationProps,
   FlipTextProps,
-  VelocityScrollProps
+  VelocityScrollProps,
 } from './TextAnimationComponents';
 
 // Advanced Text Components
-export { 
+export {
   BoxReveal,
   BoxRevealDemo,
   SparklesText,
@@ -402,23 +413,23 @@ export {
   MorphingTextDemo,
   SpinningText,
   SpinningTextBasic,
-  SpinningTextReverse
+  SpinningTextReverse,
 } from './AdvancedTextComponents';
-export type { 
+export type {
   BoxRevealProps,
   SparklesTextProps,
   MorphingTextProps,
-  SpinningTextProps
+  SpinningTextProps,
 } from './AdvancedTextComponents';
 
 // New Components Showcase
 export { NewComponentsShowcase } from './NewComponentsShowcase';
 
 // Button Components
-export { 
+export {
   RainbowButton,
   RainbowButtonDemo,
-  RainbowButtonOutlineDemo
+  RainbowButtonOutlineDemo,
 } from './RainbowButton';
 export type { RainbowButtonProps, RainbowButtonDemoProps } from './RainbowButton';
 
@@ -432,11 +443,17 @@ export type { ShinyButtonProps, ShinyButtonDemoProps } from './ShinyButton';
 
 // Interactive Hover Button Components
 export { InteractiveHoverButton, InteractiveHoverButtonDemo } from './InteractiveHoverButton';
-export type { InteractiveHoverButtonProps, InteractiveHoverButtonDemoProps } from './InteractiveHoverButton';
+export type {
+  InteractiveHoverButtonProps,
+  InteractiveHoverButtonDemoProps,
+} from './InteractiveHoverButton';
 
 // Animated Subscribe Button Components
 export { AnimatedSubscribeButton, AnimatedSubscribeButtonDemo } from './AnimatedSubscribeButton';
-export type { AnimatedSubscribeButtonProps, AnimatedSubscribeButtonDemoProps } from './AnimatedSubscribeButton';
+export type {
+  AnimatedSubscribeButtonProps,
+  AnimatedSubscribeButtonDemoProps,
+} from './AnimatedSubscribeButton';
 
 // Pulsating Button Components
 export { PulsatingButton, PulsatingButtonDemo } from './PulsatingButton';
@@ -488,7 +505,7 @@ export type { InteractiveGridPatternProps } from './InteractiveGridPattern';
 export { BackgroundPatternDemos } from './BackgroundPatternDemos';
 
 // Individual Pattern Demo Components
-export { 
+export {
   ExampleComponentDemo,
   FlickeringGridDemo,
   FlickeringGridRoundedDemo,
@@ -502,7 +519,7 @@ export {
   GridPatternLinearGradient,
   GridPatternDashed,
   InteractiveGridPatternDemo,
-  InteractiveGridPatternCustomDemo
+  InteractiveGridPatternCustomDemo,
 } from './PatternDemoComponents';
 
 // Pattern Components Showcase

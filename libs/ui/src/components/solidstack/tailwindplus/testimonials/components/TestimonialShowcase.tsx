@@ -1,9 +1,28 @@
-import { Component, JSX, mergeProps, createSignal, onMount, onCleanup, createEffect, For, Show, createMemo } from 'solid-js';
+import {
+  type Component,
+  For,
+  type JSX,
+  Show,
+  createEffect,
+  createMemo,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 import { css } from '../../../../../styled-system/css';
+import type { Testimonial } from '../state/useTestimonialSection';
+import {
+  TestimonialHero,
+  TestimonialHeroDemo,
+  TestimonialHeroOverlayDemo,
+} from './TestimonialHero';
 import { TestimonialSection } from './TestimonialSection';
-import { TestimonialSimple, TestimonialSimpleDemo, TestimonialSimpleGradientDemo } from './TestimonialSimple';
-import { TestimonialHero, TestimonialHeroDemo, TestimonialHeroOverlayDemo } from './TestimonialHero';
-import { Testimonial } from '../state/useTestimonialSection';
+import {
+  TestimonialSimple,
+  TestimonialSimpleDemo,
+  TestimonialSimpleGradientDemo,
+} from './TestimonialSimple';
 
 export interface TestimonialShowcaseProps {
   className?: string;
@@ -25,11 +44,12 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
       name: 'Judith Black',
       title: 'CEO',
       company: 'Workcation',
-      imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-600.svg'
+      imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-600.svg',
     },
     rating: 5,
-    category: 'enterprise'
+    category: 'enterprise',
   };
 
   const gridTestimonials: Testimonial[] = [
@@ -39,12 +59,13 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
       author: {
         name: 'Brenna Goyette',
         handle: 'brennagoyette',
-        imageUrl: 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
         logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/savvycal-logo-gray-900.svg',
       },
       rating: 5,
       featured: true,
-      category: 'saas'
+      category: 'saas',
     },
     {
       id: '2',
@@ -52,10 +73,11 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
       author: {
         name: 'Leslie Alexander',
         handle: 'lesliealexander',
-        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
       rating: 5,
-      category: 'startup'
+      category: 'startup',
     },
     {
       id: '3',
@@ -63,10 +85,11 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
       author: {
         name: 'Lindsay Walton',
         handle: 'lindsaywalton',
-        imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
       rating: 4,
-      category: 'enterprise'
+      category: 'enterprise',
     },
     {
       id: '4',
@@ -74,10 +97,11 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
       author: {
         name: 'Tom Cook',
         handle: 'tomcook',
-        imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
       rating: 5,
-      category: 'agency'
+      category: 'agency',
     },
     {
       id: '5',
@@ -85,11 +109,12 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
       author: {
         name: 'Leonard Krasner',
         handle: 'leonardkrasner',
-        imageUrl: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
       rating: 4,
-      category: 'startup'
-    }
+      category: 'startup',
+    },
   ];
 
   const splitTestimonials: Testimonial[] = [
@@ -100,9 +125,10 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
         name: 'Judith Black',
         title: 'CEO',
         company: 'Tuple',
-        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
-      category: 'enterprise'
+      category: 'enterprise',
     },
     {
       id: '2',
@@ -111,10 +137,11 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
         name: 'Joseph Rodriguez',
         title: 'CEO',
         company: 'Reform',
-        imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        imageUrl:
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
-      category: 'enterprise'
-    }
+      category: 'enterprise',
+    },
   ];
 
   const brandedTestimonials: Testimonial[] = [
@@ -125,10 +152,11 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
         name: 'Judith Black',
         title: 'CEO',
         company: 'Tuple',
-        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/tuple-logo-indigo-300.svg'
+        imageUrl:
+          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/tuple-logo-indigo-300.svg',
       },
-      category: 'enterprise'
+      category: 'enterprise',
     },
     {
       id: '2',
@@ -137,11 +165,12 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
         name: 'Joseph Rodriguez',
         title: 'CEO',
         company: 'Workcation',
-        imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-300.svg'
+        imageUrl:
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-300.svg',
       },
-      category: 'enterprise'
-    }
+      category: 'enterprise',
+    },
   ];
 
   const demoOptions = [
@@ -154,12 +183,12 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
     { id: 'split-testimonials', label: 'Split Testimonials', component: 'split' },
     { id: 'branded-section', label: 'Branded Section', component: 'branded' },
     { id: 'carousel-auto', label: 'Carousel Autoplay', component: 'carousel' },
-    { id: 'minimal-rating', label: 'Minimal with Rating', component: 'minimal' }
+    { id: 'minimal-rating', label: 'Minimal with Rating', component: 'minimal' },
   ];
 
   const renderDemo = () => {
     const demo = activeDemo();
-    
+
     switch (demo) {
       case 'simple-centered':
         return (
@@ -179,7 +208,7 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
           <TestimonialSimple
             testimonial={{
               ...singleTestimonial,
-              body: 'Qui dolor enim consectetur do et non ex amet culpa sint in ea non dolore. Enim minim magna anim id minim eu cillum sunt dolore aliquip. Amet elit laborum culpa irure incididunt adipisicing culpa amet officia exercitation.'
+              body: 'Qui dolor enim consectetur do et non ex amet culpa sint in ea non dolore. Enim minim magna anim id minim eu cillum sunt dolore aliquip. Amet elit laborum culpa irure incididunt adipisicing culpa amet officia exercitation.',
             }}
             theme={currentTheme()}
             variant="gradient"
@@ -195,7 +224,7 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
           <TestimonialHero
             testimonial={{
               ...singleTestimonial,
-              body: 'Gravida quam mi erat tortor neque molestie. Auctor aliquet at porttitor a enim nunc suscipit tincidunt nunc. Et non lorem tortor posuere. Nunc eu scelerisque interdum eget tellus non nibh scelerisque bibendum.'
+              body: 'Gravida quam mi erat tortor neque molestie. Auctor aliquet at porttitor a enim nunc suscipit tincidunt nunc. Et non lorem tortor posuere. Nunc eu scelerisque interdum eget tellus non nibh scelerisque bibendum.',
             }}
             theme="dark"
             variant="split"
@@ -295,7 +324,7 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
           <TestimonialSimple
             testimonial={{
               ...singleTestimonial,
-              body: 'Qui dolor enim consectetur do et non ex amet culpa sint in ea non dolore. Enim minim magna anim id minim eu cillum sunt dolore aliquip.'
+              body: 'Qui dolor enim consectetur do et non ex amet culpa sint in ea non dolore. Enim minim magna anim id minim eu cillum sunt dolore aliquip.',
             }}
             theme={currentTheme()}
             variant="minimal"
@@ -322,39 +351,47 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
   return (
     <div class={css({ minH: 'screen' })} style={merged.style}>
       {/* Controls */}
-      <div class={css({
-        position: 'sticky',
-        top: '0',
-        bg: 'white',
-        borderBottom: '1px solid',
-        borderColor: 'gray.200',
-        px: '6',
-        py: '4',
-        zIndex: '10'
-      })}>
-        <div class={css({
-          mx: 'auto',
-          maxW: '7xl',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          gap: '4'
-        })}>
-          <h1 class={css({
-            fontSize: 'xl',
-            fontWeight: 'bold',
-            color: 'gray.900'
-          })}>
-            Testimonial Components Showcase
-          </h1>
-          
-          <div class={css({
+      <div
+        class={css({
+          position: 'sticky',
+          top: '0',
+          bg: 'white',
+          borderBottom: '1px solid',
+          borderColor: 'gray.200',
+          px: '6',
+          py: '4',
+          zIndex: '10',
+        })}
+      >
+        <div
+          class={css({
+            mx: 'auto',
+            maxW: '7xl',
             display: 'flex',
+            flexWrap: 'wrap',
             alignItems: 'center',
             gap: '4',
-            flex: '1',
-            flexWrap: 'wrap'
-          })}>
+          })}
+        >
+          <h1
+            class={css({
+              fontSize: 'xl',
+              fontWeight: 'bold',
+              color: 'gray.900',
+            })}
+          >
+            Testimonial Components Showcase
+          </h1>
+
+          <div
+            class={css({
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4',
+              flex: '1',
+              flexWrap: 'wrap',
+            })}
+          >
             <select
               value={activeDemo()}
               onChange={(e) => setActiveDemo(e.target.value)}
@@ -364,13 +401,11 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
                 borderColor: 'gray.300',
                 px: '3',
                 py: '2',
-                fontSize: 'sm'
+                fontSize: 'sm',
               })}
             >
               <For each={demoOptions}>
-                {(option) => (
-                  <option value={option.id}>{option.label}</option>
-                )}
+                {(option) => <option value={option.id}>{option.label}</option>}
               </For>
             </select>
 
@@ -383,42 +418,46 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
                 borderColor: 'gray.300',
                 px: '3',
                 py: '2',
-                fontSize: 'sm'
+                fontSize: 'sm',
               })}
             >
               <option value="light">Light Theme</option>
               <option value="dark">Dark Theme</option>
             </select>
 
-            <label class={css({
-              display: 'flex',
-              alignItems: 'center',
-              gap: '2',
-              fontSize: 'sm'
-            })}>
+            <label
+              class={css({
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2',
+                fontSize: 'sm',
+              })}
+            >
               <input
                 type="checkbox"
                 checked={isAnimated()}
                 onChange={(e) => setIsAnimated(e.target.checked)}
                 class={css({
-                  rounded: 'sm'
+                  rounded: 'sm',
                 })}
               />
               Animations
             </label>
 
-            <label class={css({
-              display: 'flex',
-              alignItems: 'center',
-              gap: '2',
-              fontSize: 'sm'
-            })}>
+            <label
+              class={css({
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2',
+                fontSize: 'sm',
+              })}
+            >
               <input
                 type="checkbox"
                 checked={showRatings()}
                 onChange={(e) => setShowRatings(e.target.checked)}
                 class={css({
-                  rounded: 'sm'
+                  rounded: 'sm',
                 })}
               />
               Show Ratings
@@ -433,7 +472,7 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
                 py: '2',
                 rounded: 'md',
                 fontSize: 'sm',
-                _hover: { bg: 'indigo.700' }
+                _hover: { bg: 'indigo.700' },
               })}
             >
               Reset Animations
@@ -443,49 +482,59 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
       </div>
 
       {/* Demo Content */}
-      <div class={css({ minH: 'screen' })}>
-        {renderDemo()}
-      </div>
+      <div class={css({ minH: 'screen' })}>{renderDemo()}</div>
 
       {/* Info Panel */}
-      <div class={css({
-        bg: 'gray.50',
-        py: '12',
-        px: '6'
-      })}>
-        <div class={css({
-          mx: 'auto',
-          maxW: '7xl'
-        })}>
-          <h2 class={css({
-            fontSize: '2xl',
-            fontWeight: 'bold',
-            color: 'gray.900',
-            mb: '6'
-          })}>
+      <div
+        class={css({
+          bg: 'gray.50',
+          py: '12',
+          px: '6',
+        })}
+      >
+        <div
+          class={css({
+            mx: 'auto',
+            maxW: '7xl',
+          })}
+        >
+          <h2
+            class={css({
+              fontSize: '2xl',
+              fontWeight: 'bold',
+              color: 'gray.900',
+              mb: '6',
+            })}
+          >
             Testimonial Components Features
           </h2>
-          
-          <div class={css({
-            display: 'grid',
-            gap: '6',
-            gridTemplateColumns: '1',
-            lg: { gridTemplateColumns: '3' }
-          })}>
+
+          <div
+            class={css({
+              display: 'grid',
+              gap: '6',
+              gridTemplateColumns: '1',
+              lg: { gridTemplateColumns: '3' },
+            })}
+          >
             <div>
-              <h3 class={css({
-                fontSize: 'lg',
-                fontWeight: 'semibold',
-                color: 'gray.900',
-                mb: '2'
-              })}>
+              <h3
+                class={css({
+                  fontSize: 'lg',
+                  fontWeight: 'semibold',
+                  color: 'gray.900',
+                  mb: '2',
+                })}
+              >
                 Animation Augmentations
               </h3>
-              <ul class={css({
-                fontSize: 'sm',
-                color: 'gray.600',
-                space: 'y-1'
-              })}>
+              <ul
+                class={css({
+                  fontSize: 'sm',
+                  color: 'gray.600',
+                  space: 'y-1',
+                })}
+              >
                 <li>• TextAnimate for smooth quote reveals</li>
                 <li>• BlurFade for progressive element reveals</li>
                 <li>• BorderBeam for interactive card highlights</li>
@@ -495,19 +544,23 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
             </div>
 
             <div>
-              <h3 class={css({
-                fontSize: 'lg',
-                fontWeight: 'semibold',
-                color: 'gray.900',
-                mb: '2'
-              })}>
+              <h3
+                class={css({
+                  fontSize: 'lg',
+                  fontWeight: 'semibold',
+                  color: 'gray.900',
+                  mb: '2',
+                })}
+              >
                 Layout Variants
               </h3>
-              <ul class={css({
-                fontSize: 'sm',
-                color: 'gray.600',
-                space: 'y-1'
-              })}>
+              <ul
+                class={css({
+                  fontSize: 'sm',
+                  color: 'gray.600',
+                  space: 'y-1',
+                })}
+              >
                 <li>• Simple centered layouts</li>
                 <li>• Hero split and overlay designs</li>
                 <li>• Grid and masonry presentations</li>
@@ -517,19 +570,23 @@ export const TestimonialShowcase: Component<TestimonialShowcaseProps> = (props) 
             </div>
 
             <div>
-              <h3 class={css({
-                fontSize: 'lg',
-                fontWeight: 'semibold',
-                color: 'gray.900',
-                mb: '2'
-              })}>
+              <h3
+                class={css({
+                  fontSize: 'lg',
+                  fontWeight: 'semibold',
+                  color: 'gray.900',
+                  mb: '2',
+                })}
+              >
                 State Management
               </h3>
-              <ul class={css({
-                fontSize: 'sm',
-                color: 'gray.600',
-                space: 'y-1'
-              })}>
+              <ul
+                class={css({
+                  fontSize: 'sm',
+                  color: 'gray.600',
+                  space: 'y-1',
+                })}
+              >
                 <li>• Zag.js state machines</li>
                 <li>• Intersection observer triggers</li>
                 <li>• Hover and selection states</li>

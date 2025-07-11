@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, mergeProps } from 'solid-js';
 
 export interface DotPatternProps {
   width?: number;
@@ -32,13 +32,16 @@ const DotPattern: Component<DotPatternProps> = (props) => {
   return (
     <svg
       aria-hidden="true"
-      class={css({
-        position: 'absolute',
-        inset: 0,
-        width: 'full',
-        height: 'full',
-        pointerEvents: 'none',
-      }, merged.className)}
+      class={css(
+        {
+          position: 'absolute',
+          inset: 0,
+          width: 'full',
+          height: 'full',
+          pointerEvents: 'none',
+        },
+        merged.className
+      )}
       style={merged.style}
     >
       <defs>

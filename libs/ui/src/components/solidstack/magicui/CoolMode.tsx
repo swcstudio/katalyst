@@ -1,5 +1,13 @@
-import { Component, JSX, mergeProps, ParentComponent, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  type JSX,
+  type ParentComponent,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface CoolModeOptions {
   particle?: string;
@@ -66,16 +74,16 @@ export const CoolMode: ParentComponent<CoolModeProps> = (props) => {
   };
 
   const updateParticles = () => {
-    setParticles(prevParticles => {
+    setParticles((prevParticles) => {
       return prevParticles
-        .map(particle => ({
+        .map((particle) => ({
           ...particle,
           x: particle.x + particle.vx,
           y: particle.y + particle.vy,
           vy: particle.vy + merged.options.gravity!,
           life: particle.life - 0.02,
         }))
-        .filter(particle => particle.life > 0);
+        .filter((particle) => particle.life > 0);
     });
 
     if (particles().length > 0) {
@@ -95,7 +103,7 @@ export const CoolMode: ParentComponent<CoolModeProps> = (props) => {
       newParticles.push(createParticle(x, y));
     }
 
-    setParticles(prev => [...prev, ...newParticles]);
+    setParticles((prev) => [...prev, ...newParticles]);
 
     if (animationId) {
       cancelAnimationFrame(animationId);
@@ -121,15 +129,18 @@ export const CoolMode: ParentComponent<CoolModeProps> = (props) => {
   return (
     <div
       ref={containerRef}
-      class={css({
-        position: 'relative',
-        display: 'inline-block',
-        cursor: 'pointer',
-      }, merged.class)}
+      class={css(
+        {
+          position: 'relative',
+          display: 'inline-block',
+          cursor: 'pointer',
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       {props.children}
-      
+
       {/* Particle Container */}
       <div
         class={css({
@@ -139,7 +150,7 @@ export const CoolMode: ParentComponent<CoolModeProps> = (props) => {
           overflow: 'hidden',
         })}
       >
-        {particles().map(particle => (
+        {particles().map((particle) => (
           <div
             key={particle.id}
             class={css({
@@ -171,11 +182,16 @@ export interface CoolModeDemoProps {
 
 export const CoolModeDemo: Component<CoolModeDemoProps> = (props) => {
   return (
-    <div class={css({ 
-      position: 'relative', 
-      display: 'flex',
-      justifyContent: 'center' 
-    }, props.class)}>
+    <div
+      class={css(
+        {
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+        },
+        props.class
+      )}
+    >
       <CoolMode>
         <button
           class={css({
@@ -202,14 +218,19 @@ export const CoolModeDemo: Component<CoolModeDemoProps> = (props) => {
 
 export const CoolModeCustomDemo: Component<CoolModeDemoProps> = (props) => {
   return (
-    <div class={css({ 
-      position: 'relative', 
-      display: 'flex',
-      justifyContent: 'center' 
-    }, props.class)}>
+    <div
+      class={css(
+        {
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+        },
+        props.class
+      )}
+    >
       <CoolMode
         options={{
-          particle: "https://pbs.twimg.com/profile_images/1782811051504885763/YR5-kWOI_400x400.jpg",
+          particle: 'https://pbs.twimg.com/profile_images/1782811051504885763/YR5-kWOI_400x400.jpg',
           particleCount: 20,
           particleSize: 12,
         }}

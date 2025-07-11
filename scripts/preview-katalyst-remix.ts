@@ -1,8 +1,10 @@
+import { PORTS } from './ports.ts';
+
 console.log('Starting Katalyst Remix preview server...');
 
 try {
   const command = new Deno.Command('deno', {
-    args: ['run', '--allow-all', 'npm:@remix-run/serve@2.12.1', 'build', '--port', '20008'],
+    args: ['run', '--allow-all', 'npm:@remix-run/serve@2.12.1', 'build', '--port', PORTS.KATALYST_REMIX.toString()],
     cwd: './katalyst/remix',
     stdout: 'inherit',
     stderr: 'inherit',

@@ -1,19 +1,19 @@
-import * as accordion from "@zag-js/accordion"
-import { normalizeProps, useMachine } from "@zag-js/solid"
-import { createMemo, createUniqueId, For, JSX } from "solid-js"
+import * as accordion from '@zag-js/accordion';
+import { normalizeProps, useMachine } from '@zag-js/solid';
+import { For, type JSX, createMemo, createUniqueId } from 'solid-js';
 
 export interface AccordionItem {
-  title: string
-  content: JSX.Element | string
-  value?: string
+  title: string;
+  content: JSX.Element | string;
+  value?: string;
 }
 
 export interface AccordionProps {
-  items: AccordionItem[]
-  multiple?: boolean
-  collapsible?: boolean
-  defaultValue?: string[]
-  class?: string
+  items: AccordionItem[];
+  multiple?: boolean;
+  collapsible?: boolean;
+  defaultValue?: string[];
+  class?: string;
 }
 
 export function Accordion(props: AccordionProps) {
@@ -24,15 +24,15 @@ export function Accordion(props: AccordionProps) {
       collapsible: props.collapsible,
       value: props.defaultValue,
     })
-  )
+  );
 
-  const api = createMemo(() => accordion.connect(state, send, normalizeProps))
+  const api = createMemo(() => accordion.connect(state, send, normalizeProps));
 
   return (
     <div {...api().rootProps} class={props.class}>
       <For each={props.items}>
         {(item) => {
-          const value = item.value || item.title
+          const value = item.value || item.title;
           return (
             <div {...api().getItemProps({ value })}>
               <h3>
@@ -43,12 +43,17 @@ export function Accordion(props: AccordionProps) {
                   {item.title}
                   <svg
                     class="h-5 w-5 transform transition-transform duration-200"
-                    classList={{ "rotate-180": api().getItemState({ value }).isOpen }}
+                    classList={{ 'rotate-180': api().getItemState({ value }).isOpen }}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M19 9l-7 7-7-7" />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width={2}
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
               </h3>
@@ -56,14 +61,12 @@ export function Accordion(props: AccordionProps) {
                 {...api().getItemContentProps({ value })}
                 class="overflow-hidden transition-all duration-200 ease-in-out"
               >
-                <div class="px-4 py-3 text-sm text-gray-700">
-                  {item.content}
-                </div>
+                <div class="px-4 py-3 text-sm text-gray-700">{item.content}</div>
               </div>
             </div>
-          )
+          );
         }}
       </For>
     </div>
-  )
+  );
 }

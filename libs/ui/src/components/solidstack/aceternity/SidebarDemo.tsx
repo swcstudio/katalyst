@@ -1,5 +1,5 @@
-import { Component, createSignal, For, Show } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For, Show, createSignal, type JSX } from 'solid-js';
 
 // Placeholder Icon components
 const IconBrandTabler: Component<{ class?: string }> = (props) => (
@@ -42,23 +42,25 @@ const IconArrowLeft: Component<{ class?: string }> = (props) => (
 const Sidebar: Component<{
   open: boolean;
   setOpen: (open: boolean) => void;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <div class={css({
-      position: 'relative',
-      zIndex: '20',
-      backgroundColor: 'white',
-      borderRight: '1px solid',
-      borderColor: 'neutral.200',
-      transition: 'all 0.3s ease',
-      width: props.open ? '300px' : '80px',
-      flexShrink: 0,
-      _dark: {
-        backgroundColor: 'neutral.800',
-        borderColor: 'neutral.700',
-      },
-    })}>
+    <div
+      class={css({
+        position: 'relative',
+        zIndex: '20',
+        backgroundColor: 'white',
+        borderRight: '1px solid',
+        borderColor: 'neutral.200',
+        transition: 'all 0.3s ease',
+        width: props.open ? '300px' : '80px',
+        flexShrink: 0,
+        _dark: {
+          backgroundColor: 'neutral.800',
+          borderColor: 'neutral.700',
+        },
+      })}
+    >
       <button
         class={css({
           position: 'absolute',
@@ -99,15 +101,20 @@ const Sidebar: Component<{
 
 const SidebarBody: Component<{
   className?: string;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
-    <div class={css({
-      display: 'flex',
-      flexDirection: 'column',
-      height: 'full',
-      padding: '4',
-    }, props.className)}>
+    <div
+      class={css(
+        {
+          display: 'flex',
+          flexDirection: 'column',
+          height: 'full',
+          padding: '4',
+        },
+        props.className
+      )}
+    >
       {props.children}
     </div>
   );
@@ -117,7 +124,7 @@ const SidebarLink: Component<{
   link: {
     label: string;
     href: string;
-    icon: any;
+    icon: JSX.Element;
   };
 }> = (props) => {
   return (
@@ -144,18 +151,22 @@ const SidebarLink: Component<{
         },
       })}
     >
-      <span class={css({
-        flexShrink: 0,
-      })}>
+      <span
+        class={css({
+          flexShrink: 0,
+        })}
+      >
         {props.link.icon}
       </span>
-      <span class={css({
-        fontSize: 'sm',
-        fontWeight: 'medium',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      })}>
+      <span
+        class={css({
+          fontSize: 'sm',
+          fontWeight: 'medium',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        })}
+      >
         {props.link.label}
       </span>
     </a>
@@ -180,25 +191,29 @@ const Logo: Component = () => {
         _dark: { color: 'white' },
       })}
     >
-      <div class={css({
-        height: '5',
-        width: '6',
-        flexShrink: 0,
-        borderTopLeftRadius: 'lg',
-        borderTopRightRadius: 'sm',
-        borderBottomRightRadius: 'lg',
-        borderBottomLeftRadius: 'sm',
-        backgroundColor: 'black',
-        _dark: { backgroundColor: 'white' },
-      })} />
-      <span class={css({
-        fontWeight: 'medium',
-        whiteSpace: 'pre',
-        color: 'black',
-        opacity: 0,
-        animation: 'fadeIn 0.3s ease-in-out 0.1s forwards',
-        _dark: { color: 'white' },
-      })}>
+      <div
+        class={css({
+          height: '5',
+          width: '6',
+          flexShrink: 0,
+          borderTopLeftRadius: 'lg',
+          borderTopRightRadius: 'sm',
+          borderBottomRightRadius: 'lg',
+          borderBottomLeftRadius: 'sm',
+          backgroundColor: 'black',
+          _dark: { backgroundColor: 'white' },
+        })}
+      />
+      <span
+        class={css({
+          fontWeight: 'medium',
+          whiteSpace: 'pre',
+          color: 'black',
+          opacity: 0,
+          animation: 'fadeIn 0.3s ease-in-out 0.1s forwards',
+          _dark: { color: 'white' },
+        })}
+      >
         Acet Labs
       </span>
       <style>{`
@@ -228,17 +243,19 @@ const LogoIcon: Component = () => {
         _dark: { color: 'white' },
       })}
     >
-      <div class={css({
-        height: '5',
-        width: '6',
-        flexShrink: 0,
-        borderTopLeftRadius: 'lg',
-        borderTopRightRadius: 'sm',
-        borderBottomRightRadius: 'lg',
-        borderBottomLeftRadius: 'sm',
-        backgroundColor: 'black',
-        _dark: { backgroundColor: 'white' },
-      })} />
+      <div
+        class={css({
+          height: '5',
+          width: '6',
+          flexShrink: 0,
+          borderTopLeftRadius: 'lg',
+          borderTopRightRadius: 'sm',
+          borderBottomRightRadius: 'lg',
+          borderBottomLeftRadius: 'sm',
+          backgroundColor: 'black',
+          _dark: { backgroundColor: 'white' },
+        })}
+      />
     </a>
   );
 };
@@ -247,24 +264,26 @@ const LogoIcon: Component = () => {
 const Dashboard: Component = () => {
   return (
     <div class={css({ display: 'flex', flex: '1' })}>
-      <div class={css({
-        display: 'flex',
-        height: 'full',
-        width: 'full',
-        flex: '1',
-        flexDirection: 'column',
-        gap: '2',
-        borderTopLeftRadius: '2xl',
-        border: '1px solid',
-        borderColor: 'neutral.200',
-        backgroundColor: 'white',
-        padding: '2',
-        md: { padding: '10' },
-        _dark: {
-          borderColor: 'neutral.700',
-          backgroundColor: 'neutral.900',
-        },
-      })}>
+      <div
+        class={css({
+          display: 'flex',
+          height: 'full',
+          width: 'full',
+          flex: '1',
+          flexDirection: 'column',
+          gap: '2',
+          borderTopLeftRadius: '2xl',
+          border: '1px solid',
+          borderColor: 'neutral.200',
+          backgroundColor: 'white',
+          padding: '2',
+          md: { padding: '10' },
+          _dark: {
+            borderColor: 'neutral.700',
+            backgroundColor: 'neutral.900',
+          },
+        })}
+      >
         <div class={css({ display: 'flex', gap: '2' })}>
           <For each={Array.from({ length: 4 })}>
             {(_, idx) => (
@@ -304,113 +323,127 @@ const Dashboard: Component = () => {
 
 export const SidebarDemo: Component = () => {
   const [open, setOpen] = createSignal(false);
-  
+
   const links = [
     {
-      label: "Dashboard",
-      href: "#",
+      label: 'Dashboard',
+      href: '#',
       icon: (
-        <IconBrandTabler class={css({
-          height: '5',
-          width: '5',
-          flexShrink: 0,
-          color: 'neutral.700',
-          _dark: { color: 'neutral.200' },
-        })} />
+        <IconBrandTabler
+          class={css({
+            height: '5',
+            width: '5',
+            flexShrink: 0,
+            color: 'neutral.700',
+            _dark: { color: 'neutral.200' },
+          })}
+        />
       ),
     },
     {
-      label: "Profile",
-      href: "#",
+      label: 'Profile',
+      href: '#',
       icon: (
-        <IconUserBolt class={css({
-          height: '5',
-          width: '5',
-          flexShrink: 0,
-          color: 'neutral.700',
-          _dark: { color: 'neutral.200' },
-        })} />
+        <IconUserBolt
+          class={css({
+            height: '5',
+            width: '5',
+            flexShrink: 0,
+            color: 'neutral.700',
+            _dark: { color: 'neutral.200' },
+          })}
+        />
       ),
     },
     {
-      label: "Settings",
-      href: "#",
+      label: 'Settings',
+      href: '#',
       icon: (
-        <IconSettings class={css({
-          height: '5',
-          width: '5',
-          flexShrink: 0,
-          color: 'neutral.700',
-          _dark: { color: 'neutral.200' },
-        })} />
+        <IconSettings
+          class={css({
+            height: '5',
+            width: '5',
+            flexShrink: 0,
+            color: 'neutral.700',
+            _dark: { color: 'neutral.200' },
+          })}
+        />
       ),
     },
     {
-      label: "Logout",
-      href: "#",
+      label: 'Logout',
+      href: '#',
       icon: (
-        <IconArrowLeft class={css({
-          height: '5',
-          width: '5',
-          flexShrink: 0,
-          color: 'neutral.700',
-          _dark: { color: 'neutral.200' },
-        })} />
+        <IconArrowLeft
+          class={css({
+            height: '5',
+            width: '5',
+            flexShrink: 0,
+            color: 'neutral.700',
+            _dark: { color: 'neutral.200' },
+          })}
+        />
       ),
     },
   ];
 
   return (
-    <div class={css({
-      marginX: 'auto',
-      display: 'flex',
-      width: 'full',
-      maxWidth: '7xl',
-      flex: '1',
-      flexDirection: 'column',
-      overflow: 'hidden',
-      borderRadius: 'md',
-      border: '1px solid',
-      borderColor: 'neutral.200',
-      backgroundColor: 'gray.100',
-      height: '60vh', // for your use case, use h-screen instead
-      md: { flexDirection: 'row' },
-      _dark: {
-        borderColor: 'neutral.700',
-        backgroundColor: 'neutral.800',
-      },
-    })}>
+    <div
+      class={css({
+        marginX: 'auto',
+        display: 'flex',
+        width: 'full',
+        maxWidth: '7xl',
+        flex: '1',
+        flexDirection: 'column',
+        overflow: 'hidden',
+        borderRadius: 'md',
+        border: '1px solid',
+        borderColor: 'neutral.200',
+        backgroundColor: 'gray.100',
+        height: '60vh', // for your use case, use h-screen instead
+        md: { flexDirection: 'row' },
+        _dark: {
+          borderColor: 'neutral.700',
+          backgroundColor: 'neutral.800',
+        },
+      })}
+    >
       <Sidebar open={open()} setOpen={setOpen}>
-        <SidebarBody className={css({
-          justifyContent: 'space-between',
-          gap: '10',
-        })}>
-          <div class={css({
-            display: 'flex',
-            flex: '1',
-            flexDirection: 'column',
-            overflowX: 'hidden',
-            overflowY: 'auto',
-          })}>
+        <SidebarBody
+          className={css({
+            justifyContent: 'space-between',
+            gap: '10',
+          })}
+        >
+          <div
+            class={css({
+              display: 'flex',
+              flex: '1',
+              flexDirection: 'column',
+              overflowX: 'hidden',
+              overflowY: 'auto',
+            })}
+          >
             <Show when={open()} fallback={<LogoIcon />}>
               <Logo />
             </Show>
-            <div class={css({
-              marginTop: '8',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '2',
-            })}>
-              <For each={links}>
-                {(link) => <SidebarLink link={link} />}
-              </For>
+            <div
+              class={css({
+                marginTop: '8',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2',
+              })}
+            >
+              <For each={links}>{(link) => <SidebarLink link={link} />}</For>
             </div>
           </div>
           <div>
             <SidebarLink
               link={{
-                label: "Manu Arora",
-                href: "#",
+                label: 'Manu Arora',
+                href: '#',
                 icon: (
                   <img
                     src="https://assets.aceternity.com/manu.png"

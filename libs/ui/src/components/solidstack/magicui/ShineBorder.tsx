@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, ParentComponent } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { Component, type JSX, type ParentComponent, mergeProps } from 'solid-js';
 
 export interface ShineBorderProps {
   class?: string;
@@ -27,24 +27,27 @@ export const ShineBorder: ParentComponent<ShineBorderProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        overflow: 'hidden',
-        borderRadius: `${merged.borderRadius}px`,
-        padding: `${merged.borderWidth}px`,
-        background: `linear-gradient(45deg, transparent 30%, ${gradientColors}, transparent 70%)`,
-        backgroundSize: '200% 200%',
-        animation: `shine ${merged.duration}s ease-in-out infinite`,
-        
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          inset: `${merged.borderWidth}px`,
-          borderRadius: `${merged.borderRadius - merged.borderWidth}px`,
-          background: 'white',
-          zIndex: 1,
-        }
-      }, merged.class)}
+      class={css(
+        {
+          position: 'relative',
+          overflow: 'hidden',
+          borderRadius: `${merged.borderRadius}px`,
+          padding: `${merged.borderWidth}px`,
+          background: `linear-gradient(45deg, transparent 30%, ${gradientColors}, transparent 70%)`,
+          backgroundSize: '200% 200%',
+          animation: `shine ${merged.duration}s ease-in-out infinite`,
+
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            inset: `${merged.borderWidth}px`,
+            borderRadius: `${merged.borderRadius - merged.borderWidth}px`,
+            background: 'white',
+            zIndex: 1,
+          },
+        },
+        merged.class
+      )}
       style={{
         '--shine-duration': `${merged.duration}s`,
         '--shine-colors': gradientColors,
@@ -74,11 +77,14 @@ export interface ShineBorderCardDemoProps {
 export const ShineBorderCardDemo: ParentComponent<ShineBorderCardDemoProps> = (props) => {
   return (
     <ShineBorder
-      class={css({
-        maxWidth: '350px',
-        width: '100%',
-      }, props.class)}
-      shineColor={props.shineColor || ["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+      class={css(
+        {
+          maxWidth: '350px',
+          width: '100%',
+        },
+        props.class
+      )}
+      shineColor={props.shineColor || ['#A07CFE', '#FE8FB5', '#FFBE7B']}
     >
       <div
         class={css({

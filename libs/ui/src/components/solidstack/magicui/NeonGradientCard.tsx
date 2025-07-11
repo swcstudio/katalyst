@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, ParentComponent } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, type ParentComponent, mergeProps } from 'solid-js';
 
 export interface NeonGradientCardProps {
   class?: string;
@@ -30,12 +30,15 @@ export const NeonGradientCard: ParentComponent<NeonGradientCardProps> = (props) 
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        borderRadius: `${merged.borderRadius}px`,
-        backgroundColor: merged.backgroundColor,
-        padding: `${merged.borderSize}px`,
-      }, merged.class)}
+      class={css(
+        {
+          position: 'relative',
+          borderRadius: `${merged.borderRadius}px`,
+          backgroundColor: merged.backgroundColor,
+          padding: `${merged.borderSize}px`,
+        },
+        merged.class
+      )}
       style={{
         background: `
           linear-gradient(90deg, transparent, transparent),
@@ -54,7 +57,7 @@ export const NeonGradientCard: ParentComponent<NeonGradientCardProps> = (props) 
           backgroundColor: 'black',
           padding: '20px',
           overflow: 'hidden',
-          
+
           '&::before': {
             content: '""',
             position: 'absolute',
@@ -68,12 +71,10 @@ export const NeonGradientCard: ParentComponent<NeonGradientCardProps> = (props) 
               )
             `,
             animation: 'neonPulse 3s ease-in-out infinite',
-          }
+          },
         })}
       >
-        <div class={css({ position: 'relative', zIndex: 1 })}>
-          {props.children}
-        </div>
+        <div class={css({ position: 'relative', zIndex: 1 })}>{props.children}</div>
       </div>
     </div>
   );
@@ -86,13 +87,16 @@ export interface NeonGradientCardDemoProps {
 export const NeonGradientCardDemo: Component<NeonGradientCardDemoProps> = (props) => {
   return (
     <NeonGradientCard
-      class={css({
-        maxWidth: '384px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-      }, props.class)}
+      class={css(
+        {
+          maxWidth: '384px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+        },
+        props.class
+      )}
     >
       <span
         class={css({

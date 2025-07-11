@@ -1,15 +1,17 @@
+import { PORTS } from './ports.ts';
+
 console.log('Starting Katalyst Core development server...');
 
 try {
-  const process = Deno.run({
-    cmd: ['deno', 'run', '--allow-all', 'npm:@rsbuild/core', 'dev', '--port', '20007'],
-    cwd: './core',
+  const command = new Deno.Command('deno', {
+    args: ['run', '--allow-all', 'npm:@rsbuild/core', 'dev', '--port', PORTS.KATALYST_CORE.toString()],
+    cwd: './katalyst/core',
     stdout: 'inherit',
     stderr: 'inherit',
   });
 
-  const status = await process.status();
-  process.close();
+  const child = command.spawn();
+  const status = await child.status;
   
   if (!status.success) {
     Deno.exit(1);

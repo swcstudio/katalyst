@@ -1,70 +1,82 @@
-import { Component } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import type { Component } from 'solid-js';
 import {
+  AnimatedSubscribeButtonDemo,
+  InteractiveHoverButtonDemo,
+  PulsatingButtonDemo,
   RainbowButtonDemo,
   RainbowButtonOutlineDemo,
+  RippleButtonDemo,
   ShimmerButtonDemo,
   ShinyButtonDemo,
-  InteractiveHoverButtonDemo,
-  AnimatedSubscribeButtonDemo,
-  PulsatingButtonDemo,
-  RippleButtonDemo,
 } from './index';
 
 export const ButtonComponentsShowcase: Component = () => {
   return (
-    <div class={css({
-      padding: '40px',
-      maxWidth: '1200px',
-      margin: '0 auto',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '60px',
-    })}>
+    <div
+      class={css({
+        padding: '40px',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '60px',
+      })}
+    >
       {/* Header */}
       <div class={css({ textAlign: 'center' })}>
-        <h1 class={css({
-          fontSize: '3rem',
-          fontWeight: 'bold',
-          marginBottom: '16px',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          backgroundClip: 'text',
-          WebkitBackgroundClip: 'text',
-          color: 'transparent',
-          WebkitTextFillColor: 'transparent',
-        })}>
+        <h1
+          class={css({
+            fontSize: '3rem',
+            fontWeight: 'bold',
+            marginBottom: '16px',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
+            WebkitTextFillColor: 'transparent',
+          })}
+        >
           Interactive Button Components
         </h1>
-        <p class={css({
-          fontSize: '18px',
-          color: 'muted.foreground',
-          maxWidth: '600px',
-          margin: '0 auto',
-        })}>
+        <p
+          class={css({
+            fontSize: '18px',
+            color: 'muted.foreground',
+            maxWidth: '600px',
+            margin: '0 auto',
+          })}
+        >
           Explore our collection of beautiful and interactive button components for SolidStack-UI
         </p>
       </div>
 
       {/* Gradient & Rainbow Effects */}
-      <section class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-      })}>
-        <h2 class={css({
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: '16px',
-        })}>
+      <section
+        class={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '16px',
+          })}
+        >
           Gradient & Rainbow Effects
         </h2>
-        
-        <div class={css({
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '24px',
-        })}>
+
+        <div
+          class={css({
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: '24px',
+          })}
+        >
           <div class={css({ ...demoCardStyles })}>
             <h3 class={css({ ...demoTitleStyles })}>Rainbow Button</h3>
             <p class={css({ ...demoDescriptionStyles })}>
@@ -108,25 +120,31 @@ export const ButtonComponentsShowcase: Component = () => {
       </section>
 
       {/* Interactive Effects */}
-      <section class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-      })}>
-        <h2 class={css({
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: '16px',
-        })}>
+      <section
+        class={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '16px',
+          })}
+        >
           Interactive Effects
         </h2>
-        
-        <div class={css({
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '24px',
-        })}>
+
+        <div
+          class={css({
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: '24px',
+          })}
+        >
           <div class={css({ ...demoCardStyles })}>
             <h3 class={css({ ...demoTitleStyles })}>Interactive Hover Button</h3>
             <p class={css({ ...demoDescriptionStyles })}>
@@ -170,47 +188,59 @@ export const ButtonComponentsShowcase: Component = () => {
       </section>
 
       {/* Usage Examples Section */}
-      <section class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-      })}>
-        <h2 class={css({
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: '16px',
-        })}>
+      <section
+        class={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '16px',
+          })}
+        >
           Usage Examples
         </h2>
-        
-        <div class={css({
-          display: 'grid',
-          gridTemplateColumns: '1fr',
-          gap: '24px',
-        })}>
-          <div class={css({
-            padding: '24px',
-            border: '1px solid',
-            borderColor: 'border',
-            borderRadius: '12px',
-            backgroundColor: 'muted',
-          })}>
-            <h3 class={css({
-              fontSize: '18px',
-              fontWeight: '600',
-              marginBottom: '16px',
-              color: 'foreground',
-            })}>
+
+        <div
+          class={css({
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            gap: '24px',
+          })}
+        >
+          <div
+            class={css({
+              padding: '24px',
+              border: '1px solid',
+              borderColor: 'border',
+              borderRadius: '12px',
+              backgroundColor: 'muted',
+            })}
+          >
+            <h3
+              class={css({
+                fontSize: '18px',
+                fontWeight: '600',
+                marginBottom: '16px',
+                color: 'foreground',
+              })}
+            >
               Button Component Features
             </h3>
-            <div class={css({
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-              gap: '16px',
-              fontSize: '14px',
-              color: 'muted.foreground',
-            })}>
+            <div
+              class={css({
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                gap: '16px',
+                fontSize: '14px',
+                color: 'muted.foreground',
+              })}
+            >
               <div>
                 <h4 class={css({ fontWeight: '600', marginBottom: '8px', color: 'foreground' })}>
                   🎨 Visual Effects
@@ -261,47 +291,57 @@ export const ButtonComponentsShowcase: Component = () => {
       </section>
 
       {/* Code Example Section */}
-      <section class={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '24px',
-      })}>
-        <h2 class={css({
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: '16px',
-        })}>
+      <section
+        class={css({
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '24px',
+        })}
+      >
+        <h2
+          class={css({
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '16px',
+          })}
+        >
           Quick Start
         </h2>
-        
-        <div class={css({
-          padding: '24px',
-          backgroundColor: 'muted',
-          borderRadius: '12px',
-          border: '1px solid',
-          borderColor: 'border',
-        })}>
-          <h3 class={css({
-            fontSize: '18px',
-            fontWeight: '600',
-            marginBottom: '16px',
-            color: 'foreground',
-          })}>
-            Import and Use
-          </h3>
-          <div class={css({
-            backgroundColor: 'background',
-            padding: '16px',
-            borderRadius: '8px',
+
+        <div
+          class={css({
+            padding: '24px',
+            backgroundColor: 'muted',
+            borderRadius: '12px',
             border: '1px solid',
             borderColor: 'border',
-            fontFamily: 'monospace',
-            fontSize: '14px',
-            overflow: 'auto',
-          })}>
+          })}
+        >
+          <h3
+            class={css({
+              fontSize: '18px',
+              fontWeight: '600',
+              marginBottom: '16px',
+              color: 'foreground',
+            })}
+          >
+            Import and Use
+          </h3>
+          <div
+            class={css({
+              backgroundColor: 'background',
+              padding: '16px',
+              borderRadius: '8px',
+              border: '1px solid',
+              borderColor: 'border',
+              fontFamily: 'monospace',
+              fontSize: '14px',
+              overflow: 'auto',
+            })}
+          >
             <pre class={css({ margin: 0, color: 'foreground' })}>
-{`import { 
+              {`import { 
   RainbowButton,
   ShimmerButton,
   RippleButton 
@@ -323,24 +363,30 @@ export const ButtonComponentsShowcase: Component = () => {
       </section>
 
       {/* Footer */}
-      <footer class={css({
-        textAlign: 'center',
-        padding: '40px 0',
-        borderTop: '1px solid',
-        borderColor: 'border',
-        marginTop: '40px',
-      })}>
-        <p class={css({
-          fontSize: '16px',
-          color: 'muted.foreground',
-        })}>
+      <footer
+        class={css({
+          textAlign: 'center',
+          padding: '40px 0',
+          borderTop: '1px solid',
+          borderColor: 'border',
+          marginTop: '40px',
+        })}
+      >
+        <p
+          class={css({
+            fontSize: '16px',
+            color: 'muted.foreground',
+          })}
+        >
           Built with SolidStack-UI • Interactive Button Components
         </p>
-        <p class={css({
-          fontSize: '14px',
-          color: 'muted.foreground',
-          marginTop: '8px',
-        })}>
+        <p
+          class={css({
+            fontSize: '14px',
+            color: 'muted.foreground',
+            marginTop: '8px',
+          })}
+        >
           Perfect for modern web applications ✨
         </p>
       </footer>

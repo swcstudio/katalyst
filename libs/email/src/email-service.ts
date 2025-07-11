@@ -1,6 +1,12 @@
-import { createResendClient, getDefaultResendClient, ResendClient, ResendError, SendEmailOptions } from './resend-client.ts';
-import { SSETemplates } from './templates/sse-templates.ts';
 import { z } from 'npm:zod';
+import {
+  type ResendClient,
+  ResendError,
+  SendEmailOptions,
+  createResendClient,
+  getDefaultResendClient,
+} from './resend-client.ts';
+import { SSETemplates } from './templates/sse-templates.ts';
 
 export interface EmailServiceConfig {
   resendApiKey?: string;
@@ -15,7 +21,7 @@ export interface EmailAnalytics {
   recipient: string;
   status: 'sent' | 'failed' | 'bounced' | 'delivered';
   timestamp: Date;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface ContactFormEmailData {
@@ -29,7 +35,11 @@ export interface ContactFormEmailData {
 export interface WaitlistEmailData {
   firstName: string;
   email: string;
-  product: 'solidstack-enterprise' | 'cloud-native-boilerplate' | 'ai-agent-framework' | 'micro-frontend-toolkit';
+  product:
+    | 'solidstack-enterprise'
+    | 'cloud-native-boilerplate'
+    | 'ai-agent-framework'
+    | 'micro-frontend-toolkit';
   position: number;
   estimatedLaunch: string;
   benefits: string[];
@@ -78,7 +88,7 @@ export interface BatchEmailRequest {
   template: string;
   recipients: Array<{
     email: string;
-    data: any;
+    data: ContactFormEmailData | WaitlistEmailData | NewsletterEmailData | UserWelcomeEmailData | AIAgentEmailData | PaymentEmailData;
   }>;
   options?: {
     delay?: number;
@@ -111,16 +121,17 @@ export class EmailService {
   constructor(config: EmailServiceConfig = {}) {
     this.config = {
       resendApiKey: config.resendApiKey || Deno.env.get('RESEND_API_KEY') || '',
-      defaultFrom: config.defaultFrom || Deno.env.get('RESEND_DEFAULT_FROM') || 'noreply@spectrumwebco.com.au',
+      defaultFrom:
+        config.defaultFrom || Deno.env.get('RESEND_DEFAULT_FROM') || 'noreply@spectrumwebco.com.au',
       dryRun: config.dryRun || Deno.env.get('EMAIL_DRY_RUN') === 'true',
       trackingEnabled: config.trackingEnabled ?? true,
-      retryAttempts: config.retryAttempts || 3
+      retryAttempts: config.retryAttempts || 3,
     };
 
     if (config.resendApiKey) {
       this.resendClient = createResendClient({
         apiKey: config.resendApiKey,
-        defaultFrom: this.config.defaultFrom
+        defaultFrom: this.config.defaultFrom,
       });
     } else {
       this.resendClient = getDefaultResendClient();
@@ -130,7 +141,7 @@ export class EmailService {
   // Contact form confirmation email
   async sendContactConfirmation(data: ContactFormEmailData): Promise<EmailSendResult> {
     const html = SSETemplates.contactConfirmation(data);
-    
+
     return this.sendEmail({
       template: 'contact-confirmation',
       to: data.email,
@@ -139,15 +150,15 @@ export class EmailService {
       metadata: {
         template: 'contact-confirmation',
         referenceId: data.referenceId,
-        subject: data.subject
-      }
+        subject: data.subject,
+      },
     });
   }
 
   // Waitlist confirmation email
   async sendWaitlistConfirmation(data: WaitlistEmailData): Promise<EmailSendResult> {
     const html = SSETemplates.waitlistConfirmation(data);
-    
+
     return this.sendEmail({
       template: 'waitlist-confirmation',
       to: data.email,
@@ -156,15 +167,15 @@ export class EmailService {
       metadata: {
         template: 'waitlist-confirmation',
         product: data.product,
-        position: data.position.toString()
-      }
+        position: data.position.toString(),
+      },
     });
   }
 
   // Newsletter double opt-in email
   async sendNewsletterConfirmation(data: NewsletterEmailData): Promise<EmailSendResult> {
     const html = SSETemplates.newsletterConfirmation(data);
-    
+
     return this.sendEmail({
       template: 'newsletter-confirmation',
       to: data.email,
@@ -173,15 +184,15 @@ export class EmailService {
       metadata: {
         template: 'newsletter-confirmation',
         interests: data.interests.join(','),
-        frequency: data.frequency
-      }
+        frequency: data.frequency,
+      },
     });
   }
 
   // User welcome email after registration
   async sendUserWelcome(data: UserWelcomeEmailData): Promise<EmailSendResult> {
     const html = SSETemplates.userWelcome(data);
-    
+
     return this.sendEmail({
       template: 'user-welcome',
       to: data.email,
@@ -190,15 +201,15 @@ export class EmailService {
       metadata: {
         template: 'user-welcome',
         plan: data.plan,
-        featuresCount: data.features.length.toString()
-      }
+        featuresCount: data.features.length.toString(),
+      },
     });
   }
 
   // AI Agent session notification
   async sendAIAgentNotification(data: AIAgentEmailData): Promise<EmailSendResult> {
     const html = SSETemplates.aiAgentNotification(data);
-    
+
     return this.sendEmail({
       template: 'ai-agent-notification',
       to: data.userName, // Assuming userName contains email, adjust if needed
@@ -208,15 +219,15 @@ export class EmailService {
         template: 'ai-agent-notification',
         context: data.context,
         tokensUsed: data.tokensUsed.toString(),
-        remainingCalls: data.remainingCalls.toString()
-      }
+        remainingCalls: data.remainingCalls.toString(),
+      },
     });
   }
 
   // Payment confirmation email
   async sendPaymentConfirmation(data: PaymentEmailData): Promise<EmailSendResult> {
     const html = SSETemplates.paymentConfirmation(data);
-    
+
     return this.sendEmail({
       template: 'payment-confirmation',
       to: data.email,
@@ -226,8 +237,8 @@ export class EmailService {
         template: 'payment-confirmation',
         plan: data.plan,
         amount: data.amount.toString(),
-        currency: data.currency
-      }
+        currency: data.currency,
+      },
     });
   }
 
@@ -255,12 +266,17 @@ export class EmailService {
         console.log('DRY RUN - Email would be sent:', {
           template: options.template,
           to: options.to,
-          subject: options.subject
+          subject: options.subject,
         });
         return {
           success: true,
           messageId: `dry-run-${Date.now()}`,
-          analytics: this.createAnalyticsEntry(options.template, recipients[0], 'sent', options.metadata)
+          analytics: this.createAnalyticsEntry(
+            options.template,
+            recipients[0],
+            'sent',
+            options.metadata
+          ),
         };
       }
 
@@ -277,12 +293,17 @@ export class EmailService {
             tags: [
               { name: 'template', value: options.template },
               { name: 'environment', value: Deno.env.get('NODE_ENV') || 'development' },
-              ...(options.tags || [])
+              ...(options.tags || []),
             ],
-            metadata: options.metadata
+            metadata: options.metadata,
           });
 
-          const analytics = this.createAnalyticsEntry(options.template, recipients[0], 'sent', options.metadata);
+          const analytics = this.createAnalyticsEntry(
+            options.template,
+            recipients[0],
+            'sent',
+            options.metadata
+          );
           if (this.config.trackingEnabled) {
             this.analytics.push(analytics);
             await this.trackEmailSent(analytics);
@@ -291,19 +312,24 @@ export class EmailService {
           return {
             success: true,
             messageId: result.id,
-            analytics
+            analytics,
           };
         } catch (error) {
           lastError = error;
           if (attempt < this.config.retryAttempts - 1) {
             // Wait before retry with exponential backoff
-            await this.delay(Math.pow(2, attempt) * 1000);
+            await this.delay(2 ** attempt * 1000);
           }
         }
       }
 
       // All retries failed
-      const analytics = this.createAnalyticsEntry(options.template, recipients[0], 'failed', options.metadata);
+      const analytics = this.createAnalyticsEntry(
+        options.template,
+        recipients[0],
+        'failed',
+        options.metadata
+      );
       if (this.config.trackingEnabled) {
         this.analytics.push(analytics);
       }
@@ -311,11 +337,15 @@ export class EmailService {
       return {
         success: false,
         error: lastError?.message || 'Unknown error',
-        analytics
+        analytics,
       };
-
     } catch (error) {
-      const analytics = this.createAnalyticsEntry(options.template, Array.isArray(options.to) ? options.to[0] : options.to, 'failed', options.metadata);
+      const analytics = this.createAnalyticsEntry(
+        options.template,
+        Array.isArray(options.to) ? options.to[0] : options.to,
+        'failed',
+        options.metadata
+      );
       if (this.config.trackingEnabled) {
         this.analytics.push(analytics);
       }
@@ -323,7 +353,7 @@ export class EmailService {
       return {
         success: false,
         error: error.message,
-        analytics
+        analytics,
       };
     }
   }
@@ -384,8 +414,8 @@ export class EmailService {
             metadata: {
               template,
               batchId: `batch-${Date.now()}`,
-              ...recipient.data
-            }
+              ...recipient.data,
+            },
           });
 
           if (result.success) {
@@ -402,16 +432,22 @@ export class EmailService {
           return {
             success: false,
             error: error.message,
-            analytics: this.createAnalyticsEntry(template, recipient.email, 'failed')
+            analytics: this.createAnalyticsEntry(template, recipient.email, 'failed'),
           };
         }
       });
 
       const batchResults = await Promise.allSettled(batchPromises);
-      results.push(...batchResults.map(r => r.status === 'fulfilled' ? r.value : {
-        success: false,
-        error: r.reason?.message || 'Unknown error'
-      }));
+      results.push(
+        ...batchResults.map((r) =>
+          r.status === 'fulfilled'
+            ? r.value
+            : {
+                success: false,
+                error: r.reason?.message || 'Unknown error',
+              }
+        )
+      );
 
       // Delay between batches to respect rate limits
       if (i + batchSize < recipients.length && delay > 0) {
@@ -423,7 +459,7 @@ export class EmailService {
       successful,
       failed,
       results,
-      errors
+      errors,
     };
   }
 
@@ -438,16 +474,16 @@ export class EmailService {
 
     if (filter) {
       if (filter.template) {
-        filtered = filtered.filter(a => a.templateName === filter.template);
+        filtered = filtered.filter((a) => a.templateName === filter.template);
       }
       if (filter.status) {
-        filtered = filtered.filter(a => a.status === filter.status);
+        filtered = filtered.filter((a) => a.status === filter.status);
       }
       if (filter.startDate) {
-        filtered = filtered.filter(a => a.timestamp >= filter.startDate!);
+        filtered = filtered.filter((a) => a.timestamp >= filter.startDate!);
       }
       if (filter.endDate) {
-        filtered = filtered.filter(a => a.timestamp <= filter.endDate!);
+        filtered = filtered.filter((a) => a.timestamp <= filter.endDate!);
       }
     }
 
@@ -455,25 +491,25 @@ export class EmailService {
   }
 
   // Health check
-  async healthCheck(): Promise<{ status: 'healthy' | 'unhealthy'; details: any }> {
+  async healthCheck(): Promise<{ status: 'healthy' | 'unhealthy'; details: Record<string, unknown> }> {
     try {
       const rateLimitInfo = this.resendClient.getRateLimitInfo();
-      
+
       return {
         status: 'healthy',
         details: {
           rateLimitRemaining: rateLimitInfo?.remaining || 'unknown',
           analyticsCount: this.analytics.length,
           dryRunMode: this.config.dryRun,
-          trackingEnabled: this.config.trackingEnabled
-        }
+          trackingEnabled: this.config.trackingEnabled,
+        },
       };
     } catch (error) {
       return {
         status: 'unhealthy',
         details: {
-          error: error.message
-        }
+          error: error.message,
+        },
       };
     }
   }
@@ -488,14 +524,14 @@ export class EmailService {
     templateName: string,
     recipient: string,
     status: 'sent' | 'failed' | 'bounced' | 'delivered',
-    metadata?: Record<string, any>
+    metadata?: Record<string, unknown>
   ): EmailAnalytics {
     return {
       templateName,
       recipient,
       status,
       timestamp: new Date(),
-      metadata
+      metadata,
     };
   }
 
@@ -506,7 +542,7 @@ export class EmailService {
   }
 
   private delay(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
 

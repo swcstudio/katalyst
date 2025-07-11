@@ -1,5 +1,5 @@
-import { Component, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, createSignal, onCleanup, onMount } from 'solid-js';
 
 // Placeholder SmoothCursor component - this would need to be implemented separately
 const SmoothCursor: Component = () => {
@@ -50,27 +50,31 @@ const SmoothCursor: Component = () => {
       }}
     >
       {/* Outer ring */}
-      <div class={css({
-        width: '40px',
-        height: '40px',
-        border: '2px solid white',
-        borderRadius: 'full',
-        position: 'absolute',
-        animation: 'pulse 2s infinite',
-      })} />
-      
+      <div
+        class={css({
+          width: '40px',
+          height: '40px',
+          border: '2px solid white',
+          borderRadius: 'full',
+          position: 'absolute',
+          animation: 'pulse 2s infinite',
+        })}
+      />
+
       {/* Inner dot */}
-      <div class={css({
-        width: '20px',
-        height: '20px',
-        backgroundColor: 'white',
-        borderRadius: 'full',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-      })} />
-      
+      <div
+        class={css({
+          width: '20px',
+          height: '20px',
+          backgroundColor: 'white',
+          borderRadius: 'full',
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        })}
+      />
+
       <style>{`
         @keyframes pulse {
           0% { transform: scale(1); opacity: 1; }
@@ -84,46 +88,52 @@ const SmoothCursor: Component = () => {
 
 export const SmoothCursorDemo: Component = () => {
   return (
-    <div class={css({
-      padding: '8',
-      textAlign: 'center',
-      minHeight: '200px',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'gray.50',
-      borderRadius: 'lg',
-      _dark: {
-        backgroundColor: 'gray.900',
-      },
-    })}>
-      <span class={css({
-        display: 'none',
-        fontSize: 'lg',
-        color: 'gray.700',
-        marginBottom: '4',
-        md: {
-          display: 'block',
-        },
+    <div
+      class={css({
+        padding: '8',
+        textAlign: 'center',
+        minHeight: '200px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'gray.50',
+        borderRadius: 'lg',
         _dark: {
-          color: 'gray.300',
+          backgroundColor: 'gray.900',
         },
-      })}>
+      })}
+    >
+      <span
+        class={css({
+          display: 'none',
+          fontSize: 'lg',
+          color: 'gray.700',
+          marginBottom: '4',
+          md: {
+            display: 'block',
+          },
+          _dark: {
+            color: 'gray.300',
+          },
+        })}
+      >
         Move your mouse around
       </span>
-      <span class={css({
-        display: 'block',
-        fontSize: 'lg',
-        color: 'gray.700',
-        marginBottom: '4',
-        md: {
-          display: 'none',
-        },
-        _dark: {
-          color: 'gray.300',
-        },
-      })}>
+      <span
+        class={css({
+          display: 'block',
+          fontSize: 'lg',
+          color: 'gray.700',
+          marginBottom: '4',
+          md: {
+            display: 'none',
+          },
+          _dark: {
+            color: 'gray.300',
+          },
+        })}
+      >
         Tap anywhere to see the cursor
       </span>
       <SmoothCursor />

@@ -1,10 +1,10 @@
-import { EmailTemplateEngine, EmailTheme, TemplateProps } from '../template-engine.ts';
+import { EmailTemplateEngine, type EmailTheme, TemplateProps } from '../template-engine.ts';
 
 // SolidStack Enterprise Brand Theme
 const sseTheme: EmailTheme = {
   colors: {
     primary: '#2563eb',
-    secondary: '#64748b', 
+    secondary: '#64748b',
     accent: '#8b5cf6',
     background: '#ffffff',
     surface: '#f8fafc',
@@ -13,32 +13,32 @@ const sseTheme: EmailTheme = {
     border: '#e2e8f0',
     success: '#10b981',
     warning: '#f59e0b',
-    error: '#ef4444'
+    error: '#ef4444',
   },
   fonts: {
     primary: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     secondary: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
-    mono: 'JetBrains Mono, ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, monospace'
+    mono: 'JetBrains Mono, ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, monospace',
   },
   spacing: {
     xs: '4px',
-    sm: '8px', 
+    sm: '8px',
     md: '16px',
     lg: '24px',
     xl: '32px',
-    xxl: '48px'
+    xxl: '48px',
   },
   borderRadius: {
     sm: '6px',
     md: '8px',
     lg: '12px',
-    full: '9999px'
+    full: '9999px',
   },
   shadows: {
     sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
     md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
-  }
+    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+  },
 };
 
 const templateEngine = new EmailTemplateEngine(sseTheme);
@@ -56,7 +56,7 @@ export const SSETemplates = {
       ${templateEngine.createHeader({
         logo: 'https://spectrumwebco.com.au/assets/logo-email.png',
         title: 'Thank You for Contacting Us',
-        subtitle: 'We\'ve received your message and will respond within 24 hours'
+        subtitle: "We've received your message and will respond within 24 hours",
       })}
       
       <div style="padding: 32px; background-color: #ffffff;">
@@ -71,7 +71,7 @@ export const SSETemplates = {
         ${templateEngine.createCard({
           title: 'Your Message:',
           content: `<p style="font-style: italic; color: #64748b;">"${props.message}"</p>`,
-          footer: `Reference ID: ${props.referenceId}`
+          footer: `Reference ID: ${props.referenceId}`,
         })}
         
         ${templateEngine.createCard({
@@ -82,9 +82,9 @@ export const SSETemplates = {
               '<a href="https://docs.spectrumwebco.com.au" style="color: #2563eb; text-decoration: underline;">SolidStack Enterprise Documentation</a>',
               '<a href="https://blog.spectrumwebco.com.au" style="color: #2563eb; text-decoration: underline;">Technical Blog & Tutorials</a>',
               '<a href="https://spectrumwebco.com.au/case-studies" style="color: #2563eb; text-decoration: underline;">Case Studies & Success Stories</a>',
-              '<a href="https://store.spectrumwebco.com.au" style="color: #2563eb; text-decoration: underline;">Premium Boilerplates & Tools</a>'
+              '<a href="https://store.spectrumwebco.com.au" style="color: #2563eb; text-decoration: underline;">Premium Boilerplates & Tools</a>',
             ])}
-          `
+          `,
         })}
         
         <p style="margin: 24px 0 0 0; font-size: 16px; line-height: 1.6; color: #1e293b;">
@@ -100,16 +100,19 @@ export const SSETemplates = {
         socialLinks: [
           { platform: 'GitHub', url: 'https://github.com/spectrum-web-co' },
           { platform: 'LinkedIn', url: 'https://linkedin.com/company/spectrum-web-co' },
-          { platform: 'Twitter', url: 'https://twitter.com/spectrumwebco' }
-        ]
+          { platform: 'Twitter', url: 'https://twitter.com/spectrumwebco' },
+        ],
       })}
     `;
 
-    return templateEngine.createLayout({
-      name: 'contact-confirmation',
-      subject: 'Thank you for contacting Spectrum Web Co',
-      preheader: 'We\'ve received your message and will respond within 24 hours'
-    }, content);
+    return templateEngine.createLayout(
+      {
+        name: 'contact-confirmation',
+        subject: 'Thank you for contacting Spectrum Web Co',
+        preheader: "We've received your message and will respond within 24 hours",
+      },
+      content
+    );
   },
 
   // Waitlist confirmation template
@@ -126,7 +129,7 @@ export const SSETemplates = {
       'solidstack-enterprise': 'SolidStack Enterprise',
       'cloud-native-boilerplate': 'Cloud-Native Boilerplate',
       'ai-agent-framework': 'AI Agent Framework',
-      'micro-frontend-toolkit': 'Micro Frontend Toolkit'
+      'micro-frontend-toolkit': 'Micro Frontend Toolkit',
     };
 
     const productName = productNames[props.product as keyof typeof productNames] || props.product;
@@ -135,7 +138,7 @@ export const SSETemplates = {
       ${templateEngine.createHeader({
         logo: 'https://spectrumwebco.com.au/assets/logo-email.png',
         title: `Welcome to the ${productName} Waitlist! 🎉`,
-        subtitle: 'You\'re one step closer to next-generation development tools'
+        subtitle: "You're one step closer to next-generation development tools",
       })}
       
       <div style="padding: 32px; background-color: #ffffff;">
@@ -153,8 +156,8 @@ export const SSETemplates = {
         </div>
         
         ${templateEngine.createCard({
-          title: 'What You\'ll Get:',
-          content: templateEngine.createList(props.benefits)
+          title: "What You'll Get:",
+          content: templateEngine.createList(props.benefits),
         })}
         
         <div style="background: #eff6ff; border-left: 4px solid #3b82f6; padding: 16px; margin: 24px 0; border-radius: 8px;">
@@ -167,7 +170,7 @@ export const SSETemplates = {
           ${templateEngine.createButton({
             text: 'Share with Friends',
             url: `https://spectrumwebco.com.au/waitlist/share?product=${props.product}&ref=${props.referralCode}`,
-            variant: 'outline'
+            variant: 'outline',
           })}
         </div>
         
@@ -188,15 +191,18 @@ export const SSETemplates = {
       ${templateEngine.createFooter({
         companyName: 'Spectrum Web Co LLC',
         address: 'Brisbane, Australia',
-        unsubscribeUrl: `https://spectrumwebco.com.au/unsubscribe?email=${props.email}&type=waitlist`
+        unsubscribeUrl: `https://spectrumwebco.com.au/unsubscribe?email=${props.email}&type=waitlist`,
       })}
     `;
 
-    return templateEngine.createLayout({
-      name: 'waitlist-confirmation',
-      subject: `Welcome to the ${productName} waitlist! You're #${props.position}`,
-      preheader: `You're #${props.position} in line for early access to ${productName}`
-    }, content);
+    return templateEngine.createLayout(
+      {
+        name: 'waitlist-confirmation',
+        subject: `Welcome to the ${productName} waitlist! You're #${props.position}`,
+        preheader: `You're #${props.position} in line for early access to ${productName}`,
+      },
+      content
+    );
   },
 
   // Newsletter double opt-in template
@@ -208,21 +214,21 @@ export const SSETemplates = {
     confirmationUrl: string;
   }) => {
     const interestDescriptions = {
-      'solidjs': 'SolidJS tutorials and best practices',
+      solidjs: 'SolidJS tutorials and best practices',
       'cloud-native': 'Cloud-native architecture patterns',
       'micro-frontends': 'Micro frontend implementation guides',
-      'kubernetes': 'Kubernetes deployment strategies',
+      kubernetes: 'Kubernetes deployment strategies',
       'ai-automation': 'AI-powered development tools',
-      'devops': 'DevOps practices and CI/CD',
-      'enterprise': 'Enterprise-grade solutions',
-      'tutorials': 'Step-by-step development tutorials'
+      devops: 'DevOps practices and CI/CD',
+      enterprise: 'Enterprise-grade solutions',
+      tutorials: 'Step-by-step development tutorials',
     };
 
     const content = `
       ${templateEngine.createHeader({
         logo: 'https://spectrumwebco.com.au/assets/logo-email.png',
         title: 'Almost There! 📧',
-        subtitle: 'Please confirm your newsletter subscription'
+        subtitle: 'Please confirm your newsletter subscription',
       })}
       
       <div style="padding: 32px; background-color: #ffffff;">
@@ -238,19 +244,20 @@ export const SSETemplates = {
           text: 'Confirm Subscription',
           url: props.confirmationUrl,
           variant: 'primary',
-          fullWidth: true
+          fullWidth: true,
         })}
         
         ${templateEngine.createCard({
-          title: 'What You\'ll Receive:',
+          title: "What You'll Receive:",
           content: `
             ${templateEngine.createList(
-              props.interests.map(interest => 
-                interestDescriptions[interest as keyof typeof interestDescriptions] || interest
+              props.interests.map(
+                (interest) =>
+                  interestDescriptions[interest as keyof typeof interestDescriptions] || interest
               )
             )}
             <p style="margin: 16px 0 0 0; color: #64748b;"><strong>Frequency:</strong> ${props.frequency.charAt(0).toUpperCase() + props.frequency.slice(1)} updates</p>
-          `
+          `,
         })}
         
         <div style="background: #f0f9ff; border: 1px solid #0ea5e9; padding: 16px; border-radius: 8px; margin: 24px 0;">
@@ -275,15 +282,18 @@ export const SSETemplates = {
       ${templateEngine.createFooter({
         companyName: 'Spectrum Web Co LLC',
         address: 'Brisbane, Australia',
-        unsubscribeUrl: 'https://spectrumwebco.com.au/unsubscribe'
+        unsubscribeUrl: 'https://spectrumwebco.com.au/unsubscribe',
       })}
     `;
 
-    return templateEngine.createLayout({
-      name: 'newsletter-confirmation',
-      subject: 'Please confirm your newsletter subscription',
-      preheader: 'One click to start receiving premium development content'
-    }, content);
+    return templateEngine.createLayout(
+      {
+        name: 'newsletter-confirmation',
+        subject: 'Please confirm your newsletter subscription',
+        preheader: 'One click to start receiving premium development content',
+      },
+      content
+    );
   },
 
   // Welcome email for new authenticated users
@@ -299,7 +309,7 @@ export const SSETemplates = {
       ${templateEngine.createHeader({
         logo: 'https://spectrumwebco.com.au/assets/logo-email.png',
         title: `Welcome to SolidStack Enterprise, ${props.firstName}!`,
-        subtitle: 'Your cloud-native development journey starts now'
+        subtitle: 'Your cloud-native development journey starts now',
       })}
       
       <div style="padding: 32px; background-color: #ffffff;">
@@ -319,12 +329,12 @@ export const SSETemplates = {
         ${templateEngine.createButton({
           text: 'Access Your Dashboard',
           url: props.dashboardUrl,
-          variant: 'primary'
+          variant: 'primary',
         })}
         
         ${templateEngine.createCard({
           title: 'Your Features & Benefits:',
-          content: templateEngine.createList(props.features)
+          content: templateEngine.createList(props.features),
         })}
         
         ${templateEngine.createCard({
@@ -337,7 +347,7 @@ export const SSETemplates = {
               <li style="margin: 8px 0;"><a href="${props.dashboardUrl}/ai-agent" style="color: #2563eb; text-decoration: underline;">Try our AI coding assistant</a></li>
               <li style="margin: 8px 0;"><a href="https://docs.spectrumwebco.com.au" style="color: #2563eb; text-decoration: underline;">Explore the documentation</a></li>
             </ol>
-          `
+          `,
         })}
         
         <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; margin: 24px 0; border-radius: 8px;">
@@ -357,16 +367,19 @@ export const SSETemplates = {
         socialLinks: [
           { platform: 'GitHub', url: 'https://github.com/spectrum-web-co' },
           { platform: 'Docs', url: 'https://docs.spectrumwebco.com.au' },
-          { platform: 'Support', url: `${props.dashboardUrl}/support` }
-        ]
+          { platform: 'Support', url: `${props.dashboardUrl}/support` },
+        ],
       })}
     `;
 
-    return templateEngine.createLayout({
-      name: 'user-welcome',
-      subject: `Welcome to SolidStack Enterprise, ${props.firstName}! 🚀`,
-      preheader: 'Your cloud-native development platform is ready'
-    }, content);
+    return templateEngine.createLayout(
+      {
+        name: 'user-welcome',
+        subject: `Welcome to SolidStack Enterprise, ${props.firstName}! 🚀`,
+        preheader: 'Your cloud-native development platform is ready',
+      },
+      content
+    );
   },
 
   // AI Agent usage notification
@@ -379,21 +392,22 @@ export const SSETemplates = {
     upgradeUrl?: string;
   }) => {
     const contextLabels = {
-      'infrastructure': 'Infrastructure Architecture',
-      'terraform': 'Terraform Configuration',
-      'kubernetes': 'Kubernetes Deployment',
+      infrastructure: 'Infrastructure Architecture',
+      terraform: 'Terraform Configuration',
+      kubernetes: 'Kubernetes Deployment',
       'code-generation': 'Code Generation',
-      'troubleshooting': 'Troubleshooting',
-      'security': 'Security Analysis'
+      troubleshooting: 'Troubleshooting',
+      security: 'Security Analysis',
     };
 
-    const contextLabel = contextLabels[props.context as keyof typeof contextLabels] || props.context;
+    const contextLabel =
+      contextLabels[props.context as keyof typeof contextLabels] || props.context;
 
     const content = `
       ${templateEngine.createHeader({
         logo: 'https://spectrumwebco.com.au/assets/logo-email.png',
         title: '🤖 AI Assistant Session Complete',
-        subtitle: 'Your cloud-native architecture consultation is ready'
+        subtitle: 'Your cloud-native architecture consultation is ready',
       })}
       
       <div style="padding: 32px; background-color: #ffffff;">
@@ -408,7 +422,7 @@ export const SSETemplates = {
         ${templateEngine.createButton({
           text: 'View Complete Response',
           url: props.conversationUrl,
-          variant: 'primary'
+          variant: 'primary',
         })}
         
         <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 24px 0; border: 1px solid #e2e8f0;">
@@ -427,11 +441,15 @@ export const SSETemplates = {
           </div>
         </div>
         
-        ${props.remainingCalls < 10 ? `
+        ${
+          props.remainingCalls < 10
+            ? `
           <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 16px; margin: 24px 0; border-radius: 8px;">
             <p style="margin: 0; color: #dc2626;"><strong>⚠️ Low AI Credits:</strong> You have ${props.remainingCalls} AI calls remaining today. ${props.upgradeUrl ? `<a href="${props.upgradeUrl}" style="color: #dc2626; text-decoration: underline;">Upgrade your plan</a> for unlimited access.` : ''}</p>
           </div>
-        ` : ''}
+        `
+            : ''
+        }
         
         <div style="background: #eff6ff; border: 1px solid #3b82f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
           <p style="margin: 0 0 12px 0; color: #1e40af; font-weight: 600;">💡 Pro Tip:</p>
@@ -445,15 +463,18 @@ export const SSETemplates = {
       
       ${templateEngine.createFooter({
         companyName: 'Spectrum Web Co LLC',
-        address: 'Brisbane, Australia'
+        address: 'Brisbane, Australia',
       })}
     `;
 
-    return templateEngine.createLayout({
-      name: 'ai-agent-notification',
-      subject: `🤖 Your ${contextLabel} solution is ready`,
-      preheader: `AI assistant has completed your ${contextLabel} analysis`
-    }, content);
+    return templateEngine.createLayout(
+      {
+        name: 'ai-agent-notification',
+        subject: `🤖 Your ${contextLabel} solution is ready`,
+        preheader: `AI assistant has completed your ${contextLabel} analysis`,
+      },
+      content
+    );
   },
 
   // Payment confirmation template
@@ -472,7 +493,7 @@ export const SSETemplates = {
       ${templateEngine.createHeader({
         logo: 'https://spectrumwebco.com.au/assets/logo-email.png',
         title: 'Payment Confirmed! 💳',
-        subtitle: 'Thank you for your purchase'
+        subtitle: 'Thank you for your purchase',
       })}
       
       <div style="padding: 32px; background-color: #ffffff;">
@@ -493,19 +514,19 @@ export const SSETemplates = {
           ${templateEngine.createButton({
             text: 'Access Dashboard',
             url: props.dashboardUrl,
-            variant: 'primary'
+            variant: 'primary',
           })}
           <div style="flex: 1;"></div>
           ${templateEngine.createButton({
             text: 'Download Invoice',
             url: props.invoiceUrl,
-            variant: 'outline'
+            variant: 'outline',
           })}
         </div>
         
         ${templateEngine.createCard({
           title: 'Your Active Features:',
-          content: templateEngine.createList(props.features)
+          content: templateEngine.createList(props.features),
         })}
         
         <div style="background: #f0f9ff; border: 1px solid #0ea5e9; padding: 16px; border-radius: 8px; margin: 24px 0;">
@@ -535,17 +556,20 @@ export const SSETemplates = {
         socialLinks: [
           { platform: 'Support', url: `${props.dashboardUrl}/support` },
           { platform: 'Billing', url: 'mailto:billing@spectrumwebco.com.au' },
-          { platform: 'Community', url: 'https://discord.gg/spectrumwebco' }
-        ]
+          { platform: 'Community', url: 'https://discord.gg/spectrumwebco' },
+        ],
       })}
     `;
 
-    return templateEngine.createLayout({
-      name: 'payment-confirmation',
-      subject: `Payment Confirmed - ${props.plan} Plan Activated! 💳`,
-      preheader: `Your ${props.currency.toUpperCase()} ${props.amount} payment has been processed successfully`
-    }, content);
-  }
+    return templateEngine.createLayout(
+      {
+        name: 'payment-confirmation',
+        subject: `Payment Confirmed - ${props.plan} Plan Activated! 💳`,
+        preheader: `Your ${props.currency.toUpperCase()} ${props.amount} payment has been processed successfully`,
+      },
+      content
+    );
+  },
 };
 
 /*

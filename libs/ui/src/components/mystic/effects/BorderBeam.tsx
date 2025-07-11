@@ -1,5 +1,5 @@
-import { Component, JSX, mergeProps, children } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, type JSX, children, mergeProps } from 'solid-js';
 
 export interface BorderBeamProps {
   children?: JSX.Element;
@@ -32,16 +32,19 @@ const BorderBeam: Component<BorderBeamProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        display: 'inline-block',
-        overflow: 'hidden',
-        borderRadius: 'inherit',
-      }, merged.className)}
+      class={css(
+        {
+          position: 'relative',
+          display: 'inline-block',
+          overflow: 'hidden',
+          borderRadius: 'inherit',
+        },
+        merged.className
+      )}
       style={merged.style}
     >
       {resolved()}
-      
+
       <div
         class={css({
           position: 'absolute',

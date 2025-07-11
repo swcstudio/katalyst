@@ -1,6 +1,6 @@
-import { Component, JSX, For, createSignal } from 'solid-js';
 import { cx } from '@sse/ui/styled-system/css';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, For, JSX, createSignal } from 'solid-js';
 
 export interface CodeBlockProps {
   language: string;
@@ -47,7 +47,7 @@ export const CodeBlockDemo: Component = () => {
 
 export const CodeBlock: Component<CodeBlockProps> = (props) => {
   const [copied, setCopied] = createSignal(false);
-  
+
   const lines = () => props.code.split('\n');
   const highlightSet = () => new Set(props.highlightLines || []);
 
@@ -72,59 +72,69 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
           backgroundColor: 'gray.50',
           _dark: {
             borderColor: 'gray.800',
-            backgroundColor: 'gray.900'
-          }
+            backgroundColor: 'gray.900',
+          },
         }),
         props.className
       )}
     >
       {/* Header */}
       {props.filename && (
-        <div class={css({
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingX: '16px',
-          paddingY: '12px',
-          backgroundColor: 'gray.100',
-          borderBottom: '1px solid',
-          borderBottomColor: 'gray.200',
-          _dark: {
-            backgroundColor: 'gray.800',
-            borderBottomColor: 'gray.700'
-          }
-        })}>
+        <div
+          class={css({
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingX: '16px',
+            paddingY: '12px',
+            backgroundColor: 'gray.100',
+            borderBottom: '1px solid',
+            borderBottomColor: 'gray.200',
+            _dark: {
+              backgroundColor: 'gray.800',
+              borderBottomColor: 'gray.700',
+            },
+          })}
+        >
           <div class={css({ display: 'flex', alignItems: 'center', gap: '8px' })}>
             <div class={css({ display: 'flex', gap: '4px' })}>
-              <div class={css({
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                backgroundColor: 'red.400'
-              })} />
-              <div class={css({
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                backgroundColor: 'yellow.400'
-              })} />
-              <div class={css({
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                backgroundColor: 'green.400'
-              })} />
+              <div
+                class={css({
+                  width: '12px',
+                  height: '12px',
+                  borderRadius: '50%',
+                  backgroundColor: 'red.400',
+                })}
+              />
+              <div
+                class={css({
+                  width: '12px',
+                  height: '12px',
+                  borderRadius: '50%',
+                  backgroundColor: 'yellow.400',
+                })}
+              />
+              <div
+                class={css({
+                  width: '12px',
+                  height: '12px',
+                  borderRadius: '50%',
+                  backgroundColor: 'green.400',
+                })}
+              />
             </div>
-            <span class={css({
-              fontSize: 'sm',
-              fontWeight: '500',
-              color: 'gray.700',
-              _dark: { color: 'gray.300' }
-            })}>
+            <span
+              class={css({
+                fontSize: 'sm',
+                fontWeight: '500',
+                color: 'gray.700',
+                _dark: { color: 'gray.300' },
+              })}
+            >
               {props.filename}
             </span>
           </div>
-          
+
           <button
             onClick={copyToClipboard}
             class={css({
@@ -144,7 +154,7 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
               transition: 'all 0.2s',
               _hover: {
                 backgroundColor: 'gray.50',
-                borderColor: 'gray.400'
+                borderColor: 'gray.400',
               },
               _dark: {
                 color: 'gray.400',
@@ -152,9 +162,9 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
                 borderColor: 'gray.600',
                 _hover: {
                   backgroundColor: 'gray.600',
-                  borderColor: 'gray.500'
-                }
-              }
+                  borderColor: 'gray.500',
+                },
+              },
             })}
           >
             {copied() ? (
@@ -173,27 +183,31 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
       )}
 
       {/* Code Content */}
-      <div class={css({
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: '500px'
-      })}>
-        <pre class={css({
-          margin: 0,
-          padding: '16px',
-          fontSize: 'sm',
-          lineHeight: '1.5',
-          fontFamily: 'mono',
-          backgroundColor: 'transparent',
-          color: 'gray.800',
-          _dark: { color: 'gray.200' }
-        })}>
+      <div
+        class={css({
+          position: 'relative',
+          overflow: 'auto',
+          maxHeight: '500px',
+        })}
+      >
+        <pre
+          class={css({
+            margin: 0,
+            padding: '16px',
+            fontSize: 'sm',
+            lineHeight: '1.5',
+            fontFamily: 'mono',
+            backgroundColor: 'transparent',
+            color: 'gray.800',
+            _dark: { color: 'gray.200' },
+          })}
+        >
           <code class={css({ display: 'block' })}>
             <For each={lines()}>
               {(line, index) => {
                 const lineNumber = index() + 1;
                 const isHighlighted = highlightSet().has(lineNumber);
-                
+
                 return (
                   <div
                     class={css({
@@ -206,29 +220,29 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
                       borderLeftColor: isHighlighted ? 'blue.400' : 'transparent',
                       _dark: {
                         backgroundColor: isHighlighted ? 'blue.900/20' : 'transparent',
-                        borderLeftColor: isHighlighted ? 'blue.500' : 'transparent'
-                      }
+                        borderLeftColor: isHighlighted ? 'blue.500' : 'transparent',
+                      },
                     })}
                   >
                     {/* Line number */}
-                    <span class={css({
-                      display: 'inline-block',
-                      width: '32px',
-                      flexShrink: 0,
-                      textAlign: 'right',
-                      marginRight: '16px',
-                      color: 'gray.400',
-                      fontSize: 'xs',
-                      userSelect: 'none',
-                      _dark: { color: 'gray.600' }
-                    })}>
+                    <span
+                      class={css({
+                        display: 'inline-block',
+                        width: '32px',
+                        flexShrink: 0,
+                        textAlign: 'right',
+                        marginRight: '16px',
+                        color: 'gray.400',
+                        fontSize: 'xs',
+                        userSelect: 'none',
+                        _dark: { color: 'gray.600' },
+                      })}
+                    >
                       {lineNumber}
                     </span>
-                    
+
                     {/* Code line */}
-                    <span class={css({ flex: 1, whiteSpace: 'pre' })}>
-                      {line || ' '}
-                    </span>
+                    <span class={css({ flex: 1, whiteSpace: 'pre' })}>{line || ' '}</span>
                   </div>
                 );
               }}

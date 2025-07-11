@@ -1,0 +1,23 @@
+{
+  "name": "reactonrust",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "build": "rsbuild build",
+    "dev": "rsbuild dev --port 20007",
+    "start": "node build/index.js",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "solid-js": "^1.8.11",
+    "@inertiajs/core": "^1.0.0",
+    "@adonisjs/core": "^6.0.0",
+    "@adonisjs/inertia": "^1.0.0"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.0.0",
+    "@rsbuild/plugin-solid": "^1.0.0",
+    "typescript": "^5.6.2"
+  }
+}

@@ -1,5 +1,15 @@
-import { Component, JSX, mergeProps, ParentComponent, createSignal, onMount, onCleanup, createEffect, For } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  ParentComponent,
+  createEffect,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 // WordRotate Component
 export interface WordRotateProps {
@@ -43,11 +53,14 @@ export const WordRotate: Component<WordRotateProps> = (props) => {
 
   return (
     <span
-      class={css({
-        display: 'inline-block',
-        position: 'relative',
-        minHeight: '1em',
-      }, merged.class)}
+      class={css(
+        {
+          display: 'inline-block',
+          position: 'relative',
+          minHeight: '1em',
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       <span
@@ -72,7 +85,7 @@ export const WordRotateDemo: Component = () => {
         fontWeight: 'bold',
         color: 'foreground',
       })}
-      words={["Word", "Rotate"]}
+      words={['Word', 'Rotate']}
     />
   );
 };
@@ -106,7 +119,7 @@ export const TypingAnimation: Component<TypingAnimationProps> = (props) => {
   const startTyping = () => {
     setIsTyping(true);
     setDisplayText('');
-    
+
     const fullText = merged.children;
     let currentIndex = 0;
 
@@ -127,7 +140,7 @@ export const TypingAnimation: Component<TypingAnimationProps> = (props) => {
   onMount(() => {
     // Cursor blinking animation
     cursorIntervalId = setInterval(() => {
-      setShowCursor(prev => !prev);
+      setShowCursor((prev) => !prev);
     }, 500);
 
     if (merged.startOnMount) {
@@ -146,16 +159,20 @@ export const TypingAnimation: Component<TypingAnimationProps> = (props) => {
 
   return (
     <span
-      class={css({
-        display: 'inline-block',
-        fontFamily: 'monospace',
-      }, merged.class)}
+      class={css(
+        {
+          display: 'inline-block',
+          fontFamily: 'monospace',
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       {displayText()}
       <span
         class={css({
-          opacity: showCursor() && (isTyping() || displayText().length < merged.children.length) ? 1 : 0,
+          opacity:
+            showCursor() && (isTyping() || displayText().length < merged.children.length) ? 1 : 0,
           transition: 'opacity 0.1s ease',
         })}
       >
@@ -211,11 +228,14 @@ export const FlipText: Component<FlipTextProps> = (props) => {
     if (!hasAnimated() || !merged.startOnMount) {
       setIsFlipped(true);
       setHasAnimated(true);
-      
+
       // Reset after animation completes
-      setTimeout(() => {
-        setIsFlipped(false);
-      }, (merged.duration + merged.staggerDelay * words.length) * 1000);
+      setTimeout(
+        () => {
+          setIsFlipped(false);
+        },
+        (merged.duration + merged.staggerDelay * words.length) * 1000
+      );
     }
   };
 
@@ -244,10 +264,13 @@ export const FlipText: Component<FlipTextProps> = (props) => {
   return (
     <div
       ref={containerRef}
-      class={css({
-        display: 'inline-block',
-        cursor: merged.triggerOnHover ? 'pointer' : 'default',
-      }, merged.class)}
+      class={css(
+        {
+          display: 'inline-block',
+          cursor: merged.triggerOnHover ? 'pointer' : 'default',
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       <For each={words}>
@@ -311,12 +334,15 @@ export const VelocityScroll: Component<VelocityScrollProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        display: 'flex',
-        overflow: 'hidden',
-        width: '100%',
-      }, merged.class)}
+      class={css(
+        {
+          position: 'relative',
+          display: 'flex',
+          overflow: 'hidden',
+          width: '100%',
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       <div
@@ -324,7 +350,7 @@ export const VelocityScroll: Component<VelocityScrollProps> = (props) => {
           display: 'flex',
           whiteSpace: 'nowrap',
           animation: `scroll ${20 / merged.velocity}s linear infinite`,
-          
+
           '@keyframes scroll': {
             '0%': {
               transform: 'translateX(0)',
@@ -346,15 +372,17 @@ export const VelocityScroll: Component<VelocityScrollProps> = (props) => {
 
 export const ScrollBasedVelocityDemo: Component = () => {
   return (
-    <div class={css({
-      position: 'relative',
-      display: 'flex',
-      width: '100%',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-    })}>
+    <div
+      class={css({
+        position: 'relative',
+        display: 'flex',
+        width: '100%',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+      })}
+    >
       <VelocityScroll
         class={css({
           fontSize: '4rem',
@@ -364,29 +392,28 @@ export const ScrollBasedVelocityDemo: Component = () => {
       >
         Velocity Scroll
       </VelocityScroll>
-      <div class={css({
-        pointerEvents: 'none',
-        position: 'absolute',
-        insetY: 0,
-        left: 0,
-        width: '25%',
-        background: 'linear-gradient(to right, var(--colors-background), transparent)',
-      })} />
-      <div class={css({
-        pointerEvents: 'none',
-        position: 'absolute',
-        insetY: 0,
-        right: 0,
-        width: '25%',
-        background: 'linear-gradient(to left, var(--colors-background), transparent)',
-      })} />
+      <div
+        class={css({
+          pointerEvents: 'none',
+          position: 'absolute',
+          insetY: 0,
+          left: 0,
+          width: '25%',
+          background: 'linear-gradient(to right, var(--colors-background), transparent)',
+        })}
+      />
+      <div
+        class={css({
+          pointerEvents: 'none',
+          position: 'absolute',
+          insetY: 0,
+          right: 0,
+          width: '25%',
+          background: 'linear-gradient(to left, var(--colors-background), transparent)',
+        })}
+      />
     </div>
   );
 };
 
-export type {
-  WordRotateProps,
-  TypingAnimationProps,
-  FlipTextProps,
-  VelocityScrollProps,
-};
+export type { WordRotateProps, TypingAnimationProps, FlipTextProps, VelocityScrollProps };

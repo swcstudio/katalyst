@@ -1,5 +1,13 @@
-import { Component, JSX, mergeProps, createSignal, For, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface OrbitingCirclesProps {
   className?: string;
@@ -46,14 +54,17 @@ const OrbitingCircles: Component<OrbitingCirclesProps> = (props) => {
 
   return (
     <div
-      class={css({
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 'fit-content',
-        height: 'fit-content',
-      }, merged.className)}
+      class={css(
+        {
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 'fit-content',
+          height: 'fit-content',
+        },
+        merged.className
+      )}
       style={merged.style}
       onMouseEnter={() => merged.pauseOnHover && setIsPaused(true)}
       onMouseLeave={() => merged.pauseOnHover && setIsPaused(false)}

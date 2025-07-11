@@ -1,5 +1,5 @@
-import { Component } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import type { Component } from 'solid-js';
 import GridPattern from '../../mystic/backgrounds/GridPattern';
 
 export const GridPatternDemo: Component = () => {
@@ -19,20 +19,22 @@ export const GridPatternDemo: Component = () => {
   ];
 
   return (
-    <div class={css({
-      position: 'relative',
-      display: 'flex',
-      height: '500px',
-      width: 'full',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-      borderRadius: 'lg',
-      border: '1px solid',
-      borderColor: 'border',
-      backgroundColor: 'background'
-    })}>
+    <div
+      class={css({
+        position: 'relative',
+        display: 'flex',
+        height: '500px',
+        width: 'full',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        borderRadius: 'lg',
+        border: '1px solid',
+        borderColor: 'border',
+        backgroundColor: 'background',
+      })}
+    >
       <GridPattern
         className={css({
           maskImage: 'radial-gradient(400px circle at center, white, transparent)',
@@ -40,7 +42,7 @@ export const GridPatternDemo: Component = () => {
           insetX: '0',
           insetY: '-30%',
           height: '200%',
-          transform: 'skewY(12deg)'
+          transform: 'skewY(12deg)',
         })}
         width={40}
         height={40}

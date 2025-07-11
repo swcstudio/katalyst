@@ -1,5 +1,5 @@
-import { Component, onMount, onCleanup, createSignal, For } from "solid-js";
-import { css } from "../../styled-system/css";
+import { type Component, For, createSignal, onCleanup, onMount } from 'solid-js';
+import { css } from '../../styled-system/css';
 
 interface RippleProps {
   className?: string;
@@ -27,7 +27,7 @@ export const Ripple: Component<RippleProps> = (props) => {
   const mainCircleOpacity = () => props.mainCircleOpacity ?? 0.24;
   const numCircles = () => props.numCircles ?? 8;
   const speed = () => props.speed ?? 2;
-  const color = () => props.color ?? "#3b82f6";
+  const color = () => props.color ?? '#3b82f6';
 
   let animationId: number;
 
@@ -43,19 +43,17 @@ export const Ripple: Component<RippleProps> = (props) => {
   };
 
   const initializeCircles = () => {
-    const initialCircles = Array.from({ length: numCircles() }, (_, i) => 
-      generateCircle(i)
-    );
+    const initialCircles = Array.from({ length: numCircles() }, (_, i) => generateCircle(i));
     setCircles(initialCircles);
   };
 
   const animateCircles = () => {
-    setCircles(prev => 
+    setCircles((prev) =>
       prev.map((circle, index) => {
         const progress = (Date.now() / 1000 / speed() + index * 0.5) % 2;
         const scale = progress <= 1 ? progress : 2 - progress;
         const opacity = circle.opacity * (1 - Math.abs(progress - 1));
-        
+
         return {
           ...circle,
           scale,
@@ -63,7 +61,7 @@ export const Ripple: Component<RippleProps> = (props) => {
         };
       })
     );
-    
+
     animationId = requestAnimationFrame(animateCircles);
   };
 
@@ -80,34 +78,34 @@ export const Ripple: Component<RippleProps> = (props) => {
   });
 
   const rippleContainerStyles = css({
-    position: "absolute",
+    position: 'absolute',
     inset: 0,
-    width: "100%",
-    height: "100%",
-    pointerEvents: "none",
-    overflow: "hidden",
+    width: '100%',
+    height: '100%',
+    pointerEvents: 'none',
+    overflow: 'hidden',
   });
 
   const mainCircleStyles = css({
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    borderRadius: "50%",
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    borderRadius: '50%',
     border: `1px solid ${color()}`,
     opacity: mainCircleOpacity(),
-    animation: "ripplePulse 4s ease-in-out infinite",
+    animation: 'ripplePulse 4s ease-in-out infinite',
   });
 
   const circleStyles = css({
-    position: "absolute",
-    borderRadius: "50%",
+    position: 'absolute',
+    borderRadius: '50%',
     border: `1px solid ${color()}`,
-    pointerEvents: "none",
+    pointerEvents: 'none',
   });
 
   return (
-    <div class={`${rippleContainerStyles} ${props.className || ""}`}>
+    <div class={`${rippleContainerStyles} ${props.className || ''}`}>
       <style>{`
         @keyframes ripplePulse {
           0%, 100% {
@@ -134,7 +132,7 @@ export const Ripple: Component<RippleProps> = (props) => {
           }
         }
       `}</style>
-      
+
       {/* Main central circle */}
       <div
         class={mainCircleStyles}
@@ -143,7 +141,7 @@ export const Ripple: Component<RippleProps> = (props) => {
           height: `${mainCircleSize()}px`,
         }}
       />
-      
+
       {/* Animated ripple circles */}
       {mounted() && (
         <For each={circles()}>

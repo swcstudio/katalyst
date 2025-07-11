@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/solid-router';
+import { Show, createSignal } from 'solid-js';
 import { css } from '../styled-system/css';
 import { flex } from '../styled-system/patterns';
-import { createSignal, Show } from 'solid-js';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = createSignal(false);
@@ -139,7 +139,7 @@ const Header = () => {
               transition: 'all 0.3s ease',
               transform: isMenuOpen() ? 'rotate(45deg) translate(5px, 5px)' : 'none',
             })}
-          ></div>
+          />
           <div
             class={css({
               width: '24px',
@@ -149,7 +149,7 @@ const Header = () => {
               transition: 'all 0.3s ease',
               opacity: isMenuOpen() ? '0' : '1',
             })}
-          ></div>
+          />
           <div
             class={css({
               width: '24px',
@@ -158,7 +158,7 @@ const Header = () => {
               transition: 'all 0.3s ease',
               transform: isMenuOpen() ? 'rotate(-45deg) translate(5px, -5px)' : 'none',
             })}
-          ></div>
+          />
         </button>
       </div>
 

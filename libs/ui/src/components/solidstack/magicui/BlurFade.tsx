@@ -1,5 +1,15 @@
-import { Component, JSX, mergeProps, ParentComponent, createSignal, onMount, onCleanup, createEffect, For } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import {
+  type Component,
+  For,
+  type JSX,
+  type ParentComponent,
+  createEffect,
+  createSignal,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 
 export interface BlurFadeProps {
   class?: string;
@@ -65,12 +75,15 @@ export const BlurFade: ParentComponent<BlurFadeProps> = (props) => {
   return (
     <div
       ref={elementRef}
-      class={css({
-        transform: isVisible() ? 'translateY(0)' : `translateY(${merged.yOffset}px)`,
-        opacity: isVisible() ? 1 : 0,
-        filter: isVisible() ? 'blur(0px)' : `blur(${merged.blur})`,
-        transition: `all ${merged.duration}s ease-out`,
-      }, merged.class)}
+      class={css(
+        {
+          transform: isVisible() ? 'translateY(0)' : `translateY(${merged.yOffset}px)`,
+          opacity: isVisible() ? 1 : 0,
+          filter: isVisible() ? 'blur(0px)' : `blur(${merged.blur})`,
+          transition: `all ${merged.duration}s ease-out`,
+        },
+        merged.class
+      )}
       style={merged.style}
     >
       {props.children}
@@ -92,13 +105,15 @@ export const BlurFadeDemo: Component<BlurFadeDemoProps> = (props) => {
 
   return (
     <section id="photos" class={props.class}>
-      <div class={css({
-        columns: 2,
-        gap: '16px',
-        '@media (min-width: 640px)': {
-          columns: 3,
-        },
-      })}>
+      <div
+        class={css({
+          columns: 2,
+          gap: '16px',
+          '@media (min-width: 640px)': {
+            columns: 3,
+          },
+        })}
+      >
         <For each={images}>
           {(imageUrl, index) => (
             <BlurFade delay={0.25 + index() * 0.05} inView>
@@ -129,33 +144,37 @@ export const BlurFadeTextDemo: Component<BlurFadeTextDemoProps> = (props) => {
   return (
     <section id="header" class={props.class}>
       <BlurFade delay={0.25} inView>
-        <h2 class={css({
-          fontSize: '24px',
-          fontWeight: 'bold',
-          letterSpacing: '-0.025em',
-          '@media (min-width: 640px)': {
-            fontSize: '48px',
-          },
-          '@media (min-width: 1280px)': {
-            fontSize: '60px',
-            lineHeight: 1,
-          },
-        })}>
+        <h2
+          class={css({
+            fontSize: '24px',
+            fontWeight: 'bold',
+            letterSpacing: '-0.025em',
+            '@media (min-width: 640px)': {
+              fontSize: '48px',
+            },
+            '@media (min-width: 1280px)': {
+              fontSize: '60px',
+              lineHeight: 1,
+            },
+          })}
+        >
           Hello World 👋
         </h2>
       </BlurFade>
       <BlurFade delay={0.25 * 2} inView>
-        <span class={css({
-          fontSize: '20px',
-          letterSpacing: '-0.025em',
-          '@media (min-width: 640px)': {
-            fontSize: '24px',
-          },
-          '@media (min-width: 1280px)': {
-            fontSize: '32px',
-            lineHeight: 1,
-          },
-        })}>
+        <span
+          class={css({
+            fontSize: '20px',
+            letterSpacing: '-0.025em',
+            '@media (min-width: 640px)': {
+              fontSize: '24px',
+            },
+            '@media (min-width: 1280px)': {
+              fontSize: '32px',
+              lineHeight: 1,
+            },
+          })}
+        >
           Nice to meet you
         </span>
       </BlurFade>

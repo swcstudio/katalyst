@@ -1,5 +1,5 @@
-import { Component, createSignal, onMount, onCleanup } from 'solid-js';
 import { css } from '@sse/ui/styled-system/css';
+import { type Component, createSignal, onCleanup, onMount } from 'solid-js';
 
 interface ShootingStar {
   x: number;
@@ -35,9 +35,9 @@ export const ShootingStars: Component<ShootingStarsProps> = (props) => {
   };
 
   const createShootingStar = (width: number, height: number): ShootingStar => {
-    const angle = Math.random() * Math.PI / 3 + Math.PI / 6; // 30-60 degrees
+    const angle = (Math.random() * Math.PI) / 3 + Math.PI / 6; // 30-60 degrees
     const speed = Math.random() * (config.maxSpeed - config.minSpeed) + config.minSpeed;
-    
+
     return {
       x: Math.random() * width * 0.5, // Start from left half
       y: Math.random() * height * 0.3, // Start from top third
@@ -72,9 +72,11 @@ export const ShootingStars: Component<ShootingStarsProps> = (props) => {
     }
 
     // Reset star if it's off screen or dead
-    if (star.life >= star.maxLife || 
-        star.x > width + star.length || 
-        star.y > height + star.length) {
+    if (
+      star.life >= star.maxLife ||
+      star.x > width + star.length ||
+      star.y > height + star.length
+    ) {
       return createShootingStar(width, height);
     }
 
@@ -83,7 +85,7 @@ export const ShootingStars: Component<ShootingStarsProps> = (props) => {
 
   const drawStar = (ctx: CanvasRenderingContext2D, star: ShootingStar) => {
     ctx.save();
-    
+
     const gradient = ctx.createLinearGradient(
       star.x,
       star.y,
@@ -133,11 +135,9 @@ export const ShootingStars: Component<ShootingStarsProps> = (props) => {
 
     // Update and draw stars
     const currentStars = stars();
-    const updatedStars = currentStars.map(star => 
-      updateStar(star, width, height)
-    );
+    const updatedStars = currentStars.map((star) => updateStar(star, width, height));
 
-    updatedStars.forEach(star => {
+    updatedStars.forEach((star) => {
       drawStar(ctx, star);
     });
 
@@ -159,8 +159,8 @@ export const ShootingStars: Component<ShootingStarsProps> = (props) => {
       ctx.scale(dpr, dpr);
     }
 
-    canvasRef.style.width = rect.width + 'px';
-    canvasRef.style.height = rect.height + 'px';
+    canvasRef.style.width = `${rect.width}px`;
+    canvasRef.style.height = `${rect.height}px`;
 
     initStars(rect.width, rect.height);
   };
@@ -188,14 +188,17 @@ export const ShootingStars: Component<ShootingStarsProps> = (props) => {
   return (
     <canvas
       ref={canvasRef}
-      class={css({
-        position: 'absolute',
-        inset: '0',
-        width: 'full',
-        height: 'full',
-        pointerEvents: 'none',
-        backgroundColor: 'transparent',
-      }, props.className)}
+      class={css(
+        {
+          position: 'absolute',
+          inset: '0',
+          width: 'full',
+          height: 'full',
+          pointerEvents: 'none',
+          backgroundColor: 'transparent',
+        },
+        props.className
+      )}
     />
   );
 };
