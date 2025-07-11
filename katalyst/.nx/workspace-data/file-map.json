@@ -1,0 +1,696 @@
+{
+  "version": "6.0",
+  "nxVersion": "21.2.2",
+  "pathMappings": {
+    "@/*": [
+      "./shared/src/*"
+    ],
+    "@katalyst/shared": [
+      "./shared/src/index.ts"
+    ],
+    "@katalyst/core": [
+      "./core/src/main.tsx"
+    ],
+    "@katalyst/remix": [
+      "./remix/app/root.tsx"
+    ],
+    "@katalyst/nextjs": [
+      "./nextjs/src/app/page.tsx"
+    ],
+    "@/components": [
+      "./shared/src/components/*"
+    ],
+    "@/hooks": [
+      "./shared/src/hooks/*"
+    ],
+    "@/utils": [
+      "./shared/src/utils/*"
+    ],
+    "@/stores": [
+      "./shared/src/stores/*"
+    ],
+    "@/integrations": [
+      "./shared/src/integrations/*"
+    ],
+    "@/config": [
+      "./shared/src/config/*"
+    ],
+    "@/plugins": [
+      "./shared/src/plugins/*"
+    ],
+    "@/factory": [
+      "./shared/src/factory/*"
+    ]
+  },
+  "nxJsonPlugins": [
+    {
+      "name": "@nx/rspack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "devTargetName": "dev",
+        "previewTargetName": "preview"
+      }
+    },
+    {
+      "name": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
+    }
+  ],
+  "fileMap": {
+    "nonProjectFiles": [],
+    "projectFileMap": {
+      "@sse/katalyst-nextjs": [
+        {
+          "file": "nextjs/deno.json",
+          "hash": "16866272831410015512"
+        },
+        {
+          "file": "nextjs/next.config.js",
+          "hash": "17985941743797049550"
+        },
+        {
+          "file": "nextjs/package.json",
+          "hash": "6282612843871173276"
+        },
+        {
+          "file": "nextjs/postcss.config.js",
+          "hash": "18188427317718703771"
+        },
+        {
+          "file": "nextjs/rsbuild.config.ts",
+          "hash": "4985532052171818064"
+        },
+        {
+          "file": "nextjs/src/app/globals.css",
+          "hash": "5095979288748816231"
+        },
+        {
+          "file": "nextjs/src/app/layout.tsx",
+          "hash": "394171118532107603"
+        },
+        {
+          "file": "nextjs/src/app/page.tsx",
+          "hash": "1493285728688582525"
+        },
+        {
+          "file": "nextjs/src/app/providers.tsx",
+          "hash": "7663318219342227498"
+        },
+        {
+          "file": "nextjs/src/components/Features.tsx",
+          "hash": "8079924621402920264"
+        },
+        {
+          "file": "nextjs/src/components/Hero.tsx",
+          "hash": "7930407267785123840"
+        },
+        {
+          "file": "nextjs/src/components/Marketing.tsx",
+          "hash": "3463814888304882564"
+        },
+        {
+          "file": "nextjs/src/components/Pricing.tsx",
+          "hash": "13457437123947374166"
+        },
+        {
+          "file": "nextjs/src/index.html",
+          "hash": "5717380469249492710"
+        },
+        {
+          "file": "nextjs/src/main.tsx",
+          "hash": "5445182549000183512"
+        },
+        {
+          "file": "nextjs/tailwind.config.js",
+          "hash": "7064302691933931206"
+        },
+        {
+          "file": "nextjs/tsconfig.json",
+          "hash": "15509004336881376260"
+        },
+        {
+          "file": "nextjs/vercel.json",
+          "hash": "11055344183368059318"
+        }
+      ],
+      "@sse/katalyst-remix": [
+        {
+          "file": "remix/app/components/AdminDashboard.tsx",
+          "hash": "8799209165525393567",
+          "deps": [
+            "@sse/katalyst-shared"
+          ]
+        },
+        {
+          "file": "remix/app/components/Analytics.tsx",
+          "hash": "5117837633061078321"
+        },
+        {
+          "file": "remix/app/components/DataTable.tsx",
+          "hash": "14769751474026548660",
+          "deps": [
+            "@sse/katalyst-shared"
+          ]
+        },
+        {
+          "file": "remix/app/root.tsx",
+          "hash": "9641129706625622379"
+        },
+        {
+          "file": "remix/app/routes/_index.tsx",
+          "hash": "14051735776232571050"
+        },
+        {
+          "file": "remix/app/styles/globals.css",
+          "hash": "5095979288748816231"
+        },
+        {
+          "file": "remix/deno.json",
+          "hash": "5607642494096788665"
+        },
+        {
+          "file": "remix/package.json",
+          "hash": "14342612533345365958"
+        },
+        {
+          "file": "remix/postcss.config.js",
+          "hash": "18188427317718703771"
+        },
+        {
+          "file": "remix/remix.config.js",
+          "hash": "1101777540464722871"
+        },
+        {
+          "file": "remix/rsbuild.config.ts",
+          "hash": "13831610386765735000"
+        },
+        {
+          "file": "remix/src/index.html",
+          "hash": "14546962584366292242"
+        },
+        {
+          "file": "remix/src/main.tsx",
+          "hash": "10661096113598477889"
+        },
+        {
+          "file": "remix/tailwind.config.js",
+          "hash": "4128149304159427553"
+        },
+        {
+          "file": "remix/tsconfig.json",
+          "hash": "3433266035260181524"
+        },
+        {
+          "file": "remix/vercel.json",
+          "hash": "3394399837053933260"
+        }
+      ],
+      "@sse/katalyst-shared": [
+        {
+          "file": "shared/deno.json",
+          "hash": "16752798666614260133"
+        },
+        {
+          "file": "shared/package.json",
+          "hash": "11174671223900236625"
+        },
+        {
+          "file": "shared/src/components/ConfigProvider.d.ts",
+          "hash": "18413763428185234658"
+        },
+        {
+          "file": "shared/src/components/ConfigProvider.tsx",
+          "hash": "2316958795782159250"
+        },
+        {
+          "file": "shared/src/components/DesignSystem.d.ts",
+          "hash": "961277032474235904"
+        },
+        {
+          "file": "shared/src/components/DesignSystem.tsx",
+          "hash": "17914703248197365954"
+        },
+        {
+          "file": "shared/src/components/IntegrationProvider.tsx",
+          "hash": "6994143906695166286"
+        },
+        {
+          "file": "shared/src/components/KatalystProvider.tsx",
+          "hash": "15387741577379193854"
+        },
+        {
+          "file": "shared/src/components/index.ts",
+          "hash": "12496728378029755122"
+        },
+        {
+          "file": "shared/src/config/integrations.config.ts",
+          "hash": "8321313181742813593"
+        },
+        {
+          "file": "shared/src/config/katalyst.config.ts",
+          "hash": "13289222934691156366"
+        },
+        {
+          "file": "shared/src/design-system/ant-components/AntButton.tsx",
+          "hash": "1178185238767523814"
+        },
+        {
+          "file": "shared/src/design-system/ant-components/AntCard.tsx",
+          "hash": "14172782593465273875"
+        },
+        {
+          "file": "shared/src/design-system/ant-components/AntForm.tsx",
+          "hash": "8442674131583593579"
+        },
+        {
+          "file": "shared/src/design-system/ant-components/index.ts",
+          "hash": "4414606025765721994"
+        },
+        {
+          "file": "shared/src/design-system/components/Layout.tsx",
+          "hash": "17910862494079569870"
+        },
+        {
+          "file": "shared/src/design-system/components/Typography.tsx",
+          "hash": "10854446819267736173"
+        },
+        {
+          "file": "shared/src/design-system/components/index.ts",
+          "hash": "16845574471231206782"
+        },
+        {
+          "file": "shared/src/design-system/index.ts",
+          "hash": "9699025470553250217"
+        },
+        {
+          "file": "shared/src/design-system/primitives/Button.tsx",
+          "hash": "14873836195190454137"
+        },
+        {
+          "file": "shared/src/design-system/primitives/Card.tsx",
+          "hash": "186581042436505718"
+        },
+        {
+          "file": "shared/src/design-system/primitives/Dialog.tsx",
+          "hash": "14678351043211350535"
+        },
+        {
+          "file": "shared/src/design-system/primitives/index.ts",
+          "hash": "6555998924143757231"
+        },
+        {
+          "file": "shared/src/design-system/themes.ts",
+          "hash": "17618404896636685313"
+        },
+        {
+          "file": "shared/src/design-system/tokens.ts",
+          "hash": "6964195355616625532"
+        },
+        {
+          "file": "shared/src/design-system/types.ts",
+          "hash": "3627320174118598770"
+        },
+        {
+          "file": "shared/src/design-system/utils.ts",
+          "hash": "2749777578802065520"
+        },
+        {
+          "file": "shared/src/factory/integration-factory.ts",
+          "hash": "16182733594736461788"
+        },
+        {
+          "file": "shared/src/hooks/index.ts",
+          "hash": "15157002905131485021"
+        },
+        {
+          "file": "shared/src/hooks/use-config.ts",
+          "hash": "10432467970630768668"
+        },
+        {
+          "file": "shared/src/hooks/use-integration.ts",
+          "hash": "1605029257075126981"
+        },
+        {
+          "file": "shared/src/hooks/use-katalyst.ts",
+          "hash": "17988573186849693343"
+        },
+        {
+          "file": "shared/src/index.ts",
+          "hash": "4346744106336722119"
+        },
+        {
+          "file": "shared/src/integrations/arco.ts",
+          "hash": "5145531677666690928"
+        },
+        {
+          "file": "shared/src/integrations/asset-manifest.ts",
+          "hash": "8168436908119924634"
+        },
+        {
+          "file": "shared/src/integrations/biome.ts",
+          "hash": "17484464422182733541"
+        },
+        {
+          "file": "shared/src/integrations/clerk.ts",
+          "hash": "5563302523975785564"
+        },
+        {
+          "file": "shared/src/integrations/cosmos.ts",
+          "hash": "10424402199934647136"
+        },
+        {
+          "file": "shared/src/integrations/electron.ts",
+          "hash": "607512368970940852"
+        },
+        {
+          "file": "shared/src/integrations/emp.ts",
+          "hash": "10569824333879818457"
+        },
+        {
+          "file": "shared/src/integrations/esmx.ts",
+          "hash": "9050698892245147623"
+        },
+        {
+          "file": "shared/src/integrations/fast-refresh.ts",
+          "hash": "13943977496685201074"
+        },
+        {
+          "file": "shared/src/integrations/index.ts",
+          "hash": "17905879983572341960"
+        },
+        {
+          "file": "shared/src/integrations/inspector.ts",
+          "hash": "17246718338881963634"
+        },
+        {
+          "file": "shared/src/integrations/midscene.ts",
+          "hash": "6337554321398494117"
+        },
+        {
+          "file": "shared/src/integrations/ngrok.ts",
+          "hash": "5485273265175096318"
+        },
+        {
+          "file": "shared/src/integrations/nitro.ts",
+          "hash": "13174484176439023540"
+        },
+        {
+          "file": "shared/src/integrations/nx.ts",
+          "hash": "17730924953078015243"
+        },
+        {
+          "file": "shared/src/integrations/pareto.ts",
+          "hash": "8839606282530631590"
+        },
+        {
+          "file": "shared/src/integrations/playwright.ts",
+          "hash": "3567511461204628538"
+        },
+        {
+          "file": "shared/src/integrations/repack.ts",
+          "hash": "13204288470393942406"
+        },
+        {
+          "file": "shared/src/integrations/rspack.ts",
+          "hash": "1808655272849693264"
+        },
+        {
+          "file": "shared/src/integrations/rspeedy.ts",
+          "hash": "11774823298376469974"
+        },
+        {
+          "file": "shared/src/integrations/sails.ts",
+          "hash": "389806108978062682"
+        },
+        {
+          "file": "shared/src/integrations/storybook.ts",
+          "hash": "17683523528119392595"
+        },
+        {
+          "file": "shared/src/integrations/stylex.ts",
+          "hash": "11288972918824453748"
+        },
+        {
+          "file": "shared/src/integrations/svgr.ts",
+          "hash": "1506425794736316828"
+        },
+        {
+          "file": "shared/src/integrations/tailwind.ts",
+          "hash": "10878410293115527774"
+        },
+        {
+          "file": "shared/src/integrations/tanstack.ts",
+          "hash": "3630803657315376914"
+        },
+        {
+          "file": "shared/src/integrations/tapable.ts",
+          "hash": "5635476880902418253"
+        },
+        {
+          "file": "shared/src/integrations/typia.ts",
+          "hash": "536057604032709110"
+        },
+        {
+          "file": "shared/src/integrations/umi.ts",
+          "hash": "135935592047298897"
+        },
+        {
+          "file": "shared/src/integrations/virtual-modules.ts",
+          "hash": "2635865627325429289"
+        },
+        {
+          "file": "shared/src/integrations/vitest.ts",
+          "hash": "13902078782387907831"
+        },
+        {
+          "file": "shared/src/integrations/zephyr.ts",
+          "hash": "17720209580502386154"
+        },
+        {
+          "file": "shared/src/integrations/zustand.ts",
+          "hash": "11143288942403318988"
+        },
+        {
+          "file": "shared/src/plugins/index.ts",
+          "hash": "14549964752087129238"
+        },
+        {
+          "file": "shared/src/plugins/katalyst-plugins.ts",
+          "hash": "1006288823524784015"
+        },
+        {
+          "file": "shared/src/plugins/rspack-plugins.ts",
+          "hash": "15352753119746696121"
+        },
+        {
+          "file": "shared/src/plugins/vite-plugins.ts",
+          "hash": "751573478562486107"
+        },
+        {
+          "file": "shared/src/plugins/webpack-plugins.ts",
+          "hash": "13769273257963638240"
+        },
+        {
+          "file": "shared/src/stores/config-store.d.ts",
+          "hash": "8213960928524840917"
+        },
+        {
+          "file": "shared/src/stores/config-store.ts",
+          "hash": "17157039608672935394"
+        },
+        {
+          "file": "shared/src/stores/index.ts",
+          "hash": "10258119227116417629"
+        },
+        {
+          "file": "shared/src/stores/integration-store.ts",
+          "hash": "4906609254208251923"
+        },
+        {
+          "file": "shared/src/stores/katalyst-store.ts",
+          "hash": "6944115927674474696"
+        },
+        {
+          "file": "shared/src/types/index.ts",
+          "hash": "5869477630802348300"
+        },
+        {
+          "file": "shared/src/utils/config.ts",
+          "hash": "3267949405525595329"
+        },
+        {
+          "file": "shared/src/utils/helpers.ts",
+          "hash": "9360515126390466139"
+        },
+        {
+          "file": "shared/src/utils/index.ts",
+          "hash": "10578640202212619615"
+        },
+        {
+          "file": "shared/src/utils/validation.ts",
+          "hash": "98003378839469228"
+        },
+        {
+          "file": "shared/tsconfig.json",
+          "hash": "18301979338990003016"
+        }
+      ],
+      "@sse/katalyst-core": [
+        {
+          "file": "core/deno.json",
+          "hash": "15566484631369100336"
+        },
+        {
+          "file": "core/package.json",
+          "hash": "11150987111872059667"
+        },
+        {
+          "file": "core/postcss.config.js",
+          "hash": "18188427317718703771"
+        },
+        {
+          "file": "core/rsbuild.config.ts",
+          "hash": "11090046534005238464"
+        },
+        {
+          "file": "core/src/App.tsx",
+          "hash": "6064373081047901928",
+          "deps": [
+            "@sse/katalyst-shared",
+            [
+              "@sse/katalyst-remix",
+              "dynamic"
+            ],
+            [
+              "@sse/katalyst-nextjs",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "core/src/components/index.ts",
+          "hash": "980316576200269004"
+        },
+        {
+          "file": "core/src/hooks/index.ts",
+          "hash": "4292095091112508459"
+        },
+        {
+          "file": "core/src/index.css",
+          "hash": "5048855072388314124"
+        },
+        {
+          "file": "core/src/index.html",
+          "hash": "12557737071704514105"
+        },
+        {
+          "file": "core/src/main.tsx",
+          "hash": "1185647745933677869"
+        },
+        {
+          "file": "core/src/routeTree.gen.ts",
+          "hash": "2997020259603443591"
+        },
+        {
+          "file": "core/src/stores/index.ts",
+          "hash": "10190743549317546132"
+        },
+        {
+          "file": "core/tailwind.config.js",
+          "hash": "2184661525279289952"
+        },
+        {
+          "file": "core/tsconfig.json",
+          "hash": "7342117567208182728"
+        },
+        {
+          "file": "core/vercel.json",
+          "hash": "11613949071726490345"
+        }
+      ],
+      "katalyst": [
+        {
+          "file": ".github/workflows/ci.yml",
+          "hash": "1326947567775654452"
+        },
+        {
+          "file": ".gitignore",
+          "hash": "8254502125936286749"
+        },
+        {
+          "file": ".gitlab-ci.yml",
+          "hash": "431686686863212487"
+        },
+        {
+          "file": ".storybook/main.ts",
+          "hash": "18126097446100913317"
+        },
+        {
+          "file": ".storybook/preview.tsx",
+          "hash": "1096659833651230",
+          "deps": [
+            "@sse/katalyst-shared"
+          ]
+        },
+        {
+          "file": "CHANGELOG.md",
+          "hash": "11226232162386017536"
+        },
+        {
+          "file": "CONTRIBUTING.md",
+          "hash": "11936525258495480798"
+        },
+        {
+          "file": "LICENSE",
+          "hash": "9675011077428611963"
+        },
+        {
+          "file": "README.md",
+          "hash": "1231001113937428831"
+        },
+        {
+          "file": "biome.json",
+          "hash": "14271996460522857108"
+        },
+        {
+          "file": "bun.lock",
+          "hash": "17504348190804072300"
+        },
+        {
+          "file": "deno.json",
+          "hash": "3487328257670312892"
+        },
+        {
+          "file": "nx.json",
+          "hash": "980150330824710595"
+        },
+        {
+          "file": "package.json",
+          "hash": "9000899602053711414"
+        },
+        {
+          "file": "playwright.config.ts",
+          "hash": "5425098126082549844"
+        },
+        {
+          "file": "project.json",
+          "hash": "9781130061277932191"
+        },
+        {
+          "file": "tests/setup.ts",
+          "hash": "4316020633775737485"
+        },
+        {
+          "file": "tsconfig.json",
+          "hash": "11596085664434632083"
+        },
+        {
+          "file": "vitest.config.ts",
+          "hash": "17563898778047248170"
+        }
+      ]
+    }
+  }
+}

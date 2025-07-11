@@ -1,0 +1,54 @@
+{
+  "run": {
+    "command": "nx run-many --target=lint --projects=core,remix,nextjs,shared --parallel",
+    "startTime": "2025-07-11T12:46:09.844Z",
+    "endTime": "2025-07-11T12:46:11.376Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "@sse/katalyst-nextjs:lint",
+      "target": "lint",
+      "projectName": "@sse/katalyst-nextjs",
+      "hash": "17092745740642691301",
+      "startTime": "2025-07-11T12:46:09.907Z",
+      "endTime": "2025-07-11T12:46:10.531Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "@sse/katalyst-shared:lint",
+      "target": "lint",
+      "projectName": "@sse/katalyst-shared",
+      "hash": "1531971166763101710",
+      "startTime": "2025-07-11T12:46:09.907Z",
+      "endTime": "2025-07-11T12:46:10.824Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "@sse/katalyst-remix:lint",
+      "target": "lint",
+      "projectName": "@sse/katalyst-remix",
+      "hash": "13808360506655253641",
+      "startTime": "2025-07-11T12:46:09.907Z",
+      "endTime": "2025-07-11T12:46:10.999Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "@sse/katalyst-core:lint",
+      "target": "lint",
+      "projectName": "@sse/katalyst-core",
+      "hash": "12372974642518141941",
+      "startTime": "2025-07-11T12:46:10.541Z",
+      "endTime": "2025-07-11T12:46:11.349Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}
