@@ -28,7 +28,7 @@ export default function Home() {
           <strong>Zustand</strong> - State management
         </li>
         <li>
-          <strong>PandaCSS</strong> - Atomic CSS styling
+          <strong>Tailwind CSS 4.0</strong> - Utility-first CSS framework
         </li>
         <li>
           <strong>Anime.js</strong> - Smooth animations
