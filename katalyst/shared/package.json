@@ -34,7 +34,7 @@
     "tapable": "^2.2.1",
     "@midscene/web": "^0.21.3",
     "emp": "^2.0.0",
-    "pareto": "^1.0.0",
+    "pareto": "^0.75.2",
     "@callstack/repack": "^4.3.2",
     "umi": "^4.3.23",
     "rspeedy": "^1.0.0",

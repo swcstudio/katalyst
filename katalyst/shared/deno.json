@@ -29,7 +29,7 @@
     "tapable": "npm:tapable@2.2.1",
     "@midscene/web": "npm:@midscene/web@0.21.3",
     "emp": "npm:emp@2.0.0",
-    "pareto": "npm:pareto@1.0.0",
+    "pareto": "npm:pareto@0.75.2",
     "@callstack/repack": "npm:@callstack/repack@4.3.2",
     "umi": "npm:umi@4.3.23",
     "rspeedy": "npm:rspeedy@1.0.0",
