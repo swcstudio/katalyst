@@ -25,7 +25,7 @@
     "rspack-plugin-virtual-module": "^0.1.13",
     "rspack-manifest-plugin": "^5.0.0",
     "@rspack/plugin-react-refresh": "^1.4.3",
-    "unplugin-stylex": "^0.1.1",
+    "unplugin-stylex": "^0.5.3",
     "@arco-design/web-react": "^2.63.2",
     "@arco-plugins/unplugin-react": "^1.0.1",
     "react-cosmos": "^6.2.0",
