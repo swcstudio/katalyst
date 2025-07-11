@@ -2,6 +2,7 @@ import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginSvgr } from '@rsbuild/plugin-svgr';
 import { pluginTypeCheck } from '@rsbuild/plugin-type-check';
+import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
 
 export default defineConfig({
   plugins: [
@@ -25,6 +26,41 @@ export default defineConfig({
       },
     }),
   ],
+  tools: {
+    rspack: {
+      plugins: [
+        new ModuleFederationPlugin({
+          name: 'katalyst_core',
+          filename: 'remoteEntry.js',
+          exposes: {
+            './App': './src/App.tsx',
+            './components': './src/components/index.ts',
+            './hooks': './src/hooks/index.ts',
+            './stores': './src/stores/index.ts',
+          },
+          remotes: {
+            katalyst_remix: 'katalyst_remix@http://localhost:20008/remoteEntry.js',
+            katalyst_nextjs: 'katalyst_nextjs@http://localhost:20009/remoteEntry.js',
+          },
+          shared: {
+            react: { singleton: true, requiredVersion: '^19.0.0' },
+            'react-dom': { singleton: true, requiredVersion: '^19.0.0' },
+            '@tanstack/react-query': { singleton: true },
+            '@tanstack/react-router': { singleton: true },
+            zustand: { singleton: true },
+          },
+        }),
+      ],
+    },
+    postcss: {
+      postcssOptions: {
+        plugins: [
+          require('tailwindcss'),
+          require('autoprefixer'),
+        ],
+      },
+    },
+  },
   html: {
     template: './src/index.html',
     title: 'Katalyst Core - React 19 Framework',
@@ -101,15 +137,5 @@ export default defineConfig({
       },
     },
     bundleAnalyze: process.env.BUNDLE_ANALYZE ? {} : undefined,
-  },
-  tools: {
-    postcss: {
-      postcssOptions: {
-        plugins: [
-          require('tailwindcss'),
-          require('autoprefixer'),
-        ],
-      },
-    },
   },
 });
