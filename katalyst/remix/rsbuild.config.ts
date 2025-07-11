@@ -18,12 +18,6 @@ export default defineConfig({
     }),
     pluginTypeCheck({
       enable: true,
-      forkTsChecker: {
-        typescript: {
-          memoryLimit: 4096,
-          configFile: './tsconfig.json',
-        },
-      },
     }),
   ],
   html: {
@@ -39,12 +33,12 @@ export default defineConfig({
       index: './src/main.tsx',
     },
     alias: {
-      '@': './app',
-      '@/components': './app/components',
-      '@/hooks': './app/hooks',
-      '@/utils': './app/utils',
-      '@/stores': './app/stores',
-      '@/routes': './app/routes',
+      '@': './src',
+      '@/components': './src/components',
+      '@/hooks': './src/hooks',
+      '@/utils': './src/utils',
+      '@/stores': './src/stores',
+      '@/app': './app',
     },
   },
   server: {
@@ -113,33 +107,33 @@ export default defineConfig({
   tools: {
     rspack: {
       plugins: [
-        new ModuleFederationPlugin({
-          name: 'katalyst_remix',
-          filename: 'remoteEntry.js',
-          exposes: {
-            './AdminDashboard': './app/components/AdminDashboard.tsx',
-            './DataTable': './app/components/DataTable.tsx',
-            './Analytics': './app/components/Analytics.tsx',
-          },
-          remotes: {
-            katalyst_core: 'katalyst_core@http://localhost:20007/remoteEntry.js',
-            katalyst_nextjs: 'katalyst_nextjs@http://localhost:20009/remoteEntry.js',
-          },
-          shared: {
-            react: { singleton: true, requiredVersion: '^19.0.0' },
-            'react-dom': { singleton: true, requiredVersion: '^19.0.0' },
-            '@remix-run/react': { singleton: true },
-            '@tanstack/react-query': { singleton: true },
-            '@tanstack/react-table': { singleton: true },
-            zustand: { singleton: true },
-          },
-        }),
+        // new ModuleFederationPlugin({
+        //   name: 'katalyst_remix',
+        //   filename: 'remoteEntry.js',
+        //   exposes: {
+        //     './AdminDashboard': './app/components/AdminDashboard.tsx',
+        //     './DataTable': './app/components/DataTable.tsx',
+        //     './Analytics': './app/components/Analytics.tsx',
+        //   },
+        //   remotes: {
+        //     katalyst_core: 'katalyst_core@http://localhost:20007/remoteEntry.js',
+        //     katalyst_nextjs: 'katalyst_nextjs@http://localhost:20009/remoteEntry.js',
+        //   },
+        //   shared: {
+        //     react: { singleton: true, requiredVersion: '^19.0.0' },
+        //     'react-dom': { singleton: true, requiredVersion: '^19.0.0' },
+        //     '@remix-run/react': { singleton: true },
+        //     '@tanstack/react-query': { singleton: true },
+        //     '@tanstack/react-table': { singleton: true },
+        //     zustand: { singleton: true },
+        //   },
+        // }),
       ],
     },
     postcss: {
       postcssOptions: {
         plugins: [
-          require('tailwindcss'),
+          require('@tailwindcss/postcss'),
           require('autoprefixer'),
         ],
       },

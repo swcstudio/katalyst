@@ -12,13 +12,13 @@ interface ConfigStore {
 
 export const useConfigStore = create<ConfigStore>()(
   persist(
-    (set: any) => ({
-      theme: 'system',
-      variant: 'core',
+    (set, get) => ({
+      theme: 'system' as const,
+      variant: 'core' as const,
       devMode: false,
       setTheme: (theme: 'light' | 'dark' | 'system') => set({ theme }),
       setVariant: (variant: 'core' | 'remix' | 'nextjs') => set({ variant }),
-      toggleDevMode: () => set((state: ConfigStore) => ({ devMode: !state.devMode }))
+      toggleDevMode: () => set((state) => ({ devMode: !state.devMode }))
     }),
     {
       name: 'katalyst-config'

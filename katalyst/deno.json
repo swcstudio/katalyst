@@ -31,6 +31,7 @@
   },
   "imports": {
     "@/": "./shared/src/",
+    "@shared/": "./shared/src/",
     "@katalyst/shared": "./shared/src/index.ts",
     "@katalyst/core": "./core/src/main.tsx",
     "@katalyst/remix": "./remix/app/root.tsx",
@@ -60,6 +61,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   },
+  "unstable": ["sloppy-imports"],
   "nodeModulesDir": "auto",
   "lock": false
 }

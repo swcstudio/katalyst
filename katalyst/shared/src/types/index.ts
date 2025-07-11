@@ -1,5 +1,6 @@
 export interface KatalystConfig {
   variant: 'core' | 'remix' | 'nextjs';
+  theme?: 'light' | 'dark' | 'system';
   features: KatalystFeature[];
   plugins: KatalystPlugin[];
   integrations: KatalystIntegration[];

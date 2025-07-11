@@ -18,16 +18,10 @@ export default defineConfig({
     }),
     pluginTypeCheck({
       enable: true,
-      forkTsChecker: {
-        typescript: {
-          memoryLimit: 4096,
-          configFile: './tsconfig.json',
-        },
-      },
     }),
   ],
   html: {
-    template: './src/app/layout.tsx',
+    template: './src/index.html',
     title: 'Katalyst Next.js - React 19 + Next.js Framework',
     meta: {
       description: 'High-performance React 19 + Next.js framework with Rust toolchain',
@@ -36,7 +30,7 @@ export default defineConfig({
   },
   source: {
     entry: {
-      index: './src/app/page.tsx',
+      index: './src/main.tsx',
     },
     alias: {
       '@': './src',
@@ -113,33 +107,33 @@ export default defineConfig({
   tools: {
     rspack: {
       plugins: [
-        new ModuleFederationPlugin({
-          name: 'katalyst_nextjs',
-          filename: 'remoteEntry.js',
-          exposes: {
-            './Marketing': './src/components/Marketing.tsx',
-            './Hero': './src/components/Hero.tsx',
-            './Features': './src/components/Features.tsx',
-            './Pricing': './src/components/Pricing.tsx',
-          },
-          remotes: {
-            katalyst_core: 'katalyst_core@http://localhost:20007/remoteEntry.js',
-            katalyst_remix: 'katalyst_remix@http://localhost:20008/remoteEntry.js',
-          },
-          shared: {
-            react: { singleton: true, requiredVersion: '^19.0.0' },
-            'react-dom': { singleton: true, requiredVersion: '^19.0.0' },
-            'next': { singleton: true },
-            '@tanstack/react-query': { singleton: true },
-            zustand: { singleton: true },
-          },
-        }),
+        // new ModuleFederationPlugin({
+        //   name: 'katalyst_nextjs',
+        //   filename: 'remoteEntry.js',
+        //   exposes: {
+        //     './Marketing': './src/components/Marketing.tsx',
+        //     './Hero': './src/components/Hero.tsx',
+        //     './Features': './src/components/Features.tsx',
+        //     './Pricing': './src/components/Pricing.tsx',
+        //   },
+        //   remotes: {
+        //     katalyst_core: 'katalyst_core@http://localhost:20007/remoteEntry.js',
+        //     katalyst_remix: 'katalyst_remix@http://localhost:20008/remoteEntry.js',
+        //   },
+        //   shared: {
+        //     react: { singleton: true, requiredVersion: '^19.0.0' },
+        //     'react-dom': { singleton: true, requiredVersion: '^19.0.0' },
+        //     'next': { singleton: true },
+        //     '@tanstack/react-query': { singleton: true },
+        //     zustand: { singleton: true },
+        //   },
+        // }),
       ],
     },
     postcss: {
       postcssOptions: {
         plugins: [
-          require('tailwindcss'),
+          require('@tailwindcss/postcss'),
           require('autoprefixer'),
         ],
       },

@@ -8,7 +8,7 @@ import {
   createColumnHelper,
   flexRender,
 } from '@tanstack/react-table';
-import { Button } from '../../shared/src/components/DesignSystem';
+import { Button } from '../../../shared/src/components/DesignSystem';
 
 interface User {
   id: number;

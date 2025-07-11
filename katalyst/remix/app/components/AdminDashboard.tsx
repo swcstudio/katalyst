@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Card, Button } from '../../shared/src/components/DesignSystem';
+import { Card, Button } from '../../../shared/src/components/DesignSystem';
 import { DataTable } from './DataTable';
 import { Analytics } from './Analytics';
 

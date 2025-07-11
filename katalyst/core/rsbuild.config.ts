@@ -18,44 +18,38 @@ export default defineConfig({
     }),
     pluginTypeCheck({
       enable: true,
-      forkTsChecker: {
-        typescript: {
-          memoryLimit: 4096,
-          configFile: './tsconfig.json',
-        },
-      },
     }),
   ],
   tools: {
     rspack: {
       plugins: [
-        new ModuleFederationPlugin({
-          name: 'katalyst_core',
-          filename: 'remoteEntry.js',
-          exposes: {
-            './App': './src/App.tsx',
-            './components': './src/components/index.ts',
-            './hooks': './src/hooks/index.ts',
-            './stores': './src/stores/index.ts',
-          },
-          remotes: {
-            katalyst_remix: 'katalyst_remix@http://localhost:20008/remoteEntry.js',
-            katalyst_nextjs: 'katalyst_nextjs@http://localhost:20009/remoteEntry.js',
-          },
-          shared: {
-            react: { singleton: true, requiredVersion: '^19.0.0' },
-            'react-dom': { singleton: true, requiredVersion: '^19.0.0' },
-            '@tanstack/react-query': { singleton: true },
-            '@tanstack/react-router': { singleton: true },
-            zustand: { singleton: true },
-          },
-        }),
+        // new ModuleFederationPlugin({
+        //   name: 'katalyst_core',
+        //   filename: 'remoteEntry.js',
+        //   exposes: {
+        //     './App': './src/App.tsx',
+        //     './components': './src/components/index.ts',
+        //     './hooks': './src/hooks/index.ts',
+        //     './stores': './src/stores/index.ts',
+        //   },
+        //   remotes: {
+        //     katalyst_remix: 'katalyst_remix@http://localhost:20008/remoteEntry.js',
+        //     katalyst_nextjs: 'katalyst_nextjs@http://localhost:20009/remoteEntry.js',
+        //   },
+        //   shared: {
+        //     react: { singleton: true, requiredVersion: '^19.0.0' },
+        //     'react-dom': { singleton: true, requiredVersion: '^19.0.0' },
+        //     '@tanstack/react-query': { singleton: true },
+        //     '@tanstack/react-router': { singleton: true },
+        //     zustand: { singleton: true },
+        //   },
+        // }),
       ],
     },
     postcss: {
       postcssOptions: {
         plugins: [
-          require('tailwindcss'),
+          require('@tailwindcss/postcss'),
           require('autoprefixer'),
         ],
       },
