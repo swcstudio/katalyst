@@ -1,1 +1,1 @@
-export * from '../../shared/src/stores';
+export * from '@shared/stores';

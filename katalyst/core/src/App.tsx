@@ -2,9 +2,9 @@ import React, { Suspense, lazy } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen';
-import { useConfigStore } from '../shared/src/stores/config-store';
-import { KatalystProvider } from '../shared/src/components/KatalystProvider';
-import { DesignSystem } from '../shared/src/components/DesignSystem';
+import { useConfigStore } from '@shared/stores/config-store';
+import { KatalystProvider } from '@shared/components/KatalystProvider';
+import { DesignSystem } from '@shared/components/DesignSystem';
 import './index.css';
 
 const RemixAdminDashboard = lazy(() => import('katalyst_remix/AdminDashboard'));

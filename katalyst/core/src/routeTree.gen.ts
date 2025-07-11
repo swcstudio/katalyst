@@ -1,5 +1,14 @@
-export const routeTree = {
+import { createRootRoute, createRoute } from '@tanstack/react-router';
+import App from './App';
+
+const rootRoute = createRootRoute({
+  component: App,
+});
+
+const indexRoute = createRoute({
+  getParentRoute: () => rootRoute,
   path: '/',
-  component: () => import('./App'),
-  children: []
-};
+  component: App,
+});
+
+export const routeTree = rootRoute.addChildren([indexRoute]);

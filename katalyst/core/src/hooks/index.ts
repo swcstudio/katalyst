@@ -1,1 +1,1 @@
-export * from '../../shared/src/hooks';
+export * from '@shared/hooks';
