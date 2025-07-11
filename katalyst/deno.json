@@ -46,7 +46,7 @@
     "@clerk/clerk-react": "npm:@clerk/clerk-react@^5.17.3",
     "tailwindcss": "npm:tailwindcss@^4.0.0",
     "@arco-design/web-react": "npm:@arco-design/web-react@^2.63.2",
-    "@cosmos/react": "npm:@cosmos/react@^6.2.0",
+    "react-cosmos": "npm:react-cosmos@^6.2.0",
     "@stylex/stylex": "npm:@stylex/stylex@^0.8.0",
     "typia": "npm:typia@^6.11.3"
   },

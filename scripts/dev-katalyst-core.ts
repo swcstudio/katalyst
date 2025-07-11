@@ -9,7 +9,11 @@ try {
   });
 
   const child = command.spawn();
-  await child.status;
+  const status = await child.status;
+  
+  if (!status.success) {
+    Deno.exit(1);
+  }
 } catch (error) {
   console.error('Katalyst Core development server failed:', error);
   Deno.exit(1);
