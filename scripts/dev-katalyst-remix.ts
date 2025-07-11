@@ -2,14 +2,18 @@ console.log('Starting Katalyst Remix development server...');
 
 try {
   const command = new Deno.Command('deno', {
-    args: ['run', '--allow-all', 'npm:@remix-run/dev@2.12.1', 'dev', '--port', '20008'],
-    cwd: './katalyst/remix',
+    args: ['run', '--allow-all', 'npm:@rsbuild/core@1.0.17', 'dev', '--config', 'rsbuild.config.ts'],
+    cwd: '../katalyst/remix',
     stdout: 'inherit',
     stderr: 'inherit',
   });
 
   const child = command.spawn();
-  await child.status;
+  const status = await child.status;
+  
+  if (!status.success) {
+    Deno.exit(status.code);
+  }
 } catch (error) {
   console.error('Katalyst Remix development server failed:', error);
   Deno.exit(1);

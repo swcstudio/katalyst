@@ -2,14 +2,18 @@ console.log('Starting Katalyst Next.js development server...');
 
 try {
   const command = new Deno.Command('deno', {
-    args: ['run', '--allow-all', 'npm:next@15.1.3', 'dev', '--port', '20009'],
-    cwd: './katalyst/nextjs',
+    args: ['run', '--allow-all', 'npm:@rsbuild/core@1.0.17', 'dev', '--config', 'rsbuild.config.ts'],
+    cwd: '../katalyst/nextjs',
     stdout: 'inherit',
     stderr: 'inherit',
   });
 
   const child = command.spawn();
-  await child.status;
+  const status = await child.status;
+  
+  if (!status.success) {
+    Deno.exit(status.code);
+  }
 } catch (error) {
   console.error('Katalyst Next.js development server failed:', error);
   Deno.exit(1);
