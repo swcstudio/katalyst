@@ -19,6 +19,7 @@
     "zustand": "npm:zustand@5.0.1",
     "animejs": "npm:animejs@3.2.2",
     "tailwindcss": "npm:tailwindcss@4.0.0",
+    "@tailwindcss/postcss": "npm:@tailwindcss/postcss@4.0.0",
     "tailwindcss-animate": "npm:tailwindcss-animate@1.0.7",
     "autoprefixer": "npm:autoprefixer@10.4.20",
     "@rsbuild/plugin-svgr": "npm:@rsbuild/plugin-svgr@1.0.1",

@@ -37,7 +37,11 @@
     "storybook": "npm:storybook@8.4.7",
     "storybook-builder-rsbuild": "npm:storybook-builder-rsbuild@2.0.2",
     "ngrok": "npm:ngrok@5.0.0-beta.2",
-    "rsbuild-plugin-react-inspector": "npm:rsbuild-plugin-react-inspector@0.1.2"
+    "rsbuild-plugin-react-inspector": "npm:rsbuild-plugin-react-inspector@0.1.2",
+    "tailwindcss": "npm:tailwindcss@4.0.0",
+    "@tailwindcss/postcss": "npm:@tailwindcss/postcss@4.0.0",
+    "tailwindcss-animate": "npm:tailwindcss-animate@1.0.7",
+    "autoprefixer": "npm:autoprefixer@10.4.20"
   },
   "tasks": {
     "build": "deno run --allow-all npm:typescript tsc"
