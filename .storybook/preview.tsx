@@ -77,12 +77,12 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const theme = context.globals.theme;
-
+      
       return React.createElement(
         'div',
-        {
-          className: `katalyst-theme-${theme}`,
-          style: { padding: '1rem' },
+        { 
+          className: `katalyst-theme-${theme}`, 
+          style: { padding: '1rem' } 
         },
         React.createElement(Story)
       );

@@ -1,4 +1,4 @@
-import { createContext, type ReactNode, useContext } from 'react';
+import { createContext, useContext, ReactNode } from 'react';
 import { useConfigStore } from '../stores/config-store.ts';
 
 interface ConfigContextValue {
@@ -19,7 +19,11 @@ interface ConfigProviderProps {
 export function ConfigProvider({ children }: ConfigProviderProps) {
   const store = useConfigStore();
 
-  return <ConfigContext.Provider value={store}>{children}</ConfigContext.Provider>;
+  return (
+    <ConfigContext.Provider value={store}>
+      {children}
+    </ConfigContext.Provider>
+  );
 }
 
 export function useConfigContext() {

@@ -18,10 +18,10 @@ export const useConfigStore = create<ConfigStore>()(
       devMode: false,
       setTheme: (theme: 'light' | 'dark' | 'system') => set({ theme }),
       setVariant: (variant: 'core' | 'remix' | 'nextjs') => set({ variant }),
-      toggleDevMode: () => set((state) => ({ devMode: !state.devMode })),
+      toggleDevMode: () => set((state) => ({ devMode: !state.devMode }))
     }),
     {
-      name: 'katalyst-config',
+      name: 'katalyst-config'
     }
   )
 );

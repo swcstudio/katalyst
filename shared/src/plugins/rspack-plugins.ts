@@ -19,9 +19,10 @@ export class RSpackPluginManager {
   }
 
   generatePluginConfig() {
-    return this.getAllPlugins().map((plugin) => ({
+    return this.getAllPlugins().map(plugin => ({
       ...plugin,
-      apply: (compiler: any) => {},
+      apply: (compiler: any) => {
+      }
     }));
   }
 }

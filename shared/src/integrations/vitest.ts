@@ -160,17 +160,26 @@ export class VitestIntegration {
           benchmarking: !!this.config.test.benchmark,
           uiMode: this.config.test.ui,
           apiMode: !!this.config.test.api,
-          watchMode: true,
+          watchMode: true
         },
         performance: {
           speed: '10x faster than Jest',
           startup: 'instant',
           hotReload: 'fast',
-          memory: 'efficient',
-        },
+          memory: 'efficient'
+        }
       }),
-      plugins: ['vitest', '@vitest/ui', '@vitest/coverage-v8', '@vitest/coverage-istanbul'],
-      dependencies: ['vitest', '@vitest/ui', '@vitest/coverage-v8'],
+      plugins: [
+        'vitest',
+        '@vitest/ui',
+        '@vitest/coverage-v8',
+        '@vitest/coverage-istanbul'
+      ],
+      dependencies: [
+        'vitest',
+        '@vitest/ui',
+        '@vitest/coverage-v8'
+      ]
     };
   }
 
@@ -182,31 +191,31 @@ export class VitestIntegration {
           node: {
             name: 'node',
             features: ['fs', 'process', 'buffer', 'crypto'],
-            globals: ['global', 'process', 'Buffer'],
+            globals: ['global', 'process', 'Buffer']
           },
           jsdom: {
             name: 'jsdom',
             features: ['dom', 'window', 'document', 'localStorage'],
-            globals: ['window', 'document', 'navigator'],
+            globals: ['window', 'document', 'navigator']
           },
           'happy-dom': {
             name: 'happy-dom',
             features: ['dom', 'window', 'document', 'faster-than-jsdom'],
-            globals: ['window', 'document', 'navigator'],
+            globals: ['window', 'document', 'navigator']
           },
           'edge-runtime': {
             name: 'edge-runtime',
             features: ['edge-apis', 'web-standards', 'no-node-apis'],
-            globals: ['fetch', 'Request', 'Response'],
-          },
+            globals: ['fetch', 'Request', 'Response']
+          }
         },
         configuration: {
           environment: this.config.test.environment || 'node',
           globals: this.config.test.globals,
           setupFiles: this.config.test.setupFiles,
-          globalSetup: this.config.test.globalSetup,
-        },
-      }),
+          globalSetup: this.config.test.globalSetup
+        }
+      })
     };
   }
 
@@ -224,32 +233,32 @@ export class VitestIntegration {
           thresholds: true,
           reports: true,
           exclusion: true,
-          inclusion: true,
+          inclusion: true
         },
         providers: {
           v8: {
             name: 'v8',
             features: ['native', 'fast', 'accurate'],
-            reports: ['text', 'html', 'lcov', 'json'],
+            reports: ['text', 'html', 'lcov', 'json']
           },
           istanbul: {
             name: 'istanbul',
             features: ['mature', 'comprehensive', 'babel-compatible'],
-            reports: ['text', 'html', 'lcov', 'json', 'cobertura'],
+            reports: ['text', 'html', 'lcov', 'json', 'cobertura']
           },
           c8: {
             name: 'c8',
             features: ['v8-based', 'fast', 'simple'],
-            reports: ['text', 'html', 'lcov', 'json'],
-          },
+            reports: ['text', 'html', 'lcov', 'json']
+          }
         },
         thresholds: this.config.test.coverage?.thresholds || {
           lines: 80,
           functions: 80,
           branches: 80,
-          statements: 80,
-        },
-      }),
+          statements: 80
+        }
+      })
     };
   }
 
@@ -266,22 +275,22 @@ export class VitestIntegration {
           statistics: true,
           visualization: true,
           ci: true,
-          reporting: true,
+          reporting: true
         },
         api: {
           bench: 'bench("name", () => { ... })',
           describe: 'describe.bench("suite", () => { ... })',
           baseline: 'bench.baseline("name", () => { ... })',
           skip: 'bench.skip("name", () => { ... })',
-          only: 'bench.only("name", () => { ... })',
+          only: 'bench.only("name", () => { ... })'
         },
         metrics: {
           time: 'execution time',
           memory: 'memory usage',
           throughput: 'operations per second',
-          latency: 'response time',
-        },
-      }),
+          latency: 'response time'
+        }
+      })
     };
   }
 
@@ -293,7 +302,7 @@ export class VitestIntegration {
           enabled: this.config.test.ui,
           port: this.config.test.api?.port || 51204,
           host: this.config.test.api?.host || 'localhost',
-          open: this.config.test.open,
+          open: this.config.test.open
         },
         features: {
           webInterface: true,
@@ -303,7 +312,7 @@ export class VitestIntegration {
           filtering: true,
           search: true,
           realTime: true,
-          debugging: true,
+          debugging: true
         },
         capabilities: {
           runTests: 'Run individual or grouped tests',
@@ -311,9 +320,9 @@ export class VitestIntegration {
           coverage: 'View coverage reports',
           debugging: 'Debug tests in browser',
           filtering: 'Filter tests by name or status',
-          watching: 'Auto-run tests on file changes',
-        },
-      }),
+          watching: 'Auto-run tests on file changes'
+        }
+      })
     };
   }
 
@@ -330,7 +339,7 @@ export class VitestIntegration {
           realTime: true,
           ci: true,
           json: true,
-          junit: true,
+          junit: true
         },
         builtIn: {
           default: 'Default console reporter',
@@ -340,14 +349,14 @@ export class VitestIntegration {
           junit: 'JUnit XML for test runners',
           html: 'HTML report generation',
           hanging: 'Shows hanging tests',
-          github: 'GitHub Actions annotations',
+          github: 'GitHub Actions annotations'
         },
         custom: {
           implementation: 'Custom reporter class',
           hooks: 'onInit, onFinished, onTestResult',
-          output: 'Custom formatting and output',
-        },
-      }),
+          output: 'Custom formatting and output'
+        }
+      })
     };
   }
 
@@ -365,8 +374,8 @@ export class VitestIntegration {
             spies: true,
             stubs: true,
             hoisting: true,
-            automocking: true,
-          },
+            automocking: true
+          }
         },
         api: {
           mock: 'vi.mock("module", () => ({ ... }))',
@@ -375,16 +384,15 @@ export class VitestIntegration {
           timer: 'vi.useFakeTimers()',
           restore: 'vi.restoreAllMocks()',
           clear: 'vi.clearAllMocks()',
-          reset: 'vi.resetAllMocks()',
+          reset: 'vi.resetAllMocks()'
         },
         patterns: {
           moduleMock: 'vi.mock("./module", () => ({ default: vi.fn() }))',
-          partialMock:
-            'vi.mock("./module", async () => ({ ...(await vi.importActual("./module")), method: vi.fn() }))',
+          partialMock: 'vi.mock("./module", async () => ({ ...(await vi.importActual("./module")), method: vi.fn() }))',
           globalMock: 'vi.stubGlobal("fetch", vi.fn())',
-          timerMock: 'vi.useFakeTimers(); vi.advanceTimersByTime(1000)',
-        },
-      }),
+          timerMock: 'vi.useFakeTimers(); vi.advanceTimersByTime(1000)'
+        }
+      })
     };
   }
 
@@ -403,23 +411,23 @@ export class VitestIntegration {
             tsx: true,
             decorators: true,
             paths: true,
-            references: true,
-          },
+            references: true
+          }
         },
         configuration: {
           target: this.config.esbuild?.target || 'node14',
           jsx: this.config.esbuild?.jsxFactory || 'React.createElement',
           jsxFragment: this.config.esbuild?.jsxFragment || 'React.Fragment',
           define: this.config.define || {},
-          resolve: this.config.resolve || {},
+          resolve: this.config.resolve || {}
         },
         integration: {
           tsc: 'TypeScript compiler integration',
           esbuild: 'Fast TypeScript transformation',
           swc: 'Alternative fast compiler',
-          babel: 'Babel transformation support',
-        },
-      }),
+          babel: 'Babel transformation support'
+        }
+      })
     };
   }
 
@@ -432,7 +440,7 @@ export class VitestIntegration {
       this.setupUIMode(),
       this.setupReporting(),
       this.setupMocking(),
-      this.setupTypeScript(),
+      this.setupTypeScript()
     ]);
 
     return integrations.filter(Boolean);
@@ -450,7 +458,7 @@ export class VitestIntegration {
           '**/dist/**',
           '**/cypress/**',
           '**/.{idea,git,cache,output,temp}/**',
-          '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
+          '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*'
         ],
         testTimeout: 10000,
         hookTimeout: 10000,
@@ -479,7 +487,7 @@ export class VitestIntegration {
             '**/__tests__/**',
             '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
             '**/vitest.{workspace,projects}.[jt]s?(on)',
-            '**/.{eslint,mocha,prettier}rc.{?(c|m)js,yml}',
+            '**/.{eslint,mocha,prettier}rc.{?(c|m)js,yml}'
           ],
           reporter: ['text', 'json', 'html'],
           reportsDirectory: './coverage',
@@ -487,13 +495,13 @@ export class VitestIntegration {
             lines: 80,
             functions: 80,
             branches: 80,
-            statements: 80,
-          },
+            statements: 80
+          }
         },
         reporter: [{ name: 'default' }],
         outputFile: {
           json: './test-results.json',
-          junit: './test-results.xml',
+          junit: './test-results.xml'
         },
         threads: true,
         maxThreads: 4,
@@ -504,37 +512,37 @@ export class VitestIntegration {
         api: {
           port: 51204,
           host: 'localhost',
-          strictPort: false,
+          strictPort: false
         },
         ui: false,
         open: false,
         css: {
           include: [/\.module\./],
           modules: {
-            classNameStrategy: 'stable',
-          },
+            classNameStrategy: 'stable'
+          }
         },
         deps: {
           external: [],
           inline: [],
           fallbackCJS: false,
-          interopDefault: true,
-        },
+          interopDefault: true
+        }
       },
       esbuild: {
         target: 'node14',
-        keepNames: true,
+        keepNames: true
       },
       define: {
         __DEV__: 'true',
-        __TEST__: 'true',
+        __TEST__: 'true'
       },
       resolve: {
         alias: {
           '@': './src',
-          '~': './src',
-        },
-      },
+          '~': './src'
+        }
+      }
     };
   }
 

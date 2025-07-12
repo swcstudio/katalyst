@@ -1,251 +1,209 @@
-# SolidStack Enterprise (SSE) Framework
+# Katalyst React 19 Framework
 
-![Spectrum Web Co](https://via.placeholder.com/150x50?text=Spectrum+Web+Co)
+<p align="center">
+  <img src="https://via.placeholder.com/200x200?text=Katalyst" alt="Katalyst Logo" width="200" height="200">
+</p>
 
-> A comprehensive micro-frameworks ecosystem built with SolidJS, rspack, and the complete Tanstack ecosystem for building state-of-the-art marketing websites.
+<p align="center">
+  State-of-the-Art React 19 Framework with 24 Integrated Technologies
+</p>
 
-## 🚀 Overview
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="#getting-started">Getting Started</a> •
+  <a href="#architecture">Architecture</a> •
+  <a href="#integrations">Integrations</a> •
+  <a href="#documentation">Documentation</a>
+</p>
 
-The SolidStack Enterprise framework provides a cutting-edge foundation for building high-performance marketing websites using modern web technologies and micro-frontend architecture. Built with 100% TypeScript, Deno runtime exclusively, and complete rspack ecosystem integration.
+## Overview
 
-### ✨ Key Features
+Katalyst is a cutting-edge React 19 framework that combines the power of micro-frontends with 24 state-of-the-art technologies. Built on the Rust toolchain from SolidStack Ecosystem (SSE), Katalyst provides three specialized variants:
 
-- **🚀 Revolutionary Micro-Frontend Architecture**: Six specialized micro-frontends (Marketing, Blog, Storefront, Docs, Remix, SvelteKit) with shared state management
-- **⚡ Unparalleled Performance**: Built with SolidJS and the complete Tanstack Framework suite for lightning-fast rendering
-- **☁️ Enterprise-Grade Cloud-Native Architecture**: Designed for Kubernetes and vCluster deployment with production-ready scalability
-- **🔒 Type-Safe Development**: 100% TypeScript codebase delivering superior developer experience and runtime safety
-- **🧪 Comprehensive Testing Suite**: Robust unit, E2E, snapshot, and asynchronous code testing infrastructure with rstest
-- **💾 Self-Hosted Database**: Convex with CloudNativePG for secure, high-performance data persistence
-- **📝 Integrated Content Platform**: Built-in blog and documentation system with advanced MDX support
-- **🔑 Enterprise Authentication & Billing**: Seamlessly integrated with Clerk for secure user management
-- **🔄 Complete CI/CD Pipeline**: State-of-the-art GitOps workflow with Nx Cloud Premium and GitHub Actions
-- **⚙️ Zero-Config Deployments**: Optimized for Vercel with comprehensive multi-framework support
+- **Core**: Pure web application framework
+- **Remix**: Admin dashboard and data-heavy applications  
+- **Next.js**: Marketing websites and static content
 
-## 🛠️ Tech Stack
+## Features
 
-### Core Technologies
-- **Frontend Framework**: SolidJS with TypeScript
-- **Build Tool**: rspack (complete ecosystem, no Vite)
-- **Runtime**: Deno (exclusive package management)
-- **Styling**: PandaCSS (atomic CSS)
-- **Animation**: Anime.js with TypeScript wrappers
-- **Testing**: rstest + Deno test
-- **Linting**: Biomjs
-- **Documentation**: Storybook with SolidJS integration
+- 🚀 **React 19 Support** - Latest React features with concurrent rendering
+- 🏗️ **Micro-Frontend Architecture** - Scalable, modular application structure
+- ⚡ **RSpack Bundling** - Lightning-fast builds with Rust-powered bundler
+- 🎨 **Tailwind CSS 4.0** - Modern utility-first styling
+- 🔧 **TypeScript First** - Full type safety across the entire stack
+- 🌐 **Web3 Ready** - Built-in blockchain and crypto integrations
+- 🤖 **AI Integration** - Advanced automation and intelligent features
+- 📱 **Multi-Platform** - Desktop (Electron) and mobile (React Native) support
+- 🔒 **Enterprise Security** - Clerk authentication and advanced security features
+- 📊 **Performance Optimized** - Advanced caching, streaming, and optimization
 
-### Tanstack Ecosystem (Complete Integration)
-- **State Management**: Zustand + Tanstack Store
-- **Routing**: Tanstack Router v1.120.17
-- **Data Fetching**: Tanstack Query
-- **Forms**: Tanstack Form
-- **Tables**: Tanstack Table
-- **Virtualization**: Tanstack Virtual
-- **Performance**: Tanstack Pacer
+## Architecture
 
-### Development Tools
-- **Build Analysis**: rsdoctor with advanced features
-- **CI/CD**: Nx Cloud Premium with AI-powered features
-- **Deployment**: Vercel with multi-framework support
-- **Server**: Nitro with Deno runtime integration
+### Micro-Frontend Structure
+```
+katalyst/
+├── core/          # Pure React web app
+├── remix/         # Admin dashboard variant
+├── nextjs/        # Marketing website variant
+└── shared/        # Common utilities and integrations
+```
 
-## 🏗️ Architecture
+### Technology Stack
 
-### Micro-Frontends Ecosystem
+#### Core Technologies
+- **React 19** - Latest React with concurrent features
+- **RSpack** - Rust-powered bundler for maximum performance
+- **TypeScript 5.6** - Advanced type safety
+- **Tailwind CSS 4.0** - Modern utility-first styling
+- **Biome** - Fast linting and formatting
+- **NX** - Monorepo management with AI-powered CI/CD
 
-The SSE framework consists of six specialized micro-frontends, each serving specific purposes:
+#### State Management & Data
+- **TanStack Router** - Type-safe routing with data loading
+- **TanStack Query** - Powerful data synchronization
+- **TanStack Form** - Type-safe form management
+- **TanStack Table** - Advanced data tables
+- **TanStack Virtual** - Virtualized scrolling
+- **Zustand** - Lightweight state management
 
-| Framework | Port | Purpose | Technology Stack |
-|-----------|------|---------|------------------|
-| **Marketing** | 20000 | Main marketing website | SolidJS + rspack + PandaCSS |
-| **Blog** | 20001 | Dynamic blog functionality | Astro + SolidJS + Tanstack Query |
-| **Storefront** | 20002 | E-commerce functionality | SolidJS + rspack + Zustand |
-| **Docs** | 20003 | Static documentation | Astro Static + SolidJS components |
-| **Remix App** | 20004 | Application UIs | Remix + rspack + SSR |
-| **SvelteKit SPA** | 20005 | Single Page Applications | SvelteKit + rspack (no Vite) |
-| **Storybook** | 20006 | Component development | Storybook + SolidJS |
+#### Development & Tooling
+- **Storybook** - Component development environment
+- **Playwright** - End-to-end testing
+- **Vitest** - Unit testing framework
+- **React Inspector** - Component debugging
+- **ngrok** - Secure tunneling for development
 
-### Shared Infrastructure
+#### Enterprise Features
+- **Clerk** - Authentication and user management
+- **Arco Design** - Enterprise UI components
+- **StyleX** - Meta's CSS-in-JS solution
+- **Typia** - Runtime type validation
 
-- **State Management**: Zustand with cross-framework adapters
-- **Animations**: Anime.js TypeScript wrappers with SolidJS reactivity
-- **Components**: Shared component library with TypeScript
-- **Authentication**: Clerk integration with shared state
-- **Styling**: PandaCSS with framework-specific configurations
+#### Micro-Frontend Platform
+- **EMP** - Enterprise Micro-Frontend Platform
+- **Module Federation** - Dynamic module loading
+- **Zephyr Cloud** - Micro-frontend acceleration
 
-### Backend & Database
-- **Database**: [Convex](https://www.convex.dev/) (self-hosted)
-- **Database Engine**: [CloudNativePG](https://cloudnative-pg.io/)
-- **Server**: Nitro with Deno runtime integration
-
-### Testing Infrastructure
-- **Frameworks**: Deno test + rstest + Solid Testing Library
-- **Testing Types**: Unit, E2E, snapshot, and asynchronous code testing
-- **Coverage**: Comprehensive testing across all micro-frontends
-
-### Infrastructure & Deployment
-- **Container Orchestration**: Kubernetes
-- **Virtual Clusters**: [vCluster](https://www.vcluster.com/) (loft.sh)
-- **Cloud Provider**: OVHcloud (Managed Kubernetes)
-- **Hosting**: Vercel with multi-framework support
-- **Authentication & Billing**: [Clerk](https://clerk.dev/)
-
-### CI/CD & GitOps
-- **Build System**: Nx Cloud Premium with AI-powered CI
-- **Pipeline Tools**: GitHub Actions with comprehensive testing
-- **GitOps Framework**: [KubeStack](https://www.kubestack.com/)
-- **Deployment**: Automated Vercel deployment for all frameworks
+#### Advanced Integrations
+- **Cosmos** - Web3 and blockchain integration
+- **Sails.js** - MVC backend framework
+- **Nitro** - Universal server functions
+- **Electron** - Desktop application support
 
 ## Getting Started
 
 ### Prerequisites
-
-- **Deno Runtime**: Latest version installed
-- **Git**: For version control
-- **TypeScript**: Included via Deno
+- Node.js 18+
+- Deno 2.0+
+- Rust 1.70+ (for toolchain)
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/spectrumwebco/sse.git
-cd sse
+git clone https://github.com/swcstudio/sse.git
+cd sse/katalyst
 
-# No npm install needed - Deno handles all dependencies
-# All packages are imported via npm: specifiers in deno.json
+# Install dependencies
+npm install
+
+# Start all variants in development
+npm run dev
+
+# Or start individual variants
+npm run dev:core     # Core web app on port 3000
+npm run dev:remix    # Remix admin on port 3001  
+npm run dev:nextjs   # Next.js marketing on port 3002
 ```
 
 ### Development Commands
 
-#### Start Individual Micro-Frontends
-
 ```bash
-# Marketing website (SolidJS)
-deno task dev:marketing     # http://localhost:20000
+# Development
+npm run dev          # Start all variants
+npm run dev:core     # Start core variant only
+npm run dev:remix    # Start remix variant only
+npm run dev:nextjs   # Start nextjs variant only
 
-# Blog (Astro + SolidJS)
-deno task dev:blog          # http://localhost:20001
+# Building
+npm run build        # Build all variants
+npm run build:core   # Build core variant
+npm run build:remix  # Build remix variant
+npm run build:nextjs # Build nextjs variant
 
-# Storefront (SolidJS)
-deno task dev:storefront    # http://localhost:20002
+# Testing
+npm run test         # Run all tests
+npm run lint         # Lint all code
+npm run typecheck    # Type checking
 
-# Documentation (Astro Static)
-deno task dev:docs          # http://localhost:20003
-
-# Remix application (Remix + rspack)
-deno task dev:remix         # http://localhost:20004
-
-# SvelteKit SPA (SvelteKit + rspack)
-deno task dev:sveltekit     # http://localhost:20005
-
-# Storybook (Component development)
-deno task storybook         # http://localhost:20006
+# Storybook
+npm run storybook    # Start component development
 ```
 
-#### Build Commands
+## Integrations
 
-```bash
-# Build all micro-frontends
-deno task build
+Katalyst integrates 24 state-of-the-art technologies:
 
-# Build individual frameworks
-deno task build:marketing
-deno task build:blog
-deno task build:storefront
-deno task build:docs
-deno task build:remix
-deno task build:sveltekit
-```
+### Framework & Bundling
+1. **TanStack** - Complete React framework ecosystem
+2. **RSpack** - High-performance JavaScript bundler
+3. **EMP** - Enterprise Micro-Frontend Platform
+4. **Esmx** - ECMAScript Modules Extension
+5. **Pareto** - Streaming React SSR Framework
+6. **Re-Pack** - React Native bundler
+7. **Umi** - Enterprise-level React framework
+8. **Rspeedy/Lynx** - High-performance React Native
 
-#### Testing Commands
+### Development Tools
+9. **electron-rsbuild** - Electron builder for React
+10. **NX** - Monorepo build system with module federation
+11. **Storybook** - UI component development environment
+12. **ngrok** - Secure tunneling for local development
+13. **React Inspector** - Component debugging tool
+14. **SVGR** - SVG to React component transformer
 
-```bash
-# Comprehensive test suite
-deno task test
+### UI & Styling
+15. **Arco.design** - Enterprise UI framework
+16. **StyleX** - Meta's CSS-in-JS solution
 
-# Unit tests
-deno task test:unit
+### Web3 & Blockchain
+17. **Cosmos** - Component development with Web3 integration
 
-# Framework-specific tests
-deno task test:frameworks
+### Performance & Optimization
+18. **Zephyr Cloud** - Micro-frontend SDLC acceleration
+19. **Virtual Modules** - Virtual module plugin for RSpack
+20. **Asset Manifest** - Asset manifest generation
+21. **Fast Refresh** - React fast refresh plugin
 
-# Test all frameworks
-deno task test:all
-```
+### Validation & Type Safety
+22. **Typia** - TypeScript type validation plugin
 
-#### Development Tools
-
-```bash
-# Code quality and linting
-deno task biome
-deno task biome:fix
-
-# PandaCSS generation
-deno task generate:panda
-
-# Build analysis with rsdoctor
-deno task rsdoctor
-
-# Preview built applications
-deno task preview:marketing
-deno task preview:remix
-deno task preview:sveltekit
-```
+### Backend & Architecture
+23. **Sails** - MVC framework for Node.js
+24. **Tapable** - Plugin system for JavaScript
 
 ## Documentation
 
-For detailed documentation, please refer to the [docs](./docs) directory:
-
+- [Getting Started Guide](./docs/getting-started.md)
 - [Architecture Overview](./docs/architecture.md)
-- [Component Guide](./docs/components.md)
-- [Testing Guide](./docs/testing.md)
+- [Integration Guides](./docs/integrations/)
+- [API Reference](./docs/api/)
 - [Deployment Guide](./docs/deployment.md)
-- [Blog Setup](./docs/blog.md)
-- [Authentication & Billing](./docs/auth-billing.md)
-
-## Cloud-Native Deployment
-
-### Setting up a Kubernetes Cluster on OVHcloud
-
-1. Create a Managed Kubernetes cluster on OVHcloud
-2. Configure your local machine with kubectl:
-   ```bash
-   kubectl config use-context your-ovh-context
-   ```
-
-3. Install vcluster:
-   ```bash
-   brew install vcluster
-   ```
-
-4. Deploy your marketing website:
-   ```bash
-   kubectl apply -f k8s/deployment.yaml
-   ```
-
-For detailed deployment instructions, see the [Deployment Guide](./docs/deployment.md).
 
 ## Contributing
 
-### Development Workflow
-1. Create feature branch from `staging`
-2. Follow 100% TypeScript policy (zero JavaScript tolerance)
-3. Use non-standard ports (20000-20007) for all services
-4. Test locally before pushing: `deno task biome`, `deno task test:all`
-5. Run comprehensive builds: `deno task build:all`
-
-### Code Quality Standards
-- **Zero JavaScript tolerance**: All files must be TypeScript (.ts/.tsx)
-- **Accessibility**: WCAG compliance with proper ARIA attributes
-- **Performance**: 80% test coverage threshold enforced
-- **Security**: Non-standard ports and HashiCorp Vault integration
-
-### Testing Requirements
-- Unit tests for all shared components
-- Integration tests across framework boundaries
-- Performance testing for bundle optimization
-- Accessibility testing for WCAG compliance
+Please read our [Contributing Guide](./CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
 ## License
 
-© 2025 Spectrum Web Co LLC. All rights reserved.
-Licensed under MIT License.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+## Credits
+
+Built on the shoulders of giants. Special thanks to all the open-source projects that make Katalyst possible.
+
+---
+
+<p align="center">
+  Made with ❤️ by the SWC Studio team
+</p>

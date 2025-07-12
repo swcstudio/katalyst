@@ -134,7 +134,7 @@ export class BiomeIntegration {
           formatWrite: 'biome format --write',
           formatStdin: 'biome format --stdin-file-path',
           check: 'biome check',
-          checkWrite: 'biome check --write',
+          checkWrite: 'biome check --write'
         },
         features: {
           fastFormatting: true,
@@ -144,16 +144,18 @@ export class BiomeIntegration {
           parallelProcessing: true,
           memoryEfficient: true,
           crossPlatform: true,
-          editorIntegration: true,
-        },
+          editorIntegration: true
+        }
       }),
       plugins: [
         'biome-formatter-plugin',
         'biome-vscode-extension',
         'biome-intellij-plugin',
-        'biome-zed-extension',
+        'biome-zed-extension'
       ],
-      dependencies: ['@biomejs/biome'],
+      dependencies: [
+        '@biomejs/biome'
+      ]
     };
   }
 
@@ -166,7 +168,7 @@ export class BiomeIntegration {
           lint: 'biome lint',
           lintWrite: 'biome lint --write',
           check: 'biome check',
-          checkWrite: 'biome check --write',
+          checkWrite: 'biome check --write'
         },
         rules: {
           a11y: this.config.linter.rules.a11y,
@@ -176,7 +178,7 @@ export class BiomeIntegration {
           performance: this.config.linter.rules.performance,
           security: this.config.linter.rules.security,
           style: this.config.linter.rules.style,
-          suspicious: this.config.linter.rules.suspicious,
+          suspicious: this.config.linter.rules.suspicious
         },
         features: {
           fastLinting: true,
@@ -186,9 +188,9 @@ export class BiomeIntegration {
           memoryEfficient: true,
           crossPlatform: true,
           editorIntegration: true,
-          autoFix: true,
-        },
-      }),
+          autoFix: true
+        }
+      })
     };
   }
 
@@ -199,16 +201,16 @@ export class BiomeIntegration {
         organizeImports: this.config.organizeImports,
         commands: {
           organize: 'biome check --write',
-          organizeStdin: 'biome check --stdin-file-path',
+          organizeStdin: 'biome check --stdin-file-path'
         },
         features: {
           automaticImportSorting: true,
           removeUnusedImports: true,
           groupImports: true,
           sortImports: true,
-          mergeImports: true,
-        },
-      }),
+          mergeImports: true
+        }
+      })
     };
   }
 
@@ -221,19 +223,10 @@ export class BiomeIntegration {
         json: this.config.json,
         css: this.config.css,
         supportedExtensions: [
-          '.js',
-          '.jsx',
-          '.mjs',
-          '.cjs',
-          '.ts',
-          '.tsx',
-          '.mts',
-          '.cts',
-          '.json',
-          '.jsonc',
-          '.css',
-          '.scss',
-          '.sass',
+          '.js', '.jsx', '.mjs', '.cjs',
+          '.ts', '.tsx', '.mts', '.cts',
+          '.json', '.jsonc',
+          '.css', '.scss', '.sass'
         ],
         features: {
           syntaxHighlighting: true,
@@ -243,9 +236,9 @@ export class BiomeIntegration {
           findReferences: true,
           renameSymbol: true,
           codeActions: true,
-          diagnostics: true,
-        },
-      }),
+          diagnostics: true
+        }
+      })
     };
   }
 
@@ -263,33 +256,33 @@ export class BiomeIntegration {
             'editor.formatOnSave': true,
             'editor.codeActionsOnSave': {
               'quickfix.biome': 'explicit',
-              'source.organizeImports.biome': 'explicit',
-            },
-          },
+              'source.organizeImports.biome': 'explicit'
+            }
+          }
         },
         intellij: {
           plugin: 'com.github.biomejs.intellijbiome',
           settings: {
             enableFormatting: true,
             enableLinting: true,
-            enableOrganizeImports: true,
-          },
+            enableOrganizeImports: true
+          }
         },
         zed: {
           extension: 'biome',
           settings: {
             formatter: 'biome',
-            linter: 'biome',
-          },
+            linter: 'biome'
+          }
         },
         neovim: {
           plugin: 'nvim-biome',
           lspConfig: {
             cmd: ['biome', 'lsp-proxy'],
-            filetypes: ['javascript', 'typescript', 'json', 'css'],
-          },
-        },
-      }),
+            filetypes: ['javascript', 'typescript', 'json', 'css']
+          }
+        }
+      })
     };
   }
 
@@ -308,27 +301,27 @@ export class BiomeIntegration {
                   { uses: 'actions/checkout@v4' },
                   { uses: 'oven-sh/setup-bun@v1' },
                   { run: 'bun install' },
-                  { run: 'bunx @biomejs/biome ci' },
-                ],
-              },
-            },
-          },
+                  { run: 'bunx @biomejs/biome ci' }
+                ]
+              }
+            }
+          }
         },
         gitlab: {
           pipeline: {
             stages: ['lint', 'format'],
             biome_check: {
               stage: 'lint',
-              script: ['npx @biomejs/biome ci'],
-            },
-          },
+              script: ['npx @biomejs/biome ci']
+            }
+          }
         },
         commands: {
           ci: 'biome ci',
           ciWrite: 'biome ci --write',
-          ciChanged: 'biome ci --changed',
-        },
-      }),
+          ciChanged: 'biome ci --changed'
+        }
+      })
     };
   }
 
@@ -339,7 +332,7 @@ export class BiomeIntegration {
       this.setupOrganizeImports(),
       this.setupLanguageSupport(),
       this.setupEditorIntegration(),
-      this.setupContinuousIntegration(),
+      this.setupContinuousIntegration()
     ]);
 
     return integrations.filter(Boolean);
@@ -355,7 +348,7 @@ export class BiomeIntegration {
         lineEnding: 'lf',
         lineWidth: 80,
         attributePosition: 'auto',
-        ignore: ['node_modules/**', 'dist/**', 'build/**'],
+        ignore: ['node_modules/**', 'dist/**', 'build/**']
       },
       linter: {
         enabled: true,
@@ -369,13 +362,13 @@ export class BiomeIntegration {
           performance: {},
           security: {},
           style: {},
-          suspicious: {},
+          suspicious: {}
         },
-        ignore: ['node_modules/**', 'dist/**', 'build/**'],
+        ignore: ['node_modules/**', 'dist/**', 'build/**']
       },
       organizeImports: {
         enabled: true,
-        ignore: ['node_modules/**'],
+        ignore: ['node_modules/**']
       },
       javascript: {
         formatter: {
@@ -387,9 +380,9 @@ export class BiomeIntegration {
           semicolons: 'always',
           arrowParentheses: 'always',
           bracketSpacing: true,
-          bracketSameLine: false,
+          bracketSameLine: false
         },
-        globals: [],
+        globals: []
       },
       typescript: {
         formatter: {
@@ -401,8 +394,8 @@ export class BiomeIntegration {
           semicolons: 'always',
           arrowParentheses: 'always',
           bracketSpacing: true,
-          bracketSameLine: false,
-        },
+          bracketSameLine: false
+        }
       },
       json: {
         formatter: {
@@ -411,12 +404,12 @@ export class BiomeIntegration {
           indentWidth: 2,
           lineEnding: 'lf',
           lineWidth: 80,
-          trailingCommas: 'none',
+          trailingCommas: 'none'
         },
         parser: {
           allowComments: true,
-          allowTrailingCommas: true,
-        },
+          allowTrailingCommas: true
+        }
       },
       css: {
         formatter: {
@@ -425,24 +418,24 @@ export class BiomeIntegration {
           indentWidth: 2,
           lineEnding: 'lf',
           lineWidth: 80,
-          quoteStyle: 'double',
+          quoteStyle: 'double'
         },
         parser: {
-          cssModules: true,
-        },
+          cssModules: true
+        }
       },
       files: {
         maxSize: 1048576,
         ignore: ['node_modules/**', 'dist/**', 'build/**', '.git/**'],
         ignoreUnknown: false,
-        include: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.json', '**/*.css'],
+        include: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.json', '**/*.css']
       },
       vcs: {
         enabled: true,
         clientKind: 'git',
         useIgnoreFile: true,
-        root: '.',
-      },
+        root: '.'
+      }
     };
   }
 

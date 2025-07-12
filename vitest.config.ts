@@ -1,6 +1,6 @@
+import { defineConfig } from 'vitest/config';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { defineConfig } from 'vitest/config';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
@@ -16,7 +16,13 @@ export default defineConfig({
       'shared/src/**/*.{test,spec}.{js,ts,jsx,tsx}',
       'tests/unit/**/*.{test,spec}.{js,ts,jsx,tsx}',
     ],
-    exclude: ['node_modules/**', 'dist/**', '.next/**', '.remix/**', 'tests/e2e/**'],
+    exclude: [
+      'node_modules/**',
+      'dist/**',
+      '.next/**',
+      '.remix/**',
+      'tests/e2e/**',
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
@@ -58,8 +64,6 @@ export default defineConfig({
     },
   },
   define: {
-    'process.env.NODE_ENV': JSON.stringify(
-      (typeof process !== 'undefined' && process.env.NODE_ENV) || 'test'
-    ),
+    'process.env.NODE_ENV': JSON.stringify((typeof process !== 'undefined' && process.env.NODE_ENV) || 'test'),
   },
 });

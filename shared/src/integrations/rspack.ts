@@ -1,12 +1,10 @@
-import type { RSpackConfig } from '../types/index.ts';
+import { RSpackConfig } from '../types/index.ts';
 
-declare const process:
-  | {
-      env: {
-        NODE_ENV?: string;
-      };
-    }
-  | undefined;
+declare const process: {
+  env: {
+    NODE_ENV?: string;
+  };
+} | undefined;
 
 export class RSpackIntegration {
   private config: RSpackConfig;
@@ -17,17 +15,14 @@ export class RSpackIntegration {
 
   generateConfig(variant: 'core' | 'remix' | 'nextjs') {
     const baseConfig = {
-      mode:
-        typeof process !== 'undefined' && process?.env?.NODE_ENV === 'production'
-          ? 'production'
-          : 'development',
+      mode: (typeof process !== 'undefined' && process?.env?.NODE_ENV === 'production') ? 'production' : 'development',
       entry: this.getEntryPoint(variant),
       output: {
         path: './dist',
         filename: '[name].[contenthash:8].js',
         chunkFilename: '[name].[contenthash:8].chunk.js',
         publicPath: '/',
-        clean: true,
+        clean: true
       },
       resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
@@ -36,8 +31,8 @@ export class RSpackIntegration {
           '@/components': './src/components',
           '@/hooks': './src/hooks',
           '@/utils': './src/utils',
-          '@/stores': './src/stores',
-        },
+          '@/stores': './src/stores'
+        }
       },
       module: {
         rules: [
@@ -50,31 +45,31 @@ export class RSpackIntegration {
                   jsc: {
                     parser: {
                       syntax: 'typescript',
-                      tsx: true,
+                      tsx: true
                     },
                     transform: {
                       react: {
-                        runtime: 'automatic',
-                      },
-                    },
-                  },
-                },
-              },
-            ],
+                        runtime: 'automatic'
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           },
           {
             test: /\.css$/,
-            use: ['style-loader', 'css-loader', 'postcss-loader'],
+            use: ['style-loader', 'css-loader', 'postcss-loader']
           },
           {
             test: /\.(png|jpg|jpeg|gif|svg)$/,
-            type: 'asset/resource',
-          },
-        ],
+            type: 'asset/resource'
+          }
+        ]
       },
       plugins: this.getPlugins(variant),
       optimization: this.config.optimization,
-      performance: this.config.performance,
+      performance: this.config.performance
     };
 
     return baseConfig;
@@ -96,36 +91,24 @@ export class RSpackIntegration {
   private getPlugins(variant: 'core' | 'remix' | 'nextjs') {
     const plugins = [];
 
-    if (
-      this.config.plugins &&
-      Array.isArray(this.config.plugins) &&
-      (this.config.plugins as string[]).indexOf('react') !== -1
-    ) {
+    if (this.config.plugins && Array.isArray(this.config.plugins) && (this.config.plugins as string[]).indexOf('react') !== -1) {
       plugins.push({
         name: 'react-plugin',
-        setup: () => ({}),
+        setup: () => ({})
       });
     }
 
-    if (
-      this.config.plugins &&
-      Array.isArray(this.config.plugins) &&
-      (this.config.plugins as string[]).indexOf('svgr') !== -1
-    ) {
+    if (this.config.plugins && Array.isArray(this.config.plugins) && (this.config.plugins as string[]).indexOf('svgr') !== -1) {
       plugins.push({
         name: 'svgr-plugin',
-        setup: () => ({}),
+        setup: () => ({})
       });
     }
 
-    if (
-      this.config.plugins &&
-      Array.isArray(this.config.plugins) &&
-      (this.config.plugins as string[]).indexOf('type-check') !== -1
-    ) {
+    if (this.config.plugins && Array.isArray(this.config.plugins) && (this.config.plugins as string[]).indexOf('type-check') !== -1) {
       plugins.push({
         name: 'type-check-plugin',
-        setup: () => ({}),
+        setup: () => ({})
       });
     }
 

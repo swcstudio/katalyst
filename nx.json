@@ -1,21 +1,18 @@
 {
-  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/nx-schema.json",
-  "version": 18,
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
-      "!{projectRoot}/tsconfig.spec.json"
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/src/test-setup.[jt]s",
+      "!{projectRoot}/test-setup.[jt]s",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.js"
     ],
-    "sharedGlobals": [
-      "{workspaceRoot}/deno.json",
-      "{workspaceRoot}/nx.json",
-      "{workspaceRoot}/tsconfig.json",
-      "{workspaceRoot}/biome.json",
-      "{workspaceRoot}/panda.config.ts",
-      "libs/shared/**/*"
-    ]
+    "sharedGlobals": []
   },
   "targetDefaults": {
     "build": {
@@ -23,105 +20,56 @@
       "inputs": ["production", "^production"],
       "cache": true
     },
-    "serve": {
-      "cache": false
-    },
     "test": {
-      "inputs": ["default", "^production"],
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "cache": true
     },
     "lint": {
-      "inputs": ["default"],
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/eslint.config.js"],
       "cache": true
     },
-    "storybook": {
-      "cache": false
+    "dev": {
+      "cache": false,
+      "persistent": true
     },
-    "build-storybook": {
-      "cache": true,
-      "inputs": ["default", "^production"]
+    "preview": {
+      "cache": false,
+      "persistent": true
+    }
+  },
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "style": "css",
+        "linter": "biome",
+        "bundler": "rspack",
+        "unitTestRunner": "vitest",
+        "e2eTestRunner": "playwright"
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "biome",
+        "unitTestRunner": "vitest"
+      }
     }
   },
   "plugins": [
     {
-      "plugin": "@nx/rspack",
+      "plugin": "@nx/rspack/plugin",
       "options": {
         "buildTargetName": "build",
-        "serveTargetName": "serve"
+        "devTargetName": "dev",
+        "previewTargetName": "preview"
       }
     },
     {
-      "plugin": "@nx/js",
+      "plugin": "@nx/playwright/plugin",
       "options": {
-        "targetName": "typecheck"
+        "targetName": "e2e"
       }
     }
-  ],
-  "nxCloudAccessToken": "${NX_CLOUD_ACCESS_TOKEN}",
-  "nxCloudUrl": "https://nx.app",
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx-cloud",
-      "options": {
-        "cacheableOperations": ["build", "test", "lint", "fmt"],
-        "accessToken": "${NX_CLOUD_ACCESS_TOKEN}"
-      }
-    }
-  },
-  "distributedExecutionConfig": {
-    "enabled": true,
-    "agents": 4,
-    "agentTimeoutMs": 600000
-  },
-  "ai": {
-    "enabled": true,
-    "explainWithAI": true
-  },
-  "conformanceRules": [
-    {
-      "rule": "@nx/enforce-module-boundaries",
-      "options": {
-        "allow": [],
-        "depConstraints": [
-          {
-            "sourceTag": "scope:shared",
-            "onlyDependOnLibsWithTags": ["scope:shared"]
-          },
-          {
-            "sourceTag": "scope:marketing",
-            "onlyDependOnLibsWithTags": ["scope:shared"]
-          },
-          {
-            "sourceTag": "scope:blog",
-            "onlyDependOnLibsWithTags": ["scope:shared"]
-          },
-          {
-            "sourceTag": "scope:storefront",
-            "onlyDependOnLibsWithTags": ["scope:shared"]
-          },
-          {
-            "sourceTag": "scope:docs",
-            "onlyDependOnLibsWithTags": ["scope:shared"]
-          },
-          {
-            "sourceTag": "scope:remix",
-            "onlyDependOnLibsWithTags": ["scope:shared"]
-          },
-          {
-            "sourceTag": "scope:sveltekit",
-            "onlyDependOnLibsWithTags": ["scope:shared"]
-          }
-        ]
-      }
-    }
-  ],
-  "projects": {
-    "marketing": "apps/marketing",
-    "astro-blog": "apps/astro-blog",
-    "astro-docs": "apps/astro-docs",
-    "storefront": "apps/storefront",
-    "remix-app": "apps/remix-app",
-    "sveltekit-spa": "apps/sveltekit-spa",
-    "shared": "libs/shared"
-  }
+  ]
 }

@@ -61,45 +61,45 @@ export class EMPIntegration {
             'marketing-header': 'http://localhost:8001/emp.js',
             'marketing-footer': 'http://localhost:8002/emp.js',
             'product-showcase': 'http://localhost:8003/emp.js',
-            'user-dashboard': 'http://localhost:8004/emp.js',
+            'user-dashboard': 'http://localhost:8004/emp.js'
           },
           exposes: this.config.exposes || {
             './App': './src/App.tsx',
             './Router': './src/Router.tsx',
             './Store': './src/store/index.ts',
-            './Components': './src/components/index.ts',
+            './Components': './src/components/index.ts'
           },
           shared: {
-            react: {
-              singleton: true,
+            react: { 
+              singleton: true, 
               requiredVersion: '^18.0.0',
-              eager: true,
+              eager: true 
             },
-            'react-dom': {
-              singleton: true,
+            'react-dom': { 
+              singleton: true, 
               requiredVersion: '^18.0.0',
-              eager: true,
+              eager: true 
             },
             'react-router-dom': {
               singleton: true,
-              requiredVersion: '^6.0.0',
+              requiredVersion: '^6.0.0'
             },
             '@tanstack/react-query': {
               singleton: true,
-              requiredVersion: '^5.0.0',
+              requiredVersion: '^5.0.0'
             },
-            zustand: {
+            'zustand': {
               singleton: true,
-              requiredVersion: '^4.0.0',
+              requiredVersion: '^4.0.0'
             },
-            ...this.config.shared,
-          },
+            ...this.config.shared
+          }
         },
         rspack: {
           experiments: {
             rspackFuture: {
-              disableTransformByDefault: true,
-            },
+              disableTransformByDefault: true
+            }
           },
           plugins: [
             {
@@ -109,19 +109,28 @@ export class EMPIntegration {
                 filename: 'emp.js',
                 remotes: this.config.remotes,
                 exposes: this.config.exposes,
-                shared: this.config.shared,
-              },
-            },
-          ],
+                shared: this.config.shared
+              }
+            }
+          ]
         },
         performance: {
           firstLoad: '28% faster than previous versions',
           secondLoad: '45% faster than previous versions',
-          bundleSize: '24% smaller production bundles',
-        },
+          bundleSize: '24% smaller production bundles'
+        }
       }),
-      plugins: ['@empjs/cli', '@empjs/share', '@empjs/rspack-plugin'],
-      dependencies: ['@empjs/cli', '@empjs/share', '@empjs/rspack-plugin', 'rspack'],
+      plugins: [
+        '@empjs/cli',
+        '@empjs/share',
+        '@empjs/rspack-plugin'
+      ],
+      dependencies: [
+        '@empjs/cli',
+        '@empjs/share',
+        '@empjs/rspack-plugin',
+        'rspack'
+      ]
     };
   }
 
@@ -129,14 +138,11 @@ export class EMPIntegration {
     const empConfig = {
       name: config.name,
       filename: 'emp.js',
-      exposes: config.exposed_components.reduce(
-        (acc, component) => {
-          acc[`./${component.name}`] = component.path;
-          return acc;
-        },
-        {} as Record<string, string>
-      ),
-      shared: this.getSharedDependencies(config.framework),
+      exposes: config.exposed_components.reduce((acc, component) => {
+        acc[`./${component.name}`] = component.path;
+        return acc;
+      }, {} as Record<string, string>),
+      shared: this.getSharedDependencies(config.framework)
     };
 
     return empConfig;
@@ -144,27 +150,27 @@ export class EMPIntegration {
 
   private getSharedDependencies(framework: 'react' | 'vue2' | 'vue3') {
     const baseDependencies = {
-      react: { singleton: true, requiredVersion: '^18.0.0' },
-      'react-dom': { singleton: true, requiredVersion: '^18.0.0' },
+      'react': { singleton: true, requiredVersion: '^18.0.0' },
+      'react-dom': { singleton: true, requiredVersion: '^18.0.0' }
     };
 
     switch (framework) {
       case 'react':
         return {
           ...baseDependencies,
-          '@empjs/share/adapter': { singleton: true },
+          '@empjs/share/adapter': { singleton: true }
         };
       case 'vue2':
         return {
           ...baseDependencies,
-          vue: { singleton: true, requiredVersion: '^2.7.0' },
-          '@empjs/share/vue2-adapter': { singleton: true },
+          'vue': { singleton: true, requiredVersion: '^2.7.0' },
+          '@empjs/share/vue2-adapter': { singleton: true }
         };
       case 'vue3':
         return {
           ...baseDependencies,
-          vue: { singleton: true, requiredVersion: '^3.0.0' },
-          '@empjs/share/vue3-adapter': { singleton: true },
+          'vue': { singleton: true, requiredVersion: '^3.0.0' },
+          '@empjs/share/vue3-adapter': { singleton: true }
         };
       default:
         return baseDependencies;
@@ -174,26 +180,22 @@ export class EMPIntegration {
   configureMarketingTeamsWorkspace(teams: TeamConfig[]): WorkspaceConfig {
     const workspace: WorkspaceConfig = {
       shared_dependencies: [
-        'react',
-        'react-dom',
-        'react-router-dom',
-        'styled-components',
-        'analytics-lib',
-        '@tanstack/react-query',
-        'zustand',
+        'react', 'react-dom', 'react-router-dom', 
+        'styled-components', 'analytics-lib',
+        '@tanstack/react-query', 'zustand'
       ],
-      projects: teams.map((team) => ({
+      projects: teams.map(team => ({
         name: team.name,
         path: team.path,
         port: team.port,
         exposed_modules: team.modules,
-        dependencies: team.dependencies,
+        dependencies: team.dependencies
       })),
       deployment: {
         cdn_url: 'https://cdn.example.com/marketing',
         production_domain: 'marketing.example.com',
-        staging_domain: 'staging-marketing.example.com',
-      },
+        staging_domain: 'staging-marketing.example.com'
+      }
     };
 
     return workspace;
@@ -206,31 +208,31 @@ export class EMPIntegration {
         remoteModules: {
           'team-branding': {
             url: 'https://cdn.example.com/marketing/team-branding/emp.js',
-            modules: ['Header', 'Footer', 'ColorTheme'],
+            modules: ['Header', 'Footer', 'ColorTheme']
           },
           'team-product': {
             url: 'https://cdn.example.com/marketing/team-product/emp.js',
-            modules: ['ProductGrid', 'ProductDetail', 'ProductSearch'],
+            modules: ['ProductGrid', 'ProductDetail', 'ProductSearch']
           },
           'team-blog': {
             url: 'https://cdn.example.com/marketing/team-blog/emp.js',
-            modules: ['BlogList', 'BlogPost', 'AuthorBio'],
+            modules: ['BlogList', 'BlogPost', 'AuthorBio']
           },
           'team-analytics': {
             url: 'https://cdn.example.com/marketing/team-analytics/emp.js',
-            modules: ['AnalyticsProvider', 'EventTracker'],
-          },
+            modules: ['AnalyticsProvider', 'EventTracker']
+          }
         },
         errorBoundary: true,
         loadingFallback: 'BrandedLoadingSpinner',
         remoteTimeout: 5000,
         retryAttempts: 3,
         fallbackComponents: {
-          Header: 'DefaultHeader',
-          Footer: 'DefaultFooter',
-          ProductGrid: 'EmptyProductGrid',
-        },
-      }),
+          'Header': 'DefaultHeader',
+          'Footer': 'DefaultFooter',
+          'ProductGrid': 'EmptyProductGrid'
+        }
+      })
     };
   }
 
@@ -246,22 +248,22 @@ export class EMPIntegration {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-          'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
+          'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
         },
         proxy: {
           '/api': {
             target: 'http://localhost:3001',
             changeOrigin: true,
             pathRewrite: {
-              '^/api': '',
-            },
-          },
+              '^/api': ''
+            }
+          }
         },
         static: {
           directory: './public',
-          publicPath: '/',
-        },
-      }),
+          publicPath: '/'
+        }
+      })
     };
   }
 
@@ -269,7 +271,7 @@ export class EMPIntegration {
     const integrations = await Promise.all([
       this.setupMicroFrontend(),
       this.setupShellApplication(),
-      this.setupDevelopmentServer(),
+      this.setupDevelopmentServer()
     ]);
 
     return integrations.filter(Boolean);
@@ -281,7 +283,7 @@ export class EMPIntegration {
       dev: 'emp dev',
       build: 'emp build',
       serve: 'emp serve',
-      analyze: 'emp analyze',
+      analyze: 'emp analyze'
     };
   }
 

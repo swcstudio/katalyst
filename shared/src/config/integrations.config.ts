@@ -8,28 +8,28 @@ export const integrationConfigs: Record<string, IntegrationConfig> = {
       enabled: true,
       ssr: true,
       streaming: true,
-      fileBasedRouting: true,
+      fileBasedRouting: true
     },
     query: {
       enabled: true,
       devtools: true,
-      persistQueryClient: true,
+      persistQueryClient: true
     },
     form: {
       enabled: true,
       validation: 'typia',
-      realTimeValidation: true,
+      realTimeValidation: true
     },
     table: {
       enabled: true,
       virtualScrolling: true,
-      serverSidePagination: true,
+      serverSidePagination: true
     },
     virtual: {
       enabled: true,
       windowedScrolling: true,
-      dynamicSizing: true,
-    },
+      dynamicSizing: true
+    }
   },
   rspack: {
     optimization: {
@@ -39,24 +39,24 @@ export const integrationConfigs: Record<string, IntegrationConfig> = {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
-            priority: 10,
+            priority: 10
           },
           react: {
             test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
             name: 'react',
-            priority: 20,
-          },
-        },
+            priority: 20
+          }
+        }
       },
       minimize: true,
       usedExports: true,
-      sideEffects: false,
+      sideEffects: false
     },
     performance: {
       hints: 'warning',
       maxAssetSize: 250000,
-      maxEntrypointSize: 250000,
-    },
+      maxEntrypointSize: 250000
+    }
   },
   emp: {
     federation: {
@@ -64,27 +64,27 @@ export const integrationConfigs: Record<string, IntegrationConfig> = {
       remotes: {},
       shared: {
         react: { singleton: true, requiredVersion: '^19.0.0' },
-        'react-dom': { singleton: true, requiredVersion: '^19.0.0' },
-      },
+        'react-dom': { singleton: true, requiredVersion: '^19.0.0' }
+      }
     },
     microFrontends: {
       routing: 'client-side',
       communication: 'event-bus',
-      stateManagement: 'zustand',
-    },
+      stateManagement: 'zustand'
+    }
   },
   cosmos: {
     blockchain: 'evmos',
     web3: {
       enabled: true,
       walletConnect: true,
-      metamask: true,
+      metamask: true
     },
     components: {
       walletButton: true,
       transactionHistory: true,
-      balanceDisplay: true,
-    },
+      balanceDisplay: true
+    }
   },
   stylex: {
     atomic: true,
@@ -92,50 +92,50 @@ export const integrationConfigs: Record<string, IntegrationConfig> = {
       colors: {
         primary: '#3b82f6',
         secondary: '#64748b',
-        accent: '#f59e0b',
+        accent: '#f59e0b'
       },
       spacing: {
         xs: '0.25rem',
         sm: '0.5rem',
         md: '1rem',
         lg: '1.5rem',
-        xl: '2rem',
-      },
+        xl: '2rem'
+      }
     },
-    plugins: ['autoprefixer', 'cssnano'],
+    plugins: ['autoprefixer', 'cssnano']
   },
   storybook: {
     builder: 'rsbuild',
     addons: [
       '@storybook/addon-essentials',
       '@storybook/addon-interactions',
-      '@storybook/addon-a11y',
+      '@storybook/addon-a11y'
     ],
     features: {
       buildStoriesJson: true,
-      storyStoreV7: true,
-    },
+      storyStoreV7: true
+    }
   },
   typia: {
     validation: {
       runtime: true,
       compile: true,
-      optimize: true,
+      optimize: true
     },
     serialization: {
       json: true,
-      binary: true,
-    },
+      binary: true
+    }
   },
   midscene: {
     ai: {
       model: 'gpt-4o',
-      fallback: 'qwen2.5-vl',
+      fallback: 'qwen2.5-vl'
     },
     automation: {
       browser: 'playwright',
       mobile: 'android',
-      screenshots: true,
-    },
-  },
+      screenshots: true
+    }
+  }
 };

@@ -11,8 +11,8 @@ export class RspeedyIntegration {
       setup: () => ({
         platform: 'mobile',
         performance: 'high',
-        native: true,
-      }),
+        native: true
+      })
     };
   }
 

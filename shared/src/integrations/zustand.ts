@@ -69,7 +69,7 @@ export class ZustandIntegration {
           persistentState: this.config.persist,
           immerIntegration: this.config.immer,
           selectorSubscriptions: this.config.subscribeWithSelector,
-          timeTravel: this.config.temporal,
+          timeTravel: this.config.temporal
         },
         api: {
           create: 'create',
@@ -78,16 +78,20 @@ export class ZustandIntegration {
           devtools: 'devtools',
           persist: 'persist',
           immer: 'immer',
-          temporal: 'temporal',
-        },
+          temporal: 'temporal'
+        }
       }),
       plugins: [
         'zustand-devtools-plugin',
         'zustand-persist-plugin',
         'zustand-immer-plugin',
-        'zustand-temporal-plugin',
+        'zustand-temporal-plugin'
       ],
-      dependencies: ['zustand', 'immer', 'zustand/middleware'],
+      dependencies: [
+        'zustand',
+        'immer',
+        'zustand/middleware'
+      ]
     };
   }
 
@@ -100,7 +104,7 @@ export class ZustandIntegration {
           name: 'Katalyst Store',
           serialize: true,
           anonymousActionType: 'anonymous',
-          store: 'katalyst',
+          store: 'katalyst'
         },
         features: {
           timeTravel: true,
@@ -109,14 +113,14 @@ export class ZustandIntegration {
           actionLogging: true,
           stateComparison: true,
           exportImport: true,
-          remoteDebugging: true,
+          remoteDebugging: true
         },
         integration: {
           reduxDevtools: true,
           reactDevtools: true,
-          standalone: true,
-        },
-      }),
+          standalone: true
+        }
+      })
     };
   }
 
@@ -132,8 +136,8 @@ export class ZustandIntegration {
             storage: this.getStorageAdapter(this.config.storage.storage),
             partialize: this.config.storage.partialize,
             merge: this.config.storage.merge,
-            skipHydration: this.config.storage.skipHydration,
-          },
+            skipHydration: this.config.storage.skipHydration
+          }
         },
         features: {
           localStorage: true,
@@ -143,15 +147,15 @@ export class ZustandIntegration {
           partialPersistence: true,
           stateMigration: true,
           hydrationControl: true,
-          errorHandling: true,
+          errorHandling: true
         },
         storageAdapters: {
           localStorage: 'localStorage',
           sessionStorage: 'sessionStorage',
           indexedDB: 'idb-keyval',
-          asyncStorage: '@react-native-async-storage/async-storage',
-        },
-      }),
+          asyncStorage: '@react-native-async-storage/async-storage'
+        }
+      })
     };
   }
 
@@ -168,23 +172,23 @@ export class ZustandIntegration {
             performanceOptimization: true,
             nestedUpdates: true,
             arrayOperations: true,
-            objectOperations: true,
-          },
+            objectOperations: true
+          }
         },
         api: {
           immer: 'immer',
           produce: 'produce',
           draft: 'Draft',
           original: 'original',
-          current: 'current',
+          current: 'current'
         },
         patterns: {
           simpleUpdate: '(state) => { state.count += 1; }',
           nestedUpdate: '(state) => { state.user.profile.name = "New Name"; }',
           arrayPush: '(state) => { state.items.push(newItem); }',
-          arrayFilter: '(state) => { state.items = state.items.filter(item => item.id !== id); }',
-        },
-      }),
+          arrayFilter: '(state) => { state.items = state.items.filter(item => item.id !== id); }'
+        }
+      })
     };
   }
 
@@ -201,22 +205,21 @@ export class ZustandIntegration {
             deepEqual: true,
             customEquality: true,
             memoization: true,
-            performanceOptimization: true,
-          },
+            performanceOptimization: true
+          }
         },
         api: {
           subscribeWithSelector: 'subscribeWithSelector',
           shallow: 'shallow',
-          createWithEqualityFn: 'createWithEqualityFn',
+          createWithEqualityFn: 'createWithEqualityFn'
         },
         patterns: {
           basicSelector: 'const count = useStore(state => state.count)',
-          multipleSelectors:
-            'const { count, increment } = useStore(state => ({ count: state.count, increment: state.increment }))',
+          multipleSelectors: 'const { count, increment } = useStore(state => ({ count: state.count, increment: state.increment }))',
           shallowSelector: 'const items = useStore(state => state.items, shallow)',
-          customEquality: 'const user = useStore(state => state.user, (a, b) => a.id === b.id)',
-        },
-      }),
+          customEquality: 'const user = useStore(state => state.user, (a, b) => a.id === b.id)'
+        }
+      })
     };
   }
 
@@ -233,8 +236,8 @@ export class ZustandIntegration {
             futureStates: true,
             historyLimit: true,
             clearHistory: true,
-            pauseTracking: true,
-          },
+            pauseTracking: true
+          }
         },
         api: {
           temporal: 'temporal',
@@ -243,14 +246,14 @@ export class ZustandIntegration {
           clear: 'clear',
           pause: 'pause',
           resume: 'resume',
-          getHistory: 'getHistory',
+          getHistory: 'getHistory'
         },
         configuration: {
           limit: 100,
           handleSet: true,
-          equality: 'shallow',
-        },
-      }),
+          equality: 'shallow'
+        }
+      })
     };
   }
 
@@ -263,7 +266,7 @@ export class ZustandIntegration {
             useStore: 'useStore',
             useStoreWithEqualityFn: 'useStoreWithEqualityFn',
             createContext: 'createContext',
-            useContext: 'useContext',
+            useContext: 'useContext'
           },
           features: {
             automaticRerendering: true,
@@ -272,8 +275,8 @@ export class ZustandIntegration {
             suspenseSupport: true,
             concurrentFeatures: true,
             strictMode: true,
-            devMode: true,
-          },
+            devMode: true
+          }
         },
         patterns: {
           basicUsage: `
@@ -296,9 +299,9 @@ export class ZustandIntegration {
             const StoreProvider = ({ children }) => (
               <StoreContext.Provider value={createStore()}>{children}</StoreContext.Provider>
             )
-          `,
-        },
-      }),
+          `
+        }
+      })
     };
   }
 
@@ -323,7 +326,7 @@ export class ZustandIntegration {
       this.setupImmerIntegration(),
       this.setupSelectors(),
       this.setupTemporal(),
-      this.setupReactIntegration(),
+      this.setupReactIntegration()
     ]);
 
     return integrations.filter(Boolean);
@@ -339,22 +342,22 @@ export class ZustandIntegration {
       middleware: [
         { name: 'devtools', enabled: true, options: {} },
         { name: 'persist', enabled: true, options: {} },
-        { name: 'immer', enabled: true, options: {} },
+        { name: 'immer', enabled: true, options: {} }
       ],
       storage: {
         name: 'katalyst-store',
         storage: 'localStorage',
-        skipHydration: false,
-      },
+        skipHydration: false
+      }
     };
   }
 
   createStore<T>(initializer: (set: any, get: any, api: any) => T): ZustandStore<T> {
     return {
-      getState: () => ({}) as T,
+      getState: () => ({} as T),
       setState: () => {},
       subscribe: () => () => {},
-      destroy: () => {},
+      destroy: () => {}
     };
   }
 

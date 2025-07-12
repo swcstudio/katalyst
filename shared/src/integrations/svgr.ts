@@ -11,8 +11,8 @@ export class SvgrIntegration {
       setup: () => ({
         icons: new Map(),
         optimization: true,
-        typescript: true,
-      }),
+        typescript: true
+      })
     };
   }
 

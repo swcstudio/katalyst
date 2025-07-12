@@ -1,24 +1,12 @@
 declare namespace React {
-  interface ReactElement<
-    P = any,
-    T extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>,
-  > {
+  interface ReactElement<P = any, T extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>> {
     type: T;
     props: P;
     key: Key | null;
   }
 }
 
-declare type JSXElementConstructor<P> =
-  | ((
-      props: P
-    ) => React.ReactElement<
-      Record<string, unknown>,
-      string | JSXElementConstructor<Record<string, unknown>>
-    > | null)
-  | (new (
-      props: P
-    ) => Component<P, Record<string, unknown>>);
+declare type JSXElementConstructor<P> = ((props: P) => React.ReactElement<Record<string, unknown>, string | JSXElementConstructor<Record<string, unknown>>> | null) | (new (props: P) => Component<P, Record<string, unknown>>);
 declare type Key = string | number;
 declare class Component<P, S> {}
 
@@ -83,11 +71,20 @@ export class ParetoIntegration {
           criticalResourceHints: true,
           resourcePrioritization: true,
           performanceOptimization: true,
-          coreWebVitals: true,
-        },
+          coreWebVitals: true
+        }
       }),
-      plugins: ['pareto-streaming-plugin', 'pareto-ssr-plugin', 'pareto-critical-css-plugin'],
-      dependencies: ['pareto', 'react-dom/server', 'critical', 'penthouse'],
+      plugins: [
+        'pareto-streaming-plugin',
+        'pareto-ssr-plugin',
+        'pareto-critical-css-plugin'
+      ],
+      dependencies: [
+        'pareto',
+        'react-dom/server',
+        'critical',
+        'penthouse'
+      ]
     };
   }
 
@@ -97,7 +94,7 @@ export class ParetoIntegration {
       chunkSize: 8192, // 8KB chunks
       flushThreshold: 16384, // 16KB flush threshold
       timeout: 5000, // 5 second timeout
-      fallback: 'static',
+      fallback: 'static'
     };
   }
 
@@ -108,7 +105,7 @@ export class ParetoIntegration {
       streaming: this.config.streaming,
       criticalCSS: this.config.criticalCSS,
       preloadLinks: this.config.preload,
-      inlineStyles: true,
+      inlineStyles: true
     };
   }
 
@@ -120,9 +117,9 @@ export class ParetoIntegration {
       dimensions: [
         { width: 375, height: 667 }, // Mobile
         { width: 768, height: 1024 }, // Tablet
-        { width: 1440, height: 900 }, // Desktop
+        { width: 1440, height: 900 } // Desktop
       ],
-      penthouse: true,
+      penthouse: true
     };
   }
 
@@ -135,26 +132,26 @@ export class ParetoIntegration {
           critical: ['header', 'navigation', 'hero'],
           high: ['sidebar', 'main-content'],
           medium: ['footer', 'related-content'],
-          low: ['analytics', 'social-widgets'],
+          low: ['analytics', 'social-widgets']
         },
         triggers: {
           viewport: true,
           interaction: true,
           idle: true,
-          media: true,
+          media: true
         },
         scheduling: {
           concurrent: true,
           timeSlicing: true,
           prioritization: true,
-          interruption: true,
+          interruption: true
         },
         fallbacks: {
           timeout: 3000,
           error: 'static',
-          offline: 'cached',
-        },
-      }),
+          offline: 'cached'
+        }
+      })
     };
   }
 
@@ -166,21 +163,21 @@ export class ParetoIntegration {
           interactive: '[data-hydrate="interactive"]',
           lazy: '[data-hydrate="lazy"]',
           critical: '[data-hydrate="critical"]',
-          optional: '[data-hydrate="optional"]',
+          optional: '[data-hydrate="optional"]'
         },
         conditions: {
           viewport: 'IntersectionObserver',
           interaction: ['click', 'focus', 'touchstart'],
           idle: 'requestIdleCallback',
-          media: 'matchMedia',
+          media: 'matchMedia'
         },
         optimization: {
           bundleSplitting: true,
           codeElimination: true,
           treeshaking: true,
-          compression: true,
-        },
-      }),
+          compression: true
+        }
+      })
     };
   }
 
@@ -191,38 +188,38 @@ export class ParetoIntegration {
         preloading: {
           critical: ['fonts', 'hero-images', 'above-fold-css'],
           prefetch: ['next-page', 'likely-navigation'],
-          preconnect: ['api-endpoints', 'cdn-domains'],
+          preconnect: ['api-endpoints', 'cdn-domains']
         },
         compression: {
           gzip: true,
           brotli: true,
-          zstd: false,
+          zstd: false
         },
         caching: {
           static: '1y',
           dynamic: '1h',
           api: '5m',
-          images: '30d',
+          images: '30d'
         },
         optimization: {
           images: {
             formats: ['avif', 'webp', 'jpg'],
             sizes: [320, 640, 960, 1280, 1920],
             quality: 85,
-            lazy: true,
+            lazy: true
           },
           fonts: {
             preload: true,
             display: 'swap',
-            subset: true,
+            subset: true
           },
           scripts: {
             defer: true,
             async: false,
-            module: true,
-          },
-        },
-      }),
+            module: true
+          }
+        }
+      })
     };
   }
 
@@ -236,32 +233,32 @@ export class ParetoIntegration {
             FID: { threshold: 100, target: 50 },
             CLS: { threshold: 0.1, target: 0.05 },
             FCP: { threshold: 1800, target: 900 },
-            TTFB: { threshold: 600, target: 200 },
+            TTFB: { threshold: 600, target: 200 }
           },
           customMetrics: {
             timeToInteractive: true,
             totalBlockingTime: true,
             speedIndex: true,
             resourceLoadTime: true,
-            hydrationTime: true,
-          },
+            hydrationTime: true
+          }
         },
         reporting: {
           realUserMonitoring: true,
           syntheticMonitoring: true,
           errorTracking: true,
-          performanceBudgets: true,
+          performanceBudgets: true
         },
         alerts: {
           thresholds: {
             LCP: 2500,
             FID: 100,
             CLS: 0.1,
-            errorRate: 0.01,
+            errorRate: 0.01
           },
-          channels: ['email', 'slack', 'webhook'],
-        },
-      }),
+          channels: ['email', 'slack', 'webhook']
+        }
+      })
     };
   }
 
@@ -273,41 +270,41 @@ export class ParetoIntegration {
           staleWhileRevalidate: {
             enabled: true,
             maxAge: 3600,
-            staleAge: 86400,
+            staleAge: 86400
           },
           cacheFirst: {
             enabled: true,
-            resources: ['images', 'fonts', 'static-assets'],
+            resources: ['images', 'fonts', 'static-assets']
           },
           networkFirst: {
             enabled: true,
-            resources: ['api', 'dynamic-content'],
-          },
+            resources: ['api', 'dynamic-content']
+          }
         },
         storage: {
           memory: {
             enabled: true,
             maxSize: '100MB',
-            ttl: 3600,
+            ttl: 3600
           },
           disk: {
             enabled: true,
             maxSize: '500MB',
-            ttl: 86400,
+            ttl: 86400
           },
           cdn: {
             enabled: true,
             provider: 'cloudflare',
-            regions: ['auto'],
-          },
+            regions: ['auto']
+          }
         },
         invalidation: {
           automatic: true,
           manual: true,
           webhooks: true,
-          tags: true,
-        },
-      }),
+          tags: true
+        }
+      })
     };
   }
 
@@ -318,7 +315,7 @@ export class ParetoIntegration {
       this.setupSelectiveHydration(),
       this.setupResourceOptimization(),
       this.setupPerformanceMonitoring(),
-      this.setupCacheOptimization(),
+      this.setupCacheOptimization()
     ]);
 
     return integrations.filter(Boolean);
@@ -327,15 +324,12 @@ export class ParetoIntegration {
   getStreamingAPI() {
     const paretoInstance = this;
     return {
-      renderToReadableStream: (
-        element: React.ReactElement,
-        options: Record<string, unknown> = {}
-      ) => {
+      renderToReadableStream: (element: React.ReactElement, options: Record<string, unknown> = {}) => {
         return new ReadableStream({
           start(controller) {
             const stream = paretoInstance.createSSRStream(element, options);
             paretoInstance.pipeToController(stream, controller);
-          },
+          }
         });
       },
       renderToString: (element: React.ReactElement) => {
@@ -343,20 +337,19 @@ export class ParetoIntegration {
       },
       hydrateRoot: (container: Element, element: React.ReactElement) => {
         return paretoInstance.progressiveHydrate(container, element);
-      },
+      }
     };
   }
 
   private createSSRStream(_element: React.ReactElement, _options?: Record<string, unknown>) {
     return {
-      pipe: (_destination: Record<string, unknown>) => {},
+      pipe: (_destination: Record<string, unknown>) => {
+      }
     };
   }
 
-  private pipeToController(
-    _stream: Record<string, unknown>,
-    _controller: ReadableStreamDefaultController
-  ) {}
+  private pipeToController(_stream: Record<string, unknown>, _controller: ReadableStreamDefaultController) {
+  }
 
   private renderToStaticMarkup(_element: React.ReactElement): string {
     return '';
@@ -364,7 +357,8 @@ export class ParetoIntegration {
 
   private progressiveHydrate(_container: Element, _element: React.ReactElement) {
     return {
-      unmount: () => {},
+      unmount: () => {
+      }
     };
   }
 

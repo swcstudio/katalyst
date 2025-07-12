@@ -11,8 +11,8 @@ export class SailsIntegration {
       setup: () => ({
         models: new Map(),
         controllers: new Map(),
-        views: new Map(),
-      }),
+        views: new Map()
+      })
     };
   }
 

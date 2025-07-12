@@ -1,4 +1,4 @@
-import type { KatalystConfig } from '../types/index.ts';
+import { KatalystConfig } from '../types/index.ts';
 
 export const defaultKatalystConfig: KatalystConfig = {
   variant: 'core',
@@ -9,13 +9,13 @@ export const defaultKatalystConfig: KatalystConfig = {
     { name: 'web3', enabled: true },
     { name: 'ai-automation', enabled: true },
     { name: 'desktop', enabled: false },
-    { name: 'mobile', enabled: false },
+    { name: 'mobile', enabled: false }
   ],
   plugins: [
     { name: 'rspack', version: '1.0.17' },
     { name: 'biome', version: '1.9.4' },
     { name: 'tailwindcss', version: '4.0.0' },
-    { name: 'typescript', version: '5.6.3' },
+    { name: 'typescript', version: '5.6.3' }
   ],
   integrations: [
     { name: 'tanstack', type: 'framework', enabled: true },
@@ -42,13 +42,13 @@ export const defaultKatalystConfig: KatalystConfig = {
     { name: 'svgr', type: 'bundler', enabled: true },
     { name: 'sails', type: 'framework', enabled: true },
     { name: 'tapable', type: 'framework', enabled: true },
-    { name: 'midscene', type: 'automation', enabled: true },
-  ],
+    { name: 'midscene', type: 'automation', enabled: true }
+  ]
 };
 
 export function createKatalystConfig(variant: 'core' | 'remix' | 'nextjs'): KatalystConfig {
   const config = { ...defaultKatalystConfig, variant };
-
+  
   switch (variant) {
     case 'remix':
       config.features.push({ name: 'remix-routing', enabled: true });
@@ -61,6 +61,6 @@ export function createKatalystConfig(variant: 'core' | 'remix' | 'nextjs'): Kata
     default:
       break;
   }
-
+  
   return config;
 }

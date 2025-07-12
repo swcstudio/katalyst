@@ -1,4 +1,7 @@
-export function mergeConfigs<T extends Record<string, unknown>>(base: T, override: Partial<T>): T {
+export function mergeConfigs<T extends Record<string, unknown>>(
+  base: T,
+  override: Partial<T>
+): T {
   return { ...base, ...override };
 }
 

@@ -4,8 +4,8 @@ export default defineConfig({
   testDir: './tests/e2e',
   fullyParallel: true,
   forbidOnly: !!(typeof process !== 'undefined' && process.env.CI),
-  retries: typeof process !== 'undefined' && process.env.CI ? 2 : 0,
-  workers: typeof process !== 'undefined' && process.env.CI ? 1 : undefined,
+  retries: (typeof process !== 'undefined' && process.env.CI) ? 2 : 0,
+  workers: (typeof process !== 'undefined' && process.env.CI) ? 1 : undefined,
   reporter: [
     ['html'],
     ['json', { outputFile: 'test-results/results.json' }],

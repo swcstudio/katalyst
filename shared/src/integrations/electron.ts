@@ -11,8 +11,8 @@ export class ElectronIntegration {
       setup: () => ({
         main: './src/main.ts',
         renderer: './src/renderer.tsx',
-        preload: './src/preload.ts',
-      }),
+        preload: './src/preload.ts'
+      })
     };
   }
 

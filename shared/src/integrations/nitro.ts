@@ -89,7 +89,7 @@ export class NitroIntegration {
           compression: true,
           https: true,
           http2: true,
-          websockets: true,
+          websockets: true
         },
         presets: {
           node: 'node-server',
@@ -100,16 +100,21 @@ export class NitroIntegration {
           azure: 'azure-functions',
           firebase: 'firebase',
           deno: 'deno-server',
-          bun: 'bun',
-        },
+          bun: 'bun'
+        }
       }),
       plugins: [
         'nitro-server-plugin',
         'nitro-routing-plugin',
         'nitro-storage-plugin',
-        'nitro-cache-plugin',
+        'nitro-cache-plugin'
       ],
-      dependencies: ['nitropack', 'h3', 'unenv', 'unstorage'],
+      dependencies: [
+        'nitropack',
+        'h3',
+        'unenv',
+        'unstorage'
+      ]
     };
   }
 
@@ -124,7 +129,7 @@ export class NitroIntegration {
           middleware: true,
           prerender: this.config.routes.prerender,
           headers: this.config.routes.headers,
-          redirects: this.config.routes.redirects,
+          redirects: this.config.routes.redirects
         },
         features: {
           fileBasedRouting: true,
@@ -134,15 +139,15 @@ export class NitroIntegration {
           routeMiddleware: true,
           routeValidation: true,
           routeCaching: true,
-          routePrerendering: true,
+          routePrerendering: true
         },
         patterns: {
           pages: 'routes/**/*.{js,ts}',
           api: 'api/**/*.{js,ts}',
           middleware: 'middleware/**/*.{js,ts}',
-          plugins: 'plugins/**/*.{js,ts}',
-        },
-      }),
+          plugins: 'plugins/**/*.{js,ts}'
+        }
+      })
     };
   }
 
@@ -161,7 +166,7 @@ export class NitroIntegration {
           cloudflare: true,
           planetscale: true,
           mongodb: true,
-          github: true,
+          github: true
         },
         drivers: {
           fs: 'fs',
@@ -170,16 +175,16 @@ export class NitroIntegration {
           cloudflareKV: 'cloudflare-kv-binding',
           planetscale: 'planetscale',
           mongodb: 'mongodb',
-          github: 'github',
+          github: 'github'
         },
         api: {
           getItem: 'storage.getItem(key)',
           setItem: 'storage.setItem(key, value)',
           removeItem: 'storage.removeItem(key)',
           getKeys: 'storage.getKeys(prefix)',
-          clear: 'storage.clear()',
-        },
-      }),
+          clear: 'storage.clear()'
+        }
+      })
     };
   }
 
@@ -193,7 +198,7 @@ export class NitroIntegration {
           ttl: 3600,
           staleWhileRevalidate: true,
           tags: true,
-          compression: true,
+          compression: true
         },
         features: {
           routeCaching: true,
@@ -203,16 +208,16 @@ export class NitroIntegration {
           distributedCaching: true,
           cacheInvalidation: true,
           cacheWarmup: true,
-          cacheAnalytics: true,
+          cacheAnalytics: true
         },
         strategies: {
           staleWhileRevalidate: 'swr',
           cacheFirst: 'cache-first',
           networkFirst: 'network-first',
           cacheOnly: 'cache-only',
-          networkOnly: 'network-only',
-        },
-      }),
+          networkOnly: 'network-only'
+        }
+      })
     };
   }
 
@@ -229,7 +234,7 @@ export class NitroIntegration {
           corsMiddleware: true,
           compressionMiddleware: true,
           securityMiddleware: true,
-          loggingMiddleware: true,
+          loggingMiddleware: true
         },
         builtIn: {
           cors: 'cors',
@@ -238,15 +243,15 @@ export class NitroIntegration {
           rateLimit: 'rate-limit',
           auth: 'auth',
           logging: 'logging',
-          error: 'error',
+          error: 'error'
         },
         execution: {
           order: 'registration',
           async: true,
           errorHandling: true,
-          skipOnError: false,
-        },
-      }),
+          skipOnError: false
+        }
+      })
     };
   }
 
@@ -263,7 +268,7 @@ export class NitroIntegration {
           lifecycle: true,
           dependency: true,
           configuration: true,
-          extensibility: true,
+          extensibility: true
         },
         hooks: {
           'nitro:config': 'Configuration hook',
@@ -271,15 +276,15 @@ export class NitroIntegration {
           'nitro:build:before': 'Before build hook',
           'nitro:build:after': 'After build hook',
           'render:route': 'Route rendering hook',
-          'render:html': 'HTML rendering hook',
+          'render:html': 'HTML rendering hook'
         },
         lifecycle: {
           config: 'Configuration phase',
           init: 'Initialization phase',
           build: 'Build phase',
-          runtime: 'Runtime phase',
-        },
-      }),
+          runtime: 'Runtime phase'
+        }
+      })
     };
   }
 
@@ -291,16 +296,9 @@ export class NitroIntegration {
           preset: this.config.preset,
           universal: true,
           platforms: [
-            'node',
-            'cloudflare',
-            'vercel',
-            'netlify',
-            'aws',
-            'azure',
-            'firebase',
-            'deno',
-            'bun',
-          ],
+            'node', 'cloudflare', 'vercel', 'netlify',
+            'aws', 'azure', 'firebase', 'deno', 'bun'
+          ]
         },
         features: {
           universalDeployment: true,
@@ -310,27 +308,27 @@ export class NitroIntegration {
           bundling: true,
           minification: true,
           treeshaking: true,
-          codeGeneration: true,
+          codeGeneration: true
         },
         presets: {
           'node-server': {
             entry: './output/server/index.mjs',
-            commands: ['node ./output/server/index.mjs'],
+            commands: ['node ./output/server/index.mjs']
           },
           'cloudflare-pages': {
             entry: './output/server/index.mjs',
-            wrangler: true,
+            wrangler: true
           },
-          vercel: {
+          'vercel': {
             entry: './output/server/index.mjs',
-            functions: true,
+            functions: true
           },
-          netlify: {
+          'netlify': {
             entry: './output/server/index.mjs',
-            functions: true,
-          },
-        },
-      }),
+            functions: true
+          }
+        }
+      })
     };
   }
 
@@ -344,7 +342,7 @@ export class NitroIntegration {
             port: 3000,
             https: false,
             timing: true,
-            compress: true,
+            compress: true
           },
           features: {
             hotModuleReplacement: true,
@@ -354,8 +352,8 @@ export class NitroIntegration {
             sourceMap: true,
             debugging: true,
             profiling: true,
-            monitoring: true,
-          },
+            monitoring: true
+          }
         },
         devtools: {
           enabled: this.config.devtools.enabled,
@@ -366,10 +364,10 @@ export class NitroIntegration {
             cacheInspection: true,
             performanceMetrics: true,
             errorTracking: true,
-            logViewer: true,
-          },
-        },
-      }),
+            logViewer: true
+          }
+        }
+      })
     };
   }
 
@@ -382,7 +380,7 @@ export class NitroIntegration {
       this.setupMiddleware(),
       this.setupPlugins(),
       this.setupDeployment(),
-      this.setupDevelopment(),
+      this.setupDevelopment()
     ]);
 
     return integrations.filter(Boolean);
@@ -396,20 +394,20 @@ export class NitroIntegration {
       output: {
         dir: 'output',
         serverDir: 'output/server',
-        publicDir: 'output/public',
+        publicDir: 'output/public'
       },
       runtimeConfig: {
         app: {
           baseURL: '/',
           buildAssetsDir: '/_nuxt/',
-          cdnURL: '',
-        },
+          cdnURL: ''
+        }
       },
       appConfig: {},
       routes: {
         prerender: ['/'],
         headers: {},
-        redirects: {},
+        redirects: {}
       },
       plugins: [],
       modules: [],
@@ -418,23 +416,23 @@ export class NitroIntegration {
         drivers: {
           fs: {
             driver: 'fs',
-            options: { base: './data' },
+            options: { base: './data' }
           },
           memory: {
             driver: 'memory',
-            options: {},
-          },
-        },
+            options: {}
+          }
+        }
       },
       devtools: {
         enabled: true,
-        vscode: true,
+        vscode: true
       },
       experimental: {
         wasm: false,
         legacyExternals: false,
-        openAPI: false,
-      },
+        openAPI: false
+      }
     };
   }
 

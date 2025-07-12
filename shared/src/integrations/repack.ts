@@ -1,17 +1,13 @@
-declare const process:
-  | {
-      env: {
-        NODE_ENV?: string;
-      };
-      cwd(): string;
-    }
-  | undefined;
+declare const process: {
+  env: {
+    NODE_ENV?: string;
+  };
+  cwd(): string;
+} | undefined;
 
-declare const require:
-  | {
-      resolve(id: string): string;
-    }
-  | undefined;
+declare const require: {
+  resolve(id: string): string;
+} | undefined;
 
 export interface RePackConfig {
   platforms: Array<'ios' | 'android' | 'web' | 'windows' | 'macos'>;
@@ -70,31 +66,31 @@ export class RePackIntegration {
           codeGeneration: true,
           bridgelessMode: true,
           hermesEngine: true,
-          fabricRenderer: true,
-        },
+          fabricRenderer: true
+        }
       }),
       plugins: [
         '@callstack/repack/webpack-plugin',
         'react-native-webpack-plugin',
-        'metro-react-native-babel-preset',
+        'metro-react-native-babel-preset'
       ],
       dependencies: [
         '@callstack/repack',
         'react-native',
         'react-native-web',
         '@react-native/metro-config',
-        'metro-react-native-babel-preset',
-      ],
+        'metro-react-native-babel-preset'
+      ]
     };
   }
 
   private generatePlatformConfigs(): PlatformConfig[] {
-    return this.config.platforms.map((platform) => ({
+    return this.config.platforms.map(platform => ({
       name: platform,
       extensions: this.getPlatformExtensions(platform),
       bundler: this.config.bundler,
       devServer: this.config.devServer,
-      nativeModules: this.getPlatformNativeModules(platform),
+      nativeModules: this.getPlatformNativeModules(platform)
     }));
   }
 
@@ -108,7 +104,7 @@ export class RePackIntegration {
       `.native.ts`,
       `.native.tsx`,
       `.native.js`,
-      `.native.jsx`,
+      `.native.jsx`
     ];
     return [...platformExtensions, ...baseExtensions];
   }
@@ -118,13 +114,22 @@ export class RePackIntegration {
       'react-native-gesture-handler',
       'react-native-reanimated',
       'react-native-safe-area-context',
-      'react-native-screens',
+      'react-native-screens'
     ];
 
     const platformSpecific: Record<string, string[]> = {
-      ios: ['react-native-ios-context-menu', 'react-native-haptic-feedback'],
-      android: ['react-native-android-keyboard-adjust', 'react-native-android-open-settings'],
-      web: ['react-native-web', 'react-native-web-hooks'],
+      ios: [
+        'react-native-ios-context-menu',
+        'react-native-haptic-feedback'
+      ],
+      android: [
+        'react-native-android-keyboard-adjust',
+        'react-native-android-open-settings'
+      ],
+      web: [
+        'react-native-web',
+        'react-native-web-hooks'
+      ]
     };
 
     return [...commonModules, ...(platformSpecific[platform] || [])];
@@ -143,14 +148,14 @@ export class RePackIntegration {
           '@katalyst/components': '../shared/src/components/index.ts',
           '@katalyst/hooks': '../shared/src/hooks/index.ts',
           '@katalyst/stores': '../shared/src/stores/index.ts',
-          '@katalyst/utils': '../shared/src/utils/index.ts',
+          '@katalyst/utils': '../shared/src/utils/index.ts'
         },
         fallback: {
           crypto: false,
           stream: false,
           path: false,
-          fs: false,
-        },
+          fs: false
+        }
       },
       module: {
         rules: [
@@ -160,14 +165,17 @@ export class RePackIntegration {
               {
                 loader: 'babel-loader',
                 options: {
-                  presets: ['module:metro-react-native-babel-preset', '@babel/preset-typescript'],
+                  presets: [
+                    'module:metro-react-native-babel-preset',
+                    '@babel/preset-typescript'
+                  ],
                   plugins: [
                     'react-native-reanimated/plugin',
-                    ['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }],
-                  ],
-                },
-              },
-            ],
+                    ['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }]
+                  ]
+                }
+              }
+            ]
           },
           {
             test: /\.(js|jsx)$/,
@@ -175,18 +183,18 @@ export class RePackIntegration {
               {
                 loader: 'babel-loader',
                 options: {
-                  presets: ['module:metro-react-native-babel-preset'],
-                },
-              },
-            ],
+                  presets: ['module:metro-react-native-babel-preset']
+                }
+              }
+            ]
           },
           {
             test: /\.(png|jpg|jpeg|gif|svg)$/,
-            type: 'asset/resource',
-          },
-        ],
+            type: 'asset/resource'
+          }
+        ]
       },
-      plugins: [],
+      plugins: []
     };
   }
 
@@ -194,69 +202,58 @@ export class RePackIntegration {
     return {
       name: 'repack-webpack',
       setup: () => ({
-        mode:
-          typeof process !== 'undefined' && process.env?.NODE_ENV === 'production'
-            ? 'production'
-            : 'development',
+        mode: (typeof process !== 'undefined' && process.env?.NODE_ENV === 'production') ? 'production' : 'development',
         entry: {
-          index: './src/index.tsx',
+          index: './src/index.tsx'
         },
         output: {
           path: './dist',
           filename: '[name].[contenthash:8].js',
           chunkFilename: '[name].[contenthash:8].chunk.js',
           publicPath: '/',
-          clean: true,
+          clean: true
         },
         resolve: {
           extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
           alias: {
-            'react-native$': 'react-native-web',
-          },
+            'react-native$': 'react-native-web'
+          }
         },
         module: {
           rules: [
             {
               test: /\.(ts|tsx)$/,
-              use: 'babel-loader',
+              use: 'babel-loader'
             },
             {
               test: /\.css$/,
-              use: ['style-loader', 'css-loader', 'postcss-loader'],
-            },
-          ],
+              use: ['style-loader', 'css-loader', 'postcss-loader']
+            }
+          ]
         },
         plugins: [
           {
             name: 'RepackPlugin',
             options: {
               context: (typeof process !== 'undefined' && process.cwd()) || '.',
-              mode:
-                typeof process !== 'undefined' && process.env?.NODE_ENV === 'production'
-                  ? 'production'
-                  : 'development',
+              mode: (typeof process !== 'undefined' && process.env?.NODE_ENV === 'production') ? 'production' : 'development',
               platform: 'web',
-              minimize:
-                (typeof process !== 'undefined' && process.env?.NODE_ENV === 'production') || false,
-              devServer: this.config.devServer
-                ? {
-                    port: 8081,
-                    host: 'localhost',
-                  }
-                : undefined,
-            },
-          },
-        ],
-        devServer: this.config.devServer
-          ? {
-              port: 8081,
-              host: 'localhost',
-              hot: this.config.hotReload,
-              liveReload: true,
-              historyApiFallback: true,
+              minimize: (typeof process !== 'undefined' && process.env?.NODE_ENV === 'production') || false,
+              devServer: this.config.devServer ? {
+                port: 8081,
+                host: 'localhost'
+              } : undefined
             }
-          : undefined,
-      }),
+          }
+        ],
+        devServer: this.config.devServer ? {
+          port: 8081,
+          host: 'localhost',
+          hot: this.config.hotReload,
+          liveReload: true,
+          historyApiFallback: true
+        } : undefined
+      })
     };
   }
 
@@ -268,9 +265,9 @@ export class RePackIntegration {
           getTransformOptions: async () => ({
             transform: {
               experimentalImportSupport: false,
-              inlineRequires: true,
-            },
-          }),
+              inlineRequires: true
+            }
+          })
         },
         resolver: {
           alias: {
@@ -278,29 +275,27 @@ export class RePackIntegration {
             '@katalyst/components': '../shared/src/components/index.ts',
             '@katalyst/hooks': '../shared/src/hooks/index.ts',
             '@katalyst/stores': '../shared/src/stores/index.ts',
-            '@katalyst/utils': '../shared/src/utils/index.ts',
+            '@katalyst/utils': '../shared/src/utils/index.ts'
           },
           sourceExts: ['js', 'jsx', 'ts', 'tsx', 'json'],
-          assetExts: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'ttf', 'otf', 'woff', 'woff2'],
+          assetExts: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'ttf', 'otf', 'woff', 'woff2']
         },
         serializer: {
           getModulesRunBeforeMainModule: () => [
-            (typeof require !== 'undefined' &&
-              require.resolve('react-native/Libraries/Core/InitializeCore')) ||
-              'react-native/Libraries/Core/InitializeCore',
-          ],
+            (typeof require !== 'undefined' && require.resolve('react-native/Libraries/Core/InitializeCore')) || 'react-native/Libraries/Core/InitializeCore'
+          ]
         },
         server: {
           port: 8081,
-          host: 'localhost',
+          host: 'localhost'
         },
         watchFolders: [
           './katalyst/shared',
           './katalyst/core',
           './katalyst/remix',
-          './katalyst/nextjs',
-        ],
-      }),
+          './katalyst/nextjs'
+        ]
+      })
     };
   }
 
@@ -316,20 +311,20 @@ export class RePackIntegration {
             template: 'functional',
             typescript: true,
             props: true,
-            styles: true,
+            styles: true
           },
           screens: {
             enabled: true,
             navigation: 'react-navigation',
             typescript: true,
-            hooks: true,
+            hooks: true
           },
           services: {
             enabled: true,
             api: 'fetch',
             typescript: true,
-            validation: 'typia',
-          },
+            validation: 'typia'
+          }
         },
         templates: {
           component: `
@@ -377,9 +372,9 @@ export class RePackIntegration {
                 alignItems: 'center'
               }
             });
-          `,
-        },
-      }),
+          `
+        }
+      })
     };
   }
 
@@ -388,7 +383,7 @@ export class RePackIntegration {
       this.setupReactNative(),
       this.setupWebpackIntegration(),
       this.setupMetroIntegration(),
-      this.setupCodeGeneration(),
+      this.setupCodeGeneration()
     ]);
 
     return integrations.filter(Boolean);
@@ -402,7 +397,7 @@ export class RePackIntegration {
       'build:android': 'npx react-native run-android',
       'build:web': 'npx webpack --config webpack.config.js',
       bundle: 'npx react-native bundle',
-      codegen: 'npx react-native codegen',
+      codegen: 'npx react-native codegen'
     };
   }
 

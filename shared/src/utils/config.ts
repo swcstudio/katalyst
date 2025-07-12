@@ -1,4 +1,4 @@
-import type { KatalystConfig } from '../types/index.ts';
+import { KatalystConfig } from '../types/index.ts';
 
 export class ConfigManager {
   private config: KatalystConfig;
@@ -16,14 +16,14 @@ export class ConfigManager {
   }
 
   getFeature(name: string) {
-    return this.config.features.find((f) => f.name === name);
+    return this.config.features.find(f => f.name === name);
   }
 
   getPlugin(name: string) {
-    return this.config.plugins.find((p) => p.name === name);
+    return this.config.plugins.find(p => p.name === name);
   }
 
   getIntegration(name: string) {
-    return this.config.integrations.find((i) => i.name === name);
+    return this.config.integrations.find(i => i.name === name);
   }
 }

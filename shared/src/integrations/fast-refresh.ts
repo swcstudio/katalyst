@@ -11,8 +11,8 @@ export class FastRefreshIntegration {
       setup: () => ({
         react: true,
         overlay: true,
-        hmr: true,
-      }),
+        hmr: true
+      })
     };
   }
 

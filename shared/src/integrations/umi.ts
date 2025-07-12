@@ -11,8 +11,8 @@ export class UmiIntegration {
       setup: () => ({
         routing: 'convention',
         plugins: [],
-        aumi: true,
-      }),
+        aumi: true
+      })
     };
   }
 

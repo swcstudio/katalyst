@@ -1,10 +1,8 @@
-declare const process:
-  | {
-      env: {
-        NODE_ENV?: string;
-      };
-    }
-  | undefined;
+declare const process: {
+  env: {
+    NODE_ENV?: string;
+  };
+} | undefined;
 
 export interface EsmxConfig {
   importMaps: Record<string, string>;
@@ -50,7 +48,7 @@ export class EsmxIntegration {
           resolveJsonModule: this.config.resolveJsonModule || true,
           esModuleInterop: this.config.esModuleInterop || true,
           allowSyntheticDefaultImports: this.config.allowSyntheticDefaultImports || true,
-          moduleDetection: this.config.moduleDetection || 'auto',
+          moduleDetection: this.config.moduleDetection || 'auto'
         },
         features: {
           nativeESM: true,
@@ -60,27 +58,35 @@ export class EsmxIntegration {
           importMeta: true,
           webStreams: true,
           webCrypto: true,
-          fetchAPI: true,
-        },
+          fetchAPI: true
+        }
       }),
-      plugins: ['esmx-loader', 'esmx-resolver', 'esmx-transformer'],
-      dependencies: ['esmx', 'esbuild', 'typescript'],
+      plugins: [
+        'esmx-loader',
+        'esmx-resolver',
+        'esmx-transformer'
+      ],
+      dependencies: [
+        'esmx',
+        'esbuild',
+        'typescript'
+      ]
     };
   }
 
   private generateImportMaps(): ImportMap {
     return {
       imports: {
-        react: 'https://esm.sh/react@18',
+        'react': 'https://esm.sh/react@18',
         'react-dom': 'https://esm.sh/react-dom@18',
         'react-dom/client': 'https://esm.sh/react-dom@18/client',
         '@tanstack/react-query': 'https://esm.sh/@tanstack/react-query@5',
         '@tanstack/react-router': 'https://esm.sh/@tanstack/react-router@1',
-        zustand: 'https://esm.sh/zustand@4',
-        tailwindcss: 'https://esm.sh/tailwindcss@4',
+        'zustand': 'https://esm.sh/zustand@4',
+        'tailwindcss': 'https://esm.sh/tailwindcss@4',
         '@arco-design/web-react': 'https://esm.sh/@arco-design/web-react@2',
-        typia: 'https://esm.sh/typia@6',
-        ...this.config.importMaps,
+        'typia': 'https://esm.sh/typia@6',
+        ...this.config.importMaps
       },
       scopes: {
         '/katalyst/core/': {
@@ -88,23 +94,23 @@ export class EsmxIntegration {
           '@katalyst/components': '/katalyst/shared/src/components/index.ts',
           '@katalyst/hooks': '/katalyst/shared/src/hooks/index.ts',
           '@katalyst/stores': '/katalyst/shared/src/stores/index.ts',
-          '@katalyst/utils': '/katalyst/shared/src/utils/index.ts',
+          '@katalyst/utils': '/katalyst/shared/src/utils/index.ts'
         },
         '/katalyst/remix/': {
           '@katalyst/shared': '/katalyst/shared/src/index.ts',
           '@katalyst/components': '/katalyst/shared/src/components/index.ts',
           '@katalyst/hooks': '/katalyst/shared/src/hooks/index.ts',
           '@katalyst/stores': '/katalyst/shared/src/stores/index.ts',
-          '@katalyst/utils': '/katalyst/shared/src/utils/index.ts',
+          '@katalyst/utils': '/katalyst/shared/src/utils/index.ts'
         },
         '/katalyst/nextjs/': {
           '@katalyst/shared': '/katalyst/shared/src/index.ts',
           '@katalyst/components': '/katalyst/shared/src/components/index.ts',
           '@katalyst/hooks': '/katalyst/shared/src/hooks/index.ts',
           '@katalyst/stores': '/katalyst/shared/src/stores/index.ts',
-          '@katalyst/utils': '/katalyst/shared/src/utils/index.ts',
-        },
-      },
+          '@katalyst/utils': '/katalyst/shared/src/utils/index.ts'
+        }
+      }
     };
   }
 
@@ -113,7 +119,7 @@ export class EsmxIntegration {
       enabled: true,
       directory: '.esmx/cache',
       maxSize: '500MB',
-      ttl: 86400000, // 24 hours
+      ttl: 86400000 // 24 hours
     };
   }
 
@@ -129,20 +135,19 @@ export class EsmxIntegration {
           jsxImportSource: 'react',
           allowJs: true,
           declaration: false,
-          sourceMap: true,
+          sourceMap: true
         },
         jsx: {
           enabled: true,
           runtime: 'automatic',
           importSource: 'react',
-          development:
-            (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') || false,
+          development: (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') || false
         },
         css: {
           enabled: true,
           modules: true,
-          postcss: true,
-        },
+          postcss: true
+        }
       },
       resolvers: [
         {
@@ -153,7 +158,7 @@ export class EsmxIntegration {
               return { url: specifier };
             }
             return null;
-          },
+          }
         },
         {
           name: 'import-maps',
@@ -164,7 +169,7 @@ export class EsmxIntegration {
               return { url: importMaps.imports[specifier] };
             }
             return null;
-          },
+          }
         },
         {
           name: 'relative',
@@ -174,9 +179,9 @@ export class EsmxIntegration {
               return { url: new URL(specifier, context.parentURL).href };
             }
             return null;
-          },
-        },
-      ],
+          }
+        }
+      ]
     };
   }
 
@@ -190,7 +195,7 @@ export class EsmxIntegration {
           read: ['.', './katalyst'],
           write: ['./.esmx', './dist'],
           env: ['NODE_ENV', 'DENO_ENV'],
-          run: ['deno', 'bun'],
+          run: ['deno', 'bun']
         },
         importMap: './deno.json',
         tasks: {
@@ -198,7 +203,7 @@ export class EsmxIntegration {
           build: 'deno run --allow-all ./scripts/build.ts',
           test: 'deno test --allow-all',
           lint: 'deno lint',
-          fmt: 'deno fmt',
+          fmt: 'deno fmt'
         },
         compilerOptions: {
           allowJs: true,
@@ -226,9 +231,9 @@ export class EsmxIntegration {
           strictPropertyInitialization: true,
           suppressExcessPropertyErrors: false,
           suppressImplicitAnyIndexErrors: false,
-          useUnknownInCatchVariables: false,
-        },
-      }),
+          useUnknownInCatchVariables: false
+        }
+      })
     };
   }
 
@@ -246,7 +251,7 @@ export class EsmxIntegration {
         external: ['react', 'react-dom'],
         define: {
           'process.env.NODE_ENV': '"development"',
-          'import.meta.env.DEV': 'true',
+          'import.meta.env.DEV': 'true'
         },
         loader: {
           '.ts': 'ts',
@@ -254,7 +259,7 @@ export class EsmxIntegration {
           '.js': 'js',
           '.jsx': 'jsx',
           '.css': 'css',
-          '.json': 'json',
+          '.json': 'json'
         },
         plugins: [
           {
@@ -264,10 +269,10 @@ export class EsmxIntegration {
                 const path = args.path.replace('@katalyst/', './katalyst/shared/src/');
                 return { path, namespace: 'katalyst' };
               });
-            },
-          },
-        ],
-      }),
+            }
+          }
+        ]
+      })
     };
   }
 
@@ -284,7 +289,7 @@ export class EsmxIntegration {
           WritableStreamDefaultWriter: true,
           TransformStreamDefaultController: true,
           ReadableByteStreamController: true,
-          ReadableStreamDefaultController: true,
+          ReadableStreamDefaultController: true
         },
         apis: {
           fetch: true,
@@ -297,14 +302,14 @@ export class EsmxIntegration {
           AbortSignal: true,
           FormData: true,
           Blob: true,
-          File: true,
+          File: true
         },
         crypto: {
           subtle: true,
           getRandomValues: true,
-          randomUUID: true,
-        },
-      }),
+          randomUUID: true
+        }
+      })
     };
   }
 
@@ -313,7 +318,7 @@ export class EsmxIntegration {
       this.setupESM(),
       this.setupDenoIntegration(),
       this.setupBunIntegration(),
-      this.setupWebStreams(),
+      this.setupWebStreams()
     ]);
 
     return integrations.filter(Boolean);
@@ -326,7 +331,7 @@ export class EsmxIntegration {
         jsx: 'react-jsx',
         jsxImportSource: 'react',
         lib: ['deno.window', 'dom', 'dom.iterable', 'es2022'],
-        strict: true,
+        strict: true
       },
       imports: this.generateImportMaps().imports,
       tasks: {
@@ -334,9 +339,9 @@ export class EsmxIntegration {
         build: 'deno run --allow-all ./scripts/build.ts',
         test: 'deno test --allow-all',
         lint: 'deno lint',
-        fmt: 'deno fmt',
+        fmt: 'deno fmt'
       },
-      exclude: ['node_modules', 'dist', '.next', '.remix'],
+      exclude: ['node_modules', 'dist', '.next', '.remix']
     };
   }
 
@@ -346,12 +351,12 @@ export class EsmxIntegration {
       module: 'index.ts',
       type: 'module',
       devDependencies: {
-        'bun-types': 'latest',
+        'bun-types': 'latest'
       },
       peerDependencies: {
-        typescript: '^5.0.0',
+        typescript: '^5.0.0'
       },
-      trustedDependencies: ['esbuild'],
+      trustedDependencies: ['esbuild']
     };
   }
 

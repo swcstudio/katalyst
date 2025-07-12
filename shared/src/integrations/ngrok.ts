@@ -11,8 +11,8 @@ export class NgrokIntegration {
       setup: () => ({
         tunnel: null,
         port: 3000,
-        secure: true,
-      }),
+        secure: true
+      })
     };
   }
 

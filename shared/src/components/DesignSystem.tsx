@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 import { useConfigContext } from './ConfigProvider.tsx';
 
 interface DesignSystemProps {
@@ -8,9 +8,12 @@ interface DesignSystemProps {
 
 export function DesignSystem({ children, className = '' }: DesignSystemProps) {
   const { theme } = useConfigContext();
-
+  
   return (
-    <div className={`katalyst-design-system ${theme} ${className}`} data-theme={theme}>
+    <div 
+      className={`katalyst-design-system ${theme} ${className}`}
+      data-theme={theme}
+    >
       {children}
     </div>
   );
@@ -25,32 +28,30 @@ interface ButtonProps {
   className?: string;
 }
 
-export function Button({
-  variant = 'primary',
-  size = 'md',
-  children,
-  onClick,
+export function Button({ 
+  variant = 'primary', 
+  size = 'md', 
+  children, 
+  onClick, 
   disabled = false,
-  className = '',
+  className = ''
 }: ButtonProps) {
-  const baseClasses =
-    'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
-
+  const baseClasses = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
+  
   const variantClasses = {
     primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
     secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-    outline: 'border border-input hover:bg-accent hover:text-accent-foreground',
+    outline: 'border border-input hover:bg-accent hover:text-accent-foreground'
   };
-
+  
   const sizeClasses = {
     sm: 'h-9 px-3 text-sm',
     md: 'h-10 py-2 px-4',
-    lg: 'h-11 px-8',
+    lg: 'h-11 px-8'
   };
-
+  
   return (
-    <button
-      type="button"
+    <button type="button"
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       onClick={onClick}
       disabled={disabled}

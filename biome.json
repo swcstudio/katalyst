@@ -1,15 +1,25 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
-  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "style": {
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "useImportType": "error"
       },
       "suspicious": {
-        "noExplicitAny": "warn"
+        "noExplicitAny": "warn",
+        "noArrayIndexKey": "warn"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "warn"
+      },
+      "complexity": {
+        "noForEach": "off"
       }
     }
   },
@@ -41,21 +51,20 @@
     }
   },
   "files": {
-    "includes": [
+    "include": [
       "**/*.ts",
       "**/*.tsx",
-      "**/*.json",
-      "**/*.astro",
-      "**/*.svelte",
-      "!**/node_modules/**",
-      "!**/dist/**",
-      "!**/.output/**",
-      "!**/styled-system/**",
-      "!**/.nx/**",
-      "!**/coverage/**",
-      "!**/.astro/**",
-      "!**/.svelte-kit/**",
-      "!**/env.d.ts"
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.json"
+    ],
+    "ignore": [
+      "node_modules/**",
+      "dist/**",
+      ".next/**",
+      ".remix/**",
+      "coverage/**",
+      "storybook-static/**"
     ]
   }
 }

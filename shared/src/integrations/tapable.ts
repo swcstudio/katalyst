@@ -11,8 +11,8 @@ export class TapableIntegration {
       setup: () => ({
         hooks: new Map(),
         plugins: [],
-        lifecycle: [],
-      }),
+        lifecycle: []
+      })
     };
   }
 

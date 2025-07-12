@@ -45,7 +45,7 @@ const config: StorybookConfig = {
       '@katalyst/remix': '../remix/app/root.tsx',
       '@katalyst/nextjs': '../nextjs/src/app/page.tsx',
     };
-
+    
     return config;
   },
 };

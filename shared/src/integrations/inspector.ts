@@ -11,8 +11,8 @@ export class InspectorIntegration {
       setup: () => ({
         components: new Map(),
         devtools: true,
-        ide: 'vscode',
-      }),
+        ide: 'vscode'
+      })
     };
   }
 

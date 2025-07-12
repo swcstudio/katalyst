@@ -11,8 +11,8 @@ export class ZephyrIntegration {
       setup: () => ({
         deployment: 'cloud',
         microFrontends: true,
-        sdlc: true,
-      }),
+        sdlc: true
+      })
     };
   }
 

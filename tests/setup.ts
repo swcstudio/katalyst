@@ -1,40 +1,46 @@
-globalThis.IntersectionObserver = class MockIntersectionObserver {
-  observe() {
-    return null;
-  }
-  disconnect() {
-    return null;
-  }
-  unobserve() {
-    return null;
-  }
-} as unknown as typeof IntersectionObserver;
+import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
-if (!globalThis.structuredClone) {
-  globalThis.structuredClone = <T>(obj: T): T => {
-    return JSON.parse(JSON.stringify(obj));
-  };
+if (typeof process !== 'undefined') {
+  Object.defineProperty(process.env, 'NODE_ENV', {
+    value: 'test',
+    writable: true,
+  });
 }
 
-export const render = (_component: unknown) => {
-  return {
-    container: { innerHTML: 'mocked-container' },
-    getByText: (text: string) => ({ textContent: text }),
-    queryByRole: (_role?: string, _options?: Record<string, unknown>) => ({
-      textContent: 'mocked-heading',
-    }),
-  };
-};
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation((query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
 
-export const screen = {
-  getByText: (text: string) => ({ textContent: text }),
-  queryByRole: (_role?: string, _options?: Record<string, unknown>) => ({
-    textContent: 'mocked-heading',
-  }),
-};
+(globalThis as any).IntersectionObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
 
-/*
- * © 2025 Spectrum Web Co LLC. All rights reserved.
- * This code is the property of Spectrum Web Co LLC.
- * Licensed under MIT License.
- */
+(globalThis as any).ResizeObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+
+(globalThis as any).fetch = vi.fn();
+
+(globalThis as any).console = {
+  ...console,
+  log: vi.fn(),
+  debug: vi.fn(),
+  info: vi.fn(),
+  warn: vi.fn(),
+  error: vi.fn(),
+};

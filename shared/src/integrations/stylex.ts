@@ -11,8 +11,8 @@ export class StyleXIntegration {
       setup: () => ({
         atomic: true,
         theme: {},
-        tokens: {},
-      }),
+        tokens: {}
+      })
     };
   }
 

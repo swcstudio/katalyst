@@ -1,4 +1,4 @@
-import type { TanStackConfig } from '../types/index';
+import { TanStackConfig } from '../types/index';
 
 export interface TanStackRouterConfig {
   routes: RouteConfig[];
@@ -42,7 +42,7 @@ export class TanStackIntegration {
 
   setupRouter(): Promise<unknown> {
     if (!this.config.router) return Promise.resolve(null);
-
+    
     return Promise.resolve({
       name: 'tanstack-router',
       setup: (): TanStackRouterConfig => ({
@@ -52,7 +52,7 @@ export class TanStackIntegration {
             component: 'HomePage',
             loader: 'homeLoader',
             errorComponent: 'HomeErrorBoundary',
-            pendingComponent: 'HomePending',
+            pendingComponent: 'HomePending'
           },
           {
             path: '/products',
@@ -62,39 +62,30 @@ export class TanStackIntegration {
               {
                 path: '/:category',
                 component: 'CategoryPage',
-                loader: 'categoryLoader',
-              },
-            ],
-          },
+                loader: 'categoryLoader'
+              }
+            ]
+          }
         ],
         loaders: new Map([
-          [
-            'homeLoader',
-            {
-              fn: (..._args: unknown[]) => ({ title: 'Welcome', content: 'Marketing content' }),
-              cache: 'swr',
-              staleTime: 5 * 60 * 1000,
-              gcTime: 10 * 60 * 1000,
-            },
-          ],
-          [
-            'productsLoader',
-            {
-              fn: (..._args: unknown[]) => ({ products: [], category: 'all' }),
-              cache: 'swr',
-              staleTime: 2 * 60 * 1000,
-            },
-          ],
-          [
-            'categoryLoader',
-            {
-              fn: (...args: unknown[]) => ({
-                products: [],
-                category: args[0],
-              }),
-              cache: 'swr',
-            },
-          ],
+          ['homeLoader', {
+            fn: (..._args: unknown[]) => ({ title: 'Welcome', content: 'Marketing content' }),
+            cache: 'swr',
+            staleTime: 5 * 60 * 1000,
+            gcTime: 10 * 60 * 1000
+          }],
+          ['productsLoader', {
+            fn: (..._args: unknown[]) => ({ products: [], category: 'all' }),
+            cache: 'swr',
+            staleTime: 2 * 60 * 1000
+          }],
+          ['categoryLoader', {
+            fn: (...args: unknown[]) => ({ 
+              products: [], 
+              category: args[0] 
+            }),
+            cache: 'swr'
+          }]
         ] as [string, RouteLoader][]),
         middleware: [
           {
@@ -104,7 +95,7 @@ export class TanStackIntegration {
                 throw new Error('Authentication required');
               }
             },
-            order: 1,
+            order: 1
           },
           {
             name: 'analytics',
@@ -113,23 +104,29 @@ export class TanStackIntegration {
                 console.log('Page view:', (context as any)?.route?.path);
               }
             },
-            order: 2,
-          },
+            order: 2
+          }
         ],
         streaming: true,
         ssr: true,
         prefetching: true,
         errorBoundaries: true,
-        searchParams: true,
+        searchParams: true
       }),
-      plugins: ['tanstack-router-plugin', 'tanstack-router-devtools'],
-      dependencies: ['@tanstack/react-router', '@tanstack/router-devtools'],
+      plugins: [
+        'tanstack-router-plugin',
+        'tanstack-router-devtools'
+      ],
+      dependencies: [
+        '@tanstack/react-router',
+        '@tanstack/router-devtools'
+      ]
     });
   }
 
   setupQuery(): Record<string, unknown> | null {
     if (!this.config.query) return null;
-
+    
     return {
       name: 'tanstack-query',
       setup: () => ({
@@ -141,173 +138,151 @@ export class TanStackIntegration {
               retry: 3,
               retryDelay: (attemptIndex: number) => Math.min(1000 * 2 ** attemptIndex, 30000),
               refetchOnWindowFocus: false,
-              refetchOnReconnect: true,
+              refetchOnReconnect: true
             },
             mutations: {
               retry: 1,
-              retryDelay: 1000,
-            },
-          },
+              retryDelay: 1000
+            }
+          }
         },
         cache: new Map([
           ['marketing-content', { data: null, timestamp: 0, staleTime: 5 * 60 * 1000 }],
           ['products', { data: null, timestamp: 0, staleTime: 2 * 60 * 1000 }],
-          ['user-profile', { data: null, timestamp: 0, staleTime: 10 * 60 * 1000 }],
+          ['user-profile', { data: null, timestamp: 0, staleTime: 10 * 60 * 1000 }]
         ]),
         mutations: new Map([
-          [
-            'updateProfile',
-            {
-              mutationFn: async (data: Record<string, unknown>) => {
-                const response = await fetch('/api/profile', {
-                  method: 'PUT',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(data),
-                });
-                return response.json();
-              },
-              onSuccess: () => {
-                console.log('Profile updated successfully');
-              },
-              onError: (error: Record<string, unknown>) => {
-                console.error('Profile update failed:', error);
-              },
+          ['updateProfile', {
+            mutationFn: async (data: Record<string, unknown>) => {
+              const response = await fetch('/api/profile', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+              });
+              return response.json();
             },
-          ],
-          [
-            'submitContact',
-            {
-              mutationFn: async (data: Record<string, unknown>) => {
-                const response = await fetch('/api/contact', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(data),
-                });
-                return response.json();
-              },
+            onSuccess: () => {
+              console.log('Profile updated successfully');
             },
-          ],
+            onError: (error: Record<string, unknown>) => {
+              console.error('Profile update failed:', error);
+            }
+          }],
+          ['submitContact', {
+            mutationFn: async (data: Record<string, unknown>) => {
+              const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+              });
+              return response.json();
+            }
+          }]
         ]),
         subscriptions: new Set([
           'real-time-notifications',
           'live-chat-updates',
-          'product-inventory-updates',
-        ]),
+          'product-inventory-updates'
+        ])
       }),
-      plugins: ['tanstack-query-devtools', 'tanstack-query-persist-client'],
+      plugins: [
+        'tanstack-query-devtools',
+        'tanstack-query-persist-client'
+      ],
       dependencies: [
         '@tanstack/react-query',
         '@tanstack/react-query-devtools',
-        '@tanstack/query-persist-client-core',
-      ],
+        '@tanstack/query-persist-client-core'
+      ]
     };
   }
 
   setupForm(): Record<string, unknown> | null {
     if (!this.config.form) return null;
-
+    
     return {
       name: 'tanstack-form',
       setup: () => ({
         validators: new Map([
-          [
-            'email',
-            {
-              fn: (value: string) => {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(value) || 'Invalid email address';
-              },
-              async: false,
+          ['email', {
+            fn: (value: string) => {
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              return emailRegex.test(value) || 'Invalid email address';
             },
-          ],
-          [
-            'required',
-            {
-              fn: (value: unknown) => {
-                return (
-                  (value !== null && value !== undefined && value !== '') ||
-                  'This field is required'
-                );
-              },
-              async: false,
+            async: false
+          }],
+          ['required', {
+            fn: (value: unknown) => {
+              return (value !== null && value !== undefined && value !== '') || 'This field is required';
             },
-          ],
-          [
-            'minLength',
-            {
-              fn: (value: string, min: number) => {
-                return value.length >= min || `Minimum length is ${min} characters`;
-              },
-              async: false,
+            async: false
+          }],
+          ['minLength', {
+            fn: (value: string, min: number) => {
+              return value.length >= min || `Minimum length is ${min} characters`;
             },
-          ],
-          [
-            'uniqueEmail',
-            {
-              fn: async (value: string) => {
-                const response = await fetch(`/api/check-email?email=${encodeURIComponent(value)}`);
-                const { exists } = await response.json();
-                return !exists || 'Email already exists';
-              },
-              async: true,
+            async: false
+          }],
+          ['uniqueEmail', {
+            fn: async (value: string) => {
+              const response = await fetch(`/api/check-email?email=${encodeURIComponent(value)}`);
+              const { exists } = await response.json();
+              return !exists || 'Email already exists';
             },
-          ],
+            async: true
+          }]
         ]),
         schemas: new Map([
-          [
-            'contactForm',
-            {
-              fields: {
-                name: { validators: ['required', 'minLength:2'] },
-                email: { validators: ['required', 'email'] },
-                message: { validators: ['required', 'minLength:10'] },
-              },
-              onSubmit: async (data: Record<string, unknown>) => {
-                const response = await fetch('/api/contact', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(data),
-                });
-                return response.json();
-              },
+          ['contactForm', {
+            fields: {
+              name: { validators: ['required', 'minLength:2'] },
+              email: { validators: ['required', 'email'] },
+              message: { validators: ['required', 'minLength:10'] }
             },
-          ],
-          [
-            'registrationForm',
-            {
-              fields: {
-                email: { validators: ['required', 'email', 'uniqueEmail'] },
-                password: { validators: ['required', 'minLength:8'] },
-                confirmPassword: {
-                  validators: ['required'],
-                  validate: (value: string, formData: Record<string, unknown>) => {
-                    return value === formData.password || 'Passwords do not match';
-                  },
-                },
-              },
-            },
-          ],
+            onSubmit: async (data: Record<string, unknown>) => {
+              const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+              });
+              return response.json();
+            }
+          }],
+          ['registrationForm', {
+            fields: {
+              email: { validators: ['required', 'email', 'uniqueEmail'] },
+              password: { validators: ['required', 'minLength:8'] },
+              confirmPassword: { 
+                validators: ['required'],
+                validate: (value: string, formData: Record<string, unknown>) => {
+                  return value === formData.password || 'Passwords do not match';
+                }
+              }
+            }
+          }]
         ]),
         transformers: new Map([
           ['trim', (value: string) => value.trim()],
           ['lowercase', (value: string) => value.toLowerCase()],
           ['capitalize', (value: string) => value.charAt(0).toUpperCase() + value.slice(1)],
-          [
-            'sanitizeHtml',
-            (value: string) => {
-              return value.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-            },
-          ],
-        ]),
+          ['sanitizeHtml', (value: string) => {
+            return value.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+          }]
+        ])
       }),
-      plugins: ['tanstack-form-devtools'],
-      dependencies: ['@tanstack/react-form', '@tanstack/form-core'],
+      plugins: [
+        'tanstack-form-devtools'
+      ],
+      dependencies: [
+        '@tanstack/react-form',
+        '@tanstack/form-core'
+      ]
     };
   }
 
   setupTable(): Record<string, unknown> | null {
     if (!this.config.table) return null;
-
+    
     return {
       name: 'tanstack-table',
       setup: () => ({
@@ -318,7 +293,7 @@ export class TanStackIntegration {
             accessorKey: 'id',
             size: 80,
             enableSorting: true,
-            enableFiltering: false,
+            enableFiltering: false
           },
           {
             id: 'name',
@@ -327,7 +302,7 @@ export class TanStackIntegration {
             size: 200,
             enableSorting: true,
             enableFiltering: true,
-            filterFn: 'includesString',
+            filterFn: 'includesString'
           },
           {
             id: 'email',
@@ -336,7 +311,7 @@ export class TanStackIntegration {
             size: 250,
             enableSorting: true,
             enableFiltering: true,
-            filterFn: 'includesString',
+            filterFn: 'includesString'
           },
           {
             id: 'status',
@@ -349,7 +324,7 @@ export class TanStackIntegration {
             cell: (info: Record<string, unknown>) => {
               const status = (info as any).getValue();
               return `<span class="status-${(status as string).toLowerCase()}">${status}</span>`;
-            },
+            }
           },
           {
             id: 'actions',
@@ -363,20 +338,22 @@ export class TanStackIntegration {
                 <button onclick="editRow(${row.original.id})">Edit</button>
                 <button onclick="deleteRow(${row.original.id})">Delete</button>
               `;
-            },
-          },
+            }
+          }
         ],
         sorting: [
           { id: 'name', desc: false },
-          { id: 'email', desc: false },
+          { id: 'email', desc: false }
         ],
-        filtering: [{ id: 'status', value: 'active' }],
-        pagination: {
-          pageIndex: 0,
+        filtering: [
+          { id: 'status', value: 'active' }
+        ],
+        pagination: { 
+          pageIndex: 0, 
           pageSize: 10,
           pageCount: -1,
           canPreviousPage: false,
-          canNextPage: true,
+          canNextPage: true
         },
         features: {
           sorting: true,
@@ -387,7 +364,7 @@ export class TanStackIntegration {
           grouping: true,
           columnResizing: true,
           columnVisibility: true,
-          columnOrdering: true,
+          columnOrdering: true
         },
         state: {
           sorting: [],
@@ -399,17 +376,22 @@ export class TanStackIntegration {
           grouping: [],
           columnSizing: {},
           columnVisibility: {},
-          columnOrder: [],
-        },
+          columnOrder: []
+        }
       }),
-      plugins: ['tanstack-table-devtools'],
-      dependencies: ['@tanstack/react-table', '@tanstack/table-core'],
+      plugins: [
+        'tanstack-table-devtools'
+      ],
+      dependencies: [
+        '@tanstack/react-table',
+        '@tanstack/table-core'
+      ]
     };
   }
 
   setupVirtual(): Record<string, unknown> | null {
     if (!this.config.virtual) return null;
-
+    
     return {
       name: 'tanstack-virtual',
       setup: () => ({
@@ -427,38 +409,41 @@ export class TanStackIntegration {
           initialRect: { width: 0, height: 0 },
           onChange: (instance: Record<string, unknown>) => {
             console.log('Virtual items changed:', (instance as any).getVirtualItems().length);
-          },
+          }
         },
         scrollElement: null,
         configurations: {
           'product-list': {
             count: 1000,
             estimateSize: () => 120,
-            overscan: 3,
+            overscan: 3
           },
           'chat-messages': {
             count: 5000,
             estimateSize: (_index: number) => {
               return Math.random() > 0.5 ? 60 : 90;
             },
-            overscan: 10,
+            overscan: 10
           },
           'data-grid': {
             count: 50000,
             estimateSize: () => 40,
             overscan: 5,
-            horizontal: true,
-          },
+            horizontal: true
+          }
         },
         features: {
           dynamic: true,
           horizontal: true,
           windowVirtualizer: true,
           smoothScrolling: true,
-          stickyIndexes: true,
-        },
+          stickyIndexes: true
+        }
       }),
-      dependencies: ['@tanstack/react-virtual', '@tanstack/virtual-core'],
+      dependencies: [
+        '@tanstack/react-virtual',
+        '@tanstack/virtual-core'
+      ]
     };
   }
 
@@ -468,7 +453,7 @@ export class TanStackIntegration {
       this.setupQuery(),
       this.setupForm(),
       this.setupTable(),
-      this.setupVirtual(),
+      this.setupVirtual()
     ]);
 
     return integrations.filter(Boolean);
@@ -476,25 +461,25 @@ export class TanStackIntegration {
 
   getServerFunctions() {
     return {
-      get_marketing_content: (section: string) => {
+      'get_marketing_content': (section: string) => {
         return {
           title: `${section} Content`,
           content: `Dynamic content for ${section}`,
-          lastUpdated: new Date().toISOString(),
+          lastUpdated: new Date().toISOString()
         };
       },
-      load_products: (params: { category?: string; limit?: number }) => {
+      'load_products': (params: { category?: string; limit?: number }) => {
         return {
           products: Array.from({ length: params.limit || 10 }, (_, i) => ({
             id: i + 1,
             name: `Product ${i + 1}`,
             category: params.category || 'general',
-            price: Math.floor(Math.random() * 1000) + 10,
+            price: Math.floor(Math.random() * 1000) + 10
           })),
           category: params.category || 'all',
-          total: 1000,
+          total: 1000
         };
-      },
+      }
     };
   }
 

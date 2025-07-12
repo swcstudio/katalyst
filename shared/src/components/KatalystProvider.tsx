@@ -1,6 +1,6 @@
-import { createContext, type ReactNode, useContext } from 'react';
+import { createContext, useContext, ReactNode } from 'react';
+import { KatalystConfig } from '../types/index.ts';
 import { useKatalyst } from '../hooks/use-katalyst.ts';
-import type { KatalystConfig } from '../types/index.ts';
 
 interface KatalystContextValue {
   config: KatalystConfig;
@@ -18,7 +18,11 @@ interface KatalystProviderProps {
 export function KatalystProvider({ children, config }: KatalystProviderProps) {
   const katalyst = useKatalyst(config);
 
-  return <KatalystContext.Provider value={katalyst}>{children}</KatalystContext.Provider>;
+  return (
+    <KatalystContext.Provider value={katalyst}>
+      {children}
+    </KatalystContext.Provider>
+  );
 }
 
 export function useKatalystContext() {
