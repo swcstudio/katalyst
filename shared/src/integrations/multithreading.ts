@@ -765,3 +765,15 @@ declare module '@katalyst/multithreading' {
     `.trim();
   }
 }
+
+export { useMultithreading, useParallelComputation, useAsyncComputation } from '../hooks/use-multithreading.ts';
+export { useServerAction, useParallelServerAction, createServerAction } from '../hooks/use-server-actions.ts';
+export { useHydration, useStreamingHydration, useSuspenseHydration } from '../hooks/use-hydration.ts';
+export { MultithreadingProvider, useMultithreadingContext, withMultithreading } from '../components/MultithreadingProvider.tsx';
+export { 
+  useMultithreadingStore, 
+  useTaskQueue, 
+  useThreadPools, 
+  useMultithreadingMetrics, 
+  useChannelCommunication 
+} from '../stores/multithreading-store.ts';

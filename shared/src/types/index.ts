@@ -57,3 +57,11 @@ export interface StorybookConfig {
   addons: string[];
   features: Record<string, boolean>;
 }
+
+export interface MultithreadingConfig {
+  autoInitialize?: boolean;
+  workerThreads?: number;
+  maxBlockingThreads?: number;
+  enableProfiling?: boolean;
+  enableReactIntegration?: boolean;
+}
