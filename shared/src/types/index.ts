@@ -4,6 +4,8 @@ export interface KatalystConfig {
   features: KatalystFeature[];
   plugins: KatalystPlugin[];
   integrations: KatalystIntegration[];
+  unifiedAppBuilder?: UnifiedAppBuilderConfig;
+  platformConfigs?: PlatformConfigs;
 }
 
 export interface KatalystFeature {
@@ -56,4 +58,43 @@ export interface StorybookConfig {
   builder: 'rsbuild';
   addons: string[];
   features: Record<string, boolean>;
+}
+
+export interface UnifiedAppBuilderConfig {
+  enabled: boolean;
+  platforms: ('web' | 'desktop' | 'mobile' | 'metaverse')[];
+  frameworks: {
+    desktop: string;
+    mobile: string;
+    metaverse: string;
+  };
+  sharedComponents: boolean;
+  rustBackend: boolean;
+  features: {
+    crossPlatformComponents: boolean;
+    sharedStateManagement: boolean;
+    unifiedBuildSystem: boolean;
+    hotReload: boolean;
+  };
+}
+
+export interface PlatformConfigs {
+  desktop?: {
+    tauri?: {
+      enabled: boolean;
+      features: string[];
+    };
+  };
+  mobile?: {
+    rspeedy?: {
+      enabled: boolean;
+      features: string[];
+    };
+  };
+  metaverse?: {
+    webxr?: {
+      enabled: boolean;
+      features: string[];
+    };
+  };
 }

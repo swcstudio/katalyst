@@ -42,8 +42,47 @@ export const defaultKatalystConfig: KatalystConfig = {
     { name: 'svgr', type: 'bundler', enabled: true },
     { name: 'sails', type: 'framework', enabled: true },
     { name: 'tapable', type: 'framework', enabled: true },
-    { name: 'midscene', type: 'automation', enabled: true }
-  ]
+    { name: 'midscene', type: 'automation', enabled: true },
+    { name: 'tauri', type: 'framework', enabled: false },
+    { name: 'webxr', type: 'framework', enabled: false }
+  ],
+  unifiedAppBuilder: {
+    enabled: true,
+    platforms: ['web', 'desktop', 'mobile', 'metaverse'],
+    frameworks: {
+      desktop: 'tauri',
+      mobile: 'lynx',
+      metaverse: 'webxr'
+    },
+    sharedComponents: true,
+    rustBackend: true,
+    features: {
+      crossPlatformComponents: true,
+      sharedStateManagement: true,
+      unifiedBuildSystem: true,
+      hotReload: true
+    }
+  },
+  platformConfigs: {
+    desktop: { 
+      tauri: { 
+        enabled: true,
+        features: ['nativeMenus', 'systemTray', 'notifications', 'fileSystem']
+      }
+    },
+    mobile: { 
+      rspeedy: { 
+        enabled: true,
+        features: ['nativeNavigation', 'deviceAPIs', 'pushNotifications']
+      }
+    },
+    metaverse: { 
+      webxr: { 
+        enabled: true,
+        features: ['vr', 'ar', 'mixedReality', 'spatialTracking']
+      }
+    }
+  }
 };
 
 export function createKatalystConfig(variant: 'core' | 'remix' | 'nextjs'): KatalystConfig {
