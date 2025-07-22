@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "ES2022",
     "lib": ["dom", "dom.iterable", "es6"],
-    "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
@@ -23,10 +22,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./shared/src/*"],
-      "@katalyst/shared": ["./shared/src/index.ts"],
-      "@katalyst/core": ["./core/src/main.tsx"],
-      "@katalyst/remix": ["./remix/app/root.tsx"],
-      "@katalyst/nextjs": ["./nextjs/src/app/page.tsx"],
+      "@katalyst-react/shared": ["./shared/src/index.ts"],
+      "@katalyst-react/core": ["./core/src/main.tsx"],
+      "@katalyst-react/remix": ["./remix/app/root.tsx"],
+      "@katalyst-react/nextjs": ["./nextjs/src/app/page.tsx"],
       "@/components": ["./shared/src/components/*"],
       "@/hooks": ["./shared/src/hooks/*"],
       "@/utils": ["./shared/src/utils/*"],
@@ -40,8 +39,6 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx",
     ".next/types/**/*.ts"
   ],
   "exclude": [
@@ -50,18 +47,4 @@
     ".next",
     ".remix"
   ],
-  "references": [
-    {
-      "path": "./core"
-    },
-    {
-      "path": "./remix"
-    },
-    {
-      "path": "./nextjs"
-    },
-    {
-      "path": "./shared"
-    }
-  ]
 }
