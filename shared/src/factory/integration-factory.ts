@@ -26,6 +26,7 @@ import { TapableIntegration } from '../integrations/tapable.ts';
 import { MidsceneIntegration } from '../integrations/midscene.ts';
 import { TauriIntegration } from '../integrations/tauri.ts';
 import { WebXRIntegration } from '../integrations/webxr.ts';
+import { MultithreadingIntegration } from '../integrations/multithreading.ts';
 import { integrationConfigs } from '../config/integrations.config.ts';
 
 export class IntegrationFactory {
@@ -89,6 +90,8 @@ export class IntegrationFactory {
         return new TauriIntegration(config as any);
       case 'webxr':
         return new WebXRIntegration(config as any);
+      case 'multithreading':
+        return new MultithreadingIntegration(config as any);
       default:
         throw new Error(`Unknown integration: ${integration.name}`);
     }

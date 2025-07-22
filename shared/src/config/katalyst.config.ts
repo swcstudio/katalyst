@@ -44,7 +44,8 @@ export const defaultKatalystConfig: KatalystConfig = {
     { name: 'tapable', type: 'framework', enabled: true },
     { name: 'midscene', type: 'automation', enabled: true },
     { name: 'tauri', type: 'framework', enabled: false },
-    { name: 'webxr', type: 'framework', enabled: false }
+    { name: 'webxr', type: 'framework', enabled: false },
+    { name: 'multithreading', type: 'automation', enabled: true }
   ],
   unifiedAppBuilder: {
     enabled: true,

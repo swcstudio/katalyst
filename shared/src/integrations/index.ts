@@ -32,3 +32,4 @@ export * from './vitest.ts';
 export * from './clerk.ts';
 export * from './tauri.ts';
 export * from './webxr.ts';
+export * from './multithreading.ts';
