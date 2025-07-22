@@ -15,7 +15,7 @@ export declare class CrossbeamAtomicCell {
   load(): number
   store(value: number): void
   swap(value: number): number
-  compareExchange(current: number, new: number): boolean
+  compareExchange(current: number, newValue: number): boolean
   fetchAdd(value: number): number
   fetchSub(value: number): number
 }
