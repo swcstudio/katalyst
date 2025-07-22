@@ -83,7 +83,7 @@
     "vitest": "^2.1.4"
   },
   "engines": {
-    "node": ">=18.0.0",
+    "node": ">=22.15.0",
     "deno": ">=2.0.0"
   },
   "repository": {
