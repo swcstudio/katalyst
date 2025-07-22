@@ -182,6 +182,7 @@ Katalyst integrates 24 state-of-the-art technologies:
 23. **Sails** - MVC framework for Node.js
 24. **Tapable** - Plugin system for JavaScript
 
+<<<<<<< HEAD
 ## Multithreading Integration
 
 Katalyst's Rust-powered multithreading integration provides unprecedented performance for React applications, enabling true parallel processing for AR/VR/MR, computational workloads, and Mixed Reality experiences.
@@ -701,7 +702,6 @@ export default {
 - **Data Analytics** - Large dataset processing and aggregation
 
 The multithreading integration transforms Katalyst into a powerhouse for computationally intensive applications, enabling developers to harness the full potential of modern multi-core processors while maintaining React's declarative programming model.
-
 ## Documentation
 
 - [Getting Started Guide](./docs/getting-started.md)
