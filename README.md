@@ -1,11 +1,11 @@
-# Katalyst React 19 Framework
+# The Katalyst-React Framework
 
 <p align="center">
   <img src="https://via.placeholder.com/200x200?text=Katalyst" alt="Katalyst Logo" width="200" height="200">
 </p>
 
 <p align="center">
-  State-of-the-Art React 19 Framework with 24 Integrated Technologies
+  A State-of-the-Art Advanced HPC React Frontend Framework for creating unified Web, mobile, desktop & metaverse applications
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 Katalyst is a cutting-edge React 19 framework that combines the power of micro-frontends with 24 state-of-the-art technologies. Built on the Rust toolchain from SolidStack Ecosystem (SSE), Katalyst provides three specialized variants:
 
 - **Core**: Pure web application framework
-- **Remix**: Admin dashboard and data-heavy applications  
+- **Remix**: Admin dashboard and data-heavy applications
 - **Next.js**: Marketing websites and static content
 
 ## Features
@@ -112,7 +112,7 @@ npm run dev
 
 # Or start individual variants
 npm run dev:core     # Core web app on port 3000
-npm run dev:remix    # Remix admin on port 3001  
+npm run dev:remix    # Remix admin on port 3001
 npm run dev:nextjs   # Next.js marketing on port 3002
 ```
 
@@ -273,7 +273,7 @@ function ServerActionDemo() {
   const [processData, isPending] = useServerAction(async (formData: FormData) => {
     'use server';
     const { runParallelTask } = await import('@katalyst/multithreading/server');
-    
+
     const data = JSON.parse(formData.get('data') as string);
     return await runParallelTask('process_batch', data);
   });
@@ -281,7 +281,7 @@ function ServerActionDemo() {
   // Parallel server actions
   const [runParallelActions, isParallelPending] = useParallelServerAction([
     'data_processing',
-    'image_optimization', 
+    'image_optimization',
     'ai_analysis'
   ]);
 
@@ -414,10 +414,10 @@ function ARObjectRecognition() {
 import { useWasmMultithreading } from '@katalyst/multithreading/wasm';
 
 function WasmComputeEngine() {
-  const { 
-    loadWasmModule, 
-    runWasmParallel, 
-    createWasmWorkers 
+  const {
+    loadWasmModule,
+    runWasmParallel,
+    createWasmWorkers
   } = useWasmMultithreading();
 
   useEffect(() => {
@@ -503,7 +503,7 @@ function CortexOSInterface() {
 
 ```typescript
 function AutonomousProgramming() {
-  const { 
+  const {
     createSession,
     importContext,
     generateTrajectory,
