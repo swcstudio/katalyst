@@ -1,5 +1,5 @@
 {
-  "name": "katalyst",
+  "name": "katalyst-react",
   "$schema": "../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "katalyst",
@@ -10,7 +10,7 @@
         "parallel": true,
         "commands": [
           "nx build core",
-          "nx build remix", 
+          "nx build remix",
           "nx build nextjs"
         ]
       }
@@ -43,7 +43,7 @@
         "parallel": true,
         "commands": [
           "nx lint core",
-          "nx lint remix", 
+          "nx lint remix",
           "nx lint nextjs",
           "nx lint shared"
         ]

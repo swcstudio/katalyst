@@ -273,8 +273,11 @@ function ServerActionDemo() {
   // Single server action with multithreading
   const [processData, isPending] = useServerAction(async (formData: FormData) => {
     'use server';
+<<<<<<< HEAD
     const { runParallelTask } = await import('@katalyst-react/multithreading/server');
 
+||||||| parent of 036fc19 (docs: Complete multithreading documentation updates)
+    const { runParallelTask } = await import('@katalyst/multithreading/server');
     const data = JSON.parse(formData.get('data') as string);
     return await runParallelTask('process_batch', data);
   });
