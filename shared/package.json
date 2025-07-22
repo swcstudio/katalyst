@@ -1,7 +1,7 @@
 {
   "name": "@sse/katalyst-shared",
   "version": "0.1.0",
-  "description": "Shared utilities and configurations for Katalyst React 19 Framework",
+  "description": "Shared utilities and configurations for Katalyst-React Framework",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -1,7 +1,7 @@
 {
-  "name": "@katalyst/framework",
+  "name": "@katalyst-react/framework",
   "version": "0.1.0",
-  "description": "Katalyst React 19 Framework - State-of-the-Art micro-frontend platform with 24 integrated technologies",
+  "description": "Katalyst-React Framework - State-of-the-Art micro-frontend platform with 24 integrated technologies",
   "type": "module",
   "main": "./shared/src/index.ts",
   "exports": {

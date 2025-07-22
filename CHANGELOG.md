@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the Katalyst React 19 Framework will be documented in this file.
+All notable changes to the Katalyst-React Framework will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Initial Katalyst React 19 Framework implementation
+- Initial Katalyst-React Framework implementation
 - 24 State-of-the-Art technology integrations
 - Micro-frontend architecture with three variants (Core, Remix, Next.js)
 - Custom design system with Primitives, Ant Design, and Tailwind CSS 4.0
@@ -97,7 +97,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Version 0.1.0 - Foundation Release
 
-This is the initial release of the Katalyst React 19 Framework, establishing the foundation for a comprehensive micro-frontend platform with 24 State-of-the-Art technology integrations.
+This is the initial release of the Katalyst-React Framework, establishing the foundation for a comprehensive micro-frontend platform with 24 State-of-the-Art technology integrations.
 
 **Key Highlights:**
 - Complete framework architecture with three specialized variants

@@ -1,7 +1,7 @@
 {
   "name": "@sse/katalyst-nextjs",
   "version": "0.1.0",
-  "description": "Katalyst React 19 + Next.js Framework - High-performance full-stack framework with Next.js augmentation",
+  "description": "Katalyst-React + Next.js Framework - High-performance full-stack framework with Next.js augmentation",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

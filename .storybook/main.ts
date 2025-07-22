@@ -40,10 +40,10 @@ const config: StorybookConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': '../shared/src',
-      '@katalyst/shared': '../shared/src/index.ts',
-      '@katalyst/core': '../core/src/main.tsx',
-      '@katalyst/remix': '../remix/app/root.tsx',
-      '@katalyst/nextjs': '../nextjs/src/app/page.tsx',
+      '@katalyst-react/shared': '../shared/src/index.ts',
+      '@katalyst-react/core': '../core/src/main.tsx',
+      '@katalyst-react/remix': '../remix/app/root.tsx',
+      '@katalyst-react/nextjs': '../nextjs/src/app/page.tsx',
     };
     
     return config;

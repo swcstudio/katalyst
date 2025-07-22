@@ -8,7 +8,7 @@ export default function Marketing() {
     queryKey: ['marketing-data'],
     queryFn: () => ({
       hero: {
-        title: 'Katalyst React 19 Framework',
+        title: 'Katalyst-React Framework',
         subtitle: 'Build lightning-fast web applications with our State-of-the-Art React 19 framework',
         cta: 'Get Started Today',
       },

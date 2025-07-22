@@ -11,7 +11,7 @@ export function Hero({ data }: HeroProps) {
     <section className="bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 text-white py-20">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-5xl md:text-6xl font-bold mb-6">
-          {data?.title || 'Katalyst React 19 Framework'}
+          {data?.title || 'Katalyst-React Framework'}
         </h1>
         <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
           {data?.subtitle || 'Build lightning-fast web applications with our State-of-the-Art React 19 framework'}

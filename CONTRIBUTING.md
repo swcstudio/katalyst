@@ -1,4 +1,4 @@
-# Contributing to Katalyst React 19 Framework
+# Contributing to Katalyst-React Framework
 
 Thank you for your interest in contributing to Katalyst! This document provides guidelines and information for contributors.
 

@@ -90,25 +90,25 @@ export class EsmxIntegration {
       },
       scopes: {
         '/katalyst/core/': {
-          '@katalyst/shared': '/katalyst/shared/src/index.ts',
-          '@katalyst/components': '/katalyst/shared/src/components/index.ts',
-          '@katalyst/hooks': '/katalyst/shared/src/hooks/index.ts',
-          '@katalyst/stores': '/katalyst/shared/src/stores/index.ts',
-          '@katalyst/utils': '/katalyst/shared/src/utils/index.ts'
+          '@katalyst-react/shared': '/katalyst/shared/src/index.ts',
+          '@katalyst-react/components': '/katalyst/shared/src/components/index.ts',
+          '@katalyst-react/hooks': '/katalyst/shared/src/hooks/index.ts',
+          '@katalyst-react/stores': '/katalyst/shared/src/stores/index.ts',
+          '@katalyst-react/utils': '/katalyst/shared/src/utils/index.ts'
         },
         '/katalyst/remix/': {
-          '@katalyst/shared': '/katalyst/shared/src/index.ts',
-          '@katalyst/components': '/katalyst/shared/src/components/index.ts',
-          '@katalyst/hooks': '/katalyst/shared/src/hooks/index.ts',
-          '@katalyst/stores': '/katalyst/shared/src/stores/index.ts',
-          '@katalyst/utils': '/katalyst/shared/src/utils/index.ts'
+          '@katalyst-react/shared': '/katalyst/shared/src/index.ts',
+          '@katalyst-react/components': '/katalyst/shared/src/components/index.ts',
+          '@katalyst-react/hooks': '/katalyst/shared/src/hooks/index.ts',
+          '@katalyst-react/stores': '/katalyst/shared/src/stores/index.ts',
+          '@katalyst-react/utils': '/katalyst/shared/src/utils/index.ts'
         },
         '/katalyst/nextjs/': {
-          '@katalyst/shared': '/katalyst/shared/src/index.ts',
-          '@katalyst/components': '/katalyst/shared/src/components/index.ts',
-          '@katalyst/hooks': '/katalyst/shared/src/hooks/index.ts',
-          '@katalyst/stores': '/katalyst/shared/src/stores/index.ts',
-          '@katalyst/utils': '/katalyst/shared/src/utils/index.ts'
+          '@katalyst-react/shared': '/katalyst/shared/src/index.ts',
+          '@katalyst-react/components': '/katalyst/shared/src/components/index.ts',
+          '@katalyst-react/hooks': '/katalyst/shared/src/hooks/index.ts',
+          '@katalyst-react/stores': '/katalyst/shared/src/stores/index.ts',
+          '@katalyst-react/utils': '/katalyst/shared/src/utils/index.ts'
         }
       }
     };
@@ -265,8 +265,8 @@ export class EsmxIntegration {
           {
             name: 'katalyst-resolver',
             setup: (build: any) => {
-              build.onResolve({ filter: /^@katalyst\// }, (args: any) => {
-                const path = args.path.replace('@katalyst/', './katalyst/shared/src/');
+              build.onResolve({ filter: /^@katalyst-react\// }, (args: any) => {
+                const path = args.path.replace('@katalyst-react/', './katalyst/shared/src/');
                 return { path, namespace: 'katalyst' };
               });
             }
