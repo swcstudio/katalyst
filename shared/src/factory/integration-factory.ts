@@ -24,6 +24,7 @@ import { SvgrIntegration } from '../integrations/svgr.ts';
 import { SailsIntegration } from '../integrations/sails.ts';
 import { TapableIntegration } from '../integrations/tapable.ts';
 import { MidsceneIntegration } from '../integrations/midscene.ts';
+import { MultithreadingIntegration } from '../integrations/multithreading.ts';
 import { integrationConfigs } from '../config/integrations.config.ts';
 
 export class IntegrationFactory {
@@ -83,6 +84,8 @@ export class IntegrationFactory {
         return new TapableIntegration(config as any);
       case 'midscene':
         return new MidsceneIntegration(config as any);
+      case 'multithreading':
+        return new MultithreadingIntegration(config as any);
       default:
         throw new Error(`Unknown integration: ${integration.name}`);
     }

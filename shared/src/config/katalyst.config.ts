@@ -42,7 +42,8 @@ export const defaultKatalystConfig: KatalystConfig = {
     { name: 'svgr', type: 'bundler', enabled: true },
     { name: 'sails', type: 'framework', enabled: true },
     { name: 'tapable', type: 'framework', enabled: true },
-    { name: 'midscene', type: 'automation', enabled: true }
+    { name: 'midscene', type: 'automation', enabled: true },
+    { name: 'multithreading', type: 'automation', enabled: true }
   ]
 };
 

@@ -25,13 +25,14 @@ export class RSpackIntegration {
         clean: true
       },
       resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.node'],
         alias: {
           '@': './src',
           '@/components': './src/components',
           '@/hooks': './src/hooks',
           '@/utils': './src/utils',
-          '@/stores': './src/stores'
+          '@/stores': './src/stores',
+          '@katalyst/multithreading': './shared/src/native'
         }
       },
       module: {
@@ -64,6 +65,10 @@ export class RSpackIntegration {
           {
             test: /\.(png|jpg|jpeg|gif|svg)$/,
             type: 'asset/resource'
+          },
+          {
+            test: /\.node$/,
+            use: 'node-loader'
           }
         ]
       },

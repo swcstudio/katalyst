@@ -30,3 +30,4 @@ export * from './tailwind.ts';
 export * from './playwright.ts';
 export * from './vitest.ts';
 export * from './clerk.ts';
+export * from './multithreading.ts';

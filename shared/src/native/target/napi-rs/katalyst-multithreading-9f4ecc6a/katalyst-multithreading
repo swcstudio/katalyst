@@ -1,0 +1,52 @@
+{"kind": "struct", "name": "CrossbeamChannel", "js_doc": "", "def": "", "original_name": "CrossbeamChannel"}
+{"kind": "impl", "name": "CrossbeamChannel", "js_doc": "", "def": " constructor(bounded?: number | undefined | null)\\n send(message: string): boolean\\n receive(): string | null\\n isEmpty(): boolean\\n len(): number"}
+{"kind": "struct", "name": "CrossbeamAtomicCell", "js_doc": "", "def": "", "original_name": "CrossbeamAtomicCell"}
+{"kind": "impl", "name": "CrossbeamAtomicCell", "js_doc": "", "def": " constructor(initialValue: number)\\n load(): number\\n store(value: number): void\\n swap(value: number): number\\n compareExchange(current: number, new: number): boolean\\n fetchAdd(value: number): number\\n fetchSub(value: number): number"}
+{"kind": "struct", "name": "CrossbeamArrayQueue", "js_doc": "", "def": "", "original_name": "CrossbeamArrayQueue"}
+{"kind": "impl", "name": "CrossbeamArrayQueue", "js_doc": "", "def": " constructor(capacity: number)\\n push(item: string): boolean\\n pop(): string | null\\n isEmpty(): boolean\\n isFull(): boolean\\n len(): number\\n capacity(): number"}
+{"kind": "struct", "name": "CrossbeamSegQueue", "js_doc": "", "def": "", "original_name": "CrossbeamSegQueue"}
+{"kind": "impl", "name": "CrossbeamSegQueue", "js_doc": "", "def": " constructor()\\n push(item: string): void\\n pop(): string | null\\n isEmpty(): boolean\\n len(): number"}
+{"kind": "interface", "name": "RayonConfig", "js_doc": "", "def": "numThreads?: number\\nthreadName?: string\\nstackSize?: number\\npanicHandler?: boolean", "original_name": "RayonConfig"}
+{"kind": "struct", "name": "RayonThreadPool", "js_doc": "", "def": "", "original_name": "RayonThreadPool"}
+{"kind": "impl", "name": "RayonThreadPool", "js_doc": "", "def": " constructor(config?: RayonConfig | undefined | null)\\n currentNumThreads(): number"}
+{"kind": "fn", "name": "parallelMap", "js_doc": "", "def": "function parallelMap(data: Array<number>, operation: string, pool?: RayonThreadPool | undefined | null): Promise<unknown>"}
+{"kind": "fn", "name": "parallelReduce", "js_doc": "", "def": "function parallelReduce(data: Array<number>, operation: string, initial?: number | undefined | null, pool?: RayonThreadPool | undefined | null): Promise<unknown>"}
+{"kind": "fn", "name": "parallelFilter", "js_doc": "", "def": "function parallelFilter(data: Array<number>, operation: string, threshold?: number | undefined | null, pool?: RayonThreadPool | undefined | null): Promise<unknown>"}
+{"kind": "fn", "name": "parallelSort", "js_doc": "", "def": "function parallelSort(data: Array<number>, descending?: boolean | undefined | null, pool?: RayonThreadPool | undefined | null): Promise<unknown>"}
+{"kind": "fn", "name": "parallelChunkProcess", "js_doc": "", "def": "function parallelChunkProcess(data: Array<number>, chunkSize: number, operation: string, pool?: RayonThreadPool | undefined | null): Promise<unknown>"}
+{"kind": "fn", "name": "getRayonGlobalThreadCount", "js_doc": "", "def": "function getRayonGlobalThreadCount(): number"}
+{"kind": "interface", "name": "TokioRuntimeConfig", "js_doc": "", "def": "workerThreads?: number\\nmaxBlockingThreads?: number\\nthreadName?: string\\nthreadStackSize?: number\\nenableIo?: boolean\\nenableTime?: boolean", "original_name": "TokioRuntimeConfig"}
+{"kind": "struct", "name": "TokioRuntime", "js_doc": "", "def": "", "original_name": "TokioRuntime"}
+{"kind": "impl", "name": "TokioRuntime", "js_doc": "", "def": " constructor(config?: TokioRuntimeConfig | undefined | null)"}
+{"kind": "struct", "name": "TokioMpscChannel", "js_doc": "", "def": "", "original_name": "TokioMpscChannel"}
+{"kind": "impl", "name": "TokioMpscChannel", "js_doc": "", "def": " constructor()"}
+{"kind": "struct", "name": "TokioBroadcastChannel", "js_doc": "", "def": "", "original_name": "TokioBroadcastChannel"}
+{"kind": "impl", "name": "TokioBroadcastChannel", "js_doc": "", "def": " constructor(capacity: number)\\n send(message: string): number\\n receiverCount(): number"}
+{"kind": "fn", "name": "tokioDelay", "js_doc": "", "def": "function tokioDelay(durationMs: number, message: string): Promise<unknown>"}
+{"kind": "fn", "name": "tokioTimeout", "js_doc": "", "def": "function tokioTimeout(durationMs: number, timeoutMs: number, operation: string): Promise<unknown>"}
+{"kind": "fn", "name": "tokioParallelTasks", "js_doc": "", "def": "function tokioParallelTasks(tasks: Array<string>, delayMs: number): Promise<unknown>"}
+{"kind": "struct", "name": "TokioTimer", "js_doc": "", "def": "", "original_name": "TokioTimer"}
+{"kind": "impl", "name": "TokioTimer", "js_doc": "", "def": " constructor()\\n elapsedMs(): number\\n reset(): void"}
+{"kind": "fn", "name": "getTokioRuntimeMetrics", "js_doc": "", "def": "function getTokioRuntimeMetrics(): string"}
+{"kind": "fn", "name": "getMultithreadingInfo", "js_doc": "", "def": "function getMultithreadingInfo(): string"}
+{"kind": "fn", "name": "initializeMultithreading", "js_doc": "", "def": "function initializeMultithreading(): string"}
+{"kind": "fn", "name": "getSystemInfo", "js_doc": "", "def": "function getSystemInfo(): SystemInfo"}
+{"kind": "interface", "name": "SystemInfo", "js_doc": "", "def": "cpuCores: number\\nrayonThreads: number\\ntokioAvailable: boolean\\ncrossbeamAvailable: boolean\\nversion: string", "original_name": "SystemInfo"}
+{"kind": "struct", "name": "MultithreadingManager", "js_doc": "", "def": "", "original_name": "MultithreadingManager"}
+{"kind": "impl", "name": "MultithreadingManager", "js_doc": "", "def": " constructor()\\n initializeRayon(config?: RayonConfig | undefined | null): void\\n initializeTokio(config?: TokioRuntimeConfig | undefined | null): void\\n getRayonPool(): boolean\\n getTokioRuntime(): boolean\\n isRayonInitialized(): boolean\\n isTokioInitialized(): boolean\\n cleanup(): void"}
+{"kind": "fn", "name": "createCrossbeamChannel", "js_doc": "", "def": "function createCrossbeamChannel(bounded?: number | undefined | null): CrossbeamChannel"}
+{"kind": "fn", "name": "createCrossbeamAtomicCell", "js_doc": "", "def": "function createCrossbeamAtomicCell(initialValue: number): CrossbeamAtomicCell"}
+{"kind": "fn", "name": "createCrossbeamArrayQueue", "js_doc": "", "def": "function createCrossbeamArrayQueue(capacity: number): CrossbeamArrayQueue"}
+{"kind": "fn", "name": "createCrossbeamSegQueue", "js_doc": "", "def": "function createCrossbeamSegQueue(): CrossbeamSegQueue"}
+{"kind": "fn", "name": "createRayonThreadPool", "js_doc": "", "def": "function createRayonThreadPool(config?: RayonConfig | undefined | null): RayonThreadPool"}
+{"kind": "fn", "name": "createTokioRuntime", "js_doc": "", "def": "function createTokioRuntime(config?: TokioRuntimeConfig | undefined | null): TokioRuntime"}
+{"kind": "fn", "name": "createTokioMpscChannel", "js_doc": "", "def": "function createTokioMpscChannel(): TokioMpscChannel"}
+{"kind": "fn", "name": "createTokioBroadcastChannel", "js_doc": "", "def": "function createTokioBroadcastChannel(capacity: number): TokioBroadcastChannel"}
+{"kind": "fn", "name": "createTokioTimer", "js_doc": "", "def": "function createTokioTimer(): TokioTimer"}
+{"kind": "fn", "name": "benchmarkParallelOperations", "js_doc": "", "def": "function benchmarkParallelOperations(dataSize: number, operation: string): Promise<unknown>"}
+{"kind": "interface", "name": "BenchmarkResult", "js_doc": "", "def": "operation: string\\ndataSize: number\\nresult: number\\ndurationMs: number\\nthroughput: number", "original_name": "BenchmarkResult"}
+{"kind": "fn", "name": "stressTestConcurrency", "js_doc": "", "def": "function stressTestConcurrency(numTasks: number, taskDurationMs: number, callback: ((err: Error | null, arg: StressTestResult) => any)): void"}
+{"kind": "interface", "name": "StressTestResult", "js_doc": "", "def": "taskId: number\\ndurationMs: number\\nthreadId: string\\nstatus: string", "original_name": "StressTestResult"}
+{"kind": "fn", "name": "getPerformanceMetrics", "js_doc": "", "def": "function getPerformanceMetrics(): PerformanceMetrics"}
+{"kind": "interface", "name": "PerformanceMetrics", "js_doc": "", "def": "cpuCores: number\\nrayonThreads: number\\nmemoryUsageMb: number\\nuptimeMs: number\\nactiveTasks: number", "original_name": "PerformanceMetrics"}
+{"kind": "fn", "name": "shutdownMultithreading", "js_doc": "", "def": "function shutdownMultithreading(): string"}
