@@ -1,0 +1,29 @@
+[workspace]
+members = [
+  "shared/src/native",
+  "apps/desktop",
+  "apps/mobile"
+]
+
+[workspace.dependencies]
+tauri = { version = "2.0", features = ["api-all"] }
+tauri-build = "2.0"
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.0", features = ["full"] }
+crossbeam = "0.8"
+rayon = "1.8"
+wasm-bindgen = "0.2"
+wasmer = "4.0"
+napi = "2.16"
+napi-derive = "2.16"
+napi-build = "2.1"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["SWC Studio"]
+license = "MIT"
+repository = "https://github.com/swcstudio/katalyst"
+
+[workspace.metadata.tauri]
+bundle = { identifier = "com.katalyst.app" }

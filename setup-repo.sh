@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Katalyst Repository Setup Script
-# This script sets up the development environment for the Katalyst React 19 Framework
+# This script sets up the development environment for the Katalyst-React Framework
 
 set -e
 
@@ -202,7 +202,7 @@ run_initial_checks() {
 # Display helpful information
 display_info() {
     echo ""
-    echo "🚀 Katalyst React 19 Framework Setup Complete!"
+    echo "🚀 Katalyst-React Framework Setup Complete!"
     echo ""
     echo "📁 Repository Structure:"
     echo "  ├── core/      - Pure React web application"

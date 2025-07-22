@@ -1,5 +1,5 @@
 {
-  "name": "@katalyst/framework",
+  "name": "@katalyst-react/framework",
   "version": "0.1.0",
   "exports": {
     ".": "./shared/src/index.ts",
@@ -32,10 +32,10 @@
   "imports": {
     "@/": "./shared/src/",
     "@shared/": "./shared/src/",
-    "@katalyst/shared": "./shared/src/index.ts",
-    "@katalyst/core": "./core/src/main.tsx",
-    "@katalyst/remix": "./remix/app/root.tsx",
-    "@katalyst/nextjs": "./nextjs/src/app/page.tsx",
+    "@katalyst-react/shared": "./shared/src/index.ts",
+    "@katalyst-react/core": "./core/src/main.tsx",
+    "@katalyst-react/remix": "./remix/app/root.tsx",
+    "@katalyst-react/nextjs": "./nextjs/src/app/page.tsx",
     "react": "npm:react@^19.0.0",
     "react-dom": "npm:react-dom@^19.0.0",
     "@tanstack/react-router": "npm:@tanstack/react-router@^1.120.17",

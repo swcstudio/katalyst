@@ -1,6 +1,6 @@
 # Katalyst Repository Management Guide
 
-This guide provides comprehensive information for managing the Katalyst React 19 Framework repository.
+This guide provides comprehensive information for managing the Katalyst-React Framework repository.
 
 ## Repository Information
 

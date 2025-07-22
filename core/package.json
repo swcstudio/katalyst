@@ -1,7 +1,7 @@
 {
   "name": "@sse/katalyst-core",
   "version": "0.1.0",
-  "description": "Katalyst React 19 Core Framework - High-performance full-stack framework combining React 19 with Rust toolchain",
+  "description": "Katalyst-React Core Framework - High-performance full-stack framework combining React 19 with Rust toolchain",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

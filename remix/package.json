@@ -1,7 +1,7 @@
 {
   "name": "@sse/katalyst-remix",
   "version": "0.1.0",
-  "description": "Katalyst React 19 + Remix Framework - High-performance full-stack framework with Remix augmentation",
+  "description": "Katalyst-React + Remix Framework - High-performance full-stack framework with Remix augmentation",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

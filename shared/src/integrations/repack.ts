@@ -144,11 +144,11 @@ export class RePackIntegration {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         alias: {
           'react-native$': 'react-native-web',
-          '@katalyst/shared': '../shared/src/index.ts',
-          '@katalyst/components': '../shared/src/components/index.ts',
-          '@katalyst/hooks': '../shared/src/hooks/index.ts',
-          '@katalyst/stores': '../shared/src/stores/index.ts',
-          '@katalyst/utils': '../shared/src/utils/index.ts'
+          '@katalyst-react/shared': '../shared/src/index.ts',
+          '@katalyst-react/components': '../shared/src/components/index.ts',
+          '@katalyst-react/hooks': '../shared/src/hooks/index.ts',
+          '@katalyst-react/stores': '../shared/src/stores/index.ts',
+          '@katalyst-react/utils': '../shared/src/utils/index.ts'
         },
         fallback: {
           crypto: false,
@@ -271,11 +271,11 @@ export class RePackIntegration {
         },
         resolver: {
           alias: {
-            '@katalyst/shared': '../shared/src/index.ts',
-            '@katalyst/components': '../shared/src/components/index.ts',
-            '@katalyst/hooks': '../shared/src/hooks/index.ts',
-            '@katalyst/stores': '../shared/src/stores/index.ts',
-            '@katalyst/utils': '../shared/src/utils/index.ts'
+            '@katalyst-react/shared': '../shared/src/index.ts',
+            '@katalyst-react/components': '../shared/src/components/index.ts',
+            '@katalyst-react/hooks': '../shared/src/hooks/index.ts',
+            '@katalyst-react/stores': '../shared/src/stores/index.ts',
+            '@katalyst-react/utils': '../shared/src/utils/index.ts'
           },
           sourceExts: ['js', 'jsx', 'ts', 'tsx', 'json'],
           assetExts: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'ttf', 'otf', 'woff', 'woff2']
