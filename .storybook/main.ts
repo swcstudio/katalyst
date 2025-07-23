@@ -1,4 +1,4 @@
-import type { StorybookConfig } from '@storybook/react-rspack';
+import type { StorybookConfig } from '@storybook/react-webpack5';
 
 const config: StorybookConfig = {
   stories: [
@@ -17,7 +17,7 @@ const config: StorybookConfig = {
     '@storybook/addon-backgrounds',
   ],
   framework: {
-    name: '@storybook/react-rspack',
+    name: '@storybook/react-webpack5',
     options: {},
   },
   typescript: {
@@ -35,7 +35,7 @@ const config: StorybookConfig = {
   features: {
     experimentalRSC: false,
   },
-  rspackFinal: async (config) => {
+  webpackFinal: async (config) => {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
