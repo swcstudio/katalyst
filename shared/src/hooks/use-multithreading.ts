@@ -57,7 +57,7 @@ export function useMultithreading(config: MultithreadingHookConfig = {}) {
     setState(prev => ({ ...prev, isLoading: true, error: null }));
 
     try {
-      const { default: multithreading } = await import('../../native/index.js');
+      const multithreading = await import('../native/index.js');
       nativeModule.current = multithreading;
 
       const systemInfo = multithreading.getSystemInfo();

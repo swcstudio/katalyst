@@ -7,7 +7,6 @@ import { ParetoIntegration } from '../integrations/pareto.ts';
 import { RePackIntegration } from '../integrations/repack.ts';
 import { UmiIntegration } from '../integrations/umi.ts';
 import { RspeedyIntegration } from '../integrations/rspeedy.ts';
-import { ElectronIntegration } from '../integrations/electron.ts';
 import { NxIntegration } from '../integrations/nx.ts';
 import { ArcoIntegration } from '../integrations/arco.ts';
 import { CosmosIntegration } from '../integrations/cosmos.ts';
@@ -52,8 +51,6 @@ export class IntegrationFactory {
         return new UmiIntegration(config as any);
       case 'rspeedy':
         return new RspeedyIntegration(config as any);
-      case 'electron':
-        return new ElectronIntegration(config as any);
       case 'nx':
         return new NxIntegration(config as any);
       case 'arco':

@@ -100,17 +100,13 @@ const ServerActionsDemo: React.FC = () => {
   const [isPending, startTransition] = useTransition();
   const [actionData, setActionData] = useState<string>('test data');
   
-  const { execute: executeAction, result, loading, error } = useServerAction('processData', {
+  const { execute: executeAction, data: result, isLoading: loading, error } = useServerAction('processData', {
     timeout: 5000,
     retries: 3,
     priority: 'normal'
   });
 
-  const { execute: executeParallel, results, loading: parallelLoading } = useParallelServerAction([
-    { action: 'processData', data: 'data1' },
-    { action: 'processData', data: 'data2' },
-    { action: 'processData', data: 'data3' }
-  ]);
+  const { executeParallel, data: results, isLoading: parallelLoading } = useParallelServerAction('processData');
 
   const handleSingleAction = useCallback(() => {
     startTransition(() => {
@@ -120,7 +116,11 @@ const ServerActionsDemo: React.FC = () => {
 
   const handleParallelActions = useCallback(() => {
     startTransition(() => {
-      executeParallel();
+      executeParallel([
+        { action: 'processData', data: 'data1' },
+        { action: 'processData', data: 'data2' },
+        { action: 'processData', data: 'data3' }
+      ]);
     });
   }, [executeParallel]);
 
@@ -147,7 +147,7 @@ const ServerActionsDemo: React.FC = () => {
         <p>Error: {error || 'None'}</p>
         
         <h4>Parallel Actions Results:</h4>
-        <p>Results: {results.length > 0 ? JSON.stringify(results) : 'No results yet'}</p>
+        <p>Results: {results && results.length > 0 ? JSON.stringify(results) : 'No results yet'}</p>
       </div>
     </div>
   );
@@ -171,13 +171,15 @@ const HydrationDemo: React.FC = () => {
     timeout: 10000
   });
 
-  const { data: streamingData, isLoading: streamingLoading } = useStreamingHydration(
-    async function* () {
+  const { data: streamingData, isHydrating: streamingLoading } = useStreamingHydration(
+    'demo-streaming-data',
+    (async function* () {
       for (let i = 0; i < 10; i++) {
         yield { chunk: i, data: `Chunk ${i}` };
         await new Promise(resolve => setTimeout(resolve, 500));
       }
-    }
+    })(),
+    { chunkSize: 1000, timeout: 10000 }
   );
 
   return (
@@ -203,9 +205,9 @@ const HydrationDemo: React.FC = () => {
         
         <h4>Streaming Data:</h4>
         <p>Loading: {streamingLoading ? 'Yes' : 'No'}</p>
-        <p>Chunks: {streamingData.length}</p>
+        <p>Chunks: {streamingData?.length || 0}</p>
         <div className="streaming-chunks">
-          {streamingData.map((chunk, index) => (
+          {streamingData?.map((chunk: any, index: number) => (
             <div key={index} className="chunk">
               Chunk {chunk.chunk}: {chunk.data}
             </div>

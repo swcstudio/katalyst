@@ -55,7 +55,7 @@ export function useHydration<T>(
       if (config.enableStreaming && Array.isArray(serverData)) {
         await hydrateWithStreaming(serverData);
       } else {
-        await hydrateComplete(serverData);
+        await hydrateComplete(serverData!);
       }
 
       setState(prev => ({
@@ -82,7 +82,7 @@ export function useHydration<T>(
     if (!Array.isArray(data)) return;
 
     const chunkSize = config.chunkSize || Math.ceil(data.length / 4);
-    const chunks = [];
+    const chunks: any[] = [];
 
     for (let i = 0; i < data.length; i += chunkSize) {
       if (abortControllerRef.current?.signal.aborted) {

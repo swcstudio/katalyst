@@ -189,7 +189,8 @@ export interface TokioRuntimeConfig {
 export class MultithreadingIntegration implements KatalystIntegration {
   name = 'multithreading' as const;
   type = 'automation' as const;
-  private config: MultithreadingConfig;
+  enabled = true;
+  config: MultithreadingConfig & Record<string, unknown>;
   private nativeModule: any = null;
   private manager: any = null;
   private initialized = false;
@@ -198,7 +199,7 @@ export class MultithreadingIntegration implements KatalystIntegration {
     this.config = this.mergeWithDefaults(config);
   }
 
-  private mergeWithDefaults(config: MultithreadingConfig): MultithreadingConfig {
+  private mergeWithDefaults(config: MultithreadingConfig): MultithreadingConfig & Record<string, unknown> {
     return {
       enabled: true,
       rayon: {
@@ -766,14 +767,14 @@ declare module '@katalyst/multithreading' {
   }
 }
 
-export { useMultithreading, useParallelComputation, useAsyncComputation } from '../hooks/use-multithreading.ts';
-export { useServerAction, useParallelServerAction, createServerAction } from '../hooks/use-server-actions.ts';
-export { useHydration, useStreamingHydration, useSuspenseHydration } from '../hooks/use-hydration.ts';
-export { MultithreadingProvider, useMultithreadingContext, withMultithreading } from '../components/MultithreadingProvider.tsx';
+export { useMultithreading, useParallelComputation, useAsyncComputation } from '../hooks/use-multithreading';
+export { useServerAction, useParallelServerAction, createServerAction } from '../hooks/use-server-actions';
+export { useHydration, useStreamingHydration, useSuspenseHydration } from '../hooks/use-hydration';
+export { MultithreadingProvider, useMultithreadingContext, withMultithreading } from '../components/MultithreadingProvider';
 export { 
   useMultithreadingStore, 
   useTaskQueue, 
   useThreadPools, 
   useMultithreadingMetrics, 
   useChannelCommunication 
-} from '../stores/multithreading-store.ts';
+} from '../stores/multithreading-store';

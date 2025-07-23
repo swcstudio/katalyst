@@ -36,7 +36,7 @@ export function MultithreadingProvider({
     store.setError(null);
 
     try {
-      const { default: multithreading } = await import('../../native/index.js');
+      const multithreading = await import('../native/index.js');
       
       const initResult = multithreading.initializeMultithreading();
       console.log('Multithreading initialization:', initResult);
