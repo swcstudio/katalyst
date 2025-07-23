@@ -1,8 +1,6 @@
 [workspace]
 members = [
-  "shared/src/native",
-  "apps/desktop",
-  "apps/mobile"
+  "shared/src/native"
 ]
 
 [workspace.dependencies]
