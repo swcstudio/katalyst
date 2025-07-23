@@ -106,5 +106,31 @@
         "targetName": "e2e"
       }
     }
-  ]
+  ],
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "build:web",
+          "build:desktop", 
+          "build:mobile",
+          "build:linux",
+          "build:mac",
+          "build:windows",
+          "build:apple-vr",
+          "build:metaverse",
+          "build-native",
+          "lint",
+          "check-types",
+          "test",
+          "test:rust",
+          "test:deno"
+        ],
+        "parallel": 8,
+        "useDaemonProcess": true
+      }
+    }
+  }
 }
