@@ -1,0 +1,134 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalDependencies": [".env*", "tsconfig.json", "nx.json"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build", "build-native"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", "build/**", ".next/**", ".remix/**"]
+    },
+    "build:web": {
+      "dependsOn": ["^build", "build-native"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", "build/**", ".next/**"],
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*", "RSPACK_*"]
+    },
+    "build:desktop": {
+      "dependsOn": ["^build", "build-native", "build:web"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "src-tauri/**/*"],
+      "outputs": ["src-tauri/target/**", "dist/desktop/**"],
+      "env": ["TAURI_*", "RUST_*"]
+    },
+    "build:mobile": {
+      "dependsOn": ["^build", "build-native", "build:web"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "src-tauri/**/*"],
+      "outputs": ["src-tauri/gen/android/**", "src-tauri/gen/apple/**", "dist/mobile/**"],
+      "env": ["TAURI_*", "ANDROID_*", "IOS_*"]
+    },
+    "build:linux": {
+      "dependsOn": ["^build", "build-native", "build:desktop"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "src-tauri/**/*"],
+      "outputs": ["src-tauri/target/release/bundle/appimage/**", "dist/linux/**"],
+      "env": ["TAURI_*", "RUST_*"]
+    },
+    "build:mac": {
+      "dependsOn": ["^build", "build-native", "build:desktop"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "src-tauri/**/*"],
+      "outputs": ["src-tauri/target/release/bundle/macos/**", "dist/mac/**"],
+      "env": ["TAURI_*", "RUST_*", "APPLE_*"]
+    },
+    "build:windows": {
+      "dependsOn": ["^build", "build-native", "build:desktop"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "src-tauri/**/*"],
+      "outputs": ["src-tauri/target/release/bundle/msi/**", "dist/windows/**"],
+      "env": ["TAURI_*", "RUST_*"]
+    },
+    "build:apple-vr": {
+      "dependsOn": ["^build", "build-native", "build:web"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "shared/src/integrations/webxr.ts"],
+      "outputs": ["dist/apple-vr/**", "dist/webxr/**"],
+      "env": ["WEBXR_*", "APPLE_*", "VISIONOS_*"]
+    },
+    "build:metaverse": {
+      "dependsOn": ["^build", "build-native", "build:web"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "shared/src/integrations/webxr.ts"],
+      "outputs": ["dist/metaverse/**", "dist/webxr/**"],
+      "env": ["WEBXR_*", "META_*", "WASM_*"]
+    },
+    "build-native": {
+      "inputs": ["shared/src/native/**/*", "shared/src/native/Cargo.toml"],
+      "outputs": ["shared/src/native/target/**", "shared/src/native/index.node"],
+      "cache": true,
+      "env": ["RUST_*", "CARGO_*"]
+    },
+    "build:all-platforms": {
+      "dependsOn": [
+        "build:web",
+        "build:desktop", 
+        "build:mobile",
+        "build:linux",
+        "build:mac", 
+        "build:windows",
+        "build:apple-vr",
+        "build:metaverse"
+      ]
+    },
+    "lint": {
+      "dependsOn": ["^lint"],
+      "inputs": ["$TURBO_DEFAULT$", "biome.json", ".eslintrc*"],
+      "outputs": []
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"],
+      "inputs": ["$TURBO_DEFAULT$", "tsconfig*.json"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^test", "build-native"],
+      "inputs": ["$TURBO_DEFAULT$", "deno.test.config.ts"],
+      "outputs": ["coverage/**"],
+      "env": ["NODE_ENV"]
+    },
+    "test:rust": {
+      "dependsOn": ["build-native"],
+      "inputs": ["shared/src/native/**/*"],
+      "outputs": ["shared/src/native/target/debug/**"],
+      "env": ["RUST_*", "CARGO_*"]
+    },
+    "test:deno": {
+      "inputs": ["$TURBO_DEFAULT$", "deno.test.config.ts"],
+      "outputs": ["coverage/**"],
+      "env": ["DENO_*"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "PORT", "HOST"]
+    },
+    "dev:web": {
+      "dependsOn": ["build-native"],
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "PORT", "HOST", "NEXT_PUBLIC_*", "RSPACK_*"]
+    },
+    "dev:desktop": {
+      "dependsOn": ["build-native"],
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "TAURI_*", "RUST_*"]
+    },
+    "dev:mobile": {
+      "dependsOn": ["build-native"],
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "TAURI_*", "ANDROID_*", "IOS_*"]
+    }
+  },
+  "globalEnv": [
+    "NODE_ENV",
+    "CI",
+    "VERCEL",
+    "NETLIFY"
+  ]
+}

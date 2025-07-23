@@ -33,7 +33,7 @@ const config: StorybookConfig = {
   },
   staticDirs: ['../public'],
   features: {
-    buildStoriesJson: true,
+    experimentalRSC: false,
   },
   webpackFinal: async (config) => {
     config.resolve = config.resolve || {};

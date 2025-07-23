@@ -7,7 +7,6 @@ import { ParetoIntegration } from '../integrations/pareto.ts';
 import { RePackIntegration } from '../integrations/repack.ts';
 import { UmiIntegration } from '../integrations/umi.ts';
 import { RspeedyIntegration } from '../integrations/rspeedy.ts';
-import { ElectronIntegration } from '../integrations/electron.ts';
 import { NxIntegration } from '../integrations/nx.ts';
 import { ArcoIntegration } from '../integrations/arco.ts';
 import { CosmosIntegration } from '../integrations/cosmos.ts';
@@ -26,6 +25,7 @@ import { TapableIntegration } from '../integrations/tapable.ts';
 import { MidsceneIntegration } from '../integrations/midscene.ts';
 import { TauriIntegration } from '../integrations/tauri.ts';
 import { WebXRIntegration } from '../integrations/webxr.ts';
+import { MultithreadingIntegration } from '../integrations/multithreading.ts';
 import { integrationConfigs } from '../config/integrations.config.ts';
 
 export class IntegrationFactory {
@@ -51,8 +51,6 @@ export class IntegrationFactory {
         return new UmiIntegration(config as any);
       case 'rspeedy':
         return new RspeedyIntegration(config as any);
-      case 'electron':
-        return new ElectronIntegration(config as any);
       case 'nx':
         return new NxIntegration(config as any);
       case 'arco':
@@ -89,6 +87,8 @@ export class IntegrationFactory {
         return new TauriIntegration(config as any);
       case 'webxr':
         return new WebXRIntegration(config as any);
+      case 'multithreading':
+        return new MultithreadingIntegration(config as any);
       default:
         throw new Error(`Unknown integration: ${integration.name}`);
     }

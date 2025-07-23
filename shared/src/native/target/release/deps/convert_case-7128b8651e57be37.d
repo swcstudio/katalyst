@@ -1,0 +1,11 @@
+/home/ubuntu/repos/katalyst/shared/src/native/target/release/deps/convert_case-7128b8651e57be37.d: /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/boundary.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/case.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/converter.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/pattern.rs
+
+/home/ubuntu/repos/katalyst/shared/src/native/target/release/deps/libconvert_case-7128b8651e57be37.rlib: /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/boundary.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/case.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/converter.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/pattern.rs
+
+/home/ubuntu/repos/katalyst/shared/src/native/target/release/deps/libconvert_case-7128b8651e57be37.rmeta: /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/boundary.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/case.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/converter.rs /home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/pattern.rs
+
+/home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/lib.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/boundary.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/case.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/converter.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/convert_case-0.8.0/src/pattern.rs:

@@ -98,3 +98,11 @@ export interface PlatformConfigs {
     };
   };
 }
+
+export interface MultithreadingConfig {
+  autoInitialize?: boolean;
+  workerThreads?: number;
+  maxBlockingThreads?: number;
+  enableProfiling?: boolean;
+  enableReactIntegration?: boolean;
+}
