@@ -12,7 +12,7 @@
       "dependsOn": ["^build", "build-native"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**", "build/**", ".next/**"],
-      "env": ["NODE_ENV", "NEXT_PUBLIC_*", "VITE_*"]
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*", "RSPACK_*"]
     },
     "build:desktop": {
       "dependsOn": ["^build", "build-native", "build:web"],
@@ -110,7 +110,7 @@
       "dependsOn": ["build-native"],
       "cache": false,
       "persistent": true,
-      "env": ["NODE_ENV", "PORT", "HOST", "NEXT_PUBLIC_*", "VITE_*"]
+      "env": ["NODE_ENV", "PORT", "HOST", "NEXT_PUBLIC_*", "RSPACK_*"]
     },
     "dev:desktop": {
       "dependsOn": ["build-native"],
