@@ -30,8 +30,34 @@
       }
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-      "cache": true
+      "inputs": ["default", "^production", "{workspaceRoot}/deno.test.config.ts"],
+      "cache": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "deno test --config=deno.test.config.ts",
+          "cd shared/src/native && cargo test"
+        ],
+        "parallel": true
+      }
+    },
+    "test-rust": {
+      "inputs": ["default", "{projectRoot}/shared/src/native/**/*"],
+      "cache": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd shared/src/native && cargo test",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "test-deno": {
+      "inputs": ["default", "^production", "{workspaceRoot}/deno.test.config.ts"],
+      "cache": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno test --config=deno.test.config.ts",
+        "cwd": "{projectRoot}"
+      }
     },
     "lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/eslint.config.js"],
@@ -52,7 +78,7 @@
         "style": "css",
         "linter": "biome",
         "bundler": "rspack",
-        "unitTestRunner": "vitest",
+        "unitTestRunner": "none",
         "e2eTestRunner": "playwright"
       },
       "component": {
@@ -61,7 +87,7 @@
       "library": {
         "style": "css",
         "linter": "biome",
-        "unitTestRunner": "vitest"
+        "unitTestRunner": "none"
       }
     }
   },
