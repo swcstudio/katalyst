@@ -4,57 +4,120 @@ This guide will help you install and set up the SWC Studio Marketing component e
 
 ## System Requirements
 
-- **Node.js**: Version 18.0 or higher
-- **Package Manager**: npm, yarn, or pnpm
-- **TypeScript**: Version 5.0 or higher (recommended)
+- **Deno**: Version 2.0 or higher (primary runtime)
+- **Bun**: Version 1.0 or higher (fallback if Deno has issues)
+- **TypeScript**: Version 5.0 or higher (built-in with Deno)
 - **React**: Version 18.0 or higher
 
 ## Package Installation
 
-### Core Package
+### Primary Installation (Deno - Recommended)
+
+SWC Studio natively supports Deno out of the box for optimal performance:
 
 ```bash
-# Using npm
+# Using Deno (recommended)
+deno add @swcstudio/shared
+
+# Install peer dependencies
+deno add react react-dom
+
+# TypeScript support is built-in with Deno - no additional installation needed!
+```
+
+### Fallback Installation (Bun)
+
+If you encounter issues with Deno, use Bun as the fallback option:
+
+```bash
+# Using Bun (fallback option)
+bun add @swcstudio/shared
+
+# Install peer dependencies
+bun add react react-dom
+
+# TypeScript support
+bun add -D typescript @types/react @types/react-dom
+```
+
+### Legacy Installation (npm/yarn/pnpm)
+
+For projects that must use traditional Node.js package managers:
+
+```bash
+# Using npm (legacy)
 npm install @swcstudio/shared
 
-# Using yarn
+# Using yarn (legacy)
 yarn add @swcstudio/shared
 
-# Using pnpm
+# Using pnpm (legacy)
 pnpm add @swcstudio/shared
 ```
 
-### Peer Dependencies
+### Core Dependencies
 
-Install the required peer dependencies:
+Install the required dependencies based on your package manager:
 
 ```bash
-# React and React DOM (if not already installed)
-npm install react react-dom
+# Deno (recommended)
+deno add react react-dom @swcstudio/shared
 
-# TypeScript (for type support)
+# Bun (fallback)
+bun add react react-dom @swcstudio/shared
+bun add -D typescript @types/react @types/react-dom
+
+# npm/yarn/pnpm (legacy)
+npm install react react-dom @swcstudio/shared
 npm install -D typescript @types/react @types/react-dom
+```
 
-# Tailwind CSS (for styling)
+### Styling Dependencies
+
+For Tailwind CSS support:
+
+```bash
+# Deno
+deno add tailwindcss postcss autoprefixer
+
+# Bun
+bun add -D tailwindcss postcss autoprefixer
+
+# npm/yarn/pnpm
 npm install -D tailwindcss postcss autoprefixer
 ```
 
-### Optional Dependencies
+### Optional Integrations
 
 For specific features, you may need additional packages:
 
 ```bash
-# For TanStack integration
-npm install @tanstack/react-query @tanstack/react-form @tanstack/react-table
+# TanStack ecosystem (Deno)
+deno add @tanstack/react-query @tanstack/react-form @tanstack/react-table
 
-# For TRPC integration
+# TanStack ecosystem (Bun)
+bun add @tanstack/react-query @tanstack/react-form @tanstack/react-table
+
+# TRPC integration (Deno)
+deno add @trpc/client @trpc/react-query
+
+# TRPC integration (Bun)
+bun add @trpc/client @trpc/react-query
+
+# TRPC integration (npm/yarn/pnpm - legacy)
 npm install @trpc/client @trpc/react-query
 
-# For advanced styling
-npm install @emotion/react @emotion/styled
+# Advanced styling (Deno)
+deno add @emotion/react @emotion/styled
 
-# For native multithreading features
-npm install @swcstudio/native
+# Advanced styling (Bun)
+bun add @emotion/react @emotion/styled
+
+# Native multithreading (Deno)
+deno add @swcstudio/native
+
+# Native multithreading (Bun)
+bun add @swcstudio/native
 ```
 
 ## Framework-Specific Setup
@@ -64,6 +127,13 @@ npm install @swcstudio/native
 #### 1. Install Next.js Integration
 
 ```bash
+# Deno (recommended)
+deno add @swcstudio/nextjs-integration
+
+# Bun (fallback)
+bun add @swcstudio/nextjs-integration
+
+# npm/yarn/pnpm (legacy)
 npm install @swcstudio/nextjs-integration
 ```
 
@@ -143,6 +213,13 @@ export default function App({ Component, pageProps }: AppProps) {
 #### 1. Install Remix Integration
 
 ```bash
+# Deno (recommended)
+deno add @swcstudio/remix-integration
+
+# Bun (fallback)
+bun add @swcstudio/remix-integration
+
+# npm/yarn/pnpm (legacy)
 npm install @swcstudio/remix-integration
 ```
 
@@ -204,9 +281,64 @@ export default function App() {
 
 ### Core React Setup
 
-For standalone React applications (Create React App, Vite, etc.):
+#### Option 1: Deno with Fresh (Recommended)
 
-#### 1. Standard React Setup
+```bash
+# Create new Fresh project with SWC Studio
+deno run -A -r https://fresh.deno.dev my-swc-studio-app
+cd my-swc-studio-app
+
+# Add SWC Studio
+deno add @swcstudio/shared react react-dom
+```
+
+```tsx
+// routes/index.tsx
+import { KatalystProvider, Button } from '@swcstudio/shared';
+
+export default function Home() {
+  return (
+    <KatalystProvider framework="fresh">
+      <div class="p-8">
+        <h1 class="text-3xl font-bold mb-4">SWC Studio with Fresh</h1>
+        <Button variant="primary">Get Started</Button>
+      </div>
+    </KatalystProvider>
+  );
+}
+```
+
+#### Option 2: Bun with Vite (Fallback)
+
+```bash
+# Create Vite project with Bun
+bun create vite my-swc-studio-app --template react-ts
+cd my-swc-studio-app
+
+# Install SWC Studio
+bun add @swcstudio/shared react react-dom
+```
+
+```tsx
+// src/main.tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { KatalystProvider } from '@swcstudio/shared';
+import App from './App';
+import './index.css';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <KatalystProvider framework="react">
+      <App />
+    </KatalystProvider>
+  </React.StrictMode>
+);
+```
+
+#### Option 3: Legacy Node.js Setup
+
+For traditional React applications (Create React App, Vite with npm, etc.):
 
 ```tsx
 // src/main.tsx (Vite) or src/index.tsx (CRA)
@@ -225,7 +357,61 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 ```
 
-#### 2. Vite Configuration
+## Deno Configuration
+
+### 1. Create deno.json
+
+```json
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-read --allow-env --watch main.tsx",
+    "build": "deno compile --allow-net --allow-read --allow-env main.tsx",
+    "preview": "deno run --allow-net --allow-read --allow-env main.tsx"
+  },
+  "imports": {
+    "@swcstudio/shared": "npm:@swcstudio/shared@latest",
+    "react": "https://esm.sh/react@18",
+    "react-dom": "https://esm.sh/react-dom@18"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
+}
+```
+
+### 2. Deno Import Map (Alternative)
+
+```json
+{
+  "imports": {
+    "@/": "./src/",
+    "@swcstudio/shared": "npm:@swcstudio/shared",
+    "react": "https://esm.sh/react@^18.2.0",
+    "react-dom": "https://esm.sh/react-dom@^18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@^18.2.0/client"
+  }
+}
+```
+
+## Bun Configuration
+
+### 1. Create bunfig.toml
+
+```toml
+[install]
+# Use npm registry for compatibility
+registry = "https://registry.npmjs.org/"
+
+# Enable SWC Studio optimizations
+cache = true
+lockfile = true
+
+[install.scopes]
+"@swcstudio" = { registry = "https://registry.npmjs.org/" }
+```
+
+### 2. Vite Configuration (with Bun)
 
 ```js
 // vite.config.js
@@ -544,37 +730,150 @@ Visit your application in the browser. You should see the test component rendere
 
 ## Troubleshooting
 
-### Common Issues
+### Deno-Specific Issues
+
+**Issue**: Deno permission errors
+```bash
+# Solution: Grant necessary permissions
+deno run --allow-all your-app.tsx
+# Or grant specific permissions:
+deno run --allow-net --allow-read --allow-env your-app.tsx
+```
+
+**Issue**: ESM import issues with SWC Studio
+```bash
+# Solution: Use npm: prefix for Node.js packages
+deno add npm:@swcstudio/shared
+# Or update import map in deno.json
+```
+
+**Issue**: React types not found in Deno
+```typescript
+// Solution: Add React types to deno.json
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  },
+  "imports": {
+    "react": "https://esm.sh/react@18",
+    "@types/react": "https://esm.sh/@types/react@18"
+  }
+}
+```
+
+### Bun-Specific Issues
+
+**Issue**: Package installation fails with Bun
+```bash
+# Solution: Clear cache and reinstall
+bun pm cache rm
+bun install --force
+```
+
+**Issue**: TypeScript errors with Bun
+```bash
+# Solution: Install type dependencies explicitly
+bun add -D @types/react @types/react-dom typescript
+```
+
+**Issue**: Native modules not working with Bun
+```bash
+# Solution: Use Node.js compatibility mode
+bun --bun run your-script.js
+```
+
+### Common Issues (All Package Managers)
 
 **Issue**: TypeScript errors about missing types
 ```bash
-# Solution: Install type dependencies
-npm install -D @types/react @types/react-dom
-npm install -D typescript@latest
+# Deno (types are usually built-in)
+deno cache --reload your-app.tsx
+
+# Bun
+bun add -D @types/react @types/react-dom typescript
+
+# npm/yarn/pnpm (legacy)
+npm install -D @types/react @types/react-dom typescript@latest
 ```
 
 **Issue**: Tailwind classes not applying
 ```bash
-# Solution: Verify Tailwind configuration
-npx tailwindcss --help
-# Check that content paths include SWC Studio components
+# Deno
+deno run --allow-write npm:tailwindcss --init
+
+# Bun  
+bunx tailwindcss init
+
+# npm/yarn/pnpm (legacy)
+npx tailwindcss init
 ```
 
 **Issue**: Native modules not loading
 ```bash
-# Solution: Rebuild native modules
+# Deno
+deno cache --reload npm:@swcstudio/native
+
+# Bun
+bun add @swcstudio/native --force
+
+# npm/yarn/pnpm (legacy)
 npm rebuild @swcstudio/native
-# Or install platform-specific binaries
-npm install @swcstudio/native-darwin-x64 # For macOS
 ```
 
 **Issue**: Build errors with bundlers
 ```js
-// Solution: Update bundler configuration
-// For Webpack, add to externals:
+// Solution: Update bundler configuration based on your setup
+
+// For Deno Fresh
+// deno.json
+{
+  "imports": {
+    "@swcstudio/native": "npm:@swcstudio/native"
+  }
+}
+
+// For Bun with Vite
+// vite.config.js  
+export default defineConfig({
+  optimizeDeps: {
+    include: ['@swcstudio/shared']
+  }
+});
+
+// For Webpack (legacy)
 externals: {
   '@swcstudio/native': 'commonjs @swcstudio/native'
 }
+```
+
+### Package Manager Migration
+
+**Migrating from npm/yarn to Deno**:
+```bash
+# 1. Remove node_modules and lock files
+rm -rf node_modules package-lock.json yarn.lock
+
+# 2. Create deno.json with npm imports
+echo '{
+  "imports": {
+    "@swcstudio/shared": "npm:@swcstudio/shared@latest"
+  }
+}' > deno.json
+
+# 3. Update scripts to use Deno
+# Replace npm scripts with deno tasks
+```
+
+**Migrating from npm/yarn to Bun**:
+```bash
+# 1. Remove existing lock files
+rm -rf node_modules package-lock.json yarn.lock
+
+# 2. Install with Bun
+bun install
+
+# 3. Update scripts in package.json to use bun
 ```
 
 ### Debug Mode
@@ -617,20 +916,88 @@ export function checkInstallation() {
 }
 ```
 
+## Running Your Application
+
+### Deno Commands
+```bash
+# Development server
+deno task dev
+
+# Build for production  
+deno task build
+
+# Preview production build
+deno task preview
+```
+
+### Bun Commands
+```bash
+# Development server
+bun run dev
+
+# Build for production
+bun run build
+
+# Preview production build
+bun run preview
+```
+
+### Legacy Commands
+```bash
+# Next.js
+npm run dev
+
+# Remix
+npm run dev
+
+# Vite
+npm run dev
+
+# Create React App
+npm start
+```
+
 ## Next Steps
 
 After successful installation:
 
-1. **[Quick Start Guide](./quick-start.md)** - Build your first component
-2. **[Configuration Guide](./configuration.md)** - Customize the setup
+1. **[Quick Start Guide](./quick-start.md)** - Build your first component with Deno/Bun
+2. **[Configuration Guide](./configuration.md)** - Customize Deno/Bun setup
 3. **[Component Reference](../components/README.md)** - Explore available components
-4. **[Examples](../examples/README.md)** - See real-world usage patterns
+4. **[Examples](../examples/README.md)** - See Deno/Bun-specific usage patterns
 
 ## Support
 
 If you encounter issues during installation:
 
+### Deno Support
+- [Deno Documentation](https://deno.land/manual)
+- [Fresh Framework Guide](https://fresh.deno.dev)
+- Check Deno permissions and import maps
+
+### Bun Support  
+- [Bun Documentation](https://bun.sh/docs)
+- [Bun Package Manager](https://bun.sh/docs/cli/install)
+- Check bunfig.toml configuration
+
+### General Support
 - Check the [Troubleshooting Guide](../troubleshooting.md)
 - Search [GitHub Issues](https://github.com/swcstudio/swcstudio-marketing/issues)
 - Join our [Discord Community](https://discord.gg/swcstudio)
 - Email support: [support@swcstudio.com](mailto:support@swcstudio.com)
+
+## Performance Benefits
+
+### Why Deno?
+- ✅ **Built-in TypeScript** - No additional type setup required
+- ✅ **Native ESM** - Modern module system out of the box
+- ✅ **Security by Default** - Permission-based security model
+- ✅ **Web Standards** - Uses standard Web APIs
+- ✅ **Single Executable** - No external dependencies needed
+
+### Why Bun as Fallback?
+- ✅ **Ultra Fast** - 2-3x faster than npm/yarn package installation
+- ✅ **All-in-One** - Runtime, bundler, package manager, and test runner
+- ✅ **Node.js Compatible** - Drop-in replacement for Node.js
+- ✅ **Native Speed** - Written in Zig for maximum performance
+- ✅ **Hot Reloading** - Fast development iteration
