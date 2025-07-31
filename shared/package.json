@@ -49,7 +49,7 @@
     "@tanstack/react-router": "^1.120.17",
     "@tanstack/react-table": "^8.20.5",
     "@tanstack/react-virtual": "^3.10.8",
-    "animejs": "^3.2.2",
+    "animejs": "^4.1.2",
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0",
     "commander": "^12.0.0",
