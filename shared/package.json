@@ -62,7 +62,7 @@
     "ora": "^5.4.1",
     "pareto": "^0.75.2",
     "react": "^19.0.0",
-    "react-cosmos": "^6.2.0",
+    "react-cosmos": "^7.0.0",
     "react-dom": "^19.0.0",
     "rspack-manifest-plugin": "^5.0.0",
     "rspack-plugin-virtual-module": "^0.1.13",
