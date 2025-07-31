@@ -26,7 +26,7 @@
     "@tanstack/react-router": "^1.120.17",
     "@tanstack/react-table": "^8.20.5",
     "@tanstack/react-virtual": "^3.10.8",
-    "animejs": "^3.2.2",
+    "animejs": "^4.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zustand": "^5.0.1"
