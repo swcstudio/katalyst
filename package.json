@@ -138,7 +138,7 @@
     "@trpc/client": "^10.45.0",
     "@trpc/next": "^10.45.0",
     "@trpc/react-query": "^10.45.0",
-    "@trpc/server": "^10.45.0",
+    "@trpc/server": "^11.4.3",
     "@tauri-apps/api": "^2.0.0",
     "@tauri-apps/cli": "^2.0.0",
     "axios": "^1.6.2",
