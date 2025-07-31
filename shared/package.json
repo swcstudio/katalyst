@@ -94,7 +94,7 @@
     "@rsbuild/plugin-svgr": "^1.0.1",
     "@rsbuild/plugin-type-check": "^1.0.1",
     "@tailwindcss/postcss": "^4.0.0",
-    "@types/cheerio": "^0.22.35",
+    "@types/cheerio": "^1.0.0",
     "@types/inquirer": "^8.2.10",
     "@types/node": "^20.12.2",
     "@types/node-fetch": "^2.6.11",
