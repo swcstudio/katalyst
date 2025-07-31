@@ -30,7 +30,7 @@
     "@tanstack/react-table": "^8.20.5",
     "@tanstack/react-virtual": "^3.10.8",
     "animejs": "^3.2.2",
-    "isbot": "^4",
+    "isbot": "^5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zustand": "^5.0.1"
