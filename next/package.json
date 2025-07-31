@@ -52,7 +52,7 @@
     "graphql": "^16.12.0",
     "remark-gfm": "^4.1.0",
     "remark-rehype-wrap": "^1.0.0",
-    "remark-unwrap-images": "^4.1.0",
+    "remark-unwrap-images": "^5.0.0",
     "recma-import-images": "^1.0.0",
     "shiki": "^1.24.0",
     "unified-conditional": "^1.0.0",
