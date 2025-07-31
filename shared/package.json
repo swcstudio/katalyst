@@ -65,7 +65,7 @@
     "react-cosmos": "^6.2.0",
     "react-dom": "^19.0.0",
     "rspack-manifest-plugin": "^5.0.0",
-    "rspack-plugin-virtual-module": "^0.1.13",
+    "rspack-plugin-virtual-module": "^1.0.1",
     "sails": "^1.5.11",
     "sails-disk": "^2.1.1",
     "sails-mysql": "^1.0.1",
