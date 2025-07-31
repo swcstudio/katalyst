@@ -60,7 +60,7 @@
     "inquirer": "^8.2.6",
     "node-fetch": "^2.7.0",
     "ora": "^5.4.1",
-    "pareto": "^0.75.2",
+    "pareto": "^0.76.27",
     "react": "^19.0.0",
     "react-cosmos": "^6.2.0",
     "react-dom": "^19.0.0",
