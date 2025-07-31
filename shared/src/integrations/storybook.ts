@@ -1,4 +1,4 @@
-import { StorybookConfig } from '../types/index.ts';
+import type { StorybookConfig } from '../types/index.ts';
 
 export interface StorybookConfiguration {
   stories: string[];
@@ -47,7 +47,7 @@ export class StorybookIntegration {
           '../core/src/**/*.stories.@(js|jsx|ts|tsx|mdx)',
           '../remix/app/**/*.stories.@(js|jsx|ts|tsx|mdx)',
           '../nextjs/src/**/*.stories.@(js|jsx|ts|tsx|mdx)',
-          '../shared/src/**/*.stories.@(js|jsx|ts|tsx|mdx)'
+          '../shared/src/**/*.stories.@(js|jsx|ts|tsx|mdx)',
         ],
         addons: [
           '@storybook/addon-essentials',
@@ -63,40 +63,37 @@ export class StorybookIntegration {
           '@storybook/addon-storysource',
           '@storybook/addon-knobs',
           'storybook-addon-designs',
-          'storybook-addon-figma'
+          'storybook-addon-figma',
         ],
         framework: {
           name: '@storybook/react-rsbuild',
           options: {
             builder: {
-              rsbuildConfigPath: '../shared/rsbuild.config.ts'
-            }
-          }
+              rsbuildConfigPath: '../shared/rsbuild.config.ts',
+            },
+          },
         },
         features: {
           buildStoriesJson: true,
           storyStoreV7: true,
           argTypeTargetsV7: true,
-          warnOnLegacyHierarchySeparator: false
+          warnOnLegacyHierarchySeparator: false,
         },
         typescript: {
           check: false,
           reactDocgen: 'react-docgen-typescript',
           reactDocgenTypescriptOptions: {
             shouldExtractLiteralValuesFromEnum: true,
-            propFilter: (prop: any) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true)
-          }
+            propFilter: (prop: any) =>
+              prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+          },
         },
         docs: {
           autodocs: 'tag',
-          defaultName: 'Documentation'
-        }
+          defaultName: 'Documentation',
+        },
       }),
-      plugins: [
-        '@storybook/react-rsbuild',
-        'storybook-addon-designs',
-        'storybook-addon-figma'
-      ],
+      plugins: ['@storybook/react-rsbuild', 'storybook-addon-designs', 'storybook-addon-figma'],
       dependencies: [
         '@storybook/react',
         '@storybook/react-rsbuild',
@@ -104,8 +101,8 @@ export class StorybookIntegration {
         '@storybook/addon-interactions',
         '@storybook/addon-a11y',
         '@storybook/testing-library',
-        'storybook'
-      ]
+        'storybook',
+      ],
     };
   }
 
@@ -118,28 +115,28 @@ export class StorybookIntegration {
           controls: {
             matchers: {
               color: /(background|color)$/i,
-              date: /Date$/
-            }
+              date: /Date$/,
+            },
           },
           docs: {
-            theme: 'light'
+            theme: 'light',
           },
           backgrounds: {
             default: 'light',
             values: [
               {
                 name: 'light',
-                value: '#ffffff'
+                value: '#ffffff',
               },
               {
                 name: 'dark',
-                value: '#1a1a1a'
+                value: '#1a1a1a',
               },
               {
                 name: 'katalyst-primary',
-                value: '#0066cc'
-              }
-            ]
+                value: '#0066cc',
+              },
+            ],
           },
           viewport: {
             viewports: {
@@ -147,25 +144,25 @@ export class StorybookIntegration {
                 name: 'Mobile',
                 styles: {
                   width: '375px',
-                  height: '667px'
-                }
+                  height: '667px',
+                },
               },
               tablet: {
                 name: 'Tablet',
                 styles: {
                   width: '768px',
-                  height: '1024px'
-                }
+                  height: '1024px',
+                },
               },
               desktop: {
                 name: 'Desktop',
                 styles: {
                   width: '1440px',
-                  height: '900px'
-                }
-              }
-            }
-          }
+                  height: '900px',
+                },
+              },
+            },
+          },
         },
         globalTypes: {
           theme: {
@@ -176,11 +173,11 @@ export class StorybookIntegration {
               icon: 'paintbrush',
               items: [
                 { value: 'light', title: 'Light' },
-                { value: 'dark', title: 'Dark' }
+                { value: 'dark', title: 'Dark' },
               ],
-              dynamicTitle: true
-            }
-          }
+              dynamicTitle: true,
+            },
+          },
         },
         decorators: [
           (Story: any, context: any) => {
@@ -190,9 +187,9 @@ export class StorybookIntegration {
                 ${Story()}
               </div>
             `;
-          }
-        ]
-      })
+          },
+        ],
+      }),
     };
   }
 
@@ -209,23 +206,23 @@ export class StorybookIntegration {
             '@katalyst-react/shared': '../shared/src/index.ts',
             '@katalyst-react/core': '../core/src/main.tsx',
             '@katalyst-react/remix': '../remix/app/root.tsx',
-            '@katalyst-react/nextjs': '../nextjs/src/app/page.tsx'
+            '@katalyst-react/nextjs': '../nextjs/src/app/page.tsx',
           };
 
           config.plugins = config.plugins || [];
-          
+
           return config;
         },
         env: (config: any) => ({
           ...config,
-          STORYBOOK_THEME: 'katalyst'
+          STORYBOOK_THEME: 'katalyst',
         }),
         managerHead: (head: string) => `
           ${head}
           <link rel="icon" type="image/png" href="/favicon.png" />
           <title>Katalyst Design System</title>
-        `
-      })
+        `,
+      }),
     };
   }
 
@@ -240,14 +237,14 @@ export class StorybookIntegration {
             success: '#28a745',
             danger: '#dc3545',
             warning: '#ffc107',
-            info: '#17a2b8'
+            info: '#17a2b8',
           },
           spacing: {
             xs: '0.25rem',
             sm: '0.5rem',
             md: '1rem',
             lg: '1.5rem',
-            xl: '2rem'
+            xl: '2rem',
           },
           typography: {
             fontFamily: 'Inter, system-ui, sans-serif',
@@ -256,54 +253,54 @@ export class StorybookIntegration {
               sm: '0.875rem',
               base: '1rem',
               lg: '1.125rem',
-              xl: '1.25rem'
-            }
-          }
+              xl: '1.25rem',
+            },
+          },
         },
         componentCategories: [
           {
             name: 'Foundation',
-            components: ['Colors', 'Typography', 'Spacing', 'Icons']
+            components: ['Colors', 'Typography', 'Spacing', 'Icons'],
           },
           {
             name: 'Components',
-            components: ['Button', 'Input', 'Card', 'Modal', 'Table']
+            components: ['Button', 'Input', 'Card', 'Modal', 'Table'],
           },
           {
             name: 'Layout',
-            components: ['Grid', 'Container', 'Stack', 'Flex']
+            components: ['Grid', 'Container', 'Stack', 'Flex'],
           },
           {
             name: 'Navigation',
-            components: ['Header', 'Sidebar', 'Breadcrumb', 'Pagination']
+            components: ['Header', 'Sidebar', 'Breadcrumb', 'Pagination'],
           },
           {
             name: 'Data Display',
-            components: ['Chart', 'List', 'Timeline', 'Badge']
+            components: ['Chart', 'List', 'Timeline', 'Badge'],
           },
           {
             name: 'Feedback',
-            components: ['Alert', 'Toast', 'Progress', 'Skeleton']
-          }
+            components: ['Alert', 'Toast', 'Progress', 'Skeleton'],
+          },
         ],
         templates: [
           {
             name: 'Marketing Page',
             description: 'Complete marketing page template',
-            components: ['Header', 'Hero', 'Features', 'Testimonials', 'Footer']
+            components: ['Header', 'Hero', 'Features', 'Testimonials', 'Footer'],
           },
           {
             name: 'Dashboard',
             description: 'Admin dashboard template',
-            components: ['Sidebar', 'TopBar', 'Stats', 'Charts', 'Table']
+            components: ['Sidebar', 'TopBar', 'Stats', 'Charts', 'Table'],
           },
           {
             name: 'E-commerce',
             description: 'Product catalog and checkout',
-            components: ['ProductGrid', 'ProductCard', 'Cart', 'Checkout']
-          }
-        ]
-      })
+            components: ['ProductGrid', 'ProductCard', 'Cart', 'Checkout'],
+          },
+        ],
+      }),
     };
   }
 
@@ -318,24 +315,24 @@ export class StorybookIntegration {
             statements: 80,
             branches: 80,
             functions: 80,
-            lines: 80
-          }
+            lines: 80,
+          },
         },
         visualTesting: {
           enabled: true,
           provider: 'chromatic',
-          threshold: 0.2
+          threshold: 0.2,
         },
         accessibilityTesting: {
           enabled: true,
           rules: ['wcag2a', 'wcag2aa'],
-          tags: ['best-practice']
+          tags: ['best-practice'],
         },
         interactionTesting: {
           enabled: true,
-          framework: '@storybook/testing-library'
-        }
-      })
+          framework: '@storybook/testing-library',
+        },
+      }),
     };
   }
 
@@ -345,7 +342,7 @@ export class StorybookIntegration {
       this.setupStorybookPreview(),
       this.setupStorybookMain(),
       this.setupDesignSystem(),
-      this.setupTestingIntegration()
+      this.setupTestingIntegration(),
     ]);
 
     return integrations.filter(Boolean);
@@ -410,7 +407,7 @@ export class StorybookIntegration {
             await expect(loginButton).toBeInTheDocument();
           },
         };
-      `
+      `,
     };
   }
 

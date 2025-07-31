@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { KatalystIntegration } from '../types/index.ts';
+import { useEffect, useState } from 'react';
+import type { KatalystIntegration } from '../types/index.ts';
 
 export function useIntegration(integrationName: string) {
   const [integration, setIntegration] = useState<KatalystIntegration | null>(null);
@@ -24,6 +24,6 @@ export function useIntegration(integrationName: string) {
   return {
     integration,
     isLoading,
-    error
+    error,
   };
 }

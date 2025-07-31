@@ -1,6 +1,6 @@
-import { createContext, useContext, ReactNode, useEffect } from 'react';
-import { KatalystIntegration } from '../types/index.ts';
+import { type ReactNode, createContext, useContext, useEffect } from 'react';
 import { useIntegrationStore } from '../stores/integration-store.ts';
+import type { KatalystIntegration } from '../types/index.ts';
 
 interface IntegrationContextValue {
   integrations: Map<string, KatalystIntegration>;
@@ -17,20 +17,19 @@ interface IntegrationProviderProps {
   initialIntegrations?: KatalystIntegration[];
 }
 
-export function IntegrationProvider({ children, initialIntegrations = [] }: IntegrationProviderProps) {
+export function IntegrationProvider({
+  children,
+  initialIntegrations = [],
+}: IntegrationProviderProps) {
   const store = useIntegrationStore();
 
   useEffect(() => {
-    initialIntegrations.forEach(integration => {
+    initialIntegrations.forEach((integration) => {
       store.addIntegration(integration);
     });
   }, [initialIntegrations, store]);
 
-  return (
-    <IntegrationContext.Provider value={store}>
-      {children}
-    </IntegrationContext.Provider>
-  );
+  return <IntegrationContext.Provider value={store}>{children}</IntegrationContext.Provider>;
 }
 
 export function useIntegrationContext() {

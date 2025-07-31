@@ -97,7 +97,7 @@ export class ClerkIntegration {
           passwordless: true,
           mfa: true,
           sso: true,
-          webhooks: true
+          webhooks: true,
         },
         components: {
           ClerkProvider: 'ClerkProvider',
@@ -107,19 +107,11 @@ export class ClerkIntegration {
           UserProfile: 'UserProfile',
           OrganizationSwitcher: 'OrganizationSwitcher',
           OrganizationProfile: 'OrganizationProfile',
-          CreateOrganization: 'CreateOrganization'
-        }
+          CreateOrganization: 'CreateOrganization',
+        },
       }),
-      plugins: [
-        'clerk-react',
-        'clerk-nextjs',
-        'clerk-remix'
-      ],
-      dependencies: [
-        '@clerk/clerk-react',
-        '@clerk/nextjs',
-        '@clerk/remix'
-      ]
+      plugins: ['clerk-react', 'clerk-nextjs', 'clerk-remix'],
+      dependencies: ['@clerk/clerk-react', '@clerk/nextjs', '@clerk/remix'],
     };
   }
 
@@ -135,11 +127,17 @@ export class ClerkIntegration {
             social: true,
             passwordless: true,
             mfa: true,
-            sso: true
+            sso: true,
           },
           socialProviders: [
-            'google', 'facebook', 'twitter', 'github',
-            'linkedin', 'discord', 'apple', 'microsoft'
+            'google',
+            'facebook',
+            'twitter',
+            'github',
+            'linkedin',
+            'discord',
+            'apple',
+            'microsoft',
           ],
           features: {
             signIn: true,
@@ -150,8 +148,8 @@ export class ClerkIntegration {
             emailVerification: true,
             phoneVerification: true,
             twoFactor: true,
-            biometric: true
-          }
+            biometric: true,
+          },
         },
         security: {
           encryption: 'AES-256',
@@ -161,9 +159,9 @@ export class ClerkIntegration {
           rateLimit: true,
           bruteForce: true,
           sessionTimeout: true,
-          deviceTracking: true
-        }
-      })
+          deviceTracking: true,
+        },
+      }),
     };
   }
 
@@ -180,7 +178,7 @@ export class ClerkIntegration {
             phone: true,
             avatar: true,
             metadata: true,
-            customFields: true
+            customFields: true,
           },
           features: {
             profileUpdate: true,
@@ -190,8 +188,8 @@ export class ClerkIntegration {
             avatarUpload: true,
             accountDeletion: true,
             dataExport: true,
-            privacy: true
-          }
+            privacy: true,
+          },
         },
         hooks: {
           useUser: 'Current user data',
@@ -199,9 +197,9 @@ export class ClerkIntegration {
           useSession: 'Session information',
           useSignIn: 'Sign in methods',
           useSignUp: 'Sign up methods',
-          useClerk: 'Clerk instance'
-        }
-      })
+          useClerk: 'Clerk instance',
+        },
+      }),
     };
   }
 
@@ -219,22 +217,22 @@ export class ClerkIntegration {
             roles: true,
             permissions: true,
             billing: true,
-            settings: true
+            settings: true,
           },
           roles: {
             admin: 'Full organization access',
             member: 'Standard member access',
             guest: 'Limited guest access',
-            custom: 'Custom role definitions'
-          }
+            custom: 'Custom role definitions',
+          },
         },
         hooks: {
           useOrganization: 'Current organization',
           useOrganizationList: 'User organizations',
           useMembership: 'Organization membership',
-          useOrganizationRoles: 'Available roles'
-        }
-      })
+          useOrganizationRoles: 'Available roles',
+        },
+      }),
     };
   }
 
@@ -251,7 +249,7 @@ export class ClerkIntegration {
             deviceTracking: true,
             locationTracking: true,
             concurrentSessions: true,
-            sessionRevocation: true
+            sessionRevocation: true,
           },
           security: {
             httpOnly: true,
@@ -259,17 +257,17 @@ export class ClerkIntegration {
             sameSite: 'strict',
             encryption: true,
             rotation: true,
-            fingerprinting: true
-          }
+            fingerprinting: true,
+          },
         },
         api: {
           getToken: 'Get session token',
           signOut: 'Sign out user',
           signOutAll: 'Sign out all sessions',
           getSession: 'Get session data',
-          touchSession: 'Extend session'
-        }
-      })
+          touchSession: 'Extend session',
+        },
+      }),
     };
   }
 
@@ -288,24 +286,24 @@ export class ClerkIntegration {
             'organization.updated': 'Organization update',
             'organizationMembership.created': 'Member added',
             'organizationMembership.deleted': 'Member removed',
-            'organizationInvitation.created': 'Invitation sent'
+            'organizationInvitation.created': 'Invitation sent',
           },
           security: {
             signing: 'HMAC-SHA256',
             verification: true,
             timestamps: true,
             replay: true,
-            ipWhitelist: true
-          }
+            ipWhitelist: true,
+          },
         },
         integration: {
           express: 'Express.js middleware',
           nextjs: 'Next.js API routes',
           remix: 'Remix action/loader',
           vercel: 'Vercel functions',
-          netlify: 'Netlify functions'
-        }
-      })
+          netlify: 'Netlify functions',
+        },
+      }),
     };
   }
 
@@ -318,18 +316,18 @@ export class ClerkIntegration {
             nextjs: {
               middleware: 'middleware.ts',
               config: 'matcher configuration',
-              protection: 'Route protection'
+              protection: 'Route protection',
             },
             remix: {
               loader: 'Route loader protection',
               action: 'Action protection',
-              root: 'Root loader authentication'
+              root: 'Root loader authentication',
             },
             express: {
               middleware: 'Express middleware',
               routes: 'Route-specific protection',
-              global: 'Global authentication'
-            }
+              global: 'Global authentication',
+            },
           },
           features: {
             routeProtection: true,
@@ -338,16 +336,16 @@ export class ClerkIntegration {
             publicRoutes: true,
             ignoredRoutes: true,
             redirects: true,
-            customLogic: true
-          }
+            customLogic: true,
+          },
         },
         configuration: {
           publicRoutes: ['/'],
           ignoredRoutes: ['/api/webhook'],
           afterAuth: 'Custom redirect logic',
-          beforeAuth: 'Pre-authentication logic'
-        }
-      })
+          beforeAuth: 'Pre-authentication logic',
+        },
+      }),
     };
   }
 
@@ -366,21 +364,21 @@ export class ClerkIntegration {
             translations: true,
             layouts: true,
             components: true,
-            flows: true
-          }
+            flows: true,
+          },
         },
         themes: {
           light: 'Light theme',
           dark: 'Dark theme',
-          custom: 'Custom theme variables'
+          custom: 'Custom theme variables',
         },
         branding: {
           logo: 'Custom logo',
           colors: 'Brand colors',
           fonts: 'Custom fonts',
-          favicon: 'Custom favicon'
-        }
-      })
+          favicon: 'Custom favicon',
+        },
+      }),
     };
   }
 
@@ -393,7 +391,7 @@ export class ClerkIntegration {
       this.setupSessionManagement(),
       this.setupWebhooks(),
       this.setupMiddleware(),
-      this.setupCustomization()
+      this.setupCustomization(),
     ]);
 
     return integrations.filter(Boolean);
@@ -416,28 +414,28 @@ export class ClerkIntegration {
           colorText: '#1f2937',
           colorInputBackground: '#f9fafb',
           colorInputText: '#1f2937',
-          borderRadius: '0.375rem'
+          borderRadius: '0.375rem',
         },
         elements: {
           formButtonPrimary: 'bg-blue-600 hover:bg-blue-700',
           card: 'shadow-lg border border-gray-200',
           headerTitle: 'text-2xl font-bold',
-          headerSubtitle: 'text-gray-600'
+          headerSubtitle: 'text-gray-600',
         },
         layout: {
           socialButtonsVariant: 'blockButton',
           socialButtonsPlacement: 'top',
-          showOptionalFields: true
-        }
+          showOptionalFields: true,
+        },
       },
       localization: {
-        locale: 'en-US'
+        locale: 'en-US',
       },
       experimental: {
         organizationDomains: false,
         organizationInvitations: false,
-        organizationMemberships: false
-      }
+        organizationMemberships: false,
+      },
     };
   }
 

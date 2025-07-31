@@ -1,8 +1,10 @@
-declare const process: {
-  env: {
-    NX_CLOUD_ACCESS_TOKEN?: string;
-  };
-} | undefined;
+declare const process:
+  | {
+      env: {
+        NX_CLOUD_ACCESS_TOKEN?: string;
+      };
+    }
+  | undefined;
 
 export interface NxConfig {
   workspaceName: string;
@@ -52,20 +54,24 @@ export class NxIntegration {
           build: {
             cache: true,
             dependsOn: ['^build'],
-            inputs: ['production', '^production']
+            inputs: ['production', '^production'],
           },
           test: {
             cache: true,
-            inputs: ['default', '^production', '{workspaceRoot}/jest.preset.js']
+            inputs: ['default', '^production', '{workspaceRoot}/jest.preset.js'],
           },
           lint: {
             cache: true,
-            inputs: ['default', '{workspaceRoot}/.eslintrc.json', '{workspaceRoot}/tools/eslint-rules/**/*']
+            inputs: [
+              'default',
+              '{workspaceRoot}/.eslintrc.json',
+              '{workspaceRoot}/tools/eslint-rules/**/*',
+            ],
           },
-          'e2e': {
+          e2e: {
             cache: true,
-            inputs: ['default', '^production']
-          }
+            inputs: ['default', '^production'],
+          },
         },
         namedInputs: {
           default: ['{projectRoot}/**/*', 'sharedGlobals'],
@@ -76,9 +82,9 @@ export class NxIntegration {
             '!{projectRoot}/jest.config.[jt]s',
             '!{projectRoot}/.eslintrc.json',
             '!{projectRoot}/src/test-setup.[jt]s',
-            '!{projectRoot}/test-setup.[jt]s'
+            '!{projectRoot}/test-setup.[jt]s',
           ],
-          sharedGlobals: []
+          sharedGlobals: [],
         },
         generators: {
           '@nx/react': {
@@ -87,17 +93,17 @@ export class NxIntegration {
               linter: 'biome',
               bundler: 'rspack',
               unitTestRunner: 'vitest',
-              e2eTestRunner: 'playwright'
+              e2eTestRunner: 'playwright',
             },
             component: {
-              style: 'tailwind'
+              style: 'tailwind',
             },
             library: {
               style: 'tailwind',
               linter: 'biome',
-              unitTestRunner: 'vitest'
-            }
-          }
+              unitTestRunner: 'vitest',
+            },
+          },
         },
         tasksRunnerOptions: {
           default: {
@@ -105,24 +111,26 @@ export class NxIntegration {
             options: {
               cacheableOperations: ['build', 'lint', 'test', 'e2e'],
               parallel: 3,
-              useDaemonProcess: true
-            }
-          }
+              useDaemonProcess: true,
+            },
+          },
         },
         cache: this.config.cacheEnabled,
-        affected: this.config.affectedEnabled ? {
-          defaultBase: 'main'
-        } : undefined,
+        affected: this.config.affectedEnabled
+          ? {
+              defaultBase: 'main',
+            }
+          : undefined,
         cli: {
-          packageManager: 'pnpm'
-        }
+          packageManager: 'pnpm',
+        },
       }),
       plugins: [
         '@nx/react/plugin',
         '@nx/rspack/plugin',
         '@nx/vite/plugin',
         '@nx/playwright/plugin',
-        '@nx/storybook/plugin'
+        '@nx/storybook/plugin',
       ],
       dependencies: [
         'nx',
@@ -131,8 +139,8 @@ export class NxIntegration {
         '@nx/vite',
         '@nx/playwright',
         '@nx/storybook',
-        '@nx/js'
-      ]
+        '@nx/js',
+      ],
     };
   }
 
@@ -151,41 +159,41 @@ export class NxIntegration {
             main: 'core/src/main.tsx',
             tsConfig: 'core/tsconfig.app.json',
             outputPath: 'dist/core',
-            rspackConfig: 'core/rsbuild.config.ts'
+            rspackConfig: 'core/rsbuild.config.ts',
           },
           configurations: {
             production: {
               mode: 'production',
               optimization: true,
               extractLicenses: false,
-              sourceMap: false
-            }
-          }
+              sourceMap: false,
+            },
+          },
         },
         serve: {
           executor: '@nx/rspack:dev-server',
           options: {
             buildTarget: 'katalyst-core:build',
             port: 3000,
-            host: 'localhost'
-          }
+            host: 'localhost',
+          },
         },
         test: {
           executor: '@nx/vite:test',
           options: {
             passWithNoTests: true,
-            reportsDirectory: '../coverage/core'
-          }
+            reportsDirectory: '../coverage/core',
+          },
         },
         lint: {
           executor: '@biomejs/biome:lint',
           options: {
-            lintFilePatterns: ['core/**/*.{ts,tsx}']
-          }
-        }
+            lintFilePatterns: ['core/**/*.{ts,tsx}'],
+          },
+        },
       },
       tags: ['scope:katalyst', 'type:app'],
-      implicitDependencies: ['katalyst-shared']
+      implicitDependencies: ['katalyst-shared'],
     };
 
     projects['katalyst-remix'] = {
@@ -196,32 +204,32 @@ export class NxIntegration {
         build: {
           executor: '@nx/remix:build',
           options: {
-            outputPath: 'dist/remix'
-          }
+            outputPath: 'dist/remix',
+          },
         },
         serve: {
           executor: '@nx/remix:serve',
           options: {
             command: 'remix dev',
-            port: 3001
-          }
+            port: 3001,
+          },
         },
         test: {
           executor: '@nx/vite:test',
           options: {
             passWithNoTests: true,
-            reportsDirectory: '../coverage/remix'
-          }
+            reportsDirectory: '../coverage/remix',
+          },
         },
         lint: {
           executor: '@biomejs/biome:lint',
           options: {
-            lintFilePatterns: ['remix/**/*.{ts,tsx}']
-          }
-        }
+            lintFilePatterns: ['remix/**/*.{ts,tsx}'],
+          },
+        },
       },
       tags: ['scope:katalyst', 'type:app'],
-      implicitDependencies: ['katalyst-shared']
+      implicitDependencies: ['katalyst-shared'],
     };
 
     projects['katalyst-nextjs'] = {
@@ -232,32 +240,32 @@ export class NxIntegration {
         build: {
           executor: '@nx/next:build',
           options: {
-            outputPath: 'dist/nextjs'
-          }
+            outputPath: 'dist/nextjs',
+          },
         },
         serve: {
           executor: '@nx/next:serve',
           options: {
             dev: true,
-            port: 3002
-          }
+            port: 3002,
+          },
         },
         test: {
           executor: '@nx/vite:test',
           options: {
             passWithNoTests: true,
-            reportsDirectory: '../coverage/nextjs'
-          }
+            reportsDirectory: '../coverage/nextjs',
+          },
         },
         lint: {
           executor: '@biomejs/biome:lint',
           options: {
-            lintFilePatterns: ['nextjs/**/*.{ts,tsx}']
-          }
-        }
+            lintFilePatterns: ['nextjs/**/*.{ts,tsx}'],
+          },
+        },
       },
       tags: ['scope:katalyst', 'type:app'],
-      implicitDependencies: ['katalyst-shared']
+      implicitDependencies: ['katalyst-shared'],
     };
 
     projects['katalyst-shared'] = {
@@ -270,25 +278,25 @@ export class NxIntegration {
           options: {
             outputPath: 'dist/shared',
             main: 'shared/src/index.ts',
-            tsConfig: 'shared/tsconfig.lib.json'
-          }
+            tsConfig: 'shared/tsconfig.lib.json',
+          },
         },
         test: {
           executor: '@nx/vite:test',
           options: {
             passWithNoTests: true,
-            reportsDirectory: '../coverage/shared'
-          }
+            reportsDirectory: '../coverage/shared',
+          },
         },
         lint: {
           executor: '@biomejs/biome:lint',
           options: {
-            lintFilePatterns: ['shared/**/*.{ts,tsx}']
-          }
-        }
+            lintFilePatterns: ['shared/**/*.{ts,tsx}'],
+          },
+        },
       },
       tags: ['scope:katalyst', 'type:lib'],
-      implicitDependencies: []
+      implicitDependencies: [],
     };
 
     return projects;
@@ -301,11 +309,7 @@ export class NxIntegration {
         host: {
           name: 'katalyst-host',
           port: 3000,
-          remotes: [
-            'katalyst-marketing',
-            'katalyst-dashboard',
-            'katalyst-components'
-          ]
+          remotes: ['katalyst-marketing', 'katalyst-dashboard', 'katalyst-components'],
         },
         remotes: {
           'katalyst-marketing': {
@@ -314,8 +318,8 @@ export class NxIntegration {
             exposes: {
               './Header': './src/components/Header',
               './Footer': './src/components/Footer',
-              './Hero': './src/components/Hero'
-            }
+              './Hero': './src/components/Hero',
+            },
           },
           'katalyst-dashboard': {
             name: 'katalyst-dashboard',
@@ -323,8 +327,8 @@ export class NxIntegration {
             exposes: {
               './Dashboard': './src/components/Dashboard',
               './Analytics': './src/components/Analytics',
-              './Settings': './src/components/Settings'
-            }
+              './Settings': './src/components/Settings',
+            },
           },
           'katalyst-components': {
             name: 'katalyst-components',
@@ -332,17 +336,17 @@ export class NxIntegration {
             exposes: {
               './Button': './src/components/Button',
               './Input': './src/components/Input',
-              './Modal': './src/components/Modal'
-            }
-          }
+              './Modal': './src/components/Modal',
+            },
+          },
         },
         shared: {
           react: { singleton: true, requiredVersion: '^18.0.0' },
           'react-dom': { singleton: true, requiredVersion: '^18.0.0' },
           '@tanstack/react-query': { singleton: true },
-          'zustand': { singleton: true }
-        }
-      })
+          zustand: { singleton: true },
+        },
+      }),
     };
   }
 
@@ -353,33 +357,33 @@ export class NxIntegration {
         agents: [
           {
             name: 'agent-1',
-            maxConcurrentTasks: 3
+            maxConcurrentTasks: 3,
           },
           {
             name: 'agent-2',
-            maxConcurrentTasks: 3
-          }
+            maxConcurrentTasks: 3,
+          },
         ],
         distributedTasksConfig: {
-          'build': {
+          build: {
             parallel: true,
-            maxParallel: 6
+            maxParallel: 6,
           },
-          'test': {
+          test: {
             parallel: true,
-            maxParallel: 4
+            maxParallel: 4,
           },
-          'lint': {
+          lint: {
             parallel: true,
-            maxParallel: 8
-          }
+            maxParallel: 8,
+          },
         },
         caching: {
           enabled: true,
           location: 'local',
-          maxSizeGb: 10
-        }
-      })
+          maxSizeGb: 10,
+        },
+      }),
     };
   }
 
@@ -388,19 +392,20 @@ export class NxIntegration {
       name: 'nx-cloud',
       setup: () => ({
         enabled: this.config.cloudEnabled,
-        accessToken: (typeof process !== 'undefined' && process.env?.NX_CLOUD_ACCESS_TOKEN) || undefined,
+        accessToken:
+          (typeof process !== 'undefined' && process.env?.NX_CLOUD_ACCESS_TOKEN) || undefined,
         url: 'https://nx.app',
         caching: {
           enabled: true,
-          readOnly: false
+          readOnly: false,
         },
         distributedTaskExecution: {
-          enabled: this.config.distributedTaskExecution
+          enabled: this.config.distributedTaskExecution,
         },
         analytics: {
-          enabled: true
-        }
-      })
+          enabled: true,
+        },
+      }),
     };
   }
 
@@ -409,7 +414,7 @@ export class NxIntegration {
       this.setupWorkspace(),
       this.setupModuleFederation(),
       this.setupDistributedTaskExecution(),
-      this.setupCloudIntegration()
+      this.setupCloudIntegration(),
     ]);
 
     return integrations.filter(Boolean);
@@ -426,7 +431,7 @@ export class NxIntegration {
       migrate: 'nx migrate <package>',
       generate: 'nx generate <schematic>',
       run: 'nx run <project>:<target>',
-      'run-many': 'nx run-many --target=<target> --projects=<projects>'
+      'run-many': 'nx run-many --target=<target> --projects=<projects>',
     };
   }
 

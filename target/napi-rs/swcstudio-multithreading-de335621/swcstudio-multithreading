@@ -1,0 +1,126 @@
+{"kind": "struct", "name": "CrossbeamChannel", "js_doc": "", "def": "", "original_name": "CrossbeamChannel"}
+{"kind": "impl", "name": "CrossbeamChannel", "js_doc": "", "def": " constructor(bounded?: number | undefined | null)\\n send(message: string): boolean\\n receive(): string | null\\n isEmpty(): boolean\\n len(): number"}
+{"kind": "struct", "name": "CrossbeamAtomicCell", "js_doc": "", "def": "", "original_name": "CrossbeamAtomicCell"}
+{"kind": "impl", "name": "CrossbeamAtomicCell", "js_doc": "", "def": " constructor(initialValue: number)\\n load(): number\\n store(value: number): void\\n swap(value: number): number\\n compareExchange(current: number, new: number): boolean\\n fetchAdd(value: number): number\\n fetchSub(value: number): number"}
+{"kind": "struct", "name": "CrossbeamArrayQueue", "js_doc": "", "def": "", "original_name": "CrossbeamArrayQueue"}
+{"kind": "impl", "name": "CrossbeamArrayQueue", "js_doc": "", "def": " constructor(capacity: number)\\n push(item: string): boolean\\n pop(): string | null\\n isEmpty(): boolean\\n isFull(): boolean\\n len(): number\\n capacity(): number"}
+{"kind": "struct", "name": "CrossbeamSegQueue", "js_doc": "", "def": "", "original_name": "CrossbeamSegQueue"}
+{"kind": "impl", "name": "CrossbeamSegQueue", "js_doc": "", "def": " constructor()\\n push(item: string): void\\n pop(): string | null\\n isEmpty(): boolean\\n len(): number"}
+{"kind": "interface", "name": "RayonConfig", "js_doc": "", "def": "numThreads?: number\\nthreadName?: string\\nstackSize?: number\\npanicHandler?: boolean", "original_name": "RayonConfig"}
+{"kind": "struct", "name": "RayonThreadPool", "js_doc": "", "def": "", "original_name": "RayonThreadPool"}
+{"kind": "impl", "name": "RayonThreadPool", "js_doc": "", "def": " constructor(config?: RayonConfig | undefined | null)\\n currentNumThreads(): number"}
+{"kind": "fn", "name": "parallelMap", "js_doc": "", "def": "function parallelMap(data: Array<number>, operation: string, pool?: RayonThreadPool | undefined | null): Promise<unknown>"}
+{"kind": "fn", "name": "parallelReduce", "js_doc": "", "def": "function parallelReduce(data: Array<number>, operation: string, initial?: number | undefined | null, pool?: RayonThreadPool | undefined | null): Promise<unknown>"}
+{"kind": "fn", "name": "parallelFilter", "js_doc": "", "def": "function parallelFilter(data: Array<number>, operation: string, threshold?: number | undefined | null, pool?: RayonThreadPool | undefined | null): Promise<unknown>"}
+{"kind": "fn", "name": "parallelSort", "js_doc": "", "def": "function parallelSort(data: Array<number>, descending?: boolean | undefined | null, pool?: RayonThreadPool | undefined | null): Promise<unknown>"}
+{"kind": "fn", "name": "parallelChunkProcess", "js_doc": "", "def": "function parallelChunkProcess(data: Array<number>, chunkSize: number, operation: string, pool?: RayonThreadPool | undefined | null): Promise<unknown>"}
+{"kind": "fn", "name": "getRayonGlobalThreadCount", "js_doc": "", "def": "function getRayonGlobalThreadCount(): number"}
+{"kind": "interface", "name": "TokioRuntimeConfig", "js_doc": "", "def": "workerThreads?: number\\nmaxBlockingThreads?: number\\nthreadName?: string\\nthreadStackSize?: number\\nenableIo?: boolean\\nenableTime?: boolean", "original_name": "TokioRuntimeConfig"}
+{"kind": "struct", "name": "TokioRuntime", "js_doc": "", "def": "", "original_name": "TokioRuntime"}
+{"kind": "impl", "name": "TokioRuntime", "js_doc": "", "def": " constructor(config?: TokioRuntimeConfig | undefined | null)"}
+{"kind": "struct", "name": "TokioMpscChannel", "js_doc": "", "def": "", "original_name": "TokioMpscChannel"}
+{"kind": "impl", "name": "TokioMpscChannel", "js_doc": "", "def": " constructor()"}
+{"kind": "struct", "name": "TokioBroadcastChannel", "js_doc": "", "def": "", "original_name": "TokioBroadcastChannel"}
+{"kind": "impl", "name": "TokioBroadcastChannel", "js_doc": "", "def": " constructor(capacity: number)\\n send(message: string): number\\n receiverCount(): number"}
+{"kind": "fn", "name": "tokioDelay", "js_doc": "", "def": "function tokioDelay(durationMs: number, message: string): Promise<unknown>"}
+{"kind": "fn", "name": "tokioTimeout", "js_doc": "", "def": "function tokioTimeout(durationMs: number, timeoutMs: number, operation: string): Promise<unknown>"}
+{"kind": "fn", "name": "tokioParallelTasks", "js_doc": "", "def": "function tokioParallelTasks(tasks: Array<string>, delayMs: number): Promise<unknown>"}
+{"kind": "struct", "name": "TokioTimer", "js_doc": "", "def": "", "original_name": "TokioTimer"}
+{"kind": "impl", "name": "TokioTimer", "js_doc": "", "def": " constructor()\\n elapsedMs(): number\\n reset(): void"}
+{"kind": "fn", "name": "getTokioRuntimeMetrics", "js_doc": "", "def": "function getTokioRuntimeMetrics(): string"}
+{"kind": "struct", "name": "Mutex", "js_doc": "", "def": "", "original_name": "Mutex"}
+{"kind": "impl", "name": "Mutex", "js_doc": "", "def": " constructor(initialValue: string)\\n lock(): string\\n tryLock(): string | null\\n lockTimeout(timeoutMs: number): string | null\\n set(value: string): void\\n isLocked(): boolean"}
+{"kind": "struct", "name": "RwLock", "js_doc": "", "def": "", "original_name": "RwLock"}
+{"kind": "impl", "name": "RwLock", "js_doc": "", "def": " constructor(initialValue: string)\\n read(): string\\n write(value: string): void\\n tryRead(): string | null\\n tryWrite(value: string): boolean\\n readTimeout(timeoutMs: number): string | null\\n writeTimeout(value: string, timeoutMs: number): boolean\\n readerCount(): number\\n isLocked(): boolean\\n isLockedExclusive(): boolean"}
+{"kind": "struct", "name": "FairMutexWrapper", "js_doc": "", "def": "", "original_name": "FairMutexWrapper"}
+{"kind": "impl", "name": "FairMutexWrapper", "js_doc": "", "def": " constructor(initialValue: string)\\n lock(): string\\n tryLock(): string | null\\n set(value: string): void\\n isLocked(): boolean"}
+{"kind": "struct", "name": "OnceCell", "js_doc": "", "def": "", "original_name": "OnceCell"}
+{"kind": "impl", "name": "OnceCell", "js_doc": "", "def": " constructor()\\n get(): string | null\\n set(value: string): boolean\\n getOrInit(initValue: string): string\\n isInitialized(): boolean"}
+{"kind": "struct", "name": "Barrier", "js_doc": "", "def": "", "original_name": "Barrier"}
+{"kind": "impl", "name": "Barrier", "js_doc": "", "def": " constructor(n: number)\\n wait(): boolean"}
+{"kind": "struct", "name": "Semaphore", "js_doc": "", "def": "", "original_name": "Semaphore"}
+{"kind": "impl", "name": "Semaphore", "js_doc": "", "def": " constructor(permits: number)\\n acquire(): Promise<void>\\n tryAcquire(): boolean\\n availablePermits(): number\\n release(n: number): void"}
+{"kind": "fn", "name": "createParkingLotMutex", "js_doc": "", "def": "function createParkingLotMutex(initialValue: string): any"}
+{"kind": "fn", "name": "createParkingLotRwlock", "js_doc": "", "def": "function createParkingLotRwlock(initialValue: string): RwLock"}
+{"kind": "fn", "name": "createFairMutex", "js_doc": "", "def": "function createFairMutex(initialValue: string): FairMutexWrapper"}
+{"kind": "fn", "name": "createOnceCell", "js_doc": "", "def": "function createOnceCell(): OnceCell"}
+{"kind": "fn", "name": "createBarrier", "js_doc": "", "def": "function createBarrier(n: number): Barrier"}
+{"kind": "fn", "name": "createSemaphore", "js_doc": "", "def": "function createSemaphore(permits: number): Semaphore"}
+{"kind": "struct", "name": "DashMap", "js_doc": "", "def": "", "original_name": "DashMap"}
+{"kind": "impl", "name": "DashMap", "js_doc": "", "def": " constructor()\\nstatic withCapacity(capacity: number): DashMap\\n insert(key: string, value: string): string | null\\n get(key: string): string | null\\n remove(key: string): string | null\\n containsKey(key: string): boolean\\n len(): number\\n isEmpty(): boolean\\n clear(): void\\n getOrInsert(key: string, defaultValue: string): string\\n update(key: string, updater: string): boolean\\n keys(): Array<string>\\n values(): Array<string>\\n entries(): Array<Array<string>>\\n retain(predicateKey: string): void\\n shrinkToFit(): void"}
+{"kind": "struct", "name": "DashSet", "js_doc": "", "def": "", "original_name": "DashSet"}
+{"kind": "impl", "name": "DashSet", "js_doc": "", "def": " constructor()\\n insert(value: string): boolean\\n remove(value: string): boolean\\n contains(value: string): boolean\\n len(): number\\n isEmpty(): boolean\\n clear(): void\\n toVec(): Array<string>"}
+{"kind": "struct", "name": "ShardedMap", "js_doc": "", "def": "", "original_name": "ShardedMap"}
+{"kind": "impl", "name": "ShardedMap", "js_doc": "", "def": " constructor(shardCount: number)\\n insert(key: string, value: string): string | null\\n get(key: string): string | null\\n remove(key: string): string | null\\n containsKey(key: string): boolean\\n len(): number\\n clear(): void"}
+{"kind": "fn", "name": "createDashmap", "js_doc": "", "def": "function createDashmap(): DashMap"}
+{"kind": "fn", "name": "createDashmapWithCapacity", "js_doc": "", "def": "function createDashmapWithCapacity(capacity: number): DashMap"}
+{"kind": "fn", "name": "createDashset", "js_doc": "", "def": "function createDashset(): DashSet"}
+{"kind": "fn", "name": "createShardedMap", "js_doc": "", "def": "function createShardedMap(shardCount: number): ShardedMap"}
+{"kind": "struct", "name": "FlumeChannel", "js_doc": "", "def": "", "original_name": "FlumeChannel"}
+{"kind": "impl", "name": "FlumeChannel", "js_doc": "", "def": " constructor()\\nstatic bounded(capacity: number): FlumeChannel\\n send(message: string): void\\n trySend(message: string): boolean\\n sendAsync(message: string): Promise<void>\\n recv(): string | null\\n tryRecv(): string | null\\n recvAsync(): Promise<string | null>\\n recvTimeout(timeoutMs: number): string | null\\n len(): number\\n isEmpty(): boolean\\n isFull(): boolean\\n capacity(): number | null\\n senderCount(): number\\n receiverCount(): number\\n drain(): Array<string>\\n cloneSender(): FlumeSender\\n cloneReceiver(): FlumeReceiver"}
+{"kind": "struct", "name": "FlumeSender", "js_doc": "", "def": "", "original_name": "FlumeSender"}
+{"kind": "impl", "name": "FlumeSender", "js_doc": "", "def": " send(message: string): void\\n trySend(message: string): boolean\\n sendAsync(message: string): Promise<void>\\n isDisconnected(): boolean\\n senderCount(): number"}
+{"kind": "struct", "name": "FlumeReceiver", "js_doc": "", "def": "", "original_name": "FlumeReceiver"}
+{"kind": "impl", "name": "FlumeReceiver", "js_doc": "", "def": " recv(): string | null\\n tryRecv(): string | null\\n recvAsync(): Promise<string | null>\\n recvTimeout(timeoutMs: number): string | null\\n isDisconnected(): boolean\\n len(): number\\n isEmpty(): boolean\\n drain(): Array<string>"}
+{"kind": "struct", "name": "FlumeSelector", "js_doc": "", "def": "", "original_name": "FlumeSelector"}
+{"kind": "impl", "name": "FlumeSelector", "js_doc": "", "def": " constructor()\\n addReceiver(receiver: FlumeReceiver): void\\n select(): SelectResult | null\\n trySelect(): SelectResult | null"}
+{"kind": "interface", "name": "SelectResult", "js_doc": "", "def": "channelIndex: number\\nmessage: string", "original_name": "SelectResult"}
+{"kind": "fn", "name": "createFlumeUnbounded", "js_doc": "", "def": "function createFlumeUnbounded(): FlumeChannel"}
+{"kind": "fn", "name": "createFlumeBounded", "js_doc": "", "def": "function createFlumeBounded(capacity: number): FlumeChannel"}
+{"kind": "fn", "name": "createFlumeSelector", "js_doc": "", "def": "function createFlumeSelector(): FlumeSelector"}
+{"kind": "struct", "name": "SimdF32X4", "js_doc": "", "def": "", "original_name": "SimdF32x4"}
+{"kind": "impl", "name": "SimdF32X4", "js_doc": "", "def": " constructor(a: number, b: number, c: number, d: number)\\nstatic fromArray(values: Array<number>): SimdF32X4\\n add(other: SimdF32X4): SimdF32X4\\n sub(other: SimdF32X4): SimdF32X4\\n mul(other: SimdF32X4): SimdF32X4\\n div(other: SimdF32X4): SimdF32X4\\n dot(other: SimdF32X4): number\\n sqrt(): SimdF32X4\\n abs(): SimdF32X4\\n min(other: SimdF32X4): SimdF32X4\\n max(other: SimdF32X4): SimdF32X4\\n toArray(): Array<number>\\n sum(): number\\n horizontalSum(): number"}
+{"kind": "struct", "name": "SimdF32X8", "js_doc": "", "def": "", "original_name": "SimdF32x8"}
+{"kind": "impl", "name": "SimdF32X8", "js_doc": "", "def": " constructor(values: Array<number>)\\n add(other: SimdF32X8): SimdF32X8\\n mul(other: SimdF32X8): SimdF32X8\\n toArray(): Array<number>\\n sum(): number"}
+{"kind": "struct", "name": "SimdMatrix", "js_doc": "", "def": "", "original_name": "SimdMatrix"}
+{"kind": "impl", "name": "SimdMatrix", "js_doc": "", "def": " constructor(rows: number, cols: number)\\nstatic fromVec(rows: number, cols: number, values: Array<number>): SimdMatrix\\n add(other: SimdMatrix): SimdMatrix\\n mul(other: SimdMatrix): SimdMatrix\\n transpose(): SimdMatrix\\n scale(scalar: number): SimdMatrix\\n rows(): number\\n cols(): number\\n get(row: number, col: number): number\\n set(row: number, col: number, value: number): void\\n toVec(): Array<number>"}
+{"kind": "fn", "name": "simdDotProduct", "js_doc": "", "def": "function simdDotProduct(a: Array<number>, b: Array<number>): number"}
+{"kind": "fn", "name": "simdVectorAdd", "js_doc": "", "def": "function simdVectorAdd(a: Array<number>, b: Array<number>): Array<number>"}
+{"kind": "fn", "name": "simdVectorScale", "js_doc": "", "def": "function simdVectorScale(vec: Array<number>, scalar: number): Array<number>"}
+{"kind": "fn", "name": "simdParallelSum", "js_doc": "", "def": "function simdParallelSum(data: Array<number>): number"}
+{"kind": "fn", "name": "createSimdF32X4", "js_doc": "", "def": "function createSimdF32X4(a: number, b: number, c: number, d: number): SimdF32X4"}
+{"kind": "fn", "name": "createSimdMatrix", "js_doc": "", "def": "function createSimdMatrix(rows: number, cols: number): SimdMatrix"}
+{"kind": "struct", "name": "ThreadLocalStorage", "js_doc": "", "def": "", "original_name": "ThreadLocalStorage"}
+{"kind": "impl", "name": "ThreadLocalStorage", "js_doc": "", "def": " constructor(defaultValue: string)\\n get(): string\\n set(value: string): void\\n update(updater: string): string\\n clear(): void\\n iterValues(): Array<string>"}
+{"kind": "struct", "name": "ThreadLocalMap", "js_doc": "", "def": "", "original_name": "ThreadLocalMap"}
+{"kind": "impl", "name": "ThreadLocalMap", "js_doc": "", "def": " constructor()\\n get(key: string): string | null\\n set(key: string, value: string): void\\n remove(key: string): string | null\\n containsKey(key: string): boolean\\n keys(): Array<string>\\n values(): Array<string>\\n clear(): void\\n len(): number"}
+{"kind": "struct", "name": "ThreadLocalCounter", "js_doc": "", "def": "", "original_name": "ThreadLocalCounter"}
+{"kind": "impl", "name": "ThreadLocalCounter", "js_doc": "", "def": " constructor(initialValue: number)\\n get(): number\\n increment(): number\\n decrement(): number\\n add(amount: number): number\\n reset(): void\\n getAllValues(): Array<number>\\n sumAll(): number"}
+{"kind": "struct", "name": "ThreadId", "js_doc": "", "def": "", "original_name": "ThreadId"}
+{"kind": "impl", "name": "ThreadId", "js_doc": "", "def": "static current(): ThreadId\\n getId(): string\\nstatic getName(): string | null\\nstatic setName(name: string): void"}
+{"kind": "fn", "name": "registerCurrentThread", "js_doc": "", "def": "function registerCurrentThread(name: string): void"}
+{"kind": "fn", "name": "unregisterCurrentThread", "js_doc": "", "def": "function unregisterCurrentThread(): void"}
+{"kind": "fn", "name": "getAllThreadNames", "js_doc": "", "def": "function getAllThreadNames(): Array<Array<string>>"}
+{"kind": "fn", "name": "createThreadLocalStorage", "js_doc": "", "def": "function createThreadLocalStorage(defaultValue: string): ThreadLocalStorage"}
+{"kind": "fn", "name": "createThreadLocalMap", "js_doc": "", "def": "function createThreadLocalMap(): ThreadLocalMap"}
+{"kind": "fn", "name": "createThreadLocalCounter", "js_doc": "", "def": "function createThreadLocalCounter(initialValue: number): ThreadLocalCounter"}
+{"kind": "struct", "name": "BumpAllocator", "js_doc": "", "def": "", "original_name": "BumpAllocator"}
+{"kind": "impl", "name": "BumpAllocator", "js_doc": "", "def": " constructor()\\nstatic withCapacity(capacity: number): BumpAllocator\\n allocString(value: string): void\\n allocBytes(size: number): void\\n allocatedBytes(): number\\n reset(): void\\n chunkCapacity(): number"}
+{"kind": "struct", "name": "MemoryMappedFile", "js_doc": "", "def": "", "original_name": "MemoryMappedFile"}
+{"kind": "impl", "name": "MemoryMappedFile", "js_doc": "", "def": "static openRead(path: string): MemoryMappedFile\\nstatic openWrite(path: string, size: number): MemoryMappedFile\\n read(offset: number, length: number): Array<number>\\n readString(offset: number, length: number): string\\n write(offset: number, data: Array<number>): void\\n writeString(offset: number, data: string): void\\n flush(): void\\n size(): number\\n path(): string"}
+{"kind": "struct", "name": "MemoryPool", "js_doc": "", "def": "", "original_name": "MemoryPool"}
+{"kind": "impl", "name": "MemoryPool", "js_doc": "", "def": " constructor(blockSize: number, initialBlocks: number)\\n allocate(): number\\n deallocate(blockId: number): void\\n write(blockId: number, offset: number, data: Array<number>): void\\n read(blockId: number, offset: number, length: number): Array<number>\\n blockSize(): number\\n totalBlocks(): number\\n freeBlocks(): number\\n usedBlocks(): number"}
+{"kind": "fn", "name": "createBumpAllocator", "js_doc": "", "def": "function createBumpAllocator(): BumpAllocator"}
+{"kind": "fn", "name": "createMemoryPool", "js_doc": "", "def": "function createMemoryPool(blockSize: number, initialBlocks: number): MemoryPool"}
+{"kind": "fn", "name": "getMultithreadingInfo", "js_doc": "", "def": "function getMultithreadingInfo(): string"}
+{"kind": "fn", "name": "initializeMultithreading", "js_doc": "", "def": "function initializeMultithreading(): string"}
+{"kind": "fn", "name": "getSystemInfo", "js_doc": "", "def": "function getSystemInfo(): SystemInfo"}
+{"kind": "interface", "name": "SystemInfo", "js_doc": "", "def": "cpuCores: number\\nrayonThreads: number\\ntokioAvailable: boolean\\ncrossbeamAvailable: boolean\\nversion: string", "original_name": "SystemInfo"}
+{"kind": "struct", "name": "MultithreadingManager", "js_doc": "", "def": "", "original_name": "MultithreadingManager"}
+{"kind": "impl", "name": "MultithreadingManager", "js_doc": "", "def": " constructor()\\n initializeRayon(config?: RayonConfig | undefined | null): void\\n initializeTokio(config?: TokioRuntimeConfig | undefined | null): void\\n getRayonPool(): boolean\\n getTokioRuntime(): boolean\\n isRayonInitialized(): boolean\\n isTokioInitialized(): boolean\\n cleanup(): void"}
+{"kind": "fn", "name": "createCrossbeamChannel", "js_doc": "", "def": "function createCrossbeamChannel(bounded?: number | undefined | null): CrossbeamChannel"}
+{"kind": "fn", "name": "createCrossbeamAtomicCell", "js_doc": "", "def": "function createCrossbeamAtomicCell(initialValue: number): CrossbeamAtomicCell"}
+{"kind": "fn", "name": "createCrossbeamArrayQueue", "js_doc": "", "def": "function createCrossbeamArrayQueue(capacity: number): CrossbeamArrayQueue"}
+{"kind": "fn", "name": "createCrossbeamSegQueue", "js_doc": "", "def": "function createCrossbeamSegQueue(): CrossbeamSegQueue"}
+{"kind": "fn", "name": "createRayonThreadPool", "js_doc": "", "def": "function createRayonThreadPool(config?: RayonConfig | undefined | null): RayonThreadPool"}
+{"kind": "fn", "name": "createTokioRuntime", "js_doc": "", "def": "function createTokioRuntime(config?: TokioRuntimeConfig | undefined | null): TokioRuntime"}
+{"kind": "fn", "name": "createTokioMpscChannel", "js_doc": "", "def": "function createTokioMpscChannel(): TokioMpscChannel"}
+{"kind": "fn", "name": "createTokioBroadcastChannel", "js_doc": "", "def": "function createTokioBroadcastChannel(capacity: number): TokioBroadcastChannel"}
+{"kind": "fn", "name": "createTokioTimer", "js_doc": "", "def": "function createTokioTimer(): TokioTimer"}
+{"kind": "fn", "name": "benchmarkParallelOperations", "js_doc": "", "def": "function benchmarkParallelOperations(dataSize: number, operation: string): Promise<unknown>"}
+{"kind": "interface", "name": "BenchmarkResult", "js_doc": "", "def": "operation: string\\ndataSize: number\\nresult: number\\ndurationMs: number\\nthroughput: number", "original_name": "BenchmarkResult"}
+{"kind": "fn", "name": "stressTestConcurrency", "js_doc": "", "def": "function stressTestConcurrency(numTasks: number, taskDurationMs: number, callback: ((err: Error | null, arg: StressTestResult) => any)): void"}
+{"kind": "interface", "name": "StressTestResult", "js_doc": "", "def": "taskId: number\\ndurationMs: number\\nthreadId: string\\nstatus: string", "original_name": "StressTestResult"}
+{"kind": "fn", "name": "getPerformanceMetrics", "js_doc": "", "def": "function getPerformanceMetrics(): PerformanceMetrics"}
+{"kind": "interface", "name": "PerformanceMetrics", "js_doc": "", "def": "cpuCores: number\\nrayonThreads: number\\nmemoryUsageMb: number\\nuptimeMs: number\\nactiveTasks: number", "original_name": "PerformanceMetrics"}
+{"kind": "fn", "name": "shutdownMultithreading", "js_doc": "", "def": "function shutdownMultithreading(): string"}

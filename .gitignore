@@ -144,5 +144,10 @@ Thumbs.db
 # Zed editor
 .zed/
 
+# Nx cache and workspace data
+.nx/cache
+.nx/workspace-data
+.nx/daemon
+
 # Local development
 .local/

@@ -1,10 +1,14 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from '@remix-run/node';
 import { useQuery } from '@tanstack/react-query';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Katalyst Remix - React 19 + Remix Framework" },
-    { name: "description", content: "High-performance full-stack framework combining React 19 with Remix and Rust toolchain" },
+    { title: 'Katalyst Remix - React 19 + Remix Framework' },
+    {
+      name: 'description',
+      content:
+        'High-performance full-stack framework combining React 19 with Remix and Rust toolchain',
+    },
   ];
 };
 
@@ -15,11 +19,9 @@ export default function Index() {
   });
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
+    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
       <h1>{message}</h1>
-      <p>
-        Built with React 19, Remix, and the complete Tanstack ecosystem.
-      </p>
+      <p>Built with React 19, Remix, and the complete Tanstack ecosystem.</p>
       <ul>
         <li>
           <strong>React 19</strong> - Latest React with concurrent features

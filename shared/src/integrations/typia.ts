@@ -54,20 +54,11 @@ export class TypiaIntegration {
           randomDataGeneration: true,
           jsonSchemaGeneration: true,
           performanceOptimization: true,
-          zeroRuntimeOverhead: true
-        }
+          zeroRuntimeOverhead: true,
+        },
       }),
-      plugins: [
-        'typia/lib/transform',
-        '@typia/unplugin',
-        'unplugin-typia'
-      ],
-      dependencies: [
-        'typia',
-        '@typia/unplugin',
-        'unplugin-typia',
-        'typescript'
-      ]
+      plugins: ['typia/lib/transform', '@typia/unplugin', 'unplugin-typia'],
+      dependencies: ['typia', '@typia/unplugin', 'unplugin-typia', 'typescript'],
     };
   }
 
@@ -79,23 +70,23 @@ export class TypiaIntegration {
           assert: {
             description: 'Throws error if validation fails',
             usage: 'typia.assert<T>(input)',
-            performance: '30,000x faster than class-validator'
+            performance: '30,000x faster than class-validator',
           },
           is: {
             description: 'Returns boolean for validation result',
             usage: 'typia.is<T>(input)',
-            performance: '20,000x faster than ajv'
+            performance: '20,000x faster than ajv',
           },
           validate: {
             description: 'Returns validation result with error details',
             usage: 'typia.validate<T>(input)',
-            performance: '200x faster than joi'
+            performance: '200x faster than joi',
           },
           equals: {
             description: 'Deep equality check with type safety',
             usage: 'typia.equals<T>(a, b)',
-            performance: '10,000x faster than lodash.isEqual'
-          }
+            performance: '10,000x faster than lodash.isEqual',
+          },
         },
         customValidators: {
           email: (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
@@ -107,18 +98,21 @@ export class TypiaIntegration {
               return false;
             }
           },
-          uuid: (value: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value),
+          uuid: (value: string) =>
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+              value
+            ),
           phoneNumber: (value: string) => /^\+?[\d\s\-\(\)]+$/.test(value),
-          creditCard: (value: string) => /^\d{4}[\s\-]?\d{4}[\s\-]?\d{4}[\s\-]?\d{4}$/.test(value)
+          creditCard: (value: string) => /^\d{4}[\s\-]?\d{4}[\s\-]?\d{4}[\s\-]?\d{4}$/.test(value),
         },
         errorMessages: {
           required: 'This field is required',
           type: 'Expected {expected} but received {actual}',
           format: 'Invalid format for {property}',
           range: 'Value must be between {min} and {max}',
-          length: 'Length must be between {min} and {max} characters'
-        }
-      })
+          length: 'Length must be between {min} and {max} characters',
+        },
+      }),
     };
   }
 
@@ -130,30 +124,30 @@ export class TypiaIntegration {
           stringify: {
             description: 'JSON.stringify with type safety and performance',
             usage: 'typia.stringify<T>(input)',
-            performance: '200x faster than JSON.stringify'
+            performance: '200x faster than JSON.stringify',
           },
           assertStringify: {
             description: 'Validates then stringifies',
             usage: 'typia.assertStringify<T>(input)',
-            performance: '10x faster than validate + stringify'
+            performance: '10x faster than validate + stringify',
           },
           isStringify: {
             description: 'Conditionally stringifies if valid',
             usage: 'typia.isStringify<T>(input)',
-            performance: '5x faster than validate + stringify'
-          }
+            performance: '5x faster than validate + stringify',
+          },
         },
         deserializers: {
           parse: {
             description: 'JSON.parse with type safety',
             usage: 'typia.parse<T>(json)',
-            performance: '5x faster than JSON.parse + validation'
+            performance: '5x faster than JSON.parse + validation',
           },
           assertParse: {
             description: 'Parses and validates JSON',
             usage: 'typia.assertParse<T>(json)',
-            performance: '3x faster than parse + validate'
-          }
+            performance: '3x faster than parse + validate',
+          },
         },
         options: {
           space: this.config.target === 'es5' ? 0 : 2,
@@ -161,9 +155,9 @@ export class TypiaIntegration {
           reviver: null,
           bigint: true,
           date: 'iso',
-          undefined: 'null'
-        }
-      })
+          undefined: 'null',
+        },
+      }),
     };
   }
 
@@ -175,41 +169,41 @@ export class TypiaIntegration {
           random: {
             description: 'Generate random data matching type',
             usage: 'typia.random<T>()',
-            performance: '100x faster than faker.js'
+            performance: '100x faster than faker.js',
           },
           createRandom: {
             description: 'Create random generator function',
             usage: 'const gen = typia.createRandom<T>()',
-            performance: '1000x faster than repeated faker calls'
-          }
+            performance: '1000x faster than repeated faker calls',
+          },
         },
         constraints: {
           string: {
             minLength: 1,
             maxLength: 100,
-            format: 'default'
+            format: 'default',
           },
           number: {
             minimum: -1000000,
             maximum: 1000000,
-            multipleOf: 1
+            multipleOf: 1,
           },
           array: {
             minItems: 0,
-            maxItems: 10
+            maxItems: 10,
           },
           object: {
-            additionalProperties: false
-          }
+            additionalProperties: false,
+          },
         },
         customGenerators: {
           email: () => `user${Math.floor(Math.random() * 1000)}@example.com`,
           uuid: () => crypto.randomUUID(),
           timestamp: () => new Date().toISOString(),
           phoneNumber: () => `+1${Math.floor(Math.random() * 9000000000) + 1000000000}`,
-          url: () => `https://example${Math.floor(Math.random() * 100)}.com`
-        }
-      })
+          url: () => `https://example${Math.floor(Math.random() * 100)}.com`,
+        },
+      }),
     };
   }
 
@@ -221,24 +215,24 @@ export class TypiaIntegration {
           encode: {
             description: 'Encode to Protocol Buffer format',
             usage: 'typia.protobuf.encode<T>(input)',
-            performance: '5x faster than protobuf.js'
+            performance: '5x faster than protobuf.js',
           },
           decode: {
             description: 'Decode from Protocol Buffer format',
             usage: 'typia.protobuf.decode<T>(buffer)',
-            performance: '3x faster than protobuf.js'
+            performance: '3x faster than protobuf.js',
           },
           message: {
             description: 'Create protobuf message definition',
             usage: 'typia.protobuf.message<T>()',
-            performance: 'Zero runtime overhead'
-          }
+            performance: 'Zero runtime overhead',
+          },
         },
         features: {
           wireFormat: 'proto3',
           compression: true,
           streaming: true,
-          reflection: false
+          reflection: false,
         },
         options: {
           keepCase: false,
@@ -248,9 +242,9 @@ export class TypiaIntegration {
           defaults: true,
           arrays: true,
           objects: true,
-          oneofs: true
-        }
-      })
+          oneofs: true,
+        },
+      }),
     };
   }
 
@@ -262,13 +256,13 @@ export class TypiaIntegration {
           application: {
             description: 'Generate complete JSON Schema application',
             usage: 'typia.json.application<[T1, T2, ...]>()',
-            performance: 'Compile-time generation'
+            performance: 'Compile-time generation',
           },
           schema: {
             description: 'Generate JSON Schema for single type',
             usage: 'typia.json.schema<T>()',
-            performance: 'Zero runtime cost'
-          }
+            performance: 'Zero runtime cost',
+          },
         },
         features: {
           draft: '2020-12',
@@ -276,16 +270,16 @@ export class TypiaIntegration {
           serialization: true,
           documentation: true,
           examples: true,
-          defaults: true
+          defaults: true,
         },
         customizations: {
           title: (type: string) => `${type} Schema`,
           description: (type: string) => `JSON Schema for ${type}`,
           examples: true,
           additionalProperties: false,
-          required: true
-        }
-      })
+          required: true,
+        },
+      }),
     };
   }
 
@@ -299,30 +293,30 @@ export class TypiaIntegration {
           optimization: this.config.optimization,
           inlining: true,
           treeshaking: true,
-          minification: true
+          minification: true,
         },
         performance: {
           validation: '30,000x faster than alternatives',
           serialization: '200x faster than JSON methods',
           parsing: '5x faster than native parsing',
-          generation: '100x faster than faker libraries'
+          generation: '100x faster than faker libraries',
         },
         benchmarks: {
           'class-validator': '30,000x slower',
-          'ajv': '20,000x slower',
-          'joi': '200x slower',
-          'zod': '400x slower',
-          'yup': '500x slower',
-          'superstruct': '100x slower'
+          ajv: '20,000x slower',
+          joi: '200x slower',
+          zod: '400x slower',
+          yup: '500x slower',
+          superstruct: '100x slower',
         },
         features: {
           zeroRuntimeOverhead: true,
           compileTimeValidation: true,
           typeInference: true,
           errorReporting: true,
-          sourceMapping: true
-        }
-      })
+          sourceMapping: true,
+        },
+      }),
     };
   }
 
@@ -334,7 +328,7 @@ export class TypiaIntegration {
       this.setupRandomGeneration(),
       this.setupProtobuf(),
       this.setupJsonSchema(),
-      this.setupOptimization()
+      this.setupOptimization(),
     ]);
 
     return integrations.filter(Boolean);
@@ -409,7 +403,7 @@ export class TypiaIntegration {
         const buffer = typia.protobuf.encode(message);
 
         const decoded = typia.protobuf.decode<Message>(buffer);
-      `
+      `,
     };
   }
 

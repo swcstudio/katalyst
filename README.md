@@ -1,732 +1,557 @@
-# The Katalyst-React Framework
+# Katalyst - Spectrum Web Co AIO Management System
 
 <p align="center">
   <img src="https://via.placeholder.com/200x200?text=Katalyst" alt="Katalyst Logo" width="200" height="200">
 </p>
 
 <p align="center">
-  A State-of-the-Art Advanced HPC React Frontend Framework for creating unified Web, mobile, desktop & metaverse applications. Using our proprietary Rust toolchain & Multithreading module experience React 70% faster than vanilla. If you're acustomed to writing React apps without a fullstack framework you'll enjoy the DevEx with Katalyst which is modelled around providing the most vanilla React 19 experience.
+  <strong>The Complete All-in-One Management System for Modern Web Companies</strong>
+</p>
+
+<p align="center">
+  A state-of-the-art React 19 framework powering marketing websites, consumer blogs, NFT storefronts, email management, admin dashboards, and content management systems.
 </p>
 
 <p align="center">
   <a href="#features">Features</a> •
-  <a href="#getting-started">Getting Started</a> •
+  <a href="#quick-start">Quick Start</a> •
   <a href="#architecture">Architecture</a> •
-  <a href="#integrations">Integrations</a> •
+  <a href="#build-system">Build System</a> •
   <a href="#documentation">Documentation</a>
 </p>
 
-## Overview
+---
 
-Katalyst is what happens when you want some R&R in your job; you can rest easy & relax after writing your organisation a Rust&React web application which is futureproofed for Web3 Advancements. Writing for the Metaverse has been an uphill battle; Typescript support is not feasible with the Fullstack frameworks on the market. You require a highly optimised Real-time GenUI-native React framework ideally with a backend 3000% faster than a FastAPI Python-based backend; which is all included in the Katalyst Family of technologies.
+## 🌟 What is Katalyst?
 
-- **Core**: Pure application UI for Web, Mobile, Desktop & Metaverse with advanced feature support using multithreading, WebAssembly for creating Mixed Reality representations of Autonomous AI's. We've included our GenerativeUI Realtime Testkit Framework which allows engineers to test the operability of AI Generated Code whilst it's generated. Access the full-suite of Tailwind UI application components because Katalyst is such a vanilla React framework that it's perfectly suited making quickly scaffolding full App UI's in hours, not days.
-- **Remix**: We have 3 full frameworks inside of Katalyst, each supporting a different part of the frontend experience. Remix; whilst often overlooked in today's SaaS culture a proper Admin Dashboard and fully-featured Admin Panel make maintaining your Sales, Enquiries & much more significantly easier, providing invaluable metrics directly inside the application.
-- **Next.js**: Next.js is still perfect for writing marketing websites; Aceternity UI & Tailwind UI are a fantastic coupling for being able to create some of the most modern & secure marketing websites. With Payload CMS natively integrated with Admin Panel for writing SEO-friendly blog posts using AI; maintain your firms blog posts with the highest quality resources. Introduce a simple Storefront using Medusa and sell digital assets which are related to your overall Software Product.
+Katalyst is Spectrum Web Co's comprehensive frontend solution that replaces the need for multiple separate systems. Think of it as **WordPress for engineers** - but built with modern React 19, TypeScript, and a unified build system.
 
-## Features
+Instead of cobbling together different tools and platforms, Katalyst provides everything you need in one cohesive system:
 
-- 🚀 **React 19 Support** - Latest React features with concurrent rendering
-- 🏗️ **Micro-Frontend Architecture** - Scalable, modular application structure
-- ⚡ **RSpack Bundling** - Lightning-fast builds with Rust-powered bundler
-- 🎨 **Tailwind CSS 4.0** - Modern utility-first styling
-- 🔧 **TypeScript First** - Full type safety across the entire stack
-- 🌐 **Web3 Ready** - Built-in blockchain and crypto integrations
-- 🤖 **AI Integration** - Advanced automation and intelligent features
-- 📱 **Multi-Platform** - Desktop (Electron) and mobile (React Native) support
-- 🔒 **Enterprise Security** - Clerk authentication and advanced security features
-- 📊 **Performance Optimized** - Advanced caching, streaming, and optimization
+### 🎯 Core Applications
 
-## Architecture
+- **🚀 Marketing Website** (Next.js) - Static site generation with SEO optimization
+- **📝 Consumer Blog** (Next.js + Payload CMS) - Content management with drag & drop editing
+- **🖼️ NFT Storefront** (Next.js) - Complete marketplace for digital assets
+- **📧 Email Management** (Core + Fly.io Backend) - Self-hosted email server interface
+- **📊 Admin Dashboard** (Remix) - Comprehensive data management and analytics
+- **⚙️ Management Panel** (Remix) - Storefront and content administration
+- **🌌 Metaverse Apps** (WebXR) - Immersive VR/AR experiences across all platforms
 
-### Micro-Frontend Structure
+### 🛠️ Technical Foundation
+
+- **React 19** with concurrent features and modern patterns
+- **3 Meta Frameworks**: Core (TanStack Router), Remix (Admin), Next.js (Marketing)
+- **Unified Build System**: Orchestrates Deno, Bun, NX, and Turborepo
+- **TypeScript-First** with strict type safety across the entire stack
+- **Performance Optimized** with multithreading, WebAssembly, and intelligent caching
+- **Multi-Platform** support for web, desktop (Tauri), mobile (RSpeedy), and VR/AR (WebXR)
+- **Metaverse-Ready** with spatial UI, hand tracking, and immersive 3D environments
+
+---
+
+## ✨ Features
+
+### 🏢 Business Applications
+- **Marketing Website**: Modern, fast, SEO-optimized landing pages
+- **Blog System**: Drag & drop post creation with rich content editing
+- **NFT Marketplace**: Complete storefront with wallet integration
+- **Email Platform**: Self-hosted email management with custom apps
+- **Analytics Dashboard**: Real-time data visualization and insights
+- **Content Management**: Intuitive admin interface for all content
+
+### 🔧 Developer Experience
+- **Hot Reload**: Instant development feedback across all frameworks
+- **Type Safety**: End-to-end TypeScript with strict checking
+- **Component Library**: Shared design system across all applications
+- **Testing Suite**: Comprehensive unit, integration, and E2E tests
+- **Performance Monitoring**: Built-in performance tracking and optimization
+- **Cloud Caching**: Intelligent build caching for 10-50x faster builds
+
+### 🚀 Advanced Features
+- **Multithreading**: Web Workers for heavy computations
+- **WebAssembly**: Rust-powered performance optimizations
+- **Web3 Integration**: Built-in blockchain and crypto support
+- **AI Integration**: Advanced automation and intelligent features
+- **Real-time Updates**: Live data synchronization across applications
+- **Progressive Enhancement**: Works offline with service workers
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- **Deno 2.0+** (primary runtime)
+- **Bun 1.0+** (fallback package manager)
+- **Node.js 22.15+** (for compatibility)
+
+### 1. Installation
+```bash
+# Clone the repository
+git clone https://github.com/swcstudio/katalyst.git
+cd katalyst
+
+# Install dependencies (Deno primary, Bun fallback)
+make install
+# or
+npm run install
+```
+
+### 2. Development
+```bash
+# Start all applications
+make dev
+# or
+npm run dev
+
+# Start specific applications
+make dev-core      # Core application (port 20007)
+make dev-remix     # Admin dashboard (port 20008)
+make dev-nextjs    # Marketing website (port 20009)
+```
+
+### 3. Building
+```bash
+# Build all applications
+make build
+# or
+npm run build
+
+# Build for specific platforms
+make build-web     # Web applications
+make build-desktop # Desktop (Tauri)
+make build-mobile  # Mobile (Tauri)
+```
+
+### 4. Testing
+```bash
+# Run all tests
+make test
+# or
+npm test
+
+# Specific test types
+make test-unit         # Unit tests
+make test-integration  # Integration tests
+make test-e2e         # End-to-end tests
+make test-performance # Performance benchmarks
+```
+
+---
+
+## 🏗️ Architecture
+
+### Framework Structure
 ```
 katalyst/
-├── core/          # Pure React web app
-├── remix/         # Admin dashboard variant
-├── nextjs/        # Marketing website variant
-└── shared/        # Common utilities and integrations
+├── core/           # Main application (TanStack Router)
+│   ├── Email Management Interface
+│   ├── Real-time Dashboard
+│   ├── Web3/AI Integration
+│   └── Performance Optimizations
+├── remix/          # Admin dashboard (Remix)
+│   ├── Data Management
+│   ├── Analytics Dashboard
+│   ├── Content Administration
+│   └── Storefront Management
+├── next/           # Marketing website (Next.js)
+│   ├── Static Site Generation
+│   ├── Blog with Payload CMS
+│   ├── NFT Storefront
+│   └── SEO Optimization
+└── shared/         # Common utilities
+    ├── Components & Design System
+    ├── Hooks & State Management
+    ├── Types & Utilities
+    └── Performance Tools
 ```
 
 ### Technology Stack
 
-#### Core Technologies
+#### 🎯 Core Technologies
 - **React 19** - Latest React with concurrent features
-- **RSpack** - Rust-powered bundler for maximum performance
-- **TypeScript 5.6** - Advanced type safety
-- **Tailwind CSS 4.0** - Modern utility-first styling
-- **Biome** - Fast linting and formatting
-- **NX** - Monorepo management with AI-powered CI/CD
+- **TypeScript 5.6** - Strict type safety
+- **TanStack Router** - Type-safe routing for Core app
+- **Remix** - Full-stack framework for admin features
+- **Next.js 15** - Static generation for marketing
+- **Payload CMS** - Headless CMS for content management
 
-#### State Management & Data
-- **TanStack Router** - Type-safe routing with data loading
-- **TanStack Query** - Powerful data synchronization
-- **TanStack Form** - Type-safe form management
-- **TanStack Table** - Advanced data tables
-- **TanStack Virtual** - Virtualized scrolling
-- **Zustand** - Lightweight state management
+#### ⚡ Build & Performance
+- **RSpack** - Rust-powered bundler for maximum speed
+- **Turborepo** - Build pipeline optimization
+- **NX** - Intelligent monorepo management
+- **Deno** - Modern JavaScript runtime
+- **Bun** - Ultra-fast package manager
 
-#### Development & Tooling
-- **Storybook** - Component development environment
-- **Playwright** - End-to-end testing
-- **Vitest** - Unit testing framework
-- **React Inspector** - Component debugging
-- **ngrok** - Secure tunneling for development
-
-#### Enterprise Features
-- **Clerk** - Authentication and user management
+#### 🎨 UI & Styling
+- **Tailwind CSS 4.0** - Utility-first styling
 - **Arco Design** - Enterprise UI components
-- **StyleX** - Meta's CSS-in-JS solution
-- **Typia** - Runtime type validation
+- **Framer Motion** - Advanced animations
+- **React Three Fiber** - 3D graphics
 
-#### Micro-Frontend Platform
-- **EMP** - Enterprise Micro-Frontend Platform
-- **Module Federation** - Dynamic module loading
-- **Zephyr Cloud** - Micro-frontend acceleration
+#### 🔧 Advanced Features
+- **WebAssembly** - Rust-powered computations
+- **Web Workers** - Multithreading support
+- **Web3 Integration** - Blockchain connectivity
+- **AI Integration** - Intelligent automation
 
-#### Advanced Integrations
-- **Cosmos** - Web3 and blockchain integration
-- **Sails.js** - MVC backend framework
-- **Nitro** - Universal server functions
-- **Electron** - Desktop application support
+---
 
-## Getting Started
+## 🛠️ Build System
 
-### Prerequisites
-- Node.js 18+
-- Deno 2.0+
-- Rust 1.70+ (for toolchain)
+Katalyst uses a **unified build orchestrator** that intelligently manages multiple tools:
 
-### Installation
+### Tool Hierarchy
+1. **Primary**: Deno (package manager) + Turborepo (task runner)
+2. **Fallback**: Bun (package manager) + NX (task runner)
+3. **Compatibility**: npm/yarn for legacy support
 
+### Available Commands
+
+#### 📦 Package Management
 ```bash
-# Clone the repository
-git clone https://github.com/swcstudio/sse.git
-cd sse/katalyst
-
-# Install dependencies
-npm install
-
-# Start all variants in development
-npm run dev
-
-# Or start individual variants
-npm run dev:core     # Core web app on port 3000
-npm run dev:remix    # Remix admin on port 3001
-npm run dev:nextjs   # Next.js marketing on port 3002
+make install                 # Install with Deno (fallback to Bun)
+make install-fallback       # Force Bun installation
+make install-force          # Clean reinstall
+make update                 # Update dependencies
 ```
 
-### Development Commands
-
+#### 🚀 Development
 ```bash
-# Development
-npm run dev          # Start all variants
-npm run dev:core     # Start core variant only
-npm run dev:remix    # Start remix variant only
-npm run dev:nextjs   # Start nextjs variant only
-
-# Building
-npm run build        # Build all variants
-npm run build:core   # Build core variant
-npm run build:remix  # Build remix variant
-npm run build:nextjs # Build nextjs variant
-
-# Testing
-npm run test         # Run all tests
-npm run lint         # Lint all code
-npm run typecheck    # Type checking
-
-# Storybook
-npm run storybook    # Start component development
+make dev                    # All frameworks
+make dev-core              # Core application only
+make dev-remix             # Remix admin only
+make dev-nextjs            # Next.js marketing only
 ```
 
-## Integrations
-
-Katalyst integrates 24 state-of-the-art technologies:
-
-### Framework & Bundling
-1. **TanStack** - Complete React framework ecosystem
-2. **RSpack** - High-performance JavaScript bundler
-3. **EMP** - Enterprise Micro-Frontend Platform
-4. **Esmx** - ECMAScript Modules Extension
-5. **Pareto** - Streaming React SSR Framework
-6. **Re-Pack** - React Native bundler
-7. **Umi** - Enterprise-level React framework
-8. **Rspeedy/Lynx** - High-performance React Native
-
-### Development Tools
-9. **electron-rsbuild** - Electron builder for React
-10. **NX** - Monorepo build system with module federation
-11. **Storybook** - UI component development environment
-12. **ngrok** - Secure tunneling for local development
-13. **React Inspector** - Component debugging tool
-14. **SVGR** - SVG to React component transformer
-
-### UI & Styling
-15. **Arco.design** - Enterprise UI framework
-16. **StyleX** - Meta's CSS-in-JS solution
-
-### Web3 & Blockchain
-17. **Cosmos** - Component development with Web3 integration
-
-### Performance & Optimization
-18. **Zephyr Cloud** - Micro-frontend SDLC acceleration
-19. **Virtual Modules** - Virtual module plugin for RSpack
-20. **Asset Manifest** - Asset manifest generation
-21. **Fast Refresh** - React fast refresh plugin
-
-### Validation & Type Safety
-22. **Typia** - TypeScript type validation plugin
-
-### Backend & Architecture
-23. **Sails** - MVC framework for Node.js
-24. **Tapable** - Plugin system for JavaScript
-
-<<<<<<< HEAD
-## Multithreading Integration
-
-Katalyst's Rust-powered multithreading integration provides unprecedented performance for React applications, enabling true parallel processing for AR/VR/MR, computational workloads, and Mixed Reality experiences.
-
-### 🚀 Core Features
-
-- **Native Rust Performance** - Direct access to Crossbeam, Rayon, and Tokio through napi-rs
-- **React 19 Integration** - Server Actions, Streaming SSR, and Suspense support
-- **WebAssembly Ready** - Wasmertime integration for isolated computational environments
-- **CortexOS Foundation** - Building blocks for autonomous AI systems
-- **Memory Safe** - Rust's ownership model prevents data races and memory leaks
-- **Type Safe** - Complete TypeScript definitions for all multithreading APIs
-
-### 🎣 React Hooks API
-
-#### Core Multithreading Hook
-
-```typescript
-import { useMultithreading } from '@katalyst-react/multithreading';
-
-function MyComponent() {
-  const {
-    initialize,
-    runParallelTask,
-    runAsyncTask,
-    createChannel,
-    benchmark,
-    getMetrics,
-    state
-  } = useMultithreading({
-    autoInitialize: true,
-    workerThreads: 8,
-    maxBlockingThreads: 4,
-    enableProfiling: true
-  });
-
-  // Parallel computation with Rayon
-  const handleParallelComputation = async () => {
-    const data = Array.from({ length: 1000000 }, (_, i) => i);
-    const result = await runParallelTask('square', data, {
-      chunkSize: 10000,
-      timeout: 30000
-    });
-    console.log(`Processed ${result.result.length} items in ${result.duration}ms`);
-  };
-
-  // Async task with Tokio
-  const handleAsyncTask = async () => {
-    const result = await runAsyncTask('fetch_data', { url: 'https://api.example.com' });
-    console.log('Async result:', result);
-  };
-
-  return (
-    <div>
-      <button onClick={handleParallelComputation}>Run Parallel Task</button>
-      <button onClick={handleAsyncTask}>Run Async Task</button>
-      <p>Active Threads: {state.activeThreads}</p>
-      <p>Completed Tasks: {state.completedTasks}</p>
-    </div>
-  );
-}
+#### 🏗️ Building
+```bash
+make build                 # All frameworks (web)
+make build-web            # Web platforms
+make build-desktop        # Desktop applications
+make build-mobile         # Mobile applications
+make build-native         # Rust native components
+make build-all            # All platforms
 ```
 
-#### Specialized Computation Hooks
-
-```typescript
-// Parallel computation with automatic dependency tracking
-const { result, isComputing, recompute } = useParallelComputation(
-  largeDataset,
-  'matrix_multiply',
-  [matrixA, matrixB] // dependencies
-);
-
-// Async computation with Tokio runtime
-const { result, isComputing } = useAsyncComputation(
-  'ai_inference',
-  { model: 'llama-4-scout', prompt: userInput },
-  [userInput]
-);
+#### 🧪 Testing
+```bash
+make test                 # All tests
+make test-unit           # Unit tests
+make test-integration    # Integration tests
+make test-performance    # Performance tests
+make test-e2e           # End-to-end tests
+make test-coverage      # Coverage reports
+make test-watch         # Watch mode
 ```
 
-### ⚡ React 19 Server Actions
-
-```typescript
-import { useServerAction, useParallelServerAction } from '@katalyst-react/multithreading';
-
-function ServerActionDemo() {
-  // Single server action with multithreading
-  const [processData, isPending] = useServerAction(async (formData: FormData) => {
-    'use server';
-<<<<<<< HEAD
-    const { runParallelTask } = await import('@katalyst-react/multithreading/server');
-
-||||||| parent of 036fc19 (docs: Complete multithreading documentation updates)
-    const { runParallelTask } = await import('@katalyst/multithreading/server');
-    const data = JSON.parse(formData.get('data') as string);
-    return await runParallelTask('process_batch', data);
-  });
-
-  // Parallel server actions
-  const [runParallelActions, isParallelPending] = useParallelServerAction([
-    'data_processing',
-    'image_optimization',
-    'ai_analysis'
-  ]);
-
-  return (
-    <form action={processData}>
-      <input name="data" type="hidden" value={JSON.stringify(dataset)} />
-      <button type="submit" disabled={isPending}>
-        {isPending ? 'Processing...' : 'Process Data'}
-      </button>
-    </form>
-  );
-}
+#### 🔍 Code Quality
+```bash
+make lint               # Run linters
+make lint-fix          # Fix linting issues
+make typecheck         # TypeScript checking
+make format            # Format code
 ```
 
-### 💧 Hydration Patterns
-
-```typescript
-import { useHydration, useStreamingHydration } from '@katalyst-react/multithreading';
-
-// Basic SSR hydration with multithreading
-function HydratedComponent() {
-  const { isHydrated, hydrateWithThreading } = useHydration({
-    enableMultithreading: true,
-    preloadWorkers: 4
-  });
-
-  useEffect(() => {
-    if (isHydrated) {
-      hydrateWithThreading('initialize_workers');
-    }
-  }, [isHydrated]);
-
-  return <div>Hydrated: {isHydrated ? 'Yes' : 'No'}</div>;
-}
-
-// Streaming hydration for progressive enhancement
-function StreamingComponent() {
-  const { streamingState, hydrateChunk } = useStreamingHydration({
-    chunkSize: 1000,
-    enableParallelHydration: true
-  });
-
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      {streamingState.chunks.map(chunk => (
-        <ChunkComponent key={chunk.id} data={chunk.data} />
-      ))}
-    </Suspense>
-  );
-}
+#### 🧹 Utilities
+```bash
+make clean             # Clean build artifacts
+make clean-all         # Deep clean everything
+make status            # System status
+make doctor            # Comprehensive diagnostics
+make cache-setup       # Setup cloud caching
 ```
 
-### 🌐 Mixed Reality & Metaverse Examples
+### Tool-Specific Commands
 
-#### VR Scene Processing
-
-```typescript
-import { useMultithreading } from '@katalyst-react/multithreading';
-
-function VRSceneRenderer() {
-  const { runParallelTask, createChannel } = useMultithreading();
-  const [sceneData, setSceneData] = useState(null);
-
-  const processVRScene = async (sceneObjects: VRObject[]) => {
-    // Parallel processing of 3D objects
-    const processedObjects = await runParallelTask('process_vr_objects', sceneObjects, {
-      chunkSize: 100 // Process 100 objects per thread
-    });
-
-    // Physics calculations in parallel
-    const physicsResults = await runParallelTask('calculate_physics', processedObjects.result, {
-      chunkSize: 50
-    });
-
-    // Lighting and shadows
-    const lightingResults = await runParallelTask('calculate_lighting', {
-      objects: physicsResults.result,
-      lights: sceneLights,
-      shadows: true
-    });
-
-    setSceneData(lightingResults.result);
-  };
-
-  return (
-    <div className="vr-scene">
-      <button onClick={() => processVRScene(vrObjects)}>
-        Process VR Scene
-      </button>
-      {sceneData && <VRRenderer data={sceneData} />}
-    </div>
-  );
-}
+#### NX Commands
+```bash
+make nx-build          # Build using NX
+make nx-test           # Test using NX
+make nx-lint           # Lint using NX
+make nx-reset          # Reset NX cache
 ```
 
-#### AR Object Recognition
-
-```typescript
-function ARObjectRecognition() {
-  const { runAsyncTask } = useMultithreading();
-  const [recognizedObjects, setRecognizedObjects] = useState([]);
-
-  const processARFrame = async (frameData: ImageData) => {
-    // Async AI inference for object detection
-    const detection = await runAsyncTask('ar_object_detection', {
-      frame: frameData,
-      model: 'yolo-v8',
-      confidence: 0.8
-    });
-
-    // Parallel processing of detected objects
-    const objectAnalysis = await runParallelTask('analyze_ar_objects', detection.result);
-
-    setRecognizedObjects(objectAnalysis.result);
-  };
-
-  return (
-    <div className="ar-interface">
-      <ARCamera onFrame={processARFrame} />
-      <AROverlay objects={recognizedObjects} />
-    </div>
-  );
-}
+#### Turbo Commands
+```bash
+make turbo-build       # Build using Turbo
+make turbo-test        # Test using Turbo
+make turbo-lint        # Lint using Turbo
+make turbo-prune       # Prune Turbo cache
 ```
 
-### 🔧 WebAssembly & Wasmertime Integration
-
-```typescript
-// WebAssembly module with multithreading support
-import { useWasmMultithreading } from '@katalyst-react/multithreading/wasm';
-
-function WasmComputeEngine() {
-  const {
-    loadWasmModule,
-    runWasmParallel,
-    createWasmWorkers
-  } = useWasmMultithreading();
-
-  useEffect(() => {
-    // Load WASM module with Wasmertime
-    loadWasmModule('/compute-engine.wasm', {
-      enableThreads: true,
-      maxWorkers: 8,
-      sharedMemory: true
-    });
-  }, []);
-
-  const runHeavyComputation = async () => {
-    // Run WASM function across multiple threads
-    const result = await runWasmParallel('heavy_computation', {
-      data: largeDataset,
-      algorithm: 'fft',
-      precision: 'f64'
-    });
-
-    return result;
-  };
-
-  return (
-    <div>
-      <button onClick={runHeavyComputation}>
-        Run WASM Computation
-      </button>
-    </div>
-  );
-}
+#### Bun Commands
+```bash
+make bun-install       # Install using Bun
+make bun-build         # Build using Bun
+make bun-test          # Test using Bun
+make bun-dev           # Develop using Bun
 ```
 
-### 🧠 CortexOS & CuAI Architecture
+### Advanced Workflows
 
-#### Browser Agent Integration
-
-```typescript
-import { useCortexOS } from '@katalyst-react/multithreading/cortex';
-
-function CortexOSInterface() {
-  const {
-    initializeCortex,
-    createAIPanel,
-    connectMagnitude,
-    setupA2A
-  } = useCortexOS();
-
-  useEffect(() => {
-    // Initialize CortexOS with multithreading
-    initializeCortex({
-      redoxOS: true,
-      codeServer: 'https://code.example.com',
-      neovimConfig: 'state-of-the-art',
-      terminalAgents: ['claude-code', 'mistral-code', 'apeos-code']
-    });
-
-    // Connect Magnitude browser agent
-    connectMagnitude({
-      visionFirst: true,
-      webVoyager: true,
-      bamlOutput: 'typescript'
-    });
-
-    // Setup Agent-to-Agent communication
-    setupA2A({
-      statefulCommunication: true,
-      contextWindow: '10M',
-      memoryBlockchain: true
-    });
-  }, []);
-
-  return (
-    <div className="cortex-interface">
-      <AIPanel />
-      <CodeServerTerminal />
-      <MagnitudeBrowser />
-    </div>
-  );
-}
+#### Parallel Execution
+```bash
+make parallel-test     # Run tests in parallel
+make parallel-build    # Build frameworks in parallel
 ```
 
-#### Autonomous Programming Platform
-
-```typescript
-function AutonomousProgramming() {
-  const {
-    createSession,
-    importContext,
-    generateTrajectory,
-    trainModel
-  } = useAutonomousProgramming();
-
-  const handleContextImport = async () => {
-    // Import 20-40k context to create 200k session
-    const session = await createSession({
-      contextSize: '40k',
-      targetSession: '200k',
-      model: 'llama-4-scout'
-    });
-
-    // Generate trajectory from completed GitHub issues
-    const trajectory = await generateTrajectory({
-      issues: completedIssues,
-      model: 'claude-4-sonnet-thinking'
-    });
-
-    // Train opensource model with trajectory
-    await trainModel({
-      baseModel: 'llama-4-maverick',
-      trajectory,
-      memoryBlockchain: true
-    });
-  };
-
-  return (
-    <div className="autonomous-programming">
-      <button onClick={handleContextImport}>
-        Import Context & Train
-      </button>
-    </div>
-  );
-}
-```
-
-### 📊 Performance Monitoring
-
-```typescript
-function PerformanceMonitor() {
-  const { getMetrics } = useMultithreading();
-  const [metrics, setMetrics] = useState(null);
-
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      const currentMetrics = await getMetrics();
-      setMetrics(currentMetrics);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="performance-monitor">
-      <h3>Multithreading Metrics</h3>
-      {metrics && (
-        <div>
-          <p>CPU Usage: {metrics.cpuUsage}%</p>
-          <p>Memory Usage: {metrics.memoryUsage}MB</p>
-          <p>Active Threads: {metrics.activeThreads}</p>
-          <p>Task Queue: {metrics.taskQueueSize}</p>
-          <p>Throughput: {metrics.tasksPerSecond} tasks/sec</p>
-        </div>
-      )}
-    </div>
-  );
-}
-```
-
-### 🛠️ Best Practices
-
-#### Memory Management
-
-```typescript
-// Always cleanup resources
-useEffect(() => {
-  return () => {
-    // Cleanup channels and workers
-    channels.forEach(channel => channel.close());
-    workers.forEach(worker => worker.terminate());
-  };
-}, []);
-```
-
-#### Error Handling
-
-```typescript
-const handleThreadedOperation = async () => {
-  try {
-    const result = await runParallelTask('risky_operation', data);
-    return result;
-  } catch (error) {
-    if (error.code === 'THREAD_PANIC') {
-      // Handle Rust panic
-      console.error('Thread panicked:', error.message);
-      await reinitializeThreadPool();
-    } else if (error.code === 'TIMEOUT') {
-      // Handle timeout
-      console.warn('Operation timed out, retrying with smaller chunks');
-      return await runParallelTask('risky_operation', data, { chunkSize: data.length / 2 });
-    }
-    throw error;
-  }
-};
+#### CI/CD Pipeline
+```bash
+make full-ci          # Complete CI workflow
+make release-prep     # Prepare for release
 ```
 
 #### Performance Optimization
-
-```typescript
-// Use appropriate chunk sizes
-const optimalChunkSize = Math.ceil(data.length / navigator.hardwareConcurrency);
-
-// Batch operations for better throughput
-const batchedResults = await Promise.all([
-  runParallelTask('operation_a', dataA, { chunkSize: optimalChunkSize }),
-  runParallelTask('operation_b', dataB, { chunkSize: optimalChunkSize }),
-  runParallelTask('operation_c', dataC, { chunkSize: optimalChunkSize })
-]);
-```
-
-### 🚀 Getting Started with Multithreading
-
-#### Installation
-
 ```bash
-# Install the multithreading integration
-npm install @katalyst-react/multithreading
-
-# Build the native Rust module
-cd shared/src/native
-npm run build
-
-# Verify installation
-npm run test:multithreading
+make benchmark        # Run performance benchmarks
+make cache-setup      # Enable cloud caching
 ```
 
-#### Basic Setup
+---
 
-```typescript
-// app.tsx
-import { MultithreadingProvider } from '@katalyst-react/multithreading';
+## 📱 Applications
 
-function App() {
-  return (
-    <MultithreadingProvider
-      config={{
-        autoInitialize: true,
-        workerThreads: navigator.hardwareConcurrency,
-        enableProfiling: process.env.NODE_ENV === 'development'
-      }}
-    >
-      <YourApp />
-    </MultithreadingProvider>
-  );
-}
+### 🎯 Core Application (Port 20007)
+**Purpose**: Main application hub with advanced features
+
+**Features**:
+- Email management interface for self-hosted server
+- Real-time dashboard with live updates
+- Web3 wallet integration and blockchain features
+- AI-powered automation and smart suggestions
+- Multithreading for heavy computations
+- WebAssembly for performance-critical operations
+
+**Tech Stack**: React 19 + TanStack Router + RSpack
+
+### 📊 Admin Dashboard (Port 20008)
+**Purpose**: Comprehensive business management interface
+
+**Features**:
+- Analytics and reporting dashboard
+- Content management for blog and storefront
+- User management and permissions
+- Data visualization and insights
+- Storefront product management
+- Email campaign management
+
+**Tech Stack**: Remix + Server-side rendering + Database integration
+
+### 🌐 Marketing Website (Port 20009)
+**Purpose**: Public-facing marketing and content platform
+
+**Features**:
+- Static site generation for performance
+- Blog with drag & drop post creation
+- NFT storefront with wallet connectivity
+- SEO optimization and meta tags
+- Contact forms and lead generation
+- Email subscription management
+
+**Tech Stack**: Next.js 15 + Payload CMS + Static generation
+
+---
+
+## 🔧 Configuration
+
+### Environment Setup
+```bash
+# Copy environment template
+cp .env.example .env
+
+# Configure for development
+make setup
 ```
 
-#### Configuration
+### Required Environment Variables
+```bash
+# Database
+DATABASE_URL="your-database-url"
 
-```typescript
-// katalyst.config.ts
-export default {
-  integrations: {
-    multithreading: {
-      rayon: {
-        numThreads: 8,
-        enableWorkStealing: true
-      },
-      tokio: {
-        enableIo: true,
-        enableTime: true,
-        maxBlockingThreads: 4
-      },
-      crossbeam: {
-        enableChannels: true,
-        enableQueues: true,
-        enableAtomics: true
-      }
-    }
-  }
-};
+# Email Service (Fly.io)
+EMAIL_SERVER_URL="your-email-server"
+EMAIL_API_KEY="your-api-key"
+
+# Authentication
+CLERK_PUBLISHABLE_KEY="your-clerk-key"
+CLERK_SECRET_KEY="your-clerk-secret"
+
+# Cloud Caching
+TURBO_TOKEN="your-turbo-token"
+NX_CLOUD_ACCESS_TOKEN="your-nx-token"
+
+# Deployment
+VERCEL_TOKEN="your-vercel-token"
+NETLIFY_AUTH_TOKEN="your-netlify-token"
 ```
 
-### 🔮 Advanced Use Cases
+### Build Configuration
+The build system is configured in `build.config.ts` with intelligent defaults for each framework and platform.
 
-- **Real-time Ray Tracing** - Parallel ray casting for VR/AR applications
-- **AI Model Inference** - Distributed neural network processing
-- **Blockchain Validation** - Parallel transaction verification
-- **Scientific Computing** - Monte Carlo simulations and numerical analysis
-- **Game Physics** - Parallel collision detection and physics simulation
-- **Image/Video Processing** - Real-time filters and effects
-- **Cryptographic Operations** - Parallel hashing and encryption
-- **Data Analytics** - Large dataset processing and aggregation
+---
 
-The multithreading integration transforms Katalyst into a powerhouse for computationally intensive applications, enabling developers to harness the full potential of modern multi-core processors while maintaining React's declarative programming model.
-## Documentation
+## 🚀 Deployment
 
-- [Getting Started Guide](./docs/getting-started.md)
+### Quick Deploy
+```bash
+# Deploy all applications
+make deploy
+
+# Deploy specific platforms
+make deploy-web       # Web applications
+make deploy-desktop   # Desktop applications
+make deploy-mobile    # Mobile applications
+```
+
+### Platform Support
+- **Web**: Vercel, Netlify, AWS S3
+- **Desktop**: Tauri (Windows, macOS, Linux)
+- **Mobile**: Tauri (iOS, Android)
+- **Email Server**: Fly.io backend integration
+
+---
+
+## 🧪 Testing
+
+### Test Suites
+- **Unit Tests**: Component and function testing
+- **Integration Tests**: Cross-framework functionality
+- **E2E Tests**: Complete user journeys
+- **Performance Tests**: Multithreading and WebAssembly benchmarks
+
+### Coverage Requirements
+- **Statements**: 80%
+- **Branches**: 80%
+- **Functions**: 80%
+- **Lines**: 80%
+
+### Running Tests
+```bash
+# Complete test suite
+npm test
+
+# With coverage
+npm run test:coverage
+
+# Watch mode for development
+npm run test:watch
+
+# CI/CD ready tests
+npm run test:ci
+```
+
+---
+
+## 📚 Documentation
+
+### Development Guides
+- [Getting Started](./docs/getting-started.md)
 - [Architecture Overview](./docs/architecture.md)
-- [Integration Guides](./docs/integrations/)
-- [API Reference](./docs/api/)
+- [API Reference](./docs/api.md)
+- [Component Library](./docs/components.md)
+
+### Build System
+- [Build System Guide](./BUILD_SYSTEM.md)
+- [Tool Configuration](./docs/tools.md)
+- [Performance Optimization](./docs/performance.md)
+- [Troubleshooting](./docs/troubleshooting.md)
+
+### Deployment
 - [Deployment Guide](./docs/deployment.md)
+- [Environment Configuration](./docs/environment.md)
+- [CI/CD Setup](./docs/ci-cd.md)
 
-## Contributing
+---
 
-Please read our [Contributing Guide](./CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+## 🤝 Contributing
 
-## License
+### Development Workflow
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests: `make test`
+5. Submit a pull request
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+### Code Standards
+- **TypeScript**: Strict mode enabled
+- **Linting**: Biome for formatting and linting
+- **Testing**: Comprehensive test coverage required
+- **Documentation**: Update docs for new features
 
-## Credits
+### Performance Requirements
+- Component render time < 16ms (60fps)
+- Bundle size < 500KB per framework
+- Test suite < 5 minutes execution time
 
-Built on the shoulders of giants. Special thanks to all the open-source projects that make Katalyst possible.
+---
+
+## 📊 Performance
+
+### Benchmarks
+- **Package Installation**: Deno (0-5s) → Bun (5-15s) → npm (30-60s)
+- **Build Time**: Turbo cached (2-10s) → Turbo uncached (30-120s)
+- **Test Execution**: Deno (10-30s) → Traditional (30-90s)
+- **Development Server**: 3-8s startup time
+
+### Optimization Features
+- **Cloud Caching**: 10-50x build speedups
+- **Parallel Execution**: 2-4x improvement
+- **Bundle Splitting**: Optimized loading
+- **Tree Shaking**: Minimal bundle sizes
+
+---
+
+## 🔮 Roadmap
+
+### Immediate (Q1 2024)
+- [ ] Complete NFT storefront integration
+- [ ] Advanced email templates
+- [ ] Mobile app deployment
+- [ ] Performance optimizations
+
+### Short-term (Q2 2024)
+- [ ] AI-powered content generation
+- [ ] Advanced analytics dashboard
+- [ ] Multi-language support
+- [ ] Enhanced SEO tools
+
+### Long-term (Q3-Q4 2024)
+- [ ] Edge runtime support
+- [ ] Advanced Web3 features
+- [ ] Machine learning integration
+- [ ] Enterprise scaling
+
+---
+
+## 📝 License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+## 👤 Author
+
+**SomeRandmGuyy**
+- GitHub: [@swcstudio](https://github.com/swcstudio)
+- Repository: [katalyst](https://github.com/swcstudio/katalyst)
+
+## 🙏 Acknowledgments
+
+- React team for React 19 and concurrent features
+- Deno team for the modern JavaScript runtime
+- Bun team for ultra-fast package management
+- Vercel team for Next.js and deployment platform
+- Remix team for the full-stack framework
+
+---
+
+## 📞 Support
+
+- **Documentation**: [Build System Guide](./BUILD_SYSTEM.md)
+- **Issues**: [GitHub Issues](https://github.com/swcstudio/katalyst/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/swcstudio/katalyst/discussions)
 
 ---
 
 <p align="center">
-  Made with ❤️ by the SWC Studio team
+  <strong>Built with ❤️ for modern web development</strong>
 </p>

@@ -1,14 +1,10 @@
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
-import { pluginTypeCheck } from '@rsbuild/plugin-type-check';
 import { pluginSass } from '@rsbuild/plugin-sass';
+import { pluginTypeCheck } from '@rsbuild/plugin-type-check';
 
 export default defineConfig({
-  plugins: [
-    pluginReact(),
-    pluginTypeCheck(),
-    pluginSass(),
-  ],
+  plugins: [pluginReact(), pluginTypeCheck(), pluginSass()],
   html: {
     template: './public/index.html',
   },
@@ -145,10 +141,7 @@ export default defineConfig({
     },
     postcss: {
       postcssOptions: {
-        plugins: [
-          'tailwindcss',
-          'autoprefixer',
-        ],
+        plugins: ['tailwindcss', 'autoprefixer'],
       },
     },
   },

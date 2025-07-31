@@ -49,20 +49,16 @@ export class ArcoIntegration {
           treeShaking: true,
           typescript: true,
           accessibility: true,
-          responsive: true
-        }
+          responsive: true,
+        },
       }),
-      plugins: [
-        'unplugin-react-arco',
-        '@arco-design/webpack-plugin',
-        'babel-plugin-import'
-      ],
+      plugins: ['unplugin-react-arco', '@arco-design/webpack-plugin', 'babel-plugin-import'],
       dependencies: [
         '@arco-design/web-react',
         '@arco-design/color',
         '@arco-themes/react-arco-pro',
-        'unplugin-react-arco'
-      ]
+        'unplugin-react-arco',
+      ],
     };
   }
 
@@ -75,8 +71,10 @@ export class ArcoIntegration {
       infoColor: this.config.theme?.infoColor || '#722ED1',
       borderRadius: this.config.theme?.borderRadius || 2,
       fontSize: this.config.theme?.fontSize || 14,
-      fontFamily: this.config.theme?.fontFamily || '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial',
-      boxShadow: this.config.theme?.boxShadow || '0 2px 8px rgba(0, 0, 0, 0.15)'
+      fontFamily:
+        this.config.theme?.fontFamily ||
+        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial',
+      boxShadow: this.config.theme?.boxShadow || '0 2px 8px rgba(0, 0, 0, 0.15)',
     };
   }
 
@@ -88,10 +86,10 @@ export class ArcoIntegration {
           type: ['primary', 'secondary', 'outline', 'dashed', 'text'],
           size: ['mini', 'small', 'default', 'large'],
           status: ['warning', 'danger', 'success'],
-          shape: ['square', 'round', 'circle']
+          shape: ['square', 'round', 'circle'],
         },
         variants: ['solid', 'outline', 'ghost'],
-        customizable: true
+        customizable: true,
       },
       {
         name: 'Input',
@@ -100,10 +98,10 @@ export class ArcoIntegration {
           status: ['warning', 'error'],
           allowClear: true,
           disabled: false,
-          readOnly: false
+          readOnly: false,
         },
         variants: ['default', 'borderless'],
-        customizable: true
+        customizable: true,
       },
       {
         name: 'Select',
@@ -112,10 +110,10 @@ export class ArcoIntegration {
           mode: ['multiple', 'tags'],
           allowClear: true,
           allowCreate: true,
-          showSearch: true
+          showSearch: true,
         },
         variants: ['default', 'borderless'],
-        customizable: true
+        customizable: true,
       },
       {
         name: 'Table',
@@ -125,10 +123,10 @@ export class ArcoIntegration {
           stripe: true,
           hover: true,
           pagination: true,
-          loading: false
+          loading: false,
         },
         variants: ['default', 'card'],
-        customizable: true
+        customizable: true,
       },
       {
         name: 'Form',
@@ -137,10 +135,10 @@ export class ArcoIntegration {
           size: ['mini', 'small', 'default', 'large'],
           labelAlign: ['left', 'right'],
           requiredSymbol: true,
-          colon: true
+          colon: true,
         },
         variants: ['default', 'card'],
-        customizable: true
+        customizable: true,
       },
       {
         name: 'Card',
@@ -149,10 +147,10 @@ export class ArcoIntegration {
           bordered: true,
           hoverable: true,
           loading: false,
-          bodyStyle: {}
+          bodyStyle: {},
         },
         variants: ['default', 'inner'],
-        customizable: true
+        customizable: true,
       },
       {
         name: 'Modal',
@@ -162,10 +160,10 @@ export class ArcoIntegration {
           closable: true,
           mask: true,
           maskClosable: true,
-          keyboard: true
+          keyboard: true,
         },
         variants: ['default', 'simple'],
-        customizable: true
+        customizable: true,
       },
       {
         name: 'Drawer',
@@ -174,10 +172,10 @@ export class ArcoIntegration {
           closable: true,
           mask: true,
           maskClosable: true,
-          placement: ['top', 'right', 'bottom', 'left']
+          placement: ['top', 'right', 'bottom', 'left'],
         },
         variants: ['default'],
-        customizable: true
+        customizable: true,
       },
       {
         name: 'Notification',
@@ -185,10 +183,10 @@ export class ArcoIntegration {
           type: ['info', 'success', 'warning', 'error'],
           duration: 4500,
           closable: true,
-          showIcon: true
+          showIcon: true,
         },
         variants: ['default'],
-        customizable: false
+        customizable: false,
       },
       {
         name: 'Message',
@@ -196,11 +194,11 @@ export class ArcoIntegration {
           type: ['info', 'success', 'warning', 'error', 'loading'],
           duration: 3000,
           closable: false,
-          showIcon: true
+          showIcon: true,
         },
         variants: ['default'],
-        customizable: false
-      }
+        customizable: false,
+      },
     ];
   }
 
@@ -248,7 +246,7 @@ export class ArcoIntegration {
       'IconHeart',
       'IconStar',
       'IconThumbUp',
-      'IconThumbDown'
+      'IconThumbDown',
     ];
   }
 
@@ -262,20 +260,20 @@ export class ArcoIntegration {
           '--success-6': this.config.theme?.successColor || '#00B42A',
           '--warning-6': this.config.theme?.warningColor || '#FF7D00',
           '--danger-6': this.config.theme?.errorColor || '#F53F3F',
-          '--arcoblue-6': this.config.theme?.infoColor || '#722ED1'
+          '--arcoblue-6': this.config.theme?.infoColor || '#722ED1',
         },
         modifyVars: {
           'arcoblue-6': this.config.theme?.primaryColor || '#165DFF',
           'green-6': this.config.theme?.successColor || '#00B42A',
           'orange-6': this.config.theme?.warningColor || '#FF7D00',
           'red-6': this.config.theme?.errorColor || '#F53F3F',
-          'purple-6': this.config.theme?.infoColor || '#722ED1'
+          'purple-6': this.config.theme?.infoColor || '#722ED1',
         },
         importStyle: 'less',
         resolveComponent: (name: string) => {
           return name.startsWith('A') ? `@arco-design/web-react/es/${name.slice(1)}` : false;
-        }
-      })
+        },
+      }),
     };
   }
 
@@ -290,7 +288,7 @@ export class ArcoIntegration {
           errorColor: this.config.theme?.errorColor || '#F53F3F',
           infoColor: this.config.theme?.infoColor || '#722ED1',
           borderRadius: this.config.theme?.borderRadius || 2,
-          fontSize: this.config.theme?.fontSize || 14
+          fontSize: this.config.theme?.fontSize || 14,
         },
         darkMode: {
           enabled: true,
@@ -300,16 +298,16 @@ export class ArcoIntegration {
             '--color-bg-2': '#232324',
             '--color-bg-3': '#2a2a2b',
             '--color-bg-4': '#313132',
-            '--color-bg-5': '#373739'
-          }
+            '--color-bg-5': '#373739',
+          },
         },
         customVariables: {
           '--katalyst-primary': this.config.theme?.primaryColor || '#165DFF',
           '--katalyst-secondary': '#86909C',
           '--katalyst-accent': '#722ED1',
-          '--katalyst-neutral': '#F7F8FA'
-        }
-      })
+          '--katalyst-neutral': '#F7F8FA',
+        },
+      }),
     };
   }
 
@@ -334,8 +332,8 @@ export class ArcoIntegration {
               7: '#6B7785',
               8: '#4E5969',
               9: '#272E3B',
-              10: '#1D2129'
-            }
+              10: '#1D2129',
+            },
           },
           spacing: {
             xs: '4px',
@@ -343,29 +341,31 @@ export class ArcoIntegration {
             md: '12px',
             lg: '16px',
             xl: '20px',
-            xxl: '24px'
+            xxl: '24px',
           },
           typography: {
-            fontFamily: this.config.theme?.fontFamily || '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto',
+            fontFamily:
+              this.config.theme?.fontFamily ||
+              '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto',
             fontSize: {
               xs: '12px',
               sm: '14px',
               md: '16px',
               lg: '18px',
               xl: '20px',
-              xxl: '24px'
+              xxl: '24px',
             },
             fontWeight: {
               normal: 400,
               medium: 500,
               semibold: 600,
-              bold: 700
+              bold: 700,
             },
             lineHeight: {
               tight: 1.25,
               normal: 1.5,
-              relaxed: 1.75
-            }
+              relaxed: 1.75,
+            },
           },
           borderRadius: {
             none: '0px',
@@ -373,16 +373,16 @@ export class ArcoIntegration {
             md: '4px',
             lg: '6px',
             xl: '8px',
-            full: '9999px'
+            full: '9999px',
           },
           shadow: {
             sm: '0 1px 2px rgba(0, 0, 0, 0.05)',
             md: '0 2px 8px rgba(0, 0, 0, 0.15)',
             lg: '0 4px 16px rgba(0, 0, 0, 0.15)',
-            xl: '0 8px 24px rgba(0, 0, 0, 0.15)'
-          }
-        }
-      })
+            xl: '0 8px 24px rgba(0, 0, 0, 0.15)',
+          },
+        },
+      }),
     };
   }
 
@@ -391,7 +391,7 @@ export class ArcoIntegration {
       this.setupArco(),
       this.setupUnpluginReact(),
       this.setupCustomTheme(),
-      this.setupDesignTokens()
+      this.setupDesignTokens(),
     ]);
 
     return integrations.filter(Boolean);
@@ -430,7 +430,7 @@ export class ArcoIntegration {
         ];
         
         <Table columns={columns} data={data} pagination />
-      `
+      `,
     };
   }
 

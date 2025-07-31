@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { IntegrationFactory } from '../factory/integration-factory.ts';
-import { KatalystIntegration } from '../types/index.ts';
-import { useMultithreading, MultithreadingHookConfig } from './use-multithreading.ts';
+import type { KatalystIntegration } from '../types/index.ts';
+import { type MultithreadingHookConfig, useMultithreading } from './use-multithreading.ts';
 
 export interface UnifiedBuilderConfig {
   targetPlatforms: ('web' | 'desktop' | 'mobile' | 'metaverse')[];
@@ -28,7 +28,11 @@ export interface UnifiedBuilderState {
     isInitialized: boolean;
     isLoading: boolean;
     activeThreads: number;
-    runParallelTask: <T>(operation: string, data: T[], options?: { chunkSize?: number; timeout?: number }) => Promise<any>;
+    runParallelTask: <T>(
+      operation: string,
+      data: T[],
+      options?: { chunkSize?: number; timeout?: number }
+    ) => Promise<any>;
     runAsyncTask: <T>(operation: string, data: T, options?: { timeout?: number }) => Promise<any>;
     createChannel: (bounded?: number) => any;
     benchmark: (operation: string, dataSize: number) => Promise<any>;
@@ -45,10 +49,12 @@ export function useUnifiedBuilder(config: UnifiedBuilderConfig): UnifiedBuilderS
 
   const multithreadingConfig: MultithreadingHookConfig = {
     autoInitialize: config.features?.multithreading !== false,
-    workerThreads: config.features?.performanceOptimization ? navigator.hardwareConcurrency || 8 : 4,
+    workerThreads: config.features?.performanceOptimization
+      ? navigator.hardwareConcurrency || 8
+      : 4,
     maxBlockingThreads: config.targetPlatforms.includes('metaverse') ? 8 : 4,
     enableProfiling: config.features?.performanceOptimization || false,
-    ...config.multithreading
+    ...config.multithreading,
   };
 
   const multithreading = useMultithreading(multithreadingConfig);
@@ -60,44 +66,45 @@ export function useUnifiedBuilder(config: UnifiedBuilderConfig): UnifiedBuilderS
 
       try {
         const integrationsToInit: KatalystIntegration[] = [];
-        
+
         if (config.targetPlatforms.includes('desktop')) {
-          integrationsToInit.push({ 
-            name: 'tauri', 
+          integrationsToInit.push({
+            name: 'tauri',
             type: 'framework' as const,
-            enabled: true 
+            enabled: true,
           });
         }
-        
+
         if (config.targetPlatforms.includes('mobile')) {
-          integrationsToInit.push({ 
-            name: 'rspeedy', 
+          integrationsToInit.push({
+            name: 'rspeedy',
             type: 'framework' as const,
-            enabled: true 
+            enabled: true,
           });
         }
-        
+
         if (config.targetPlatforms.includes('metaverse')) {
-          integrationsToInit.push({ 
-            name: 'webxr', 
+          integrationsToInit.push({
+            name: 'webxr',
             type: 'framework' as const,
-            enabled: true 
+            enabled: true,
           });
-          
+
           if (config.features?.webxrMultithreading && multithreading.state.isInitialized) {
-            integrationsToInit.push({ 
-              name: 'multithreading', 
+            integrationsToInit.push({
+              name: 'multithreading',
               type: 'framework' as const,
-              enabled: true 
+              enabled: true,
             });
           }
         }
 
         if (integrationsToInit.length > 0) {
-          const initializedIntegrations = await IntegrationFactory.initializeIntegrations(integrationsToInit);
-          
+          const initializedIntegrations =
+            await IntegrationFactory.initializeIntegrations(integrationsToInit);
+
           const integrationMap: Record<string, any> = {};
-          integrationsToInit.forEach(integration => {
+          integrationsToInit.forEach((integration) => {
             const instance = IntegrationFactory.getIntegration(integration.name);
             if (instance) {
               integrationMap[integration.name] = instance;
@@ -106,7 +113,7 @@ export function useUnifiedBuilder(config: UnifiedBuilderConfig): UnifiedBuilderS
 
           setIntegrations(integrationMap);
           setPlatforms(config.targetPlatforms);
-          
+
           if (config.features?.multithreading && multithreading.state.isInitialized) {
             setIsReady(true);
           } else if (!config.features?.multithreading) {
@@ -125,24 +132,31 @@ export function useUnifiedBuilder(config: UnifiedBuilderConfig): UnifiedBuilderS
     };
 
     initializePlatforms();
-  }, [config.targetPlatforms, config.sharedComponents, config.rustBackend, multithreading.state.isInitialized]);
+  }, [
+    config.targetPlatforms,
+    config.sharedComponents,
+    config.rustBackend,
+    multithreading.state.isInitialized,
+  ]);
 
-  return { 
-    platforms, 
-    isReady, 
-    isInitializing, 
-    error, 
+  return {
+    platforms,
+    isReady,
+    isInitializing,
+    error,
     integrations,
-    multithreading: config.features?.multithreading ? {
-      isInitialized: multithreading.state.isInitialized,
-      isLoading: multithreading.state.isLoading,
-      activeThreads: multithreading.state.activeThreads,
-      runParallelTask: multithreading.runParallelTask,
-      runAsyncTask: multithreading.runAsyncTask,
-      createChannel: multithreading.createChannel,
-      benchmark: multithreading.benchmark,
-      getMetrics: multithreading.getMetrics,
-    } : undefined
+    multithreading: config.features?.multithreading
+      ? {
+          isInitialized: multithreading.state.isInitialized,
+          isLoading: multithreading.state.isLoading,
+          activeThreads: multithreading.state.activeThreads,
+          runParallelTask: multithreading.runParallelTask,
+          runAsyncTask: multithreading.runAsyncTask,
+          createChannel: multithreading.createChannel,
+          benchmark: multithreading.benchmark,
+          getMetrics: multithreading.getMetrics,
+        }
+      : undefined,
   };
 }
 
@@ -151,7 +165,7 @@ export function useDesktopBuilder(config?: Partial<UnifiedBuilderConfig>) {
     targetPlatforms: ['desktop'],
     sharedComponents: true,
     rustBackend: true,
-    ...config
+    ...config,
   });
 }
 
@@ -160,7 +174,7 @@ export function useMobileBuilder(config?: Partial<UnifiedBuilderConfig>) {
     targetPlatforms: ['mobile'],
     sharedComponents: true,
     rustBackend: true,
-    ...config
+    ...config,
   });
 }
 
@@ -169,7 +183,7 @@ export function useMetaverseBuilder(config?: Partial<UnifiedBuilderConfig>) {
     targetPlatforms: ['metaverse'],
     sharedComponents: true,
     rustBackend: true,
-    ...config
+    ...config,
   });
 }
 
@@ -182,8 +196,8 @@ export function useMultiPlatformBuilder(config?: Partial<UnifiedBuilderConfig>) 
       hotReload: true,
       crossPlatformSharing: true,
       performanceOptimization: true,
-      nativeIntegration: true
+      nativeIntegration: true,
     },
-    ...config
+    ...config,
   });
 }

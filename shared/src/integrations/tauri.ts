@@ -1,4 +1,4 @@
-import { KatalystIntegration } from '../types/index';
+import type { KatalystIntegration } from '../types/index';
 
 export interface TauriConfig {
   autoInitialize?: boolean;
@@ -46,7 +46,9 @@ export class TauriIntegration implements KatalystIntegration {
     this.config = this.mergeWithDefaults(config);
   }
 
-  private mergeWithDefaults(config: TauriConfig & Record<string, unknown>): TauriConfig & Record<string, unknown> {
+  private mergeWithDefaults(
+    config: TauriConfig & Record<string, unknown>
+  ): TauriConfig & Record<string, unknown> {
     return {
       autoInitialize: true,
       platforms: ['desktop', 'mobile', 'web'],
@@ -149,7 +151,7 @@ export class TauriIntegration implements KatalystIntegration {
             menuOnLeftClick: false,
           },
         },
-      })
+      }),
     };
   }
 
@@ -204,7 +206,7 @@ export class TauriIntegration implements KatalystIntegration {
             icon: ['icons/icon.png'],
           },
         },
-      })
+      }),
     };
   }
 
@@ -252,7 +254,7 @@ export class TauriIntegration implements KatalystIntegration {
             targets: ['aarch64-linux-android', 'aarch64-apple-ios'],
           },
         },
-      })
+      }),
     };
   }
 
@@ -301,7 +303,7 @@ export class TauriIntegration implements KatalystIntegration {
           gamepad: true,
           sensors: true,
         },
-      })
+      }),
     };
   }
 
@@ -344,7 +346,7 @@ export class TauriIntegration implements KatalystIntegration {
           gdb: true,
           webInspector: true,
         },
-      })
+      }),
     };
   }
 

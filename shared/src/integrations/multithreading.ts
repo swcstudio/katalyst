@@ -1,4 +1,4 @@
-import type { KatalystIntegration, KatalystConfig } from '../types/index.js';
+import type { KatalystConfig, KatalystIntegration } from '../types/index.js';
 
 /**
  * Configuration options for the Katalyst Multithreading integration.
@@ -18,6 +18,54 @@ export interface MultithreadingConfig {
     stackSize?: number;
     /** Enable panic handler for better error reporting */
     panicHandler?: boolean;
+  };
+  /** GPU compute configuration */
+  gpu?: {
+    /** Enable GPU acceleration */
+    enabled?: boolean;
+    /** Preferred GPU backend */
+    backend?: 'webgpu' | 'cuda' | 'vulkan' | 'metal' | 'auto';
+    /** Memory pool size for GPU operations */
+    memoryPoolSize?: number;
+    /** Enable GPU-accelerated React reconciliation */
+    acceleratedReconciliation?: boolean;
+    /** Enable shader-based components */
+    shaderComponents?: boolean;
+  };
+  /** Machine Learning configuration */
+  ml?: {
+    /** Enable ML capabilities */
+    enabled?: boolean;
+    /** ML backend */
+    backend?: 'candle' | 'ort' | 'tflite' | 'auto';
+    /** Model cache size in MB */
+    modelCacheSize?: number;
+    /** Enable real-time inference */
+    realtimeInference?: boolean;
+    /** Enable model quantization */
+    quantization?: boolean;
+  };
+  /** Advanced compression configuration */
+  compression?: {
+    /** Enable advanced compression */
+    enabled?: boolean;
+    /** Compression algorithm */
+    algorithm?: 'zstd' | 'lz4' | 'brotli' | 'auto';
+    /** Compression level (1-22) */
+    level?: number;
+    /** Enable state compression */
+    stateCompression?: boolean;
+  };
+  /** Cryptography configuration */
+  crypto?: {
+    /** Enable cryptographic features */
+    enabled?: boolean;
+    /** Enable zero-knowledge proofs */
+    zkProofs?: boolean;
+    /** Enable homomorphic encryption */
+    homomorphicEncryption?: boolean;
+    /** Key derivation iterations */
+    kdfIterations?: number;
   };
   /** Tokio async runtime configuration */
   tokio?: {
@@ -149,23 +197,23 @@ export interface TokioRuntimeConfig {
 
 /**
  * Katalyst Multithreading Integration
- * 
+ *
  * Provides comprehensive Rust concurrency features to the React ecosystem via napi-rs.
  * Integrates Crossbeam, Rayon, and Tokio for high-performance parallel processing,
  * async operations, and lock-free data structures.
- * 
+ *
  * Key Features:
  * - **Crossbeam**: Lock-free channels, atomic operations, scoped threads
  * - **Rayon**: Data parallelism with parallel iterators and custom thread pools
  * - **Tokio**: Async runtime with task spawning, channels, and timers
  * - **Performance**: Benchmarking, stress testing, and metrics collection
- * 
+ *
  * Use Cases:
  * - Heavy computational workloads in React applications
  * - Background processing for AR/VR/MR environments
  * - WASM integration with native performance
  * - Real-time data processing and streaming
- * 
+ *
  * @example
  * ```typescript
  * const multithreading = new MultithreadingIntegration({
@@ -173,15 +221,15 @@ export interface TokioRuntimeConfig {
  *   tokio: { workerThreads: 2 },
  *   performance: { enableBenchmarking: true }
  * });
- * 
+ *
  * await multithreading.initialize();
- * 
+ *
  * // Parallel data processing
  * const result = await multithreading.parallelMap([1,2,3,4], 'square');
- * 
+ *
  * // Async operations
  * const delayed = await multithreading.tokioDelay(1000, 'Hello World');
- * 
+ *
  * // Benchmark performance
  * const benchmark = await multithreading.benchmark(10000, 'parallel_sum');
  * ```
@@ -199,7 +247,9 @@ export class MultithreadingIntegration implements KatalystIntegration {
     this.config = this.mergeWithDefaults(config);
   }
 
-  private mergeWithDefaults(config: MultithreadingConfig): MultithreadingConfig & Record<string, unknown> {
+  private mergeWithDefaults(
+    config: MultithreadingConfig
+  ): MultithreadingConfig & Record<string, unknown> {
     return {
       enabled: true,
       rayon: {
@@ -246,7 +296,7 @@ export class MultithreadingIntegration implements KatalystIntegration {
 
     try {
       this.nativeModule = await this.loadNativeModule();
-      
+
       const initResult = this.nativeModule.initializeMultithreading();
       if (this.config.debug?.enableLogging) {
         console.log('[Katalyst Multithreading]', initResult);
@@ -272,11 +322,11 @@ export class MultithreadingIntegration implements KatalystIntegration {
 
   private async loadNativeModule(): Promise<any> {
     try {
-      return require('@katalyst/multithreading');
+      return require('@swcstudio/multithreading');
     } catch (error) {
       throw new Error(
         `Failed to load native multithreading module: ${error}. ` +
-        'Make sure the Rust crate is compiled and the native module is available.'
+          'Make sure the Rust crate is compiled and the native module is available.'
       );
     }
   }
@@ -286,7 +336,7 @@ export class MultithreadingIntegration implements KatalystIntegration {
 
     try {
       this.manager.initializeRayon(this.config.rayon);
-      
+
       if (this.config.debug?.enableLogging) {
         const threadCount = this.nativeModule.getRayonGlobalThreadCount();
         console.log(`[Katalyst Multithreading] Rayon initialized with ${threadCount} threads`);
@@ -302,7 +352,7 @@ export class MultithreadingIntegration implements KatalystIntegration {
 
     try {
       this.manager.initializeTokio(this.config.tokio);
-      
+
       if (this.config.debug?.enableLogging) {
         const metrics = this.nativeModule.getTokioRuntimeMetrics();
         console.log('[Katalyst Multithreading] Tokio runtime initialized:', metrics);
@@ -343,7 +393,7 @@ export class MultithreadingIntegration implements KatalystIntegration {
     return this.nativeModule.createCrossbeamChannel(options?.bounded);
   }
 
-  createCrossbeamAtomicCell(initialValue: number = 0): any {
+  createCrossbeamAtomicCell(initialValue = 0): any {
     this.ensureInitialized();
     return this.nativeModule.createCrossbeamAtomicCell(initialValue);
   }
@@ -421,11 +471,7 @@ export class MultithreadingIntegration implements KatalystIntegration {
     });
   }
 
-  async parallelSort(
-    data: number[],
-    descending: boolean = false,
-    threadPool?: any
-  ): Promise<number[]> {
+  async parallelSort(data: number[], descending = false, threadPool?: any): Promise<number[]> {
     this.ensureInitialized();
     return new Promise((resolve, reject) => {
       const task = this.nativeModule.parallelSort(data, descending, threadPool);
@@ -454,11 +500,7 @@ export class MultithreadingIntegration implements KatalystIntegration {
     });
   }
 
-  async tokioTimeout(
-    durationMs: number,
-    timeoutMs: number,
-    operation: string
-  ): Promise<string> {
+  async tokioTimeout(durationMs: number, timeoutMs: number, operation: string): Promise<string> {
     this.ensureInitialized();
     return new Promise((resolve, reject) => {
       const task = this.nativeModule.tokioTimeout(durationMs, timeoutMs, operation);
@@ -482,7 +524,7 @@ export class MultithreadingIntegration implements KatalystIntegration {
     if (!this.config.performance?.enableBenchmarking) {
       throw new Error('Benchmarking is disabled in configuration');
     }
-    
+
     return new Promise((resolve, reject) => {
       const task = this.nativeModule.benchmarkParallelOperations(dataSize, operation);
       task.then(resolve).catch(reject);
@@ -511,11 +553,7 @@ export class MultithreadingIntegration implements KatalystIntegration {
     this.nativeModule.crossbeamScopeSpawn(callback);
   }
 
-  crossbeamSelectChannels(
-    channel1: any,
-    channel2: any,
-    callback: (message: string) => void
-  ): void {
+  crossbeamSelectChannels(channel1: any, channel2: any, callback: (message: string) => void): void {
     this.ensureInitialized();
     if (!this.config.crossbeam?.enableSelection) {
       throw new Error('Crossbeam channel selection is disabled in configuration');
@@ -524,20 +562,12 @@ export class MultithreadingIntegration implements KatalystIntegration {
     this.nativeModule.crossbeamSelectChannels(channel1, channel2, callback);
   }
 
-  tokioSelectChannels(
-    channel1: any,
-    channel2: any,
-    callback: (message: string) => void
-  ): void {
+  tokioSelectChannels(channel1: any, channel2: any, callback: (message: string) => void): void {
     this.ensureInitialized();
     this.nativeModule.tokioSelectChannels(channel1, channel2, callback);
   }
 
-  tokioSpawnMultiple(
-    count: number,
-    delayMs: number,
-    callback: (message: string) => void
-  ): void {
+  tokioSpawnMultiple(count: number, delayMs: number, callback: (message: string) => void): void {
     this.ensureInitialized();
     this.nativeModule.tokioSpawnMultiple(count, delayMs, callback);
   }
@@ -551,6 +581,318 @@ export class MultithreadingIntegration implements KatalystIntegration {
     this.nativeModule.rayonJoin(leftCallback, rightCallback, resultCallback);
   }
 
+  // ========================================
+  // 🚀 REVOLUTIONARY FEATURES
+  // ========================================
+
+  // GPU Compute Integration
+  createGPUDevice(backend?: string): any {
+    this.ensureInitialized();
+    return this.nativeModule.createGPUDevice(backend || 'auto');
+  }
+
+  createGPUBuffer(
+    data: number[],
+    usage: 'storage' | 'uniform' | 'vertex' | 'index' = 'storage'
+  ): any {
+    this.ensureInitialized();
+    return this.nativeModule.createGPUBuffer(data, usage);
+  }
+
+  compileGPUShader(source: string, entryPoint = 'main'): any {
+    this.ensureInitialized();
+    return this.nativeModule.compileGPUShader(source, entryPoint);
+  }
+
+  async dispatchGPUCompute(
+    shader: any,
+    buffers: any[],
+    workgroups: [number, number, number]
+  ): Promise<any> {
+    this.ensureInitialized();
+    return new Promise((resolve, reject) => {
+      this.nativeModule.dispatchGPUCompute(shader, buffers, workgroups).then(resolve).catch(reject);
+    });
+  }
+
+  async gpuAcceleratedReactReconciliation(oldTree: any, newTree: any): Promise<any> {
+    this.ensureInitialized();
+    return new Promise((resolve, reject) => {
+      this.nativeModule.gpuAcceleratedReconciliation(oldTree, newTree).then(resolve).catch(reject);
+    });
+  }
+
+  // Machine Learning Integration
+  loadMLModel(modelPath: string, format: 'onnx' | 'tflite' | 'candle' = 'onnx'): any {
+    this.ensureInitialized();
+    return this.nativeModule.loadMLModel(modelPath, format);
+  }
+
+  async runMLInference(model: any, input: number[]): Promise<number[]> {
+    this.ensureInitialized();
+    return new Promise((resolve, reject) => {
+      this.nativeModule.runMLInference(model, input).then(resolve).catch(reject);
+    });
+  }
+
+  async realtimeObjectDetection(imageData: Uint8Array): Promise<any[]> {
+    this.ensureInitialized();
+    return new Promise((resolve, reject) => {
+      this.nativeModule.realtimeObjectDetection(imageData).then(resolve).catch(reject);
+    });
+  }
+
+  async speechToText(audioData: Float32Array): Promise<string> {
+    this.ensureInitialized();
+    return new Promise((resolve, reject) => {
+      this.nativeModule.speechToText(audioData).then(resolve).catch(reject);
+    });
+  }
+
+  async predictiveUI(userActions: any[], context: any): Promise<any> {
+    this.ensureInitialized();
+    return new Promise((resolve, reject) => {
+      this.nativeModule.predictiveUI(userActions, context).then(resolve).catch(reject);
+    });
+  }
+
+  // Advanced Compression
+  compressData(
+    data: Uint8Array,
+    algorithm: 'zstd' | 'lz4' | 'brotli' = 'zstd',
+    level = 3
+  ): Uint8Array {
+    this.ensureInitialized();
+    return this.nativeModule.compressData(data, algorithm, level);
+  }
+
+  decompressData(
+    compressedData: Uint8Array,
+    algorithm: 'zstd' | 'lz4' | 'brotli' = 'zstd'
+  ): Uint8Array {
+    this.ensureInitialized();
+    return this.nativeModule.decompressData(compressedData, algorithm);
+  }
+
+  compressReactState(state: any): Uint8Array {
+    this.ensureInitialized();
+    return this.nativeModule.compressReactState(JSON.stringify(state));
+  }
+
+  decompressReactState(compressedState: Uint8Array): any {
+    this.ensureInitialized();
+    const jsonStr = this.nativeModule.decompressReactState(compressedState);
+    return JSON.parse(jsonStr);
+  }
+
+  createTimeTravel(maxHistorySize = 1000): any {
+    this.ensureInitialized();
+    return this.nativeModule.createTimeTravel(maxHistorySize);
+  }
+
+  // Cryptography & Privacy
+  generateKeyPair(algorithm: 'ed25519' | 'secp256k1' | 'rsa' = 'ed25519'): any {
+    this.ensureInitialized();
+    return this.nativeModule.generateKeyPair(algorithm);
+  }
+
+  encryptData(data: Uint8Array, publicKey: Uint8Array): Uint8Array {
+    this.ensureInitialized();
+    return this.nativeModule.encryptData(data, publicKey);
+  }
+
+  decryptData(encryptedData: Uint8Array, privateKey: Uint8Array): Uint8Array {
+    this.ensureInitialized();
+    return this.nativeModule.decryptData(encryptedData, privateKey);
+  }
+
+  createZKProof(statement: any, witness: any): any {
+    this.ensureInitialized();
+    return this.nativeModule.createZKProof(statement, witness);
+  }
+
+  verifyZKProof(proof: any, statement: any): boolean {
+    this.ensureInitialized();
+    return this.nativeModule.verifyZKProof(proof, statement);
+  }
+
+  homomorphicEncrypt(data: number, publicKey: any): any {
+    this.ensureInitialized();
+    return this.nativeModule.homomorphicEncrypt(data, publicKey);
+  }
+
+  homomorphicAdd(ciphertext1: any, ciphertext2: any): any {
+    this.ensureInitialized();
+    return this.nativeModule.homomorphicAdd(ciphertext1, ciphertext2);
+  }
+
+  homomorphicDecrypt(ciphertext: any, privateKey: any): number {
+    this.ensureInitialized();
+    return this.nativeModule.homomorphicDecrypt(ciphertext, privateKey);
+  }
+
+  // Quantum Computing Simulation
+  createQuantumSimulator(numQubits: number): any {
+    this.ensureInitialized();
+    return this.nativeModule.createQuantumSimulator(numQubits);
+  }
+
+  quantumGroverSearch(database: any[], target: any): number {
+    this.ensureInitialized();
+    return this.nativeModule.quantumGroverSearch(database, target);
+  }
+
+  quantumShorFactoring(number: number): number[] {
+    this.ensureInitialized();
+    return this.nativeModule.quantumShorFactoring(number);
+  }
+
+  generateQuantumRandomBytes(size: number): Uint8Array {
+    this.ensureInitialized();
+    return this.nativeModule.generateQuantumRandomBytes(size);
+  }
+
+  // Real-time Audio/Video Processing
+  createAudioProcessor(sampleRate = 44100, channels = 2): any {
+    this.ensureInitialized();
+    return this.nativeModule.createAudioProcessor(sampleRate, channels);
+  }
+
+  processAudioRealtime(
+    audioData: Float32Array,
+    effect: 'reverb' | 'echo' | 'distortion' | 'pitch'
+  ): Float32Array {
+    this.ensureInitialized();
+    return this.nativeModule.processAudioRealtime(audioData, effect);
+  }
+
+  createVideoProcessor(width: number, height: number, fps = 30): any {
+    this.ensureInitialized();
+    return this.nativeModule.createVideoProcessor(width, height, fps);
+  }
+
+  applyVideoFilter(
+    frameData: Uint8Array,
+    filter: 'blur' | 'sharpen' | 'edge_detect' | 'vintage'
+  ): Uint8Array {
+    this.ensureInitialized();
+    return this.nativeModule.applyVideoFilter(frameData, filter);
+  }
+
+  detectFaces(imageData: Uint8Array): any[] {
+    this.ensureInitialized();
+    return this.nativeModule.detectFaces(imageData);
+  }
+
+  // Advanced Networking
+  createQuicConnection(address: string, port: number): any {
+    this.ensureInitialized();
+    return this.nativeModule.createQuicConnection(address, port);
+  }
+
+  createCustomProtocol(protocolName: string, config: any): any {
+    this.ensureInitialized();
+    return this.nativeModule.createCustomProtocol(protocolName, config);
+  }
+
+  enableZeroCopyTransfer(): void {
+    this.ensureInitialized();
+    this.nativeModule.enableZeroCopyTransfer();
+  }
+
+  createMeshNetwork(nodeId: string): any {
+    this.ensureInitialized();
+    return this.nativeModule.createMeshNetwork(nodeId);
+  }
+
+  // Spatial Computing & AR/VR
+  createPhysicsWorld(gravity: [number, number, number] = [0, -9.81, 0]): any {
+    this.ensureInitialized();
+    return this.nativeModule.createPhysicsWorld(gravity);
+  }
+
+  createRigidBody(shape: 'box' | 'sphere' | 'cylinder', dimensions: number[]): any {
+    this.ensureInitialized();
+    return this.nativeModule.createRigidBody(shape, dimensions);
+  }
+
+  stepPhysicsSimulation(world: any, deltaTime: number): void {
+    this.ensureInitialized();
+    this.nativeModule.stepPhysicsSimulation(world, deltaTime);
+  }
+
+  enableHandTracking(): any {
+    this.ensureInitialized();
+    return this.nativeModule.enableHandTracking();
+  }
+
+  getHandPose(): any {
+    this.ensureInitialized();
+    return this.nativeModule.getHandPose();
+  }
+
+  // Real-time Analytics
+  createTimeSeriesDB(name: string): any {
+    this.ensureInitialized();
+    return this.nativeModule.createTimeSeriesDB(name);
+  }
+
+  insertDataPoint(db: any, timestamp: number, value: number, tags: Record<string, string>): void {
+    this.ensureInitialized();
+    this.nativeModule.insertDataPoint(db, timestamp, value, tags);
+  }
+
+  queryTimeRange(
+    db: any,
+    startTime: number,
+    endTime: number,
+    aggregation: 'avg' | 'sum' | 'min' | 'max' = 'avg'
+  ): any[] {
+    this.ensureInitialized();
+    return this.nativeModule.queryTimeRange(db, startTime, endTime, aggregation);
+  }
+
+  detectAnomalies(data: number[], sensitivity = 0.95): number[] {
+    this.ensureInitialized();
+    return this.nativeModule.detectAnomalies(data, sensitivity);
+  }
+
+  predictTimeSeries(data: number[], periods: number): number[] {
+    this.ensureInitialized();
+    return this.nativeModule.predictTimeSeries(data, periods);
+  }
+
+  // Distributed Computing
+  createP2PNode(nodeId: string): any {
+    this.ensureInitialized();
+    return this.nativeModule.createP2PNode(nodeId);
+  }
+
+  connectToPeer(node: any, peerAddress: string): any {
+    this.ensureInitialized();
+    return this.nativeModule.connectToPeer(node, peerAddress);
+  }
+
+  distributeComputation(task: any, peers: any[]): any {
+    this.ensureInitialized();
+    return this.nativeModule.distributeComputation(task, peers);
+  }
+
+  createDistributedState(stateId: string, initialValue: any): any {
+    this.ensureInitialized();
+    return this.nativeModule.createDistributedState(stateId, JSON.stringify(initialValue));
+  }
+
+  syncDistributedState(state: any): void {
+    this.ensureInitialized();
+    this.nativeModule.syncDistributedState(state);
+  }
+
+  createConsensusGroup(groupId: string, algorithm: 'raft' | 'pbft' | 'pow' = 'raft'): any {
+    this.ensureInitialized();
+    return this.nativeModule.createConsensusGroup(groupId, algorithm);
+  }
+
   private ensureInitialized(): void {
     if (!this.initialized) {
       throw new Error('MultithreadingIntegration must be initialized before use');
@@ -561,13 +903,13 @@ export class MultithreadingIntegration implements KatalystIntegration {
     if (this.manager) {
       this.manager.cleanup();
     }
-    
+
     if (this.nativeModule) {
       this.nativeModule.shutdownMultithreading();
     }
 
     this.initialized = false;
-    
+
     if (this.config.debug?.enableLogging) {
       console.log('[Katalyst Multithreading] Cleanup completed');
     }
@@ -603,6 +945,32 @@ export class MultithreadingIntegration implements KatalystIntegration {
       debug: {
         enableLogging: false,
         logLevel: 'info',
+      },
+      gpu: {
+        enabled: false,
+        backend: 'auto',
+        memoryPoolSize: 512 * 1024 * 1024, // 512MB
+        acceleratedReconciliation: false,
+        shaderComponents: false,
+      },
+      ml: {
+        enabled: false,
+        backend: 'auto',
+        modelCacheSize: 256, // 256MB
+        realtimeInference: false,
+        quantization: true,
+      },
+      compression: {
+        enabled: false,
+        algorithm: 'zstd',
+        level: 3,
+        stateCompression: false,
+      },
+      crypto: {
+        enabled: false,
+        zkProofs: false,
+        homomorphicEncryption: false,
+        kdfIterations: 100000,
       },
     };
   }
@@ -767,14 +1135,26 @@ declare module '@katalyst/multithreading' {
   }
 }
 
-export { useMultithreading, useParallelComputation, useAsyncComputation } from '../hooks/use-multithreading';
-export { useServerAction, useParallelServerAction, createServerAction } from '../hooks/use-server-actions';
+export {
+  useMultithreading,
+  useParallelComputation,
+  useAsyncComputation,
+} from '../hooks/use-multithreading';
+export {
+  useServerAction,
+  useParallelServerAction,
+  createServerAction,
+} from '../hooks/use-server-actions';
 export { useHydration, useStreamingHydration, useSuspenseHydration } from '../hooks/use-hydration';
-export { MultithreadingProvider, useMultithreadingContext, withMultithreading } from '../components/MultithreadingProvider';
-export { 
-  useMultithreadingStore, 
-  useTaskQueue, 
-  useThreadPools, 
-  useMultithreadingMetrics, 
-  useChannelCommunication 
+export {
+  MultithreadingProvider,
+  useMultithreadingContext,
+  withMultithreading,
+} from '../components/MultithreadingProvider';
+export {
+  useMultithreadingStore,
+  useTaskQueue,
+  useThreadPools,
+  useMultithreadingMetrics,
+  useChannelCommunication,
 } from '../stores/multithreading-store';

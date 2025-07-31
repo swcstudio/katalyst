@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { KatalystConfig } from '../types/index.ts';
+import type { KatalystConfig } from '../types/index.ts';
 
 interface KatalystStore {
   config: KatalystConfig | null;
@@ -13,8 +13,9 @@ export const useKatalystStore = create<KatalystStore>((set, _get) => ({
   config: null,
   isInitialized: false,
   setConfig: (config: KatalystConfig) => set({ config }),
-  updateConfig: (updates: Partial<KatalystConfig>) => set((state: KatalystStore) => ({
-    config: state.config ? { ...state.config, ...updates } : null
-  })),
-  setInitialized: (initialized: boolean) => set({ isInitialized: initialized })
+  updateConfig: (updates: Partial<KatalystConfig>) =>
+    set((state: KatalystStore) => ({
+      config: state.config ? { ...state.config, ...updates } : null,
+    })),
+  setInitialized: (initialized: boolean) => set({ isInitialized: initialized }),
 }));

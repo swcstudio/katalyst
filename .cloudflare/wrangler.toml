@@ -1,0 +1,307 @@
+# Katalyst Framework - Cloudflare Configuration
+# Comprehensive setup for all Cloudflare services supporting the AIO management system
+
+name = "katalyst-framework"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Workers configuration
+[env.production]
+name = "katalyst-production"
+route = { pattern = "katalyst.framework/*", zone_name = "katalyst.framework" }
+vars = { ENVIRONMENT = "production" }
+
+[env.staging]
+name = "katalyst-staging"
+route = { pattern = "staging.katalyst.framework/*", zone_name = "katalyst.framework" }
+vars = { ENVIRONMENT = "staging" }
+
+[env.development]
+name = "katalyst-development"
+vars = { ENVIRONMENT = "development" }
+
+# AI Services Configuration
+[ai]
+binding = "AI"
+
+# D1 Databases - SQLite serverless databases
+[[d1_databases]]
+binding = "DB_USERS"
+database_name = "katalyst-users"
+database_id = "your-users-db-id"
+preview_database_id = "your-users-preview-db-id"
+
+[[d1_databases]]
+binding = "DB_CONTENT"
+database_name = "katalyst-content"
+database_id = "your-content-db-id"
+preview_database_id = "your-content-preview-db-id"
+
+[[d1_databases]]
+binding = "DB_ANALYTICS"
+database_name = "katalyst-analytics"
+database_id = "your-analytics-db-id"
+preview_database_id = "your-analytics-preview-db-id"
+
+[[d1_databases]]
+binding = "DB_NFT"
+database_name = "katalyst-nft-storefront"
+database_id = "your-nft-db-id"
+preview_database_id = "your-nft-preview-db-id"
+
+[[d1_databases]]
+binding = "DB_EMAIL"
+database_name = "katalyst-email"
+database_id = "your-email-db-id"
+preview_database_id = "your-email-preview-db-id"
+
+# KV Namespaces - Key-value storage
+[[kv_namespaces]]
+binding = "KV_CACHE"
+id = "your-cache-kv-id"
+preview_id = "your-cache-preview-kv-id"
+
+[[kv_namespaces]]
+binding = "KV_CONFIG"
+id = "your-config-kv-id"
+preview_id = "your-config-preview-kv-id"
+
+[[kv_namespaces]]
+binding = "KV_SESSIONS"
+id = "your-sessions-kv-id"
+preview_id = "your-sessions-preview-kv-id"
+
+[[kv_namespaces]]
+binding = "KV_BLOG_CACHE"
+id = "your-blog-cache-kv-id"
+preview_id = "your-blog-cache-preview-kv-id"
+
+# R2 Buckets - Object storage
+[[r2_buckets]]
+binding = "R2_ASSETS"
+bucket_name = "katalyst-assets"
+preview_bucket_name = "katalyst-assets-preview"
+
+[[r2_buckets]]
+binding = "R2_MEDIA"
+bucket_name = "katalyst-media"
+preview_bucket_name = "katalyst-media-preview"
+
+[[r2_buckets]]
+binding = "R2_NFT_STORAGE"
+bucket_name = "katalyst-nft-storage"
+preview_bucket_name = "katalyst-nft-storage-preview"
+
+[[r2_buckets]]
+binding = "R2_EMAIL_ATTACHMENTS"
+bucket_name = "katalyst-email-attachments"
+preview_bucket_name = "katalyst-email-attachments-preview"
+
+[[r2_buckets]]
+binding = "R2_BACKUPS"
+bucket_name = "katalyst-backups"
+preview_bucket_name = "katalyst-backups-preview"
+
+# Durable Objects - Stateful serverless
+[[durable_objects.bindings]]
+name = "REALTIME_CHAT"
+class_name = "RealtimeChatObject"
+script_name = "katalyst-realtime"
+
+[[durable_objects.bindings]]
+name = "EMAIL_PROCESSOR"
+class_name = "EmailProcessorObject"
+script_name = "katalyst-email"
+
+[[durable_objects.bindings]]
+name = "NFT_AUCTION"
+class_name = "NFTAuctionObject"
+script_name = "katalyst-nft"
+
+[[durable_objects.bindings]]
+name = "ANALYTICS_AGGREGATOR"
+class_name = "AnalyticsAggregatorObject"
+script_name = "katalyst-analytics"
+
+# Vectorize - Vector database for AI/ML
+[[vectorize]]
+binding = "VECTORIZE_INDEX"
+index_name = "katalyst-embeddings"
+dimensions = 1536
+metric = "cosine"
+
+[[vectorize]]
+binding = "VECTORIZE_CONTENT"
+index_name = "katalyst-content-search"
+dimensions = 768
+metric = "euclidean"
+
+# Queues - Message queuing
+[[queues.producers]]
+binding = "EMAIL_QUEUE"
+queue = "katalyst-email-queue"
+
+[[queues.producers]]
+binding = "NFT_PROCESSING_QUEUE"
+queue = "katalyst-nft-processing"
+
+[[queues.producers]]
+binding = "ANALYTICS_QUEUE"
+queue = "katalyst-analytics-queue"
+
+[[queues.producers]]
+binding = "BLOG_INDEXING_QUEUE"
+queue = "katalyst-blog-indexing"
+
+[[queues.consumers]]
+queue = "katalyst-email-queue"
+max_batch_size = 10
+max_batch_timeout = 30
+
+[[queues.consumers]]
+queue = "katalyst-nft-processing"
+max_batch_size = 5
+max_batch_timeout = 60
+
+[[queues.consumers]]
+queue = "katalyst-analytics-queue"
+max_batch_size = 50
+max_batch_timeout = 10
+
+[[queues.consumers]]
+queue = "katalyst-blog-indexing"
+max_batch_size = 20
+max_batch_timeout = 30
+
+# Analytics Engine - Time-series metrics
+[[analytics_engine_datasets]]
+binding = "ANALYTICS_DATASET"
+dataset = "katalyst_metrics"
+
+# Hyperdrive - Database acceleration
+[[hyperdrive]]
+binding = "HYPERDRIVE"
+id = "your-hyperdrive-id"
+localConnectionString = "postgresql://localhost:5432/katalyst"
+
+# Environment Variables
+[vars]
+ENVIRONMENT = "development"
+API_VERSION = "v1"
+LOG_LEVEL = "info"
+ENABLE_ANALYTICS = "true"
+ENABLE_AI_FEATURES = "true"
+NFT_NETWORK = "ethereum"
+EMAIL_DOMAIN = "katalyst.framework"
+
+# Production Environment Variables
+[env.production.vars]
+ENVIRONMENT = "production"
+LOG_LEVEL = "warn"
+API_URL = "https://api.katalyst.framework"
+FRONTEND_URL = "https://katalyst.framework"
+ADMIN_URL = "https://admin.katalyst.framework"
+CDN_URL = "https://cdn.katalyst.framework"
+
+# Staging Environment Variables
+[env.staging.vars]
+ENVIRONMENT = "staging"
+LOG_LEVEL = "debug"
+API_URL = "https://api-staging.katalyst.framework"
+FRONTEND_URL = "https://staging.katalyst.framework"
+ADMIN_URL = "https://admin-staging.katalyst.framework"
+CDN_URL = "https://cdn-staging.katalyst.framework"
+
+# Development Environment Variables
+[env.development.vars]
+ENVIRONMENT = "development"
+LOG_LEVEL = "debug"
+API_URL = "http://localhost:3001"
+FRONTEND_URL = "http://localhost:3000"
+ADMIN_URL = "http://localhost:3002"
+CDN_URL = "http://localhost:3003"
+
+# Build configuration
+[build]
+command = "npm run build"
+cwd = "./"
+watch_dir = "src"
+
+# Deployment configuration
+[triggers]
+crons = [
+  "0 0 * * *",  # Daily analytics aggregation
+  "0 */6 * * *", # Email queue processing every 6 hours
+  "*/15 * * * *", # NFT price updates every 15 minutes
+  "0 2 * * 0"   # Weekly backup on Sunday at 2 AM
+]
+
+# Security headers
+[env.production.define]
+SECURITY_HEADERS = """
+{
+  "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.katalyst.framework; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.katalyst.framework wss://realtime.katalyst.framework;",
+  "X-Frame-Options": "DENY",
+  "X-Content-Type-Options": "nosniff",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "geolocation=(), microphone=(), camera=()"
+}
+"""
+
+# Compatibility settings for Node.js modules
+node_compat = true
+
+# Upload rules for static assets
+[[rules]]
+type = "ESModule"
+globs = ["**/*.js", "**/*.mjs"]
+
+[[rules]]
+type = "CommonJS"
+globs = ["**/*.cjs"]
+
+[[rules]]
+type = "Text"
+globs = ["**/*.txt", "**/*.html", "**/*.css"]
+
+[[rules]]
+type = "Data"
+globs = ["**/*.wasm", "**/*.bin"]
+
+# Site configuration for Pages
+[site]
+bucket = "./dist"
+entry-point = "workers-site"
+include = ["upload_dir"]
+exclude = ["node_modules"]
+
+# Miniflare development server configuration
+[miniflare]
+kv_persist = true
+cache_persist = true
+d1_persist = true
+r2_persist = true
+durable_objects_persist = true
+
+# Custom domains for different environments
+[env.production.routes]
+{ pattern = "katalyst.framework/*", zone_name = "katalyst.framework" }
+{ pattern = "api.katalyst.framework/*", zone_name = "katalyst.framework" }
+{ pattern = "admin.katalyst.framework/*", zone_name = "katalyst.framework" }
+{ pattern = "cdn.katalyst.framework/*", zone_name = "katalyst.framework" }
+
+[env.staging.routes]
+{ pattern = "staging.katalyst.framework/*", zone_name = "katalyst.framework" }
+{ pattern = "api-staging.katalyst.framework/*", zone_name = "katalyst.framework" }
+{ pattern = "admin-staging.katalyst.framework/*", zone_name = "katalyst.framework" }
+
+# Rate limiting configuration
+[limits]
+cpu_ms = 50000
+memory_mb = 128
+
+# Observability
+[observability]
+enabled = true
+head_sampling_rate = 0.01

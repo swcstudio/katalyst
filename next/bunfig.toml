@@ -1,0 +1,100 @@
+[install]
+# Package management configuration
+cache = ".bun/cache"
+lockfile = "bun.lockb"
+exact = true
+save-exact = true
+production = false
+
+# Registry configuration
+registry = "https://registry.npmjs.org"
+
+# Peer dependency handling
+peer = true
+auto = "fallback"
+
+[install.optional]
+# Handle optional dependencies
+skipOptional = false
+
+[dev]
+# Development server configuration
+hot = true
+port = 20009
+
+[build]
+# Build configuration
+target = "node"
+minify = true
+sourcemap = true
+splitting = true
+
+[test]
+# Test configuration
+preload = ["./src/lib/test-setup.ts"]
+timeout = 30000
+
+[run]
+# Runtime configuration
+shell = "/bin/zsh"
+
+# Environment variables
+[env]
+NODE_ENV = "development"
+PAYLOAD_CONFIG_PATH = "./payload.config.ts"
+NEXT_TELEMETRY_DISABLED = "1"
+
+# Script aliases
+[scripts]
+dev = "next dev --port 20009"
+build = "next build"
+start = "next start --port 20009"
+preview = "next start --port 20009"
+test = "bun test"
+lint = "biome check ."
+format = "biome format --write ."
+typecheck = "tsc --noEmit"
+payload = "payload"
+"payload:migrate" = "payload migrate"
+"payload:seed" = "payload seed"
+"payload:generate:types" = "payload generate:types"
+
+# Module resolution
+[module]
+resolution = "node"
+
+# TypeScript configuration
+[typescript]
+compilerOptions.jsx = "react-jsx"
+compilerOptions.jsxImportSource = "react"
+compilerOptions.target = "ES2022"
+compilerOptions.lib = ["DOM", "DOM.Iterable", "ES2022"]
+compilerOptions.allowJs = true
+compilerOptions.skipLibCheck = true
+compilerOptions.strict = true
+compilerOptions.forceConsistentCasingInFileNames = true
+compilerOptions.noEmit = true
+compilerOptions.esModuleInterop = true
+compilerOptions.module = "esnext"
+compilerOptions.moduleResolution = "bundler"
+compilerOptions.resolveJsonModule = true
+compilerOptions.isolatedModules = true
+compilerOptions.incremental = true
+compilerOptions.allowImportingTsExtensions = true
+
+# Path mapping
+[typescript.compilerOptions.paths]
+"@/*" = ["./src/*"]
+"@swcstudio/shared" = ["../shared/src"]
+"@swcstudio/shared/*" = ["../shared/src/*"]
+"@payload-config" = ["./payload.config.ts"]
+
+# Package manager specific settings
+[install.scopes]
+"@swcstudio" = { registry = "file:../shared" }
+
+# Bundle configuration for production
+[bundle]
+packages = "external"
+platform = "node"
+target = "node22"

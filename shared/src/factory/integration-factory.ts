@@ -1,39 +1,39 @@
-import { KatalystIntegration } from '../types/index.ts';
-import { TanStackIntegration } from '../integrations/tanstack.ts';
-import { RSpackIntegration } from '../integrations/rspack.ts';
+import { integrationConfigs } from '../config/integrations.config.ts';
+import { ArcoIntegration } from '../integrations/arco.ts';
+import { AssetManifestIntegration } from '../integrations/asset-manifest.ts';
+import { CosmosIntegration } from '../integrations/cosmos.ts';
 import { EMPIntegration } from '../integrations/emp.ts';
 import { EsmxIntegration } from '../integrations/esmx.ts';
+import { FastRefreshIntegration } from '../integrations/fast-refresh.ts';
+import { InspectorIntegration } from '../integrations/inspector.ts';
+import { MidsceneIntegration } from '../integrations/midscene.ts';
+import { MultithreadingIntegration } from '../integrations/multithreading.ts';
+import { NgrokIntegration } from '../integrations/ngrok.ts';
+import { NxIntegration } from '../integrations/nx.ts';
 import { ParetoIntegration } from '../integrations/pareto.ts';
 import { RePackIntegration } from '../integrations/repack.ts';
-import { UmiIntegration } from '../integrations/umi.ts';
+import { RSpackIntegration } from '../integrations/rspack.ts';
 import { RspeedyIntegration } from '../integrations/rspeedy.ts';
-import { NxIntegration } from '../integrations/nx.ts';
-import { ArcoIntegration } from '../integrations/arco.ts';
-import { CosmosIntegration } from '../integrations/cosmos.ts';
-import { StyleXIntegration } from '../integrations/stylex.ts';
-import { ZephyrIntegration } from '../integrations/zephyr.ts';
-import { VirtualModulesIntegration } from '../integrations/virtual-modules.ts';
-import { AssetManifestIntegration } from '../integrations/asset-manifest.ts';
-import { FastRefreshIntegration } from '../integrations/fast-refresh.ts';
-import { TypiaIntegration } from '../integrations/typia.ts';
-import { StorybookIntegration } from '../integrations/storybook.ts';
-import { NgrokIntegration } from '../integrations/ngrok.ts';
-import { InspectorIntegration } from '../integrations/inspector.ts';
-import { SvgrIntegration } from '../integrations/svgr.ts';
 import { SailsIntegration } from '../integrations/sails.ts';
+import { StorybookIntegration } from '../integrations/storybook.ts';
+import { StyleXIntegration } from '../integrations/stylex.ts';
+import { SvgrIntegration } from '../integrations/svgr.ts';
+import { TanStackIntegration } from '../integrations/tanstack.ts';
 import { TapableIntegration } from '../integrations/tapable.ts';
-import { MidsceneIntegration } from '../integrations/midscene.ts';
 import { TauriIntegration } from '../integrations/tauri.ts';
+import { TypiaIntegration } from '../integrations/typia.ts';
+import { UmiIntegration } from '../integrations/umi.ts';
+import { VirtualModulesIntegration } from '../integrations/virtual-modules.ts';
 import { WebXRIntegration } from '../integrations/webxr.ts';
-import { MultithreadingIntegration } from '../integrations/multithreading.ts';
-import { integrationConfigs } from '../config/integrations.config.ts';
+import { ZephyrIntegration } from '../integrations/zephyr.ts';
+import type { KatalystIntegration } from '../types/index.ts';
 
 export class IntegrationFactory {
   private static integrations = new Map<string, unknown>();
 
   static createIntegration(integration: KatalystIntegration) {
     const config = integrationConfigs[integration.name as keyof typeof integrationConfigs] || {};
-    
+
     switch (integration.name) {
       case 'tanstack':
         return new TanStackIntegration(config as any);
@@ -96,7 +96,7 @@ export class IntegrationFactory {
 
   static async initializeIntegrations(integrations: KatalystIntegration[]) {
     const results = [];
-    
+
     for (const integration of integrations) {
       if (integration.enabled) {
         try {
@@ -109,7 +109,7 @@ export class IntegrationFactory {
         }
       }
     }
-    
+
     return results;
   }
 

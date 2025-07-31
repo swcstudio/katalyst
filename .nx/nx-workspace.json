@@ -1,0 +1,133 @@
+{
+  "$schema": "../node_modules/nx/schemas/nx-workspace-schema.json",
+  "version": 2,
+  "workspace": {
+    "name": "swc-studio-marketing",
+    "version": "1.1.0",
+    "description": "SWC Studio comprehensive AI-powered development platform with state-of-the-art Cloudflare integration",
+    "author": "SWC Studio",
+    "license": "Apache-2.0"
+  },
+  "profiles": {
+    "development": {
+      "parallel": 8,
+      "daemon": true,
+      "cache": {
+        "enabled": true,
+        "location": ".nx/cache",
+        "maxSize": "10GB"
+      },
+      "plugins": [
+        "@nx/rspack/plugin",
+        "@nx/playwright/plugin",
+        "@nx/storybook/plugin",
+        "@nx/eslint/plugin"
+      ]
+    },
+    "production": {
+      "parallel": 4,
+      "daemon": false,
+      "cache": {
+        "enabled": true,
+        "location": ".nx/cache",
+        "maxSize": "5GB"
+      },
+      "plugins": ["@nx/rspack/plugin", "@nx/playwright/plugin"]
+    },
+    "ci": {
+      "parallel": 16,
+      "daemon": false,
+      "cache": {
+        "enabled": true,
+        "location": ".nx/cache",
+        "maxSize": "20GB"
+      },
+      "remoteCache": {
+        "enabled": true
+      }
+    }
+  },
+  "pluginRegistry": {
+    "installed": [
+      {
+        "name": "@nx/rspack",
+        "version": "latest",
+        "capabilities": ["build", "dev", "preview"],
+        "technologies": ["rspack", "webpack", "bundling"]
+      },
+      {
+        "name": "@nx/playwright",
+        "version": "latest",
+        "capabilities": ["e2e", "testing"],
+        "technologies": ["playwright", "testing", "automation"]
+      },
+      {
+        "name": "@nx/storybook",
+        "version": "latest",
+        "capabilities": ["storybook", "docs", "components"],
+        "technologies": ["storybook", "documentation", "ui"]
+      },
+      {
+        "name": "@nx/eslint",
+        "version": "latest",
+        "capabilities": ["lint", "format"],
+        "technologies": ["eslint", "linting", "code-quality"]
+      }
+    ],
+    "available": ["@nx/react", "@nx/next", "@nx/remix", "@nx/deno", "@nx/rust", "@nx/web", "@nx/js"]
+  },
+  "projectTemplates": {
+    "react-app": {
+      "generator": "@nx/react:application",
+      "options": {
+        "style": "css",
+        "linter": "biome",
+        "bundler": "rspack",
+        "unitTestRunner": "none",
+        "e2eTestRunner": "playwright",
+        "routing": true,
+        "strict": true
+      }
+    },
+    "shared-library": {
+      "generator": "@nx/js:library",
+      "options": {
+        "bundler": "esbuild",
+        "unitTestRunner": "none",
+        "linter": "biome",
+        "buildable": true,
+        "publishable": false
+      }
+    },
+    "cloudflare-worker": {
+      "generator": "nx:run-commands",
+      "options": {
+        "command": "deno run --allow-all scripts/create-worker.ts"
+      }
+    }
+  },
+  "workspaceLayout": {
+    "appsDir": ".",
+    "libsDir": "shared"
+  },
+  "analytics": {
+    "enabled": true,
+    "anonymousTracking": false,
+    "collectUsageData": true
+  },
+  "cloud": {
+    "enabled": false,
+    "url": "https://cloud.nx.app",
+    "features": {
+      "remoteCache": false,
+      "distributedTaskExecution": false,
+      "flakinessDection": false
+    }
+  },
+  "experimental": {
+    "projectCrystal": true,
+    "inferencePlugins": true,
+    "workspacesMode": true,
+    "rspackCaching": true
+  }
+}

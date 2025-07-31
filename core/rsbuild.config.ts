@@ -1,9 +1,9 @@
+// import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
+import process from 'node:process';
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginSvgr } from '@rsbuild/plugin-svgr';
 import { pluginTypeCheck } from '@rsbuild/plugin-type-check';
-// import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
-import process from "node:process";
 
 export default defineConfig({
   plugins: [
@@ -15,6 +15,43 @@ export default defineConfig({
     pluginSvgr({
       svgrOptions: {
         exportType: 'default',
+        prettier: false,
+        svgo: true,
+        svgoConfig: {
+          plugins: [
+            {
+              name: 'preset-default',
+              params: {
+                overrides: {
+                  removeViewBox: false,
+                  removeUselessStrokeAndFill: false,
+                },
+              },
+            },
+            'prefixIds',
+          ],
+        },
+        titleProp: true,
+        ref: true,
+        replaceAttrValues: {
+          '#000': 'currentColor',
+          '#000000': 'currentColor',
+        },
+        template: (variables, { tpl }) => {
+          return tpl`
+${variables.imports};
+
+${variables.interfaces};
+
+const ${variables.componentName} = (${variables.props}) => (
+  ${variables.jsx}
+);
+
+${variables.componentName}.displayName = "${variables.componentName}";
+
+${variables.exports};
+`;
+        },
       },
     }),
     pluginTypeCheck({
@@ -49,10 +86,7 @@ export default defineConfig({
     },
     postcss: {
       postcssOptions: {
-        plugins: [
-          require('@tailwindcss/postcss'),
-          require('autoprefixer'),
-        ],
+        plugins: [require('@tailwindcss/postcss'), require('autoprefixer')],
       },
     },
   },

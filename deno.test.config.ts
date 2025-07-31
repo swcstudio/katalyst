@@ -4,7 +4,7 @@ export default defineConfig({
   include: [
     'core/src/**/*.{test,spec}.{js,ts,jsx,tsx}',
     'remix/app/**/*.{test,spec}.{js,ts,jsx,tsx}',
-    'nextjs/src/**/*.{test,spec}.{js,ts,jsx,tsx}',
+    'next/src/**/*.{test,spec}.{js,ts,jsx,tsx}',
     'shared/src/**/*.{test,spec}.{js,ts,jsx,tsx}',
     'tests/unit/**/*.{test,spec}.{js,ts,jsx,tsx}',
   ],
@@ -27,7 +27,7 @@ export default defineConfig({
     include: [
       'core/src/**/*.{js,ts,jsx,tsx}',
       'remix/app/**/*.{js,ts,jsx,tsx}',
-      'nextjs/src/**/*.{js,ts,jsx,tsx}',
+      'next/src/**/*.{js,ts,jsx,tsx}',
       'shared/src/**/*.{js,ts,jsx,tsx}',
     ],
     exclude: [

@@ -1,5 +1,9 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "extends": "nx/presets/npm.json",
+  "affected": {
+    "defaultBase": "main"
+  },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
@@ -10,66 +14,240 @@
       "!{projectRoot}/src/test-setup.[jt]s",
       "!{projectRoot}/test-setup.[jt]s",
       "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.js"
+      "!{projectRoot}/eslint.config.js",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+      "!{projectRoot}/.storybook/**/*",
+      "!{projectRoot}/cypress/**/*",
+      "!{projectRoot}/**/*.cy.[jt]s?(x)",
+      "!{projectRoot}/cypress.config.[jt]s"
     ],
-    "sharedGlobals": []
+    "sharedGlobals": [
+      "{workspaceRoot}/.github/workflows/*.yml",
+      "{workspaceRoot}/deno.json",
+      "{workspaceRoot}/deno.test.config.ts",
+      "{workspaceRoot}/biome.json",
+      "{workspaceRoot}/tsconfig.json",
+      "{workspaceRoot}/turbo.json",
+      "{workspaceRoot}/Cargo.toml"
+    ],
+    "native": ["{projectRoot}/shared/src/native/**/*", "{workspaceRoot}/Cargo.toml"],
+    "cloudflare": ["{projectRoot}/.cloudflare/**/*", "{workspaceRoot}/.env.example"]
   },
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build", "build-native"],
       "inputs": ["production", "^production"],
-      "cache": true
+      "cache": true,
+      "outputs": ["{projectRoot}/dist", "{projectRoot}/build"],
+      "metadata": {
+        "technologies": ["javascript", "typescript"],
+        "description": "Build the project for production"
+      }
     },
     "build-native": {
-      "inputs": ["default", "{projectRoot}/shared/src/native/**/*"],
+      "inputs": ["native"],
       "cache": true,
+      "outputs": ["{projectRoot}/shared/src/native/target"],
       "executor": "nx:run-commands",
       "options": {
-        "command": "cd shared/src/native && npm run build",
+        "command": "cd shared/src/native && cargo build --release",
         "cwd": "{projectRoot}"
+      },
+      "metadata": {
+        "technologies": ["rust"],
+        "description": "Build native Rust components"
+      }
+    },
+    "build:web": {
+      "dependsOn": ["^build", "build-native"],
+      "inputs": ["production", "^production"],
+      "cache": true,
+      "outputs": ["{projectRoot}/dist/web"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno run --allow-all scripts/unified-runner.ts --task build:web",
+        "cwd": "{workspaceRoot}"
+      }
+    },
+    "build:desktop": {
+      "dependsOn": ["^build", "build-native"],
+      "inputs": ["production", "^production", "native"],
+      "cache": true,
+      "outputs": ["{projectRoot}/dist/desktop"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno run --allow-all scripts/unified-runner.ts --task build:desktop",
+        "cwd": "{workspaceRoot}"
+      }
+    },
+    "build:mobile": {
+      "dependsOn": ["^build", "build-native"],
+      "inputs": ["production", "^production", "native"],
+      "cache": true,
+      "outputs": ["{projectRoot}/dist/mobile"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno run --allow-all scripts/unified-runner.ts --task build:mobile",
+        "cwd": "{workspaceRoot}"
       }
     },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/deno.test.config.ts"],
       "cache": true,
+      "outputs": ["{projectRoot}/coverage", "{workspaceRoot}/tests/output"],
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "deno test --config=deno.test.config.ts",
+          "deno test --config=deno.test.config.ts --coverage=coverage",
           "cd shared/src/native && cargo test"
         ],
         "parallel": true
+      },
+      "metadata": {
+        "technologies": ["deno", "rust"],
+        "description": "Run all tests (Deno + Rust)"
       }
     },
-    "test-rust": {
-      "inputs": ["default", "{projectRoot}/shared/src/native/**/*"],
+    "test:rust": {
+      "inputs": ["native"],
       "cache": true,
+      "outputs": ["{projectRoot}/shared/src/native/target/debug"],
       "executor": "nx:run-commands",
       "options": {
         "command": "cd shared/src/native && cargo test",
         "cwd": "{projectRoot}"
       }
     },
-    "test-deno": {
+    "test:deno": {
       "inputs": ["default", "^production", "{workspaceRoot}/deno.test.config.ts"],
       "cache": true,
+      "outputs": ["{projectRoot}/coverage"],
       "executor": "nx:run-commands",
       "options": {
-        "command": "deno test --config=deno.test.config.ts",
+        "command": "deno test --config=deno.test.config.ts --coverage=coverage",
         "cwd": "{projectRoot}"
       }
     },
+    "test:e2e": {
+      "inputs": ["default", "^production"],
+      "cache": true,
+      "outputs": ["{projectRoot}/test-results", "{projectRoot}/playwright-report"],
+      "executor": "@nx/playwright:playwright",
+      "options": {
+        "config": "{projectRoot}/playwright.config.ts"
+      }
+    },
     "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/eslint.config.js"],
-      "cache": true
+      "inputs": ["default", "{workspaceRoot}/biome.json"],
+      "cache": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "biome check {projectRoot} --apply-unsafe"
+      }
+    },
+    "typecheck": {
+      "inputs": ["default", "^production"],
+      "cache": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno check {projectRoot}/src/**/*.ts"
+      }
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "metadata": {
+        "description": "Start development server"
+      }
     },
     "preview": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "dependsOn": ["build"],
+      "metadata": {
+        "description": "Preview production build"
+      }
+    },
+    "deploy": {
+      "dependsOn": ["build", "test", "lint"],
+      "inputs": ["production", "cloudflare"],
+      "cache": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno run --allow-all scripts/unified-runner.ts --task deploy",
+        "cwd": "{workspaceRoot}"
+      }
+    },
+    "storybook": {
+      "cache": false,
+      "persistent": true,
+      "executor": "@nx/storybook:storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "{projectRoot}/.storybook"
+      }
+    },
+    "build-storybook": {
+      "inputs": ["default", "^production"],
+      "cache": true,
+      "outputs": ["{projectRoot}/dist/storybook"],
+      "executor": "@nx/storybook:build",
+      "options": {
+        "configDir": "{projectRoot}/.storybook",
+        "outputDir": "{projectRoot}/dist/storybook"
+      }
+    },
+    "ai:generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "deno run --allow-all shared/src/test-utils/ai-test-generator.ts --target {projectRoot}"
+        ]
+      },
+      "configurations": {
+        "test": {
+          "command": "deno run --allow-all shared/src/test-utils/ai-test-generator.ts --target {projectRoot} --type test"
+        },
+        "component": {
+          "command": "deno run --allow-all shared/src/test-utils/component-test-generator.ts --target {projectRoot}"
+        },
+        "coverage": {
+          "command": "deno run --allow-all shared/src/test-utils/coverage-analyzer.ts --target {projectRoot}"
+        }
+      }
+    },
+    "coverage:analyze": {
+      "dependsOn": ["test"],
+      "inputs": ["{projectRoot}/coverage/**/*"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno run --allow-all shared/src/test-utils/coverage-analyzer.ts --project {projectRoot} --threshold 80"
+      }
+    },
+    "mutation:test": {
+      "dependsOn": ["test"],
+      "inputs": ["default", "^production"],
+      "cache": false,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx stryker run --mutate {projectRoot}/src/**/*.{ts,tsx}"
+      }
+    },
+    "performance:test": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx lighthouse --output=json --output-path={projectRoot}/lighthouse-report.json http://localhost:20007"
+      }
+    },
+    "security:scan": {
+      "cache": false,
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npm audit --audit-level=moderate", "cargo audit"],
+        "parallel": true
+      }
     }
   },
   "generators": {
@@ -79,15 +257,46 @@
         "linter": "biome",
         "bundler": "rspack",
         "unitTestRunner": "none",
-        "e2eTestRunner": "playwright"
+        "e2eTestRunner": "playwright",
+        "routing": true,
+        "strict": true,
+        "addTailwind": true
       },
       "component": {
-        "style": "css"
+        "style": "css",
+        "export": true,
+        "classComponent": false
       },
       "library": {
         "style": "css",
         "linter": "biome",
-        "unitTestRunner": "none"
+        "unitTestRunner": "none",
+        "buildable": true,
+        "publishable": false,
+        "strict": true
+      }
+    },
+    "@nx/js": {
+      "library": {
+        "linter": "biome",
+        "unitTestRunner": "none",
+        "buildable": true,
+        "bundler": "esbuild"
+      }
+    },
+    "@nx/rspack": {
+      "application": {
+        "style": "css",
+        "linter": "biome",
+        "unitTestRunner": "none",
+        "e2eTestRunner": "playwright"
+      }
+    },
+    "@nx/storybook": {
+      "configuration": {
+        "configureCypress": false,
+        "generateStories": true,
+        "generateCypressSpecs": false
       }
     }
   },
@@ -97,13 +306,30 @@
       "options": {
         "buildTargetName": "build",
         "devTargetName": "dev",
-        "previewTargetName": "preview"
+        "previewTargetName": "preview",
+        "serveStaticTargetName": "serve-static"
       }
     },
     {
       "plugin": "@nx/playwright/plugin",
       "options": {
-        "targetName": "e2e"
+        "targetName": "e2e",
+        "ciTargetName": "e2e-ci"
+      }
+    },
+    {
+      "plugin": "@nx/storybook/plugin",
+      "options": {
+        "buildStorybookTargetName": "build-storybook",
+        "serveStorybookTargetName": "storybook",
+        "testStorybookTargetName": "test-storybook",
+        "staticStorybookTargetName": "static-storybook"
+      }
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
       }
     }
   ],
@@ -114,7 +340,7 @@
         "cacheableOperations": [
           "build",
           "build:web",
-          "build:desktop", 
+          "build:desktop",
           "build:mobile",
           "build:linux",
           "build:mac",
@@ -122,15 +348,53 @@
           "build:apple-vr",
           "build:metaverse",
           "build-native",
+          "build-storybook",
           "lint",
-          "check-types",
+          "typecheck",
           "test",
+          "test:e2e",
           "test:rust",
-          "test:deno"
+          "test:deno",
+          "test-storybook",
+          "ai:generate",
+          "coverage:analyze",
+          "mutation:test"
         ],
         "parallel": 8,
-        "useDaemonProcess": true
+        "useDaemonProcess": true,
+        "remoteCache": {
+          "enabled": false
+        }
+      }
+    },
+    "cloud": {
+      "runner": "@nx/nx-cloud",
+      "options": {
+        "accessToken": "NX_CLOUD_ACCESS_TOKEN",
+        "cacheableOperations": ["build", "test", "lint", "typecheck", "e2e"],
+        "parallel": true,
+        "distributed": {
+          "enabled": true,
+          "maxAgents": 8
+        },
+        "showUsageWarnings": true
       }
     }
-  }
+  },
+  "nxCloudAccessToken": "",
+  "release": {
+    "version": {
+      "preVersionCommand": "nx run-many -t build test lint",
+      "conventionalCommits": true
+    },
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    }
+  },
+  "parallel": 3,
+  "cacheDirectory": ".nx/cache",
+  "defaultBase": "main",
+  "useInferencePlugins": true
 }

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
+import { Analytics } from './Analytics.tsx';
 // import { Card, Button } from '../../../shared/src/components/DesignSystem.tsx';
 import { DataTable } from './DataTable.tsx';
-import { Analytics } from './Analytics.tsx';
 
 export default function AdminDashboard() {
   const { data: dashboardData, isLoading } = useQuery({
@@ -16,7 +16,7 @@ export default function AdminDashboard() {
           { id: 1, action: 'User registered', user: 'john@example.com', timestamp: new Date() },
           { id: 2, action: 'Order placed', user: 'jane@example.com', timestamp: new Date() },
           { id: 3, action: 'Payment processed', user: 'bob@example.com', timestamp: new Date() },
-        ]
+        ],
       };
     },
   });
@@ -58,12 +58,15 @@ export default function AdminDashboard() {
           <h3 className="text-lg font-medium text-gray-900 mb-4">Analytics Overview</h3>
           <Analytics />
         </div>
-        
+
         <div className="p-4 border rounded-lg bg-white shadow">
           <h3 className="text-lg font-medium text-gray-900 mb-4">Recent Activity</h3>
           <div className="space-y-3">
             {dashboardData?.recentActivity.map((activity) => (
-              <div key={activity.id} className="flex items-center justify-between p-3 bg-gray-50 rounded">
+              <div
+                key={activity.id}
+                className="flex items-center justify-between p-3 bg-gray-50 rounded"
+              >
                 <div>
                   <div className="font-medium">{activity.action}</div>
                   <div className="text-sm text-gray-600">{activity.user}</div>

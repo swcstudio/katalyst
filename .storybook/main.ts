@@ -4,7 +4,7 @@ const config: StorybookConfig = {
   stories: [
     '../core/src/**/*.stories.@(js|jsx|ts|tsx|mdx)',
     '../remix/app/**/*.stories.@(js|jsx|ts|tsx|mdx)',
-    '../nextjs/src/**/*.stories.@(js|jsx|ts|tsx|mdx)',
+    '../next/src/**/*.stories.@(js|jsx|ts|tsx|mdx)',
     '../shared/src/**/*.stories.@(js|jsx|ts|tsx|mdx)',
   ],
   addons: [
@@ -43,9 +43,9 @@ const config: StorybookConfig = {
       '@katalyst-react/shared': '../shared/src/index.ts',
       '@katalyst-react/core': '../core/src/main.tsx',
       '@katalyst-react/remix': '../remix/app/root.tsx',
-      '@katalyst-react/nextjs': '../nextjs/src/app/page.tsx',
+      '@katalyst-react/next': '../next/src/app/page.tsx',
     };
-    
+
     return config;
   },
 };

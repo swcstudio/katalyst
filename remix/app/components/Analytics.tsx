@@ -29,7 +29,7 @@ export function Analytics() {
             <div key={day.date} className="flex items-center justify-between">
               <span className="text-sm">{day.date}</span>
               <div className="flex items-center space-x-2">
-                <div 
+                <div
                   className="bg-blue-200 h-2 rounded"
                   style={{ width: `${(day.views / 2000) * 100}px` }}
                 />

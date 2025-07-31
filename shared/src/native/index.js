@@ -73,23 +73,23 @@ function requireNative() {
   } else if (process.platform === 'android') {
     if (process.arch === 'arm64') {
       try {
-        return require('./katalyst-multithreading.android-arm64.node')
+        return require('./swcstudio-multithreading.android-arm64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-android-arm64')
+        return require('@swcstudio/multithreading-android-arm64')
       } catch (e) {
         loadErrors.push(e)
       }
     } else if (process.arch === 'arm') {
       try {
-        return require('./katalyst-multithreading.android-arm-eabi.node')
+        return require('./swcstudio-multithreading.android-arm-eabi.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-android-arm-eabi')
+        return require('@swcstudio/multithreading-android-arm-eabi')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -99,34 +99,34 @@ function requireNative() {
   } else if (process.platform === 'win32') {
     if (process.arch === 'x64') {
       try {
-        return require('./katalyst-multithreading.win32-x64-msvc.node')
+        return require('./swcstudio-multithreading.win32-x64-msvc.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-win32-x64-msvc')
+        return require('@swcstudio/multithreading-win32-x64-msvc')
       } catch (e) {
         loadErrors.push(e)
       }
     } else if (process.arch === 'ia32') {
       try {
-        return require('./katalyst-multithreading.win32-ia32-msvc.node')
+        return require('./swcstudio-multithreading.win32-ia32-msvc.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-win32-ia32-msvc')
+        return require('@swcstudio/multithreading-win32-ia32-msvc')
       } catch (e) {
         loadErrors.push(e)
       }
     } else if (process.arch === 'arm64') {
       try {
-        return require('./katalyst-multithreading.win32-arm64-msvc.node')
+        return require('./swcstudio-multithreading.win32-arm64-msvc.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-win32-arm64-msvc')
+        return require('@swcstudio/multithreading-win32-arm64-msvc')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -135,34 +135,34 @@ function requireNative() {
     }
   } else if (process.platform === 'darwin') {
     try {
-      return require('./katalyst-multithreading.darwin-universal.node')
+      return require('./swcstudio-multithreading.darwin-universal.node')
     } catch (e) {
       loadErrors.push(e)
     }
     try {
-      return require('@katalyst/multithreading-darwin-universal')
+      return require('@swcstudio/multithreading-darwin-universal')
     } catch (e) {
       loadErrors.push(e)
     }
     if (process.arch === 'x64') {
       try {
-        return require('./katalyst-multithreading.darwin-x64.node')
+        return require('./swcstudio-multithreading.darwin-x64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-darwin-x64')
+        return require('@swcstudio/multithreading-darwin-x64')
       } catch (e) {
         loadErrors.push(e)
       }
     } else if (process.arch === 'arm64') {
       try {
-        return require('./katalyst-multithreading.darwin-arm64.node')
+        return require('./swcstudio-multithreading.darwin-arm64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-darwin-arm64')
+        return require('@swcstudio/multithreading-darwin-arm64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -172,23 +172,23 @@ function requireNative() {
   } else if (process.platform === 'freebsd') {
     if (process.arch === 'x64') {
       try {
-        return require('./katalyst-multithreading.freebsd-x64.node')
+        return require('./swcstudio-multithreading.freebsd-x64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-freebsd-x64')
+        return require('@swcstudio/multithreading-freebsd-x64')
       } catch (e) {
         loadErrors.push(e)
       }
     } else if (process.arch === 'arm64') {
       try {
-        return require('./katalyst-multithreading.freebsd-arm64.node')
+        return require('./swcstudio-multithreading.freebsd-arm64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-freebsd-arm64')
+        return require('@swcstudio/multithreading-freebsd-arm64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -199,23 +199,23 @@ function requireNative() {
     if (process.arch === 'x64') {
       if (isMusl()) {
         try {
-          return require('./katalyst-multithreading.linux-x64-musl.node')
+          return require('./swcstudio-multithreading.linux-x64-musl.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          return require('@katalyst/multithreading-linux-x64-musl')
+          return require('@swcstudio/multithreading-linux-x64-musl')
         } catch (e) {
           loadErrors.push(e)
         }
       } else {
         try {
-          return require('./katalyst-multithreading.linux-x64-gnu.node')
+          return require('./swcstudio-multithreading.linux-x64-gnu.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          return require('@katalyst/multithreading-linux-x64-gnu')
+          return require('@swcstudio/multithreading-linux-x64-gnu')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -223,23 +223,23 @@ function requireNative() {
     } else if (process.arch === 'arm64') {
       if (isMusl()) {
         try {
-          return require('./katalyst-multithreading.linux-arm64-musl.node')
+          return require('./swcstudio-multithreading.linux-arm64-musl.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          return require('@katalyst/multithreading-linux-arm64-musl')
+          return require('@swcstudio/multithreading-linux-arm64-musl')
         } catch (e) {
           loadErrors.push(e)
         }
       } else {
         try {
-          return require('./katalyst-multithreading.linux-arm64-gnu.node')
+          return require('./swcstudio-multithreading.linux-arm64-gnu.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          return require('@katalyst/multithreading-linux-arm64-gnu')
+          return require('@swcstudio/multithreading-linux-arm64-gnu')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -247,23 +247,23 @@ function requireNative() {
     } else if (process.arch === 'arm') {
       if (isMusl()) {
         try {
-          return require('./katalyst-multithreading.linux-arm-musleabihf.node')
+          return require('./swcstudio-multithreading.linux-arm-musleabihf.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          return require('@katalyst/multithreading-linux-arm-musleabihf')
+          return require('@swcstudio/multithreading-linux-arm-musleabihf')
         } catch (e) {
           loadErrors.push(e)
         }
       } else {
         try {
-          return require('./katalyst-multithreading.linux-arm-gnueabihf.node')
+          return require('./swcstudio-multithreading.linux-arm-gnueabihf.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          return require('@katalyst/multithreading-linux-arm-gnueabihf')
+          return require('@swcstudio/multithreading-linux-arm-gnueabihf')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -271,46 +271,46 @@ function requireNative() {
     } else if (process.arch === 'riscv64') {
       if (isMusl()) {
         try {
-          return require('./katalyst-multithreading.linux-riscv64-musl.node')
+          return require('./swcstudio-multithreading.linux-riscv64-musl.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          return require('@katalyst/multithreading-linux-riscv64-musl')
+          return require('@swcstudio/multithreading-linux-riscv64-musl')
         } catch (e) {
           loadErrors.push(e)
         }
       } else {
         try {
-          return require('./katalyst-multithreading.linux-riscv64-gnu.node')
+          return require('./swcstudio-multithreading.linux-riscv64-gnu.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          return require('@katalyst/multithreading-linux-riscv64-gnu')
+          return require('@swcstudio/multithreading-linux-riscv64-gnu')
         } catch (e) {
           loadErrors.push(e)
         }
       }
     } else if (process.arch === 'ppc64') {
       try {
-        return require('./katalyst-multithreading.linux-ppc64-gnu.node')
+        return require('./swcstudio-multithreading.linux-ppc64-gnu.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-linux-ppc64-gnu')
+        return require('@swcstudio/multithreading-linux-ppc64-gnu')
       } catch (e) {
         loadErrors.push(e)
       }
     } else if (process.arch === 's390x') {
       try {
-        return require('./katalyst-multithreading.linux-s390x-gnu.node')
+        return require('./swcstudio-multithreading.linux-s390x-gnu.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-linux-s390x-gnu')
+        return require('@swcstudio/multithreading-linux-s390x-gnu')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -320,34 +320,34 @@ function requireNative() {
   } else if (process.platform === 'openharmony') {
     if (process.arch === 'arm64') {
       try {
-        return require('./katalyst-multithreading.linux-arm64-ohos.node')
+        return require('./swcstudio-multithreading.linux-arm64-ohos.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-linux-arm64-ohos')
+        return require('@swcstudio/multithreading-linux-arm64-ohos')
       } catch (e) {
         loadErrors.push(e)
       }
     } else if (process.arch === 'x64') {
       try {
-        return require('./katalyst-multithreading.linux-x64-ohos.node')
+        return require('./swcstudio-multithreading.linux-x64-ohos.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-linux-x64-ohos')
+        return require('@swcstudio/multithreading-linux-x64-ohos')
       } catch (e) {
         loadErrors.push(e)
       }
     } else if (process.arch === 'arm') {
       try {
-        return require('./katalyst-multithreading.linux-arm-ohos.node')
+        return require('./swcstudio-multithreading.linux-arm-ohos.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        return require('@katalyst/multithreading-linux-arm-ohos')
+        return require('@swcstudio/multithreading-linux-arm-ohos')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -363,7 +363,7 @@ nativeBinding = requireNative()
 
 if (!nativeBinding || process.env.NAPI_RS_FORCE_WASI) {
   try {
-    nativeBinding = require('./katalyst-multithreading.wasi.cjs')
+    nativeBinding = require('./swcstudio-multithreading.wasi.cjs')
   } catch (err) {
     if (process.env.NAPI_RS_FORCE_WASI) {
       loadErrors.push(err)
@@ -371,7 +371,7 @@ if (!nativeBinding || process.env.NAPI_RS_FORCE_WASI) {
   }
   if (!nativeBinding) {
     try {
-      nativeBinding = require('@katalyst/multithreading-wasm32-wasi')
+      nativeBinding = require('@swcstudio/multithreading-wasm32-wasi')
     } catch (err) {
       if (process.env.NAPI_RS_FORCE_WASI) {
         loadErrors.push(err)
@@ -393,26 +393,72 @@ if (!nativeBinding) {
 }
 
 module.exports = nativeBinding
+module.exports.Barrier = nativeBinding.Barrier
+module.exports.BumpAllocator = nativeBinding.BumpAllocator
 module.exports.CrossbeamArrayQueue = nativeBinding.CrossbeamArrayQueue
 module.exports.CrossbeamAtomicCell = nativeBinding.CrossbeamAtomicCell
 module.exports.CrossbeamChannel = nativeBinding.CrossbeamChannel
 module.exports.CrossbeamSegQueue = nativeBinding.CrossbeamSegQueue
+module.exports.DashMap = nativeBinding.DashMap
+module.exports.DashSet = nativeBinding.DashSet
+module.exports.FairMutexWrapper = nativeBinding.FairMutexWrapper
+module.exports.FlumeChannel = nativeBinding.FlumeChannel
+module.exports.FlumeReceiver = nativeBinding.FlumeReceiver
+module.exports.FlumeSelector = nativeBinding.FlumeSelector
+module.exports.FlumeSender = nativeBinding.FlumeSender
+module.exports.MemoryMappedFile = nativeBinding.MemoryMappedFile
+module.exports.MemoryPool = nativeBinding.MemoryPool
 module.exports.MultithreadingManager = nativeBinding.MultithreadingManager
+module.exports.Mutex = nativeBinding.Mutex
+module.exports.OnceCell = nativeBinding.OnceCell
 module.exports.RayonThreadPool = nativeBinding.RayonThreadPool
+module.exports.RwLock = nativeBinding.RwLock
+module.exports.Semaphore = nativeBinding.Semaphore
+module.exports.ShardedMap = nativeBinding.ShardedMap
+module.exports.SimdF32X4 = nativeBinding.SimdF32X4
+module.exports.SimdF32x4 = nativeBinding.SimdF32x4
+module.exports.SimdF32X8 = nativeBinding.SimdF32X8
+module.exports.SimdF32x8 = nativeBinding.SimdF32x8
+module.exports.SimdMatrix = nativeBinding.SimdMatrix
+module.exports.ThreadId = nativeBinding.ThreadId
+module.exports.ThreadLocalCounter = nativeBinding.ThreadLocalCounter
+module.exports.ThreadLocalMap = nativeBinding.ThreadLocalMap
+module.exports.ThreadLocalStorage = nativeBinding.ThreadLocalStorage
 module.exports.TokioBroadcastChannel = nativeBinding.TokioBroadcastChannel
 module.exports.TokioMpscChannel = nativeBinding.TokioMpscChannel
 module.exports.TokioRuntime = nativeBinding.TokioRuntime
 module.exports.TokioTimer = nativeBinding.TokioTimer
 module.exports.benchmarkParallelOperations = nativeBinding.benchmarkParallelOperations
+module.exports.createBarrier = nativeBinding.createBarrier
+module.exports.createBumpAllocator = nativeBinding.createBumpAllocator
 module.exports.createCrossbeamArrayQueue = nativeBinding.createCrossbeamArrayQueue
 module.exports.createCrossbeamAtomicCell = nativeBinding.createCrossbeamAtomicCell
 module.exports.createCrossbeamChannel = nativeBinding.createCrossbeamChannel
 module.exports.createCrossbeamSegQueue = nativeBinding.createCrossbeamSegQueue
+module.exports.createDashmap = nativeBinding.createDashmap
+module.exports.createDashmapWithCapacity = nativeBinding.createDashmapWithCapacity
+module.exports.createDashset = nativeBinding.createDashset
+module.exports.createFairMutex = nativeBinding.createFairMutex
+module.exports.createFlumeBounded = nativeBinding.createFlumeBounded
+module.exports.createFlumeSelector = nativeBinding.createFlumeSelector
+module.exports.createFlumeUnbounded = nativeBinding.createFlumeUnbounded
+module.exports.createMemoryPool = nativeBinding.createMemoryPool
+module.exports.createOnceCell = nativeBinding.createOnceCell
+module.exports.createParkingLotMutex = nativeBinding.createParkingLotMutex
+module.exports.createParkingLotRwlock = nativeBinding.createParkingLotRwlock
 module.exports.createRayonThreadPool = nativeBinding.createRayonThreadPool
+module.exports.createSemaphore = nativeBinding.createSemaphore
+module.exports.createShardedMap = nativeBinding.createShardedMap
+module.exports.createSimdF32X4 = nativeBinding.createSimdF32X4
+module.exports.createSimdMatrix = nativeBinding.createSimdMatrix
+module.exports.createThreadLocalCounter = nativeBinding.createThreadLocalCounter
+module.exports.createThreadLocalMap = nativeBinding.createThreadLocalMap
+module.exports.createThreadLocalStorage = nativeBinding.createThreadLocalStorage
 module.exports.createTokioBroadcastChannel = nativeBinding.createTokioBroadcastChannel
 module.exports.createTokioMpscChannel = nativeBinding.createTokioMpscChannel
 module.exports.createTokioRuntime = nativeBinding.createTokioRuntime
 module.exports.createTokioTimer = nativeBinding.createTokioTimer
+module.exports.getAllThreadNames = nativeBinding.getAllThreadNames
 module.exports.getMultithreadingInfo = nativeBinding.getMultithreadingInfo
 module.exports.getPerformanceMetrics = nativeBinding.getPerformanceMetrics
 module.exports.getRayonGlobalThreadCount = nativeBinding.getRayonGlobalThreadCount
@@ -424,8 +470,14 @@ module.exports.parallelFilter = nativeBinding.parallelFilter
 module.exports.parallelMap = nativeBinding.parallelMap
 module.exports.parallelReduce = nativeBinding.parallelReduce
 module.exports.parallelSort = nativeBinding.parallelSort
+module.exports.registerCurrentThread = nativeBinding.registerCurrentThread
 module.exports.shutdownMultithreading = nativeBinding.shutdownMultithreading
+module.exports.simdDotProduct = nativeBinding.simdDotProduct
+module.exports.simdParallelSum = nativeBinding.simdParallelSum
+module.exports.simdVectorAdd = nativeBinding.simdVectorAdd
+module.exports.simdVectorScale = nativeBinding.simdVectorScale
 module.exports.stressTestConcurrency = nativeBinding.stressTestConcurrency
 module.exports.tokioDelay = nativeBinding.tokioDelay
 module.exports.tokioParallelTasks = nativeBinding.tokioParallelTasks
 module.exports.tokioTimeout = nativeBinding.tokioTimeout
+module.exports.unregisterCurrentThread = nativeBinding.unregisterCurrentThread

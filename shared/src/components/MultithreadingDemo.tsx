@@ -1,15 +1,31 @@
 import React, { useState, useCallback, useTransition } from 'react';
-import { useMultithreading, useParallelComputation, useAsyncComputation } from '../hooks/use-multithreading.ts';
-import { useServerAction, useParallelServerAction, createServerAction } from '../hooks/use-server-actions.ts';
-import { useHydration, useStreamingHydration, useSuspenseHydration } from '../hooks/use-hydration.ts';
-import { MultithreadingProvider, useMultithreadingContext, withMultithreading } from './MultithreadingProvider.tsx';
-import { 
-  useMultithreadingStore, 
-  useTaskQueue, 
-  useThreadPools, 
-  useMultithreadingMetrics, 
-  useChannelCommunication 
+import {
+  useHydration,
+  useStreamingHydration,
+  useSuspenseHydration,
+} from '../hooks/use-hydration.ts';
+import {
+  useAsyncComputation,
+  useMultithreading,
+  useParallelComputation,
+} from '../hooks/use-multithreading.ts';
+import {
+  createServerAction,
+  useParallelServerAction,
+  useServerAction,
+} from '../hooks/use-server-actions.ts';
+import {
+  useChannelCommunication,
+  useMultithreadingMetrics,
+  useMultithreadingStore,
+  useTaskQueue,
+  useThreadPools,
 } from '../stores/multithreading-store.ts';
+import {
+  MultithreadingProvider,
+  useMultithreadingContext,
+  withMultithreading,
+} from './MultithreadingProvider.tsx';
 
 interface DemoProps {
   title?: string;
@@ -19,12 +35,11 @@ interface DemoProps {
 const ParallelComputationDemo: React.FC = () => {
   const [data, setData] = useState<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   const [operation, setOperation] = useState<string>('square');
-  
-  const { result, isComputing, recompute } = useParallelComputation(
+
+  const { result, isComputing, recompute } = useParallelComputation(data, operation, [
     data,
     operation,
-    [data, operation]
-  );
+  ]);
 
   return (
     <div className="demo-section">
@@ -33,7 +48,14 @@ const ParallelComputationDemo: React.FC = () => {
         <input
           type="text"
           value={data.join(', ')}
-          onChange={(e) => setData(e.target.value.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n)))}
+          onChange={(e) =>
+            setData(
+              e.target.value
+                .split(',')
+                .map((n) => Number.parseInt(n.trim()))
+                .filter((n) => !isNaN(n))
+            )
+          }
           placeholder="Enter numbers separated by commas"
         />
         <select value={operation} onChange={(e) => setOperation(e.target.value)}>
@@ -59,12 +81,11 @@ const ParallelComputationDemo: React.FC = () => {
 const AsyncComputationDemo: React.FC = () => {
   const [message, setMessage] = useState<string>('Hello World');
   const [operation, setOperation] = useState<string>('delay');
-  
-  const { result, isComputing, recompute } = useAsyncComputation(
-    operation,
+
+  const { result, isComputing, recompute } = useAsyncComputation(operation, message, [
     message,
-    [message, operation]
-  );
+    operation,
+  ]);
 
   return (
     <div className="demo-section">
@@ -99,14 +120,23 @@ const AsyncComputationDemo: React.FC = () => {
 const ServerActionsDemo: React.FC = () => {
   const [isPending, startTransition] = useTransition();
   const [actionData, setActionData] = useState<string>('test data');
-  
-  const { execute: executeAction, data: result, isLoading: loading, error } = useServerAction('processData', {
+
+  const {
+    execute: executeAction,
+    data: result,
+    isLoading: loading,
+    error,
+  } = useServerAction('processData', {
     timeout: 5000,
     retries: 3,
-    priority: 'normal'
+    priority: 'normal',
   });
 
-  const { executeParallel, data: results, isLoading: parallelLoading } = useParallelServerAction('processData');
+  const {
+    executeParallel,
+    data: results,
+    isLoading: parallelLoading,
+  } = useParallelServerAction('processData');
 
   const handleSingleAction = useCallback(() => {
     startTransition(() => {
@@ -119,7 +149,7 @@ const ServerActionsDemo: React.FC = () => {
       executeParallel([
         { action: 'processData', data: 'data1' },
         { action: 'processData', data: 'data2' },
-        { action: 'processData', data: 'data3' }
+        { action: 'processData', data: 'data3' },
       ]);
     });
   }, [executeParallel]);
@@ -145,7 +175,7 @@ const ServerActionsDemo: React.FC = () => {
         <h4>Single Action Result:</h4>
         <p>Result: {result ? JSON.stringify(result) : 'No result yet'}</p>
         <p>Error: {error || 'None'}</p>
-        
+
         <h4>Parallel Actions Results:</h4>
         <p>Results: {results && results.length > 0 ? JSON.stringify(results) : 'No results yet'}</p>
       </div>
@@ -154,21 +184,24 @@ const ServerActionsDemo: React.FC = () => {
 };
 
 const HydrationDemo: React.FC = () => {
-  const [serverData, setServerData] = useState<any>({ message: 'Hello from server', timestamp: Date.now() });
+  const [serverData, setServerData] = useState<any>({
+    message: 'Hello from server',
+    timestamp: Date.now(),
+  });
   const [hydrationMethod, setHydrationMethod] = useState<'complete' | 'streaming'>('complete');
-  
-  const { 
-    isHydrated, 
-    isHydrating, 
-    progress, 
-    error: hydrationError, 
-    rehydrate, 
-    abort 
+
+  const {
+    isHydrated,
+    isHydrating,
+    progress,
+    error: hydrationError,
+    rehydrate,
+    abort,
   } = useHydration(serverData, {
     method: hydrationMethod,
     enableStreaming: hydrationMethod === 'streaming',
     chunkSize: 1000,
-    timeout: 10000
+    timeout: 10000,
   });
 
   const { data: streamingData, isHydrating: streamingLoading } = useStreamingHydration(
@@ -176,7 +209,7 @@ const HydrationDemo: React.FC = () => {
     (async function* () {
       for (let i = 0; i < 10; i++) {
         yield { chunk: i, data: `Chunk ${i}` };
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 500));
       }
     })(),
     { chunkSize: 1000, timeout: 10000 }
@@ -186,7 +219,10 @@ const HydrationDemo: React.FC = () => {
     <div className="demo-section">
       <h3>Hydration Demo</h3>
       <div className="controls">
-        <select value={hydrationMethod} onChange={(e) => setHydrationMethod(e.target.value as 'complete' | 'streaming')}>
+        <select
+          value={hydrationMethod}
+          onChange={(e) => setHydrationMethod(e.target.value as 'complete' | 'streaming')}
+        >
           <option value="complete">Complete Hydration</option>
           <option value="streaming">Streaming Hydration</option>
         </select>
@@ -202,7 +238,7 @@ const HydrationDemo: React.FC = () => {
         <p>Hydrating: {isHydrating ? 'Yes' : 'No'}</p>
         <p>Progress: {progress}%</p>
         <p>Error: {hydrationError || 'None'}</p>
-        
+
         <h4>Streaming Data:</h4>
         <p>Loading: {streamingLoading ? 'Yes' : 'No'}</p>
         <p>Chunks: {streamingData?.length || 0}</p>
@@ -223,7 +259,7 @@ const StateManagementDemo: React.FC = () => {
   const { pools, addPool, updatePool } = useThreadPools();
   const { metrics, updateMetrics, resetMetrics } = useMultithreadingMetrics();
   const { createChannel, subscribe, publish } = useChannelCommunication();
-  
+
   const [newTaskOperation, setNewTaskOperation] = useState<string>('compute');
   const [channelMessage, setChannelMessage] = useState<string>('Hello Channel');
 
@@ -234,7 +270,7 @@ const StateManagementDemo: React.FC = () => {
       data: { value: Math.random() * 100 },
       priority: 'normal' as const,
       status: 'pending' as const,
-      startTime: Date.now()
+      startTime: Date.now(),
     };
     addTask(task);
   }, [addTask, newTaskOperation]);
@@ -254,7 +290,7 @@ const StateManagementDemo: React.FC = () => {
   return (
     <div className="demo-section">
       <h3>State Management Demo</h3>
-      
+
       <div className="subsection">
         <h4>Task Queue</h4>
         <div className="controls">
@@ -267,7 +303,7 @@ const StateManagementDemo: React.FC = () => {
           <button onClick={handleAddTask}>Add Task</button>
         </div>
         <div className="task-list">
-          {tasks.slice(0, 5).map(task => (
+          {tasks.slice(0, 5).map((task) => (
             <div key={task.id} className="task-item">
               {task.operation} - {task.status} - Priority: {task.priority}
             </div>
@@ -279,9 +315,10 @@ const StateManagementDemo: React.FC = () => {
       <div className="subsection">
         <h4>Thread Pools</h4>
         <div className="pool-list">
-          {pools.map(pool => (
+          {pools.map((pool) => (
             <div key={pool.id} className="pool-item">
-              {pool.type} - Workers: {pool.workerCount} - Active: {pool.activeTasks}/{pool.totalTasks}
+              {pool.type} - Workers: {pool.workerCount} - Active: {pool.activeTasks}/
+              {pool.totalTasks}
             </div>
           ))}
         </div>
@@ -317,12 +354,16 @@ const StateManagementDemo: React.FC = () => {
   );
 };
 
-const MultithreadingDemoContent: React.FC<DemoProps> = ({ title = "Katalyst Multithreading Demo", showAdvanced = true }) => {
-  const { state, initialize, runParallelTask, runAsyncTask, benchmark, getMetrics } = useMultithreading({
-    autoInitialize: true,
-    workerThreads: 4,
-    enableProfiling: true
-  });
+const MultithreadingDemoContent: React.FC<DemoProps> = ({
+  title = 'Katalyst Multithreading Demo',
+  showAdvanced = true,
+}) => {
+  const { state, initialize, runParallelTask, runAsyncTask, benchmark, getMetrics } =
+    useMultithreading({
+      autoInitialize: true,
+      workerThreads: 4,
+      enableProfiling: true,
+    });
 
   const [benchmarkResult, setBenchmarkResult] = useState<any>(null);
   const [systemMetrics, setSystemMetrics] = useState<any>(null);
@@ -352,7 +393,7 @@ const MultithreadingDemoContent: React.FC<DemoProps> = ({ title = "Katalyst Mult
   return (
     <div className="multithreading-demo">
       <h1>{title}</h1>
-      
+
       <div className="system-status">
         <h2>System Status</h2>
         <p>Initialized: {state.isInitialized ? 'Yes' : 'No'}</p>
@@ -360,12 +401,12 @@ const MultithreadingDemoContent: React.FC<DemoProps> = ({ title = "Katalyst Mult
         <p>Completed Tasks: {state.completedTasks}</p>
         <p>Failed Tasks: {state.failedTasks}</p>
         <p>Average Task Duration: {state.averageTaskDuration.toFixed(2)}ms</p>
-        
+
         <div className="controls">
           <button onClick={handleBenchmark}>Run Benchmark</button>
           <button onClick={handleGetMetrics}>Get System Metrics</button>
         </div>
-        
+
         {benchmarkResult && (
           <div className="benchmark-result">
             <h3>Benchmark Result</h3>
@@ -375,7 +416,7 @@ const MultithreadingDemoContent: React.FC<DemoProps> = ({ title = "Katalyst Mult
             <p>Throughput: {benchmarkResult.throughput.toFixed(2)} ops/sec</p>
           </div>
         )}
-        
+
         {systemMetrics && (
           <div className="system-metrics">
             <h3>System Metrics</h3>
@@ -393,15 +434,35 @@ const MultithreadingDemoContent: React.FC<DemoProps> = ({ title = "Katalyst Mult
       {showAdvanced && (
         <div className="advanced-features">
           <h2>Advanced Features</h2>
-          <p>This demo showcases the comprehensive React 19 ecosystem integration with Rust multithreading:</p>
+          <p>
+            This demo showcases the comprehensive React 19 ecosystem integration with Rust
+            multithreading:
+          </p>
           <ul>
-            <li><strong>Hooks:</strong> useMultithreading, useParallelComputation, useAsyncComputation</li>
-            <li><strong>Server Actions:</strong> React 19 useTransition integration for non-blocking operations</li>
-            <li><strong>Hydration:</strong> SSR support with streaming and suspense patterns</li>
-            <li><strong>State Management:</strong> Zustand store for global multithreading state</li>
-            <li><strong>Context:</strong> Provider pattern for dependency injection and lifecycle management</li>
-            <li><strong>Channel Communication:</strong> Pub/sub patterns for inter-component communication</li>
-            <li><strong>Performance Monitoring:</strong> Real-time metrics and benchmarking</li>
+            <li>
+              <strong>Hooks:</strong> useMultithreading, useParallelComputation, useAsyncComputation
+            </li>
+            <li>
+              <strong>Server Actions:</strong> React 19 useTransition integration for non-blocking
+              operations
+            </li>
+            <li>
+              <strong>Hydration:</strong> SSR support with streaming and suspense patterns
+            </li>
+            <li>
+              <strong>State Management:</strong> Zustand store for global multithreading state
+            </li>
+            <li>
+              <strong>Context:</strong> Provider pattern for dependency injection and lifecycle
+              management
+            </li>
+            <li>
+              <strong>Channel Communication:</strong> Pub/sub patterns for inter-component
+              communication
+            </li>
+            <li>
+              <strong>Performance Monitoring:</strong> Real-time metrics and benchmarking
+            </li>
           </ul>
         </div>
       )}

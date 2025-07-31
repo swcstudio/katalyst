@@ -1,0 +1,10 @@
+/Users/ove/Desktop/swcstudio-marketing/target/debug/deps/libasync_global_executor-9b33c87bf06243e9.rmeta: /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/lib.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/config.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/executor.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/init.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/reactor.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/threading.rs
+
+/Users/ove/Desktop/swcstudio-marketing/target/debug/deps/async_global_executor-9b33c87bf06243e9.d: /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/lib.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/config.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/executor.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/init.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/reactor.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/threading.rs
+
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/lib.rs:
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/config.rs:
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/executor.rs:
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/init.rs:
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/reactor.rs:
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/async-global-executor-2.4.1/src/threading.rs:

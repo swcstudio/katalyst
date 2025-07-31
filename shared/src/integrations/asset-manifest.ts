@@ -11,8 +11,8 @@ export class AssetManifestIntegration {
       setup: () => ({
         manifest: {},
         assets: new Map(),
-        publicPath: '/'
-      })
+        publicPath: '/',
+      }),
     };
   }
 

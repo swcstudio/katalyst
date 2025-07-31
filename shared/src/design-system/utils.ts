@@ -1,6 +1,6 @@
 // import { type ClassValue, clsx } from 'clsx';
 // import { twMerge } from 'tailwind-merge';
-import process from "node:process";
+import process from 'node:process';
 
 export function cn(...inputs: (string | undefined | null | boolean)[]) {
   return inputs.filter(Boolean).join(' ');
@@ -20,7 +20,7 @@ export function formatBytes(
   if (bytes === 0) return '0 Byte';
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
   return `${(bytes / Math.pow(1024, i)).toFixed(decimals)} ${
-    sizeType === 'accurate' ? accurateSizes[i] ?? 'Bytest' : sizes[i] ?? 'Bytes'
+    sizeType === 'accurate' ? (accurateSizes[i] ?? 'Bytest') : (sizes[i] ?? 'Bytes')
   }`;
 }
 
@@ -54,10 +54,7 @@ export function unslugify(str: string) {
 }
 
 export function toTitleCase(str: string) {
-  return str.replace(
-    /\w\S*/g,
-    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-  );
+  return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
 export function toSentenceCase(str: string) {

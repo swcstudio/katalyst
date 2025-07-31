@@ -19,9 +19,9 @@ export class RspackPluginManager {
   }
 
   getRspackPlugins() {
-    return this.getAllPlugins().map(plugin => ({
+    return this.getAllPlugins().map((plugin) => ({
       name: plugin.name,
-      options: plugin.options || {}
+      options: plugin.options || {},
     }));
   }
 

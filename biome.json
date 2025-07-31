@@ -51,11 +51,7 @@
     }
   },
   "files": {
-    "include": [
-      "**/*.ts",
-      "**/*.tsx",
-      "**/*.json"
-    ],
+    "include": ["**/*.ts", "**/*.tsx", "**/*.json"],
     "ignore": [
       "node_modules/**",
       "dist/**",

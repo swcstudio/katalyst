@@ -1,4 +1,4 @@
-import { KatalystIntegration } from '../types/index';
+import type { KatalystIntegration } from '../types/index';
 
 export interface WebXRConfig {
   autoInitialize?: boolean;
@@ -34,7 +34,9 @@ export class WebXRIntegration implements KatalystIntegration {
     this.config = this.mergeWithDefaults(config);
   }
 
-  private mergeWithDefaults(config: WebXRConfig & Record<string, unknown>): WebXRConfig & Record<string, unknown> {
+  private mergeWithDefaults(
+    config: WebXRConfig & Record<string, unknown>
+  ): WebXRConfig & Record<string, unknown> {
     return {
       autoInitialize: true,
       devices: {
@@ -86,27 +88,24 @@ export class WebXRIntegration implements KatalystIntegration {
         devices: {
           headsets: this.config.devices?.headsets ?? [
             'meta-quest-2',
-            'meta-quest-3', 
+            'meta-quest-3',
             'meta-quest-pro',
-            'apple-vision-pro'
+            'apple-vision-pro',
           ],
-          arGlasses: this.config.devices?.arGlasses ?? [
-            'meta-ar-glasses',
-            'meta-ray-ban-stories'
-          ],
+          arGlasses: this.config.devices?.arGlasses ?? ['meta-ar-glasses', 'meta-ray-ban-stories'],
           controllers: this.config.devices?.controllers ?? [
             'hand-tracking',
             'motion-controllers',
             'eye-tracking',
-            'gesture-recognition'
+            'gesture-recognition',
           ],
           platforms: this.config.devices?.platforms ?? [
             'standalone',
             'pc-vr',
             'mobile-ar',
             'mixed-reality',
-            'passthrough'
-          ]
+            'passthrough',
+          ],
         },
         rendering: {
           engine: 'three.js',
@@ -148,7 +147,7 @@ export class WebXRIntegration implements KatalystIntegration {
             lightEstimation: true,
           },
         },
-      })
+      }),
     };
   }
 
@@ -193,7 +192,7 @@ export class WebXRIntegration implements KatalystIntegration {
           codeServer: true,
           neovim: true,
         },
-      })
+      }),
     };
   }
 
@@ -249,7 +248,7 @@ export class WebXRIntegration implements KatalystIntegration {
           sceneUnderstanding: true,
           mixedRealityCapture: true,
         },
-      })
+      }),
     };
   }
 
@@ -261,27 +260,27 @@ export class WebXRIntegration implements KatalystIntegration {
           distributed: true,
           realtime: true,
           scalable: true,
-          crossPlatform: true
+          crossPlatform: true,
         },
         networking: {
           webrtc: true,
           websockets: true,
           p2p: true,
-          cloudSync: true
+          cloudSync: true,
         },
         avatar: {
           customization: true,
           animation: true,
           physics: true,
-          expressions: true
+          expressions: true,
         },
         world: {
           procedural: true,
           persistent: true,
           collaborative: true,
-          physics: true
-        }
-      })
+          physics: true,
+        },
+      }),
     };
   }
 
@@ -330,7 +329,7 @@ export class WebXRIntegration implements KatalystIntegration {
           vulkanAPI: true,
           openXR: true,
         },
-      })
+      }),
     };
   }
 

@@ -11,8 +11,8 @@ export class MidsceneIntegration {
       setup: () => ({
         automation: true,
         ai: 'gpt-4o',
-        browser: 'playwright'
-      })
+        browser: 'playwright',
+      }),
     };
   }
 

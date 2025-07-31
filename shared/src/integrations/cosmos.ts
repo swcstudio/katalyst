@@ -1,4 +1,4 @@
-import { Web3Config } from '../types/index.ts';
+import type { Web3Config } from '../types/index.ts';
 
 export interface CosmosConfig extends Web3Config {
   evmosRpc: string;
@@ -42,12 +42,12 @@ export class CosmosIntegration {
             chainId: this.config.chainId || 'evmos_9001-2',
             coinType: this.config.coinType || 60,
             addressPrefix: this.config.addressPrefix || 'evmos',
-            gasPrice: this.config.gasPrice || '25000000000aevmos'
+            gasPrice: this.config.gasPrice || '25000000000aevmos',
           },
           cosmos: {
             rpc: this.config.cosmosRpc || 'https://rest.bd.evmos.org:1317',
-            chainId: this.config.chainId || 'evmos_9001-2'
-          }
+            chainId: this.config.chainId || 'evmos_9001-2',
+          },
         },
         components: this.getWeb3Components(),
         features: {
@@ -58,21 +58,18 @@ export class CosmosIntegration {
           crossChain: true,
           ibcTransfers: true,
           stakingRewards: true,
-          governance: true
-        }
+          governance: true,
+        },
       }),
-      plugins: [
-        'react-cosmos-plugin-rspack',
-        'evmos-js-plugin'
-      ],
+      plugins: ['react-cosmos-plugin-rspack', 'evmos-js-plugin'],
       dependencies: [
         'react-cosmos',
         '@evmos/evmosjs',
         '@cosmjs/stargate',
         '@cosmjs/proto-signing',
         '@keplr-wallet/types',
-        'ethers'
-      ]
+        'ethers',
+      ],
     };
   }
 
@@ -84,8 +81,8 @@ export class CosmosIntegration {
         props: {
           supportedWallets: ['keplr', 'metamask', 'walletconnect'],
           autoConnect: true,
-          chainId: this.config.chainId
-        }
+          chainId: this.config.chainId,
+        },
       },
       {
         name: 'TransactionHistory',
@@ -94,8 +91,8 @@ export class CosmosIntegration {
           pageSize: 10,
           showPending: true,
           showFailed: true,
-          refreshInterval: 30000
-        }
+          refreshInterval: 30000,
+        },
       },
       {
         name: 'TokenBalance',
@@ -103,8 +100,8 @@ export class CosmosIntegration {
         props: {
           showUsdValue: true,
           refreshInterval: 10000,
-          supportedTokens: ['EVMOS', 'ATOM', 'OSMO']
-        }
+          supportedTokens: ['EVMOS', 'ATOM', 'OSMO'],
+        },
       },
       {
         name: 'NFTGallery',
@@ -112,8 +109,8 @@ export class CosmosIntegration {
         props: {
           gridSize: 4,
           showMetadata: true,
-          supportedStandards: ['ERC721', 'ERC1155']
-        }
+          supportedStandards: ['ERC721', 'ERC1155'],
+        },
       },
       {
         name: 'CrossChainBridge',
@@ -121,9 +118,9 @@ export class CosmosIntegration {
         props: {
           supportedChains: ['ethereum', 'cosmos', 'osmosis'],
           minAmount: '0.001',
-          maxAmount: '1000'
-        }
-      }
+          maxAmount: '1000',
+        },
+      },
     ];
   }
 
@@ -138,8 +135,8 @@ export class CosmosIntegration {
             'address-conversion',
             'eip712-transactions',
             'cosmos-transactions',
-            'ibc-transfers'
-          ]
+            'ibc-transfers',
+          ],
         },
         addressConversion: {
           ethToEvmos: (ethAddress: string) => {
@@ -147,25 +144,25 @@ export class CosmosIntegration {
           },
           evmosToEth: (evmosAddress: string) => {
             return `0x${evmosAddress.slice(5)}`;
-          }
+          },
         },
         transactionTypes: {
           eip712: {
             enabled: true,
-            types: ['MsgSend', 'MsgDelegate', 'MsgVote']
+            types: ['MsgSend', 'MsgDelegate', 'MsgVote'],
           },
           cosmos: {
             enabled: true,
-            types: ['bank', 'staking', 'gov', 'ibc']
-          }
+            types: ['bank', 'staking', 'gov', 'ibc'],
+          },
         },
         smartContracts: {
           deployment: true,
           interaction: true,
           eventListening: true,
-          gasEstimation: true
-        }
-      })
+          gasEstimation: true,
+        },
+      }),
     };
   }
 
@@ -178,28 +175,28 @@ export class CosmosIntegration {
             name: 'keplr',
             type: 'cosmos',
             chainId: this.config.chainId,
-            rpc: this.config.cosmosRpc
+            rpc: this.config.cosmosRpc,
           },
           {
             name: 'metamask',
             type: 'ethereum',
-            chainId: parseInt(this.config.chainId.split('_')[1].split('-')[0]),
-            rpc: this.config.evmosRpc
-          }
+            chainId: Number.parseInt(this.config.chainId.split('_')[1].split('-')[0]),
+            rpc: this.config.evmosRpc,
+          },
         ],
         authentication: {
           signMessage: true,
           verifySignature: true,
           sessionManagement: true,
-          autoReconnect: true
+          autoReconnect: true,
         },
         permissions: {
           readAccounts: true,
           signTransactions: true,
           suggestChain: true,
-          addToken: true
-        }
-      })
+          addToken: true,
+        },
+      }),
     };
   }
 
@@ -214,16 +211,16 @@ export class CosmosIntegration {
             config: {
               type: 'sankey',
               data: 'transaction-flows',
-              realTime: true
-            }
+              realTime: true,
+            },
           },
           {
             name: 'NetworkStats',
             type: 'dashboard',
             config: {
               metrics: ['tps', 'blockTime', 'validators', 'totalSupply'],
-              refreshInterval: 5000
-            }
+              refreshInterval: 5000,
+            },
           },
           {
             name: 'TokenDistribution',
@@ -231,25 +228,25 @@ export class CosmosIntegration {
             config: {
               data: 'token-holders',
               showPercentages: true,
-              interactive: true
-            }
-          }
+              interactive: true,
+            },
+          },
         ],
         dataProviders: {
           'transaction-flows': {
             endpoint: '/api/blockchain/transactions',
-            transform: (data: any) => data.flows
+            transform: (data: any) => data.flows,
           },
           'network-stats': {
             endpoint: '/api/blockchain/stats',
-            transform: (data: any) => data.metrics
+            transform: (data: any) => data.metrics,
           },
           'token-holders': {
             endpoint: '/api/blockchain/tokens/distribution',
-            transform: (data: any) => data.distribution
-          }
-        }
-      })
+            transform: (data: any) => data.distribution,
+          },
+        },
+      }),
     };
   }
 
@@ -265,39 +262,39 @@ export class CosmosIntegration {
                 chainA: 'evmos_9001-2',
                 chainB: 'cosmoshub-4',
                 portId: 'transfer',
-                channelId: 'channel-0'
+                channelId: 'channel-0',
               },
               {
                 chainA: 'evmos_9001-2',
                 chainB: 'osmosis-1',
                 portId: 'transfer',
-                channelId: 'channel-1'
-              }
-            ]
+                channelId: 'channel-1',
+              },
+            ],
           },
           bridge: {
             ethereum: {
               enabled: true,
               contractAddress: '0x...',
-              supportedTokens: ['WETH', 'USDC', 'USDT']
-            }
-          }
+              supportedTokens: ['WETH', 'USDC', 'USDT'],
+            },
+          },
         },
         security: {
           validation: true,
           timeouts: {
             packet: 600,
-            acknowledgment: 600
+            acknowledgment: 600,
           },
-          relayers: ['hermes', 'rly']
+          relayers: ['hermes', 'rly'],
         },
         monitoring: {
           channelStatus: true,
           packetTracking: true,
           relayerHealth: true,
-          alerting: true
-        }
-      })
+          alerting: true,
+        },
+      }),
     };
   }
 
@@ -307,7 +304,7 @@ export class CosmosIntegration {
       this.setupEvmosIntegration(),
       this.setupWeb3Authentication(),
       this.setupBlockchainDataVisualization(),
-      this.setupCrossChainCommunication()
+      this.setupCrossChainCommunication(),
     ]);
 
     return integrations.filter(Boolean);
@@ -319,9 +316,9 @@ export class CosmosIntegration {
         mockData: {
           address: 'evmos1...',
           balance: '100.5 EVMOS',
-          connected: true
+          connected: true,
         },
-        scenarios: ['connected', 'disconnected', 'connecting', 'error']
+        scenarios: ['connected', 'disconnected', 'connecting', 'error'],
       },
       'transaction-history': {
         mockData: {
@@ -331,11 +328,11 @@ export class CosmosIntegration {
               type: 'send',
               amount: '10 EVMOS',
               status: 'confirmed',
-              timestamp: Date.now()
-            }
-          ]
+              timestamp: Date.now(),
+            },
+          ],
         },
-        scenarios: ['empty', 'loading', 'error', 'populated']
+        scenarios: ['empty', 'loading', 'error', 'populated'],
       },
       'nft-gallery': {
         mockData: {
@@ -344,12 +341,12 @@ export class CosmosIntegration {
               id: '1',
               name: 'Test NFT',
               image: 'https://example.com/nft.png',
-              collection: 'Test Collection'
-            }
-          ]
+              collection: 'Test Collection',
+            },
+          ],
         },
-        scenarios: ['empty', 'loading', 'error', 'populated']
-      }
+        scenarios: ['empty', 'loading', 'error', 'populated'],
+      },
     };
   }
 

@@ -1,1 +1,0 @@
-std::option::Option<&rayon::RayonThreadPool>: napi::bindgen_prelude::ToNapiValue

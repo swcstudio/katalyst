@@ -11,8 +11,8 @@ export class VirtualModulesIntegration {
       setup: () => ({
         modules: new Map(),
         cache: true,
-        hot: true
-      })
+        hot: true,
+      }),
     };
   }
 

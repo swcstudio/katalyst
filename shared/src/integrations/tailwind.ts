@@ -104,28 +104,24 @@ export class TailwindIntegration {
           important: !!this.config.important,
           containerQueries: this.cssConfig.features.containerQueries,
           nesting: this.cssConfig.features.nesting,
-          customMedia: this.cssConfig.features.customMedia
+          customMedia: this.cssConfig.features.customMedia,
         },
         newFeatures: {
           oklab: this.cssConfig.features.oklab,
           relativeLuminance: this.cssConfig.features.relativeLuminance,
           trigonometricFunctions: this.cssConfig.features.trigonometricFunctions,
           exponentialFunctions: this.cssConfig.features.exponentialFunctions,
-          steppedValueFunctions: this.cssConfig.features.steppedValueFunctions
-        }
+          steppedValueFunctions: this.cssConfig.features.steppedValueFunctions,
+        },
       }),
       plugins: [
         'tailwindcss',
         '@tailwindcss/typography',
         '@tailwindcss/forms',
         '@tailwindcss/aspect-ratio',
-        '@tailwindcss/container-queries'
+        '@tailwindcss/container-queries',
       ],
-      dependencies: [
-        'tailwindcss',
-        'autoprefixer',
-        'postcss'
-      ]
+      dependencies: ['tailwindcss', 'autoprefixer', 'postcss'],
     };
   }
 
@@ -144,16 +140,16 @@ export class TailwindIntegration {
             arbitraryValues: true,
             arbitraryProperties: true,
             arbitraryVariants: true,
-            stackedVariants: true
-          }
+            stackedVariants: true,
+          },
         },
         performance: {
           buildTime: 'significantly faster',
           bundleSize: 'smaller',
           developmentExperience: 'instant',
-          hotReload: 'fast'
-        }
-      })
+          hotReload: 'fast',
+        },
+      }),
     };
   }
 
@@ -168,7 +164,7 @@ export class TailwindIntegration {
             md: '768px',
             lg: '1024px',
             xl: '1280px',
-            '2xl': '1536px'
+            '2xl': '1536px',
           },
           features: {
             mobileFirst: true,
@@ -176,8 +172,8 @@ export class TailwindIntegration {
             containerQueries: this.cssConfig.features.containerQueries,
             orientationQueries: true,
             printStyles: true,
-            motionQueries: true
-          }
+            motionQueries: true,
+          },
         },
         utilities: {
           display: 'block, inline-block, flex, grid, etc.',
@@ -185,9 +181,9 @@ export class TailwindIntegration {
           grid: 'grid-cols-12, gap-4, etc.',
           spacing: 'p-4, m-2, space-x-4, etc.',
           sizing: 'w-full, h-screen, max-w-md, etc.',
-          typography: 'text-lg, font-bold, leading-tight, etc.'
-        }
-      })
+          typography: 'text-lg, font-bold, leading-tight, etc.',
+        },
+      }),
     };
   }
 
@@ -204,16 +200,16 @@ export class TailwindIntegration {
             selectorStrategy: this.config.darkMode === 'selector',
             systemPreference: true,
             toggle: true,
-            persistence: true
-          }
+            persistence: true,
+          },
         },
         implementation: {
           class: 'dark:bg-gray-900 dark:text-white',
           media: '@media (prefers-color-scheme: dark)',
           selector: '[data-theme="dark"]',
-          javascript: 'document.documentElement.classList.toggle("dark")'
-        }
-      })
+          javascript: 'document.documentElement.classList.toggle("dark")',
+        },
+      }),
     };
   }
 
@@ -232,8 +228,8 @@ export class TailwindIntegration {
             customComponents: true,
             customUtilities: true,
             customVariants: true,
-            customPlugins: true
-          }
+            customPlugins: true,
+          },
         },
         plugins: this.config.plugins,
         extensibility: {
@@ -242,9 +238,9 @@ export class TailwindIntegration {
           addBase: 'plugin(({ addBase }) => { ... })',
           addVariant: 'plugin(({ addVariant }) => { ... })',
           matchUtilities: 'plugin(({ matchUtilities }) => { ... })',
-          matchComponents: 'plugin(({ matchComponents }) => { ... })'
-        }
-      })
+          matchComponents: 'plugin(({ matchComponents }) => { ... })',
+        },
+      }),
     };
   }
 
@@ -265,17 +261,17 @@ export class TailwindIntegration {
             lazyLoading: true,
             criticalCSS: true,
             inlining: true,
-            prefetching: true
-          }
+            prefetching: true,
+          },
         },
         strategies: {
           contentPurging: this.config.content,
           safelist: this.config.safelist,
           blocklist: this.config.blocklist,
           dynamicContent: 'regex patterns',
-          whitelisting: 'specific classes'
-        }
-      })
+          whitelisting: 'specific classes',
+        },
+      }),
     };
   }
 
@@ -287,38 +283,39 @@ export class TailwindIntegration {
           react: {
             setup: 'npm install tailwindcss postcss autoprefixer',
             config: 'tailwind.config.js',
-            import: '@import "tailwindcss/base"; @import "tailwindcss/components"; @import "tailwindcss/utilities";'
+            import:
+              '@import "tailwindcss/base"; @import "tailwindcss/components"; @import "tailwindcss/utilities";',
           },
           nextjs: {
             setup: 'built-in support',
             config: 'tailwind.config.js',
-            css: 'globals.css'
+            css: 'globals.css',
           },
           remix: {
             setup: 'npm install tailwindcss',
             config: 'tailwind.config.js',
-            css: 'app/styles/tailwind.css'
+            css: 'app/styles/tailwind.css',
           },
           vite: {
             setup: 'npm install tailwindcss postcss autoprefixer',
             config: 'postcss.config.js',
-            plugin: '@vitejs/plugin-react'
-          }
+            plugin: '@vitejs/plugin-react',
+          },
         },
         buildTools: {
           webpack: 'postcss-loader',
           rollup: 'rollup-plugin-postcss',
           parcel: 'built-in support',
           rspack: 'postcss-loader',
-          esbuild: 'esbuild-plugin-postcss'
+          esbuild: 'esbuild-plugin-postcss',
         },
         editors: {
           vscode: 'Tailwind CSS IntelliSense',
           intellij: 'Tailwind CSS plugin',
           neovim: 'tailwindcss-colorizer-cmp.nvim',
-          sublime: 'LSP-tailwindcss'
-        }
-      })
+          sublime: 'LSP-tailwindcss',
+        },
+      }),
     };
   }
 
@@ -335,30 +332,30 @@ export class TailwindIntegration {
               fontSize: this.config.theme.fontSize,
               fontWeight: this.config.theme.fontWeight,
               lineHeight: this.config.theme.lineHeight,
-              letterSpacing: this.config.theme.letterSpacing
+              letterSpacing: this.config.theme.letterSpacing,
             },
             shadows: this.config.theme.boxShadow,
             borders: {
               radius: this.config.theme.borderRadius,
               width: this.config.theme.borderWidth,
-              color: this.config.theme.borderColor
-            }
+              color: this.config.theme.borderColor,
+            },
           },
           components: {
             buttons: 'btn, btn-primary, btn-secondary',
             forms: 'input, select, textarea, checkbox, radio',
             navigation: 'nav, breadcrumb, pagination',
             feedback: 'alert, toast, modal, tooltip',
-            layout: 'container, grid, flex, stack'
+            layout: 'container, grid, flex, stack',
           },
           patterns: {
             cardPattern: 'bg-white rounded-lg shadow-md p-6',
             buttonPattern: 'px-4 py-2 rounded-md font-medium transition-colors',
             inputPattern: 'border border-gray-300 rounded-md px-3 py-2 focus:ring-2',
-            modalPattern: 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center'
-          }
-        }
-      })
+            modalPattern: 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center',
+          },
+        },
+      }),
     };
   }
 
@@ -373,14 +370,14 @@ export class TailwindIntegration {
         relativeLuminance: true,
         trigonometricFunctions: true,
         exponentialFunctions: true,
-        steppedValueFunctions: true
+        steppedValueFunctions: true,
       },
       performance: {
         jit: true,
         purge: true,
         optimization: true,
-        caching: true
-      }
+        caching: true,
+      },
     };
   }
 
@@ -393,7 +390,7 @@ export class TailwindIntegration {
       this.setupCustomization(),
       this.setupPerformanceOptimization(),
       this.setupIntegrations(),
-      this.setupDesignSystem()
+      this.setupDesignSystem(),
     ]);
 
     return integrations.filter(Boolean);
@@ -405,7 +402,7 @@ export class TailwindIntegration {
         './src/**/*.{js,ts,jsx,tsx}',
         './app/**/*.{js,ts,jsx,tsx}',
         './pages/**/*.{js,ts,jsx,tsx}',
-        './components/**/*.{js,ts,jsx,tsx}'
+        './components/**/*.{js,ts,jsx,tsx}',
       ],
       theme: {
         screens: {
@@ -413,7 +410,7 @@ export class TailwindIntegration {
           md: '768px',
           lg: '1024px',
           xl: '1280px',
-          '2xl': '1536px'
+          '2xl': '1536px',
         },
         colors: {
           transparent: 'transparent',
@@ -430,8 +427,8 @@ export class TailwindIntegration {
             600: '#4b5563',
             700: '#374151',
             800: '#1f2937',
-            900: '#111827'
-          }
+            900: '#111827',
+          },
         },
         spacing: {
           px: '1px',
@@ -468,40 +465,40 @@ export class TailwindIntegration {
           64: '16rem',
           72: '18rem',
           80: '20rem',
-          96: '24rem'
+          96: '24rem',
         },
         animation: {
           none: 'none',
           spin: 'spin 1s linear infinite',
           ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
           pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-          bounce: 'bounce 1s infinite'
+          bounce: 'bounce 1s infinite',
         },
         keyframes: {
           spin: {
-            to: { transform: 'rotate(360deg)' }
+            to: { transform: 'rotate(360deg)' },
           },
           ping: {
-            '75%, 100%': { transform: 'scale(2)', opacity: '0' }
+            '75%, 100%': { transform: 'scale(2)', opacity: '0' },
           },
           pulse: {
-            '50%': { opacity: '.5' }
+            '50%': { opacity: '.5' },
           },
           bounce: {
             '0%, 100%': {
               transform: 'translateY(-25%)',
-              animationTimingFunction: 'cubic-bezier(0.8,0,1,1)'
+              animationTimingFunction: 'cubic-bezier(0.8,0,1,1)',
             },
             '50%': {
               transform: 'none',
-              animationTimingFunction: 'cubic-bezier(0,0,0.2,1)'
-            }
-          }
+              animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
+            },
+          },
         },
         fontFamily: {
           sans: ['ui-sans-serif', 'system-ui', 'sans-serif'],
           serif: ['ui-serif', 'Georgia', 'serif'],
-          mono: ['ui-monospace', 'SFMono-Regular', 'monospace']
+          mono: ['ui-monospace', 'SFMono-Regular', 'monospace'],
         },
         fontSize: {
           xs: ['0.75rem', { lineHeight: '1rem' }],
@@ -516,7 +513,7 @@ export class TailwindIntegration {
           '6xl': ['3.75rem', { lineHeight: '1' }],
           '7xl': ['4.5rem', { lineHeight: '1' }],
           '8xl': ['6rem', { lineHeight: '1' }],
-          '9xl': ['8rem', { lineHeight: '1' }]
+          '9xl': ['8rem', { lineHeight: '1' }],
         },
         fontWeight: {
           thin: '100',
@@ -527,7 +524,7 @@ export class TailwindIntegration {
           semibold: '600',
           bold: '700',
           extrabold: '800',
-          black: '900'
+          black: '900',
         },
         lineHeight: {
           3: '.75rem',
@@ -543,7 +540,7 @@ export class TailwindIntegration {
           snug: '1.375',
           normal: '1.5',
           relaxed: '1.625',
-          loose: '2'
+          loose: '2',
         },
         letterSpacing: {
           tighter: '-0.05em',
@@ -551,7 +548,7 @@ export class TailwindIntegration {
           normal: '0em',
           wide: '0.025em',
           wider: '0.05em',
-          widest: '0.1em'
+          widest: '0.1em',
         },
         textColor: {},
         backgroundColor: {},
@@ -565,14 +562,14 @@ export class TailwindIntegration {
           xl: '0.75rem',
           '2xl': '1rem',
           '3xl': '1.5rem',
-          full: '9999px'
+          full: '9999px',
         },
         borderWidth: {
           DEFAULT: '1px',
           0: '0px',
           2: '2px',
           4: '4px',
-          8: '8px'
+          8: '8px',
         },
         boxShadow: {
           sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
@@ -582,7 +579,7 @@ export class TailwindIntegration {
           xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
           '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
           inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
-          none: 'none'
+          none: 'none',
         },
         opacity: {
           0: '0',
@@ -599,7 +596,7 @@ export class TailwindIntegration {
           80: '0.8',
           90: '0.9',
           95: '0.95',
-          100: '1'
+          100: '1',
         },
         zIndex: {
           0: '0',
@@ -608,9 +605,9 @@ export class TailwindIntegration {
           30: '30',
           40: '40',
           50: '50',
-          auto: 'auto'
+          auto: 'auto',
         },
-        extend: {}
+        extend: {},
       },
       plugins: [],
       darkMode: 'class',
@@ -624,12 +621,12 @@ export class TailwindIntegration {
         hoverOnlyWhenSupported: false,
         respectDefaultRingColorOpacity: false,
         disableColorOpacityUtilitiesByDefault: false,
-        relativeContentPathsByDefault: false
+        relativeContentPathsByDefault: false,
       },
       experimental: {
         optimizeUniversalDefaults: false,
-        matchVariant: false
-      }
+        matchVariant: false,
+      },
     };
   }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useMultithreadingContext } from '../components/MultithreadingProvider.tsx';
 
 export interface HydrationConfig {
@@ -18,11 +18,7 @@ export interface HydrationState<T> {
   chunks: T[];
 }
 
-export function useHydration<T>(
-  key: string,
-  serverData: T | null,
-  config: HydrationConfig = {}
-) {
+export function useHydration<T>(key: string, serverData: T | null, config: HydrationConfig = {}) {
   const { nativeModule, isInitialized } = useMultithreadingContext();
   const [state, setState] = useState<HydrationState<T>>({
     data: serverData,
@@ -36,47 +32,50 @@ export function useHydration<T>(
   const hydratedRef = useRef(false);
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  const hydrate = useMemo(() => async () => {
-    if (hydratedRef.current || !isInitialized || !nativeModule) {
-      return;
-    }
-
-    hydratedRef.current = true;
-    abortControllerRef.current = new AbortController();
-
-    setState(prev => ({
-      ...prev,
-      isHydrating: true,
-      error: null,
-      progress: 0,
-    }));
-
-    try {
-      if (config.enableStreaming && Array.isArray(serverData)) {
-        await hydrateWithStreaming(serverData);
-      } else {
-        await hydrateComplete(serverData!);
-      }
-
-      setState(prev => ({
-        ...prev,
-        isHydrating: false,
-        isHydrated: true,
-        progress: 100,
-      }));
-    } catch (error) {
-      if (error instanceof Error && error.name === 'AbortError') {
+  const hydrate = useMemo(
+    () => async () => {
+      if (hydratedRef.current || !isInitialized || !nativeModule) {
         return;
       }
 
-      setState(prev => ({
+      hydratedRef.current = true;
+      abortControllerRef.current = new AbortController();
+
+      setState((prev) => ({
         ...prev,
-        isHydrating: false,
-        error: error instanceof Error ? error.message : 'Hydration failed',
-        data: config.fallback || prev.data,
+        isHydrating: true,
+        error: null,
+        progress: 0,
       }));
-    }
-  }, [key, serverData, config, isInitialized, nativeModule]);
+
+      try {
+        if (config.enableStreaming && Array.isArray(serverData)) {
+          await hydrateWithStreaming(serverData);
+        } else {
+          await hydrateComplete(serverData!);
+        }
+
+        setState((prev) => ({
+          ...prev,
+          isHydrating: false,
+          isHydrated: true,
+          progress: 100,
+        }));
+      } catch (error) {
+        if (error instanceof Error && error.name === 'AbortError') {
+          return;
+        }
+
+        setState((prev) => ({
+          ...prev,
+          isHydrating: false,
+          error: error instanceof Error ? error.message : 'Hydration failed',
+          data: config.fallback || prev.data,
+        }));
+      }
+    },
+    [key, serverData, config, isInitialized, nativeModule]
+  );
 
   const hydrateWithStreaming = async (data: T) => {
     if (!Array.isArray(data)) return;
@@ -90,7 +89,7 @@ export function useHydration<T>(
       }
 
       const chunk = data.slice(i, i + chunkSize);
-      
+
       const processedChunk = await nativeModule.rayonParallelMap(
         chunk,
         'hydrate_chunk',
@@ -99,16 +98,16 @@ export function useHydration<T>(
 
       chunks.push(...processedChunk);
 
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         chunks: [...prev.chunks, ...processedChunk],
         progress: Math.min(100, ((i + chunkSize) / data.length) * 100),
       }));
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
     }
 
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       data: chunks as T,
     }));
@@ -129,7 +128,7 @@ export function useHydration<T>(
       processedData = await nativeModule.tokioSpawnTask('hydrate_object', data);
     }
 
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       data: processedData,
       progress: 100,
@@ -138,7 +137,7 @@ export function useHydration<T>(
 
   const rehydrate = async () => {
     hydratedRef.current = false;
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       isHydrated: false,
       chunks: [],
@@ -151,7 +150,7 @@ export function useHydration<T>(
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       isHydrating: false,
     }));
@@ -197,7 +196,7 @@ export function useStreamingHydration<T>(
   const processStream = async () => {
     if (!isInitialized || !nativeModule) return;
 
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       isHydrating: true,
       error: null,
@@ -208,32 +207,29 @@ export function useStreamingHydration<T>(
       let chunkCount = 0;
 
       for await (const chunk of serverDataStream) {
-        const processedChunk = await nativeModule.tokioSpawnTask(
-          'process_stream_chunk',
-          chunk
-        );
+        const processedChunk = await nativeModule.tokioSpawnTask('process_stream_chunk', chunk);
 
         processedChunks.push(processedChunk);
         chunkCount++;
 
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           chunks: [...prev.chunks, processedChunk],
           data: [...processedChunks],
           progress: Math.min(100, chunkCount * 10),
         }));
 
-        await new Promise(resolve => setTimeout(resolve, 0));
+        await new Promise((resolve) => setTimeout(resolve, 0));
       }
 
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         isHydrating: false,
         isHydrated: true,
         progress: 100,
       }));
     } catch (error) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         isHydrating: false,
         error: error instanceof Error ? error.message : 'Streaming hydration failed',
@@ -257,7 +253,7 @@ export function useSuspenseHydration<T>(
   const promiseRef = useRef<Promise<T> | null>(null);
 
   if (!isInitialized || !nativeModule) {
-    throw new Promise(resolve => {
+    throw new Promise((resolve) => {
       const checkInitialized = () => {
         if (isInitialized && nativeModule) {
           resolve(undefined);

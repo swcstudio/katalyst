@@ -1,25 +1,50 @@
 #![deny(clippy::all)]
 
+#[cfg(feature = "mimalloc")]
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 use napi_derive::napi;
 use napi::bindgen_prelude::*;
 use napi::threadsafe_function::{ThreadsafeFunction, ThreadsafeFunctionCallMode};
 
+// Core modules
 mod crossbeam;
 mod rayon;
 mod tokio;
 
+// Advanced modules
+mod parking_lot;
+mod dashmap;
+mod flume;
+mod simd;
+mod thread_local;
+mod memory_pool;
+
+// Re-export all public APIs
 pub use crossbeam::*;
 pub use rayon::*;
 pub use tokio::*;
+pub use parking_lot::*;
+pub use dashmap::*;
+pub use flume::*;
+pub use simd::*;
+pub use thread_local::*;
+pub use memory_pool::*;
 
 #[napi]
 pub fn get_multithreading_info() -> String {
     format!(
-        "Katalyst Multithreading Module v0.1.0\n\
+        "@swcstudio/multithreading Module v1.0.0\n\
         Features:\n\
         - Crossbeam: Channels, atomics, lock-free data structures\n\
         - Rayon: Parallel iterators, custom thread pools\n\
         - Tokio: Async runtime, task spawning, async channels\n\
+        - ParkingLot: Advanced synchronization primitives\n\
+        - DashMap: Concurrent hash maps\n\
+        - Flume: Fast multi-producer, multi-consumer channels\n\
+        - SIMD: Vectorized operations and parallel math\n\
+        - Thread-local storage and memory pools\n\
         \n\
         Available CPU cores: {}\n\
         Rayon global thread count: {}",
@@ -44,7 +69,7 @@ pub fn get_system_info() -> napi::Result<SystemInfo> {
         rayon_threads: num_cpus::get() as u32,
         tokio_available: true,
         crossbeam_available: true,
-        version: "0.1.0".to_string(),
+        version: "1.0.0".to_string(),
     })
 }
 

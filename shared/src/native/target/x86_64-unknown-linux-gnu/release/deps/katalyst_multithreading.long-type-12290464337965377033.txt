@@ -1,1 +1,0 @@
-napi::threadsafe_function::ThreadsafeFunction<_, napi::Unknown<'_>, Vec<_>, napi::Status, false>

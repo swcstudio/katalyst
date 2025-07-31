@@ -1,11 +1,11 @@
 {
-  "name": "@katalyst/multithreading",
-  "version": "0.1.0",
-  "description": "Rust-powered multithreading capabilities for Katalyst React framework",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "name": "@swcstudio/multithreading",
+  "version": "1.0.0",
+  "description": "Advanced multithreading system for React 19 with AI-focused thread lifecycle management, WebSocket monitoring, and subagent coordination through Rust-powered Crossbeam, Rayon, and Tokio",
+  "main": "wrapper.js",
+  "types": "wrapper.d.ts",
   "napi": {
-    "binaryName": "katalyst-multithreading",
+    "binaryName": "swcstudio-multithreading",
     "targets": [
       "x86_64-pc-windows-msvc",
       "x86_64-apple-darwin",
@@ -19,6 +19,19 @@
       "i686-pc-windows-msvc"
     ]
   },
+  "keywords": [
+    "multithreading",
+    "react",
+    "rust",
+    "rayon",
+    "tokio",
+    "crossbeam",
+    "ai",
+    "websocket",
+    "subagents",
+    "performance",
+    "concurrency"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@napi-rs/cli": "^3.0.1"
@@ -28,7 +41,8 @@
     "build": "napi build --platform --release",
     "build:debug": "napi build --platform",
     "prepublishOnly": "napi prepublish -t npm",
-    "test": "ava",
+    "test": "node test.js",
+    "examples": "node examples.js",
     "universal": "napi universal",
     "version": "napi version"
   },

@@ -17,9 +17,9 @@ export class RspeedyIntegration {
         features: {
           hotReload: true,
           nativeComponents: true,
-          crossPlatformSharing: true
-        }
-      })
+          crossPlatformSharing: true,
+        },
+      }),
     };
   }
 
@@ -36,20 +36,20 @@ export class RspeedyIntegration {
           nativeNavigation: true,
           deviceIntegration: true,
           backgroundProcessing: true,
-          biometricAuth: true
+          biometricAuth: true,
         },
         buildConfig: {
           ios: {
             bundleIdentifier: 'com.katalyst.lynx',
-            deploymentTarget: '14.0'
+            deploymentTarget: '14.0',
           },
           android: {
             packageName: 'com.katalyst.lynx',
             minSdkVersion: 24,
-            targetSdkVersion: 34
-          }
-        }
-      })
+            targetSdkVersion: 34,
+          },
+        },
+      }),
     };
   }
 
@@ -62,22 +62,18 @@ export class RspeedyIntegration {
           multithreading: true,
           wasmSupport: true,
           nativeModules: true,
-          memoryOptimization: true
+          memoryOptimization: true,
         },
         performance: {
           jsEngine: 'hermes',
           bundleOptimization: true,
-          lazyLoading: true
-        }
-      })
+          lazyLoading: true,
+        },
+      }),
     };
   }
 
   async initialize() {
-    return [
-      this.setupRspeedy(),
-      this.setupUnifiedMobile(),
-      this.setupHighPerformanceRuntime()
-    ];
+    return [this.setupRspeedy(), this.setupUnifiedMobile(), this.setupHighPerformanceRuntime()];
   }
 }

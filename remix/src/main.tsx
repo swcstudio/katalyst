@@ -1,6 +1,6 @@
+import { RemixBrowser } from '@remix-run/react';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { RemixBrowser } from '@remix-run/react';
 
 const root = createRoot(document.getElementById('root')!);
 

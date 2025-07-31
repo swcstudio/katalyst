@@ -1,17 +1,24 @@
 {
-  "name": "@sse/katalyst-remix",
-  "version": "0.1.0",
-  "description": "Katalyst-React + Remix Framework - High-performance full-stack framework with Remix augmentation",
+  "name": "katalyst-remix",
+  "version": "1.0.0",
+  "description": "Remix Admin Dashboard for Spectrum Web Co AIO Management System - Full-stack admin interface for data management, analytics, and content administration",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swcstudio/katalyst.git",
+    "directory": "remix"
+  },
+  "license": "Apache-2.0",
+  "author": "SomeRandmGuyy",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "@remix-run/dev dev --port 20008",
     "build": "@remix-run/dev build",
-    "preview": "@remix-run/serve build --port 20008",
-    "test": "deno test --allow-all",
+    "dev": "@remix-run/dev dev --port 20008",
+    "format": "deno fmt",
     "lint": "deno lint",
-    "format": "deno fmt"
+    "preview": "@remix-run/serve build --port 20008",
+    "test": "deno test --allow-all"
   },
   "dependencies": {
     "@remix-run/node": "^2.12.1",
@@ -29,23 +36,23 @@
     "zustand": "^5.0.1"
   },
   "devDependencies": {
-    "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.5",
+    "@biomejs/biome": "^1.9.4",
+    "@clerk/clerk-react": "^5.17.0",
+    "@module-federation/enhanced": "^0.8.0",
+    "@nx/react": "^21.2.2",
     "@remix-run/dev": "^2.12.1",
     "@rsbuild/core": "^1.0.17",
     "@rsbuild/plugin-react": "^1.0.3",
     "@rsbuild/plugin-svgr": "^1.0.1",
-    "@module-federation/enhanced": "^0.8.0",
     "@rsbuild/plugin-type-check": "^1.0.1",
-    "@biomejs/biome": "^1.9.4",
-    "@clerk/clerk-react": "^5.17.0",
-    "@nx/react": "^21.2.2",
-    "nx": "^21.2.2",
-    "nitropack": "^2.9.7",
-    "tailwindcss": "^4.0.0",
     "@tailwindcss/postcss": "^4.0.0",
-    "tailwindcss-animate": "^1.0.7",
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
     "autoprefixer": "^10.4.20",
+    "nitropack": "^2.9.7",
+    "nx": "^21.2.2",
+    "tailwindcss": "^4.0.0",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.6.3"
   }
 }

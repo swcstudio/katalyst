@@ -1,0 +1,138 @@
+{
+  "$schema": "../node_modules/nx/schemas/nx-daemon-schema.json",
+  "enabled": true,
+  "autoStart": true,
+  "processManagement": {
+    "maxMemory": "2GB",
+    "idleTimeout": 10800000,
+    "shutdownGracePeriod": 5000,
+    "restartOnCrash": true,
+    "maxRestarts": 3
+  },
+  "fileWatching": {
+    "enabled": true,
+    "watchMode": "native",
+    "ignorePatterns": [
+      "**/node_modules/**",
+      "**/.git/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/.nx/cache/**",
+      "**/.next/**",
+      "**/.remix/**",
+      "**/coverage/**",
+      "**/*.log",
+      "**/tmp/**",
+      "**/temp/**"
+    ],
+    "watchPaths": [
+      "core/**/*",
+      "remix/**/*",
+      "nextjs/**/*",
+      "shared/**/*",
+      ".cloudflare/**/*",
+      "scripts/**/*",
+      "nx.json",
+      "package.json",
+      "tsconfig.json",
+      "deno.json",
+      "Cargo.toml"
+    ],
+    "debounceMs": 300,
+    "maxWatchedFiles": 50000
+  },
+  "projectGraph": {
+    "cacheEnabled": true,
+    "cacheTtl": 3600000,
+    "incrementalUpdates": true,
+    "parallelProcessing": true,
+    "optimizations": {
+      "memoization": true,
+      "lazyLoading": true,
+      "batchUpdates": true
+    }
+  },
+  "taskExecution": {
+    "parallel": 8,
+    "maxConcurrency": 16,
+    "scheduling": "smart",
+    "priorityQueue": true,
+    "resourceAwareness": {
+      "enabled": true,
+      "cpuThreshold": 80,
+      "memoryThreshold": 85
+    }
+  },
+  "networking": {
+    "socketType": "unix",
+    "socketPath": "/tmp/nx-daemon-{workspaceHash}.sock",
+    "connectionTimeout": 5000,
+    "requestTimeout": 30000,
+    "keepAlive": true,
+    "compression": true
+  },
+  "logging": {
+    "level": "info",
+    "output": ".nx/cache/d/daemon.log",
+    "maxFileSize": "10MB",
+    "maxFiles": 5,
+    "console": false,
+    "timestamps": true,
+    "performance": {
+      "enabled": true,
+      "threshold": 1000
+    }
+  },
+  "security": {
+    "allowedOrigins": ["localhost", "127.0.0.1"],
+    "authentication": false,
+    "encryption": false,
+    "permissions": {
+      "fileSystem": ["read", "write"],
+      "network": ["local"]
+    }
+  },
+  "environment": {
+    "development": {
+      "enabled": true,
+      "watchMode": "native",
+      "logging": "debug",
+      "performance": true
+    },
+    "production": {
+      "enabled": false,
+      "watchMode": "disabled",
+      "logging": "error",
+      "performance": false
+    },
+    "ci": {
+      "enabled": false,
+      "watchMode": "disabled",
+      "logging": "warn",
+      "performance": true
+    }
+  },
+  "integrations": {
+    "cloudflare": {
+      "enabled": true,
+      "watchPaths": [".cloudflare/**/*"],
+      "triggers": ["deploy", "dev"]
+    },
+    "deno": {
+      "enabled": true,
+      "watchPaths": ["**/*.ts", "deno.json"],
+      "triggers": ["build", "test", "typecheck"]
+    },
+    "rust": {
+      "enabled": true,
+      "watchPaths": ["shared/src/native/**/*", "Cargo.toml"],
+      "triggers": ["build-native", "test:rust"]
+    }
+  },
+  "experimental": {
+    "aiOptimizations": true,
+    "predictiveScheduling": true,
+    "smartCaching": true,
+    "resourcePrediction": true
+  }
+}

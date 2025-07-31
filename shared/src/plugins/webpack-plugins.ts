@@ -20,9 +20,9 @@ export class RspackPluginManager {
 
   getRspackConfiguration() {
     return {
-      plugins: this.getAllPlugins().map(plugin => ({
+      plugins: this.getAllPlugins().map((plugin) => ({
         name: plugin.name,
-        options: plugin.options || {}
+        options: plugin.options || {},
       })),
       optimization: {
         minimize: true,

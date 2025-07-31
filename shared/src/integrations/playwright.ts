@@ -130,12 +130,12 @@ export class PlaywrightIntegration {
           tracing: true,
           debugging: true,
           codegen: true,
-          inspector: true
+          inspector: true,
         },
         browsers: {
           chromium: 'Google Chrome, Microsoft Edge',
           firefox: 'Mozilla Firefox',
-          webkit: 'Apple Safari'
+          webkit: 'Apple Safari',
         },
         capabilities: {
           autoWait: 'Automatically waits for elements',
@@ -143,20 +143,17 @@ export class PlaywrightIntegration {
           mobileDevices: 'Emulate mobile devices',
           geolocation: 'Test location-based features',
           permissions: 'Test browser permissions',
-          authentication: 'Handle login states'
-        }
+          authentication: 'Handle login states',
+        },
       }),
       plugins: [
         'playwright-test',
         'playwright-core',
         'playwright-chromium',
         'playwright-firefox',
-        'playwright-webkit'
+        'playwright-webkit',
       ],
-      dependencies: [
-        '@playwright/test',
-        'playwright'
-      ]
+      dependencies: ['@playwright/test', 'playwright'],
     };
   }
 
@@ -168,21 +165,21 @@ export class PlaywrightIntegration {
           chromium: {
             name: 'chromium',
             channel: 'chrome',
-            features: ['devtools', 'extensions', 'mobile-emulation']
+            features: ['devtools', 'extensions', 'mobile-emulation'],
           },
           firefox: {
             name: 'firefox',
-            features: ['devtools', 'mobile-emulation']
+            features: ['devtools', 'mobile-emulation'],
           },
           webkit: {
             name: 'webkit',
-            features: ['mobile-emulation', 'touch-events']
-          }
+            features: ['mobile-emulation', 'touch-events'],
+          },
         },
         devices: {
           desktop: ['Desktop Chrome', 'Desktop Firefox', 'Desktop Safari'],
           mobile: ['iPhone 13', 'Pixel 5', 'Galaxy S9+'],
-          tablet: ['iPad Pro', 'Galaxy Tab S4']
+          tablet: ['iPad Pro', 'Galaxy Tab S4'],
         },
         configuration: {
           headless: this.config.use.headless,
@@ -190,9 +187,9 @@ export class PlaywrightIntegration {
           userAgent: this.config.use.userAgent,
           locale: this.config.use.locale,
           timezone: this.config.use.timezoneId,
-          permissions: this.config.use.permissions
-        }
-      })
+          permissions: this.config.use.permissions,
+        },
+      }),
     };
   }
 
@@ -209,21 +206,21 @@ export class PlaywrightIntegration {
             sharding: true,
             loadBalancing: true,
             faultTolerance: true,
-            resourceOptimization: true
-          }
+            resourceOptimization: true,
+          },
         },
         execution: {
           strategy: 'parallel',
           isolation: 'worker-level',
           sharing: 'test-level',
-          coordination: 'automatic'
+          coordination: 'automatic',
         },
         performance: {
           speedup: '3-10x faster',
           efficiency: 'optimal resource usage',
-          scalability: 'horizontal scaling'
-        }
-      })
+          scalability: 'horizontal scaling',
+        },
+      }),
     };
   }
 
@@ -240,7 +237,7 @@ export class PlaywrightIntegration {
           screenshots: true,
           videos: true,
           traces: true,
-          artifacts: true
+          artifacts: true,
         },
         builtInReporters: {
           list: 'Simple list reporter',
@@ -249,16 +246,16 @@ export class PlaywrightIntegration {
           html: 'HTML report with screenshots',
           json: 'JSON report for CI/CD',
           junit: 'JUnit XML for test runners',
-          github: 'GitHub Actions annotations'
+          github: 'GitHub Actions annotations',
         },
         customization: {
           templates: 'Custom HTML templates',
           styling: 'Custom CSS styling',
           data: 'Additional test data',
           filtering: 'Result filtering',
-          grouping: 'Test grouping'
-        }
-      })
+          grouping: 'Test grouping',
+        },
+      }),
     };
   }
 
@@ -278,24 +275,24 @@ export class PlaywrightIntegration {
             network: true,
             timeline: true,
             dom: true,
-            sources: true
-          }
+            sources: true,
+          },
         },
         tools: {
           playwrightInspector: 'GUI debugging tool',
           traceViewer: 'Timeline and network viewer',
           codegen: 'Test generation tool',
           vscode: 'VS Code extension',
-          devtools: 'Browser DevTools integration'
+          devtools: 'Browser DevTools integration',
         },
         commands: {
           debug: 'npx playwright test --debug',
           headed: 'npx playwright test --headed',
           ui: 'npx playwright test --ui',
           trace: 'npx playwright show-trace',
-          codegen: 'npx playwright codegen'
-        }
-      })
+          codegen: 'npx playwright codegen',
+        },
+      }),
     };
   }
 
@@ -315,8 +312,8 @@ export class PlaywrightIntegration {
             caching: true,
             authentication: true,
             cors: true,
-            redirects: true
-          }
+            redirects: true,
+          },
         },
         capabilities: {
           mockAPI: 'Mock API responses',
@@ -324,14 +321,15 @@ export class PlaywrightIntegration {
           modifyHeaders: 'Modify request/response headers',
           simulateConditions: 'Slow 3G, offline, etc.',
           interceptRequests: 'Capture and modify requests',
-          authentication: 'Handle auth tokens'
+          authentication: 'Handle auth tokens',
         },
         patterns: {
           mockResponse: 'await page.route("**/api/**", route => route.fulfill({ json: mockData }))',
           blockImages: 'await page.route("**/*.{png,jpg,jpeg}", route => route.abort())',
-          modifyRequest: 'await page.route("**/api/**", route => route.continue({ headers: { ...route.request().headers(), "Authorization": "Bearer token" } }))'
-        }
-      })
+          modifyRequest:
+            'await page.route("**/api/**", route => route.continue({ headers: { ...route.request().headers(), "Authorization": "Bearer token" } }))',
+        },
+      }),
     };
   }
 
@@ -351,8 +349,8 @@ export class PlaywrightIntegration {
             animations: true,
             masking: true,
             clipping: true,
-            pixelDiff: true
-          }
+            pixelDiff: true,
+          },
         },
         capabilities: {
           visualRegression: 'Compare screenshots across runs',
@@ -360,15 +358,15 @@ export class PlaywrightIntegration {
           responsive: 'Test responsive designs',
           animations: 'Handle animations and transitions',
           masking: 'Mask dynamic content',
-          threshold: 'Configurable difference threshold'
+          threshold: 'Configurable difference threshold',
         },
         commands: {
           screenshot: 'await page.screenshot()',
           elementScreenshot: 'await element.screenshot()',
           compare: 'await expect(page).toHaveScreenshot()',
-          update: 'npx playwright test --update-snapshots'
-        }
-      })
+          update: 'npx playwright test --update-snapshots',
+        },
+      }),
     };
   }
 
@@ -390,34 +388,35 @@ export class PlaywrightIntegration {
                     { run: 'npm ci' },
                     { run: 'npx playwright install --with-deps' },
                     { run: 'npx playwright test' },
-                    { uses: 'actions/upload-artifact@v4', if: 'always()', with: { name: 'playwright-report', path: 'playwright-report/' } }
-                  ]
-                }
-              }
-            }
+                    {
+                      uses: 'actions/upload-artifact@v4',
+                      if: 'always()',
+                      with: { name: 'playwright-report', path: 'playwright-report/' },
+                    },
+                  ],
+                },
+              },
+            },
           },
           docker: {
             image: 'mcr.microsoft.com/playwright:v1.40.0-focal',
-            commands: [
-              'npm ci',
-              'npx playwright test'
-            ]
+            commands: ['npm ci', 'npx playwright test'],
           },
           configuration: {
             headless: true,
             workers: 1,
             retries: 2,
-            reporter: 'github'
-          }
+            reporter: 'github',
+          },
         },
         features: {
           parallelization: 'Run tests in parallel',
           artifacts: 'Store test results and screenshots',
           reporting: 'Generate HTML reports',
           notifications: 'Slack/email notifications',
-          caching: 'Cache dependencies and browsers'
-        }
-      })
+          caching: 'Cache dependencies and browsers',
+        },
+      }),
     };
   }
 
@@ -430,16 +429,17 @@ export class PlaywrightIntegration {
       this.setupDebugging(),
       this.setupNetworkInterception(),
       this.setupVisualTesting(),
-      this.setupContinuousIntegration()
+      this.setupContinuousIntegration(),
     ]);
 
     return integrations.filter(Boolean);
   }
 
   getDefaultConfig(): PlaywrightConfig {
-    const isCI = typeof globalThis !== 'undefined' && 
-                 typeof (globalThis as any).process !== 'undefined' && 
-                 (globalThis as any).process.env?.CI;
+    const isCI =
+      typeof globalThis !== 'undefined' &&
+      typeof (globalThis as any).process !== 'undefined' &&
+      (globalThis as any).process.env?.CI;
     return {
       testDir: './tests',
       outputDir: './test-results',
@@ -454,7 +454,7 @@ export class PlaywrightIntegration {
       reporter: [
         { name: 'html' },
         { name: 'json', options: { outputFile: 'test-results.json' } },
-        { name: 'junit', options: { outputFile: 'test-results.xml' } }
+        { name: 'junit', options: { outputFile: 'test-results.xml' } },
       ],
       use: {
         baseURL: 'http://localhost:3000',
@@ -464,20 +464,20 @@ export class PlaywrightIntegration {
         ignoreHTTPSErrors: true,
         screenshot: 'only-on-failure',
         video: 'retain-on-failure',
-        trace: 'on-first-retry'
+        trace: 'on-first-retry',
       },
       projects: [
         {
           name: 'chromium',
-          use: { browserName: 'chromium' }
+          use: { browserName: 'chromium' },
         },
         {
           name: 'firefox',
-          use: { browserName: 'firefox' }
+          use: { browserName: 'firefox' },
         },
         {
           name: 'webkit',
-          use: { browserName: 'webkit' }
+          use: { browserName: 'webkit' },
         },
         {
           name: 'mobile-chrome',
@@ -485,8 +485,8 @@ export class PlaywrightIntegration {
             browserName: 'chromium',
             viewport: { width: 375, height: 667 },
             isMobile: true,
-            hasTouch: true
-          }
+            hasTouch: true,
+          },
         },
         {
           name: 'mobile-safari',
@@ -494,17 +494,17 @@ export class PlaywrightIntegration {
             browserName: 'webkit',
             viewport: { width: 375, height: 667 },
             isMobile: true,
-            hasTouch: true
-          }
-        }
+            hasTouch: true,
+          },
+        },
       ],
       expect: {
         timeout: 5000,
         toHaveScreenshot: {
           threshold: 0.2,
-          mode: 'pixel'
-        }
-      }
+          mode: 'pixel',
+        },
+      },
     };
   }
 

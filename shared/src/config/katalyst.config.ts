@@ -1,4 +1,4 @@
-import { KatalystConfig } from '../types/index.ts';
+import type { KatalystConfig } from '../types/index.ts';
 
 export const defaultKatalystConfig: KatalystConfig = {
   variant: 'core',
@@ -9,13 +9,13 @@ export const defaultKatalystConfig: KatalystConfig = {
     { name: 'web3', enabled: true },
     { name: 'ai-automation', enabled: true },
     { name: 'desktop', enabled: false },
-    { name: 'mobile', enabled: false }
+    { name: 'mobile', enabled: false },
   ],
   plugins: [
     { name: 'rspack', version: '1.0.17' },
     { name: 'biome', version: '1.9.4' },
     { name: 'tailwindcss', version: '4.0.0' },
-    { name: 'typescript', version: '5.6.3' }
+    { name: 'typescript', version: '5.6.3' },
   ],
   integrations: [
     { name: 'tanstack', type: 'framework', enabled: true },
@@ -45,7 +45,7 @@ export const defaultKatalystConfig: KatalystConfig = {
     { name: 'midscene', type: 'automation', enabled: true },
     { name: 'tauri', type: 'framework', enabled: false },
     { name: 'webxr', type: 'framework', enabled: false },
-    { name: 'multithreading', type: 'automation', enabled: true }
+    { name: 'multithreading', type: 'automation', enabled: true },
   ],
   unifiedAppBuilder: {
     enabled: true,
@@ -53,7 +53,7 @@ export const defaultKatalystConfig: KatalystConfig = {
     frameworks: {
       desktop: 'tauri',
       mobile: 'lynx',
-      metaverse: 'webxr'
+      metaverse: 'webxr',
     },
     sharedComponents: true,
     rustBackend: true,
@@ -61,34 +61,34 @@ export const defaultKatalystConfig: KatalystConfig = {
       crossPlatformComponents: true,
       sharedStateManagement: true,
       unifiedBuildSystem: true,
-      hotReload: true
-    }
+      hotReload: true,
+    },
   },
   platformConfigs: {
-    desktop: { 
-      tauri: { 
+    desktop: {
+      tauri: {
         enabled: true,
-        features: ['nativeMenus', 'systemTray', 'notifications', 'fileSystem']
-      }
+        features: ['nativeMenus', 'systemTray', 'notifications', 'fileSystem'],
+      },
     },
-    mobile: { 
-      rspeedy: { 
+    mobile: {
+      rspeedy: {
         enabled: true,
-        features: ['nativeNavigation', 'deviceAPIs', 'pushNotifications']
-      }
+        features: ['nativeNavigation', 'deviceAPIs', 'pushNotifications'],
+      },
     },
-    metaverse: { 
-      webxr: { 
+    metaverse: {
+      webxr: {
         enabled: true,
-        features: ['vr', 'ar', 'mixedReality', 'spatialTracking']
-      }
-    }
-  }
+        features: ['vr', 'ar', 'mixedReality', 'spatialTracking'],
+      },
+    },
+  },
 };
 
 export function createKatalystConfig(variant: 'core' | 'remix' | 'nextjs'): KatalystConfig {
   const config = { ...defaultKatalystConfig, variant };
-  
+
   switch (variant) {
     case 'remix':
       config.features.push({ name: 'remix-routing', enabled: true });
@@ -101,6 +101,6 @@ export function createKatalystConfig(variant: 'core' | 'remix' | 'nextjs'): Kata
     default:
       break;
   }
-  
+
   return config;
 }

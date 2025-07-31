@@ -8,45 +8,28 @@
       "executor": "nx:run-commands",
       "options": {
         "parallel": true,
-        "commands": [
-          "nx build core",
-          "nx build remix",
-          "nx build nextjs"
-        ]
+        "commands": ["nx build core", "nx build remix", "nx build next"]
       }
     },
     "dev": {
       "executor": "nx:run-commands",
       "options": {
         "parallel": true,
-        "commands": [
-          "nx dev core",
-          "nx dev remix",
-          "nx dev nextjs"
-        ]
+        "commands": ["nx dev core", "nx dev remix", "nx dev next"]
       }
     },
     "test": {
       "executor": "nx:run-commands",
       "options": {
         "parallel": true,
-        "commands": [
-          "nx test core",
-          "nx test remix",
-          "nx test nextjs"
-        ]
+        "commands": ["nx test core", "nx test remix", "nx test next"]
       }
     },
     "lint": {
       "executor": "nx:run-commands",
       "options": {
         "parallel": true,
-        "commands": [
-          "nx lint core",
-          "nx lint remix",
-          "nx lint nextjs",
-          "nx lint shared"
-        ]
+        "commands": ["nx lint core", "nx lint remix", "nx lint next", "nx lint shared"]
       }
     }
   },
