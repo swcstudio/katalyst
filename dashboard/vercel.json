@@ -1,0 +1,115 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "turbo run build --filter=@katalyst/* --cache-dir=.turbo",
+  "outputDirectory": null,
+  "installCommand": "deno run --allow-all scripts/unified-runner.ts --install",
+  "devCommand": "turbo run dev --parallel",
+  "ignoreCommand": "npx turbo-ignore",
+  "regions": ["iad1", "sfo1", "cdg1", "hnd1"],
+  "public": false,
+  "github": {
+    "enabled": true,
+    "autoAlias": true,
+    "silent": false,
+    "autoJobCancelation": true
+  },
+  "functions": {
+    "api/**/*.ts": {
+      "runtime": "edge",
+      "maxDuration": 30,
+      "memory": 1024,
+      "regions": ["iad1", "sfo1"]
+    },
+    "api/ai/**/*.ts": {
+      "runtime": "edge",
+      "maxDuration": 60,
+      "memory": 3008,
+      "includeFiles": "shared/src/ai/**"
+    },
+    "api/webxr/**/*.ts": {
+      "runtime": "edge",
+      "maxDuration": 300,
+      "memory": 3008,
+      "includeFiles": "shared/src/webxr/**"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/v1/:path*",
+      "destination": "/api/:path*"
+    },
+    {
+      "source": "/webxr/:path*",
+      "destination": "/api/webxr/:path*"
+    },
+    {
+      "source": "/mobile/:path*",
+      "destination": "/api/mobile/:path*"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/api/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    },
+    {
+      "source": "/static/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "env": {
+    "TURBO_REMOTE_CACHE_SIGNATURE_KEY": "@turbo-remote-cache-key",
+    "TURBO_TEAM": "@turbo-team",
+    "TURBO_TOKEN": "@turbo-token"
+  },
+  "build": {
+    "env": {
+      "NEXT_TELEMETRY_DISABLED": "1",
+      "TURBO_TELEMETRY_DISABLED": "1",
+      "NODE_ENV": "production",
+      "ENABLE_EXPERIMENTAL_COREPACK": "1"
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/cache-warmup",
+      "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/cron/analytics-digest",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}

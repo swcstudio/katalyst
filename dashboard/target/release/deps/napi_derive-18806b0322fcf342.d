@@ -1,0 +1,11 @@
+/Users/ove/Desktop/swcstudio-marketing/target/release/deps/libnapi_derive-18806b0322fcf342.dylib: /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/lib.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand/typedef.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand/typedef/type_def.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand/napi.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/parser/mod.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/parser/attrs.rs
+
+/Users/ove/Desktop/swcstudio-marketing/target/release/deps/napi_derive-18806b0322fcf342.d: /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/lib.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand/typedef.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand/typedef/type_def.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand/napi.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/parser/mod.rs /Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/parser/attrs.rs
+
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/lib.rs:
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand.rs:
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand/typedef.rs:
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand/typedef/type_def.rs:
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/expand/napi.rs:
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/parser/mod.rs:
+/Users/ove/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/napi-derive-3.1.1/src/parser/attrs.rs:

@@ -1,0 +1,284 @@
+{
+  "$schema": "../node_modules/nx/schemas/nx-plugins-schema.json",
+  "version": "2.0",
+  "metadata": {
+    "workspaceName": "swc-studio-marketing",
+    "lastUpdated": "2025-01-11T00:00:00.000Z",
+    "nxVersion": "^21.2.2"
+  },
+  "plugins": {
+    "core": [
+      {
+        "name": "@nx/rspack",
+        "version": "^21.2.2",
+        "enabled": true,
+        "options": {
+          "buildTargetName": "build",
+          "devTargetName": "dev",
+          "previewTargetName": "preview",
+          "serveStaticTargetName": "serve-static"
+        },
+        "capabilities": ["build", "dev", "preview", "bundle-analysis"],
+        "technologies": ["rspack", "webpack", "bundling", "javascript", "typescript"],
+        "crystal": true,
+        "autoInfer": true
+      },
+      {
+        "name": "@nx/playwright",
+        "version": "^21.2.2",
+        "enabled": true,
+        "options": {
+          "targetName": "e2e",
+          "ciTargetName": "e2e-ci"
+        },
+        "capabilities": ["e2e", "testing", "visual-regression", "cross-browser"],
+        "technologies": ["playwright", "testing", "automation", "chromium", "firefox", "webkit"],
+        "crystal": true,
+        "autoInfer": true
+      },
+      {
+        "name": "@nx/storybook",
+        "version": "^21.2.2",
+        "enabled": true,
+        "options": {
+          "buildStorybookTargetName": "build-storybook",
+          "serveStorybookTargetName": "storybook",
+          "testStorybookTargetName": "test-storybook",
+          "staticStorybookTargetName": "static-storybook"
+        },
+        "capabilities": [
+          "component-docs",
+          "visual-testing",
+          "design-system",
+          "component-development"
+        ],
+        "technologies": ["storybook", "documentation", "react", "ui-components"],
+        "crystal": true,
+        "autoInfer": true
+      },
+      {
+        "name": "@nx/eslint",
+        "version": "^21.2.2",
+        "enabled": true,
+        "options": {
+          "targetName": "lint"
+        },
+        "capabilities": ["linting", "code-quality", "formatting"],
+        "technologies": ["eslint", "biome", "code-quality", "static-analysis"],
+        "crystal": true,
+        "autoInfer": true
+      },
+      {
+        "name": "@nx/react",
+        "version": "^21.2.2",
+        "enabled": true,
+        "options": {
+          "buildTargetName": "build",
+          "devTargetName": "dev",
+          "testTargetName": "test"
+        },
+        "capabilities": ["react-apps", "react-libraries", "jsx", "component-generation"],
+        "technologies": ["react", "jsx", "typescript", "javascript"],
+        "crystal": true,
+        "autoInfer": true
+      }
+    ],
+    "framework": [
+      {
+        "name": "@nx/next",
+        "version": "^21.2.2",
+        "enabled": true,
+        "options": {
+          "buildTargetName": "build",
+          "devTargetName": "dev",
+          "exportTargetName": "export"
+        },
+        "capabilities": ["next-apps", "ssr", "ssg", "api-routes"],
+        "technologies": ["nextjs", "react", "vercel", "pages-router", "app-router"],
+        "crystal": true,
+        "autoInfer": true,
+        "projects": ["nextjs"]
+      },
+      {
+        "name": "@nx/remix",
+        "version": "^21.2.2",
+        "enabled": true,
+        "options": {
+          "buildTargetName": "build",
+          "devTargetName": "dev",
+          "typeCheckTargetName": "typecheck"
+        },
+        "capabilities": ["remix-apps", "ssr", "loaders", "actions"],
+        "technologies": ["remix", "react", "web-standards", "progressive-enhancement"],
+        "crystal": true,
+        "autoInfer": true,
+        "projects": ["remix"]
+      }
+    ],
+    "runtime": [
+      {
+        "name": "@nx/js",
+        "version": "^21.2.2",
+        "enabled": true,
+        "options": {
+          "buildTargetName": "build",
+          "testTargetName": "test"
+        },
+        "capabilities": ["typescript", "javascript", "node", "library-creation"],
+        "technologies": ["typescript", "javascript", "node", "esbuild", "swc"],
+        "crystal": true,
+        "autoInfer": true
+      },
+      {
+        "name": "@nx/deno",
+        "version": "^1.0.0",
+        "enabled": true,
+        "optional": true,
+        "options": {
+          "testTargetName": "test:deno",
+          "typecheckTargetName": "typecheck"
+        },
+        "capabilities": ["deno-runtime", "typescript-first", "web-standards"],
+        "technologies": ["deno", "typescript", "web-standards", "v8"],
+        "crystal": false,
+        "autoInfer": false
+      }
+    ],
+    "custom": [
+      {
+        "name": "swc-studio-unified-runner",
+        "version": "1.1.0",
+        "enabled": true,
+        "local": true,
+        "path": "./scripts/unified-runner-plugin.ts",
+        "options": {
+          "platforms": ["web", "desktop", "mobile"],
+          "frameworks": ["core", "remix", "nextjs"],
+          "cloudflare": true
+        },
+        "capabilities": [
+          "multi-platform-builds",
+          "cross-framework-support",
+          "cloudflare-deployment",
+          "native-compilation"
+        ],
+        "technologies": ["deno", "rust", "cloudflare-workers", "tauri", "react-native"],
+        "crystal": false,
+        "autoInfer": false
+      },
+      {
+        "name": "swc-studio-cloudflare-plugin",
+        "version": "1.1.0",
+        "enabled": true,
+        "local": true,
+        "path": "./scripts/cloudflare-plugin.ts",
+        "options": {
+          "workers": true,
+          "d1": true,
+          "r2": true,
+          "kv": true,
+          "vectorize": true,
+          "ai": true
+        },
+        "capabilities": [
+          "cloudflare-workers",
+          "ai-integration",
+          "vector-database",
+          "edge-deployment"
+        ],
+        "technologies": ["cloudflare-workers", "serverless", "edge-computing", "ai-models"],
+        "crystal": false,
+        "autoInfer": false
+      }
+    ]
+  },
+  "registry": {
+    "official": {
+      "url": "https://nx.dev/plugin-registry",
+      "cache": true,
+      "cacheExpiry": "24h"
+    },
+    "community": {
+      "url": "https://www.npmjs.com/search?q=keywords:nx-plugin",
+      "cache": true,
+      "cacheExpiry": "12h"
+    }
+  },
+  "discovery": {
+    "enabled": true,
+    "autoInstall": false,
+    "suggestions": {
+      "enabled": true,
+      "frequency": "weekly"
+    },
+    "compatibility": {
+      "checkVersion": true,
+      "strictMode": false
+    }
+  },
+  "performance": {
+    "lazy": {
+      "enabled": true,
+      "threshold": 100
+    },
+    "parallel": {
+      "enabled": true,
+      "maxWorkers": 8
+    },
+    "caching": {
+      "enabled": true,
+      "pluginMetadata": true,
+      "inferredTasks": true
+    }
+  },
+  "inference": {
+    "enabled": true,
+    "patterns": {
+      "rspack": [
+        "**/rspack.config.js",
+        "**/rspack.config.ts",
+        "**/rsbuild.config.js",
+        "**/rsbuild.config.ts"
+      ],
+      "playwright": ["**/playwright.config.js", "**/playwright.config.ts"],
+      "storybook": ["**/.storybook/main.js", "**/.storybook/main.ts"],
+      "eslint": ["**/.eslintrc.json", "**/eslint.config.js"],
+      "biome": ["**/biome.json"],
+      "next": ["**/next.config.js", "**/next.config.mjs"],
+      "remix": ["**/remix.config.js", "**/vite.config.ts"],
+      "deno": ["**/deno.json", "**/deno.jsonc"],
+      "rust": ["**/Cargo.toml"],
+      "cloudflare": ["**/.cloudflare/**/*", "**/wrangler.toml"]
+    },
+    "exclusions": [
+      "**/node_modules/**",
+      "**/.git/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/.nx/cache/**"
+    ]
+  },
+  "validation": {
+    "enabled": true,
+    "strict": false,
+    "rules": {
+      "pluginConflicts": "warn",
+      "duplicateCapabilities": "warn",
+      "missingDependencies": "error",
+      "versionMismatch": "warn"
+    }
+  },
+  "updates": {
+    "enabled": true,
+    "checkInterval": "weekly",
+    "autoUpdate": false,
+    "notifications": true,
+    "channels": ["stable", "beta"]
+  },
+  "experimental": {
+    "aiPluginSuggestions": true,
+    "dynamicPluginLoading": true,
+    "pluginMarketplace": false,
+    "crossWorkspacePlugins": false
+  }
+}

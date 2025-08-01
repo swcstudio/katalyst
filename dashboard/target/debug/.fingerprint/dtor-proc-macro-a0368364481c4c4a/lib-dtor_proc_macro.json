@@ -1,0 +1,20 @@
+{
+  "rustc": 15497389221046826682,
+  "features": "[\"default\"]",
+  "declared_features": "[\"default\"]",
+  "target": 16179305312861323885,
+  "profile": 3033921117576893,
+  "path": 9639455322355433587,
+  "deps": [],
+  "local": [
+    {
+      "CheckDepInfo": {
+        "dep_info": "debug/.fingerprint/dtor-proc-macro-a0368364481c4c4a/dep-lib-dtor_proc_macro",
+        "checksum": false
+      }
+    }
+  ],
+  "rustflags": [],
+  "config": 2069994364910194474,
+  "compile_kind": 0
+}

@@ -1,0 +1,20 @@
+{
+  "rustc": 15497389221046826682,
+  "features": "[\"async-timeout\"]",
+  "declared_features": "[\"async-timeout\", \"default\"]",
+  "target": 5408242616063297496,
+  "profile": 3033921117576893,
+  "path": 9195250516846667651,
+  "deps": [[8576480473721236041, "rustc_version", false, 15474487422347329531]],
+  "local": [
+    {
+      "CheckDepInfo": {
+        "dep_info": "debug/.fingerprint/rstest_macros-c55796fcc7fb1fa2/dep-build-script-build-script-build",
+        "checksum": false
+      }
+    }
+  ],
+  "rustflags": [],
+  "config": 2069994364910194474,
+  "compile_kind": 0
+}

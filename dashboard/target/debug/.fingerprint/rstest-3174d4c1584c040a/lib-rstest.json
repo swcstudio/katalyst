@@ -1,0 +1,24 @@
+{
+  "rustc": 15497389221046826682,
+  "features": "[\"async-timeout\", \"default\"]",
+  "declared_features": "[\"async-timeout\", \"default\"]",
+  "target": 9430943459246707904,
+  "profile": 8276155916380437441,
+  "path": 101085826119145120,
+  "deps": [
+    [2706460456408817945, "futures", false, 13495635558891539151],
+    [8140693133181067772, "futures_timer", false, 713311948900264397],
+    [13578492128271635567, "rstest_macros", false, 99371849383821983]
+  ],
+  "local": [
+    {
+      "CheckDepInfo": {
+        "dep_info": "debug/.fingerprint/rstest-3174d4c1584c040a/dep-lib-rstest",
+        "checksum": false
+      }
+    }
+  ],
+  "rustflags": [],
+  "config": 2069994364910194474,
+  "compile_kind": 0
+}

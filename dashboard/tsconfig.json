@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "es6"],
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "allowImportingTsExtensions": true,
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./shared/src/*"],
+      "@katalyst-react/shared": ["./shared/src/index.ts"],
+      "@katalyst-react/core": ["./core/src/main.tsx"],
+      "@katalyst-react/remix": ["./remix/app/root.tsx"],
+      "@katalyst-react/nextjs": ["./nextjs/src/app/page.tsx"],
+      "@/components": ["./shared/src/components/*"],
+      "@/hooks": ["./shared/src/hooks/*"],
+      "@/utils": ["./shared/src/utils/*"],
+      "@/stores": ["./shared/src/stores/*"],
+      "@/integrations": ["./shared/src/integrations/*"],
+      "@/config": ["./shared/src/config/*"],
+      "@/plugins": ["./shared/src/plugins/*"],
+      "@/factory": ["./shared/src/factory/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "dist", ".next", ".remix"]
+}

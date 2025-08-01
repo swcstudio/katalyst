@@ -1,0 +1,74 @@
+{
+  "name": "@swcstudio/cloudflare-integration",
+  "version": "1.0.0",
+  "description": "Cloudflare integration for Claude Code AI development",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler publish",
+    "deploy:worker": "cd workers && wrangler publish",
+    "deploy:pages": "wrangler pages publish ../dist",
+    "setup": "./scripts/setup.sh",
+    "migrate": "wrangler d1 migrations apply claude-code-db",
+    "migrate:local": "wrangler d1 migrations apply claude-code-db --local",
+    "kv:list": "wrangler kv:namespace list",
+    "r2:list": "wrangler r2 bucket list",
+    "logs": "wrangler tail",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "vitest run",
+    "test:integration": "playwright test",
+    "build": "tsc && rollup -c",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.24.3",
+    "@cloudflare/workers-types": "^4.20240909.0",
+    "@octokit/rest": "^20.1.1",
+    "@linear/sdk": "^22.0.0",
+    "@slack/bolt": "^3.17.1",
+    "telegraf": "^4.16.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "prettier": "^3.3.2",
+    "typescript": "^5.5.3",
+    "vitest": "^1.6.0",
+    "playwright": "^1.45.0",
+    "rollup": "^4.18.0",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "wrangler": "^3.65.1"
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "pages",
+    "kv",
+    "d1",
+    "r2",
+    "ai",
+    "claude",
+    "edge",
+    "serverless"
+  ],
+  "author": "SWC Studio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swcstudio/cloudflare-claude-integration.git"
+  },
+  "bugs": {
+    "url": "https://github.com/swcstudio/cloudflare-claude-integration/issues"
+  },
+  "homepage": "https://github.com/swcstudio/cloudflare-claude-integration#readme"
+}

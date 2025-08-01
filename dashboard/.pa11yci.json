@@ -1,0 +1,42 @@
+{
+  "defaults": {
+    "timeout": 10000,
+    "wait": 2000,
+    "standard": "WCAG2AA",
+    "runners": ["axe", "htmlcs"],
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+    },
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "headers": {
+      "Accept-Language": "en-US,en;q=0.9"
+    },
+    "actions": ["wait for element body to be visible"],
+    "hideElements": ".cookie-banner, .chat-widget",
+    "ignore": ["color-contrast", "heading-order"],
+    "threshold": 0
+  },
+  "urls": [
+    {
+      "url": "http://localhost:3000",
+      "screenCapture": "screenshots/homepage.png"
+    },
+    {
+      "url": "http://localhost:3000/about",
+      "screenCapture": "screenshots/about.png"
+    },
+    {
+      "url": "http://localhost:3000/contact",
+      "screenCapture": "screenshots/contact.png",
+      "actions": [
+        "wait for element body to be visible",
+        "set field #name to Test User",
+        "set field #email to test@example.com",
+        "wait for element button[type=submit] to be visible"
+      ]
+    }
+  ]
+}
