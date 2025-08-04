@@ -54,7 +54,7 @@
     "remark-rehype-wrap": "^1.0.0",
     "remark-unwrap-images": "^4.1.0",
     "recma-import-images": "^1.0.0",
-    "shiki": "^1.24.0",
+    "shiki": "^3.9.2",
     "unified-conditional": "^1.0.0",
     "escape-string-regexp": "^5.0.0",
     "fast-glob": "^3.3.3",
