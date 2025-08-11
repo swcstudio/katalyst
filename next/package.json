@@ -67,7 +67,7 @@
     "@types/react-dom": "^19.1.6",
     "@types/mdx": "^2.0.8",
     "typescript": "^5.8.0",
-    "@biomejs/biome": "^1.10.0",
+    "@biomejs/biome": "^2.1.4",
     "@rsbuild/core": "^1.2.0",
     "@rsbuild/plugin-react": "^1.2.0",
     "@rsbuild/plugin-svgr": "^1.2.0",
