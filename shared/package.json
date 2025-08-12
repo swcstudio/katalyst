@@ -57,7 +57,7 @@
     "@empjs/cli": "^3.9.1-beta.1",
     "@empjs/share": "^3.9.1-beta.1",
     "@empjs/rspack-plugin": "^3.9.1-beta.1",
-    "inquirer": "^8.2.6",
+    "inquirer": "^12.9.1",
     "node-fetch": "^2.7.0",
     "ora": "^5.4.1",
     "pareto": "^0.75.2",
