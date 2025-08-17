@@ -1,0 +1,38 @@
+{
+  "name": "katalyst-core",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean",
+    "setup": "deno task setup",
+    "setup:multithreading": "deno run --allow-all ./scripts/setup-multithreading.ts",
+    "nx": "nx",
+    "nx:run": "nx run-many",
+    "nx:graph": "nx graph",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.5.0",
+    "turbo": "^1.12.0",
+    "nx": "^18.0.0",
+    "@nrwl/workspace": "^18.0.0",
+    "@tauri-apps/cli": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "deno": ">=1.40.0",
+    "bun": ">=1.0.0"
+  },
+  "packageManager": "deno@1.40.0"
+}

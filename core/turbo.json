@@ -1,0 +1,68 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["NODE_ENV", "DENO_ENV", "TAURI_ENV"],
+  "remoteCache": {
+    "enabled": true,
+    "signature": true
+  },
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "build/**", "target/**"],
+      "env": ["DENO_ENV", "NODE_ENV", "TAURI_*"],
+      "cache": true
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**"],
+      "cache": true,
+      "inputs": ["src/**", "tests/**", "*.test.ts", "*.test.tsx"]
+    },
+    "lint": {
+      "outputs": [],
+      "cache": true,
+      "inputs": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "cache": true
+    },
+    "clean": {
+      "cache": false
+    },
+    "deploy": {
+      "dependsOn": ["build", "test", "lint"],
+      "outputs": ["dist/**"],
+      "cache": false
+    },
+    "@katalyst/multithreading#build": {
+      "outputs": ["*.node", "target/**"],
+      "cache": true,
+      "env": ["CARGO_*", "RUST_*"]
+    },
+    "@katalyst/desktop#build": {
+      "dependsOn": ["@katalyst/core#build", "@katalyst/multithreading#build"],
+      "outputs": ["src-tauri/target/**", "dist/**"],
+      "env": ["TAURI_*"],
+      "cache": true
+    },
+    "@katalyst/mobile#build": {
+      "dependsOn": ["@katalyst/core#build"],
+      "outputs": ["ios/build/**", "android/build/**", "dist/**"],
+      "cache": true
+    },
+    "@katalyst/metaverse#build": {
+      "dependsOn": ["@katalyst/core#build", "@katalyst/webxr#build"],
+      "outputs": ["dist/**", "wasm/**"],
+      "env": ["WASM_*", "WASMER_*"],
+      "cache": true
+    }
+  }
+}

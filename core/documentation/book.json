@@ -1,0 +1,126 @@
+{
+  "title": "Katalyst Framework Documentation",
+  "description": "Complete documentation for the Katalyst multi-monorepo microfrontend framework",
+  "author": "Katalyst Team",
+  "language": "en",
+  "gitbook": ">=3.0.0",
+  "root": "./src",
+  "structure": {
+    "readme": "README.md",
+    "summary": "SUMMARY.md"
+  },
+  "plugins": [
+    "-sharing",
+    "sharing-plus",
+    "expandable-chapters",
+    "copy-code-button",
+    "code",
+    "page-toc",
+    "prism",
+    "-highlight",
+    "github",
+    "anchor-navigation-ex",
+    "search-pro",
+    "advanced-emoji",
+    "todo",
+    "mermaid-compat",
+    "katex",
+    "versions-select",
+    "theme-api",
+    "summary"
+  ],
+  "pluginsConfig": {
+    "theme-api": {
+      "theme": "dark",
+      "split": true,
+      "languages": [
+        {
+          "lang": "js",
+          "name": "JavaScript",
+          "default": true
+        },
+        {
+          "lang": "ts",
+          "name": "TypeScript"
+        },
+        {
+          "lang": "rust",
+          "name": "Rust"
+        },
+        {
+          "lang": "wasm",
+          "name": "WebAssembly"
+        }
+      ]
+    },
+    "sharing": {
+      "facebook": true,
+      "twitter": true,
+      "linkedin": true,
+      "github": true,
+      "all": [
+        "facebook",
+        "twitter",
+        "linkedin",
+        "github"
+      ]
+    },
+    "github": {
+      "url": "https://github.com/katalyst/katalyst-core"
+    },
+    "page-toc": {
+      "selector": ".markdown-section h1, .markdown-section h2, .markdown-section h3",
+      "position": "before-first",
+      "showByDefault": true
+    },
+    "prism": {
+      "css": [
+        "prismjs/themes/prism-tomorrow.css"
+      ],
+      "lang": {
+        "shell": "bash",
+        "typescript": "typescript",
+        "ts": "typescript",
+        "rust": "rust",
+        "wasm": "wasm"
+      }
+    },
+    "anchor-navigation-ex": {
+      "showLevel": true,
+      "associatedWithSummary": true,
+      "printLog": false,
+      "multipleH1": true,
+      "mode": "float",
+      "showGoTop": true,
+      "float": {
+        "floatIcon": "fa fa-navicon",
+        "showLevelIcon": false,
+        "level1Icon": "fa fa-hand-o-right",
+        "level2Icon": "fa fa-hand-o-right",
+        "level3Icon": "fa fa-hand-o-right"
+      }
+    },
+    "versions": {
+      "type": "branches",
+      "options": [
+        {
+          "value": "https://docs.katalyst.io/v2/",
+          "text": "Version 2.0"
+        },
+        {
+          "value": "https://docs.katalyst.io/v1/",
+          "text": "Version 1.0"
+        }
+      ]
+    }
+  },
+  "variables": {
+    "version": "2.0.0"
+  },
+  "styles": {
+    "website": "styles/website.css",
+    "pdf": "styles/pdf.css",
+    "epub": "styles/epub.css",
+    "mobi": "styles/mobi.css"
+  }
+}

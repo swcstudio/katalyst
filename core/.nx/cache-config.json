@@ -1,0 +1,207 @@
+{
+  "$schema": "../node_modules/nx/schemas/nx-cache-config-schema.json",
+  "version": "2.0",
+  "cache": {
+    "enabled": true,
+    "location": ".nx/cache",
+    "maxSize": "10GB",
+    "cleanup": {
+      "enabled": true,
+      "maxAge": "7d",
+      "schedule": "0 2 * * 0",
+      "strategy": "lru"
+    }
+  },
+  "storage": {
+    "compression": {
+      "enabled": true,
+      "algorithm": "gzip",
+      "level": 6
+    },
+    "encryption": {
+      "enabled": false,
+      "algorithm": "aes-256-gcm"
+    },
+    "partitioning": {
+      "strategy": "hash",
+      "buckets": 256,
+      "distribution": "even"
+    }
+  },
+  "performance": {
+    "parallel": {
+      "reads": 8,
+      "writes": 4,
+      "deletes": 2
+    },
+    "buffering": {
+      "enabled": true,
+      "size": "64MB",
+      "flushInterval": 5000
+    },
+    "indexing": {
+      "enabled": true,
+      "type": "btree",
+      "memory": "256MB"
+    }
+  },
+  "policies": {
+    "retention": {
+      "default": "7d",
+      "build": "14d",
+      "test": "3d",
+      "lint": "1d",
+      "e2e": "7d"
+    },
+    "priority": {
+      "build": 10,
+      "test": 8,
+      "lint": 5,
+      "e2e": 7,
+      "storybook": 3
+    },
+    "eviction": {
+      "strategy": "lru",
+      "triggerThreshold": 90,
+      "targetThreshold": 75
+    }
+  },
+  "targets": {
+    "build": {
+      "enabled": true,
+      "inputs": ["production", "^production", "native"],
+      "outputs": ["{projectRoot}/dist", "{projectRoot}/build"],
+      "hashAlgorithm": "sha256",
+      "compression": true,
+      "retention": "14d"
+    },
+    "build:web": {
+      "enabled": true,
+      "inputs": ["production", "^production"],
+      "outputs": ["{projectRoot}/dist/web"],
+      "hashAlgorithm": "sha256",
+      "compression": true,
+      "retention": "14d"
+    },
+    "build:desktop": {
+      "enabled": true,
+      "inputs": ["production", "^production", "native"],
+      "outputs": ["{projectRoot}/dist/desktop"],
+      "hashAlgorithm": "sha256",
+      "compression": true,
+      "retention": "14d"
+    },
+    "build:mobile": {
+      "enabled": true,
+      "inputs": ["production", "^production", "native"],
+      "outputs": ["{projectRoot}/dist/mobile"],
+      "hashAlgorithm": "sha256",
+      "compression": true,
+      "retention": "14d"
+    },
+    "build-native": {
+      "enabled": true,
+      "inputs": ["native"],
+      "outputs": ["{projectRoot}/shared/src/native/target"],
+      "hashAlgorithm": "sha256",
+      "compression": true,
+      "retention": "14d"
+    },
+    "test": {
+      "enabled": true,
+      "inputs": ["default", "^production"],
+      "outputs": ["{projectRoot}/coverage", "{workspaceRoot}/tests/output"],
+      "hashAlgorithm": "sha256",
+      "compression": false,
+      "retention": "3d"
+    },
+    "test:rust": {
+      "enabled": true,
+      "inputs": ["native"],
+      "outputs": ["{projectRoot}/shared/src/native/target/debug"],
+      "hashAlgorithm": "sha256",
+      "compression": false,
+      "retention": "3d"
+    },
+    "test:deno": {
+      "enabled": true,
+      "inputs": ["default", "^production"],
+      "outputs": ["{projectRoot}/coverage"],
+      "hashAlgorithm": "sha256",
+      "compression": false,
+      "retention": "3d"
+    },
+    "test:e2e": {
+      "enabled": true,
+      "inputs": ["default", "^production"],
+      "outputs": ["{projectRoot}/test-results", "{projectRoot}/playwright-report"],
+      "hashAlgorithm": "sha256",
+      "compression": true,
+      "retention": "7d"
+    },
+    "lint": {
+      "enabled": true,
+      "inputs": ["default"],
+      "outputs": [],
+      "hashAlgorithm": "sha256",
+      "compression": false,
+      "retention": "1d"
+    },
+    "typecheck": {
+      "enabled": true,
+      "inputs": ["default", "^production"],
+      "outputs": [],
+      "hashAlgorithm": "sha256",
+      "compression": false,
+      "retention": "1d"
+    },
+    "build-storybook": {
+      "enabled": true,
+      "inputs": ["default", "^production"],
+      "outputs": ["{projectRoot}/dist/storybook"],
+      "hashAlgorithm": "sha256",
+      "compression": true,
+      "retention": "7d"
+    },
+    "deploy": {
+      "enabled": false,
+      "inputs": ["production", "cloudflare"],
+      "outputs": [],
+      "hashAlgorithm": "sha256",
+      "compression": false,
+      "retention": "1d"
+    }
+  },
+  "analytics": {
+    "enabled": true,
+    "metrics": ["hit_rate", "miss_rate", "size", "operations", "performance"],
+    "reporting": {
+      "interval": "24h",
+      "format": "json",
+      "destination": ".nx/cache/analytics"
+    }
+  },
+  "monitoring": {
+    "healthCheck": {
+      "enabled": true,
+      "interval": "5m",
+      "timeout": "30s"
+    },
+    "alerts": {
+      "diskUsage": {
+        "threshold": 85,
+        "action": "cleanup"
+      },
+      "corruption": {
+        "enabled": true,
+        "action": "rebuild"
+      }
+    }
+  },
+  "experimental": {
+    "smartPrefetching": true,
+    "predictiveCaching": true,
+    "distributedCache": false,
+    "aiOptimizations": true
+  }
+}

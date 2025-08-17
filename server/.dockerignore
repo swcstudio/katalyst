@@ -1,0 +1,102 @@
+# Katalyst Server - Docker Build Optimization
+# Ignore files that don't need to be in the Docker context
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+*.md
+
+# Development files
+.env
+.env.local
+.env.development
+.env.test
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime directories
+tmp/
+temp/
+_temp/
+
+# Build artifacts (will be created in container)
+_build/
+deps/
+.mix/
+
+# Node.js
+node_modules/
+npm-debug.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments (will be created in container)
+.venv/
+venv/
+ENV/
+env/
+
+# Test artifacts
+cover/
+.coverage
+.nyc_output
+coverage/
+
+# Elixir artifacts
+erl_crash.dump
+*.beam
+
+# Phoenix artifacts
+priv/static/assets/
+priv/static/cache_manifest.json
+
+# Rust artifacts (will be compiled in container)
+target/
+Cargo.lock
+native/*/target/
+
+# OS generated files
+Thumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Fly.io
+fly.toml.bak
+
+# Local database
+*.sqlite3
+*.db
+
+# Sensitive files
+.env.prod
+secrets.exs

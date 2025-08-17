@@ -1,0 +1,62 @@
+#!/bin/bash
+# Health check script for Katalyst Server
+# Checks Phoenix, Claude Code integration, and Python bridge
+
+set -e
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+echo -e "${YELLOW}🔍 Katalyst Server Health Check${NC}"
+echo "=================================="
+
+# Check Phoenix server
+echo -n "📡 Phoenix Server: "
+if curl -f -s http://localhost:8080/health > /dev/null 2>&1; then
+    echo -e "${GREEN}✓ Healthy${NC}"
+else
+    echo -e "${RED}✗ Unhealthy${NC}"
+    exit 1
+fi
+
+# Check Claude Code integration
+echo -n "🤖 Claude Code API: "
+if curl -f -s http://localhost:8080/api/claude/health > /dev/null 2>&1; then
+    echo -e "${GREEN}✓ Healthy${NC}"
+else
+    echo -e "${RED}✗ Unhealthy${NC}"
+    exit 1
+fi
+
+# Check Python bridge
+echo -n "🐍 Python Bridge: "
+if python3 /app/python_bridge.py '{"action": "init", "params": {}}' > /dev/null 2>&1; then
+    echo -e "${GREEN}✓ Healthy${NC}"
+else
+    echo -e "${RED}✗ Unhealthy${NC}"
+    exit 1
+fi
+
+# Check virtual environment
+echo -n "📦 Virtual Environment: "
+if [ -d "/app/.venv" ] && [ -f "/app/.venv/bin/python3" ]; then
+    echo -e "${GREEN}✓ Ready${NC}"
+else
+    echo -e "${RED}✗ Missing${NC}"
+    exit 1
+fi
+
+# Check Claude Code SDK
+echo -n "🧠 Claude Code SDK: "
+if /app/.venv/bin/python3 -c "import claude_code_sdk; print('OK')" > /dev/null 2>&1; then
+    echo -e "${GREEN}✓ Available${NC}"
+else
+    echo -e "${RED}✗ Unavailable${NC}"
+    exit 1
+fi
+
+echo ""
+echo -e "${GREEN}✅ All systems operational${NC}"

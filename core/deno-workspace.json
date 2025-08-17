@@ -1,0 +1,63 @@
+{
+  "version": "0.1.0",
+  "imports": {
+    "@katalyst/core": "./packages/core/mod.ts",
+    "@katalyst/design-system": "./packages/design-system/mod.ts",
+    "@katalyst/multithreading": "./packages/multithreading/mod.ts",
+    "@katalyst/mobile": "./packages/mobile/mod.ts",
+    "@katalyst/desktop": "./packages/desktop/mod.ts",
+    "@katalyst/metaverse": "./packages/metaverse/mod.ts",
+    "@katalyst/pwa": "./packages/pwa/mod.ts",
+    "@katalyst/build-system": "./packages/build-system/mod.ts",
+    "@katalyst/utils": "./packages/utils/mod.ts",
+    "@katalyst/hooks": "./packages/hooks/mod.ts",
+    "@katalyst/integrations": "./packages/integrations/mod.ts",
+    "@katalyst/webxr": "./packages/webxr/mod.ts",
+    "@katalyst/payments": "./packages/payments/mod.ts",
+    "@katalyst/ai": "./packages/ai/mod.ts",
+    "@katalyst/test-utils": "./packages/test-utils/mod.ts"
+  },
+  "workspace": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "memberDenoPaths": [
+      "./apps/marketing/deno.json",
+      "./apps/app/deno.json",
+      "./apps/admin/deno.json",
+      "./packages/core/deno.json",
+      "./packages/design-system/deno.json",
+      "./packages/multithreading/deno.json",
+      "./packages/mobile/deno.json",
+      "./packages/desktop/deno.json",
+      "./packages/metaverse/deno.json",
+      "./packages/pwa/deno.json",
+      "./packages/build-system/deno.json",
+      "./packages/utils/deno.json",
+      "./packages/hooks/deno.json",
+      "./packages/integrations/deno.json",
+      "./packages/webxr/deno.json",
+      "./packages/payments/deno.json",
+      "./packages/ai/deno.json",
+      "./packages/test-utils/deno.json"
+    ]
+  },
+  "tasks": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean",
+    "setup": "deno task install:deps && deno task setup:multithreading",
+    "install:deps": "deno install && bun install --fallback",
+    "setup:multithreading": "deno run --allow-all ./scripts/setup-multithreading.ts"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "strict": true
+  }
+}

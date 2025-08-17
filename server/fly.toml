@@ -1,0 +1,158 @@
+# fly.toml app configuration file generated for katalyst-server on 2025-08-07T10:03:23Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'katalyst-server'
+primary_region = 'dfw'
+kill_signal = 'SIGTERM'
+console_command = '_build/prod/rel/katalyst/bin/katalyst remote'
+
+[experimental]
+  auto_rollback = true
+  enable_consul = true
+  enable_etcd = true
+
+[build]
+  dockerfile = 'Dockerfile'
+
+  [build.args]
+    ELIXIR_ENV = 'prod'
+    ELIXIR_VERSION = '1.16.0'
+    ERLANG_VERSION = '26.2.1'
+    MIX_ENV = 'prod'
+    PYTHON_ENV = 'production'
+    PYTHON_VERSION = '3.12.8'
+    RUST_ENV = 'production'
+
+[deploy]
+  strategy = 'bluegreen'
+  max_unavailable = 0.33
+  wait_timeout = '5m0s'
+  release_command = "_build/prod/rel/katalyst/bin/katalyst eval 'Katalyst.Release.migrate'"
+
+[env]
+  BEAM_ENABLE_SMP = 'auto'
+  CLAUDE_MAX_SESSIONS = '1000'
+  CLAUDE_SDK_ENV = 'production'
+  CLAUDE_SESSION_TIMEOUT = '1800'
+  ECTO_IPV6 = 'true'
+  ERL_AFLAGS = '-proto_dist inet6_tcp'
+  ERL_MAX_ETS_TABLES = '32768'
+  ERL_MAX_PORTS = '65536'
+  GENSERVER_POOL_SIZE = '50'
+  MAX_CONCURRENT_REQUESTS = '10000'
+  MIX_ENV = 'prod'
+  NODE_POOL_SIZE = '100'
+  PHX_HOST = 'katalyst-server.fly.dev'
+  PHX_SERVER = 'true'
+  POOL_SIZE = '20'
+  PORT = '8080'
+  PYTHONPATH = '/app/.venv/lib/python3.12/site-packages'
+  PYTHON_ENV = 'production'
+  RUST_BACKTRACE = '0'
+  RUST_ENV = 'production'
+  VIRTUAL_ENV = '/app/.venv'
+
+[processes]
+  claude_manager = "_build/prod/rel/katalyst/bin/katalyst eval 'Katalyst.ClaudeCode.SessionManager.start_link()'"
+  scheduler = "_build/prod/rel/katalyst/bin/katalyst eval 'Katalyst.Scheduler.start()'"
+  web = '_build/prod/rel/katalyst/bin/katalyst start'
+  worker = "_build/prod/rel/katalyst/bin/katalyst eval 'Katalyst.Workers.Supervisor.start()'"
+
+[[mounts]]
+  source = 'katalyst_data'
+  destination = '/data'
+  processes = ['web']
+
+[[services]]
+  protocol = 'tcp'
+  internal_port = 8080
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 2
+  processes = ['web']
+
+  [[services.ports]]
+    port = 80
+    handlers = ['http']
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ['tls', 'http']
+
+    [services.ports.tls_options]
+      alpn = ['h2', 'http/1.1']
+
+  [services.concurrency]
+    type = 'connections'
+    hard_limit = 2000
+    soft_limit = 1500
+
+  [[services.tcp_checks]]
+    interval = '10s'
+    timeout = '3s'
+    grace_period = '5s'
+
+  [[services.http_checks]]
+    interval = '30s'
+    timeout = '5s'
+    grace_period = '10s'
+    method = 'GET'
+    path = '/health'
+    protocol = 'http'
+    tls_skip_verify = false
+
+    [services.http_checks.headers]
+      User-Agent = 'Fly-Health-Check'
+
+  [[services.http_checks]]
+    interval = '45s'
+    timeout = '10s'
+    grace_period = '15s'
+    method = 'GET'
+    path = '/api/claude/health'
+    protocol = 'http'
+
+  [[services.http_checks]]
+    interval = '15s'
+    timeout = '3s'
+    grace_period = '5s'
+    method = 'GET'
+    path = '/ready'
+    protocol = 'http'
+
+[[services]]
+  protocol = 'tcp'
+  internal_port = 4000
+  processes = ['web']
+
+  [[services.ports]]
+    port = 4000
+    handlers = ['http']
+
+  [services.concurrency]
+    type = 'connections'
+    hard_limit = 3000
+    soft_limit = 2000
+
+[[vm]]
+  size = 'performance-4x'
+  cpu_kind = 'performance'
+  cpus = 4
+  memory_mb = 8192
+
+[[vm]]
+  size = 'performance-2x'
+  cpus = 2
+  memory_mb = 4096
+
+[[vm]]
+  size = 'performance-2x'
+  cpus = 2
+  memory_mb = 4096
+
+[[metrics]]
+  port = 9091
+  path = '/metrics'
