@@ -1,0 +1,22 @@
+{
+  "name": "katalyst-packages-docs",
+  "version": "1.0.0",
+  "description": "Documentation for Katalyst Turborepo packages",
+  "private": true,
+  "scripts": {
+    "install": "gitbook install",
+    "serve": "gitbook serve",
+    "build": "gitbook build",
+    "pdf": "gitbook pdf . katalyst-packages.pdf",
+    "epub": "gitbook epub . katalyst-packages.epub",
+    "mobi": "gitbook mobi . katalyst-packages.mobi"
+  },
+  "keywords": [
+    "katalyst",
+    "turborepo",
+    "documentation",
+    "gitbook"
+  ],
+  "author": "Katalyst Team",
+  "license": "MIT"
+}
