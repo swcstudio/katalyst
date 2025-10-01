@@ -1,0 +1,23 @@
+# GitBook output
+_book/
+*.epub
+*.mobi
+*.pdf
+
+# Node modules (if GitBook is installed locally)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.log

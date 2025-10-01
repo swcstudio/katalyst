@@ -1,0 +1,101 @@
+{
+  "title": "Katalyst Packages Documentation",
+  "description": "Comprehensive documentation for all custom Turborepo packages in the Katalyst framework",
+  "author": "Katalyst Team",
+  "language": "en",
+  "gitbook": ">=3.0.0",
+  "structure": {
+    "readme": "README.md",
+    "summary": "SUMMARY.md"
+  },
+  "plugins": [
+    "expandable-chapters",
+    "copy-code-button",
+    "github",
+    "search-plus",
+    "prism",
+    "-highlight",
+    "anchor-navigation-ex",
+    "page-toc-button",
+    "back-to-top-button",
+    "code",
+    "splitter",
+    "mermaid-gb3",
+    "katex",
+    "theme-api",
+    "advanced-emoji",
+    "todo"
+  ],
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/swcstudio/katalyst"
+    },
+    "theme-api": {
+      "theme": "dark",
+      "split": true,
+      "languages": [
+        {
+          "lang": "js",
+          "name": "JavaScript",
+          "default": true
+        },
+        {
+          "lang": "ts",
+          "name": "TypeScript"
+        },
+        {
+          "lang": "tsx",
+          "name": "React"
+        },
+        {
+          "lang": "rust",
+          "name": "Rust"
+        },
+        {
+          "lang": "bash",
+          "name": "Shell"
+        }
+      ]
+    },
+    "page-toc-button": {
+      "maxTocDepth": 3,
+      "minTocSize": 2
+    },
+    "prism": {
+      "css": [
+        "prismjs/themes/prism-tomorrow.css"
+      ],
+      "lang": {
+        "shell": "bash",
+        "typescript": "typescript",
+        "jsx": "jsx",
+        "tsx": "tsx"
+      }
+    },
+    "anchor-navigation-ex": {
+      "showLevel": true,
+      "associatedWithSummary": true,
+      "printLog": false,
+      "multipleH1": true,
+      "mode": "float",
+      "showGoTop": true,
+      "float": {
+        "floatIcon": "fa fa-navicon",
+        "showLevelIcon": false,
+        "level1Icon": "fa fa-hand-o-right",
+        "level2Icon": "fa fa-hand-o-right",
+        "level3Icon": "fa fa-hand-o-right"
+      }
+    },
+    "sharing": {
+      "facebook": false,
+      "twitter": true,
+      "github": true,
+      "all": ["twitter", "github"]
+    }
+  },
+  "variables": {
+    "version": "2.0.0",
+    "releaseDate": "2024"
+  }
+}
