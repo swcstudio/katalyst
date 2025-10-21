@@ -21,6 +21,11 @@
     "test": "deno test --allow-all"
   },
   "dependencies": {
+    "@refinedev/core": "4.58.0",
+    "@refinedev/react-router-v6": "4.6.2",
+    "@refinedev/simple-rest": "4.4.0",
+    "@refinedev/react-table": "5.0.7",
+    "@refinedev/devtools": "1.1.5",
     "@remix-run/node": "^2.12.1",
     "@remix-run/react": "^2.12.1",
     "@remix-run/serve": "^2.12.1",

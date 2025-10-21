@@ -1,0 +1,64 @@
+{
+  "name": "@katalyst/hooks",
+  "version": "1.0.0",
+  "description": "Revolutionary unified hook system for React with native multithreading capabilities",
+  "private": false,
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
+      "types": "./src/index.ts"
+    },
+    "./core": "./src/core/index.ts",
+    "./multithreading": "./src/use-multithreading.ts",
+    "./unified": "./src/use-katalyst-unified.ts"
+  },
+  "scripts": {
+    "build": "deno task build",
+    "dev": "deno task dev",
+    "lint": "biome check .",
+    "typecheck": "deno check **/*.ts",
+    "test": "deno test",
+    "test:watch": "deno test --watch"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@swcstudio/multithreading": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "keywords": [
+    "react",
+    "hooks", 
+    "multithreading",
+    "performance",
+    "rust",
+    "katalyst",
+    "unified-interface",
+    "enterprise"
+  ],
+  "author": "Katalyst Framework Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katalyst-framework/katalyst.git",
+    "directory": "packages/hooks"
+  },
+  "bugs": {
+    "url": "https://github.com/katalyst-framework/katalyst/issues"
+  },
+  "homepage": "https://katalyst-framework.dev",
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -2,6 +2,11 @@ import type { LinksFunction } from '@remix-run/node';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
+import { Refine } from '@refinedev/core';
+import dataProvider from '@refinedev/simple-rest';
+import routerProvider from '@refinedev/react-router-v6';
+import { DevtoolsProvider, DevtoolsPanel } from '@refinedev/devtools';
+import '@refinedev/devtools/dist/style.css';
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -39,7 +44,20 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <DevtoolsProvider>
+        <Refine
+          dataProvider={dataProvider('https://api.example.com')}
+          routerProvider={routerProvider}
+          options={{
+            syncWithLocation: true,
+            warnWhenUnsavedChanges: true,
+            liveMode: 'auto',
+          }}
+        >
+          <Outlet />
+          <DevtoolsPanel />
+        </Refine>
+      </DevtoolsProvider>
     </QueryClientProvider>
   );
 }

@@ -1,0 +1,118 @@
+{
+  "productName": "Katalyst Desktop",
+  "version": "0.1.0",
+  "identifier": "com.katalyst.desktop",
+  "build": {
+    "beforeDevCommand": "pnpm dev:web",
+    "beforeBuildCommand": "pnpm build:web",
+    "devUrl": "http://localhost:3000",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "title": "Katalyst Desktop",
+        "label": "main",
+        "width": 1400,
+        "height": 900,
+        "minWidth": 1000,
+        "minHeight": 700,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true,
+        "decorations": true,
+        "alwaysOnTop": false,
+        "skipTaskbar": false,
+        "theme": "auto",
+        "titleBarStyle": "default"
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": [],
+    "externalBin": [],
+    "copyright": "",
+    "category": "Productivity",
+    "shortDescription": "Katalyst Desktop Application",
+    "longDescription": "A powerful desktop application built with Katalyst framework, featuring modern UI, native integrations, and high performance.",
+    "macOS": {
+      "entitlements": null,
+      "exceptionDomain": "",
+      "frameworks": [],
+      "providerShortName": null,
+      "signingIdentity": null
+    },
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
+    }
+  },
+  "plugins": {
+    "shell": {
+      "open": true,
+      "scope": [
+        "https://**"
+      ]
+    },
+    "dialog": {
+      "all": true,
+      "ask": true,
+      "confirm": true,
+      "message": true,
+      "open": true,
+      "save": true
+    },
+    "fs": {
+      "all": true,
+      "readFile": true,
+      "writeFile": true,
+      "readDir": true,
+      "copyFile": true,
+      "createDir": true,
+      "removeDir": true,
+      "removeFile": true,
+      "renameFile": true,
+      "exists": true,
+      "scope": ["**"]
+    },
+    "notification": {
+      "all": true
+    },
+    "window": {
+      "all": true
+    },
+    "process": {
+      "all": true,
+      "relaunch": true,
+      "exit": true
+    },
+    "deep-link": {
+      "all": true,
+      "protocols": ["katalyst", "kat"]
+    }
+  },
+  "permissions": [
+    "core:default",
+    "shell:allow-open",
+    "dialog:all",
+    "fs:all",
+    "notification:all",
+    "window:all",
+    "process:all",
+    "deep-link:all"
+  ]
+}

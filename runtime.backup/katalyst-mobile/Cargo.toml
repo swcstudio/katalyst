@@ -1,0 +1,50 @@
+[package]
+name = "katalyst-mobile"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+# Core
+katalyst-tui = { path = "../katalyst-tui" }
+katalyst-core = { path = "../katalyst-core" }
+
+# Web framework
+axum = "0.7"
+tower = "0.5"
+tower-http = { version = "0.5", features = ["fs", "cors", "compression"] }
+
+# WebSocket
+tokio-tungstenite = "0.24"
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Async
+tokio.workspace = true
+futures.workspace = true
+
+# Terminal emulation for web
+xterm-js-rs = "0.1"
+
+# HTML/CSS generation
+maud = "0.26"
+
+# Static files
+rust-embed = "8.5"
+
+# WASM bindgen for browser
+wasm-bindgen = "0.2"
+web-sys = "0.3"
+
+# Mobile-specific
+lynx = "0.2"
+
+[[bin]]
+name = "katalyst-server"
+path = "src/server.rs"
+
+[lib]
+crate-type = ["cdylib", "rlib"]

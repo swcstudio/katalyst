@@ -1,0 +1,38 @@
+[package]
+name = "katalyst-lsp"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+# LSP
+tower-lsp.workspace = true
+lsp-types.workspace = true
+lsp-server.workspace = true
+
+# Async
+tokio.workspace = true
+async-trait.workspace = true
+futures.workspace = true
+
+# Process management
+which.workspace = true
+nix.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Error handling
+anyhow.workspace = true
+thiserror.workspace = true
+
+# Logging
+tracing.workspace = true
+log.workspace = true
+
+# Additional
+dashmap.workspace = true
+once_cell.workspace = true
+parking_lot.workspace = true

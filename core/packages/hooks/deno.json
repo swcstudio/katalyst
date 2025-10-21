@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "lib": ["deno.window", "dom", "dom.asynciterable"],
+    "strict": true
+  },
+  "tasks": {
+    "build": "echo 'Building hooks package...' && deno check src/index.ts",
+    "dev": "deno check --watch src/index.ts",
+    "test": "deno test --allow-all tests/",
+    "test:watch": "deno test --allow-all --watch tests/"
+  },
+  "imports": {
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0"
+  }
+}
