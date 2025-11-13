@@ -165,7 +165,7 @@ jobs:
           kill $SERVER_PID
 
       - name: Upload performance results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: performance-results-${{ matrix.framework }}
           path: perf-results-${{ matrix.framework }}.json
@@ -212,7 +212,7 @@ jobs:
           npx heapdump-analyzer *.heapsnapshot > heap-analysis-${{ matrix.framework }}.json
 
       - name: Upload memory analysis
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: memory-analysis-${{ matrix.framework }}
           path: |
@@ -290,7 +290,7 @@ jobs:
           artillery report load-test-${{ matrix.framework }}.json
 
       - name: Upload load test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: load-test-${{ matrix.framework }}
           path: |

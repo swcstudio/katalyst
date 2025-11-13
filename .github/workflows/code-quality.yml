@@ -128,7 +128,7 @@ jobs:
             --ignore "**/*.test.{ts,tsx},**/node_modules/**,**/dist/**,**/.next/**"
 
       - name: Upload duplication report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: duplication-report
