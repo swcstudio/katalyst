@@ -330,7 +330,7 @@ jobs:
             require('fs').writeFileSync('task-report.md', report);
 
       - name: Upload dashboard
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: task-dashboard
           path: |

@@ -148,7 +148,7 @@ jobs:
         run: npm run test:${{ matrix.framework }}
 
       - name: Upload coverage
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: coverage-${{ matrix.framework }}
@@ -212,7 +212,7 @@ jobs:
 
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: playwright-results-${{ matrix.framework }}-${{ matrix.browser }}
           path: tests/output/playwright-report/
@@ -248,7 +248,7 @@ jobs:
         run: npm run test:wasm
 
       - name: Upload performance results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: performance-results
           path: tests/output/performance/
@@ -301,7 +301,7 @@ jobs:
         run: npm run build:${{ matrix.platform }} -- --frameworks ${{ matrix.framework }}
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: build-${{ matrix.framework }}-${{ matrix.platform }}
           path: |
@@ -329,7 +329,7 @@ jobs:
         run: npm run build-storybook
 
       - name: Upload Storybook
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: storybook-static
           path: storybook-static/

@@ -132,7 +132,7 @@ jobs:
           nodejsscan -d . -o nodejsscan-report.json
 
       - name: Upload SAST results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: sast-results

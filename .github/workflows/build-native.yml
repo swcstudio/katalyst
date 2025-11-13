@@ -127,7 +127,7 @@ jobs:
         shell: bash
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v5
         with:
           name: binaries-${{ matrix.settings.target }}
           path: packages/multithreading/${{ env.APP_NAME }}.*.node
