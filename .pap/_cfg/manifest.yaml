@@ -1,0 +1,10 @@
+installation:
+  version: 6.0.0-alpha.8
+  installDate: '2025-11-12T10:37:43.660Z'
+  lastUpdated: '2025-11-12T10:37:43.660Z'
+modules:
+  - core
+  - bmm
+ides:
+  - iflow
+  - trae
