@@ -1,0 +1,63 @@
+{
+  "name": "katalyst-remix",
+  "version": "1.0.0",
+  "description": "Remix Admin Dashboard for Spectrum Web Co AIO Management System - Full-stack admin interface for data management, analytics, and content administration",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swcstudio/katalyst.git",
+    "directory": "remix"
+  },
+  "license": "Apache-2.0",
+  "author": "SomeRandmGuyy",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "@remix-run/dev build",
+    "dev": "@remix-run/dev dev --port 20008",
+    "format": "deno fmt",
+    "lint": "deno lint",
+    "preview": "@remix-run/serve build --port 20008",
+    "test": "deno test --allow-all"
+  },
+  "dependencies": {
+    "@refinedev/core": "4.58.0",
+    "@refinedev/react-router-v6": "4.6.2",
+    "@refinedev/simple-rest": "4.4.0",
+    "@refinedev/react-table": "5.0.7",
+    "@refinedev/devtools": "1.1.5",
+    "@remix-run/node": "^2.12.1",
+    "@remix-run/react": "^2.12.1",
+    "@remix-run/serve": "^2.12.1",
+    "@tanstack/react-form": "^0.34.1",
+    "@tanstack/react-query": "^5.59.20",
+    "@tanstack/react-router": "^1.120.17",
+    "@tanstack/react-table": "^8.20.5",
+    "@tanstack/react-virtual": "^3.10.8",
+    "animejs": "^3.2.2",
+    "isbot": "^4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zustand": "^5.0.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@clerk/clerk-react": "^5.17.0",
+    "@module-federation/enhanced": "^0.8.0",
+    "@nx/react": "^21.2.2",
+    "@remix-run/dev": "^2.12.1",
+    "@rsbuild/core": "^1.0.17",
+    "@rsbuild/plugin-react": "^1.0.3",
+    "@rsbuild/plugin-svgr": "^1.0.1",
+    "@rsbuild/plugin-type-check": "^1.0.1",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
+    "autoprefixer": "^10.4.20",
+    "nitropack": "^2.9.7",
+    "nx": "^21.2.2",
+    "tailwindcss": "^4.0.0",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.6.3"
+  }
+}

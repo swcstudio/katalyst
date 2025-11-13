@@ -1,0 +1,180 @@
+{
+  "title": "Katalyst Framework Documentation",
+  "description": "Complete documentation for the Katalyst multi-monorepo microfrontend framework",
+  "author": "Katalyst Team",
+  "language": "en",
+  "gitbook": ">=3.0.0",
+  "root": ".",
+  "structure": {
+    "readme": "README.md",
+    "summary": "SUMMARY.md"
+  },
+  "variables": {
+    "version": "2.0.0",
+    "api_url": "https://api.katalyst.io",
+    "discord_url": "https://discord.gg/katalyst",
+    "github_url": "https://github.com/katalyst/katalyst-core",
+    "website_url": "https://katalyst.io",
+    "docs_url": "https://docs.katalyst.io"
+  },
+  "plugins": [
+    "search-pro",
+    "page-toc-button",
+    "back-to-top-button",
+    "code",
+    "copy-code-button",
+    "highlight",
+    "prism",
+    "terminal",
+    "expandable-chapters",
+    "chapter-fold",
+    "navigation-highlight",
+    "page-toc",
+    "mermaid-compat",
+    "katex",
+    "youtube",
+    "embed-video",
+    "image-captions",
+    "sharing-plus",
+    "social-share",
+    "git-author",
+    "git-revision-time",
+    "edit-link",
+    "todo",
+    "advanced-emoji",
+    "flexible-alerts",
+    "custom-favicon",
+    "page-footer-ex",
+    "hide-element"
+  ],
+  "pluginsConfig": {
+    "search-pro": {
+      "maxResultLength": 15,
+      "depth": 3,
+      "hideOtherSidebarContent": false
+    },
+    "page-toc": {
+      "selector": ".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4",
+      "position": "before-first",
+      "showByDefault": true
+    },
+    "prism": {
+      "css": ["prismjs/themes/prism-tomorrow.css"],
+      "lang": {
+        "shell": "bash",
+        "typescript": "typescript",
+        "ts": "typescript",
+        "javascript": "javascript",
+        "js": "javascript",
+        "rust": "rust",
+        "wasm": "wasm",
+        "yaml": "yaml",
+        "json": "json",
+        "jsx": "jsx",
+        "tsx": "tsx",
+        "css": "css",
+        "scss": "scss",
+        "html": "html",
+        "dockerfile": "dockerfile"
+      }
+    },
+    "copy-code-button": {
+      "copyButton": "Copy",
+      "copyButtonClass": "copy-button"
+    },
+    "expandable-chapters": {
+      "tags": ["h1", "h2", "h3", "h4", "h5", "h6"]
+    },
+    "mermaid-compat": {
+      "theme": "forest"
+    },
+    "katex": {
+      "delimiters": [
+        {"left": "$", "right": "$"},
+        {"left": "$$", "right": "$$"}
+      ]
+    },
+    "sharing-plus": {
+      "facebook": true,
+      "twitter": true,
+      "linkedin": true,
+      "whatsapp": true,
+      "telegram": true,
+      "all": ["facebook", "twitter", "linkedin", "whatsapp", "telegram"]
+    },
+    "edit-link": {
+      "base": "https://github.com/katalyst/katalyst-core/edit/main/docs/",
+      "label": "Edit This Page"
+    },
+    "git-author": {
+      "position": "top",
+      "createBy": true,
+      "updateBy": true
+    },
+    "git-revision-time": {
+      "position": "bottom",
+      "format": "YYYY-MM-DD HH:mm:ss"
+    },
+    "flexible-alerts": {
+      "style": "flat",
+      "note": {
+        "label": "Note",
+        "icon": "fa fa-info-circle",
+        "className": "info"
+      },
+      "tip": {
+        "label": "Tip",
+        "icon": "fa fa-lightbulb-o",
+        "className": "tip"
+      },
+      "warning": {
+        "label": "Warning",
+        "icon": "fa fa-exclamation-triangle",
+        "className": "warning"
+      },
+      "danger": {
+        "label": "Danger",
+        "icon": "fa fa-ban",
+        "className": "danger"
+      }
+    },
+    "page-footer-ex": {
+      "copyright": "© 2024 Katalyst Framework. All rights reserved.",
+      "update_label": "Last updated:",
+      "update_format": "YYYY-MM-DD HH:mm:ss"
+    },
+    "hide-element": {
+      "elements": [".gitbook-link"]
+    }
+  },
+  "styles": {
+    "website": "styles/website.css",
+    "pdf": "styles/pdf.css",
+    "epub": "styles/epub.css",
+    "mobi": "styles/mobi.css"
+  },
+  "scripts": [
+    "scripts/custom.js"
+  ],
+  "ignore": [
+    "_book",
+    "node_modules",
+    ".git",
+    "templates"
+  ],
+  "files": [
+    "CHANGELOG.md",
+    "LICENSE",
+    "CONTRIBUTING.md"
+  ],
+  "output": {
+    "directory": "_book"
+  },
+  "keywords": ["katalyst", "microfrontend", "monorepo", "typescript", "react", "wasm", "rust", "deno"],
+  "homepage": "https://docs.katalyst.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/katalyst/katalyst-core.git"
+  },
+  "license": "MIT"
+}

@@ -3,7 +3,7 @@
   "framework": null,
   "buildCommand": "turbo run build --filter=@katalyst/* --cache-dir=.turbo",
   "outputDirectory": null,
-  "installCommand": "deno run --allow-all scripts/unified-runner.ts --install",
+  "installCommand": "deno run --allow-all scripts/unified-runner.ts --install && cd server && mix deps.get && cd ../runtime && cargo build --release",
   "devCommand": "turbo run dev --parallel",
   "ignoreCommand": "npx turbo-ignore",
   "regions": ["iad1", "sfo1", "cdg1", "hnd1"],
@@ -32,6 +32,31 @@
       "maxDuration": 300,
       "memory": 3008,
       "includeFiles": "shared/src/webxr/**"
+    },
+    "api/elixir/**/*.ex": {
+      "runtime": "python3.11",
+      "maxDuration": 30,
+      "memory": 1024,
+      "includeFiles": "server/lib/**",
+      "excludeFiles": "server/test/**"
+    },
+    "api/python/**/*.py": {
+      "runtime": "python3.11",
+      "maxDuration": 30,
+      "memory": 1024,
+      "includeFiles": "server/python_bridge.py"
+    },
+    "api/rust/**/*.rs": {
+      "runtime": "rust",
+      "maxDuration": 15,
+      "memory": 512,
+      "includeFiles": "runtime/target/release/**"
+    },
+    "api/wasm/**/*.ts": {
+      "runtime": "edge",
+      "maxDuration": 30,
+      "memory": 128,
+      "includeFiles": "wasm-modules/**"
     }
   },
   "rewrites": [
@@ -92,14 +117,23 @@
   "env": {
     "TURBO_REMOTE_CACHE_SIGNATURE_KEY": "@turbo-remote-cache-key",
     "TURBO_TEAM": "@turbo-team",
-    "TURBO_TOKEN": "@turbo-token"
+    "TURBO_TOKEN": "@turbo-token",
+    "MIX_ENV": "production",
+    "RUST_LOG": "info",
+    "PYTHONPATH": "/var/task",
+    "UV_INDEX_URL": "https://pypi.org/simple/",
+    "WASMER_DIR": "/opt/wasmer",
+    "WASMER_VERSION": "4.3.0"
   },
   "build": {
     "env": {
       "NEXT_TELEMETRY_DISABLED": "1",
       "TURBO_TELEMETRY_DISABLED": "1",
       "NODE_ENV": "production",
-      "ENABLE_EXPERIMENTAL_COREPACK": "1"
+      "ENABLE_EXPERIMENTAL_COREPACK": "1",
+      "MIX_ENV": "production",
+      "RUSTFLAGS": "-C opt-level=3",
+      "PYTHONOPTIMIZE": "2"
     }
   },
   "crons": [

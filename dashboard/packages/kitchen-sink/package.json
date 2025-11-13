@@ -1,0 +1,188 @@
+{
+  "name": "@katalyst/kitchen-sink",
+  "version": "1.0.0",
+  "description": "🚀 Katalyst Framework - Complete suite of tools for building modern applications",
+  "keywords": [
+    "react",
+    "framework",
+    "micro-frontends",
+    "ai",
+    "multithreading",
+    "design-system",
+    "hooks",
+    "api",
+    "tauri",
+    "mobile",
+    "desktop",
+    "webxr"
+  ],
+  "homepage": "https://katalyst.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/katalyst-framework/katalyst.git",
+    "directory": "packages/kitchen-sink"
+  },
+  "license": "MIT",
+  "author": "Katalyst Framework Team",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./core": {
+      "import": "./dist/core.mjs",
+      "require": "./dist/core.js",
+      "types": "./dist/core.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks.mjs",
+      "require": "./dist/hooks.js",
+      "types": "./dist/hooks.d.ts"
+    },
+    "./design-system": {
+      "import": "./dist/design-system.mjs",
+      "require": "./dist/design-system.js",
+      "types": "./dist/design-system.d.ts"
+    },
+    "./api": {
+      "import": "./dist/api.mjs",
+      "require": "./dist/api.js",
+      "types": "./dist/api.d.ts"
+    },
+    "./ai": {
+      "import": "./dist/ai.mjs",
+      "require": "./dist/ai.js",
+      "types": "./dist/ai.d.ts"
+    },
+    "./build-system": {
+      "import": "./dist/build-system.mjs",
+      "require": "./dist/build-system.js",
+      "types": "./dist/build-system.d.ts"
+    },
+    "./mobile": {
+      "import": "./dist/mobile.mjs",
+      "require": "./dist/mobile.js",
+      "types": "./dist/mobile.d.ts"
+    },
+    "./desktop": {
+      "import": "./dist/desktop.mjs",
+      "require": "./dist/desktop.js",
+      "types": "./dist/desktop.d.ts"
+    },
+    "./webxr": {
+      "import": "./dist/webxr.mjs",
+      "require": "./dist/webxr.js",
+      "types": "./dist/webxr.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components.mjs",
+      "require": "./dist/components.js",
+      "types": "./dist/components.d.ts"
+    },
+    "./admin": {
+      "import": "./dist/admin.mjs",
+      "require": "./dist/admin.js",
+      "types": "./dist/admin.d.ts"
+    },
+    "./marketing": {
+      "import": "./dist/marketing.mjs",
+      "require": "./dist/marketing.js",
+      "types": "./dist/marketing.d.ts"
+    },
+    "./cli": {
+      "import": "./dist/cli.mjs",
+      "require": "./dist/cli.js",
+      "types": "./dist/cli.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "docs": "typedoc src/index.ts",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "dependencies": {
+    "@katalyst/core": "workspace:*",
+    "@katalyst/hooks": "workspace:*",
+    "@katalyst/design-system": "workspace:*",
+    "@katalyst/api": "workspace:*",
+    "@katalyst/ai": "workspace:*",
+    "@katalyst/build-system": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@tanstack/react-query": "^5.0.0",
+    "@tanstack/react-router": "^1.0.0",
+    "@tanstack/react-form": "^0.20.0",
+    "@tanstack/react-table": "^8.0.0",
+    "zustand": "^4.0.0",
+    "zod": "^3.0.0",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.0.0",
+    "framer-motion": "^11.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@tauri-apps/api": {
+      "optional": true
+    },
+    "@react-navigation/native": {
+      "optional": true
+    },
+    "@react-three/fiber": {
+      "optional": true
+    },
+    "@remix-run/react": {
+      "optional": true
+    },
+    "next": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/node": "^20.11.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.1",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "typedoc": "^0.25.0",
+    "rimraf": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "workspaces": [
+    "core",
+    "hooks",
+    "design-system",
+    "api",
+    "ai",
+    "build-system"
+  ]
+}

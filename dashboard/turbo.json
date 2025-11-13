@@ -1,157 +1,68 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "ui": "tui",
-  "globalDependencies": [".env*", "tsconfig.json", "nx.json"],
+  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["NODE_ENV", "DENO_ENV", "TAURI_ENV"],
   "remoteCache": {
     "enabled": true,
-    "preflight": true
+    "signature": true
   },
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "build-native"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", "build/**", ".next/**", ".remix/**", ".vercel/**"],
-      "cache": true,
-      "env": [
-        "NODE_ENV",
-        "VERCEL",
-        "VERCEL_ENV",
-        "VERCEL_URL",
-        "VERCEL_GIT_COMMIT_SHA",
-        "NEXT_PUBLIC_*"
-      ]
-    },
-    "build:vercel": {
-      "dependsOn": ["^build", "build-native"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*", "vercel.json"],
-      "outputs": [".vercel/**", ".next/**", "dist/**"],
-      "cache": true,
-      "env": [
-        "VERCEL",
-        "VERCEL_ENV",
-        "VERCEL_URL",
-        "VERCEL_ANALYTICS_ID",
-        "NEXT_PUBLIC_VERCEL_ANALYTICS_ID"
-      ]
-    },
-    "build-native": {
-      "inputs": ["shared/src/native/**/*", "shared/src/native/Cargo.toml"],
-      "outputs": [
-        "shared/src/native/target/**",
-        "shared/src/native/index.node",
-        "shared/src/native/*.node"
-      ],
-      "cache": true,
-      "env": ["RUST_*", "CARGO_*", "NAPI_*"],
-      "persistent": false
-    },
-    "build:edge": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", "api/**", "edge/**"],
-      "outputs": [".vercel/output/**"],
-      "cache": true,
-      "env": ["EDGE_CONFIG", "KV_*", "REDIS_*"]
-    },
-    "build:web": {
-      "dependsOn": ["^build", "build-native"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", "build/**", ".next/**"],
-      "env": ["NODE_ENV", "NEXT_PUBLIC_*", "RSPACK_*", "VERCEL_*"],
+      "outputs": ["dist/**", ".next/**", "build/**", "target/**"],
+      "env": ["DENO_ENV", "NODE_ENV", "TAURI_*"],
       "cache": true
-    },
-    "build:desktop": {
-      "dependsOn": ["^build", "build-native", "build:web"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*", "src-tauri/**/*"],
-      "outputs": ["src-tauri/target/**", "dist/desktop/**"],
-      "env": ["TAURI_*", "RUST_*"],
-      "cache": true
-    },
-    "build:mobile": {
-      "dependsOn": ["^build", "build-native", "build:web"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*", "src-tauri/**/*"],
-      "outputs": ["src-tauri/gen/android/**", "src-tauri/gen/apple/**", "dist/mobile/**"],
-      "env": ["TAURI_*", "ANDROID_*", "IOS_*"],
-      "cache": true
-    },
-    "build:webxr": {
-      "dependsOn": ["^build", "build-native"],
-      "inputs": ["$TURBO_DEFAULT$", "shared/src/webxr/**"],
-      "outputs": ["dist/webxr/**", ".vercel/output/functions/webxr/**"],
-      "env": ["WEBXR_*", "THREE_*", "WASM_*"],
-      "cache": true
-    },
-    "lint": {
-      "dependsOn": ["^lint"],
-      "inputs": ["$TURBO_DEFAULT$", "biome.json", ".eslintrc*"],
-      "outputs": [],
-      "cache": true
-    },
-    "check-types": {
-      "dependsOn": ["^check-types"],
-      "inputs": ["$TURBO_DEFAULT$", "tsconfig*.json"],
-      "outputs": [],
-      "cache": true
-    },
-    "test": {
-      "dependsOn": ["^test", "build-native"],
-      "inputs": ["$TURBO_DEFAULT$", "deno.test.config.ts", "**/*.test.*"],
-      "outputs": ["coverage/**", ".nyc_output/**"],
-      "env": ["NODE_ENV", "CI"],
-      "cache": true
-    },
-    "test:e2e": {
-      "dependsOn": ["build"],
-      "inputs": ["tests/e2e/**", "playwright.config.ts"],
-      "outputs": ["test-results/**", "playwright-report/**"],
-      "env": ["CI", "PLAYWRIGHT_*"],
-      "cache": false
-    },
-    "deploy:preview": {
-      "dependsOn": ["build:vercel", "test"],
-      "cache": false,
-      "env": ["VERCEL_*", "GITHUB_*"]
-    },
-    "deploy:production": {
-      "dependsOn": ["build:vercel", "test", "test:e2e"],
-      "cache": false,
-      "env": ["VERCEL_*", "GITHUB_*", "SENTRY_*"]
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "env": ["NODE_ENV", "PORT", "HOST", "VERCEL_*"]
+      "dependsOn": ["^build"]
     },
-    "dev:web": {
-      "dependsOn": ["build-native"],
-      "cache": false,
-      "persistent": true,
-      "env": ["NODE_ENV", "PORT", "HOST", "NEXT_PUBLIC_*", "RSPACK_*", "VERCEL_*"]
-    },
-    "analyze": {
+    "test": {
       "dependsOn": ["build"],
-      "outputs": [".next/analyze/**", "bundle-analyzer/**"],
+      "outputs": ["coverage/**"],
+      "cache": true,
+      "inputs": ["src/**", "tests/**", "*.test.ts", "*.test.tsx"]
+    },
+    "lint": {
+      "outputs": [],
+      "cache": true,
+      "inputs": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "cache": true
+    },
+    "clean": {
       "cache": false
     },
-    "cache:clear": {
-      "cache": false,
-      "dependsOn": []
+    "deploy": {
+      "dependsOn": ["build", "test", "lint"],
+      "outputs": ["dist/**"],
+      "cache": false
+    },
+    "@katalyst/multithreading#build": {
+      "outputs": ["*.node", "target/**"],
+      "cache": true,
+      "env": ["CARGO_*", "RUST_*"]
+    },
+    "@katalyst/desktop#build": {
+      "dependsOn": ["@katalyst/core#build", "@katalyst/multithreading#build"],
+      "outputs": ["src-tauri/target/**", "dist/**"],
+      "env": ["TAURI_*"],
+      "cache": true
+    },
+    "@katalyst/mobile#build": {
+      "dependsOn": ["@katalyst/core#build"],
+      "outputs": ["ios/build/**", "android/build/**", "dist/**"],
+      "cache": true
+    },
+    "@katalyst/metaverse#build": {
+      "dependsOn": ["@katalyst/core#build", "@katalyst/webxr#build"],
+      "outputs": ["dist/**", "wasm/**"],
+      "env": ["WASM_*", "WASMER_*"],
+      "cache": true
     }
-  },
-  "globalEnv": [
-    "NODE_ENV",
-    "CI",
-    "VERCEL",
-    "VERCEL_ENV",
-    "VERCEL_URL",
-    "VERCEL_REGION",
-    "VERCEL_GIT_*",
-    "GITHUB_*"
-  ],
-  "globalPassThroughEnv": [
-    "VERCEL_ANALYTICS_ID",
-    "NEXT_PUBLIC_VERCEL_ANALYTICS_ID",
-    "TURBO_TEAM",
-    "TURBO_TOKEN",
-    "TURBO_REMOTE_CACHE_SIGNATURE_KEY"
-  ]
+  }
 }

@@ -1,0 +1,246 @@
+# GitBook Configuration for Katalyst Documentation
+# Inspired by https://docs.daytona.io structure and design
+
+root: .
+structure:
+  readme: README.md
+  summary: SUMMARY.md
+
+# GitBook specific settings
+gitbook: ">=3.0.0"
+
+# Theme configuration
+theme:
+  name: default
+  properties:
+    # Enable dark mode by default
+    toggle_chapters: false
+    show_level: true
+    
+# Language settings
+language: en
+
+# Project metadata
+title: "Katalyst Framework Documentation"
+description: "Complete documentation for the Katalyst multi-monorepo microfrontend framework"
+author: "Katalyst Team"
+keywords: ["katalyst", "microfrontend", "monorepo", "typescript", "react", "wasm"]
+homepage: "https://docs.katalyst.io"
+repository: "https://github.com/katalyst/katalyst-core"
+license: "MIT"
+
+# Variables for use throughout documentation
+variables:
+  version: "2.0.0"
+  api_url: "https://api.katalyst.io"
+  discord_url: "https://discord.gg/katalyst"
+  github_url: "https://github.com/katalyst/katalyst-core"
+  website_url: "https://katalyst.io"
+
+# Redirects for legacy URLs
+redirects:
+  old-url: new-url
+
+# Search configuration
+search:
+  engine: lunr
+  max_index_size: 1000000
+
+# Analytics (if needed)
+# analytics:
+#   provider: google
+#   property: "GA_MEASUREMENT_ID"
+
+# PDF settings
+pdf:
+  pageNumbers: false
+  fontSize: 12
+  fontFamily: Arial
+  paperSize: a4
+  margin:
+    top: 56
+    right: 56
+    bottom: 56
+    left: 56
+
+# Plugins configuration
+plugins:
+  # Core functionality
+  - search-pro
+  - page-toc-button
+  - back-to-top-button
+  
+  # Code enhancement
+  - code
+  - copy-code-button
+  - highlight
+  - prism
+  - terminal
+  
+  # Navigation and structure
+  - expandable-chapters
+  - chapter-fold
+  - navigation-highlight
+  - page-toc
+  
+  # Media and content
+  - mermaid-compat
+  - katex
+  - youtube
+  - embed-video
+  - image-captions
+  
+  # Social and sharing
+  - sharing-plus
+  - social-share
+  
+  # Version control
+  - git-author
+  - git-revision-time
+  - edit-link
+  
+  # Advanced features
+  - todo
+  - advanced-emoji
+  - flexible-alerts
+  - custom-favicon
+  - page-footer-ex
+  - hide-element
+
+# Plugin configurations
+pluginsConfig:
+  # Search pro configuration
+  search-pro:
+    maxResultLength: 15
+    depth: 3
+    hideOtherSidebarContent: false
+    
+  # Table of contents
+  page-toc:
+    selector: ".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4"
+    position: "before-first"
+    showByDefault: true
+    
+  # Code highlighting with Prism
+  prism:
+    css: ["prismjs/themes/prism-tomorrow.css"]
+    lang:
+      shell: "bash"
+      typescript: "typescript"
+      ts: "typescript"
+      javascript: "javascript"
+      js: "javascript"
+      rust: "rust"
+      wasm: "wasm"
+      yaml: "yaml"
+      json: "json"
+      
+  # Copy code button
+  copy-code-button:
+    copyButton: "Copy"
+    copyButtonClass: "copy-button"
+    copyButton: "Copy"
+    
+  # Expandable chapters
+  expandable-chapters:
+    tags: ["h1", "h2", "h3", "h4", "h5", "h6"]
+    
+  # Mermaid diagram support
+  mermaid-compat:
+    theme: forest
+    
+  # Math support with KaTeX
+  katex:
+    delimiters:
+      left: ["$", "$"]
+      right: ["$", "$"]
+      
+  # Social sharing
+  sharing-plus:
+    facebook: true
+    twitter: true
+    linkedin: true
+    whatsapp: true
+    telegram: true
+    all: ["facebook", "twitter", "linkedin", "whatsapp", "telegram"]
+    
+  # Edit link configuration
+  edit-link:
+    base: "https://github.com/katalyst/katalyst-core/edit/main/docs/"
+    label: "Edit This Page"
+    
+  # Git information
+  git-author:
+    position: top
+    createBy: true
+    updateBy: true
+    
+  git-revision-time:
+    position: bottom
+    format: "YYYY-MM-DD HH:mm:ss"
+    
+  # Flexible alerts for callouts
+  flexible-alerts:
+    style: flat
+    note:
+      label: "Note"
+      icon: "fa fa-info-circle"
+      className: "info"
+    tip:
+      label: "Tip"
+      icon: "fa fa-lightbulb-o"
+      className: "tip"
+    warning:
+      label: "Warning"
+      icon: "fa fa-exclamation-triangle"
+      className: "warning"
+    danger:
+      label: "Danger"
+      icon: "fa fa-ban"
+      className: "danger"
+      
+  # Page footer
+  page-footer-ex:
+    copyright: "© 2024 Katalyst Framework. All rights reserved."
+    update_label: "Last updated:"
+    update_format: "YYYY-MM-DD HH:mm:ss"
+    
+  # Hide elements for cleaner UI
+  hide-element:
+    elements: [".gitbook-link"]
+
+# Custom styles and scripts
+styles:
+  website: "styles/website.css"
+  pdf: "styles/pdf.css"
+  epub: "styles/epub.css"
+  mobi: "styles/mobi.css"
+
+# Custom scripts
+scripts:
+  - "scripts/custom.js"
+
+# Ignore files from processing
+ignore:
+  - "_book"
+  - "node_modules"
+  - ".git"
+  - "templates"
+  - "README.md"
+
+# Additional files to include
+files:
+  - "CHANGELOG.md"
+  - "LICENSE"
+  - "CONTRIBUTING.md"
+
+# Output directory
+output:
+  directory: "_book"
+  
+# Integration settings
+links:
+  sidebar:
+    "Katalyst Website": "https://katalyst.io"
+    "GitHub Repository": "https://github.com/katalyst/katalyst-core"
+    "Discord Community": "https://discord.gg/katalyst"
